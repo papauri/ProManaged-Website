@@ -1,0 +1,162 @@
+/* Game Cards Grid */
+.game-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13%, 1fr)); /* Limit cards per row */
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+    margin: 0 auto;
+    width: 100%; /* Full-width grid */
+    background-color: #f3f3f3; /* Subtle light background */
+    border: 1px solid #e0e0e0; /* Soft border for the grid */
+    border-radius: 10px; /* Smooth corners for the grid */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.latest-game-cards-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(19%, 1fr)); /* Limit cards per row */
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+    margin: 0 auto;
+    width: 100%; /* Full-width grid */
+    background-color: #f3f3f3; /* Subtle light background */
+    border: 1px solid #e0e0e0; /* Soft border for the grid */
+    border-radius: 10px; /* Smooth corners for the grid */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.ebay-game-cards-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13%, 1fr)); /* Limit cards per row */
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+    margin: 0 auto;
+    width: 100%; /* Full-width grid */
+    background-color: #f3f3f3; /* Subtle light background */
+    border: 1px solid #e0e0e0; /* Soft border for the grid */
+    border-radius: 10px; /* Smooth corners for the grid */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Game Card */
+.game-card {
+    background: #ffffff; /* Clean white background */
+    border: 2px solid #d1d1d1; /* Soft border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px; /* Add padding for better spacing */
+    height: auto; /* Flexible height to fit all content */
+}
+
+.game-card:hover {
+    transform: translateY(-5px); /* Lift on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    border-color: #6c63ff; /* Accent border on hover */
+}
+
+/* Game Card Image */
+.game-card img {
+    width: 100%; /* Full width of the container */
+    height: 180px; /* Fixed height for uniformity */
+    object-fit: fill; /* Stretch the image to fit the container */
+    border-bottom: 2px solid #6c63ff; /* Accent line below image */
+    background-color: #eaeaea; /* Subtle background behind images */
+}
+
+/* Game Card Content */
+.game-card .game-info {
+    padding: 10px;
+    text-align: left; /* Align text for readability */
+}
+
+/* Uniform Title */
+.game-card .game-info h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem; /* Slightly smaller for a modern, sleek look */
+    font-weight: 700; /* Lighter weight for better readability */
+    color: #444444; /* Softer color for less visual strain */
+    margin-bottom: 10px; /* Increased spacing for better separation */
+    text-align: center; /* Center align for consistent layout */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Gracefully truncate long titles */
+    height: 3rem; /* Consistent height to align across rows */
+    line-height: 1.5; /* Optimal line spacing for better readability */
+    transition: color 0.3s ease; /* Add subtle hover effect */
+}
+
+.game-card .game-info h3:hover {
+    color: #6c63ff; /* Highlight color on hover for interactivity */
+}
+
+
+/* Uniform Description */
+.game-card .game-info p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem; /* Compact text size */
+    color: #555555; /* Subtle gray for descriptions */
+    margin: 5px 0;
+    line-height: 1.4;
+    height: auto; /* Flexible height for varying content */
+}
+
+/* Release Date */
+.game-card .game-info .game-release {
+    font-size: 0.85rem;
+    color: #777777; /* Slightly lighter text for minor details */
+}
+
+/* Rating */
+.game-card .game-info .game-rating {
+    font-weight: bold;
+    color: #f75d59; /* Accent color for ratings */
+}
+
+/* Section Header */
+.section-header h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333333; /* Neutral text color */
+    margin-bottom: 15px;
+    text-align: center;
+    line-height: 1.5;
+    border-bottom: 2px solid #6c63ff; /* Accent underline */
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.section-header p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #666666; /* Subtle gray for descriptions */
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .game-cards-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .game-cards-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    }
+}
+
+@media (max-width: 480px) {
+    .game-cards-grid {
+        grid-template-columns: 1fr; /* 1 card per row */
+    }
+}
