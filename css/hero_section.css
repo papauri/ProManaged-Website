@@ -1,0 +1,141 @@
+.hero {
+    height: 65vh; /* Reduced vertical size for compactness */
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #243B55, #141E30); /* Sleek blue gradient */
+    color: var(--white);
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+    transform: translate(-50%, -50%);
+    animation: subtleSpin 20s linear infinite; /* Smooth spin */
+    z-index: 0;
+}
+
+@keyframes subtleSpin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.hero-content {
+    z-index: 1; /* Place above background effects */
+    position: relative;
+    max-width: 750px;
+    text-align: center;
+    animation: fadeInUp 1.2s ease-out;
+}
+
+#hero-title {
+    font-family: 'Space Grotesk', sans-serif; /* Modern, clean font with a futuristic vibe */
+    font-size: 4.5rem; /* Bold and impactful size */
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+    color: #A4B2C5; /* Muted steel-blue for easy readability */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    background: none; /* Removed bright gradient for a clean look */
+    -webkit-text-fill-color: #A4B2C5;
+    transition: transform 0.2s ease, text-shadow 0.2s ease;
+}
+
+#hero-title:hover {
+    color: #B4C5D9; /* Slight hover color change */
+    text-shadow: 0px 4px 10px rgba(180, 197, 217, 0.5); /* Softer glow on hover */
+    transform: scale(1.02); /* Slight zoom effect on hover */
+}
+
+
+
+#hero-subtitle {
+    font-family: 'Poppins', sans-serif; /* Clean, modern font */
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 40px;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+#hero-get-started,
+#hero-learn-more {
+    padding: 10px 25px; /* Smaller buttons */
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+#hero-get-started {
+    background: linear-gradient(to right, #FF6F61, #FFD564);
+    color: var(--white);
+}
+
+#hero-get-started:hover {
+    background: linear-gradient(to right, #FFD564, #FF6F61);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(255, 111, 97, 0.8);
+}
+
+#hero-learn-more {
+    background: transparent;
+    color: #00C6FF;
+    border: 2px solid #00C6FF;
+}
+
+#hero-learn-more:hover {
+    background: #00C6FF;
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 198, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        padding: 20px;
+    }
+
+    #hero-title {
+        font-size: 3.5rem; /* Adjusted for smaller screens */
+    }
+
+    #hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    #hero-get-started,
+    #hero-learn-more {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+}

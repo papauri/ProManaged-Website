@@ -1,0 +1,65 @@
+.logo-container {
+    display: flex;
+    align-items: flex-start; /* Align the logo to the top-left */
+    justify-content: flex-start; /* Push logo to the left edge */
+    text-align: left;
+    padding: 0; /* Remove padding to ensure full stretch */
+    width: 100%; /* Stretch container to screen width */
+    height: 100%; /* Cover the available height */
+    position: relative;
+}
+
+.logo {
+    width: 100%; /* Ensure the logo spans the full width */
+    height: 100%; /* Stretch to fill height */
+    object-fit: contain; /* Maintain aspect ratio without distortion */
+    cursor: pointer;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)); /* Subtle shadow effect */
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+    background: none !important; /* Remove any background color */
+    border: none !important; /* Ensure no border is visible */
+}
+
+.logo:hover {
+    transform: scale(1.03); /* Slight zoom effect for interactivity */
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15)); /* Enhanced shadow */
+}
+
+.logo-tagline {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #4a4a4a !important; /* Neutral and consistent */
+    margin-top: 10px;
+    letter-spacing: 1.2px;
+    text-transform: none; /* Maintain natural text casing */
+    max-width: 80%; /* Ensure tagline remains readable */
+    text-align: left; /* Align tagline with the logo */
+    padding-left: 10px; /* Slight padding for separation */
+}
+
+.logo-tagline:hover {
+    color: #6c757d; /* Subtle hover effect */
+    transition: color 0.3s ease-in-out;
+}
+
+/* Responsive Adjustments for Mobile Devices */
+@media (max-width: 768px) {
+    .logo-container {
+        align-items: center; /* Center align for mobile devices */
+        justify-content: center;
+        padding: 10px; /* Add slight padding */
+    }
+
+    .logo {
+        width: 95%; /* Scale logo to fit screen width */
+        max-width: 350px; /* Prevent logo from being too large */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .logo-tagline {
+        font-size: 1.2rem; /* Adjust font size for smaller screens */
+        text-align: center; /* Center align tagline for better readability */
+        padding: 0; /* Remove padding */
+    }
+}

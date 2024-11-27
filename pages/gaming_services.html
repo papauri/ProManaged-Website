@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="services_head">
+    <!-- Services-specific styles dynamically loaded -->
+</head>
+
+<body>
+    <!-- Hero Section Dynamically Loaded -->
+    <div id="hero-section"></div>
+
+    <!-- Gaming Services Section -->
+    <section class="gaming-services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Gaming Services</h2>
+                <p class="subtitle">Explore the latest game sales, reviews, and gaming accessories!</p>
+            </div>
+
+            <div class="tab-buttons">
+                <button id="tab-btn-sales" class="tab-btn active" data-target="tab-panel-sales">Latest Game
+                    Sales</button>
+                <button id="tab-btn-reviews" class="tab-btn" data-target="tab-panel-reviews">Latest Game
+                    Reviews</button>
+                <button id="tab-btn-accessories" class="tab-btn" data-target="tab-panel-accessories">Gear &
+                    Accessories</button>
+            </div>
+
+            <div class="tab-content">
+                <!-- Latest Game Sales (CheapShark) -->
+                <div id="tab-panel-sales" class="tab-panel active">
+                    <h3>Latest Game Sales</h3>
+                    <p>Check out the hottest game deals and discounts available now.</p>
+                    <div id="cheapshark-cards" class="game-cards-grid">
+                        <!-- Game cards from CheapShark will be dynamically loaded here -->
+                    </div>
+                </div>
+
+                <!-- Latest Game Reviews (RAWG) -->
+                <div id="tab-panel-reviews" class="tab-panel">
+                    <h3>Latest Game Reviews</h3>
+                    <p>Explore the most recent reviews and ratings for the trending games.</p>
+                    <div id="rawg-cards" class="latest-game-cards-grid">
+                        <!-- Game cards from RAWG will be dynamically loaded here -->
+                    </div>
+                </div>
+
+                <!-- Gaming Accessories -->
+                <div id="tab-panel-accessories" class="tab-panel">
+                    <h3>Gear & Accessories</h3>
+                    <p>Discover the latest gaming gear, consoles, and accessories shipped directly to your location.</p>
+
+                    <!-- Filter and Sort Options -->
+                    <div id="filters" class="filter-section">
+                        <select id="product-type-filter">
+                            <option value="">All Products</option>
+                            <option value="ps5">PlayStation 5</option>
+                            <option value="ps4">PlayStation 4</option>
+                            <option value="xbox">Xbox Series</option>
+                            <option value="accessories">Gaming Accessories</option>
+                        </select>
+                        <select id="condition-filter">
+                            <option value="">All Conditions</option>
+                            <option value="NEW">New</option>
+                            <option value="LIKE_NEW">Like New</option>
+                            <option value="NEW_OTHER">New Other</option>
+                            <option value="USED">Used</option>
+                            <option value="FOR_PARTS">For Parts</option>
+                        </select>
+                        <select id="marketplace-filter">
+                            <option value="">All Marketplaces</option>
+                            <option value="GB">United Kingdom</option>
+                            <option value="DE">Germany</option>
+                            <option value="FR">France</option>
+                            <option value="IE">Ireland</option>
+                        </select>
+                        <select id="sort-order">
+                            <option value="-price">Highest Price</option>
+                            <option value="price">Lowest Price</option>
+                        </select>
+                        <button id="apply-filters" class="btn-filter">Apply Filters</button>
+                    </div>
+
+                    <!-- eBay listings -->
+                    <div id="ebay-cards" class="ebay-game-cards-grid">
+                        <!-- eBay listings will be dynamically inserted here -->
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Dynamically Loaded -->
+    <div id="booking-form"></div>
+
+    <!-- Footer Dynamically Loaded -->
+    <div id="footer"></div>
+
+    <!-- Include necessary scripts -->
+    <script src="../js/service_dynamic_loading.js" defer></script>
+    <script src="../js/gaming_services.js" defer></script>
+    <script src="../js/booking_form.js" defer></script>
+    <script src="../js/game_prices.js" defer></script>
+    <script src="../js/game_reviews.js" defer></script>
+    <script src="../js/ebay.js" defer></script> <!-- Script for PS5 eBay items -->
+</body>
+
+</html>
