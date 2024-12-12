@@ -1,4 +1,3 @@
-// Wait until the DOM is fully loaded before executing the script
 document.addEventListener("DOMContentLoaded", function () {
     /**
      * Function to load a reusable HTML component into a specified element on the page.
@@ -13,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 return response.text();
             })
             .then(html => {
-                console.log(`Checking existence of selector: ${selector}`);
                 const targetElement = document.querySelector(selector);
                 if (!targetElement) {
                     console.warn(`Element not found for selector: ${selector}`);
@@ -27,23 +25,36 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     };
 
-    // Dynamically load service-specific reusable components
+    // Dynamically load common reusable components
     Promise.all([
-        loadComponent("#services_head", "../components/Services/services_styles.html"), // Load styles for services
-        loadComponent("#hero-section", "../components/hero_section.html"), // Load the hero section into #hero-section
-        loadComponent("#booking-form", "../components/booking_form.html"), // Load booking form
-        loadComponent("#footer", "../components/footer.html") // Load the footer
+        loadComponent("#services_head", "../components/Services/services_styles.html"),
+        loadComponent("#hero-section", "../components/hero_section.html"),
+        loadComponent("#booking-form", "../components/booking_form.html"),
+        loadComponent("#footer", "../components/footer.html")
     ])
     .then(() => {
-        console.log("Service-specific components loaded successfully.");
-
-        // Initialize the booking modal after it has been loaded
-        initializeBookingModal();
+        console.log("Common components loaded successfully.");
+        initializeBookingModal(); // Ensure this is only called if modal logic exists
     })
     .catch(error => {
-        console.error("Error loading service-specific components:", error);
+        console.error("Error loading common components:", error);
     });
 
-    // Initialize gaming services immediately as it does not depend on dynamically loaded components
-    initializeGamingServices();
+    // Lazy load gaming services only when accessed
+    document.querySelectorAll('a[data-load="gaming_services.html"]').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const page = this.getAttribute('data-load');
+
+            // Load the gaming services component
+            loadComponent("#content-container", page)
+                .then(() => {
+                    console.log(`Gaming services loaded from ${page}`);
+                    initializeGamingServices(); // Call this after the component is loaded
+                })
+                .catch(error => {
+                    console.error("Error loading gaming services:", error);
+                });
+        });
+    });
 });
