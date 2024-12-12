@@ -1,65 +1,59 @@
 .logo-container {
     display: flex;
-    align-items: flex-start; /* Align the logo to the top-left */
-    justify-content: flex-start; /* Push logo to the left edge */
-    text-align: left;
-    padding: 0; /* Remove padding to ensure full stretch */
-    width: 100%; /* Stretch container to screen width */
-    height: 100%; /* Cover the available height */
-    position: relative;
+    align-items: center; /* Center vertically for a balanced look */
+    justify-content: center; /* Center horizontally */
+    padding: 10px; /* Provide slight breathing space */
+    width: 100%; /* Occupy full container width */
+    height: auto; /* Allow dynamic height based on content */
+    position: relative; /* Positioning context for inner elements */
 }
 
 .logo {
-    width: 100%; /* Ensure the logo spans the full width */
-    height: 100%; /* Stretch to fill height */
-    object-fit: contain; /* Maintain aspect ratio without distortion */
-    cursor: pointer;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)); /* Subtle shadow effect */
+    max-width: 10%; /* Set a maximum width for better control */
+    width: auto; /* Maintain aspect ratio */
+    height: auto; /* Adjust height dynamically */
+    object-fit: contain; /* Ensure proper aspect ratio without distortion */
+    cursor: pointer; /* Interactivity hint */
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)); /* Soft shadow for depth */
     transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
-    background: none !important; /* Remove any background color */
-    border: none !important; /* Ensure no border is visible */
 }
 
 .logo:hover {
-    transform: scale(1.03); /* Slight zoom effect for interactivity */
-    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15)); /* Enhanced shadow */
+    transform: scale(2.05); /* Gentle zoom effect */
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2)); /* Stronger shadow on hover */
 }
 
 .logo-tagline {
     font-family: 'Raleway', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.2rem; /* Adjust for readability */
     font-weight: 400;
-    color: #4a4a4a !important; /* Neutral and consistent */
-    margin-top: 10px;
-    letter-spacing: 1.2px;
-    text-transform: none; /* Maintain natural text casing */
-    max-width: 80%; /* Ensure tagline remains readable */
-    text-align: left; /* Align tagline with the logo */
-    padding-left: 10px; /* Slight padding for separation */
+    color: #4a4a4a; /* Neutral and consistent color */
+    margin-top: 8px; /* Space between logo and tagline */
+    letter-spacing: 1px; /* Slight spacing for readability */
+    text-align: center; /* Center-align the tagline */
+    padding: 0 15px; /* Padding for better visual flow */
+    max-width: 90%; /* Ensure text fits within container */
 }
 
 .logo-tagline:hover {
-    color: #6c757d; /* Subtle hover effect */
+    color: #6c757d; /* Subtle color shift for interactivity */
     transition: color 0.3s ease-in-out;
 }
 
 /* Responsive Adjustments for Mobile Devices */
 @media (max-width: 768px) {
     .logo-container {
-        align-items: center; /* Center align for mobile devices */
-        justify-content: center;
-        padding: 10px; /* Add slight padding */
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center; /* Center-align elements */
+        padding: 15px; /* Additional padding for small screens */
     }
 
     .logo {
-        width: 95%; /* Scale logo to fit screen width */
-        max-width: 350px; /* Prevent logo from being too large */
-        height: auto; /* Maintain aspect ratio */
+        max-width: 120px; /* Scale logo for smaller screens */
     }
 
     .logo-tagline {
-        font-size: 1.2rem; /* Adjust font size for smaller screens */
-        text-align: center; /* Center align tagline for better readability */
-        padding: 0; /* Remove padding */
+        font-size: 1rem; /* Reduce font size for readability */
+        margin-top: 5px; /* Reduce space */
     }
 }
