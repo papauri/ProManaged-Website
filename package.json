@@ -1,12 +1,13 @@
 {
   "name": "game-prices-backend",
   "version": "1.0.0",
-  "description": "Backend for game prices API integration",
+  "description": "Backend for gaming",
   "type": "module",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "start:server_two": "node server_two.js"
   },
   "keywords": [],
   "author": "",
