@@ -1,11 +1,12 @@
 {
   "name": "game-prices-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend for game prices API integration",
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +20,8 @@
     "firebase-admin": "^13.0.1",
     "node-fetch": "^3.3.2",
     "punycode": "^2.3.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
