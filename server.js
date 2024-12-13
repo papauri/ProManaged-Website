@@ -8,8 +8,12 @@ import serviceAccount from './firebase-service-account.json' assert { type: 'jso
 // =========================
 // Firebase Initialization
 // =========================
+// Parse the service account JSON from the environment variable
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+
+// Initialize Firebase Admin SDK
 initializeApp({
-    credential: cert(serviceAccount),
+  credential: cert(serviceAccount),
 });
 
 const db = getFirestore();
@@ -21,7 +25,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: 'http://127.0.0.1:5500', // Allow requests from your live server
+    origin: ['http://127.0.0.1:5500', 'http://promanaged-it.com'], // Both local and production
 }));
 app.use(express.json());
 
