@@ -16,22 +16,22 @@ app.use(bodyParser.json());
 app.post('/send-email', async (req, res) => {
     const { name, email, phone, message } = req.body;
 
-    // Email transporter setup using secure SSL/TLS settings
+    // Email transporter setup using environment variables
     const transporter = nodemailer.createTransport({
-        host: 'blue.webhostingireland.ie', // Outgoing server (SMTP)
-        port: 465, // SMTP port for secure SSL/TLS
-        secure: true, // Use SSL/TLS
+        host: process.env.SMTP_HOST, // SMTP server
+        port: parseInt(process.env.SMTP_PORT, 10), // SMTP port (ensure it's a number)
+        secure: true, // Use SSL/TLS for secure connection
         auth: {
-            user: process.env.SMTP_USER, // Your email address
-            pass: process.env.SMTP_PASS, // Your email account’s password
+            user: process.env.SMTP_USER, // Email address
+            pass: process.env.SMTP_PASS, // Email password
         },
     });
 
     // Email details
     const mailOptions = {
-        from: process.env.SMTP_USER, // Sender's email (your email)
+        from: process.env.SMTP_USER, // Sender's email
         to: process.env.RECEIVER_EMAIL, // Receiver's email
-        replyTo: email, // Reply-to sender's email address
+        replyTo: email, // Set reply-to to the sender's email address
         subject: `Contact Form Submission from ${name}`,
         text: `
             Name: ${name}
