@@ -41,8 +41,7 @@ app.post('/send-email', async (req, res) => {
             Name: ${name}
             Email: ${email}
             Phone: ${phone}
-            Message:
-            ${message}
+            Message:${message}
         `,
         replyTo: email, // Set reply-to to the sender's email
     };
