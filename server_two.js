@@ -24,31 +24,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Environment Variables
+let EBAY_OAUTH_TOKEN = process.env.EBAY_OAUTH_TOKEN; // First token set as an env variable
+const COLLECTION_NAME = 'ebayListings'; // Firestore collection name
+
 // =========================
 // Helper Functions
 // =========================
 
-// Retrieve eBay OAuth token, fetch a new one if it doesn't exist
-async function getEbayAuthToken() {
-    const tokenDocRef = db.collection("ebayTokens").doc("auth");
-
-    const tokenDoc = await tokenDocRef.get();
-    if (tokenDoc.exists) {
-        const tokenData = tokenDoc.data();
-        const now = Date.now();
-        
-        // Check if token is expired
-        if (now < tokenData.expiry) {
-            return tokenData.accessToken;
-        }
-    }
-
-    // If no valid token exists, refresh it
-    return await refreshEbayAuthToken(tokenDocRef);
-}
-
-// Refresh eBay OAuth token
-async function refreshEbayAuthToken(tokenDocRef) {
+// Refresh eBay OAuth token and update in Firestore and local variable
+async function refreshEbayAuthToken() {
     const ebayClientId = process.env.EBAY_CLIENT_ID;
     const ebayClientSecret = process.env.EBAY_CLIENT_SECRET;
 
@@ -65,19 +50,45 @@ async function refreshEbayAuthToken(tokenDocRef) {
     });
 
     if (!authResponse.ok) {
-        throw new Error("Failed to refresh eBay OAuth token");
+        const errorText = await authResponse.text();
+        throw new Error(`Failed to refresh eBay OAuth token: ${errorText}`);
     }
 
     const authData = await authResponse.json();
     const expiry = Date.now() + authData.expires_in * 1000;
 
-    // Save the new token in Firestore
+    EBAY_OAUTH_TOKEN = authData.access_token;
+
+    // Store the new token in Firestore
+    const tokenDocRef = db.collection("ebayTokens").doc("auth");
     await tokenDocRef.set({
         accessToken: authData.access_token,
         expiry,
     });
 
-    return authData.access_token;
+    console.log("eBay OAuth token refreshed and updated in Firestore.");
+}
+
+// Check and refresh token if necessary
+async function ensureValidToken() {
+    const tokenDocRef = db.collection("ebayTokens").doc("auth");
+    const tokenDoc = await tokenDocRef.get();
+
+    if (tokenDoc.exists) {
+        const tokenData = tokenDoc.data();
+        const now = Date.now();
+
+        // Use Firestore token if it's valid
+        if (now < tokenData.expiry) {
+            EBAY_OAUTH_TOKEN = tokenData.accessToken;
+        } else {
+            console.log("Token expired. Refreshing...");
+            await refreshEbayAuthToken();
+        }
+    } else {
+        console.log("No token found in Firestore. Refreshing...");
+        await refreshEbayAuthToken();
+    }
 }
 
 // Map condition ID to a user-friendly name
@@ -109,6 +120,8 @@ function convertCurrencyToMWK(currency, value) {
 
 app.get('/api/ebay/items', async (req, res) => {
     try {
+        await ensureValidToken(); // Ensure token is valid before making the request
+
         const baseURL = 'https://api.ebay.com/buy/browse/v1/item_summary/search';
 
         const selectedMarketplace = req.query.marketplace || '';
@@ -139,10 +152,8 @@ app.get('/api/ebay/items', async (req, res) => {
             params.append("filter", `conditionIds:{${condition}}`);
         }
 
-        const ebayAuthToken = await getEbayAuthToken(); // Retrieve the token dynamically
-
         const headers = {
-            Authorization: `Bearer ${ebayAuthToken}`,
+            Authorization: `Bearer ${EBAY_OAUTH_TOKEN}`,
             "Content-Type": "application/json",
             "X-EBAY-C-MARKETPLACE-ID": config.id,
             "X-EBAY-C-ENDUSERCTX": `contextualLocation=country=${config.country},zip=${config.zip}`,
