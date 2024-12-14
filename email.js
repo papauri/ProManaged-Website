@@ -1,6 +1,9 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
+import express from 'express';
+import bodyParser from 'body-parser';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+
+dotenv.config(); // Load environment variables from .env file
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,18 +15,19 @@ app.post('/send-email', async (req, res) => {
 
     // Email transporter setup
     const transporter = nodemailer.createTransport({
-        host: 'smtp.blue.webhostingireland.ie.com', // Replace with your SMTP server
-        port: 465, // or 465 for secure
-        secure: false, // true for 465, false for other ports
+        host: process.env.SMTP_HOST, // SMTP host from .env
+        port: process.env.SMTP_PORT || 465, // SMTP port from .env
+        secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
         auth: {
-            user: 'johnpaulchirwa@promanaged-it.com', // Your email address
+            user: process.env.SMTP_USER, // Email from .env
+            pass: process.env.SMTP_PASS, // Password from .env
         },
     });
 
     // Email details
     const mailOptions = {
-        from: email,
-        to: 'johnpaulchirwa@promanaged-it.com', // Your email address to receive form submissions
+        from: process.env.SMTP_USER, // Email sender
+        to: process.env.RECEIVER_EMAIL, // Your email address to receive form submissions
         subject: `Contact Form Submission from ${name}`,
         text: `
             Name: ${name}
