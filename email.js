@@ -17,7 +17,6 @@ app.post('/send-email', async (req, res) => {
         secure: false, // true for 465, false for other ports
         auth: {
             user: 'johnpaulchirwa@promanaged-it.com', // Your email address
-            pass: 'Jamesjamdpc89!', // Your email password or app-specific password
         },
     });
 
