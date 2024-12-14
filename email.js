@@ -4,6 +4,8 @@ import nodemailer from 'nodemailer';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
+console.log(process.env.SMTP_USER, process.env.SMTP_PASS);
+
 // Load environment variables
 dotenv.config();
 
