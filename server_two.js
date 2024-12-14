@@ -1,14 +1,17 @@
 import express from 'express';
 import cors from 'cors';
-import fetch from 'node-fetch'; // Ensure node-fetch is installed
+import fetch from 'node-fetch';
 import { initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 
 // =========================
 // Firebase Initialization
 // =========================
+
+// Parse the service account JSON from the environment variable
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
+// Initialize Firebase Admin SDK
 initializeApp({
     credential: cert(serviceAccount),
 });
@@ -16,116 +19,98 @@ initializeApp({
 const db = getFirestore();
 
 // =========================
-// eBay API Configuration
-// =========================
-const EBAY_AUTH_URL = 'https://api.ebay.com/identity/v1/oauth2/token';
-const EBAY_CLIENT_ID = process.env.EBAY_CLIENT_ID;
-const EBAY_CLIENT_SECRET = process.env.EBAY_CLIENT_SECRET;
-
-// =========================
 // Express App Initialization
 // =========================
 const app = express();
 
 // Middleware
-app.use(
-    cors({
-        origin: ['http://127.0.0.1:5500', 'http://promanaged-it.com'], // Both local and production
-    })
-);
+app.use(cors());
 app.use(express.json());
+
+// =========================
+// Environment Variables
+// =========================
+const EBAY_OAUTH_TOKEN = process.env.EBAY_OAUTH_TOKEN;
+const COLLECTION_NAME = 'ebayListings'; // Firestore collection name
 
 // =========================
 // Helper Functions
 // =========================
 
-// Fetch a fresh eBay OAuth token and store it in Firestore
-async function fetchAndStoreEbayToken() {
-    try {
-        console.log('Fetching new eBay OAuth token...');
-
-        const response = await fetch(EBAY_AUTH_URL, {
-            method: 'POST',
-            headers: {
-                Authorization: `Basic ${Buffer.from(
-                    `${EBAY_CLIENT_ID}:${EBAY_CLIENT_SECRET}`
-                ).toString('base64')}`,
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-                grant_type: 'client_credentials',
-                scope: 'https://api.ebay.com/oauth/api_scope',
-            }),
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`Failed to fetch eBay token: ${response.statusText} - ${errorText}`);
-        }
-
-        const data = await response.json();
-        const token = data.access_token;
-        const expiresIn = data.expires_in; // Token expiry time in seconds
-
-        // Store the token in Firestore
-        const docRef = db.collection('ebayAuth').doc('authToken');
-        await docRef.set({
-            token,
-            expiresAt: Date.now() + expiresIn * 1000, // Store expiry time in milliseconds
-            lastUpdated: new Date().toISOString(),
-        });
-
-        console.log('eBay OAuth token successfully fetched and stored.');
-        return token;
-    } catch (error) {
-        console.error('Error fetching eBay token:', error);
-        throw error;
-    }
+// Determine product type from title
+function getProductType(title) {
+    const titleLower = title.toLowerCase();
+    if (titleLower.includes('playstation 5') || titleLower.includes('ps5')) return 'ps5';
+    if (titleLower.includes('playstation 4') || titleLower.includes('ps4')) return 'ps4';
+    if (titleLower.includes('xbox')) return 'xbox';
+    return 'accessories';
 }
 
-// Get a valid eBay OAuth token (fetch a new one if expired)
-async function getEbayToken() {
-    const docRef = db.collection('ebayAuth').doc('authToken');
-    const doc = await docRef.get();
+// Map condition ID to a user-friendly name
+function getConditionName(conditionId) {
+    const conditionNames = {
+        '1000': 'New',
+        '1500': 'New - Other',
+        '2000': 'Like New',
+        '3000': 'Used',
+        '7000': 'For Parts',
+    };
+    return conditionNames[conditionId] || 'Unknown Condition';
+}
 
-    if (doc.exists) {
-        const data = doc.data();
-        const currentTime = Date.now();
-
-        // Check if token is expired
-        if (data.expiresAt && currentTime < data.expiresAt) {
-            console.log('Using cached eBay OAuth token.');
-            return data.token; // Return existing token
-        }
-    }
-
-    // Fetch a new token if not available or expired
-    return fetchAndStoreEbayToken();
+// Convert currency to MWK
+function convertCurrencyToMWK(currency, value) {
+    const exchangeRates = {
+        GBP: 3600,
+        EUR: 3200,
+        USD: 2820,
+    };
+    const rate = exchangeRates[currency] || 3200;
+    return value * rate;
 }
 
 // =========================
-// Routes
+// API Routes
 // =========================
 
-// Fetch eBay items
+// Fetch eBay items and store them in Firestore
 app.get('/api/ebay/items', async (req, res) => {
     try {
-        const token = await getEbayToken(); // Get a valid token
+        const baseURL = 'https://api.ebay.com/buy/browse/v1/item_summary/search';
+
+        const selectedMarketplace = req.query.marketplace || '';
+        const condition = req.query.condition;
+
+        const marketplaceConfig = {
+            GB: { id: 'EBAY_GB', country: 'GB', zip: 'SW1A1AA' },
+            DE: { id: 'EBAY_DE', country: 'DE', zip: '10115' },
+            FR: { id: 'EBAY_FR', country: 'FR', zip: '75001' },
+            IE: { id: 'EBAY_IE', country: 'IE', zip: 'D01' },
+        };
+
+        const config = selectedMarketplace
+            ? marketplaceConfig[selectedMarketplace]
+            : marketplaceConfig.GB;
 
         const query = req.query.q || 'Gaming Console';
         const limit = req.query.limit || '20';
 
         const params = new URLSearchParams({
             q: query,
-            limit: limit,
+            limit,
+            marketplace_ids: selectedMarketplace
+                ? config.id
+                : 'EBAY_GB,EBAY_FR,EBAY_DE,EBAY_IE',
         });
 
         const headers = {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${EBAY_OAUTH_TOKEN}`,
             'Content-Type': 'application/json',
+            'X-EBAY-C-MARKETPLACE-ID': config.id,
+            'X-EBAY-C-ENDUSERCTX': `contextualLocation=country=${config.country},zip=${config.zip}`,
         };
 
-        const ebayAPIUrl = `https://api.ebay.com/buy/browse/v1/item_summary/search?${params.toString()}`;
+        const ebayAPIUrl = `${baseURL}?${params.toString()}`;
         const response = await fetch(ebayAPIUrl, { headers });
 
         if (!response.ok) {
@@ -139,18 +124,45 @@ app.get('/api/ebay/items', async (req, res) => {
             return res.json([]);
         }
 
-        const items = data.itemSummaries.map((item) => ({
-            title: item.title || 'No Title Available',
-            price: `${item.price?.value || '0'} ${item.price?.currency || 'USD'}`,
-            image: item.image?.imageUrl || 'https://via.placeholder.com/150',
-            condition: item.condition || 'Unknown',
-            url: item.itemWebUrl || '#',
-        }));
+        const items = data.itemSummaries.map((item) => {
+            const currency = item.price?.currency || 'EUR';
+            const originalPrice = parseFloat(item.price?.value || 0);
+            const priceMWK = convertCurrencyToMWK(currency, originalPrice);
+
+            return {
+                id: item.itemId, // Unique identifier
+                title: item.title || 'No Title Available',
+                originalPrice: `${originalPrice.toFixed(2)} ${currency}`,
+                priceMWK: `${priceMWK.toFixed(2)} MWK`,
+                image: item.image?.imageUrl || 'https://via.placeholder.com/150',
+                feedbackPercentage: item.seller?.feedbackPercentage || 'N/A',
+                marketplace: item.itemLocation?.country || 'N/A',
+                condition: getConditionName(item.conditionId),
+                url: item.itemWebUrl || '#',
+                productType: getProductType(item.title),
+            };
+        });
+
+        // Write items to Firestore
+        const batch = db.batch();
+        const collectionRef = db.collection(COLLECTION_NAME);
+
+        items.forEach((item) => {
+            const docRef = collectionRef.doc(item.id); // Use eBay item ID as document ID
+            batch.set(docRef, item);
+        });
+
+        await batch.commit();
+        console.log(`Successfully stored ${items.length} items in Firestore.`);
 
         res.json(items);
     } catch (error) {
         console.error('Error fetching eBay items:', error);
-        res.status(500).json({ error: 'Failed to fetch eBay items.' });
+        res.status(500).json({
+            error: 'Failed to fetch eBay items',
+            message: error.message,
+            stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
+        });
     }
 });
 
