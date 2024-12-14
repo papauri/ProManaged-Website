@@ -1,8 +1,8 @@
-import express from "express";
-import cors from "cors";
-import fetch from "node-fetch";
-import { initializeApp, cert } from "firebase-admin/app";
-import { getFirestore } from "firebase-admin/firestore";
+import express from 'express';
+import cors from 'cors';
+import fetch from 'node-fetch';
+import { initializeApp, cert } from 'firebase-admin/app';
+import { getFirestore } from 'firebase-admin/firestore';
 
 // =========================
 // Firebase Initialization
@@ -19,6 +19,8 @@ const db = getFirestore();
 // Express App Initialization
 // =========================
 const app = express();
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
@@ -26,40 +28,68 @@ app.use(express.json());
 // Helper Functions
 // =========================
 
-// Get OAuth Token from Firestore
+// Retrieve eBay OAuth token, fetch a new one if it doesn't exist
 async function getEbayAuthToken() {
-    try {
-        const tokenDoc = await db.collection("ebayTokens").doc("auth").get();
-        if (tokenDoc.exists) {
-            return tokenDoc.data().accessToken;
-        } else {
-            throw new Error("eBay auth token not found in Firestore.");
+    const tokenDocRef = db.collection("ebayTokens").doc("auth");
+
+    const tokenDoc = await tokenDocRef.get();
+    if (tokenDoc.exists) {
+        const tokenData = tokenDoc.data();
+        const now = Date.now();
+        
+        // Check if token is expired
+        if (now < tokenData.expiry) {
+            return tokenData.accessToken;
         }
-    } catch (error) {
-        console.error("Error retrieving eBay token from Firestore:", error);
-        throw new Error("Failed to retrieve eBay token.");
     }
+
+    // If no valid token exists, refresh it
+    return await refreshEbayAuthToken(tokenDocRef);
 }
 
-// Determine product type from title
-function getProductType(title) {
-    const titleLower = title.toLowerCase();
-    if (titleLower.includes("playstation 5") || titleLower.includes("ps5")) return "ps5";
-    if (titleLower.includes("playstation 4") || titleLower.includes("ps4")) return "ps4";
-    if (titleLower.includes("xbox")) return "xbox";
-    return "accessories";
+// Refresh eBay OAuth token
+async function refreshEbayAuthToken(tokenDocRef) {
+    const ebayClientId = process.env.EBAY_CLIENT_ID;
+    const ebayClientSecret = process.env.EBAY_CLIENT_SECRET;
+
+    const authResponse = await fetch("https://api.ebay.com/identity/v1/oauth2/token", {
+        method: "POST",
+        headers: {
+            Authorization: `Basic ${Buffer.from(`${ebayClientId}:${ebayClientSecret}`).toString("base64")}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+            grant_type: "client_credentials",
+            scope: "https://api.ebay.com/oauth/api_scope",
+        }),
+    });
+
+    if (!authResponse.ok) {
+        throw new Error("Failed to refresh eBay OAuth token");
+    }
+
+    const authData = await authResponse.json();
+    const expiry = Date.now() + authData.expires_in * 1000;
+
+    // Save the new token in Firestore
+    await tokenDocRef.set({
+        accessToken: authData.access_token,
+        expiry,
+    });
+
+    return authData.access_token;
 }
 
 // Map condition ID to a user-friendly name
 function getConditionName(conditionId) {
     const conditionNames = {
-        "1000": "New",
-        "1500": "New - Other",
-        "2000": "Like New",
-        "3000": "Used",
-        "7000": "For Parts",
+        '1000': 'New',
+        '1500': 'New - Other',
+        '2000': 'Like New',
+        '3000': 'Used',
+        '7000': 'For Parts',
     };
-    return conditionNames[conditionId] || "Unknown Condition";
+    return conditionNames[conditionId] || 'Unknown Condition';
 }
 
 // Convert currency to MWK
@@ -74,23 +104,23 @@ function convertCurrencyToMWK(currency, value) {
 }
 
 // =========================
-// API Routes
+// Routes
 // =========================
 
-app.get("/api/ebay/items", async (req, res) => {
+app.get('/api/ebay/items', async (req, res) => {
     try {
-        const baseURL = "https://api.ebay.com/buy/browse/v1/item_summary/search";
+        const baseURL = 'https://api.ebay.com/buy/browse/v1/item_summary/search';
 
-        const selectedMarketplace = req.query.marketplace || "";
+        const selectedMarketplace = req.query.marketplace || '';
         const condition = req.query.condition;
         const query = req.query.q || "Gaming Console";
         const limit = req.query.limit || "20";
 
         const marketplaceConfig = {
-            GB: { id: "EBAY_GB", country: "GB", zip: "SW1A1AA" },
-            DE: { id: "EBAY_DE", country: "DE", zip: "10115" },
-            FR: { id: "EBAY_FR", country: "FR", zip: "75001" },
-            IE: { id: "EBAY_IE", country: "IE", zip: "D01" },
+            GB: { id: 'EBAY_GB', country: 'GB', zip: 'SW1A1AA' },
+            DE: { id: 'EBAY_DE', country: 'DE', zip: '10115' },
+            FR: { id: 'EBAY_FR', country: 'FR', zip: '75001' },
+            IE: { id: 'EBAY_IE', country: 'IE', zip: 'D01' },
         };
 
         const config = selectedMarketplace
@@ -109,7 +139,7 @@ app.get("/api/ebay/items", async (req, res) => {
             params.append("filter", `conditionIds:{${condition}}`);
         }
 
-        const ebayAuthToken = await getEbayAuthToken();
+        const ebayAuthToken = await getEbayAuthToken(); // Retrieve the token dynamically
 
         const headers = {
             Authorization: `Bearer ${ebayAuthToken}`,
@@ -149,7 +179,7 @@ app.get("/api/ebay/items", async (req, res) => {
                 marketplace: item.itemLocation?.country || "N/A",
                 condition: getConditionName(item.conditionId),
                 url: item.itemWebUrl || "#",
-                productType: getProductType(item.title),
+                productType: item.title.toLowerCase().includes('ps5') ? 'ps5' : 'other',
             };
         });
 
