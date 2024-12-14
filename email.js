@@ -6,11 +6,7 @@ import cors from 'cors'; // Import cors
 const app = express();
 
 // Enable CORS
-app.use(cors({
-    origin: 'http://promanaged-it.com', // Allow your domain
-    methods: ['POST'], // Specify allowed methods
-    allowedHeaders: ['Content-Type'], // Specify allowed headers
-}));
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
