@@ -26,17 +26,17 @@ app.post('/send-email', async (req, res) => {
     });
 
     const mailOptions = {
-        from: email,
-        to: process.env.SMTP_USER,
-        subject: `Contact Form Submission from ${name}`,
-        text: `
-            Name: ${name}
-            Email: ${email}
-            Phone: ${phone}
-            Message:
-            ${message}
-        `,
-    };
+    from: process.env.EMAIL_USER, // Use your domain email
+    to: process.env.EMAIL_USER, // Recipient
+    subject: `Contact Form Submission from ${name}`,
+    text: `
+        Name: ${name}
+        Email: ${email}
+        Phone: ${phone}
+        Message:
+        ${message}
+    `,
+};
 
     try {
         await transporter.sendMail(mailOptions);
