@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "start:server_two": "node server_two.js",
-    "start:email": "node email.js"
+    "start:email": "node email.js",
+    "start:appointment": "node appointment.js"
   },
   "keywords": [],
   "author": "",
