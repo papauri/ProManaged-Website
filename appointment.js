@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 // Appointment booking endpoint
 // Endpoint for booking appointments
-app.post('/api/book-appointment', async (req, res) => {
+app.post('/book-appointment', async (req, res) => {
     const { name, email, service, date, time } = req.body;
 
     // Validate the required fields
