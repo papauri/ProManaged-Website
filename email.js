@@ -26,8 +26,8 @@ app.post('/send-email', async (req, res) => {
     });
 
     const mailOptions = {
-    from: process.env.EMAIL_USER, // Use your domain email
-    to: process.env.EMAIL_USER, // Recipient
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER,
     subject: `Contact Form Submission from ${name}`,
     text: `
         Name: ${name}
@@ -36,6 +36,7 @@ app.post('/send-email', async (req, res) => {
         Message:
         ${message}
     `,
+    replyTo: email, // Set reply-to to the sender's email
 };
 
     try {
