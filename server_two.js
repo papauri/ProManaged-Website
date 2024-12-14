@@ -92,10 +92,10 @@ async function ensureValidToken() {
 // Detect product type based on title
 function detectProductType(title) {
     const titleLower = title.toLowerCase();
-    if (titleLower.includes('playstation 5') || titleLower.includes('ps5')) return 'ps5';
-    if (titleLower.includes('playstation 4') || titleLower.includes('ps4')) return 'ps4';
-    if (titleLower.includes('xbox')) return 'xbox';
-    if (titleLower.includes('controller') || titleLower.includes('accessories')) return 'accessories';
+    if (titleLower.includes('playstation 5') || titleLower.includes('ps5') || titleLower.includes('ps 5')) return 'ps5';
+    if (titleLower.includes('playstation 4') || titleLower.includes('ps4') || titleLower.includes('ps 4')) return 'ps4';
+    if (titleLower.includes('xbox series') || titleLower.includes('xbox one') || titleLower.includes('xbox')) return 'xbox';
+    if (titleLower.includes('controller') || titleLower.includes('accessory') || titleLower.includes('accessories')) return 'accessories';
     return 'other';
 }
 
@@ -108,7 +108,12 @@ function getConditionName(conditionId) {
         '3000': 'Used',
         '7000': 'For Parts',
     };
-    return conditionNames[conditionId] || 'Unknown Condition';
+
+    if (!conditionId || !conditionNames[conditionId]) {
+        console.warn(`Unrecognized condition ID: ${conditionId}`);
+        return 'Unknown Condition';
+    }
+    return conditionNames[conditionId];
 }
 
 // =========================
