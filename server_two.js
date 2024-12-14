@@ -25,7 +25,7 @@ app.use(cors());
 app.use(express.json());
 
 // Environment Variables
-let EBAY_OAUTH_TOKEN = process.env.EBAY_OAUTH_TOKEN; // First token set as an env variable
+let EBAY_OAUTH_TOKEN = process.env.EBAY_OAUTH_TOKEN; // Initial token from environment variable
 
 // =========================
 // Helper Functions
@@ -68,7 +68,7 @@ async function refreshEbayAuthToken() {
     console.log("eBay OAuth token refreshed and updated in Firestore.");
 }
 
-// Check and refresh token if necessary
+// Ensure token is valid before making requests
 async function ensureValidToken() {
     const tokenDocRef = db.collection("ebayTokens").doc("auth");
     const tokenDoc = await tokenDocRef.get();
@@ -77,7 +77,6 @@ async function ensureValidToken() {
         const tokenData = tokenDoc.data();
         const now = Date.now();
 
-        // Use Firestore token if it's valid
         if (now < tokenData.expiry) {
             EBAY_OAUTH_TOKEN = tokenData.accessToken;
         } else {
@@ -90,7 +89,7 @@ async function ensureValidToken() {
     }
 }
 
-// Detect product type from title
+// Detect product type based on title
 function detectProductType(title) {
     const titleLower = title.toLowerCase();
     if (titleLower.includes('playstation 5') || titleLower.includes('ps5')) return 'ps5';
@@ -110,17 +109,6 @@ function getConditionName(conditionId) {
         '7000': 'For Parts',
     };
     return conditionNames[conditionId] || 'Unknown Condition';
-}
-
-// Convert currency to MWK
-function convertCurrencyToMWK(currency, value) {
-    const exchangeRates = {
-        GBP: 3600,
-        EUR: 3200,
-        USD: 2820,
-    };
-    const rate = exchangeRates[currency] || 3200;
-    return value * rate;
 }
 
 // =========================
@@ -184,24 +172,17 @@ app.get('/api/ebay/items', async (req, res) => {
             return res.json([]);
         }
 
-        const items = data.itemSummaries.map((item) => {
-            const currency = item.price?.currency || "EUR";
-            const originalPrice = parseFloat(item.price?.value || 0);
-            const priceMWK = convertCurrencyToMWK(currency, originalPrice);
-
-            return {
-                id: item.itemId,
-                title: item.title || "No Title Available",
-                originalPrice: `${originalPrice.toFixed(2)} ${currency}`,
-                priceMWK: `${priceMWK.toFixed(2)} MWK`,
-                image: item.image?.imageUrl || "https://via.placeholder.com/150",
-                feedbackPercentage: item.seller?.feedbackPercentage || "N/A",
-                marketplace: item.itemLocation?.country || "N/A",
-                condition: getConditionName(item.conditionId),
-                url: item.itemWebUrl || "#",
-                productType: detectProductType(item.title),
-            };
-        });
+        const items = data.itemSummaries.map((item) => ({
+            id: item.itemId,
+            title: item.title || "No Title Available",
+            originalPrice: `${item.price?.value || 0} ${item.price?.currency || "N/A"}`,
+            image: item.image?.imageUrl || "https://via.placeholder.com/150",
+            feedbackPercentage: item.seller?.feedbackPercentage || "N/A",
+            marketplace: item.itemLocation?.country || "N/A",
+            condition: getConditionName(item.conditionId),
+            url: item.itemWebUrl || "#",
+            productType: detectProductType(item.title),
+        }));
 
         res.json(items);
     } catch (error) {
