@@ -25,7 +25,7 @@ app.use(cors());
 app.use(express.json());
 
 // Environment Variables
-let EBAY_OAUTH_TOKEN = process.env.EBAY_OAUTH_TOKEN;
+let EBAY_OAUTH_TOKEN = process.env.EBAY_OAUTH_TOKEN; // Initial token from environment variable
 
 // =========================
 // Helper Functions
@@ -92,8 +92,8 @@ async function ensureValidToken() {
 // Detect product type based on title
 function detectProductType(title) {
     const titleLower = title.toLowerCase();
-    if (titleLower.includes('playstation 5') || titleLower.includes('ps5')) return 'ps5';
-    if (titleLower.includes('playstation 4') || titleLower.includes('ps4')) return 'ps4';
+    if (titleLower.includes('playstation 5') || titleLower.includes('ps5') || titleLower.includes('ps 5')) return 'ps5';
+    if (titleLower.includes('playstation 4') || titleLower.includes('ps4') || titleLower.includes('ps 4')) return 'ps4';
     if (titleLower.includes('xbox series') || titleLower.includes('xbox one') || titleLower.includes('xbox')) return 'xbox';
     if (titleLower.includes('controller') || titleLower.includes('accessory') || titleLower.includes('accessories')) return 'accessories';
     return 'other';
@@ -122,18 +122,32 @@ function getConditionName(conditionId) {
 
 app.get('/api/ebay/items', async (req, res) => {
     try {
-        await ensureValidToken();
+        await ensureValidToken(); // Ensure token is valid before making the request
 
         const baseURL = 'https://api.ebay.com/buy/browse/v1/item_summary/search';
 
-        const query = req.query.q || "Gaming Console";
+        const selectedMarketplace = req.query.marketplace || '';
         const condition = req.query.condition;
+        const query = req.query.q || "Gaming Console";
         const limit = req.query.limit || "20";
+
+        const marketplaceConfig = {
+            GB: { id: 'EBAY_GB', country: 'GB', zip: 'SW1A1AA' },
+            DE: { id: 'EBAY_DE', country: 'DE', zip: '10115' },
+            FR: { id: 'EBAY_FR', country: 'FR', zip: '75001' },
+            IE: { id: 'EBAY_IE', country: 'IE', zip: 'D01' },
+        };
+
+        const config = selectedMarketplace
+            ? marketplaceConfig[selectedMarketplace]
+            : marketplaceConfig.GB;
 
         const params = new URLSearchParams({
             q: query,
-            fieldgroups: "PRODUCT", // Include product data
             limit,
+            marketplace_ids: selectedMarketplace
+                ? config.id
+                : "EBAY_GB,EBAY_FR,EBAY_DE,EBAY_IE",
         });
 
         if (condition) {
@@ -143,6 +157,8 @@ app.get('/api/ebay/items', async (req, res) => {
         const headers = {
             Authorization: `Bearer ${EBAY_OAUTH_TOKEN}`,
             "Content-Type": "application/json",
+            "X-EBAY-C-MARKETPLACE-ID": config.id,
+            "X-EBAY-C-ENDUSERCTX": `contextualLocation=country=${config.country},zip=${config.zip}`,
         };
 
         const ebayAPIUrl = `${baseURL}?${params.toString()}`;
@@ -164,7 +180,7 @@ app.get('/api/ebay/items', async (req, res) => {
         const items = data.itemSummaries.map((item) => ({
             id: item.itemId,
             title: item.title || "No Title Available",
-            price: `${item.price?.value || 0} ${item.price?.currency || "N/A"}`,
+            originalPrice: `${item.price?.value || 0} ${item.price?.currency || "N/A"}`,
             image: item.image?.imageUrl || "https://via.placeholder.com/150",
             feedbackPercentage: item.seller?.feedbackPercentage || "N/A",
             marketplace: item.itemLocation?.country || "N/A",
