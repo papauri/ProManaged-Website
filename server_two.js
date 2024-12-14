@@ -7,11 +7,8 @@ import { getFirestore } from 'firebase-admin/firestore';
 // =========================
 // Firebase Initialization
 // =========================
-
-// Parse the service account JSON from the environment variable
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-// Initialize Firebase Admin SDK
 initializeApp({
     credential: cert(serviceAccount),
 });
@@ -27,9 +24,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// =========================
 // Environment Variables
-// =========================
 const EBAY_OAUTH_TOKEN = process.env.EBAY_OAUTH_TOKEN;
 const COLLECTION_NAME = 'ebayListings'; // Firestore collection name
 
@@ -70,7 +65,7 @@ function convertCurrencyToMWK(currency, value) {
 }
 
 // =========================
-// API Routes
+// Routes
 // =========================
 
 // Fetch eBay items and store them in Firestore
@@ -80,6 +75,8 @@ app.get('/api/ebay/items', async (req, res) => {
 
         const selectedMarketplace = req.query.marketplace || '';
         const condition = req.query.condition;
+        const query = req.query.q || 'Gaming Console';
+        const limit = req.query.limit || '20';
 
         const marketplaceConfig = {
             GB: { id: 'EBAY_GB', country: 'GB', zip: 'SW1A1AA' },
@@ -92,9 +89,6 @@ app.get('/api/ebay/items', async (req, res) => {
             ? marketplaceConfig[selectedMarketplace]
             : marketplaceConfig.GB;
 
-        const query = req.query.q || 'Gaming Console';
-        const limit = req.query.limit || '20';
-
         const params = new URLSearchParams({
             q: query,
             limit,
@@ -102,6 +96,10 @@ app.get('/api/ebay/items', async (req, res) => {
                 ? config.id
                 : 'EBAY_GB,EBAY_FR,EBAY_DE,EBAY_IE',
         });
+
+        if (condition) {
+            params.append('filter', `conditionIds:{${condition}}`);
+        }
 
         const headers = {
             Authorization: `Bearer ${EBAY_OAUTH_TOKEN}`,
@@ -111,6 +109,8 @@ app.get('/api/ebay/items', async (req, res) => {
         };
 
         const ebayAPIUrl = `${baseURL}?${params.toString()}`;
+        console.log(`Fetching from eBay: ${ebayAPIUrl}`);
+
         const response = await fetch(ebayAPIUrl, { headers });
 
         if (!response.ok) {
