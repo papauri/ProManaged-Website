@@ -2,18 +2,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import nodemailer from 'nodemailer';
 import cors from 'cors';
-import dotenv from 'dotenv';
-
-console.log(process.env.SMTP_USER, process.env.SMTP_PASS);
-
-// Load environment variables
-dotenv.config();
 
 const app = express();
 
-// Enable CORS for specific origin
-app.use(cors({ origin: 'http://promanaged-it.com' }));
+// Enable CORS
+app.use(cors());
 
+// Parse request bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -21,32 +16,34 @@ app.use(bodyParser.json());
 app.post('/send-email', async (req, res) => {
     const { name, email, phone, message } = req.body;
 
-    // Configure transporter
+    // Email transporter setup using secure SSL/TLS settings
     const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: Number(process.env.SMTP_PORT),
-        secure: true, // Use true for port 465
+        host: 'blue.webhostingireland.ie', // Outgoing server (SMTP)
+        port: 465, // SMTP port for secure SSL/TLS
+        secure: true, // Use SSL/TLS
         auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS,
+            user: process.env.SMTP_USER, // Your email address
+            pass: process.env.SMTP_PASS, // Your email account’s password
         },
     });
 
     // Email details
     const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER,
+        from: process.env.SMTP_USER, // Sender's email (your email)
+        to: process.env.RECEIVER_EMAIL, // Receiver's email
+        replyTo: email, // Reply-to sender's email address
         subject: `Contact Form Submission from ${name}`,
         text: `
             Name: ${name}
             Email: ${email}
             Phone: ${phone}
-            Message:${message}
+            Message:
+            ${message}
         `,
-        replyTo: email, // Set reply-to to the sender's email
     };
 
     try {
+        // Send the email
         await transporter.sendMail(mailOptions);
         res.status(200).send('Email sent successfully!');
     } catch (error) {
