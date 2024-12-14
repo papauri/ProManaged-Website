@@ -90,6 +90,16 @@ async function ensureValidToken() {
     }
 }
 
+// Detect product type from title
+function detectProductType(title) {
+    const titleLower = title.toLowerCase();
+    if (titleLower.includes('playstation 5') || titleLower.includes('ps5')) return 'ps5';
+    if (titleLower.includes('playstation 4') || titleLower.includes('ps4')) return 'ps4';
+    if (titleLower.includes('xbox')) return 'xbox';
+    if (titleLower.includes('controller') || titleLower.includes('accessories')) return 'accessories';
+    return 'other';
+}
+
 // Map condition ID to a user-friendly name
 function getConditionName(conditionId) {
     const conditionNames = {
@@ -189,7 +199,7 @@ app.get('/api/ebay/items', async (req, res) => {
                 marketplace: item.itemLocation?.country || "N/A",
                 condition: getConditionName(item.conditionId),
                 url: item.itemWebUrl || "#",
-                productType: item.title.toLowerCase().includes('ps5') ? 'ps5' : 'other',
+                productType: detectProductType(item.title),
             };
         });
 
