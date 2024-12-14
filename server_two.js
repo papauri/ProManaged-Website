@@ -26,7 +26,6 @@ app.use(express.json());
 
 // Environment Variables
 let EBAY_OAUTH_TOKEN = process.env.EBAY_OAUTH_TOKEN; // First token set as an env variable
-const COLLECTION_NAME = 'ebayListings'; // Firestore collection name
 
 // =========================
 // Helper Functions
