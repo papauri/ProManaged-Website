@@ -1,12 +1,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import nodemailer from 'nodemailer';
-import cors from 'cors'; // Import cors
+import cors from 'cors';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
 
-// Enable CORS
-app.use(cors());
+// Enable CORS for specific origin
+app.use(cors({ origin: 'http://promanaged-it.com' }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -15,29 +19,31 @@ app.use(bodyParser.json());
 app.post('/send-email', async (req, res) => {
     const { name, email, phone, message } = req.body;
 
+    // Configure transporter
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
-        port: 465,
-        secure: true,
+        port: Number(process.env.SMTP_PORT),
+        secure: true, // Use true for port 465
         auth: {
             user: process.env.SMTP_USER,
             pass: process.env.SMTP_PASS,
         },
     });
 
+    // Email details
     const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER,
-    subject: `Contact Form Submission from ${name}`,
-    text: `
-        Name: ${name}
-        Email: ${email}
-        Phone: ${phone}
-        Message:
-        ${message}
-    `,
-    replyTo: email, // Set reply-to to the sender's email
-};
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_USER,
+        subject: `Contact Form Submission from ${name}`,
+        text: `
+            Name: ${name}
+            Email: ${email}
+            Phone: ${phone}
+            Message:
+            ${message}
+        `,
+        replyTo: email, // Set reply-to to the sender's email
+    };
 
     try {
         await transporter.sendMail(mailOptions);
@@ -48,5 +54,6 @@ app.post('/send-email', async (req, res) => {
     }
 });
 
+// Start the server
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Email server running on port ${PORT}`));
