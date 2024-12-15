@@ -1,12 +1,15 @@
 {
   "name": "game-prices-backend",
   "version": "1.0.0",
-  "description": "Backend for game prices API integration",
+  "description": "Backend for gaming",
   "type": "module",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "start:server_two": "node server_two.js",
+    "start:email": "node email.js",
+    "start:appointment": "node appointment.js"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +22,9 @@
     "firebase": "^11.0.2",
     "firebase-admin": "^13.0.1",
     "node-fetch": "^3.3.2",
-    "punycode": "^2.3.1"
+    "punycode": "^2.3.1",
+    "nodemailer": "^6.9.1",
+    "body-parser": "^1.20.2"
   },
   "engines": {
     "node": ">=14.0.0"
