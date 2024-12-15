@@ -6,7 +6,7 @@ import cors from 'cors';
 const app = express();
 
 // Enable CORS with specific allowed origin
-const allowedOrigins = ['http://promanaged-it.com', 'http://127.0.0.1:5500']; // Include both production and development origins
+const allowedOrigins = ['https://promanaged-it.com', 'http://127.0.0.1:5500']; // Include both production and development origins
 app.use(cors({
     origin: allowedOrigins,
     methods: ['GET', 'POST'], // Allow specific methods
