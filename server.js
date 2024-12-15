@@ -25,7 +25,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: ['http://127.0.0.1:5500', 'http://promanaged-it.com'], // Both local and production
+    origin: ['https://127.0.0.1:5500', 'http://promanaged-it.com'], // Both local and production
 }));
 app.use(express.json());
 
