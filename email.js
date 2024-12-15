@@ -27,15 +27,15 @@ app.post('/send-email', async (req, res) => {
         port: parseInt(process.env.SMTP_PORT, 10), // SMTP port (ensure it's a number)
         secure: true, // Use SSL/TLS for secure connection
         auth: {
-            user: process.env.SMTP_USER, // Email address
-            pass: process.env.SMTP_PASS, // Email password
+            user: process.env.CONTACTUS_SMTP_USER, // Email address
+            pass: process.env.CONTACTUS_SMTP_PASS, // Email password
         },
     });
 
     // Email details
     const mailOptions = {
-        from: process.env.SMTP_USER, // Sender's email
-        to: process.env.RECEIVER_EMAIL, // Receiver's email
+        from: process.env.CONTACTUS_SMTP_USER, // Sender's email
+        to: process.env.CONTACTUS_RECEIVER_EMAIL, // Receiver's email
         replyTo: email, // Set reply-to to the sender's email address
         subject: `Contact Form Submission from ${name}`,
         text: `
