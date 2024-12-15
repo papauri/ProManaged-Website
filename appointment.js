@@ -32,14 +32,14 @@ app.post('/book-appointment', async (req, res) => {
         port: parseInt(process.env.SMTP_PORT, 10),
         secure: true, // Use SSL
         auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS,
+            user: process.env.APPOINTMENT_SMTP_USER,
+            pass: process.env.APPOINTMENT_SMTP_PASS,
         },
     });
 
     const mailOptions = {
-        from: process.env.SMTP_USER,
-        to: process.env.RECEIVER_EMAIL, // appointments@promanaged-it.com
+        from: process.env.APPOINTMENT_SMTP_USER,
+        to: process.env.APPOINTMENT_RECEIVER_EMAIL, // appointments@promanaged-it.com
         subject: `New Appointment Request`,
         text: `
             You have a new appointment request:
