@@ -25,7 +25,7 @@ app.use(cors());
 app.use(express.json());
 
 // Environment Variables
-let EBAY_OAUTH_TOKEN = process.env.EBAY_OAUTH_TOKEN; // Initial token from environment variable
+//let EBAY_OAUTH_TOKEN = process.env.EBAY_OAUTH_TOKEN; // Initial token from environment variable
 
 // =========================
 // Helper Functions
