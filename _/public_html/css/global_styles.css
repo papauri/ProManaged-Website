@@ -1,0 +1,38 @@
+:root {
+    --primary-color: #1D4ED8;
+    --secondary-color: #F97316;
+    --background-color: #F3F4F6;
+    --text-color: #111827;
+    --white: #ffffff;
+    --gray: #6B7280;
+    --accent-color: #10B981;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --button-hover-bg: #1E40AF;
+    --button-hover-text: #ffffff;
+    --transition: all 0.3s ease-in-out;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}

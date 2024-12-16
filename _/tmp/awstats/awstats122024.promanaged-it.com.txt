@@ -1,0 +1,562 @@
+AWSTATS DATA FILE 7.8 (build 20200416)
+# If you remove this file, all statistics for date 202412 will be lost/reset.
+# Last config file used to build this data file was /home/p601229/tmp/awstats/awstats.promanaged-it.com.conf.
+
+# Position (offset in bytes) in this file for beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 28
+POS_GENERAL 2013                
+POS_TIME 2699                
+POS_VISITOR 11440               
+POS_DAY 15362               
+POS_DOMAIN 3505                
+POS_LOGIN 4000                
+POS_ROBOT 4155                
+POS_WORMS 4420                
+POS_EMAILSENDER 4551                
+POS_EMAILRECEIVER 4694                
+POS_SESSION 15555               
+POS_SIDER 15738               
+POS_FILETYPES 4829                
+POS_DOWNLOADS 5013                
+POS_OS 5061                
+POS_BROWSER 5299                
+POS_SCREENSIZE 6368                
+POS_UNKNOWNREFERER 6442                
+POS_UNKNOWNREFERERBROWSER 6909                
+POS_ORIGIN 7130                
+POS_SEREFERRALS 7269                
+POS_PAGEREFS 7450                
+POS_SEARCHWORDS 7641                
+POS_KEYWORDS 7793                
+POS_MISC 2363                
+POS_ERRORS 7852                
+POS_CLUSTER 3856                
+POS_SIDER_404 7960                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20241215112734 2439 599612 11112067683994
+FirstTime 20241211203804
+LastTime 20241215112724
+LastUpdate 20241215120208 2439 0 2439 0 0
+TotalVisits 111                 
+TotalUnique 91                  
+MonthHostsKnown 0                   
+MonthHostsUnknown 102                 
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+JavaEnabled 0 0 0
+QuickTimeSupport 0 0 0
+DirectorSupport 0 0 0
+AddToFavourites 0 0 0
+TotalMisc 0 0 0
+FlashSupport 0 0 0
+JavascriptDisabled 0 0 0
+PDFSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+RealPlayerSupport 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 21 230 217008 16 43 297481
+1 23 310 8596265 15 62 290276
+2 0 1 3630 30 35 249196
+3 13 28 1013667 21 22 166200
+4 15 37 2829798 17 24 173257
+5 3 3 55950 20 20 166202
+6 2 7 46746 19 20 122420
+7 2 2 37300 19 21 173269
+8 2 6 44365 19 26 232151
+9 7 42 52470 11 16 124572
+10 3 3 216 16 18 166200
+11 19 123 129611 68 132 652601
+12 72 341 991984 48 79 362609
+13 9 143 10052 15 18 124656
+14 10 159 49837 9 10 41552
+15 30 407 326782 13 81 808482
+16 61 755 2472418 14 22 197153
+17 131 1519 3284816 5 13 124402
+18 36 498 2450608 15 17 145360
+19 54 541 2957320 15 17 145342
+20 11 39 2667484 10 16 103804
+21 22 286 172967 8 11 72683
+22 67 651 358106 7 12 62330
+23 41 414 2247181 21 30 259435
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 25 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 20
+ie 520 6233 14799231
+us 69 201 11851904
+it 10 10 1684
+gb 9 16 174915
+de 9 9 125267
+ru 8 11 130567
+cn 6 6 89842
+fr 4 9 74841
+ca 4 4 73440
+in 3 13 1751682
+au 2 2 36140
+nl 2 17 920160
+cl 1 2 858699
+ao 1 1 18650
+zz 1 1 87
+ua 1 1 17490
+mu 1 1 18650
+il 1 1 17490
+kh 1 1 18650
+ro 1 6 37192
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 25 first Hits must be first (order not required for others)
+BEGIN_ROBOT 4
+Googlebot/ 65 286972 20241214025309 0
+link 6 83743 20241214084636 0
+no_user_agent 2 36140 20241215061553 0
+curl 2 0 20241214084552 0
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 6
+svg 14 11234 0 0
+css 4196 1201024 0 0
+html 638 5118400 0 0
+Unknown 16 105092 0 0
+js 1656 582702 0 0
+png 25 23998129 0 0
+END_FILETYPES
+
+# Downloads - Hits - Bandwidth
+BEGIN_DOWNLOADS 0
+END_DOWNLOADS
+
+# OS ID - Hits
+BEGIN_OS ID - Hits - Pages 13
+macosx15 14 8
+ios_iphone 165 22
+win8 1 1
+linux 127 22
+win8.1 2 0
+Unknown 50 36
+macosx 1 1
+winnt 1 1
+win7 12 3
+linuxubuntu 6 6
+android10 1808 134
+win2000 1 1
+win10 4357 419
+END_OS
+
+# Browser ID - Hits - Pages
+BEGIN_BROWSER 50
+chrome129.0.0.0 2 2
+chrome108.0.0.0 1 1
+mozilla 23 9
+chrome79.0.3945.79 34 2
+netscape5.0 8 8
+chrome117.0.5938.132 35 2
+chrome128.0.6613.86 1 1
+firefox36.0 1 0
+chrome126.0.0.0 1 1
+chrome95.0.4638.69 1 1
+firefox117.0 6 6
+chrome94.0.4606.61 8 8
+chrome74.0.3583.88 1 1
+chrome37.0.2049.0 1 0
+chrome124.0.0.0 11 2
+chrome4.0.206.1 1 1
+edge12 1 1
+chrome97.0.4692.71 3 3
+chrome127.0.0.0 6 1
+chrome91.0.4472.114 1 1
+firefox118.0 1 1
+firefox42.0 1 1
+chrome19.0.1084.9 1 1
+chrome131.0.0.0 1875 143
+chrome70.0.3819.88 1 1
+chrome77.0.2428.88 1 1
+firefox125.0 2 2
+chrome128.0.0.0 4195 357
+chrome80.0.3987.162 1 1
+chrome114.0.0.0 8 8
+firefox50.0 2 1
+chrome130.0.0.0 1 1
+chrome108.0.5359.71 16 1
+chrome106.0.0.0 15 10
+firefox65.0 2 2
+chrome98.0.4758.102 23 2
+safari 154 11
+chrome107.0.0.0 2 2
+chrome111.0.5563.65 1 1
+chrome83.0.4103.61 10 2
+chrome125.0.0.0 6 5
+firefox35.0 1 1
+safari17.0 2 2
+chrome89.0.4389.114 9 9
+chrome85.0.4183.121 1 1
+chrome125.0.6422.60 34 2
+chrome78.0.3904.108 6 6
+Unknown 26 26
+firefox133.0 1 1
+safari17.5 1 1
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 8
+Python/3.6_aiohttp/3.5.4 20241213160833
+iubenda-radar/2.47.0 20241211223852
+Mozilla/5.0_Firefox/35.0 20241214005059
+Mozilla/5.0_(compatible;_Let's_Encrypt_validation_server;__https://www.letsencrypt.org) 20241214192846
+Mozilla/5.0_(compatible) 20241215075100
+Cpanel-HTTP-Client/1.0 20241214192841
+NetAPI_v1 20241213160342
+Mozilla/5.0_(compatible;_Dataprovider.com) 20241213172908
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 4
+Cpanel-HTTP-Client/1.0 20241214192841
+NetAPI_v1 20241213160342
+iubenda-radar/2.47.0 20241211223852
+Python/3.6_aiohttp/3.5.4 20241213160833
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 304 327
+From1 1 1
+From2 3 3
+From3 5 5
+From4 341 6209
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 2
+www_google_com 2 2
+www_google_ie 1 1
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 25 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 1
+https://blue.webhostingireland.ie:2083 5 5
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 0
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 25 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 0
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 3
+500 1 0
+404 546 4854778
+101 1 0
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referrer
+BEGIN_SIDER_404 93
+/tink_chat/ 3 -
+/css/service_cards.css 2 http://promanaged-it.com/
+/app/ 1 -
+/css/book_appointment.css 2 http://promanaged-it.com/
+/app-ads.txt 3 -
+/blog/wp-includes/wlwmanifest.xml 7 -
+/.well-known/security.txt 1 -
+/wp/wp-includes/wlwmanifest.xml 1 -
+/pages/services.html 1 http://promanaged-it.com/pages/it_equipment.html
+/scripts/main.js 2 http://promanaged-it.com/get-started.html
+/pages/custom-websites.html 1 http://promanaged-it.com/get-started.html
+/js/gaming_services.js 1 http://promanaged-it.com/
+/5jshCV 3 -
+/q1gpDhK4 3 -
+/lander/sber/ 3 -
+/KLFzmbdm 3 -
+/n4TWwtZ4 3 -
+/humans.txt 1 -
+/web/wp-includes/wlwmanifest.xml 1 -
+/Kd67Fq1x 3 -
+/security.txt 1 -
+/lander/sberquiz-2223-3 3 -
+/wp-includes/wlwmanifest.xml 6 -
+/fpyB8SZ3 3 -
+/.env 1 -
+/262LBNFp 3 -
+/lander/sberchat5v4_tds_newcrm_038-vnutr_1721815245/index.php 3 -
+/wordpress/wp-includes/wlwmanifest.xml 1 -
+/pages/it_equipment.html 3 http://promanaged-it.com/
+/3ds1633693954432212 3 -
+/gpLFR5sr 3 -
+/js/dynamic_loading.js 1 http://promanaged-it.com/
+/pages/get-started.html 1 http://promanaged-it.com/pages/gaming_services.html
+/n5cw4Z3Y 3 -
+/wordpress/wp-admin/setup-config.php 112 -
+/pages/gaming-services.html 2 http://promanaged-it.com/get-started.html
+/../images/icon.png 5 -
+/css/mission_vision.css 2 http://promanaged-it.com/
+/ 64 https://blue.webhostingireland.ie:2083/
+/wp-admin/setup-config.php 110 -
+/sberbank-quiz-4 3 -
+/js/contact.js 7 http://promanaged-it.com/
+/js/tabs.js 7 http://promanaged-it.com/
+/lander/sber-fix/ 3 -
+/css/gaming_services.css 6 http://promanaged-it.com/
+/zMmL28CN 3 -
+/js/scrollEffects.js 7 http://promanaged-it.com/
+/css/hero_section.css 2 http://promanaged-it.com/
+/pages/js/networking.js 2 http://promanaged-it.com/pages/network_infrastructure.html
+/3vt4yTCT 3 -
+/about.html 1 http://promanaged-it.com
+/css/how-it-works.css 2 http://promanaged-it.com/pages/it_equipment.html
+/28kxhS 3 -
+/js/rippleEffect.js 7 http://promanaged-it.com/
+/robots.txt 19 -
+/lander/testsberv4-copy--1/ 3 -
+/3ds.php 3 -
+/api/send-email 1 http://promanaged-it.com/
+/wp-login.php 2 -
+/main.js 1 -
+/YRWnWHy7 3 -
+/sellers.json 3 -
+/css/global_styles.css 2 http://promanaged-it.com/
+/login/ 1 -
+/xmlrpc.php 7 -
+/merchant/code 3 -
+/wp-includes/ID3/license.txt 1 -
+/n6PdMqLz 3 -
+/feed/ 1 -
+/merchant/z/payment/ 3 -
+/css/scroll_top.css 2 http://promanaged-it.com/
+/js/hoverEffects.js 7 http://promanaged-it.com/
+/6bXX29bt 3 -
+/cabinet 3 -
+/services.html 2 http://promanaged-it.com/index.html
+/privacy-policy.html 2 http://promanaged-it.com/
+/.git/config 1 -
+/styles/get-started.css 2 http://promanaged-it.com/get-started.html
+/pages/it_support.html 3 http://promanaged-it.com/
+/pages/hardware.html 2 -
+/css/navbar.css 2 http://promanaged-it.com/
+/js/service_dynamic_loading.js 1 http://promanaged-it.com/pages/custom_websites.html
+/NWJs6k27 3 -
+/css/footer_promanaged.css 2 http://promanaged-it.com/
+/ads.txt 6 -
+/sitemap.xml 1 -
+/css/contact_section.css 2 http://promanaged-it.com/
+/favicon.png 2 -
+/css/logo.css 2 http://promanaged-it.com/
+/lander/sberchat5v4_tds_newcrm_028-vnutr/index.php 3 -
+/sberbank-quiz-v2/ 3 -
+/css/about_section.css 2 http://promanaged-it.com/
+/sberchat008-prilca/ 3 -
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 25 first Hits must be first (order not required for others)
+BEGIN_VISITOR 102
+109.78.254.187 505 6218 14728929 20241214221600
+3.75.161.193 16 16 1152 20241211223852
+44.228.242.45 8 8 39877 20241215031759
+185.43.232.18 8 8 512 20241214192841
+167.172.79.248 6 6 111900 20241215052000
+81.88.58.248 4 4 770 20241212120215
+81.88.48.120 4 4 770 20241212120215
+34.45.32.124 3 3 51840 20241213191521
+34.106.230.211 3 3 52470 20241214034029
+124.70.203.191 3 3 36212 20241215070651
+34.30.184.125 3 3 55950 20241215110559 20241215110558 /
+62.210.80.82 3 3 52470 20241214121241
+31.204.145.169 2 17 920160 20241214013339
+64.15.129.107 2 2 37300 20241214195652
+205.169.39.42 2 36 3424988 20241215010644
+81.88.58.247 2 2 144 20241212110032
+92.251.254.8 2 2 34787 20241211232805
+149.56.150.174 2 2 33956 20241213172842
+157.245.70.112 2 2 37296 20241215032924
+205.169.39.229 2 25 2550489 20241215010710
+205.169.39.150 2 19 926444 20241213233952
+223.150.211.55 1 1 18650 20241215004847
+91.210.234.42 1 1 72 20241212105525
+188.213.202.129 1 6 37192 20241214043348
+13.50.112.199 1 1 87 20241214192846
+85.8.130.54 1 1 17546 20241214170155
+18.220.211.124 1 1 87 20241214192846
+103.131.95.72 1 1 17490 20241214044834
+164.52.24.178 1 1 18650 20241215002916
+134.209.84.192 1 1 17490 20241214082920
+104.197.69.115 1 9 878043 20241215010640
+41.72.210.122 1 1 18650 20241215004843
+216.225.198.193 1 1 18650 20241214233645
+195.201.41.238 1 1 17280 20241213223458
+185.216.35.140 1 1 17490 20241214041604
+54.185.255.100 1 1 17280 20241213223107
+176.53.218.182 1 1 17490 20241214114607
+85.91.7.5 1 1 72 20241211222943
+85.8.130.51 1 1 17546 20241214170153
+95.164.157.194 1 1 17490 20241214093440
+158.69.25.39 1 1 17490 20241214015744
+34.78.49.210 1 1 17490 20241214041420
+34.122.147.229 0 2 2306 
+107.150.39.94 1 1 17490 20241214160607
+34.96.52.117 1 1 17280 20241213224717
+34.59.82.31 1 6 29256 20241215064840
+103.135.172.118 1 1 18650 20241215004844
+89.104.110.212 1 1 17490 20241214114620
+154.223.139.201 1 1 18650 20241215112724 20241215112724 /
+62.210.90.212 1 6 22371 20241213154540
+92.251.254.4 1 1 72 20241211222540
+34.34.253.154 1 1 18650 20241215013838
+192.175.111.244 1 1 18650 20241214195657
+35.89.6.187 0 1 6664 
+198.12.64.46 1 1 17490 20241214041604
+146.70.218.36 1 1 18650 20241214235613
+60.166.2.227 1 1 17490 20241214041824
+85.8.130.76 1 1 13386 20241214170151
+139.99.170.109 1 1 17490 20241214045446
+49.185.107.27 1 1 17490 20241214045447
+45.90.62.135 1 1 18650 20241215112704 20241215112704 /
+176.53.222.137 1 1 72 20241212104948
+34.123.170.104 0 2 3534 
+205.169.39.58 0 2 6740 
+65.21.88.112 1 1 16875 20241213160833
+45.132.227.241 0 4 841209 
+85.8.130.66 1 1 7841 20241214170153
+176.53.223.111 1 1 18650 20241214210436
+144.217.135.173 1 15 900079 20241213172907
+54.201.107.102 0 1 1085 
+205.169.39.57 0 1 6489 
+179.61.240.140 1 2 858699 20241214045446
+178.254.29.124 1 1 16978 20241213172647
+167.99.207.64 1 1 17546 20241214163458
+209.141.59.132 1 1 17280 20241213181751
+38.154.198.110 1 1 0 20241214093439
+176.53.220.148 1 1 17280 20241213221731
+45.90.61.36 1 1 17280 20241213212836
+85.8.130.58 1 1 0 20241214170152
+18.237.183.50 1 1 87 20241214192846
+85.8.130.63 1 1 17546 20241214170152
+54.251.75.232 1 1 87 20241214192846
+45.131.194.52 0 6 855683 
+139.59.161.191 1 1 18650 20241215075100
+35.202.72.83 1 1 17490 20241214062231
+205.169.39.56 0 1 3630 
+136.243.61.201 1 1 16878 20241213160342
+149.34.242.151 1 1 17490 20241214041604
+85.8.130.62 1 1 17546 20241214170151
+103.12.161.82 1 1 18650 20241215004843
+51.158.37.195 1 5 26875 20241214084558
+54.244.75.243 0 1 615 
+85.91.7.4 1 1 34715 20241211204949
+85.91.7.6 1 1 72 20241211221836
+117.240.19.214 1 1 18650 20241215004843
+34.72.176.129 1 21 2538082 20241213233924
+212.143.94.254 1 1 17490 20241214041754
+185.68.247.33 1 1 18650 20241215004842
+85.237.194.64 1 4 17490 20241214043353
+117.107.136.69 1 1 17490 20241214005059
+23.178.112.216 1 1 87 20241214192845
+89.208.29.76 0 3 6165 
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 5
+20241211 36 36 106521 11
+20241212 70 221 939277 10
+20241213 259 3370 8696475 18
+20241214 254 2815 13187606 52
+20241215 35 103 8086702 20
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 5
+2mn-5mn 2
+0s-30s 98
+30s-2mn 1
+1h+ 5
+30mn-1h 2
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 25 first Pages must be first (order not required for others)
+BEGIN_SIDER 29
+/ 326 2639142 100 90
+/pages/gaming_services.html 113 410382 0 3
+/pages/it_equipment.html 56 1307584 0 1
+/pages/network_infrastructure.html 27 261228 0 1
+/pages/custom_websites.html 27 305749 0 0
+/get-started.html 24 138154 1 1
+/privacy_policy.html 9 41181 1 2
+/components/footer.html 7 2305 0 1
+/components/hero_section.html 7 456 0 0
+/components/index_body.html 5 489 0 0
+/components/header.html 5 1504 0 0
+/components/mission_vision.html 5 1134 0 0
+/components/styles.html 5 1382 0 0
+/components/services_section.html 5 2082 0 0
+/components/contact.html 5 1665 0 0
+/components/about.html 5 1145 0 0
+/.well-known/acme-challenge/zfe4krH-Rzu5HTudlAlZID5S8TVblRPyQo6uqDmpcX0 5 435 5 5
+/cpanel 3 104145 2 2
+/learn-more.html 3 0 1 1
+/components/Services/services_styles.html 2 1103 0 0
+/components/booking_form.html 2 1715 0 0
+/.well-known/acme-challenge/5XSPIGQZ8EY9VM9NCUMBMA47XUESO7-- 1 64 0 1
+/.well-known/acme-challenge/LOGY__S2U5GLWQX58F-2V-QNOSY4RSM1 1 64 0 0
+/.well-known/acme-challenge/OVUYMVRYI3BBMX8ALCGLW_0U5VYI23GG 1 64 0 0
+/.well-known/acme-challenge/_2G9H0QHGWX8VITEN7YI3AU-WDI0YFL_ 1 64 0 0
+/.well-known/acme-challenge/8SGZ_QFCMVTAPZTQR9MS1ICXF29521N7 1 64 0 0
+/.well-known/acme-challenge/L82XK7-XVCLMOUJQKT668CHW2VAT9XBV 1 64 0 0
+/.well-known/acme-challenge/LTV68824EYIT1ODC7MC4PSY1YDIVRID9 1 64 0 0
+/.well-known/acme-challenge/TVIQO3T-0DKUT1OBE5558KAKG4FDNR2O 1 64 1 0
+END_SIDER

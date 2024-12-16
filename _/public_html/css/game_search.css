@@ -1,0 +1,192 @@
+/* Search Button Styling */
+.btn-search {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 12px 24px; /* Slightly larger for a modern look */
+    color: #ffffff;
+    background: linear-gradient(90deg, #4b4b53, #b3824a); /* Subtle gradient */
+    border: none;
+    border-radius: 30px; /* Rounded for a softer look */
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px; /* Adds spacing between the input and button */
+}
+
+.btn-search:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(90deg, #4a4db3, #6c63ff); /* Reverse gradient on hover */
+}
+
+.btn-search:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(90deg, #5b59d6, #3d3d9f); /* Slightly muted gradient on click */
+}
+
+/* Text Search Bar Styling */
+#game-search-input {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    padding: 12px 15px; /* Comfortable padding */
+    border: 2px solid #d1d1d1; /* Subtle border */
+    border-radius: 30px; /* Rounded edges for a modern look */
+    outline: none;
+    width: 100%; /* Full width */
+    max-width: 400px; /* Limit the width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 10px; /* Adds spacing between the input and button */
+}
+
+#game-search-input:focus {
+    border-color: #6c63ff; /* Highlighted border */
+    box-shadow: 0 6px 15px rgba(108, 99, 255, 0.2); /* Glow effect */
+}
+
+/* Center Alignment for Search Section */
+.game-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Spacing between input and button */
+    margin: 20px auto;
+    max-width: 500px; /* Limit container width */
+    text-align: center;
+}
+
+
+/* Game Search Results Grid */
+
+
+/* Game Card (Scoped for Search) */
+#game-search-results .game-card {
+    background: #ffffff;
+    border: 2px solid #d1d1d1; /* Soft border */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    height: auto; /* Flexible height */
+    max-width: 300px; /* Restrict card width */
+    margin: 0 auto; /* Center cards */
+}
+
+#game-search-results .game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    border-color: #6c63ff; /* Accent color */
+}
+
+/* Card Image */
+#game-search-results .game-card img {
+    width: auto;
+    height: auto; /* Maintain aspect ratio and adjust height automatically */
+    max-height: auto; /* Limit height for larger images */
+    object-fit: cover; /* Crop image if it exceeds the container dimensions */
+    border-bottom: 2px solid #6c63ff;
+    background-color: #eaeaea;
+}
+
+/* Game Card Content */
+#game-search-results .game-card .game-info {
+    padding: 10px;
+    text-align: left; /* Align text for readability */
+}
+
+/* Card Title */
+#game-search-results .game-card .game-info h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #444444;
+    margin-bottom: 10px;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit title to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 3rem;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
+#game-search-results .game-card .game-info h3:hover {
+    color: #6c63ff;
+}
+
+/* Card Description */
+#game-search-results .game-card .game-info p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    color: #555555;
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+/* Buy Button */
+#game-search-results .game-card .game-info .btn-buy {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #6c63ff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#game-search-results .game-card .game-info .btn-buy:hover {
+    background-color: #4a4db3;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design for Search Results */
+@media (max-width: 1024px) {
+    #game-search-results {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ensure cards remain a reasonable size */
+    }
+
+    #game-search-results .game-card {
+        max-width: 100%; /* Allow cards to adjust */
+    }
+}
+
+@media (max-width: 768px) {
+    #game-search-results {
+        grid-template-columns: repeat(2, 1fr); /* Show 2 cards per row */
+    }
+
+    #game-search-results .game-card img {
+        height: 160px; /* Adjust image size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    #game-search-results {
+        grid-template-columns: 1fr; /* Show 1 card per row */
+    }
+
+    #game-search-results .game-card {
+        max-width: 90%; /* Keep cards smaller for mobile */
+    }
+
+    #game-search-results .game-card img {
+        height: 140px; /* Adjust image size for very small screens */
+    }
+}

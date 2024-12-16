@@ -1,0 +1,117 @@
+.logo-container {
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    padding: 2px; /* Increased padding for breathing space */
+    width: 1%; /* Occupy full container width */
+    height: auto; /* Allow dynamic height based on content */
+    position: relative; /* Positioning context for inner elements */
+    animation: fadeIn 1s ease-out, slideDown 0.6s ease-in-out; /* Add entry animations */
+}
+
+.logo {
+    max-width: 12%; /* Increased size for better visibility */
+    width: auto; /* Maintain aspect ratio */
+    height: auto; /* Adjust height dynamically */
+    object-fit: contain; /* Ensure proper aspect ratio without distortion */
+    cursor: pointer; /* Interactivity hint */
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)); /* Soft shadow for depth */
+    transition: transform 0.4s cubic-bezier(0.42, 0, 0.58, 1), filter 0.4s ease-in-out;
+}
+
+.logo:hover {
+    transform: scale(2.2) rotate(10deg); /* Zoom and slight rotation on hover */
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.25)); /* Stronger shadow on hover */
+    animation: bounce 0.6s infinite ease-in-out; /* Subtle bounce animation */
+}
+
+.logo-tagline {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.5rem; /* Adjusted size for better emphasis */
+    font-weight: 500;
+    color: #333333; /* Neutral and consistent color */
+    margin-top: 12px; /* Space between logo and tagline */
+    letter-spacing: 1.2px; /* Slight spacing for readability */
+    text-align: center; /* Center-align the tagline */
+    padding: 0 20px; /* Padding for better visual flow */
+    max-width: 90%; /* Ensure text fits within container */
+    transition: color 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.logo-tagline:hover {
+    color: #0056b3; /* Stronger color shift for interactivity */
+    transform: translateY(-5px); /* Slight lift on hover */
+    animation: glow 1.2s ease-in-out infinite; /* Glow effect */
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-30px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: scale(2.2) translateY(0);
+    }
+    50% {
+        transform: scale(2.2) translateY(-10px);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(0, 86, 179, 0.8), 0 0 20px rgba(0, 86, 179, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(0, 86, 179, 1), 0 0 30px rgba(0, 86, 179, 0.7);
+    }
+}
+
+/* Responsive Adjustments for Mobile Devices */
+@media (max-width: 768px) {
+    .logo-container {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center; /* Center-align elements */
+        padding: 5px; /* Additional padding for small screens */
+    }
+
+    .logo {
+        max-width: 45%; /* Larger logo for smaller screens */
+    }
+
+    .logo:hover {
+        transform: scale(2.5) rotate(10deg); /* Increase zoom for mobile hover */
+    }
+
+    .logo-tagline {
+        font-size: 1.2rem; /* Adjust tagline font size */
+        margin-top: 10px; /* Slightly reduced spacing */
+    }
+}
+
+/* Extra Small Screens */
+@media (max-width: 480px) {
+    
+    .logo {
+        max-width: 55%; /* Even larger size for very small screens */
+    }
+
+    .logo-tagline {
+        font-size: 1rem; /* Further reduce font size for compact screens */
+        margin-top: 8px;
+    }
+}

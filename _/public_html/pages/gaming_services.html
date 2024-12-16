@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="services_head">
+    <!-- Services-specific styles dynamically loaded -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ProManaged IT - Gaming Services">
+    <title>Gaming Services - ProManaged IT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="../css/hero_section.css">
+    <link rel="stylesheet" href="../css/gaming_services.css">
+    <link rel="stylesheet" href="../css/global_styles.css">
+    <link rel="stylesheet" href="../css/footer_promanaged.css">
+    <link rel="stylesheet" href="../css/book_appointment.css">
+    <link rel="stylesheet" href="../css/game_prices.css">
+    <link rel="stylesheet" href="../css/gear_and_accessories.css">
+    <link rel="stylesheet" href="../css/ebay.css">
+    <link rel="stylesheet" href="../css/game_reviews.css">
+    <link rel="stylesheet" href="../css/game_search.css">
+</head>
+</head>
+
+<body>
+    <div id="hero-section"> <!-- Hero dynamically loaded -->
+
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <h1 id="hero-title">ProManaged IT</h1>
+                <p id="hero-subtitle">Innovative IT solutions for a seamless tomorrow</p>
+                <div class="hero-buttons">
+                    <a href="../get-started.html" class="btn primary" id="hero-get-started">Get Started</a>
+                    <a href="../learn-more.html" class="btn secondary" id="hero-learn-more">Learn More</a>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Gaming Services Section -->
+    <section class="gaming-services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Gaming Services</h2>
+                <p class="subtitle">Explore the latest game sales, reviews, and gaming accessories!</p>
+            </div>
+
+            <div class="tab-buttons">
+                <button id="tab-btn-sales" class="tab-btn active" data-target="tab-panel-sales">Latest Game Sales</button>
+                <button id="tab-btn-reviews" class="tab-btn" data-target="tab-panel-reviews">Latest Game Reviews</button>
+                <button id="tab-btn-accessories" class="tab-btn" data-target="tab-panel-accessories">Gear & Accessories</button>
+                <button id="tab-btn-search" class="tab-btn" data-target="tab-panel-search">Search Games</button>
+            </div>
+            
+            <div class="tab-content">
+                <!-- Latest Game Sales (CheapShark) -->
+                <div id="tab-panel-sales" class="tab-panel active">
+                    <h3>Latest Game Sales</h3>
+                    <p>Check out the hottest game deals and discounts available now.</p>
+                    <div id="cheapshark-cards" class="game-cards-grid">
+                        <!-- Game cards from CheapShark will be dynamically loaded here -->
+                    </div>
+                </div>
+            
+                <!-- Game Search -->
+                <div id="tab-panel-search" class="tab-panel">
+                    <h3>Search Games</h3>
+                    <p>Find deals for specific games by searching their titles.</p>
+                    <div class="game-search">
+                        <label for="game-search-input">Search for a Game:</label>
+                        <input type="text" id="game-search-input" placeholder="Enter game title" />
+                        <button id="game-search-button" class="btn-search">Search</button>
+                    </div>
+                    <div id="game-search-results" class="game-search-results">
+                        <!-- Search results will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+
+                <!-- Latest Game Reviews (RAWG) -->
+                <div id="tab-panel-reviews" class="tab-panel">
+                    <h3>Latest Game Reviews</h3>
+                    <p>Explore the most recent reviews and ratings for the trending games.</p>
+
+                    <!-- Platform Filter -->
+                    <div id="platform-filter-container" class="filter-section">
+                        <label for="platform-filter">Filter by Platform:</label>
+                        <select id="platform-filter">
+                            <option value="">All Platforms</option>
+                            <!-- Platforms will be dynamically added here -->
+                        </select>
+                        <button id="apply-platform-filter" class="btn-filter">Apply Filter</button>
+                    </div>
+
+                    <!-- Game Cards -->
+                    <div id="rawg-cards" class="latest-game-cards-grid">
+                        <!-- Game cards from RAWG will be dynamically loaded here -->
+                    </div>
+                </div>
+
+
+                <!-- Gaming Accessories -->
+                <div id="tab-panel-accessories" class="tab-panel">
+                    <h3>Gear & Accessories</h3>
+                    <p>Discover the latest gaming gear, consoles, and accessories shipped directly to your location.</p>
+
+                    <!-- Filter and Sort Options -->
+                    <div id="filters" class="filter-section">
+                        <!-- Product Type Filter -->
+                        <select id="product-type-filter">
+                            <option value="">All Products</option>
+                            <option value="ps5">PlayStation 5</option>
+                            <option value="ps4">PlayStation 4</option>
+                            <option value="xbox">Xbox Series</option>
+                            <option value="accessories">Gaming Accessories</option>
+                        </select>
+
+                        <!-- Condition Filter -->
+                        <select id="condition-filter">
+                            <option value="">All Conditions</option>
+                            <option value="NEW">New</option>
+                            <option value="LIKE_NEW">Like New</option>
+                            <option value="NEW_OTHER">New Other</option>
+                            <option value="USED">Used</option>
+                            <option value="FOR_PARTS">For Parts</option>
+                        </select>
+
+                        <!-- Marketplace Filter -->
+                        <select id="marketplace-filter">
+                            <option value="">All Marketplaces</option>
+                            <option value="GB">United Kingdom</option>
+                            <option value="DE">Germany</option>
+                            <option value="FR">France</option>
+                            <option value="IE">Ireland</option>
+                        </select>
+
+                        <!-- Sort Order Filter -->
+                        <select id="sort-order">
+                            <option value="-price">Highest Price</option>
+                            <option value="price">Lowest Price</option>
+                        </select>
+
+                        <!-- Apply Filters Button -->
+                        <button id="apply-filters" class="btn-filter">Apply Filters</button>
+                    </div>
+
+                    <!-- eBay Listings -->
+                    <div id="ebay-cards" class="ebay-game-cards-grid">
+                        <!-- eBay listings will be dynamically inserted here -->
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Section-->
+    <section class="booking-section">
+        <div class="container">
+            <h2>Book an Appointment</h2>
+            <p>Select your service, choose a time, and let us take care of the rest!</p>
+            <!-- Booking Button -->
+            <button id="open-booking-modal" class="btn primary">Book Now</button>
+        </div>
+    </section>
+
+    <!-- Modal for Booking Form -->
+    <div id="booking-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <span id="close-booking-modal" class="close">&times;</span>
+            <h2>Book an Appointment</h2>
+            <form id="booking-form" action="php/booking.php" method="POST">
+                <div class="form-row">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-row">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-row">
+                    <label for="service">Service</label>
+                    <select id="service" name="service" required>
+                        <option value="Gaming Services">Gaming Services</option>
+                        <option value="Network Infrastructure">Network Infrastructure</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-row">
+                    <label for="time">Time</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+                <button type="submit" class="btn primary">Confirm Appointment</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="footer-section"> <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-divider"></div>
+
+            <div class="footer-content container">
+                <!-- Quick Links -->
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="../index.html">Services</a></li>
+                        <li><a href="#" id="get-in-touch-link">Get in Touch</a></li>
+                        <li><a href="../privacy_policy.html">Privacy Policy</a></li>
+                        <!-- Updated to link to new page -->
+                    </ul>
+                </div>
+
+                <!-- Brand Information -->
+                <div class="footer-brand">
+                    <h3>ProManaged IT</h3>
+                    <p>Your go-to partner for sleek IT solutions that simplify technology. Transform your IT experience
+                        with
+                        top-notch services.</p>
+                    <p>
+                        <strong>Contact Emails:</strong>
+                    <p></p>
+                    <a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a>
+                    <p></p>
+                    <a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a>
+                    <p></p>
+                    <a href="mailto:johnpaulchirwa@promanaged-it.com">johnpaulchirwa@promanaged-it.com</a>
+                    </p>
+                </div>
+
+                <!-- Newsletter Section -->
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get the latest updates and exclusive offers straight to your inbox.</p>
+                    <form>
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="footer-bottom">
+                <p>
+                    &copy; 2024 ProManaged IT. All Rights Reserved. |
+                    <a href="#">Terms of Service</a> |
+                    <a href="../privacy_policy.html">Privacy Policy</a> <!-- Updated to link to new page -->
+                </p>
+                <p>
+                    <strong>Company Registration Number:</strong> 749512 |
+                    <a href="https://core.cro.ie/e-commerce/company/5379600" target="_blank">Verify Registration</a>
+                </p>
+            </div>
+        </footer>
+
+        <!-- Contact Dialog -->
+        <div id="contact-dialog" style="
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        ">
+            <div style="
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                width: 90%;
+                max-width: 400px;
+                text-align: center;
+            ">
+                <h3>Contact Us</h3>
+                <p>You can reach us via the following:</p>
+                <p><strong>Email:</strong></p>
+                <p>
+                    <a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a><br>
+                    <a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a>
+                </p>
+                <p><strong>WhatsApp:</strong> +353-8-6008-1635</p>
+                <button id="close-dialog" style="
+                    background: #3498db;
+                    color: white;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                ">Close</button>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const getInTouchLink = document.getElementById("get-in-touch-link"); // Link element
+                const contactDialog = document.getElementById("contact-dialog");
+                const closeDialogButton = document.getElementById("close-dialog");
+
+                // Show the dialog when "Get in Touch" is clicked
+                getInTouchLink.addEventListener("click", function (e) {
+                    e.preventDefault(); // Prevent default scrolling behavior
+                    contactDialog.style.display = "flex"; // Show the dialog
+                });
+
+                // Close the dialog when "Close" button is clicked
+                closeDialogButton.addEventListener("click", function () {
+                    contactDialog.style.display = "none"; // Hide the dialog
+                });
+            });
+        </script>
+
+    </div>
+
+
+    <!-- Include necessary scripts -->
+    <script src="../js/gaming_services.js" defer></script>
+    <script src="../js/booking_form.js" defer></script>
+    <script src="../js/game_prices.js" defer></script>
+    <script src="../js/game_reviews.js" defer></script>
+    <script src="../js/game_search.js" defer></script>
+    <script src="../js/ebay.js" defer></script> <!-- Script for PS5 eBay items -->
+    <script src="../js/service_tab_switching.js" defer></script> <!-- Script for PS5 eBay items -->
+
+</body>
+
+</html>

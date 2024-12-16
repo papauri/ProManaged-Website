@@ -1,0 +1,122 @@
+.about {
+    padding: 30px 15px; /* Reduced padding for a more compact section */
+    background: linear-gradient(135deg, #0d1b2a, #1b263b); /* Dark blue tones */
+    color: #ffffff;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.section-header h2 {
+    font-size: 2rem; /* Reduced font size */
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 1.2px;
+}
+
+.section-header .subtitle_into {
+    font-size: 1rem; /* Slightly smaller font size */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px; /* Reduced margin for compactness */
+    max-width: 600px; /* Reduced width for tighter text wrapping */
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+.about-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* Reduced spacing between elements */
+    max-width: 900px; /* Reduced width for a more compact layout */
+    margin: 0 auto;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.about-photo {
+    flex: 1;
+    max-width: 180px; /* Reduced photo size */
+    height: 180px; /* Maintained aspect ratio */
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.about-photo:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+}
+
+.about-text {
+    flex: 2;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 20px; /* Reduced padding */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(6px);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5; /* Reduced line height for compact text */
+    font-size: 0.9rem; /* Slightly smaller font size */
+}
+
+.about-text h3 {
+    font-size: 1.5rem; /* Reduced heading size */
+    margin-bottom: 10px;
+    color: #f9bc60;
+}
+
+.about-text p {
+    font-size: 0.9rem; /* Smaller paragraph font size */
+    margin-bottom: 10px;
+}
+
+.about-text strong {
+    color: #f9bc60; /* Highlight key terms in a gold tone */
+}
+
+.about-text .cta-text {
+    margin-top: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .about-photo {
+        max-width: 140px; /* Further reduce size for small screens */
+        height: 140px;
+    }
+
+    .about-text {
+        text-align: center;
+        padding: 15px;
+    }
+
+    .about-text h3 {
+        font-size: 1.3rem;
+    }
+
+    .about-text p {
+        font-size: 0.85rem;
+    }
+}

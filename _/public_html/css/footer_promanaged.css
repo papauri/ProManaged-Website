@@ -1,0 +1,196 @@
+/* FOOTER - MODERN, MINIMAL, AND SUBTLE */
+.footer {
+    background: #F8F9FA; /* Soft off-white */
+    color: #3C4043; /* Neutral dark gray text */
+    padding: 40px 20px;
+    border-top: 1px solid #E5E7EB; /* Subtle border for separation */
+    position: relative;
+    z-index: 1;
+}
+
+/* Footer Content Layout */
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    max-width: 80%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Footer Brand Section */
+.footer-brand h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #556B8E; /* Muted blue-gray for modern feel */
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.footer-brand p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #6B7280; /* Subtle mid-gray for supporting text */
+    margin-bottom: 15px;
+}
+
+/* Footer Links */
+.footer-links h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    color: #556B8E; /* Muted blue-gray for consistency */
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #6096BA; /* Soft teal for links */
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #2D6A8D; /* Subtle aqua on hover */
+}
+
+/* Social Media Section */
+.footer-social h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    color: #556B8E; /* Muted blue-gray */
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    justify-content: flex-start;
+}
+
+.footer-social a {
+    color: #6B7280; /* Subtle gray for icons */
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #2D6A8D; /* Aqua hover effect */
+    transform: scale(1.1);
+}
+
+/* Newsletter Section */
+.footer-newsletter h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    color: #556B8E; /* Muted blue-gray */
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.footer-newsletter p {
+    font-size: 0.95rem;
+    color: #6B7280; /* Subtle gray for text */
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.footer-newsletter form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.footer-newsletter input {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #E5E7EB; /* Subtle border */
+    background: #FFFFFF; /* White for input */
+    color: #3C4043;
+    flex: 1;
+    font-size: 0.9rem;
+    outline: none;
+    transition: background 0.3s ease, border 0.3s ease;
+}
+
+.footer-newsletter input:focus {
+    border: 1px solid #556B8E; /* Focus border */
+    background: #F8F9FA;
+}
+
+.footer-newsletter button {
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: none;
+    background: #6096BA; /* Teal for CTA buttons */
+    color: #FFFFFF;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.footer-newsletter button:hover {
+    background: #2D6A8D; /* Slightly darker teal for hover effect */
+    transform: translateY(-3px);
+}
+
+/* Bottom Footer */
+.footer-bottom {
+    background: #F1F5F9; /* Light gray for separation */
+    padding: 15px 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #6B7280; /* Subtle gray */
+    border-top: 1px solid #E5E7EB;
+}
+
+.footer-bottom a {
+    color: #6096BA; /* Teal for links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom a:hover {
+    color: #2D6A8D; /* Aqua on hover */
+}
+
+
+
+/* Responsive Footer Design */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr; /* Single-column layout for smaller screens */
+        text-align: center;
+    }
+
+    .footer-brand,
+    .footer-links,
+    .footer-social,
+    .footer-newsletter {
+        text-align: center;
+    }
+
+    .footer-newsletter form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .footer-social-icons {
+        justify-content: center;
+    }
+}

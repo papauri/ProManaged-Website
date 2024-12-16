@@ -1,0 +1,376 @@
+AWSTATS DATA FILE 7.8 (build 20200416)
+# If you remove this file, all statistics for date 202412 will be lost/reset.
+# Last config file used to build this data file was /home/p601229/tmp/awstats/ssl/awstats.promanaged-it.com.conf.
+
+# Position (offset in bytes) in this file for beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 28
+POS_GENERAL 2017                
+POS_TIME 2700                
+POS_VISITOR 3516                
+POS_DAY 5215                
+POS_DOMAIN 5395                
+POS_LOGIN 5854                
+POS_ROBOT 6009                
+POS_WORMS 6179                
+POS_EMAILSENDER 6310                
+POS_EMAILRECEIVER 6453                
+POS_SESSION 6529                
+POS_SIDER 6714                
+POS_FILETYPES 7078                
+POS_DOWNLOADS 7235                
+POS_OS 7283                
+POS_BROWSER 7478                
+POS_SCREENSIZE 8020                
+POS_UNKNOWNREFERER 8094                
+POS_UNKNOWNREFERERBROWSER 8282                
+POS_ORIGIN 8425                
+POS_SEREFERRALS 8560                
+POS_PAGEREFS 8741                
+POS_SEARCHWORDS 8932                
+POS_KEYWORDS 9084                
+POS_MISC 2364                
+POS_ERRORS 9143                
+POS_CLUSTER 5710                
+POS_SIDER_404 9235                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20241215114105 967 228037 18409844516435
+FirstTime 20241214192923
+LastTime 20241215114105
+LastUpdate 20241215120208 967 0 967 0 0
+TotalVisits 38                  
+TotalUnique 36                  
+MonthHostsKnown 0                   
+MonthHostsUnknown 39                  
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+AddToFavourites 0 0 0
+DirectorSupport 0 0 0
+RealPlayerSupport 0 0 0
+TotalMisc 0 0 0
+QuickTimeSupport 0 0 0
+JavaEnabled 0 0 0
+PDFSupport 0 0 0
+JavascriptDisabled 0 0 0
+FlashSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 13 67 7750199 2 9 72523
+1 6 42 5117066 4 11 41556
+2 0 0 0 9 13 93403
+3 2 38 5042466 5 5 51935
+4 3 30 137676 4 4 41556
+5 1 1 18650 4 4 41556
+6 1 1 18650 4 4 41556
+7 1 1 18650 4 5 41556
+8 0 0 0 4 4 41556
+9 0 0 0 2 2 20778
+10 1 19 2521233 4 4 41556
+11 9 150 131313 30 58 300359
+12 0 0 0 0 0 0
+13 0 0 0 0 0 0
+14 0 0 0 0 0 0
+15 0 0 0 0 0 0
+16 0 0 0 0 0 0
+17 0 0 0 0 0 0
+18 0 0 0 0 0 0
+19 15 153 6150267 4 29 131222
+20 13 157 2634043 5 7 51933
+21 12 74 136286 4 4 41564
+22 5 41 2558533 4 7 41564
+23 3 19 37300 4 4 41564
+END_TIME
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 25 first Hits must be first (order not required for others)
+BEGIN_VISITOR 39
+109.78.254.187 36 484 5408111 20241215111640 20241215110132 /pages/gaming_services.html
+154.28.229.48 4 4 64976 20241214210223
+85.239.50.165 3 39 5061116 20241215004827
+102.70.6.161 3 43 2545809 20241214205921
+34.248.137.227 3 21 2558533 20241214220454
+31.193.217.166 2 32 61266 20241215114105 20241215114001 /pages/gaming_services.html
+104.164.173.213 2 2 37292 20241214192931
+206.217.139.27 2 20 2539883 20241215010536
+168.119.80.126 2 29 119026 20241215042555
+212.143.94.254 2 2 37300 20241215004843
+197.254.85.186 1 1 18650 20241215004842
+185.152.32.74 1 1 18650 20241215055730
+213.232.121.39 1 1 18650 20241215004843
+49.156.34.214 1 1 18650 20241215004850
+111.221.4.100 1 1 18650 20241215004846
+154.28.229.64 1 1 18650 20241214210209
+95.177.180.82 1 19 2521233 20241215101920
+119.98.109.174 1 1 18650 20241215004848
+80.82.70.198 1 1 18650 20241215032834
+23.92.127.38 1 1 18650 20241215010117
+104.166.80.196 1 1 18650 20241214231255
+164.52.24.178 1 1 18650 20241215003558
+185.43.232.18 1 1 18650 20241214233304
+104.166.80.209 1 1 18650 20241214210819
+192.145.127.216 1 19 2521233 20241215004652
+93.174.93.114 0 18 2502583 
+94.102.49.123 0 18 2502583 
+192.175.111.253 0 1 841209 
+216.238.119.45 1 1 18650 20241215010216
+195.201.168.79 1 1 18650 20241215042539
+104.255.169.113 1 1 18650 20241215010119
+104.164.173.126 1 1 18650 20241214210401
+94.102.63.27 1 1 18650 20241215032940
+206.41.176.107 1 19 2521233 20241215010123
+45.134.142.214 1 1 18650 20241214194432
+139.59.161.191 1 1 18650 20241215075101
+43.225.72.110 1 1 18650 20241215004859
+104.164.173.129 1 1 18646 20241214192923
+57.128.169.147 1 1 18650 20241215063048
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 2
+20241214 48 444 11516429 13
+20241215 37 349 20755903 25
+END_DAY
+
+# Domain - Pages - Hits - Bandwidth
+# The 25 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 17
+ie 39 517 5488027
+us 23 104 8008789
+ru 5 41 5098416
+id 3 43 2545809
+nl 2 38 5042466
+il 2 2 37300
+in 2 2 37300
+cn 1 1 18650
+kh 1 1 18650
+au 1 1 18650
+fr 1 19 2521233
+gb 1 1 18650
+ro 1 19 2521233
+bd 1 1 18650
+be 1 1 18650
+ke 1 1 18650
+ca 0 1 841209
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 25 first Hits must be first (order not required for others)
+BEGIN_ROBOT 1
+Googlebot/ 23 100089 20241214193945 0
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Session range - Number of visits
+BEGIN_SESSION 5
+1h+ 1
+15mn-30mn 1
+30s-2mn 1
+0s-30s 31
+2mn-5mn 2
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 25 first Pages must be first (order not required for others)
+BEGIN_SIDER 7
+/ 60 857884 37 33
+/pages/gaming_services.html 12 57160 1 2
+/get-started.html 6 40158 0 1
+/pages/it_equipment.html 2 90878 0 0
+/privacy_policy.html 2 7841 0 0
+/pages/network_infrastructure.html 2 30720 0 0
+/pages/custom_websites.html 1 23378 0 0
+END_SIDER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 5
+html 85 1108019 0 0
+svg 3 11234 0 0
+png 27 30324541 0 0
+css 460 609393 0 0
+js 218 219145 0 0
+END_FILETYPES
+
+# Downloads - Hits - Bandwidth
+BEGIN_DOWNLOADS 0
+END_DOWNLOADS
+
+# OS ID - Hits
+BEGIN_OS ID - Hits - Pages 10
+linuxubuntu 6 6
+macosx15 30 9
+android10 499 35
+unix 1 0
+linux 60 8
+win10 75 13
+Unknown 4 4
+win7 78 6
+ios_iphone 39 3
+macosx9 1 1
+END_OS
+
+# Browser ID - Hits - Pages
+BEGIN_BROWSER 26
+chrome119.0.0.0 1 0
+chrome122.0.0.0 2 2
+Unknown 3 3
+chrome111.0.5563.65 1 1
+chrome128.0.0.0 75 5
+chrome131.0.0.0 495 34
+chrome130.0.0.0 2 2
+chrome110.0.0.0 1 1
+chrome45.0.2454.85 77 5
+chrome84.0.4147.89 1 1
+chrome120.0.0.0 7 1
+chrome116.0.0.0 4 4
+firefox120.0 4 2
+chrome33.0.1750.152 1 1
+chrome125.0.0.0 43 3
+mozilla 1 1
+firefox83.0 1 1
+chrome117.0.0.0 5 5
+safari 19 1
+safari17.5 1 1
+chrome114.0.0.0 2 1
+firefox117.0 6 6
+safari10.0 19 1
+edge12 1 1
+firefox125.0 20 2
+chrome119.0.6045.199 1 0
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 3
+Mozilla/5.0_(compatible) 20241215075101
+Softaculous 20241214233304
+WhatsApp/2.23.20.0 20241214210021
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 2
+Softaculous 20241214233304
+WhatsApp/2.23.20.0 20241214210021
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 59 71
+From1 1 1
+From2 5 5
+From3 1 1
+From4 19 715
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 2
+www_google_ie 1 1
+www_google_com 4 4
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 25 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 1
+https://blue.webhostingireland.ie:2083 1 1
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 0
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 25 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 0
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 1
+404 105 1037648
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referrer
+BEGIN_SIDER_404 38
+/28kxhS 1 -
+/NWJs6k27 1 -
+/n6PdMqLz 1 -
+/merchant/z/payment/ 1 -
+/6bXX29bt 1 -
+/sberbank-quiz-v2/ 1 -
+/lander/sberchat5v4_tds_newcrm_038-vnutr_1721815245/index.php 1 -
+/wordpress/wp-admin/setup-config.php 30 -
+/robots.txt 6 -
+/pages/index.html 2 https://promanaged-it.com/pages/gaming_services.html
+/zMmL28CN 1 -
+/.git/config 1 -
+/q1gpDhK4 1 -
+/3ds1633693954432212 1 -
+/262LBNFp 1 -
+/lander/sberquiz-2223-3 1 -
+/KLFzmbdm 1 -
+/sberchat008-prilca/ 1 -
+/gpLFR5sr 1 -
+/tink_chat/ 1 -
+/pages/hardware.html 1 https://promanaged-it.com/get-started.html
+/lander/sberchat5v4_tds_newcrm_028-vnutr/index.php 1 -
+/lander/sber-fix/ 1 -
+/Kd67Fq1x 1 -
+/merchant/code 1 -
+/YRWnWHy7 1 -
+/3ds.php 1 -
+/n4TWwtZ4 1 -
+/5jshCV 1 -
+/lander/testsberv4-copy--1/ 1 -
+/wp-admin/setup-config.php 30 -
+/fpyB8SZ3 1 -
+/3vt4yTCT 1 -
+/sberbank-quiz-4 1 -
+/lander/sber/ 1 -
+/n5cw4Z3Y 1 -
+/../images/icon.png 4 -
+/cabinet 1 -
+END_SIDER_404

@@ -1,0 +1,160 @@
+/* Default Grid Layout */
+.ebay-game-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Default grid layout */
+    gap: 15px;
+    justify-content: center;
+    align-items: stretch;
+    padding: 20px;
+}
+
+/* Default Card Styles */
+.game-card {
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 100%;
+    cursor: pointer;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Image */
+.game-card-image {
+    position: relative;
+    overflow: hidden;
+    height: 180px; /* Fixed height for desktop images */
+    width: 100%; /* Ensure full width */
+}
+
+.game-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.game-card-content {
+    padding: 15px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Card Content Details */
+.game-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.game-price,
+.game-price-mwk,
+.game-condition,
+.seller-info {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.buy-button {
+    display: inline-block;
+    padding: 8px 12px;
+    background: var(--secondary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.buy-button:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* Mobile-Specific List Layout */
+@media (max-width: 768px) {
+    .ebay-game-cards-grid {
+        display: block; /* Switch to block layout */
+        padding: 10px;
+    }
+
+    .game-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px; /* Increased gap for better spacing */
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        background-color: var(--white); /* Keep card background consistent */
+    }
+
+    .game-card-image {
+        height: 150px; /* Larger image height */
+        width: 150px; /* Larger square image */
+        border-radius: 8px; /* Rounded corners for a modern look */
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .game-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .game-card-content {
+        flex: 1; /* Take the remaining space */
+        padding: 0;
+        gap: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .game-title {
+        font-size: 0.85rem; /* Smaller font size for compact display */
+        font-weight: bold;
+        margin: 0; /* Remove extra margin */
+        color: var(--text-color); /* Ensure good readability */
+    }
+
+    .game-price,
+    .game-condition,
+    .seller-info {
+        font-size: 0.75rem; /* Smaller font size */
+        color: var(--gray); /* Neutral color for less emphasis */
+        margin: 0;
+    }
+
+    .buy-button {
+        align-self: flex-start;
+        padding: 8px 12px;
+        font-size: 0.75rem; /* Smaller button font size */
+        border-radius: 6px; /* Rounded button */
+        background: var(--secondary-color); /* Consistent theme */
+        color: var(--white); /* Text color for contrast */
+        text-decoration: none;
+        transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .buy-button:hover {
+        background: var(--primary-color); /* Darker hover effect */
+        transform: translateY(-3px); /* Slight lift effect */
+    }
+
+}

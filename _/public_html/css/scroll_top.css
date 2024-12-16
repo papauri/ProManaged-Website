@@ -1,0 +1,19 @@
+.scroll-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.scroll-top-btn:hover {
+    background: var(--button-hover-bg);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}

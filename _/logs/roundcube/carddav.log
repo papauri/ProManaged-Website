@@ -1,0 +1,9 @@
+[11-Dec-2024 20:42:48 +0000]: <a2c2895c> [5 ERR] Database::get (SELECT * FROM carddav_addressbooks WHERE (("user_id" = '1'))) ERROR: [1] no such table: carddav_addressbooks 
+[11-Dec-2024 20:42:48 +0000]: <a2c2895c> [5 ERR] Error reading carddav addressbooks: [1] no such table: carddav_addressbooks 
+[11-Dec-2024 20:42:48 +0000]: <a2c2895c> [5 ERR] Database::get (SELECT "filename" FROM carddav_migrations) ERROR: [1] no such table: carddav_migrations 
+[14-Dec-2024 01:32:20 +0000]: <81d0068b> [5 ERR] Database::get (SELECT * FROM carddav_addressbooks WHERE (("user_id" = '1'))) ERROR: [1] no such table: carddav_addressbooks 
+[14-Dec-2024 01:32:20 +0000]: <81d0068b> [5 ERR] Error reading carddav addressbooks: [1] no such table: carddav_addressbooks 
+[14-Dec-2024 01:32:20 +0000]: <81d0068b> [5 ERR] Database::get (SELECT "filename" FROM carddav_migrations) ERROR: [1] no such table: carddav_migrations 
+[14-Dec-2024 15:21:11 +0000]: <18521158> [5 ERR] Database::get (SELECT * FROM carddav_addressbooks WHERE (("user_id" = '1'))) ERROR: [1] no such table: carddav_addressbooks 
+[14-Dec-2024 15:21:11 +0000]: <18521158> [5 ERR] Error reading carddav addressbooks: [1] no such table: carddav_addressbooks 
+[14-Dec-2024 15:21:11 +0000]: <18521158> [5 ERR] Database::get (SELECT "filename" FROM carddav_migrations) ERROR: [1] no such table: carddav_migrations 
