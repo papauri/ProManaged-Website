@@ -1,7 +1,7 @@
 ---
 name: codebase-scout
 description: Read-only codebase mapper. Maps features→files→endpoints→tables and flags gaps/dead code before planning or building. Scoped to ONE directory tree per call.
-tools: Read, Grep, Glob
+tools: Read, Grep, Glob, Write
 model: haiku
 ---
 
