@@ -11,8 +11,8 @@
 ---
 
 ## Phase 1 — LEARN (map before touching)
-- [ ] L1. codebase-scout maps `_/public_html/css/` and `_/public_html/js/` → `.claude/SYSTEM_MAP.md`: which CSS/JS each page loads, duplicated code, dead links, all palettes/fonts/effects in use. (enables D1–D6)
-- [ ] L2. codebase-scout maps the 8 HTML pages → per-page component/section inventory. (enables D7–D13)
+- [x] L1. codebase-scout maps `_/public_html/css/` and `_/public_html/js/` → `.claude/SYSTEM_MAP.md`: which CSS/JS each page loads, duplicated code, dead links, all palettes/fonts/effects in use. (enables D1–D6)
+- [x] L2. codebase-scout maps the 8 HTML pages → per-page component/section inventory. (enables D7–D13)
 
 ## Phase 2 — STABILISE (build the foundation)
 - [ ] D1. Create `_/public_html/css/tokens.css` — single :root token set: neutral palette + accent #2563EB, type scale, spacing scale, one --radius, one–two --shadow. Import it first in every page. — frontend-specialist
@@ -65,7 +65,7 @@ When every box above is [x], the project is DONE — print "PROJECT COMPLETE" an
 ---
 
 ## STATUS
-- Just finished: Setup (agents, plan, /build-loop skill). Awaiting first /build-loop run.
-- In progress: none.
-- Next 3 queued: L1, L2, D1.
+- Just finished: L1+L2 — frontend mapped to .claude/SYSTEM_MAP.md (LEARN phase complete).
+- In progress: D1 — create tokens.css.
+- Next 3 queued: D1, D2, D3.
 - Blocked: none.
