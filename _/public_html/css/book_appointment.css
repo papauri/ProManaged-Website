@@ -10,7 +10,7 @@
 
 /* Section Header */
 .booking-section h2 {
-    font-family: 'Raleway', sans-serif;
+    font-family: var(--font-sans);
     font-size: 3rem;
     font-weight: 800;
     color: #111111;
@@ -31,7 +31,7 @@
 }
 
 .booking-section p {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
     font-size: 1.1rem;
     color: #555555;
     margin: 0 auto 35px;

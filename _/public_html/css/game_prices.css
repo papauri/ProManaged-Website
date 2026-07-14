@@ -53,7 +53,7 @@
 
 /* Card Title */
 .game-card .game-info h3 {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
     font-size: 1rem;
     font-weight: 700;
     color: #444444;
@@ -75,7 +75,7 @@
 
 /* Card Description */
 .game-card .game-info p {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.9rem;
     color: #555555;
     margin: 5px 0;
@@ -96,7 +96,7 @@
 
 /* Section Header */
 .section-header h2 {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
     font-size: 2rem;
     font-weight: bold;
     color: #333333;
@@ -108,7 +108,7 @@
 }
 
 .section-header p {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
     font-size: 1rem;
     color: #666666;
     text-align: center;

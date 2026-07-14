@@ -1,7 +1,7 @@
 /* Search Button Styling */
 .btn-search {
     display: inline-block;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
     font-size: 1rem;
     font-weight: bold;
     padding: 12px 24px; /* Slightly larger for a modern look */
@@ -31,7 +31,7 @@
 
 /* Text Search Bar Styling */
 #game-search-input {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
     font-size: 1rem;
     padding: 12px 15px; /* Comfortable padding */
     border: 2px solid #d1d1d1; /* Subtle border */
@@ -107,7 +107,7 @@
 
 /* Card Title */
 #game-search-results .game-card .game-info h3 {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
     font-size: 1rem;
     font-weight: 700;
     color: #444444;
@@ -129,7 +129,7 @@
 
 /* Card Description */
 #game-search-results .game-card .game-info p {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.9rem;
     color: #555555;
     margin: 5px 0;

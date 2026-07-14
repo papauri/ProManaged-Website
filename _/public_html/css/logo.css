@@ -26,7 +26,7 @@
 }
 
 .logo-tagline {
-    font-family: 'Raleway', sans-serif;
+    font-family: var(--font-sans);
     font-size: 1.5rem; /* Adjusted size for better emphasis */
     font-weight: 500;
     color: #333333; /* Neutral and consistent color */
