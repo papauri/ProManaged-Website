@@ -15,8 +15,8 @@
 - [x] L2. codebase-scout maps the 8 HTML pages → per-page component/section inventory. (enables D7–D13)
 
 ## Phase 2 — STABILISE (build the foundation)
-- [ ] D1. Create `_/public_html/css/tokens.css` — single :root token set: neutral palette + accent #2563EB, type scale, spacing scale, one --radius, one–two --shadow. Import it first in every page. — frontend-specialist
-- [ ] D2. Load Inter (single font); remove references to Raleway/Montserrat/Space Grotesk/Arial; wire font tokens. — frontend-specialist
+- [x] D1. Create `_/public_html/css/tokens.css` — single :root token set: neutral palette + accent #2563EB, type scale, spacing scale, one --radius, one–two --shadow. Import it first in every page. — frontend-specialist
+- [ ] D2. Load Inter (single font); remove references to Raleway/Montserrat/Space Grotesk/Arial; wire font tokens. — frontend-specialist  (also fix pre-existing broken ../../css/ stylesheet paths -> ../css/ on pages/custom_websites, it_equipment, network_infrastructure so their CSS loads)
 - [ ] D3. Remove the dark theme from `css/custom_websites.css`; unify all 8 pages to the one light theme. — frontend-specialist
 - [ ] D6. Normalize radii, shadows, and gradients across all 24 CSS files to token values (remove multi-stop decorative gradients). — frontend-specialist + ui-designer
 
@@ -37,7 +37,7 @@
 ---
 
 ## PROJECT COMPLETE WHEN (approved deliverables — fixed ceiling)
-- [ ] D1. tokens.css design-system source of truth (accent #2563EB, type + spacing scale, one radius, one–two shadows)
+- [x] D1. tokens.css design-system source of truth (accent #2563EB, type + spacing scale, one radius, one–two shadows)
 - [ ] D2. Single font (Inter); 4 unloaded fonts removed
 - [ ] D3. Rogue dark theme removed; all 8 pages unified to one light theme
 - [ ] D4. Decorative animations removed; only subtle hover/focus feedback remains
@@ -65,7 +65,7 @@ When every box above is [x], the project is DONE — print "PROJECT COMPLETE" an
 ---
 
 ## STATUS
-- Just finished: L1+L2 — frontend mapped to .claude/SYSTEM_MAP.md (LEARN phase complete).
-- In progress: D1 — create tokens.css.
-- Next 3 queued: D1, D2, D3.
+- Just finished: D1 — tokens.css created + linked first on all 8 pages (qa PASS).
+- In progress: D2 — load Inter, remove unused fonts, fix broken ../../css/ paths on 3 pages.
+- Next 3 queued: D2, D3, D6.
 - Blocked: none.
