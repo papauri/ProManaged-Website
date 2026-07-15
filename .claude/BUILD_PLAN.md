@@ -17,7 +17,7 @@
 ## Phase 2 — STABILISE (build the foundation)
 - [x] D1. Create `_/public_html/css/tokens.css` — single :root token set: neutral palette + accent #2563EB, type scale, spacing scale, one --radius, one–two --shadow. Import it first in every page. — frontend-specialist
 - [x] D2. Load Inter (single font); remove references to Raleway/Montserrat/Space Grotesk/Arial; wire font tokens. — frontend-specialist  (also fix pre-existing broken ../../css/ stylesheet paths -> ../css/ on pages/custom_websites, it_equipment, network_infrastructure so their CSS loads)
-- [ ] D3. Remove the dark theme from `css/custom_websites.css`; unify all 8 pages to the one light theme. — frontend-specialist
+- [x] D3. Remove the dark theme from `css/custom_websites.css`; unify all 8 pages to the one light theme. — frontend-specialist
 - [ ] D6. Normalize radii, shadows, and gradients across all 24 CSS files to token values (remove multi-stop decorative gradients). — frontend-specialist + ui-designer
 
 ## Phase 3 — COMPLETE (rebuild components minimally)
@@ -39,7 +39,7 @@
 ## PROJECT COMPLETE WHEN (approved deliverables — fixed ceiling)
 - [x] D1. tokens.css design-system source of truth (accent #2563EB, type + spacing scale, one radius, one–two shadows)
 - [x] D2. Single font (Inter); 4 unloaded fonts removed
-- [ ] D3. Rogue dark theme removed; all 8 pages unified to one light theme
+- [x] D3. Rogue dark theme removed; all 8 pages unified to one light theme
 - [ ] D4. Decorative animations removed; only subtle hover/focus feedback remains
 - [ ] D5. Glowing gradient buttons replaced with restrained solid CTAs
 - [ ] D6. Radii, shadows, gradients normalized to token values
@@ -65,7 +65,7 @@ When every box above is [x], the project is DONE — print "PROJECT COMPLETE" an
 ---
 
 ## STATUS
-- Just finished: D2 — Inter loaded on all 8 pages, fonts unified to var(--font-sans), broken ../../css/ paths fixed (qa PASS).
-- In progress: D3 — remove rogue dark theme from custom_websites.css; unify to light.
-- Next 3 queued: D3, D6, D4.
+- Just finished: D3 — custom_websites.css converted from dark to light token theme (qa PASS).
+- In progress: D6 — normalize radii/shadows/gradients across CSS to token values.
+- Next 3 queued: D6, D4, D5.
 - Blocked: none.
