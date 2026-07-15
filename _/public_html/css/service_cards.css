@@ -107,7 +107,6 @@
 
 .service-card:hover i {
     color: #ffffff;
-    transform: rotate(360deg); /* Full spin */
 }
 
 /* Title and Description */

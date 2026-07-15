@@ -7,19 +7,6 @@
     overflow: hidden;
 }
 
-.contact::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: 50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
-    transform: translate(-50%, -50%);
-    animation: subtleSpin 25s linear infinite; /* Subtle spin like the hero */
-    z-index: 0;
-}
-
 .contact .section-header h2 {
     font-family: var(--font-sans);
     font-size: 2.5rem;

@@ -22,7 +22,6 @@
 .logo:hover {
     transform: scale(2.2) rotate(10deg); /* Zoom and slight rotation on hover */
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.25)); /* Stronger shadow on hover */
-    animation: bounce 0.6s infinite ease-in-out; /* Subtle bounce animation */
 }
 
 .logo-tagline {
@@ -41,7 +40,6 @@
 .logo-tagline:hover {
     color: #0056b3; /* Stronger color shift for interactivity */
     transform: translateY(-5px); /* Slight lift on hover */
-    animation: glow 1.2s ease-in-out infinite; /* Glow effect */
 }
 
 /* Keyframe Animations */
@@ -60,24 +58,6 @@
     }
     to {
         transform: translateY(0);
-    }
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: scale(2.2) translateY(0);
-    }
-    50% {
-        transform: scale(2.2) translateY(-10px);
-    }
-}
-
-@keyframes glow {
-    0%, 100% {
-        text-shadow: 0 0 10px rgba(0, 86, 179, 0.8), 0 0 20px rgba(0, 86, 179, 0.5);
-    }
-    50% {
-        text-shadow: 0 0 15px rgba(0, 86, 179, 1), 0 0 30px rgba(0, 86, 179, 0.7);
     }
 }
 
