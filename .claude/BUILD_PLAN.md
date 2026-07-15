@@ -22,7 +22,7 @@
 
 ## Phase 3 — COMPLETE (rebuild components minimally)
 - [x] D4. Remove decorative animations (hero rotating glow, pulsating hamburger, 360° icon spins); keep subtle hover/focus only. — frontend-specialist
-- [ ] D5. Replace glowing gradient buttons with restrained solid CTAs using the accent token. — frontend-specialist + ui-designer
+- [x] D5. Replace glowing gradient buttons with restrained solid CTAs using the accent token. — frontend-specialist + ui-designer
 - [ ] D7. Redesign nav/header + minimal mobile menu (`css/navbar.css`, `js/mobile_phone_navbar.js`). — frontend-specialist + ui-designer
 - [ ] D8. Redesign hero (`css/hero_section.css`) — whitespace-driven, no rotating glow. — frontend-specialist + ui-designer
 - [ ] D9. Redesign service cards + feature/testimonial sections (`css/service_cards.css`, `css/about_section.css`, `css/mission_vision.css`). — frontend-specialist + ui-designer
@@ -30,7 +30,7 @@
 - [ ] D11. Redesign contact + booking forms (`css/contact_section.css`, `css/book_appointment.css`) to minimal style. — frontend-specialist + ui-designer
 
 ## Phase 4 — POLISH (consistency & correctness)
-- [ ] D12. Apply the design system consistently across all 8 pages; audit for stray old styles. — frontend-specialist + ui-designer
+- [ ] D12. Apply the design system consistently across all 8 pages; audit for stray old styles. — frontend-specialist + ui-designer  (cleanup backlog: migrate legacy --primary-color/--secondary-color section backgrounds in get-started.css & it_equipment.css to tokens; remove it_equipment.css local :root --transition/color overrides and leftover :root in global_styles.css; convert remaining #ff6b6b in book_appointment.css h2::after underline + input focus border to tokens; dead fadeInUp keyframe ref in hero_section/contact_section; backdrop-filter no-ops in custom_websites.css)
 - [ ] D13. Fix content bugs: `custom_websites.html` title/meta ("Gaming Services" → correct); dead footer links (`about.html`, `pages/hardware.html`). — frontend-specialist
 - [ ] D14. Verify responsive breakpoints (768px / 480px) and accessibility (contrast, focus states, alt text, tap targets) on all pages. — ui-designer + qa-auditor
 
@@ -41,7 +41,7 @@
 - [x] D2. Single font (Inter); 4 unloaded fonts removed
 - [x] D3. Rogue dark theme removed; all 8 pages unified to one light theme
 - [x] D4. Decorative animations removed; only subtle hover/focus feedback remains
-- [ ] D5. Glowing gradient buttons replaced with restrained solid CTAs
+- [x] D5. Glowing gradient buttons replaced with restrained solid CTAs
 - [x] D6. Radii, shadows, gradients normalized to token values
 - [ ] D7. Nav/header + minimal mobile menu redesigned
 - [ ] D8. Hero redesigned (no rotating glow)
@@ -65,7 +65,7 @@ When every box above is [x], the project is DONE — print "PROJECT COMPLETE" an
 ---
 
 ## STATUS
-- Just finished: D4 — decorative animations removed (rotating glows, pulsate hamburger, 360 icon spin, logo bounce/glow); functional motion kept (qa PASS).
-- In progress: D5 — replace gradient buttons with solid accent CTAs.
-- Next 3 queued: D5, D7, D8.
+- Just finished: D5 — gradient/glow buttons replaced with solid token CTAs; primary/outline hierarchy standardized (qa PASS).
+- In progress: D7 — redesign nav/header + minimal mobile menu.
+- Next 3 queued: D7, D8, D9.
 - Blocked: none.
