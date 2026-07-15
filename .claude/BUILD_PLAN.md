@@ -21,7 +21,7 @@
 - [x] D6. Normalize radii, shadows, and gradients across all 24 CSS files to token values (remove multi-stop decorative gradients). — frontend-specialist + ui-designer
 
 ## Phase 3 — COMPLETE (rebuild components minimally)
-- [ ] D4. Remove decorative animations (hero rotating glow, pulsating hamburger, 360° icon spins); keep subtle hover/focus only. — frontend-specialist
+- [x] D4. Remove decorative animations (hero rotating glow, pulsating hamburger, 360° icon spins); keep subtle hover/focus only. — frontend-specialist
 - [ ] D5. Replace glowing gradient buttons with restrained solid CTAs using the accent token. — frontend-specialist + ui-designer
 - [ ] D7. Redesign nav/header + minimal mobile menu (`css/navbar.css`, `js/mobile_phone_navbar.js`). — frontend-specialist + ui-designer
 - [ ] D8. Redesign hero (`css/hero_section.css`) — whitespace-driven, no rotating glow. — frontend-specialist + ui-designer
@@ -40,7 +40,7 @@
 - [x] D1. tokens.css design-system source of truth (accent #2563EB, type + spacing scale, one radius, one–two shadows)
 - [x] D2. Single font (Inter); 4 unloaded fonts removed
 - [x] D3. Rogue dark theme removed; all 8 pages unified to one light theme
-- [ ] D4. Decorative animations removed; only subtle hover/focus feedback remains
+- [x] D4. Decorative animations removed; only subtle hover/focus feedback remains
 - [ ] D5. Glowing gradient buttons replaced with restrained solid CTAs
 - [x] D6. Radii, shadows, gradients normalized to token values
 - [ ] D7. Nav/header + minimal mobile menu redesigned
@@ -65,7 +65,7 @@ When every box above is [x], the project is DONE — print "PROJECT COMPLETE" an
 ---
 
 ## STATUS
-- Just finished: D6 — border-radius/box-shadow normalized to tokens across 21 CSS files (qa PASS). STABILISE phase complete (D1,D2,D3,D6 done).
-- In progress: D4 — remove decorative animations (Phase 3 COMPLETE).
-- Next 3 queued: D4, D5, D7.
+- Just finished: D4 — decorative animations removed (rotating glows, pulsate hamburger, 360 icon spin, logo bounce/glow); functional motion kept (qa PASS).
+- In progress: D5 — replace gradient buttons with solid accent CTAs.
+- Next 3 queued: D5, D7, D8.
 - Blocked: none.
