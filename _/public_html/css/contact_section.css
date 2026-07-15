@@ -50,8 +50,8 @@
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
     padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
     text-align: left;
     backdrop-filter: blur(10px); /* Glassmorphism effect */
     position: relative;
@@ -61,7 +61,7 @@
 
 .contact-form:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-md);
 }
 
 .form-group {
@@ -78,20 +78,20 @@
     width: 100%;
     padding: 15px;
     border: 1px solid rgba(255, 255, 255, 0.4); /* Subtle white border */
-    border-radius: 8px;
+    border-radius: var(--radius);
     outline: none;
     font-size: 1rem;
     color: #ffffff;
     background: rgba(255, 255, 255, 0.1); /* Semi-transparent input background */
     transition: border 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2); /* Slight inset shadow */
+    box-shadow: var(--shadow-sm); /* Slight inset shadow */
 }
 
 .input-container input:focus,
 .input-container textarea:focus {
     border: 1px solid #00C6FF; /* Bright blue border on focus */
     background: rgba(255, 255, 255, 0.2); /* Brightened background */
-    box-shadow: 0 0 10px #00C6FF; /* Glow effect */
+    box-shadow: var(--shadow-md); /* Glow effect */
 }
 
 .input-container label {
@@ -114,7 +114,7 @@
     color: #00C6FF;
     background: rgba(36, 59, 85, 0.8); /* Matches background */
     padding: 0 5px;
-    border-radius: 5px;
+    border-radius: var(--radius);
 }
 
 .button-container {
@@ -125,25 +125,25 @@
 .contact-form button {
     padding: 15px 30px;
     border: none;
-    border-radius: 30px;
+    border-radius: var(--radius-full);
     background: linear-gradient(to right, #00C6FF, #0072FF);
     color: var(--white);
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-sm);
 }
 
 .contact-form button:hover {
     transform: translateY(-5px);
     background: linear-gradient(to right, #0072FF, #00C6FF); /* Reversed gradient */
-    box-shadow: 0 10px 25px rgba(0, 198, 255, 0.5);
+    box-shadow: var(--shadow-md);
 }
 
 .contact-form button:active {
     transform: translateY(0);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-sm);
 }
 
 /* Add subtle glowing border to the form on hover */
@@ -157,7 +157,7 @@
     padding: 10px;
     font-size: 1rem;
     text-align: center;
-    border-radius: 5px;
+    border-radius: var(--radius);
     display: none;
 }
 

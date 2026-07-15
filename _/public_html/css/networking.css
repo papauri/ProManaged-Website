@@ -36,7 +36,7 @@
 .network-card {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
-    border-radius: 12px;
+    border-radius: var(--radius);
     padding: 2rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -46,7 +46,7 @@
 
 .network-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
 }
 
 .network-card.primary {
@@ -57,7 +57,7 @@
 .network-card.active {
     border: 2px solid #2ecc71; /* Highlight with green border */
     background: rgba(46, 204, 113, 0.1); /* Subtle green background */
-    box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3); /* Add shadow */
+    box-shadow: var(--shadow-md); /* Add shadow */
 }
 
 /* Icon Styling */
@@ -98,7 +98,7 @@
     margin-top: 1.5rem;
     padding: 1rem;
     background: rgba(52, 152, 219, 0.1);
-    border-radius: 8px;
+    border-radius: var(--radius);
 }
 
 .price-info span {

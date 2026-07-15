@@ -1,8 +1,8 @@
 /* RAWG Cards - General Layout */
 .latest-game-card {
     background: var(--white); /* Clean background for the cards */
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-bottom: 20px; /* Space between cards */
@@ -10,7 +10,7 @@
 
 .latest-game-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-md);
 }
 
 /* Image Section */
@@ -59,7 +59,7 @@
 
     .latest-game-card {
         margin-bottom: 15px;
-        border-radius: 8px;
+        border-radius: var(--radius);
         overflow: hidden;
     }
 

@@ -118,7 +118,7 @@
 
 .footer-newsletter input {
     padding: 12px 15px;
-    border-radius: 8px;
+    border-radius: var(--radius);
     border: 1px solid #E5E7EB; /* Subtle border */
     background: #FFFFFF; /* White for input */
     color: #3C4043;
@@ -135,7 +135,7 @@
 
 .footer-newsletter button {
     padding: 12px 25px;
-    border-radius: 8px;
+    border-radius: var(--radius);
     border: none;
     background: #6096BA; /* Teal for CTA buttons */
     color: #FFFFFF;

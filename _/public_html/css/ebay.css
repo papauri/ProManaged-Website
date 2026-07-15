@@ -11,8 +11,8 @@
 /* Default Card Styles */
 .game-card {
     background: var(--white);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
@@ -24,7 +24,7 @@
 
 .game-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-md);
 }
 
 /* Card Image */
@@ -71,7 +71,7 @@
     background: var(--secondary-color);
     color: var(--white);
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: var(--radius);
     font-size: 0.9rem;
     font-weight: bold;
     text-align: center;
@@ -98,15 +98,15 @@
         gap: 15px; /* Increased gap for better spacing */
         padding: 15px;
         margin-bottom: 20px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
+        box-shadow: var(--shadow-sm);
+        border-radius: var(--radius);
         background-color: var(--white); /* Keep card background consistent */
     }
 
     .game-card-image {
         height: 150px; /* Larger image height */
         width: 150px; /* Larger square image */
-        border-radius: 8px; /* Rounded corners for a modern look */
+        border-radius: var(--radius); /* Rounded corners for a modern look */
         overflow: hidden;
         flex-shrink: 0;
     }
@@ -145,7 +145,7 @@
         align-self: flex-start;
         padding: 8px 12px;
         font-size: 0.75rem; /* Smaller button font size */
-        border-radius: 6px; /* Rounded button */
+        border-radius: var(--radius); /* Rounded button */
         background: var(--secondary-color); /* Consistent theme */
         color: var(--white); /* Text color for contrast */
         text-decoration: none;

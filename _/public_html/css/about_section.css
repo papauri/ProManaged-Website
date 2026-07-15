@@ -44,7 +44,7 @@
     height: 180px; /* Maintained aspect ratio */
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-sm);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -57,7 +57,7 @@
 
 .about-photo:hover {
     transform: scale(1.1);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+    box-shadow: var(--shadow-md);
 }
 
 .about-text {
@@ -65,8 +65,8 @@
     text-align: left;
     background: rgba(255, 255, 255, 0.08);
     padding: 20px; /* Reduced padding */
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
     backdrop-filter: blur(6px);
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.5; /* Reduced line height for compact text */

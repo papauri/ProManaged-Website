@@ -28,7 +28,7 @@
     height: 4px;
     background: #004AAD !important;
     margin: 10px auto 0;
-    border-radius: 5px;
+    border-radius: var(--radius);
 }
 
 .section-header .subtitle {
@@ -68,8 +68,8 @@
 /* Service Card */
 .service-card {
     background: #f4f7fa;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
     padding: 40px 30px;
     text-align: center;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.4s ease-in-out;
@@ -93,7 +93,7 @@
 
 .service-card:hover {
     transform: scale(1.05) translateY(-5px); /* Scale and lift */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-md);
     background: linear-gradient(135deg, #007BFF, #0056b3);
 }
 

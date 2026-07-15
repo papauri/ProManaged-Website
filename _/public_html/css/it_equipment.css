@@ -10,10 +10,6 @@
     --success-color: #22c55e;
     --warning-color: #f59e0b;
     --error-color: #ef4444;
-    --border-radius: 12px;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
-    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
     --transition: all 0.3s ease;
 }
 
@@ -34,9 +30,9 @@
     margin-bottom: 3rem;
     padding: 2rem;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     color: white;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-sm);
 }
 
 .equipment-header h2 {
@@ -66,7 +62,7 @@
 .search-container select {
     padding: 0.75rem 1rem;
     border: 2px solid #e2e8f0;
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     font-size: 1rem;
     transition: var(--transition);
 }
@@ -88,7 +84,7 @@
     background: var(--primary-color);
     color: white;
     border: none;
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     cursor: pointer;
     font-weight: 600;
     transition: var(--transition);
@@ -109,7 +105,7 @@
 .filter-tag {
     padding: 0.5rem 1rem;
     background: white;
-    border-radius: 20px;
+    border-radius: var(--radius-full);
     font-size: 0.9rem;
     color: var(--text-secondary);
     box-shadow: var(--shadow-sm);
@@ -125,15 +121,15 @@
 
 .equipment-card {
     background: white;
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     padding: 1.5rem;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
     transition: var(--transition);
 }
 
 .equipment-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-md);
 }
 
 .card-icon {
@@ -196,8 +192,8 @@
     right: 2rem;
     width: 350px;
     background: white;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
     transition: var(--transition);
     z-index: 1000;
 }
@@ -206,7 +202,7 @@
     background: var(--primary-color);
     color: white;
     padding: 1rem;
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    border-radius: var(--radius) var(--radius) 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -236,7 +232,7 @@
 
 .chat-message {
     padding: 0.75rem 1rem;
-    border-radius: 1rem;
+    border-radius: var(--radius);
     max-width: 80%;
 }
 
@@ -263,7 +259,7 @@
     flex: 1;
     padding: 0.5rem;
     border: 1px solid #e2e8f0;
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
 }
 
 .chat-input button {
@@ -271,7 +267,7 @@
     background: var(--primary-color);
     color: white;
     border: none;
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     cursor: pointer;
 }
 

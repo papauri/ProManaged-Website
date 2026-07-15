@@ -4,7 +4,7 @@
     color: var(--white);
     padding: 60px 20px;
     text-align: center;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-sm);
 }
 
 .hero-section h1 {
@@ -22,7 +22,7 @@
     padding: 15px 30px;
     font-size: 1.1rem;
     font-weight: bold;
-    border-radius: 6px;
+    border-radius: var(--radius);
     background: var(--white);
     color: var(--primary-color);
     transition: var(--transition);
@@ -58,15 +58,15 @@
 .feature-item {
     background: var(--white);
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
     text-align: center;
     transition: var(--transition);
 }
 
 .feature-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-md);
 }
 
 .feature-item i {
@@ -112,8 +112,8 @@
 .service-card {
     background: var(--background-color);
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
     text-align: center;
     transition: var(--transition);
     display: flex;
@@ -123,7 +123,7 @@
 
 .service-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-md);
 }
 
 .service-card h3 {
@@ -146,7 +146,7 @@
     font-size: 1rem;
     background: var(--primary-color);
     color: var(--white);
-    border-radius: 6px;
+    border-radius: var(--radius);
     text-decoration: none;
     transition: var(--transition);
     align-self: center; /* Center align the button */
@@ -168,8 +168,8 @@
 .testimonial-item {
     background: var(--white);
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
     transition: var(--transition);
     text-align: left;
     display: flex;
@@ -179,7 +179,7 @@
 
 .testimonial-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-md);
 }
 
 .testimonial-item p {
@@ -220,7 +220,7 @@
     padding: 15px 30px;
     font-size: 1.1rem;
     font-weight: bold;
-    border-radius: 6px;
+    border-radius: var(--radius);
     background: var(--white);
     color: var(--primary-color);
     transition: var(--transition);

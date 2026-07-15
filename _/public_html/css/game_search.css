@@ -8,24 +8,24 @@
     color: #ffffff;
     background: linear-gradient(90deg, #4b4b53, #b3824a); /* Subtle gradient */
     border: none;
-    border-radius: 30px; /* Rounded for a softer look */
+    border-radius: var(--radius-full); /* Rounded for a softer look */
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
     margin-top: 10px; /* Adds spacing between the input and button */
 }
 
 .btn-search:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-md);
     background: linear-gradient(90deg, #4a4db3, #6c63ff); /* Reverse gradient on hover */
 }
 
 .btn-search:active {
     transform: translateY(0);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-sm);
     background: linear-gradient(90deg, #5b59d6, #3d3d9f); /* Slightly muted gradient on click */
 }
 
@@ -35,18 +35,18 @@
     font-size: 1rem;
     padding: 12px 15px; /* Comfortable padding */
     border: 2px solid #d1d1d1; /* Subtle border */
-    border-radius: 30px; /* Rounded edges for a modern look */
+    border-radius: var(--radius-full); /* Rounded edges for a modern look */
     outline: none;
     width: 100%; /* Full width */
     max-width: 400px; /* Limit the width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     margin-bottom: 10px; /* Adds spacing between the input and button */
 }
 
 #game-search-input:focus {
     border-color: #6c63ff; /* Highlighted border */
-    box-shadow: 0 6px 15px rgba(108, 99, 255, 0.2); /* Glow effect */
+    box-shadow: var(--shadow-md); /* Glow effect */
 }
 
 /* Center Alignment for Search Section */
@@ -69,8 +69,8 @@
 #game-search-results .game-card {
     background: #ffffff;
     border: 2px solid #d1d1d1; /* Soft border */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
@@ -85,7 +85,7 @@
 
 #game-search-results .game-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-md);
     border-color: #6c63ff; /* Accent color */
 }
 
@@ -146,14 +146,14 @@
     color: #ffffff;
     background-color: #6c63ff;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--radius);
     text-decoration: none;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #game-search-results .game-card .game-info .btn-buy:hover {
     background-color: #4a4db3;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-md);
 }
 
 /* Responsive Design for Search Results */

@@ -22,7 +22,7 @@ header {
     color: #fff;
     padding: 30px 20px;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
 }
 
 h1, h2, h3 {
@@ -34,8 +34,8 @@ main {
     max-width: 800px;
     margin: 20px auto;
     background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius);
 }
 
 footer {
@@ -44,7 +44,7 @@ footer {
     margin-top: 20px;
     background-color: var(--secondary-color);
     border-top: 1px solid #ddd;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
 }
 
 footer a {
