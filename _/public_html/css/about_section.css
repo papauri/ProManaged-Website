@@ -1,7 +1,7 @@
 .about {
     padding: 30px 15px; /* Reduced padding for a more compact section */
-    background: linear-gradient(135deg, #0d1b2a, #1b263b); /* Dark blue tones */
-    color: #ffffff;
+    background: var(--color-bg);
+    color: var(--color-text);
     text-align: center;
     position: relative;
     z-index: 1;
@@ -12,14 +12,14 @@
     font-weight: 700;
     margin-bottom: 10px;
     text-transform: uppercase;
-    color: #ffffff;
+    color: var(--color-text);
     letter-spacing: 1.2px;
 }
 
 .section-header .subtitle_into {
     font-size: 1rem; /* Slightly smaller font size */
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--color-text-muted);
     margin-bottom: 20px; /* Reduced margin for compactness */
     max-width: 600px; /* Reduced width for tighter text wrapping */
     margin-left: auto;
@@ -63,12 +63,12 @@
 .about-text {
     flex: 2;
     text-align: left;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     padding: 20px; /* Reduced padding */
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
-    backdrop-filter: blur(6px);
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--color-text-muted);
     line-height: 1.5; /* Reduced line height for compact text */
     font-size: 0.9rem; /* Slightly smaller font size */
 }
@@ -76,7 +76,7 @@
 .about-text h3 {
     font-size: 1.5rem; /* Reduced heading size */
     margin-bottom: 10px;
-    color: #f9bc60;
+    color: var(--color-text);
 }
 
 .about-text p {
@@ -85,7 +85,7 @@
 }
 
 .about-text strong {
-    color: #f9bc60; /* Highlight key terms in a gold tone */
+    color: var(--color-accent); /* Highlight key terms in accent color */
 }
 
 .about-text .cta-text {

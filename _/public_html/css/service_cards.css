@@ -14,7 +14,7 @@
     font-family: var(--font-sans);
     font-size: 2.8rem;
     font-weight: 700;
-    color: #004AAD !important;
+    color: var(--color-text);
     position: relative;
     display: inline-block;
     text-transform: none;
@@ -26,7 +26,7 @@
     display: block;
     width: 60px;
     height: 4px;
-    background: #004AAD !important;
+    background: var(--color-accent);
     margin: 10px auto 0;
     border-radius: var(--radius);
 }
@@ -35,7 +35,7 @@
     font-family: var(--font-sans);
     font-size: 1.2rem;
     font-weight: 400;
-    color: #333333 !important;
+    color: var(--color-text-muted);
     margin-top: 15px;
     max-width: 600px;
     margin-left: auto;
@@ -47,7 +47,7 @@
     font-family: var(--font-sans);
     font-size: 1.2rem;
     font-weight: 400;
-    color: #333333 !important;
+    color: var(--color-text-muted);
     margin-top: 15px;
     max-width: 600px;
     margin-left: auto;
@@ -67,7 +67,8 @@
 
 /* Service Card */
 .service-card {
-    background: #f4f7fa;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
     padding: 40px 30px;
@@ -92,46 +93,35 @@
 }
 
 .service-card:hover {
-    transform: scale(1.05) translateY(-5px); /* Scale and lift */
+    transform: translateY(-4px); /* Subtle lift */
     box-shadow: var(--shadow-md);
-    background: linear-gradient(135deg, #007BFF, #0056b3);
 }
 
 /* Icon Styling */
 .service-card i {
     font-size: 2.5rem;
     margin-bottom: 15px;
-    color: #007BFF;
+    color: var(--color-accent);
     transition: transform 0.4s ease, color 0.4s ease, opacity 0.4s;
 }
 
 .service-card:hover i {
-    color: #ffffff;
+    color: var(--color-accent-hover);
 }
 
 /* Title and Description */
 .service-card h3 {
     font-size: 1.2rem;
     margin-bottom: 10px;
-    font-weight: 600;
-    color: #2c3e50;
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
     transition: color 0.4s ease, transform 0.4s ease;
-}
-
-.service-card:hover h3 {
-    color: #ffffff;
-    transform: scale(1.1);
 }
 
 .service-card p {
     font-size: 0.9rem;
-    color: #7f8c8d;
+    color: var(--color-text-muted);
     transition: color 0.4s ease, opacity 0.4s;
-}
-
-.service-card:hover p {
-    color: #f1f1f1;
-    opacity: 1;
 }
 
 /* Entering Viewport Animation */
