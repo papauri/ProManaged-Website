@@ -23,7 +23,7 @@
 ## Phase 3 — COMPLETE (rebuild components minimally)
 - [x] D4. Remove decorative animations (hero rotating glow, pulsating hamburger, 360° icon spins); keep subtle hover/focus only. — frontend-specialist
 - [x] D5. Replace glowing gradient buttons with restrained solid CTAs using the accent token. — frontend-specialist + ui-designer
-- [ ] D7. Redesign nav/header + minimal mobile menu (`css/navbar.css`, `js/mobile_phone_navbar.js`). — frontend-specialist + ui-designer
+- [x] D7. Redesign nav/header + minimal mobile menu (`css/navbar.css`, `js/mobile_phone_navbar.js`). — frontend-specialist + ui-designer
 - [ ] D8. Redesign hero (`css/hero_section.css`) — whitespace-driven, no rotating glow. — frontend-specialist + ui-designer
 - [ ] D9. Redesign service cards + feature/testimonial sections (`css/service_cards.css`, `css/about_section.css`, `css/mission_vision.css`). — frontend-specialist + ui-designer
 - [ ] D10. Redesign footer (`css/footer_promanaged.css`): fix max-width:80% drift; dedupe the inline "Contact Us" dialog across page footers. — frontend-specialist
@@ -43,7 +43,7 @@
 - [x] D4. Decorative animations removed; only subtle hover/focus feedback remains
 - [x] D5. Glowing gradient buttons replaced with restrained solid CTAs
 - [x] D6. Radii, shadows, gradients normalized to token values
-- [ ] D7. Nav/header + minimal mobile menu redesigned
+- [x] D7. Nav/header + minimal mobile menu redesigned
 - [ ] D8. Hero redesigned (no rotating glow)
 - [ ] D9. Service cards + feature/testimonial sections redesigned
 - [ ] D10. Footer redesigned (max-width drift + duplicated inline dialog fixed)
@@ -65,7 +65,7 @@ When every box above is [x], the project is DONE — print "PROJECT COMPLETE" an
 ---
 
 ## STATUS
-- Just finished: D5 — gradient/glow buttons replaced with solid token CTAs; primary/outline hierarchy standardized (qa PASS).
-- In progress: D7 — redesign nav/header + minimal mobile menu.
-- Next 3 queued: D7, D8, D9.
+- Just finished: D7 — nav/header redesigned to minimal token style; mobile menu class-mismatch bug fixed (hamburger X + overlay now work) (qa PASS).
+- In progress: D8 — redesign hero (whitespace-driven, remove rotating glow remnants).
+- Next 3 queued: D8, D9, D10.
 - Blocked: none.

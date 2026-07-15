@@ -20,7 +20,7 @@
 }
 
 .logo:hover {
-    transform: scale(2.2) rotate(10deg); /* Zoom and slight rotation on hover */
+    transform: scale(1.03); /* Subtle scale on hover */
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.25)); /* Stronger shadow on hover */
 }
 
@@ -28,7 +28,7 @@
     font-family: var(--font-sans);
     font-size: 1.5rem; /* Adjusted size for better emphasis */
     font-weight: 500;
-    color: #333333; /* Neutral and consistent color */
+    color: var(--color-text-muted); /* Neutral and consistent color, tokenized */
     margin-top: 12px; /* Space between logo and tagline */
     letter-spacing: 1.2px; /* Slight spacing for readability */
     text-align: center; /* Center-align the tagline */
@@ -38,7 +38,7 @@
 }
 
 .logo-tagline:hover {
-    color: #0056b3; /* Stronger color shift for interactivity */
+    color: var(--color-accent); /* Accent color shift for interactivity, tokenized */
     transform: translateY(-5px); /* Slight lift on hover */
 }
 
@@ -74,7 +74,7 @@
     }
 
     .logo:hover {
-        transform: scale(2.5) rotate(10deg); /* Increase zoom for mobile hover */
+        transform: scale(1.03); /* Increase zoom for mobile hover */
     }
 
     .logo-tagline {

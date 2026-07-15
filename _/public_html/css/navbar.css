@@ -1,16 +1,3 @@
-:root {
-    --primary-color: #1d3557; /* Deep Blue */
-    --secondary-color: #457b9d; /* Soft Blue */
-    --accent-color: #e63946; /* Bright Red */
-    --white: #ffffff; /* Pure White */
-    --text-color: #2c3e50; /* Dark Text Color */
-    --gray: #7f8c8d; /* Neutral Gray */
-    --background-color: #f8f9fa; /* Light Background */
-    --gradient: linear-gradient(135deg, #1d3557, #457b9d); /* Universal Gradient */
-    --shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Default Shadow */
-    --transition: all 0.3s ease-in-out;
-}
-
 /* Reset */
 body, h1, h2, h3, p, ul, li, a {
     margin: 0;
@@ -21,8 +8,8 @@ body, h1, h2, h3, p, ul, li, a {
 /* General Body Style */
 body {
     font-family: var(--font-sans);
-    background: var(--background-color);
-    color: var(--text-color);
+    background: var(--color-surface);
+    color: var(--color-text);
     line-height: 1.6;
     scroll-behavior: smooth;
 }
@@ -33,8 +20,9 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: #ffffff; /* Pure white background */
-    box-shadow: var(--shadow-md); /* Subtle shadow for separation */
+    background: var(--color-bg); /* Solid white background */
+    border-bottom: 1px solid var(--color-border); /* Subtle separator */
+    box-shadow: var(--shadow-sm); /* Subtle shadow for separation */
     z-index: 999;
     transition: background 0.3s ease, box-shadow 0.3s ease;
     padding: 15px 30px;
@@ -87,7 +75,7 @@ body {
 /* Links */
 .nav-link {
     text-decoration: none;
-    color: #2c3e50; /* Dark text color for contrast */
+    color: var(--color-text); /* Neutral text color for contrast */
     font-size: 1rem;
     font-weight: 500;
     padding: 8px 15px;
@@ -95,9 +83,12 @@ body {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
-.nav-link:hover {
-    background: #f8f9fa; /* Light gray hover effect */
-    color: #1d3557; /* Deep blue hover color */
+.nav-link:hover,
+.nav-link:focus-visible,
+.nav-link.active,
+.nav-link[aria-current="page"] {
+    background: var(--color-surface); /* Light neutral hover effect */
+    color: var(--color-accent); /* Accent hover/active color */
 }
 
 /* Hamburger Menu */
@@ -107,7 +98,7 @@ body {
     align-items: center;
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #1d3557, #457b9d); /* Futuristic gradient */
+    background: var(--color-surface); /* Minimal neutral background */
     border-radius: 50%; /* Circular shape */
     box-shadow: var(--shadow-sm);
     cursor: pointer;
@@ -117,8 +108,8 @@ body {
 }
 
 .hamburger-menu:hover {
-    transform: scale(1.1); /* Subtle scaling */
-    background: linear-gradient(135deg, #457b9d, #1d3557); /* Gradient reversal */
+    transform: scale(1.05); /* Subtle scaling */
+    background: var(--color-surface-2); /* Slightly deeper neutral on hover */
 }
 
 /* Hamburger Icon Lines */
@@ -126,7 +117,7 @@ body {
     position: absolute;
     width: 35px; /* Longer lines for emphasis */
     height: 4px;
-    background-color: #fff; /* Bright white */
+    background-color: var(--color-text); /* Minimal dark bars */
     border-radius: var(--radius);
     transition: transform 0.5s ease, opacity 0.4s ease, background-color 0.3s ease;
 }
@@ -151,16 +142,16 @@ body {
 }
 
 /* Open State - Circular Motion */
-.hamburger-menu.open span:nth-child(1) {
+.hamburger-menu.active span:nth-child(1) {
     transform: rotate(0deg) translateY(12px); /* Moves downwards */
     width: 25px; /* Shortens line */
 }
 
-.hamburger-menu.open span:nth-child(2) {
+.hamburger-menu.active span:nth-child(2) {
     opacity: 0; /* Disappears smoothly */
 }
 
-.hamburger-menu.open span:nth-child(3) {
+.hamburger-menu.active span:nth-child(3) {
     transform: rotate(0deg) translateY(-12px); /* Moves upwards */
     width: 25px; /* Shortens line */
 }
@@ -172,7 +163,7 @@ body {
     right: -100%;
     width: 100%;
     height: 100vh;
-    background: var(--gradient);
+    background: var(--color-bg); /* Clean solid panel, replaces gradient overlay */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -188,6 +179,16 @@ body {
     opacity: 1;
 }
 
+.nav-menu.mobile .nav-link {
+    color: var(--color-text);
+}
+
+.nav-menu.mobile .nav-link:hover,
+.nav-menu.mobile .nav-link:focus-visible {
+    color: var(--color-accent);
+    background: var(--color-surface);
+}
+
 .nav-overlay {
     position: fixed;
     top: 0;
@@ -197,11 +198,11 @@ body {
     background: rgba(0, 0, 0, 0.7);
     opacity: 0;
     visibility: hidden;
-    transition: var(--transition);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 998;
 }
 
-.nav-overlay.open {
+.nav-overlay.visible {
     opacity: 1;
     visibility: visible;
 }
