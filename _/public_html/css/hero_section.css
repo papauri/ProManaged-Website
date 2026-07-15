@@ -1,13 +1,12 @@
 .hero {
-    height: 65vh; /* Reduced vertical size for compactness */
     min-height: 450px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #243B55, #141E30); /* Sleek blue gradient */
-    color: var(--white);
+    background: var(--color-bg);
+    color: var(--color-text);
     text-align: center;
-    padding: 40px 20px;
+    padding: var(--space-24) var(--container-pad);
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -16,46 +15,42 @@
 .hero-content {
     z-index: 1; /* Place above background effects */
     position: relative;
-    max-width: 750px;
+    max-width: var(--container-max);
     text-align: center;
-    animation: fadeInUp 1.2s ease-out;
 }
 
 #hero-title {
-    font-family: var(--font-sans); /* Modern, clean font with a futuristic vibe */
-    font-size: 4.5rem; /* Bold and impactful size */
-    font-weight: 700;
-    margin-bottom: 20px;
-    letter-spacing: 1.5px;
-    line-height: 1.2;
-    color: #A4B2C5; /* Muted steel-blue for easy readability */
-    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
-    background: none; /* Removed bright gradient for a clean look */
-    -webkit-text-fill-color: #A4B2C5;
-    transition: transform 0.2s ease, text-shadow 0.2s ease;
+    font-family: var(--font-sans);
+    font-size: var(--text-5xl);
+    font-weight: var(--weight-bold);
+    margin-bottom: var(--space-5);
+    line-height: var(--leading-tight);
+    color: var(--color-text);
+    transition: var(--transition);
 }
 
 #hero-title:hover {
-    color: #B4C5D9; /* Slight hover color change */
-    text-shadow: 0px 4px 10px rgba(180, 197, 217, 0.5); /* Softer glow on hover */
-    transform: scale(1.02); /* Slight zoom effect on hover */
+    color: var(--color-accent);
 }
 
 
 
 #hero-subtitle {
-    font-family: var(--font-sans); /* Clean, modern font */
-    font-size: 1.5rem;
-    font-weight: 400;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 40px;
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-normal);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+    max-width: 60ch;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--space-10);
 }
 
 .hero-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: var(--space-4);
     justify-content: center;
 }
 
@@ -100,26 +95,35 @@
 
 @media (max-width: 768px) {
     .hero {
-        align-items: flex-end; /* Move the content lower */
-        padding-bottom: 40px; /* Add spacing from the bottom */
+        padding: var(--space-16) var(--container-pad);
     }
 
     .hero-content {
-        padding: 20px;
+        padding: var(--space-4);
         text-align: center; /* Maintain centered text alignment */
     }
 
     #hero-title {
-        font-size: 3.5rem; /* Adjusted for smaller screens */
+        font-size: var(--text-4xl);
     }
 
     #hero-subtitle {
-        font-size: 1.2rem; /* Smaller subtitle */
+        font-size: var(--text-base);
     }
 
     #hero-get-started,
     #hero-learn-more {
         padding: 8px 20px;
         font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: var(--space-12) var(--container-pad);
+    }
+
+    #hero-title {
+        font-size: var(--text-3xl);
     }
 }
