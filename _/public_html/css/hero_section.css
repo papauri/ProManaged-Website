@@ -64,7 +64,7 @@
     padding: 10px 25px; /* Smaller buttons */
     font-size: 1rem;
     font-weight: 600;
-    border-radius: var(--radius-full);
+    border-radius: var(--radius);
     border: none;
     cursor: pointer;
     position: relative;
@@ -75,25 +75,25 @@
 }
 
 #hero-get-started {
-    background: linear-gradient(to right, #FF6F61, #FFD564);
-    color: var(--white);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
 }
 
 #hero-get-started:hover {
-    background: linear-gradient(to right, #FFD564, #FF6F61);
+    background: var(--color-accent-hover);
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
 }
 
 #hero-learn-more {
     background: transparent;
-    color: #00C6FF;
-    border: 2px solid #00C6FF;
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
 }
 
 #hero-learn-more:hover {
-    background: #00C6FF;
-    color: var(--white);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
 }

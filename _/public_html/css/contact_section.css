@@ -112,9 +112,9 @@
 .contact-form button {
     padding: 15px 30px;
     border: none;
-    border-radius: var(--radius-full);
-    background: linear-gradient(to right, #00C6FF, #0072FF);
-    color: var(--white);
+    border-radius: var(--radius);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
@@ -124,7 +124,7 @@
 
 .contact-form button:hover {
     transform: translateY(-5px);
-    background: linear-gradient(to right, #0072FF, #00C6FF); /* Reversed gradient */
+    background: var(--color-accent-hover);
     box-shadow: var(--shadow-md);
 }
 

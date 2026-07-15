@@ -42,10 +42,10 @@
 /* Booking Button */
 #open-booking-modal {
     padding: 12px 30px;
-    border-radius: var(--radius-full);
+    border-radius: var(--radius);
     border: none;
-    background: linear-gradient(135deg, #ff6b6b, #ff8c66); /* Sleek gradient */
-    color: #ffffff;
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
     font-size: 1.1rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -55,7 +55,7 @@
 }
 
 #open-booking-modal:hover {
-    background: linear-gradient(135deg, #ff8c66, #ff6b6b); /* Reverse gradient */
+    background: var(--color-accent-hover);
     box-shadow: var(--shadow-md); /* Glow effect */
     transform: translateY(-3px) scale(1.08); /* Smooth hover effect */
 }
@@ -118,7 +118,7 @@
 }
 
 .modal-content .close:hover {
-    color: #ff6b6b;
+    color: var(--color-danger);
     transform: rotate(360deg); /* Smooth rotation on hover */
 }
 
@@ -152,18 +152,18 @@
 /* Submit Button */
 .modal-content button[type="submit"] {
     padding: 12px 20px;
-    background: linear-gradient(135deg, #ff6b6b, #ff8c66);
+    background: var(--color-accent);
     border: none;
     border-radius: var(--radius);
     font-size: 1.1rem;
     font-weight: bold;
-    color: #ffffff;
+    color: var(--color-accent-contrast);
     cursor: pointer;
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .modal-content button[type="submit"]:hover {
-    background: linear-gradient(135deg, #ff8c66, #ff6b6b);
+    background: var(--color-accent-hover);
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
 }

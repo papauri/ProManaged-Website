@@ -5,10 +5,10 @@
     font-size: 1rem;
     font-weight: bold;
     padding: 12px 24px; /* Slightly larger for a modern look */
-    color: #ffffff;
-    background: linear-gradient(90deg, #4b4b53, #b3824a); /* Subtle gradient */
+    color: var(--color-accent-contrast);
+    background: var(--color-accent);
     border: none;
-    border-radius: var(--radius-full); /* Rounded for a softer look */
+    border-radius: var(--radius); /* Rounded for a softer look */
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     text-transform: uppercase;
@@ -20,13 +20,13 @@
 .btn-search:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
-    background: linear-gradient(90deg, #4a4db3, #6c63ff); /* Reverse gradient on hover */
+    background: var(--color-accent-hover);
 }
 
 .btn-search:active {
     transform: translateY(0);
     box-shadow: var(--shadow-sm);
-    background: linear-gradient(90deg, #5b59d6, #3d3d9f); /* Slightly muted gradient on click */
+    background: var(--color-accent-active);
 }
 
 /* Text Search Bar Styling */
@@ -143,8 +143,8 @@
     padding: 10px 15px;
     font-size: 0.9rem;
     font-weight: bold;
-    color: #ffffff;
-    background-color: #6c63ff;
+    color: var(--color-accent-contrast);
+    background-color: var(--color-accent);
     border: none;
     border-radius: var(--radius);
     text-decoration: none;
@@ -152,7 +152,7 @@
 }
 
 #game-search-results .game-card .game-info .btn-buy:hover {
-    background-color: #4a4db3;
+    background-color: var(--color-accent-hover);
     box-shadow: var(--shadow-md);
 }
 

@@ -23,15 +23,14 @@
     font-size: 1.1rem;
     font-weight: bold;
     border-radius: var(--radius);
-    background: var(--white);
-    color: var(--primary-color);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
     transition: var(--transition);
     text-decoration: none;
 }
 
 .hero-section .btn.primary:hover {
-    background: var(--button-hover-bg);
-    color: var(--button-hover-text);
+    background: var(--color-accent-hover);
     transform: translateY(-3px);
 }
 
@@ -144,8 +143,9 @@
 .service-card .btn.secondary {
     padding: 12px 20px;
     font-size: 1rem;
-    background: var(--primary-color);
-    color: var(--white);
+    background: transparent;
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
     border-radius: var(--radius);
     text-decoration: none;
     transition: var(--transition);
@@ -154,7 +154,9 @@
 }
 
 .service-card .btn.secondary:hover {
-    background: var(--button-hover-bg);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    border: 2px solid var(--color-accent);
     transform: translateY(-3px);
 }
 
@@ -221,15 +223,14 @@
     font-size: 1.1rem;
     font-weight: bold;
     border-radius: var(--radius);
-    background: var(--white);
-    color: var(--primary-color);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
     transition: var(--transition);
     text-decoration: none;
 }
 
 .cta-section .btn.primary:hover {
-    background: var(--button-hover-bg);
-    color: var(--button-hover-text);
+    background: var(--color-accent-hover);
     transform: translateY(-3px);
 }
 

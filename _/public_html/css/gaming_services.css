@@ -34,9 +34,9 @@
 
 .tab-btn {
     padding: 10px 20px;
-    background: var(--light-gray); /* Light neutral color for consistency */
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    background: var(--color-surface); /* Light neutral color for consistency */
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -47,8 +47,8 @@
 
 .tab-btn:hover,
 .tab-btn.active {
-    background: var(--primary-color);
-    color: var(--white);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
     box-shadow: var(--shadow-md);
 }
 
