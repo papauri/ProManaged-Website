@@ -27,7 +27,7 @@
 - [x] D8. Redesign hero (`css/hero_section.css`) — whitespace-driven, no rotating glow. — frontend-specialist + ui-designer
 - [x] D9. Redesign service cards + feature/testimonial sections (`css/service_cards.css`, `css/about_section.css`, `css/mission_vision.css`). — frontend-specialist + ui-designer
 - [x] D10. Redesign footer (`css/footer_promanaged.css`): fix max-width:80% drift; dedupe the inline "Contact Us" dialog across page footers. — frontend-specialist
-- [ ] D11. Redesign contact + booking forms (`css/contact_section.css`, `css/book_appointment.css`) to minimal style. — frontend-specialist + ui-designer
+- [x] D11. Redesign contact + booking forms (`css/contact_section.css`, `css/book_appointment.css`) to minimal style. — frontend-specialist + ui-designer
 
 ## Phase 4 — POLISH (consistency & correctness)
 - [ ] D12. Apply the design system consistently across all 8 pages; audit for stray old styles. — frontend-specialist + ui-designer  (cleanup backlog: migrate legacy --primary-color/--secondary-color section backgrounds in get-started.css & it_equipment.css to tokens; remove it_equipment.css local :root --transition/color overrides and leftover :root in global_styles.css; convert remaining #ff6b6b in book_appointment.css h2::after underline + input focus border to tokens; dead fadeInUp keyframe ref in hero_section/contact_section; backdrop-filter no-ops in custom_websites.css)
@@ -47,7 +47,7 @@
 - [x] D8. Hero redesigned (no rotating glow)
 - [x] D9. Service cards + feature/testimonial sections redesigned
 - [x] D10. Footer redesigned (max-width drift + duplicated inline dialog fixed)
-- [ ] D11. Contact + booking forms redesigned minimally
+- [x] D11. Contact + booking forms redesigned minimally
 - [ ] D12. Design system applied consistently across all 8 pages
 - [ ] D13. Content bugs fixed (wrong title, dead footer links)
 - [ ] D14. Responsive breakpoints + basic accessibility verified
@@ -65,7 +65,7 @@ When every box above is [x], the project is DONE — print "PROJECT COMPLETE" an
 ---
 
 ## STATUS
-- Just finished: D10 — footer redesigned to minimal tokens (container width fixed); inline contact dialog deduped into shared js/contact_dialog.js across 7 pages (qa PASS).
-- In progress: D11 — redesign contact + booking forms to minimal token style.
-- Next 3 queued: D11, D12, D13.
+- Just finished: D11 — contact + booking forms redesigned to light token style (qa PASS). Phase 3 COMPLETE done.
+- In progress: D12 — apply design system consistently across all 8 pages + legacy :root cleanup.
+- Next 3 queued: D12, D13, D14.
 - Blocked: none.
