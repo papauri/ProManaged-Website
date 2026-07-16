@@ -26,7 +26,7 @@
 - [x] D7. Redesign nav/header + minimal mobile menu (`css/navbar.css`, `js/mobile_phone_navbar.js`). — frontend-specialist + ui-designer
 - [x] D8. Redesign hero (`css/hero_section.css`) — whitespace-driven, no rotating glow. — frontend-specialist + ui-designer
 - [x] D9. Redesign service cards + feature/testimonial sections (`css/service_cards.css`, `css/about_section.css`, `css/mission_vision.css`). — frontend-specialist + ui-designer
-- [ ] D10. Redesign footer (`css/footer_promanaged.css`): fix max-width:80% drift; dedupe the inline "Contact Us" dialog across page footers. — frontend-specialist
+- [x] D10. Redesign footer (`css/footer_promanaged.css`): fix max-width:80% drift; dedupe the inline "Contact Us" dialog across page footers. — frontend-specialist
 - [ ] D11. Redesign contact + booking forms (`css/contact_section.css`, `css/book_appointment.css`) to minimal style. — frontend-specialist + ui-designer
 
 ## Phase 4 — POLISH (consistency & correctness)
@@ -46,7 +46,7 @@
 - [x] D7. Nav/header + minimal mobile menu redesigned
 - [x] D8. Hero redesigned (no rotating glow)
 - [x] D9. Service cards + feature/testimonial sections redesigned
-- [ ] D10. Footer redesigned (max-width drift + duplicated inline dialog fixed)
+- [x] D10. Footer redesigned (max-width drift + duplicated inline dialog fixed)
 - [ ] D11. Contact + booking forms redesigned minimally
 - [ ] D12. Design system applied consistently across all 8 pages
 - [ ] D13. Content bugs fixed (wrong title, dead footer links)
@@ -65,7 +65,7 @@ When every box above is [x], the project is DONE — print "PROJECT COMPLETE" an
 ---
 
 ## STATUS
-- Just finished: D9 — service cards + about/feature + mission-vision sections redesigned to minimal token cards; about section converted dark->light (qa PASS).
-- In progress: D10 — footer CSS redesign + dedupe inline contact dialog across 7 pages.
-- Next 3 queued: D10, D11, D12.
+- Just finished: D10 — footer redesigned to minimal tokens (container width fixed); inline contact dialog deduped into shared js/contact_dialog.js across 7 pages (qa PASS).
+- In progress: D11 — redesign contact + booking forms to minimal token style.
+- Next 3 queued: D11, D12, D13.
 - Blocked: none.
