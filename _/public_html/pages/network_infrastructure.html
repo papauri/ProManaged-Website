@@ -276,64 +276,6 @@
             </div>
         </footer>
 
-        <!-- Contact Dialog -->
-        <div id="contact-dialog" style="
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-        ">
-            <div style="
-                background: white;
-                padding: 20px;
-                border-radius: 8px;
-                width: 90%;
-                max-width: 400px;
-                text-align: center;
-            ">
-                <h3>Contact Us</h3>
-                <p>You can reach us via the following:</p>
-                <p><strong>Email:</strong></p>
-                <p>
-                    <a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a><br>
-                    <a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a>
-                </p>
-                <p><strong>WhatsApp:</strong> +353-8-6008-1635</p>
-                <button id="close-dialog" style="
-                    background: #3498db;
-                    color: white;
-                    padding: 10px 20px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                ">Close</button>
-            </div>
-        </div>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const getInTouchLink = document.getElementById("get-in-touch-link"); // Link element
-                const contactDialog = document.getElementById("contact-dialog");
-                const closeDialogButton = document.getElementById("close-dialog");
-
-                // Show the dialog when "Get in Touch" is clicked
-                getInTouchLink.addEventListener("click", function (e) {
-                    e.preventDefault(); // Prevent default scrolling behavior
-                    contactDialog.style.display = "flex"; // Show the dialog
-                });
-
-                // Close the dialog when "Close" button is clicked
-                closeDialogButton.addEventListener("click", function () {
-                    contactDialog.style.display = "none"; // Hide the dialog
-                });
-            });
-        </script>
 
     </div>
 
@@ -341,6 +283,7 @@
     <!-- Include necessary scripts -->
     <script src="../js/booking_form.js" defer></script>
     <script src="../js/networking.js" defer></script>
+    <script src="../js/contact_dialog.js"></script>
 </body>
 
 </html>
