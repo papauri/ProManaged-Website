@@ -1,7 +1,7 @@
 .contact {
     padding: 70px 20px; /* Increased padding for spacing */
-    background: linear-gradient(135deg, #243B55, #141E30); /* Dark blue gradient to match hero */
-    color: var(--white);
+    background: var(--color-surface);
+    color: var(--color-text);
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -11,11 +11,8 @@
     font-family: var(--font-sans);
     font-size: 2.5rem;
     font-weight: 800;
-    color: #ffffff;
+    color: var(--color-text);
     text-transform: uppercase;
-    background: linear-gradient(to right, #00C6FF, #0072FF); /* Gradient text */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     margin-bottom: 15px;
     animation: fadeInUp 1.5s ease-out;
 }
@@ -24,7 +21,7 @@
     font-family: var(--font-sans);
     font-size: 1.3rem;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--color-text-muted);
     margin-top: 15px;
     margin-bottom: 30px;
     line-height: 1.6;
@@ -35,19 +32,18 @@
     width: 100%;
     max-width: 700px; /* Wider form for better balance */
     margin: 0 auto;
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    background: var(--color-bg);
     padding: 40px;
+    border: 1px solid var(--color-border);
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
     text-align: left;
-    backdrop-filter: blur(10px); /* Glassmorphism effect */
     position: relative;
     z-index: 1;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
 }
 
 .contact-form:hover {
-    transform: translateY(-5px);
     box-shadow: var(--shadow-md);
 }
 
@@ -64,21 +60,19 @@
 .input-container textarea {
     width: 100%;
     padding: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.4); /* Subtle white border */
+    border: 1px solid var(--color-border);
     border-radius: var(--radius);
     outline: none;
     font-size: 1rem;
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent input background */
-    transition: border 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: var(--shadow-sm); /* Slight inset shadow */
+    color: var(--color-text);
+    background: var(--color-bg);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .input-container input:focus,
 .input-container textarea:focus {
-    border: 1px solid #00C6FF; /* Bright blue border on focus */
-    background: rgba(255, 255, 255, 0.2); /* Brightened background */
-    box-shadow: var(--shadow-md); /* Glow effect */
+    border: 1px solid var(--color-accent);
+    box-shadow: var(--shadow-sm);
 }
 
 .input-container label {
@@ -86,7 +80,7 @@
     top: 50%;
     left: 15px;
     transform: translateY(-50%);
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--color-text-subtle);
     pointer-events: none;
     transition: transform 0.3s ease, font-size 0.3s ease, color 0.3s ease;
 }
@@ -98,8 +92,8 @@
     top: -10px;
     left: 10px;
     font-size: 0.85rem;
-    color: #00C6FF;
-    background: rgba(36, 59, 85, 0.8); /* Matches background */
+    color: var(--color-accent);
+    background: var(--color-bg);
     padding: 0 5px;
     border-radius: var(--radius);
 }
@@ -118,24 +112,17 @@
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
     box-shadow: var(--shadow-sm);
 }
 
 .contact-form button:hover {
-    transform: translateY(-5px);
     background: var(--color-accent-hover);
     box-shadow: var(--shadow-md);
 }
 
 .contact-form button:active {
-    transform: translateY(0);
     box-shadow: var(--shadow-sm);
-}
-
-/* Add subtle glowing border to the form on hover */
-.contact-form:hover {
-    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Form Feedback Message */
@@ -149,13 +136,13 @@
 }
 
 .form-feedback.success {
-    background: #10b981; /* Success color */
-    color: #ffffff;
+    background: var(--color-success);
+    color: var(--color-text-inverse);
 }
 
 .form-feedback.error {
-    background: #ef4444; /* Error color */
-    color: #ffffff;
+    background: var(--color-danger);
+    color: var(--color-text-inverse);
 }
 
 /* Loading Animation */
@@ -163,8 +150,8 @@
     display: inline-block;
     width: 1rem;
     height: 1rem;
-    border: 2px solid #ffffff;
-    border-top: 2px solid #4b5563;
+    border: 2px solid var(--color-border);
+    border-top: 2px solid var(--color-accent);
     border-radius: 50%;
     animation: spin 0.6s linear infinite;
     margin-left: 8px;

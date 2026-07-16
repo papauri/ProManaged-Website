@@ -1,9 +1,9 @@
 /* Booking Section */
 .booking-section {
     padding: 60px 20px;
-    background: linear-gradient(135deg, #f4f4f4, #ffffff); /* Clean, bright background */
+    background: var(--color-bg);
     text-align: center;
-    color: #333333;
+    color: var(--color-text);
     position: relative;
     overflow: hidden;
 }
@@ -13,7 +13,7 @@
     font-family: var(--font-sans);
     font-size: 3rem;
     font-weight: 800;
-    color: #111111;
+    color: var(--color-text);
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -24,16 +24,15 @@
     display: block;
     width: 100px;
     height: 5px;
-    background: #ff6b6b; /* Accent underline with brighter color */
+    background: var(--color-accent);
     margin: 15px auto 0;
     border-radius: var(--radius);
-    box-shadow: var(--shadow-sm); /* Glow effect */
 }
 
 .booking-section p {
     font-family: var(--font-sans);
     font-size: 1.1rem;
-    color: #555555;
+    color: var(--color-text-muted);
     margin: 0 auto 35px;
     max-width: 600px;
     line-height: 1.7;
@@ -85,7 +84,8 @@
 
 /* Modal Content */
 .modal-content {
-    background: linear-gradient(135deg, #ffffff, #f7f7f7); /* Subtle gradient */
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius);
     padding: 40px;
     max-width: 500px;
@@ -112,7 +112,7 @@
     top: 20px;
     right: 20px;
     font-size: 1.8rem;
-    color: #999999;
+    color: var(--color-text-subtle);
     cursor: pointer;
     transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -128,25 +128,26 @@
     font-size: 1rem;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #333333;
+    color: var(--color-text-muted);
 }
 
 .modal-content input,
 .modal-content select {
     width: 100%;
     padding: 12px;
-    border: 1px solid #dddddd;
+    border: 1px solid var(--color-border);
     border-radius: var(--radius);
     font-size: 1rem;
     margin-bottom: 20px;
-    background: #f9f9f9;
+    background: var(--color-bg);
+    color: var(--color-text);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .modal-content input:focus,
 .modal-content select:focus {
-    border-color: #ff6b6b;
-    box-shadow: var(--shadow-md);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-sm);
 }
 
 /* Submit Button */
