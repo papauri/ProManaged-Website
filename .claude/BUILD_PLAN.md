@@ -30,7 +30,7 @@
 - [x] D11. Redesign contact + booking forms (`css/contact_section.css`, `css/book_appointment.css`) to minimal style. — frontend-specialist + ui-designer
 
 ## Phase 4 — POLISH (consistency & correctness)
-- [ ] D12. Apply the design system consistently across all 8 pages; audit for stray old styles. — frontend-specialist + ui-designer  (cleanup backlog: migrate legacy --primary-color/--secondary-color section backgrounds in get-started.css & it_equipment.css to tokens; remove it_equipment.css local :root --transition/color overrides and leftover :root in global_styles.css; convert remaining #ff6b6b in book_appointment.css h2::after underline + input focus border to tokens; dead fadeInUp keyframe ref in hero_section/contact_section; backdrop-filter no-ops in custom_websites.css)
+- [x] D12. Apply the design system consistently across all 8 pages; audit for stray old styles. — frontend-specialist + ui-designer  (cleanup backlog: migrate legacy --primary-color/--secondary-color section backgrounds in get-started.css & it_equipment.css to tokens; remove it_equipment.css local :root --transition/color overrides and leftover :root in global_styles.css; convert remaining #ff6b6b in book_appointment.css h2::after underline + input focus border to tokens; dead fadeInUp keyframe ref in hero_section/contact_section; backdrop-filter no-ops in custom_websites.css)
 - [ ] D13. Fix content bugs: `custom_websites.html` title/meta ("Gaming Services" → correct); dead footer links (`about.html`, `pages/hardware.html`). — frontend-specialist
 - [ ] D14. Verify responsive breakpoints (768px / 480px) and accessibility (contrast, focus states, alt text, tap targets) on all pages. — ui-designer + qa-auditor
 
@@ -48,7 +48,7 @@
 - [x] D9. Service cards + feature/testimonial sections redesigned
 - [x] D10. Footer redesigned (max-width drift + duplicated inline dialog fixed)
 - [x] D11. Contact + booking forms redesigned minimally
-- [ ] D12. Design system applied consistently across all 8 pages
+- [x] D12. Design system applied consistently across all 8 pages
 - [ ] D13. Content bugs fixed (wrong title, dead footer links)
 - [ ] D14. Responsive breakpoints + basic accessibility verified
 
@@ -65,7 +65,7 @@ When every box above is [x], the project is DONE — print "PROJECT COMPLETE" an
 ---
 
 ## STATUS
-- Just finished: D11 — contact + booking forms redesigned to light token style (qa PASS). Phase 3 COMPLETE done.
-- In progress: D12 — apply design system consistently across all 8 pages + legacy :root cleanup.
-- Next 3 queued: D12, D13, D14.
+- Just finished: D12 — site-wide token migration; 3 legacy :root blocks removed; networking dark->light; get-started hero->light; ALL css now token-compliant repo-wide (qa PASS).
+- In progress: D13 — fix content bugs (custom_websites title/meta, dead footer links).
+- Next 3 queued: D13, D14, done.
 - Blocked: none.
