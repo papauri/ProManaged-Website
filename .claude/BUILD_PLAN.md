@@ -31,7 +31,7 @@
 
 ## Phase 4 — POLISH (consistency & correctness)
 - [x] D12. Apply the design system consistently across all 8 pages; audit for stray old styles. — frontend-specialist + ui-designer  (cleanup backlog: migrate legacy --primary-color/--secondary-color section backgrounds in get-started.css & it_equipment.css to tokens; remove it_equipment.css local :root --transition/color overrides and leftover :root in global_styles.css; convert remaining #ff6b6b in book_appointment.css h2::after underline + input focus border to tokens; dead fadeInUp keyframe ref in hero_section/contact_section; backdrop-filter no-ops in custom_websites.css)
-- [ ] D13. Fix content bugs: `custom_websites.html` title/meta ("Gaming Services" → correct); dead footer links (`about.html`, `pages/hardware.html`). — frontend-specialist
+- [x] D13. Fix content bugs: `custom_websites.html` title/meta ("Gaming Services" → correct); dead footer links (`about.html`, `pages/hardware.html`). — frontend-specialist
 - [ ] D14. Verify responsive breakpoints (768px / 480px) and accessibility (contrast, focus states, alt text, tap targets) on all pages. — ui-designer + qa-auditor
 
 ---
@@ -49,7 +49,7 @@
 - [x] D10. Footer redesigned (max-width drift + duplicated inline dialog fixed)
 - [x] D11. Contact + booking forms redesigned minimally
 - [x] D12. Design system applied consistently across all 8 pages
-- [ ] D13. Content bugs fixed (wrong title, dead footer links)
+- [x] D13. Content bugs fixed (wrong title, dead footer links)
 - [ ] D14. Responsive breakpoints + basic accessibility verified
 
 When every box above is [x], the project is DONE — print "PROJECT COMPLETE" and halt.
@@ -65,7 +65,8 @@ When every box above is [x], the project is DONE — print "PROJECT COMPLETE" an
 ---
 
 ## STATUS
-- Just finished: D12 — site-wide token migration; 3 legacy :root blocks removed; networking dark->light; get-started hero->light; ALL css now token-compliant repo-wide (qa PASS).
-- In progress: D13 — fix content bugs (custom_websites title/meta, dead footer links).
-- Next 3 queued: D13, D14, done.
+- Just finished: D13 — content bugs fixed: custom_websites title/meta corrected, all dead links repointed (about.html, hardware.html, learn-more.html typo), booking service selects normalized across pages (qa PASS).
+- In progress: D14 — responsive + accessibility verification via Chromium/Playwright browser testing across all 8 pages.
+- Next: PROJECT COMPLETE after D14.
 - Blocked: none.
+- Known pre-existing (non-blocking, backlog): gaming_services.html has an unbalanced <div> (33 open/34 close) that predates this work.
