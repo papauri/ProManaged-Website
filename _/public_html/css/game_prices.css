@@ -8,16 +8,16 @@
     padding: 20px;
     margin: 0 auto;
     width: 100%; /* Full-width grid */
-    background-color: #f3f3f3; /* Subtle light background */
-    border: 1px solid #e0e0e0; /* Soft border */
+    background-color: var(--color-surface); /* Subtle light background */
+    border: 1px solid var(--color-border); /* Soft border */
     border-radius: var(--radius); /* Smooth corners */
     box-shadow: var(--shadow-sm); /* Subtle shadow */
 }
 
 /* Game Card */
 .game-card {
-    background: #ffffff;
-    border: 2px solid #d1d1d1; /* Soft border */
+    background: var(--color-white);
+    border: 2px solid var(--color-border); /* Soft border */
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
     overflow: hidden;
@@ -33,7 +33,7 @@
 .game-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-md);
-    border-color: #6c63ff; /* Accent color */
+    border-color: var(--color-accent); /* Accent color */
 }
 
 /* Card Image */
@@ -41,8 +41,8 @@
     width: 100%;
     height: 180px; /* Consistent height */
     object-fit: cover; /* Maintain aspect ratio */
-    border-bottom: 2px solid #6c63ff;
-    background-color: #eaeaea;
+    border-bottom: 2px solid var(--color-accent);
+    background-color: var(--color-surface-2);
 }
 
 /* Game Card Content */
@@ -56,7 +56,7 @@
     font-family: var(--font-sans);
     font-size: 1rem;
     font-weight: 700;
-    color: #444444;
+    color: var(--color-text-muted);
     margin-bottom: 10px;
     text-align: center;
     display: -webkit-box;
@@ -70,14 +70,14 @@
 }
 
 .game-card .game-info h3:hover {
-    color: #6c63ff;
+    color: var(--color-accent);
 }
 
 /* Card Description */
 .game-card .game-info p {
     font-family: var(--font-sans);
     font-size: 0.9rem;
-    color: #555555;
+    color: var(--color-text-muted);
     margin: 5px 0;
     line-height: 1.4;
 }
@@ -85,13 +85,13 @@
 /* Release Date */
 .game-card .game-info .game-release {
     font-size: 0.85rem;
-    color: #777777;
+    color: var(--color-text-subtle);
 }
 
 /* Rating */
 .game-card .game-info .game-rating {
     font-weight: bold;
-    color: #f75d59;
+    color: var(--color-danger);
 }
 
 /* Section Header */
@@ -99,10 +99,10 @@
     font-family: var(--font-sans);
     font-size: 2rem;
     font-weight: bold;
-    color: #333333;
+    color: var(--color-text);
     margin-bottom: 15px;
     text-align: center;
-    border-bottom: 2px solid #6c63ff;
+    border-bottom: 2px solid var(--color-accent);
     display: inline-block;
     padding-bottom: 5px;
 }
@@ -110,7 +110,7 @@
 .section-header p {
     font-family: var(--font-sans);
     font-size: 1rem;
-    color: #666666;
+    color: var(--color-text-muted);
     text-align: center;
     margin-bottom: 25px;
 }

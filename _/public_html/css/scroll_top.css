@@ -2,8 +2,8 @@
     position: fixed;
     bottom: 30px;
     right: 20px;
-    background: var(--primary-color);
-    color: var(--white);
+    background: var(--color-accent);
+    color: var(--color-white);
     border: none;
     border-radius: 50%;
     width: 45px;
@@ -14,6 +14,6 @@
 }
 
 .scroll-top-btn:hover {
-    background: var(--button-hover-bg);
+    background: var(--color-accent-hover);
     box-shadow: var(--shadow-md);
 }

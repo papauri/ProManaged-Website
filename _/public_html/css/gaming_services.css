@@ -2,7 +2,7 @@
 
 .gaming-services {
     padding: 60px 20px;
-    background: var(--background-color); /* Keeps your original site background */
+    background: var(--color-bg); /* Keeps your original site background */
     text-align: center;
     max-width: 100%; /* Ensure the section spans the full width of the page */
     margin: 0 auto; /* Center the section on the page */
@@ -57,7 +57,7 @@
     width: 100%; /* Ensure it spans full width */
     margin: 0 auto;
     padding: 20px;
-    background: var(--white);
+    background: var(--color-white);
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
 }

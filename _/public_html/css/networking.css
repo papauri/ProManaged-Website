@@ -1,7 +1,7 @@
 /* Network Section Container */
 .network-section {
-    background: linear-gradient(135deg, #1a1f25 0%, #2c3e50 100%);
-    color: #fff;
+    background: var(--color-bg);
+    color: var(--color-text);
     padding: 4rem 2rem;
 }
 
@@ -19,9 +19,7 @@
 .network-header h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    background: linear-gradient(45deg, #3498db, #2ecc71);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--color-text);
 }
 
 /* Grid Layout */
@@ -34,12 +32,12 @@
 
 /* Card Styling */
 .network-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--color-surface);
     backdrop-filter: blur(10px);
     border-radius: var(--radius);
     padding: 2rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--color-border);
     position: relative;
     overflow: hidden;
 }
@@ -50,13 +48,13 @@
 }
 
 .network-card.primary {
-    border: 2px solid #3498db;
-    background: rgba(52, 152, 219, 0.1);
+    border: 2px solid var(--color-accent);
+    background: var(--color-accent-soft);
 }
 
 .network-card.active {
-    border: 2px solid #2ecc71; /* Highlight with green border */
-    background: rgba(46, 204, 113, 0.1); /* Subtle green background */
+    border: 2px solid var(--color-success); /* Highlight with green border */
+    background: var(--color-surface); /* Subtle green background */
     box-shadow: var(--shadow-md); /* Add shadow */
 }
 
@@ -64,7 +62,7 @@
 .card-icon {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
-    color: #3498db;
+    color: var(--color-accent);
 }
 
 /* Service List Styling */
@@ -78,8 +76,8 @@
     padding: 0.8rem 0;
     padding-left: 1.5rem;
     position: relative;
-    color: #ecf0f1;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-text-muted);
+    border-bottom: 1px solid var(--color-border);
 }
 
 .service-list li:last-child {
@@ -90,14 +88,14 @@
     content: "→";
     position: absolute;
     left: 0;
-    color: #3498db;
+    color: var(--color-accent);
 }
 
 /* Price Information */
 .price-info {
     margin-top: 1.5rem;
     padding: 1rem;
-    background: rgba(52, 152, 219, 0.1);
+    background: var(--color-accent-soft);
     border-radius: var(--radius);
 }
 
@@ -105,13 +103,13 @@
     display: block;
     margin: 0.5rem 0;
     font-weight: bold;
-    color: #3498db;
+    color: var(--color-accent);
 }
 
 /* Currency Display */
 .currency-display {
     font-size: 0.9rem;
-    color: #95a5a6;
+    color: var(--color-text-subtle);
     margin-top: 0.5rem;
 }
 

@@ -34,7 +34,7 @@
     font-family: var(--font-sans);
     font-size: 1rem;
     padding: 12px 15px; /* Comfortable padding */
-    border: 2px solid #d1d1d1; /* Subtle border */
+    border: 2px solid var(--color-border); /* Subtle border */
     border-radius: var(--radius-full); /* Rounded edges for a modern look */
     outline: none;
     width: 100%; /* Full width */
@@ -45,7 +45,7 @@
 }
 
 #game-search-input:focus {
-    border-color: #6c63ff; /* Highlighted border */
+    border-color: var(--color-accent); /* Highlighted border */
     box-shadow: var(--shadow-md); /* Glow effect */
 }
 
@@ -67,8 +67,8 @@
 
 /* Game Card (Scoped for Search) */
 #game-search-results .game-card {
-    background: #ffffff;
-    border: 2px solid #d1d1d1; /* Soft border */
+    background: var(--color-white);
+    border: 2px solid var(--color-border); /* Soft border */
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
     overflow: hidden;
@@ -86,7 +86,7 @@
 #game-search-results .game-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-md);
-    border-color: #6c63ff; /* Accent color */
+    border-color: var(--color-accent); /* Accent color */
 }
 
 /* Card Image */
@@ -95,8 +95,8 @@
     height: auto; /* Maintain aspect ratio and adjust height automatically */
     max-height: auto; /* Limit height for larger images */
     object-fit: cover; /* Crop image if it exceeds the container dimensions */
-    border-bottom: 2px solid #6c63ff;
-    background-color: #eaeaea;
+    border-bottom: 2px solid var(--color-accent);
+    background-color: var(--color-surface-2);
 }
 
 /* Game Card Content */
@@ -110,7 +110,7 @@
     font-family: var(--font-sans);
     font-size: 1rem;
     font-weight: 700;
-    color: #444444;
+    color: var(--color-text-muted);
     margin-bottom: 10px;
     text-align: center;
     display: -webkit-box;
@@ -124,14 +124,14 @@
 }
 
 #game-search-results .game-card .game-info h3:hover {
-    color: #6c63ff;
+    color: var(--color-accent);
 }
 
 /* Card Description */
 #game-search-results .game-card .game-info p {
     font-family: var(--font-sans);
     font-size: 0.9rem;
-    color: #555555;
+    color: var(--color-text-muted);
     margin: 5px 0;
     line-height: 1.4;
 }

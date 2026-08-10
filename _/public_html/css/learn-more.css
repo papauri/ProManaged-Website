@@ -2,8 +2,8 @@
 body {
     margin: 0;
     font-family: var(--font-sans);
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: var(--color-surface);
+    color: var(--color-text);
     line-height: 1.6;
 }
 
@@ -20,8 +20,8 @@ h1, h2, h3, h4 {
 
 /* Hero Section */
 .hero-section {
-    background: #333;
-    color: #fff;
+    background: var(--color-bg);
+    color: var(--color-text);
     text-align: center;
     padding: 60px 20px;
 }
@@ -53,7 +53,7 @@ h1, h2, h3, h4 {
 
 /* Apps and Innovations Section */
 .apps-and-innovations {
-    background: #fff;
+    background: var(--color-white);
     padding: 50px 20px;
     text-align: center;
 }
@@ -75,7 +75,7 @@ h1, h2, h3, h4 {
 }
 
 .feature-item {
-    background: #f5f5f5;
+    background: var(--color-surface);
     padding: 20px;
     border-radius: var(--radius);
     text-align: center;
@@ -89,7 +89,7 @@ h1, h2, h3, h4 {
 
 .feature-item i {
     font-size: 2rem;
-    color: #3498db;
+    color: var(--color-accent);
     margin-bottom: 10px;
 }
 
@@ -104,7 +104,7 @@ h1, h2, h3, h4 {
 
 /* Services Section */
 .services-section {
-    background: #f9f9f9;
+    background: var(--color-surface);
     padding: 50px 20px;
     text-align: center;
 }
@@ -121,7 +121,7 @@ h1, h2, h3, h4 {
 }
 
 .service-card {
-    background: #fff;
+    background: var(--color-white);
     padding: 20px;
     border-radius: var(--radius);
     text-align: center;

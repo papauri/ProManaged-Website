@@ -1,8 +1,8 @@
 /* How It Works Section */
 .info-section {
     padding: 20px;
-    background-color: #f9f9f9;
-    border-top: 1px solid #e0e0e0;
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
     text-align: center;
 }
 
@@ -18,8 +18,8 @@
 }
 
 .info-section .btn {
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--color-accent);
+    color: var(--color-accent-contrast);
     padding: 10px 20px;
     border: none;
     cursor: pointer;
@@ -29,7 +29,7 @@
 }
 
 .info-section .btn:hover {
-    background-color: #0056b3;
+    background-color: var(--color-accent-hover);
 }
 
 /* How It Works Modal */
@@ -46,7 +46,7 @@
 }
 
 .modal-content {
-    background-color: #fff;
+    background-color: var(--color-white);
     margin: 15% auto;
     padding: 20px;
     border-radius: var(--radius);
@@ -67,8 +67,8 @@
 }
 
 .modal-content .btn {
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--color-accent);
+    color: var(--color-accent-contrast);
     padding: 10px 20px;
     border: none;
     cursor: pointer;
@@ -78,7 +78,7 @@
 }
 
 .modal-content .btn:hover {
-    background-color: #0056b3;
+    background-color: var(--color-accent-hover);
 }
 
 .close {
@@ -86,6 +86,6 @@
     top: 15px;
     right: 20px;
     font-size: 24px;
-    color: #333;
+    color: var(--color-text);
     cursor: pointer;
 }

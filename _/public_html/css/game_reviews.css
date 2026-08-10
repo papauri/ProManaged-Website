@@ -1,6 +1,6 @@
 /* RAWG Cards - General Layout */
 .latest-game-card {
-    background: var(--white); /* Clean background for the cards */
+    background: var(--color-white); /* Clean background for the cards */
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
     overflow: hidden;
@@ -18,7 +18,7 @@
     width: 100%;
     height: 200px; /* Fixed height for consistent layout */
     overflow: hidden;
-    border-bottom: 2px solid var(--light-gray);
+    border-bottom: 2px solid var(--color-border);
 }
 
 .latest-game-card-image img {
@@ -36,7 +36,7 @@
 .latest-game-title {
     font-size: 1.2rem;
     font-weight: bold;
-    color: var(--text-color);
+    color: var(--color-text);
     margin-bottom: 10px;
 }
 
@@ -45,7 +45,7 @@
 .latest-game-platforms,
 .latest-game-genres {
     font-size: 0.9rem;
-    color: var(--gray);
+    color: var(--color-text-subtle);
     margin: 5px 0;
 }
 
