@@ -32,7 +32,7 @@
 ## Phase 4 — POLISH (consistency & correctness)
 - [x] D12. Apply the design system consistently across all 8 pages; audit for stray old styles. — frontend-specialist + ui-designer  (cleanup backlog: migrate legacy --primary-color/--secondary-color section backgrounds in get-started.css & it_equipment.css to tokens; remove it_equipment.css local :root --transition/color overrides and leftover :root in global_styles.css; convert remaining #ff6b6b in book_appointment.css h2::after underline + input focus border to tokens; dead fadeInUp keyframe ref in hero_section/contact_section; backdrop-filter no-ops in custom_websites.css)
 - [x] D13. Fix content bugs: `custom_websites.html` title/meta ("Gaming Services" → correct); dead footer links (`about.html`, `pages/hardware.html`). — frontend-specialist
-- [ ] D14. Verify responsive breakpoints (768px / 480px) and accessibility (contrast, focus states, alt text, tap targets) on all pages. — ui-designer + qa-auditor
+- [x] D14. Verify responsive breakpoints (768px / 480px) and accessibility (contrast, focus states, alt text, tap targets) on all pages. — ui-designer + qa-auditor
 
 ---
 
@@ -50,7 +50,7 @@
 - [x] D11. Contact + booking forms redesigned minimally
 - [x] D12. Design system applied consistently across all 8 pages
 - [x] D13. Content bugs fixed (wrong title, dead footer links)
-- [ ] D14. Responsive breakpoints + basic accessibility verified
+- [x] D14. Responsive breakpoints + basic accessibility verified
 
 When every box above is [x], the project is DONE — print "PROJECT COMPLETE" and halt.
 
@@ -65,8 +65,8 @@ When every box above is [x], the project is DONE — print "PROJECT COMPLETE" an
 ---
 
 ## STATUS
-- Just finished: D13 — content bugs fixed: custom_websites title/meta corrected, all dead links repointed (about.html, hardware.html, learn-more.html typo), booking service selects normalized across pages (qa PASS).
-- In progress: D14 — responsive + accessibility verification via Chromium/Playwright browser testing across all 8 pages.
-- Next: PROJECT COMPLETE after D14.
+- PROJECT COMPLETE — all 14 deliverables [x]. D14 done: browser-tested all 8 pages (desktop+mobile) via Chromium/Playwright; fixed 3 real bugs (it_equipment 404 script path, privacy_policy invisible h1, how-it-works modal aria-hidden sync). No overflow, Inter loads, interactions pass, single light token theme throughout.
+- In progress: none.
+- Next: none — project complete, loop halted.
 - Blocked: none.
-- Known pre-existing (non-blocking, backlog): gaming_services.html has an unbalanced <div> (33 open/34 close) that predates this work.
+- Non-blocking backlog (FUTURE IDEAS): pre-existing unbalanced <div> in gaming_services.html; Inter/FontAwesome served via CDN (consider self-hosting); how-it-works welcome modal auto-opens on every load (UX decision); committed secrets (.env, firebase-service-account.json, ebay_token.json) + cPanel dump still in repo (security).

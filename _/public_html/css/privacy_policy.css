@@ -18,7 +18,11 @@ header {
     box-shadow: var(--shadow-sm);
 }
 
-h1, h2, h3 {
+header h1 {
+    color: var(--color-accent-contrast);
+}
+
+h2, h3 {
     color: var(--color-accent);
 }
 

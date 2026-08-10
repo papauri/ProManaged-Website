@@ -6,10 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Show modal
     howItWorksModal.style.display = 'block';
+    howItWorksModal.setAttribute('aria-hidden', 'false');
 
     // Function to close the modal
     const closeModal = () => {
         howItWorksModal.style.display = 'none';
+        howItWorksModal.setAttribute('aria-hidden', 'true');
     };
 
     // Close modal on click of close button
