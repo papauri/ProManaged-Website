@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head id="main-head">
-    <title>ProManaged IT - Sleek IT Solutions</title>
+    <title>ProManaged IT - Software, Hardware & Network Solutions</title>
     <!-- components/styles.html -->
 
     <!-- Metadata -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ProManaged IT - Sleek IT Solutions for Personal and Business Needs">
-    <meta name="keywords" content="IT solutions, ProManaged IT, custom websites, network setup, gaming services">
+    <meta name="description" content="ProManaged IT - Custom web apps and SaaS platforms, hardware sourcing, and network solutions for personal and business needs.">
+    <meta name="keywords" content="web apps, SaaS, software development, ProManaged IT, network setup, hardware sourcing">
     <meta name="author" content="ProManaged IT Team">
 
     <!-- External Fonts and Icons -->
@@ -45,7 +45,7 @@
     <!-- Miscellaneous -->
     <link rel="stylesheet" href="css/mission_vision.css">
     <link rel="stylesheet" href="css/scroll_top.css">
-    <link rel="stylesheet" href="css/how_it_works.css">
+    <link rel="stylesheet" href="css/why_band.css">
 
 </head>
 
@@ -87,39 +87,66 @@
         </header>
     </div>
 
-<!-- How It Works Modal -->
-<div id="how-it-works-modal" class="modal" aria-hidden="true" role="dialog">
-    <div class="modal-content">
-        <span id="close-how-it-works-modal" class="close">&times;</span>
-        <h2>Discover the ProManaged IT Difference</h2>
-        <p>
-            From Ireland to Malawi and beyond, we’re here to simplify your tech journey. Whether you’re buying your child their first laptop or upgrading your own gear, we’ll guide you every step of the way.
-        </p>
-        <p>
-            Need advice before making a purchase? We’ve got you covered. Pay in your local currency, and let us handle everything from ordering to delivery — no stress, no confusion.
-        </p>
-        <p>
-            ProManaged IT is more than a service; it’s your partner in bridging the gap between technology and your needs, wherever you are. Let us make IT work for you!
-        </p>
-    </div>
-</div>
-
-
-
     <div id="hero-section"> <!-- Hero dynamically loaded -->
 
         <section id="home" class="hero">
             <div class="container hero-content">
-                <h1 id="hero-title">ProManaged IT</h1>
-                <p id="hero-subtitle">Innovative IT solutions for a seamless tomorrow</p>
-                <div class="hero-buttons">
-                    <a href="get-started.html" class="btn primary" id="hero-get-started">Get Started</a>
-                    <a href="learn_more.html" class="btn secondary" id="hero-learn-more">Learn More</a>
-
+                <div class="hero-main">
+                    <span class="hero-eyebrow">Ireland &middot; Malawi &middot; Worldwide</span>
+                    <h1 id="hero-title">Software, Hardware & Network Solutions</h1>
+                    <p id="hero-subtitle">We build web apps and SaaS platforms, source IT and gaming hardware, and set up networks — with local support in Ireland and Malawi.</p>
+                    <div class="hero-buttons">
+                        <a href="get-started.html" class="btn primary" id="hero-get-started">Get Started</a>
+                        <a href="learn_more.html" class="btn secondary" id="hero-learn-more">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-facts">
+                    <div class="hero-fact">
+                        <i class="fas fa-earth-africa" aria-hidden="true"></i>
+                        <div class="hero-fact-body">
+                            <span class="hero-fact-title">Ireland &amp; Malawi</span>
+                            <span class="hero-fact-desc">Local support on two continents</span>
+                        </div>
+                    </div>
+                    <div class="hero-fact">
+                        <i class="fas fa-layer-group" aria-hidden="true"></i>
+                        <div class="hero-fact-body">
+                            <span class="hero-fact-title">3 Core Services</span>
+                            <span class="hero-fact-desc">Software &middot; Hardware &middot; Networks</span>
+                        </div>
+                    </div>
+                    <div class="hero-fact">
+                        <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
+                        <div class="hero-fact-body">
+                            <span class="hero-fact-title">Pay Locally</span>
+                            <span class="hero-fact-desc">Local currency, no forex hassle</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
+    </div>
+
+    <div id="why-section"> <!-- Why ProManaged IT — inline bento band (replaces the old welcome popup) -->
+        <section class="why-band">
+            <div class="container">
+                <div class="why-grid">
+                    <div class="why-tile why-tile-lead">
+                        <h2>Discover the ProManaged IT Difference</h2>
+                        <p>From Ireland to Malawi and beyond, we're here to simplify your tech journey. Whether you're buying your child their first laptop or upgrading your own gear, we'll guide you every step of the way.</p>
+                    </div>
+                    <div class="why-tile">
+                        <i class="fas fa-hand-holding-dollar" aria-hidden="true"></i>
+                        <p>Need advice before making a purchase? We've got you covered. Pay in your local currency, and let us handle everything from ordering to delivery — no stress, no confusion.</p>
+                    </div>
+                    <div class="why-tile">
+                        <i class="fas fa-handshake" aria-hidden="true"></i>
+                        <p>ProManaged IT is more than a service; it's your partner in bridging the gap between technology and your needs, wherever you are. Let us make IT work for you!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <div id="services-section"> <!-- Services dynamically loaded -->
@@ -131,32 +158,25 @@
                 </div>
                 <div class="services-grid">
 
-                    <!-- IT Equipment -->
-                    <div class="service-card" data-target="pages/it_equipment.html">
-                        <i class="fas fa-laptop"></i>
-                        <h3>Global Tech, Local Pay</h3>
-                        <p>Access international IT equipment without forex hassles. We handle everything from
-                            procurement to delivery, with convenient payment in your local currency.</p>
+                    <!-- Software & Web Apps -->
+                    <div class="service-card service-card-featured" data-target="pages/custom_websites.html" role="link" tabindex="0" aria-label="Software & Web Apps — learn more">
+                        <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                        <h3>Software & Web Apps</h3>
+                        <p>Custom web apps and SaaS platforms, built end to end — and websites too if that's what
+                            you need.</p>
                     </div>
 
-                    <!-- Custom Websites -->
-                    <div class="service-card" data-target="pages/custom_websites.html">
-                        <i class="fas fa-laptop-code"></i>
-                        <h3>Custom Websites</h3>
-                        <p>Tailored Android/iOS websites to suit your needs.</p>
-                    </div>
-
-                    <!-- Gaming Services -->
-                    <div class="service-card" data-target="pages/gaming_services.html">
-                        <i class="fas fa-gamepad"></i>
-                        <h3>Gaming Services</h3>
-                        <p>Gaming setups, updates, online purchases, and accessories shipped from Ireland and the UK.
-                        </p>
+                    <!-- Hardware Sourcing -->
+                    <div class="service-card" data-target="pages/hardware_sourcing.html" role="link" tabindex="0" aria-label="Hardware Sourcing — learn more">
+                        <i class="fas fa-laptop" aria-hidden="true"></i>
+                        <h3>Hardware Sourcing</h3>
+                        <p>IT and gaming equipment sourced and delivered worldwide, with convenient payment in your
+                            local currency.</p>
                     </div>
 
                     <!-- Network Infrastructure -->
-                    <div class="service-card" data-target="pages/network_infrastructure.html">
-                        <i class="fas fa-network-wired"></i>
+                    <div class="service-card" data-target="pages/network_infrastructure.html" role="link" tabindex="0" aria-label="Network Infrastructure — learn more">
+                        <i class="fas fa-network-wired" aria-hidden="true"></i>
                         <h3>Network Infrastructure</h3>
                         <p>Simple and effective network setup for homes and businesses.</p>
                     </div>
@@ -183,7 +203,7 @@
                             Hi, I’m <strong>John-Paul Chirwa</strong>, the founder of ProManaged IT. My passion for technology and innovation drives this company. Our mission? To make IT solutions accessible, reliable, and tailored for individuals and businesses of all sizes.
                         </p>
                         <p>
-                            Whether it's network setups, custom-built websites, or specialized IT infrastructure, we’re here to simplify your technology challenges. By bridging global expertise with local support — especially in Malawi and Africa — we deliver unmatched value.
+                            Whether it's a custom web app, a SaaS platform, network setup, or sourcing hardware, we’re here to simplify your technology challenges. By bridging global expertise with local support — especially in Malawi and Africa — we deliver unmatched value.
                         </p>
                         <p class="cta-text">
                             <strong>Let us make your IT experience seamless.</strong>
@@ -197,20 +217,17 @@
 
     <div id="mission-vision-section"> <!-- Mission & Vision Section -->
 
-        <section id="mission-vision" class="mission-vision-tabs">
+        <section id="mission-vision" class="mission-vision-panes">
             <div class="container">
                 <h2 class="section-header">Mission & Vision</h2>
-                <div class="tab-buttons">
-                    <button class="tab-btn active" data-target="mission-panel" aria-selected="true">Mission</button>
-                    <button class="tab-btn" data-target="vision-panel">Vision</button>
-                </div>
-                <div class="tab-content">
-                    <div id="mission-panel" class="tab-panel active" role="tabpanel" aria-labelledby="mission-btn">
+                <div class="panes-grid">
+                    <div class="pane-card">
+                        <span class="pane-label">Mission</span>
                         <p>Our mission is to make IT accessible and affordable for all, delivering cost-effective
-                            solutions
-                            with excellent customer service.</p>
+                            solutions with excellent customer service.</p>
                     </div>
-                    <div id="vision-panel" class="tab-panel" role="tabpanel" aria-labelledby="vision-btn">
+                    <div class="pane-card">
+                        <span class="pane-label">Vision</span>
                         <p>Our vision is to lead in IT innovation, bringing ease and efficiency to individuals and
                             businesses globally.</p>
                     </div>
@@ -257,6 +274,10 @@
                             <label for="message">Your Message</label>
                         </div>
                     </div>
+                    <div class="form-group hp-field" aria-hidden="true">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
                     <div class="button-container">
                         <button type="submit" class="btn primary">Send Message</button>
                     </div>
@@ -279,7 +300,7 @@
                         <li><a href="#home" class="nav-link">Home</a></li>
                         <li><a href="#about" class="nav-link">About</a></li>
                         <li><a href="#services" class="nav-link">Services</a></li>
-                        <li><a href="#" id="get-in-touch-link">Get in Touch</a></li>
+                        <li><a href="#contact">Get in Touch</a></li>
                         <li><a href="privacy_policy.html">Privacy Policy</a></li> <!-- Updated to link to new page -->
                     </ul>
                 </div>
@@ -306,7 +327,7 @@
                     <h4>Newsletter</h4>
                     <p>Subscribe to get the latest updates and exclusive offers straight to your inbox.</p>
                     <form>
-                        <input type="email" placeholder="Enter your email address" required>
+                        <input type="email" placeholder="Enter your email address" aria-label="Email address" required>
                         <button type="submit">Subscribe</button>
                     </form>
                 </div>
@@ -331,11 +352,7 @@
 
     <script src="js/main.js" defer></script>
     <script src="js/mobile_phone_navbar.js" defer></script>
-    <script src="js/service_cards.js" defer></script>
     <script src="js/contact__form.js" defer></script>
-    <script src="js/how_it_works.js" defer></script>
-
-    <script src="js/contact_dialog.js"></script>
 </body>
 
 </html>

@@ -1,189 +1,199 @@
-.contact {
-    padding: 70px 20px; /* Increased padding for spacing */
-    background: var(--color-surface);
-    color: var(--color-text);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.contact .section-header h2 {
-    font-family: var(--font-sans);
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--color-text);
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    animation: fadeInUp 1.5s ease-out;
-}
-
-.contact .section-header .subtitle_contact {
-    font-family: var(--font-sans);
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: var(--color-text-muted);
-    margin-top: 15px;
-    margin-bottom: 30px;
-    line-height: 1.6;
-    animation: fadeInUp 1.8s ease-out;
-}
-
-.contact-form {
-    width: 100%;
-    max-width: 700px; /* Wider form for better balance */
-    margin: 0 auto;
-    background: var(--color-bg);
-    padding: 40px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
-    text-align: left;
-    position: relative;
-    z-index: 1;
-    transition: box-shadow 0.3s ease;
-}
-
-.contact-form:hover {
-    box-shadow: var(--shadow-md);
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.input-container {
-    position: relative;
-    width: 100%;
-}
-
-.input-container input,
-.input-container textarea {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    outline: none;
-    font-size: 1rem;
-    color: var(--color-text);
-    background: var(--color-bg);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.input-container input:focus,
-.input-container textarea:focus {
-    border: 1px solid var(--color-accent);
-    box-shadow: var(--shadow-sm);
-}
-
-.input-container label {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    color: var(--color-text-subtle);
-    pointer-events: none;
-    transition: transform 0.3s ease, font-size 0.3s ease, color 0.3s ease;
-}
-
-.input-container input:focus + label,
-.input-container input:not(:placeholder-shown) + label,
-.input-container textarea:focus + label,
-.input-container textarea:not(:placeholder-shown) + label {
-    top: -10px;
-    left: 10px;
-    font-size: 0.85rem;
-    color: var(--color-accent);
-    background: var(--color-bg);
-    padding: 0 5px;
-    border-radius: var(--radius);
-}
-
-.button-container {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.contact-form button {
-    padding: 15px 30px;
-    border: none;
-    border-radius: var(--radius);
-    background: var(--color-accent);
-    color: var(--color-accent-contrast);
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: var(--shadow-sm);
-}
-
-.contact-form button:hover {
-    background: var(--color-accent-hover);
-    box-shadow: var(--shadow-md);
-}
-
-.contact-form button:active {
-    box-shadow: var(--shadow-sm);
-}
-
-/* Form Feedback Message */
-.form-feedback {
-    margin: 20px 0;
-    padding: 10px;
-    font-size: 1rem;
-    text-align: center;
-    border-radius: var(--radius);
-    display: none;
-}
-
-.form-feedback.success {
-    background: var(--color-success);
-    color: var(--color-text-inverse);
-}
-
-.form-feedback.error {
-    background: var(--color-danger);
-    color: var(--color-text-inverse);
-}
-
-/* Loading Animation */
-.loading {
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    border: 2px solid var(--color-border);
-    border-top: 2px solid var(--color-accent);
-    border-radius: 50%;
-    animation: spin 0.6s linear infinite;
-    margin-left: 8px;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .contact-form {
-        padding: 30px;
-    }
-
-    .contact .section-header h2 {
-        font-size: 2rem;
-    }
-
-    .contact .section-header .subtitle {
-        font-size: 1rem;
-    }
-
-    .contact-form button {
-        font-size: 1rem;
-        padding: 12px 25px;
-    }
-}
-
+.contact {
+    padding: var(--space-24) 20px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact .section-header h2 {
+    font-family: var(--font-sans);
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+    margin-bottom: 15px;
+    animation: fadeInUp 1.5s ease-out;
+}
+
+.contact .section-header .subtitle_contact {
+    font-family: var(--font-sans);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    margin-top: 15px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    animation: fadeInUp 1.8s ease-out;
+}
+
+.contact-form {
+    width: 100%;
+    max-width: 700px; /* Wider form for better balance */
+    margin: 0 auto;
+    background: var(--color-bg);
+    padding: 40px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    text-align: left;
+    position: relative;
+    z-index: 1;
+    transition: box-shadow var(--transition);
+}
+
+.contact-form:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.form-group {
+    margin-bottom: var(--space-5);
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.input-container input,
+.input-container textarea {
+    width: 100%;
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    outline: none;
+    font-size: var(--text-base);
+    color: var(--color-text);
+    background: var(--color-bg);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.input-container input:focus,
+.input-container textarea:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+
+.input-container label {
+    position: absolute;
+    top: 50%;
+    left: var(--space-4);
+    transform: translateY(-50%);
+    color: var(--color-text-subtle);
+    pointer-events: none;
+    transition: transform var(--transition), font-size var(--transition), color var(--transition);
+}
+
+.input-container input:not(:focus):not(:placeholder-shown) + label,
+.input-container textarea:not(:focus):not(:placeholder-shown) + label {
+    color: var(--color-text-subtle);
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label,
+.input-container textarea:focus + label,
+.input-container textarea:not(:placeholder-shown) + label {
+    top: 0;
+    left: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    background: var(--color-bg);
+    padding: 0 var(--space-1);
+    border-radius: var(--radius-sm);
+}
+
+.button-container {
+    text-align: center;
+    margin-top: var(--space-5);
+}
+
+.contact-form button {
+    padding: var(--space-4) var(--space-8);
+    border: none;
+    border-radius: var(--radius);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font-size: var(--text-xl);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background var(--transition), box-shadow var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.contact-form button:hover {
+    background: var(--color-accent-hover);
+    box-shadow: var(--shadow-md);
+}
+
+.contact-form button:active {
+    box-shadow: var(--shadow-sm);
+}
+
+/* Form Feedback Message */
+.form-feedback {
+    margin: var(--space-5) 0;
+    padding: var(--space-3);
+    font-size: var(--text-base);
+    text-align: center;
+    border-radius: var(--radius);
+    display: none;
+}
+
+/* JS only sets textContent + inline color on this element (no class
+   toggle), so reveal it once it actually has a message to show. */
+.form-feedback:not(:empty) {
+    display: block;
+}
+
+.form-feedback.success {
+    background: var(--color-success);
+    color: var(--color-text-inverse);
+}
+
+.form-feedback.error {
+    background: var(--color-danger);
+    color: var(--color-text-inverse);
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid var(--color-border);
+    border-top: 2px solid var(--color-accent);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    margin-left: 8px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .contact-form {
+        padding: 30px;
+    }
+
+    .contact .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .contact .section-header .subtitle_contact {
+        font-size: 1rem;
+    }
+
+    .contact-form button {
+        font-size: var(--text-base);
+        padding: var(--space-3) var(--space-6);
+    }
+}
+

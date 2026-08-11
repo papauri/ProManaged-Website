@@ -1,137 +1,147 @@
-/* Network Section Container */
-.network-section {
-    background: var(--color-bg);
-    color: var(--color-text);
-    padding: 4rem 2rem;
-}
-
-.network-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Header Styling */
-.network-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.network-header h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--color-text);
-}
-
-/* Grid Layout */
-.network-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-/* Card Styling */
-.network-card {
-    background: var(--color-surface);
-    backdrop-filter: blur(10px);
-    border-radius: var(--radius);
-    padding: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid var(--color-border);
-    position: relative;
-    overflow: hidden;
-}
-
-.network-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-}
-
-.network-card.primary {
-    border: 2px solid var(--color-accent);
-    background: var(--color-accent-soft);
-}
-
-.network-card.active {
-    border: 2px solid var(--color-success); /* Highlight with green border */
-    background: var(--color-surface); /* Subtle green background */
-    box-shadow: var(--shadow-md); /* Add shadow */
-}
-
-/* Icon Styling */
-.card-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--color-accent);
-}
-
-/* Service List Styling */
-.service-list {
-    list-style: none;
-    padding: 0;
-    margin: 1.5rem 0;
-}
-
-.service-list li {
-    padding: 0.8rem 0;
-    padding-left: 1.5rem;
-    position: relative;
-    color: var(--color-text-muted);
-    border-bottom: 1px solid var(--color-border);
-}
-
-.service-list li:last-child {
-    border-bottom: none;
-}
-
-.service-list li:before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--color-accent);
-}
-
-/* Price Information */
-.price-info {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background: var(--color-accent-soft);
-    border-radius: var(--radius);
-}
-
-.price-info span {
-    display: block;
-    margin: 0.5rem 0;
-    font-weight: bold;
-    color: var(--color-accent);
-}
-
-/* Currency Display */
-.currency-display {
-    font-size: 0.9rem;
-    color: var(--color-text-subtle);
-    margin-top: 0.5rem;
-}
-
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .network-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1.5rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .network-section {
-        padding: 2rem 1rem;
-    }
-
-    .network-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .network-header h2 {
-        font-size: 2rem;
-    }
+/* Network Section Container */
+.network-section {
+    background: var(--color-bg);
+    color: var(--color-text);
+    padding: 4rem 2rem;
+}
+
+.network-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header Styling */
+.network-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.network-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+}
+
+/* Grid Layout */
+.network-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+/* Card Styling */
+.network-card {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--color-border);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.network-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.network-card.primary {
+    border: 2px solid var(--color-accent);
+    background: var(--color-accent-soft);
+    grid-column: span 2;
+}
+
+.network-card.primary h3 {
+    font-size: var(--text-2xl);
+}
+
+.network-card.active {
+    border: 2px solid var(--color-success); /* Highlight with green border */
+    background: var(--color-surface); /* Subtle green background */
+    box-shadow: var(--shadow-md); /* Add shadow */
+}
+
+/* Icon Styling */
+.card-icon {
+    font-size: var(--text-4xl);
+    margin-bottom: 1.5rem;
+    color: var(--color-accent);
+}
+
+/* Service List Styling */
+.service-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.service-list li {
+    padding: 0.8rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--color-text-muted);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.service-list li:last-child {
+    border-bottom: none;
+}
+
+.service-list li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+}
+
+/* Price Information */
+.price-info {
+    margin-top: auto; /* Pin to bottom so cards align evenly within a row */
+    padding: 1rem;
+    background: var(--color-accent-soft);
+    border-radius: var(--radius);
+}
+
+.price-info span {
+    display: block;
+    margin: 0.5rem 0;
+    font-weight: bold;
+    color: var(--color-accent);
+}
+
+/* Currency Display */
+.currency-display {
+    font-size: 0.9rem;
+    color: var(--color-text-subtle);
+    margin-top: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .network-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .network-section {
+        padding: 2rem 1rem;
+    }
+
+    .network-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .network-header h2 {
+        font-size: 2rem;
+    }
+
 }

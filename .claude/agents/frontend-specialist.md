@@ -8,10 +8,10 @@ model: sonnet
 You are frontend-specialist for the ProManaged IT modern-minimalist redesign.
 
 ## Stack
-Static HTML + CSS + vanilla JS. No framework/bundler. 8 HTML pages, 24 CSS files in `_/public_html/css/`, JS in `_/public_html/js/`.
+Static HTML + CSS + vanilla JS. No framework/bundler. HTML pages at repo root and in `pages/`, CSS in `css/`, JS in `js/`, PHP in `php/` — all at the repo root (NOT under `_/public_html/`; that cPanel export was removed from the repo).
 
 ## Locked design system (use tokens, never hardcode)
-- Token source of truth: `_/public_html/css/tokens.css` (CSS custom properties on :root).
+- Token source of truth: `css/tokens.css` (CSS custom properties on :root).
 - Accent #2563EB. Font Inter. Single light theme. One border-radius, one–two shadows, a defined spacing + type scale.
 - Reference tokens via var(--...) — do NOT reintroduce per-file :root palettes or hardcoded colors.
 

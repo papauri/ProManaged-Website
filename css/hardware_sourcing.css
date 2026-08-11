@@ -1,0 +1,129 @@
+/* Hardware Sourcing page */
+.sourcing-intro {
+    padding: 4rem 2rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+.sourcing-intro .container {
+    max-width: 900px;
+    text-align: center;
+}
+
+.sourcing-intro h2 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-4);
+}
+
+.sourcing-intro p {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    line-height: var(--leading-normal);
+    margin-bottom: var(--space-4);
+}
+
+.sourcing-track-record {
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-6);
+    margin-top: var(--space-8);
+    text-align: left;
+}
+
+.sourcing-track-record h3 {
+    color: var(--color-accent);
+    margin-top: 0;
+    margin-bottom: var(--space-2);
+    font-size: var(--text-xl);
+}
+
+.sourcing-track-record p {
+    margin-bottom: 0;
+    color: var(--color-text);
+}
+
+/* Category grid — descriptive only, no outbound shop links */
+.sourcing-categories {
+    padding: 0 2rem 4rem;
+    background: var(--color-bg);
+}
+
+.sourcing-categories .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto var(--space-8);
+}
+
+.sourcing-categories .section-header h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-2);
+}
+
+.sourcing-categories .section-header p {
+    color: var(--color-text-muted);
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.category-card-featured {
+    grid-column: span 2;
+}
+
+.category-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-8);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.category-card i {
+    font-size: var(--text-4xl);
+    color: var(--color-accent);
+    margin-bottom: var(--space-3);
+}
+
+.category-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-2);
+}
+
+.category-card p {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .sourcing-intro h2 {
+        font-size: var(--text-3xl);
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-card-featured {
+        grid-column: span 1;
+    }
+}

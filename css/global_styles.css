@@ -1,25 +1,35 @@
-
-/* Global Styles */
-body {
-    font-family: var(--font-sans);
-    line-height: 1.6;
-    color: var(--color-text);
-    background-color: var(--color-bg);
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
-}
-
-*,
-*::before,
-*::after {
-    box-sizing: inherit;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
+
+/* Global Styles */
+body {
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Honeypot field: invisible to real visitors, catches simple bots that fill in every field. */
+.hp-field {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}

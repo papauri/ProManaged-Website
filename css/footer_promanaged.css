@@ -1,199 +1,181 @@
-/* FOOTER - MODERN, MINIMAL, AND SUBTLE */
-.footer {
-    background: var(--color-surface-2);
-    color: var(--color-text-muted);
-    padding: 40px 20px;
-    border-top: 1px solid var(--color-border); /* Subtle border for separation */
-    position: relative;
-    z-index: 1;
-}
-
-/* Footer Content Layout */
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--container-pad);
-    text-align: left;
-}
-
-/* Footer Brand Section */
-.footer-brand h3 {
-    font-family: var(--font-sans);
-    font-size: 1.8rem;
-    font-weight: var(--weight-semibold);
-    color: var(--color-text);
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
-
-.footer-brand p {
-    font-family: var(--font-sans);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--color-text-muted);
-    margin-bottom: 15px;
-}
-
-/* Footer Links */
-.footer-links h4 {
-    font-family: var(--font-sans);
-    font-size: 1.1rem;
-    color: var(--color-text);
-    margin-bottom: 10px;
-    font-weight: var(--weight-semibold);
-}
-
-.footer-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-links li {
-    margin-bottom: 10px;
-}
-
-.footer-links a {
-    color: var(--color-text-muted);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color var(--transition);
-}
-
-.footer-links a:hover,
-.footer-links a:focus {
-    color: var(--color-accent);
-}
-
-/* Social Media Section */
-.footer-social h4 {
-    font-family: var(--font-sans);
-    font-size: 1.1rem;
-    color: var(--color-text);
-    margin-bottom: 10px;
-    font-weight: var(--weight-semibold);
-}
-
-.footer-social-icons {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
-    justify-content: flex-start;
-}
-
-.footer-social a {
-    color: var(--color-text-muted);
-    font-size: 1.5rem;
-    transition: color var(--transition);
-}
-
-.footer-social a:hover,
-.footer-social a:focus {
-    color: var(--color-accent);
-}
-
-/* Newsletter Section */
-.footer-newsletter h4 {
-    font-family: var(--font-sans);
-    font-size: 1.1rem;
-    color: var(--color-text);
-    margin-bottom: 10px;
-    font-weight: var(--weight-semibold);
-}
-
-.footer-newsletter p {
-    font-size: 0.95rem;
-    color: var(--color-text-muted);
-    margin-bottom: 15px;
-    line-height: 1.6;
-}
-
-.footer-newsletter form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.footer-newsletter input {
-    padding: 12px 15px;
-    border-radius: var(--radius);
-    border: 1px solid var(--color-border);
-    background: var(--color-bg);
-    color: var(--color-text);
-    flex: 1;
-    font-size: 0.9rem;
-    outline: none;
-    transition: border-color var(--transition);
-}
-
-.footer-newsletter input:focus {
-    border: 1px solid var(--color-accent);
-    background: var(--color-bg);
-}
-
-.footer-newsletter button {
-    padding: 12px 25px;
-    border-radius: var(--radius);
-    border: none;
-    background: var(--color-accent);
-    color: var(--color-accent-contrast);
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background var(--transition);
-}
-
-.footer-newsletter button:hover,
-.footer-newsletter button:focus {
-    background: var(--color-accent-hover);
-}
-
-/* Bottom Footer */
-.footer-bottom {
-    background: var(--color-surface-2);
-    padding: 15px 0;
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--color-text-subtle);
-    border-top: 1px solid var(--color-border);
-}
-
-.footer-bottom a {
-    color: var(--color-text-subtle);
-    text-decoration: none;
-    transition: color var(--transition);
-}
-
-.footer-bottom a:hover,
-.footer-bottom a:focus {
-    color: var(--color-accent);
-}
-
-
-
-/* Responsive Footer Design */
-@media (max-width: 768px) {
-    .footer-content {
-        grid-template-columns: 1fr; /* Single-column layout for smaller screens */
-        text-align: center;
-    }
-
-    .footer-brand,
-    .footer-links,
-    .footer-social,
-    .footer-newsletter {
-        text-align: center;
-    }
-
-    .footer-newsletter form {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .footer-social-icons {
-        justify-content: center;
-    }
-}
+/* FOOTER - MODERN, MINIMAL, AND SUBTLE */
+.footer {
+    background: var(--color-surface-2);
+    color: var(--color-text-muted);
+    padding: var(--space-16) 0 var(--space-10);
+    position: relative;
+    z-index: 1;
+}
+
+/* Inset divider: separates the footer band from the page above */
+.footer-divider {
+    max-width: var(--container-max);
+    margin: 0 auto var(--space-12);
+    padding: 0 var(--container-pad);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footer Content Layout */
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-10);
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+    text-align: left;
+}
+
+/* Consistent heading style across all footer columns */
+.footer-content h3,
+.footer-content h4 {
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    margin-bottom: var(--space-4);
+}
+
+/* Footer Brand Section */
+.footer-brand p {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2);
+}
+
+.footer-brand a {
+    display: inline-block;
+    padding: var(--space-3) 0;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    transition: color var(--transition);
+}
+
+.footer-brand a:hover,
+.footer-brand a:focus {
+    color: var(--color-accent-hover);
+}
+
+/* Footer Links */
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: var(--space-1);
+}
+
+.footer-links a {
+    display: inline-block;
+    padding: var(--space-3) 0;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    transition: color var(--transition);
+}
+
+.footer-links a:hover,
+.footer-links a:focus {
+    color: var(--color-accent);
+}
+
+/* Newsletter Section */
+.footer-newsletter p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+    line-height: var(--leading-normal);
+}
+
+.footer-newsletter form {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+.footer-newsletter input {
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    flex: 1;
+    font-size: var(--text-sm);
+    outline: none;
+    transition: border-color var(--transition);
+}
+
+.footer-newsletter input:focus {
+    border-color: var(--color-accent);
+}
+
+.footer-newsletter button {
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius);
+    border: none;
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.footer-newsletter button:hover,
+.footer-newsletter button:focus {
+    background: var(--color-accent-hover);
+}
+
+/* Bottom Footer */
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: var(--container-max);
+    margin: var(--space-12) auto 0;
+    padding: var(--space-5) var(--container-pad) 0;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+.footer-bottom a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.footer-bottom a:hover,
+.footer-bottom a:focus {
+    color: var(--color-accent);
+}
+
+/* Visible keyboard focus ring, consistent with the accent-based focus treatment used site-wide */
+.footer-links a:focus-visible,
+.footer-brand a:focus-visible,
+.footer-bottom a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* Responsive Footer Design */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+        text-align: center;
+    }
+
+    .footer-newsletter form {
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+}
