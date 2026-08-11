@@ -19,6 +19,7 @@ Owner loads the homepage and says "that's a different site" within 3 seconds —
 - **Vercel dashboard** — take: 12-col grid + `grid-auto-flow: dense` so uneven tiles self-pack. Don't copy: dense data-viz chrome.
 
 ## Completion Criteria (Definition of Done)
+- [ ] `.why-tile-lead p` computes to an on-accent text color with WCAG AA contrast ≥ 4.5:1 against `#2563EB`
 - [ ] Every card grid uses a 12-column track, `gap: var(--bento-gap)`, `grid-auto-flow: dense`
 - [ ] Zero hardcoded `gap: 2rem` / `1.5rem` / `1rem` in any grid
 - [ ] A `--font-display` token exists and drives every H1/H2
@@ -30,6 +31,9 @@ Owner loads the homepage and says "that's a different site" within 3 seconds —
 
 ## Files to Change
 `css/tokens.css`, `css/global_styles.css`, `css/privacy_policy.css`, `css/service_cards.css`, `css/why_band.css`, `css/hero_section.css`, `css/mission_vision.css`, `css/hardware_sourcing.css`, `css/networking.css`, `css/custom_websites.css`, `css/get-started.css`, `css/learn-more.css`, and the `<head>` font links only in all 7 HTML pages. Nothing else.
+
+### Objective P0 Files to Change
+`css/why_band.css` only. One selector change only; no layout, spacing, typography, HTML, or unrelated cleanup.
 
 ## Exact Changes
 ### css/tokens.css
@@ -109,6 +113,9 @@ None beyond CSS rules and one `<link>` swap per page. No new files, no JS.
 ## Phases
 > Execute **one unchecked task at a time**, only after AGENT LEAD approval. Completion Criteria are acceptance tests, not coding tasks.
 
+### Phase 0: WCAG blocker
+- [ ] **P0. Fix lead-tile paragraph contrast only.** File: `css/why_band.css`. Function/section: `.why-tile-lead p` (lines 47–51) and later `.why-tile p` cascade (lines 66–70). Change: make the lead-paragraph selector strictly more specific than the later generic tile-paragraph selector so its existing `rgba(255, 255, 255, 0.9)` declaration wins; do not change either color value. Reason: equal specificity plus later source order currently changes the computed text to `#475569`, yielding 1.47:1 against `#2563EB`. Exit: Playwright computed style confirms the on-accent value and contrast is ≥4.5:1 at 375px and 768px; diff contains exactly one selector-line change in `css/why_band.css`.
+
 ### Phase 1: Type system
 - [ ] **P1. Implement modern type only.** Files: `css/tokens.css`, `css/global_styles.css`, `css/privacy_policy.css`, and font-link lines in the 7 listed HTML pages. Apply the exact typography changes above; do not touch grid CSS. Exit: `--font-display` and fluid sizes exist, every H1/H2 receives the display face, and all 7 font-link strings match.
 
@@ -120,6 +127,13 @@ None beyond CSS rules and one `<link>` swap per page. No new files, no JS.
 
 ### Phase 4: Verification
 - [ ] **P4. Verify; do not redesign.** Browser-test all 7 pages at 375/768/1280px; report console errors, overflow, font loading, and criterion failures. Code changes require a separate fix plan. Exit: all Completion Criteria can be checked by AGENT LEAD.
+
+## Latest QA Evidence (read-only; 2026-08-12)
+- Playwright real-viewport sweep completed at 375px and 768px on all 6 public site pages; no horizontal overflow.
+- **High / P0:** `index.html` lead-tile paragraph contrast is 1.47:1 due to the confirmed CSS cascade above.
+- **Low / deferred until exact selectors are reported:** one `get-started.html` paragraph is 4.37:1; several get-started tap targets are below 44px.
+- **Cosmetic / deferred:** missing `favicon.ico` is the only reported console error.
+- This evidence does not complete P4: the sweep must be rerun after P1–P3 alter fonts and layout.
 
 ---
 
