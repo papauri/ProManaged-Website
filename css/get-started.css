@@ -1,0 +1,265 @@
+/* Hero Section */
+.hero-section {
+    background: var(--color-bg);
+    color: var(--color-text);
+    padding: 60px 20px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.hero-section .btn.primary {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: var(--radius);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.hero-section .btn.primary:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-3px);
+}
+
+/* Why Choose Us Section */
+.why-choose-us {
+    padding: 60px 20px;
+    background: var(--color-surface);
+    text-align: center;
+}
+
+.why-choose-us h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: var(--color-text);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.feature-item {
+    background: var(--color-white);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.feature-item i {
+    font-size: 2.5rem;
+    color: var(--color-accent-hover);
+    margin-bottom: 15px;
+}
+
+.feature-item h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--color-text);
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 1rem;
+    color: var(--color-text-subtle);
+    line-height: 1.6;
+}
+
+/* Services Section */
+.services-section {
+    padding: 60px 20px;
+    background: var(--color-white);
+}
+
+.services-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-align: center;
+    color: var(--color-text);
+}
+
+/* Services Section - Uniform Button and Text Positioning */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.service-card {
+    background: var(--color-surface);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column; /* Ensure vertical alignment */
+    justify-content: space-between; /* Equal spacing between elements */
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.service-card h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--color-accent);
+}
+
+.service-card p {
+    font-size: 1rem;
+    color: var(--color-text-subtle);
+    margin-bottom: 20px;
+    line-height: 1.6;
+    flex-grow: 1; /* Ensures the button stays at the bottom */
+}
+
+.service-card .btn.secondary {
+    padding: 12px 20px;
+    font-size: 1rem;
+    background: transparent;
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: var(--transition);
+    align-self: center; /* Center align the button */
+    width: fit-content; /* Adjust button width to its content */
+}
+
+.service-card .btn.secondary:hover {
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    border: 2px solid var(--color-accent);
+    transform: translateY(-3px);
+}
+
+/* Testimonials Section - Uniform Text and Button Height */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.testimonial-item {
+    background: var(--color-white);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    text-align: left;
+    display: flex;
+    flex-direction: column; /* Ensure vertical layout */
+    justify-content: space-between; /* Uniform spacing */
+}
+
+.testimonial-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.testimonial-item p {
+    font-size: 1rem;
+    color: var(--color-text-subtle);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Push the name to the bottom */
+}
+
+.testimonial-item h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-text);
+    text-align: right; /* Align name to the right */
+}
+
+/* Call to Action Section */
+.cta-section {
+    padding: 60px 20px;
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.cta-section .btn.primary {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: var(--radius);
+    background: var(--color-white);
+    color: var(--color-accent);
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.cta-section .btn.primary:hover {
+    background: var(--color-surface);
+    transform: translateY(-3px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .features-grid,
+    .services-grid,
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+    }
+
+    .services-section h2,
+    .testimonials-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .cta-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .cta-section p {
+        font-size: 1rem;
+    }
+}

@@ -57,8 +57,8 @@ When every box above is [x], the project is DONE — print "PROJECT COMPLETE" an
 ---
 
 ## FUTURE IDEAS (not in scope — needs owner approval)
-- Remove committed secrets (.env, firebase-service-account.json, ebay_token.json) and the full cPanel dump from version control.
-- Consolidate the duplicate Node vs PHP backends into one.
+- DONE 2026-08-12 (working tree): committed secrets and the full cPanel dump removed from version control; see STATUS. Still open: rotate the exposed credentials and decide on a git history rewrite (see STATUS).
+- The duplicate Node/Firebase/eBay backend was abandoned cruft, not a live alternative to the PHP backend — removed rather than consolidated (see STATUS).
 - Add automated tests / CI, a Lighthouse budget, or a static-site build step.
 - Dark-mode toggle built on the token system.
 
@@ -66,7 +66,9 @@ When every box above is [x], the project is DONE — print "PROJECT COMPLETE" an
 
 ## STATUS
 - PROJECT COMPLETE — all 14 deliverables [x]. D14 done: browser-tested all 8 pages (desktop+mobile) via Chromium/Playwright; fixed 3 real bugs (it_equipment 404 script path, privacy_policy invisible h1, how-it-works modal aria-hidden sync). No overflow, Inter loads, interactions pass, single light token theme throughout.
+- 2026-08-12 repo cleanup (owner-approved, addresses the FUTURE IDEAS security item below): the full cPanel account dump (`_/`) was removed from the working tree — it contained the wildcard SSL private key, live mailbox contents, and cPanel config, none of which belong in source control. Site content moved from `_/public_html/` to repo root (`index.html`, `get-started.html`, `learn_more.html`, `privacy_policy.html`, `pages/`, `css/`, `js/`, `images/`, `php/`, `.htaccess` now live at root). Fixed a real bug found in the process: `index.html` was loading `../css/...` and `../images/icon.png` (one level too high — homepage CSS/logo were 404ing in production); corrected to `css/...` / `images/...`. Removed: unused `phpdotenv-master` vendor copy (not referenced by any `.php`), dead `js/*_through_server.js` variants (superseded by the versions actually linked from HTML), stray `images/icon.png1`/`icon.png2`, `php/ebay_token.json` + `php/error_log` runtime artifacts, and an entire abandoned root-level Node/Firebase/eBay backend (`server.js`, `server_two.js`, `ebay_bkp_working.js`, `email.js`, `appointment.js`, `firebase.js`, `firebase-service-account.json`, `package.json`, `game-prices-backend/`) that nothing in the live site references. `.env` untracked (`git rm --cached`) and added to a new `.gitignore`, but kept on disk locally since `php/ebay_auth.php`/`rawg_reviews.php` still read real credentials from it at runtime. All CSS/JS/PHP references verified to resolve post-move. Tracked file count: ~13,900 → 72.
+- Still open (owner decision, not executed): the secrets that were committed (`.env` contents — SMTP/eBay/RAWG credentials, `firebase-service-account.json`, the SSL private key, `ebay_token.json`) remain recoverable from git history and were pushed to `github.com/papauri/ProManaged-Website`. Treat as compromised — rotate the eBay client secret, RAWG API key, SMTP passwords, and reissue the promanaged-it.com SSL cert/key regardless of any history rewrite. History rewrite (`git filter-repo`/BFG) + force-push was not performed — needs explicit owner go-ahead since it rewrites shared history.
 - In progress: none.
 - Next: none — project complete, loop halted.
 - Blocked: none.
-- Non-blocking backlog (FUTURE IDEAS): pre-existing unbalanced <div> in gaming_services.html; Inter/FontAwesome served via CDN (consider self-hosting); how-it-works welcome modal auto-opens on every load (UX decision); committed secrets (.env, firebase-service-account.json, ebay_token.json) + cPanel dump still in repo (security).
+- Non-blocking backlog (FUTURE IDEAS): pre-existing unbalanced <div> in gaming_services.html; Inter/FontAwesome served via CDN (consider self-hosting); how-it-works welcome modal auto-opens on every load (UX decision).

@@ -1,0 +1,192 @@
+/* Search Button Styling */
+.btn-search {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 12px 24px; /* Slightly larger for a modern look */
+    color: var(--color-accent-contrast);
+    background: var(--color-accent);
+    border: none;
+    border-radius: var(--radius); /* Rounded for a softer look */
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: var(--shadow-sm);
+    margin-top: 10px; /* Adds spacing between the input and button */
+}
+
+.btn-search:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: var(--color-accent-hover);
+}
+
+.btn-search:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+    background: var(--color-accent-active);
+}
+
+/* Text Search Bar Styling */
+#game-search-input {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    padding: 12px 15px; /* Comfortable padding */
+    border: 2px solid var(--color-border); /* Subtle border */
+    border-radius: var(--radius-full); /* Rounded edges for a modern look */
+    outline: none;
+    width: 100%; /* Full width */
+    max-width: 400px; /* Limit the width */
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 10px; /* Adds spacing between the input and button */
+}
+
+#game-search-input:focus {
+    border-color: var(--color-accent); /* Highlighted border */
+    box-shadow: var(--shadow-md); /* Glow effect */
+}
+
+/* Center Alignment for Search Section */
+.game-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Spacing between input and button */
+    margin: 20px auto;
+    max-width: 500px; /* Limit container width */
+    text-align: center;
+}
+
+
+/* Game Search Results Grid */
+
+
+/* Game Card (Scoped for Search) */
+#game-search-results .game-card {
+    background: var(--color-white);
+    border: 2px solid var(--color-border); /* Soft border */
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    height: auto; /* Flexible height */
+    max-width: 300px; /* Restrict card width */
+    margin: 0 auto; /* Center cards */
+}
+
+#game-search-results .game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-accent); /* Accent color */
+}
+
+/* Card Image */
+#game-search-results .game-card img {
+    width: auto;
+    height: auto; /* Maintain aspect ratio and adjust height automatically */
+    max-height: auto; /* Limit height for larger images */
+    object-fit: cover; /* Crop image if it exceeds the container dimensions */
+    border-bottom: 2px solid var(--color-accent);
+    background-color: var(--color-surface-2);
+}
+
+/* Game Card Content */
+#game-search-results .game-card .game-info {
+    padding: 10px;
+    text-align: left; /* Align text for readability */
+}
+
+/* Card Title */
+#game-search-results .game-card .game-info h3 {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    margin-bottom: 10px;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit title to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 3rem;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
+#game-search-results .game-card .game-info h3:hover {
+    color: var(--color-accent);
+}
+
+/* Card Description */
+#game-search-results .game-card .game-info p {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+/* Buy Button */
+#game-search-results .game-card .game-info .btn-buy {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--color-accent-contrast);
+    background-color: var(--color-accent);
+    border: none;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#game-search-results .game-card .game-info .btn-buy:hover {
+    background-color: var(--color-accent-hover);
+    box-shadow: var(--shadow-md);
+}
+
+/* Responsive Design for Search Results */
+@media (max-width: 1024px) {
+    #game-search-results {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ensure cards remain a reasonable size */
+    }
+
+    #game-search-results .game-card {
+        max-width: 100%; /* Allow cards to adjust */
+    }
+}
+
+@media (max-width: 768px) {
+    #game-search-results {
+        grid-template-columns: repeat(2, 1fr); /* Show 2 cards per row */
+    }
+
+    #game-search-results .game-card img {
+        height: 160px; /* Adjust image size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    #game-search-results {
+        grid-template-columns: 1fr; /* Show 1 card per row */
+    }
+
+    #game-search-results .game-card {
+        max-width: 90%; /* Keep cards smaller for mobile */
+    }
+
+    #game-search-results .game-card img {
+        height: 140px; /* Adjust image size for very small screens */
+    }
+}

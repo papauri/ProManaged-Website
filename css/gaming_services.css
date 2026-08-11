@@ -1,0 +1,114 @@
+/* Gaming Services CSS */
+
+.gaming-services {
+    padding: 60px 20px;
+    background: var(--color-bg); /* Keeps your original site background */
+    text-align: center;
+    max-width: 100%; /* Ensure the section spans the full width of the page */
+    margin: 0 auto; /* Center the section on the page */
+}
+
+.gaming-services .container {
+    max-width: 100%; /* Allow full-width container */
+    padding: 0 2px; /* Add padding for spacing */
+}
+
+
+.gaming-services .section-header h2::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    margin: 10px auto 0;
+    border-radius: var(--radius);
+}
+
+/* Tab Buttons */
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    background: var(--color-surface); /* Light neutral color for consistency */
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    box-shadow: var(--shadow-md);
+}
+
+/* Tab Content */
+.tab-content {
+    width: 100%; /* Ensure it spans full width */
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--color-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.tab-panel {
+    display: none; /* Hide all panels by default */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tab-panel.active {
+    display: block; /* Show active panel */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 468px) {
+    .gaming-services .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .tab-buttons {
+        gap: 10px;
+    }
+
+    .tab-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .tab-content {
+        padding: 15px;
+    }
+
+    .back-button {
+        font-size: 0.9rem;
+        padding: 8px 20px;
+    }
+}
+

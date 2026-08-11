@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="main-head">
+    <title>ProManaged IT - Sleek IT Solutions</title>
+    <!-- components/styles.html -->
+
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ProManaged IT - Sleek IT Solutions for Personal and Business Needs">
+    <meta name="keywords" content="IT solutions, ProManaged IT, custom websites, network setup, gaming services">
+    <meta name="author" content="ProManaged IT Team">
+
+    <!-- External Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- Design Tokens -->
+    <link rel="stylesheet" href="../css/tokens.css">
+
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="../css/global_styles.css">
+
+    <!-- Component Styles -->
+    <!-- Header and Navigation -->
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/logo.css">
+
+    <!-- Hero Section -->
+    <link rel="stylesheet" href="../css/hero_section.css">
+
+    <!-- Services and Features -->
+    <link rel="stylesheet" href="../css/service_cards.css">
+
+    <!-- About and Contact -->
+    <link rel="stylesheet" href="../css/about_section.css">
+    <link rel="stylesheet" href="../css/contact_section.css">
+
+    <!-- Footer -->
+    <link rel="stylesheet" href="../css/footer_promanaged.css">
+
+    <!-- Miscellaneous -->
+    <link rel="stylesheet" href="../css/mission_vision.css">
+    <link rel="stylesheet" href="../css/scroll_top.css">
+    <link rel="stylesheet" href="../css/how_it_works.css">
+
+</head>
+
+<body id="main-body">
+
+
+    <div id="header-section"> <!-- Header dynamically loaded -->
+        <header class="header" id="header">
+            <nav class="navbar">
+                <div class="nav-container">
+                    <a href="#home" class="nav-brand">
+                        <img src="../images/icon.png" alt="ProManaged IT Logo" class="logo">
+                    </a>
+                    <button class="hamburger-menu" aria-label="Toggle navigation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <!-- Desktop Navigation Menu -->
+                    <ul class="nav-menu desktop">
+                        <li><a href="#home" class="nav-link">Home</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#services" class="nav-link">Services</a></li>
+                        <li><a href="#mission-vision" class="nav-link">Mission & Vision</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <!-- Mobile Navigation Menu -->
+                    <ul class="nav-menu mobile">
+                        <li><a href="#home" class="nav-link">Home</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#services" class="nav-link">Services</a></li>
+                        <li><a href="#mission-vision" class="nav-link">Mission & Vision</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- Overlay for mobile menu -->
+                <div class="nav-overlay"></div>
+            </nav>
+        </header>
+    </div>
+
+<!-- How It Works Modal -->
+<div id="how-it-works-modal" class="modal" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+        <span id="close-how-it-works-modal" class="close">&times;</span>
+        <h2>Discover the ProManaged IT Difference</h2>
+        <p>
+            From Ireland to Malawi and beyond, we’re here to simplify your tech journey. Whether you’re buying your child their first laptop or upgrading your own gear, we’ll guide you every step of the way.
+        </p>
+        <p>
+            Need advice before making a purchase? We’ve got you covered. Pay in your local currency, and let us handle everything from ordering to delivery — no stress, no confusion.
+        </p>
+        <p>
+            ProManaged IT is more than a service; it’s your partner in bridging the gap between technology and your needs, wherever you are. Let us make IT work for you!
+        </p>
+    </div>
+</div>
+
+
+
+    <div id="hero-section"> <!-- Hero dynamically loaded -->
+
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <h1 id="hero-title">ProManaged IT</h1>
+                <p id="hero-subtitle">Innovative IT solutions for a seamless tomorrow</p>
+                <div class="hero-buttons">
+                    <a href="get-started.html" class="btn primary" id="hero-get-started">Get Started</a>
+                    <a href="learn_more.html" class="btn secondary" id="hero-learn-more">Learn More</a>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div id="services-section"> <!-- Services dynamically loaded -->
+        <section id="services" class="services" aria-labelledby="services-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="services-title" class="services-title">Our Services</h2>
+                    <p class="subtitles">Explore our wide range of IT solutions tailored to meet your needs.</p>
+                </div>
+                <div class="services-grid">
+
+                    <!-- IT Equipment -->
+                    <div class="service-card" data-target="pages/it_equipment.html">
+                        <i class="fas fa-laptop"></i>
+                        <h3>Global Tech, Local Pay</h3>
+                        <p>Access international IT equipment without forex hassles. We handle everything from
+                            procurement to delivery, with convenient payment in your local currency.</p>
+                    </div>
+
+                    <!-- Custom Websites -->
+                    <div class="service-card" data-target="pages/custom_websites.html">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>Custom Websites</h3>
+                        <p>Tailored Android/iOS websites to suit your needs.</p>
+                    </div>
+
+                    <!-- Gaming Services -->
+                    <div class="service-card" data-target="pages/gaming_services.html">
+                        <i class="fas fa-gamepad"></i>
+                        <h3>Gaming Services</h3>
+                        <p>Gaming setups, updates, online purchases, and accessories shipped from Ireland and the UK.
+                        </p>
+                    </div>
+
+                    <!-- Network Infrastructure -->
+                    <div class="service-card" data-target="pages/network_infrastructure.html">
+                        <i class="fas fa-network-wired"></i>
+                        <h3>Network Infrastructure</h3>
+                        <p>Simple and effective network setup for homes and businesses.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="about-section"> <!-- About Us Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2>About Us</h2>
+                    <p class="subtitle_into">ProManaged IT delivers cutting-edge technology with personalized solutions to simplify your IT experience.</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-photo">
+                        <img src="images/founder.png" alt="John-Paul Chirwa - Founder of ProManaged IT" class="founder-photo">
+                    </div>
+                    <div class="about-text">
+                        <h3>Welcome to ProManaged IT</h3>
+                        <p>
+                            Hi, I’m <strong>John-Paul Chirwa</strong>, the founder of ProManaged IT. My passion for technology and innovation drives this company. Our mission? To make IT solutions accessible, reliable, and tailored for individuals and businesses of all sizes.
+                        </p>
+                        <p>
+                            Whether it's network setups, custom-built websites, or specialized IT infrastructure, we’re here to simplify your technology challenges. By bridging global expertise with local support — especially in Malawi and Africa — we deliver unmatched value.
+                        </p>
+                        <p class="cta-text">
+                            <strong>Let us make your IT experience seamless.</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+
+    <div id="mission-vision-section"> <!-- Mission & Vision Section -->
+
+        <section id="mission-vision" class="mission-vision-tabs">
+            <div class="container">
+                <h2 class="section-header">Mission & Vision</h2>
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-target="mission-panel" aria-selected="true">Mission</button>
+                    <button class="tab-btn" data-target="vision-panel">Vision</button>
+                </div>
+                <div class="tab-content">
+                    <div id="mission-panel" class="tab-panel active" role="tabpanel" aria-labelledby="mission-btn">
+                        <p>Our mission is to make IT accessible and affordable for all, delivering cost-effective
+                            solutions
+                            with excellent customer service.</p>
+                    </div>
+                    <div id="vision-panel" class="tab-panel" role="tabpanel" aria-labelledby="vision-btn">
+                        <p>Our vision is to lead in IT innovation, bringing ease and efficiency to individuals and
+                            businesses globally.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="contact-section"> <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Contact Us</h2>
+                    <p class="subtitle_contact">We'd love to hear from you! Feel free to reach out with any questions, feedback,
+                        or requests.</p>
+                </div>
+
+                <!-- Add feedback message placeholders -->
+                <div id="form-feedback" class="form-feedback"></div>
+
+                <!-- Contact Form -->
+                <form class="contact-form" id="contact-form" action="php/contact.php" method="POST">
+                    <div class="form-group">
+                        <div class="input-container">
+                            <input type="text" id="name" name="name" placeholder=" " required>
+                            <label for="name">Full Name</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container">
+                            <input type="email" id="email" name="email" placeholder=" " required>
+                            <label for="email">Email Address</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container">
+                            <input type="tel" id="phone" name="phone" placeholder=" " required>
+                            <label for="phone">Phone Number</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container">
+                            <textarea id="message" name="message" rows="4" placeholder=" " required></textarea>
+                            <label for="message">Your Message</label>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit" class="btn primary">Send Message</button>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+
+    </div>
+
+    <div id="footer-section"> <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-divider"></div>
+
+            <div class="footer-content container">
+                <!-- Quick Links -->
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home" class="nav-link">Home</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#services" class="nav-link">Services</a></li>
+                        <li><a href="#" id="get-in-touch-link">Get in Touch</a></li>
+                        <li><a href="privacy_policy.html">Privacy Policy</a></li> <!-- Updated to link to new page -->
+                    </ul>
+                </div>
+
+                <!-- Brand Information -->
+                <div class="footer-brand">
+                    <h3>ProManaged IT</h3>
+                    <p>Your go-to partner for sleek IT solutions that simplify technology. Transform your IT experience
+                        with
+                        top-notch services.</p>
+                    <p>
+                        <strong>Contact Emails:</strong>
+                    <p></p>
+                    <a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a>
+                    <p></p>
+                    <a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a>
+                    <p></p>
+                    <a href="mailto:johnpaulchirwa@promanaged-it.com">johnpaulchirwa@promanaged-it.com</a>
+                    </p>
+                </div>
+
+                <!-- Newsletter Section -->
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get the latest updates and exclusive offers straight to your inbox.</p>
+                    <form>
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="footer-bottom">
+                <p>
+                    &copy; 2024 ProManaged IT. All Rights Reserved. |
+                    <a href="#">Terms of Service</a> |
+                    <a href="privacy_policy.html">Privacy Policy</a> <!-- Updated to link to new page -->
+                </p>
+                <p>
+                    <strong>Company Registration Number:</strong> 749512 |
+                    <a href="https://core.cro.ie/e-commerce/company/5379600" target="_blank">Verify Registration</a>
+                </p>
+            </div>
+        </footer>
+
+
+    </div>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/mobile_phone_navbar.js" defer></script>
+    <script src="js/service_cards.js" defer></script>
+    <script src="js/contact__form.js" defer></script>
+    <script src="js/how_it_works.js" defer></script>
+
+    <script src="js/contact_dialog.js"></script>
+</body>
+
+</html>

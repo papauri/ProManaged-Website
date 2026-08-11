@@ -1,0 +1,159 @@
+/* General Styling */
+body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+    font-weight: 500;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Hero Section */
+.hero-section {
+    background: var(--color-bg);
+    color: var(--color-text);
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.hero-section .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    text-decoration: none;
+    border-radius: var(--radius);
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.hero-section .btn:hover {
+    background: var(--color-accent-hover);
+}
+
+/* Apps and Innovations Section */
+.apps-and-innovations {
+    background: var(--color-white);
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.apps-and-innovations h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.apps-and-innovations p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.feature-item {
+    background: var(--color-surface);
+    padding: 20px;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.feature-item i {
+    font-size: 2rem;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+}
+
+.feature-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 0.9rem;
+}
+
+/* Services Section */
+.services-section {
+    background: var(--color-surface);
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.services-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.service-card {
+    background: var(--color-white);
+    padding: 20px;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.service-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.service-card .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    text-decoration: none;
+    border-radius: var(--radius);
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.service-card .btn:hover {
+    background: var(--color-accent-hover);
+}

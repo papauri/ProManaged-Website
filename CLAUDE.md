@@ -13,7 +13,7 @@ Run `/build-loop` (continuous by default). It cycles: build-planner -> specialis
 ## Locked design decisions
 - Accent color: #2563EB. Font: Inter. Single light theme.
 - One border-radius, one–two shadows, a defined spacing + type scale.
-- Token source of truth: `_/public_html/css/tokens.css` — reference via var(--...); never reintroduce per-file :root palettes or hardcoded colors.
+- Token source of truth: `css/tokens.css` — reference via var(--...); never reintroduce per-file :root palettes or hardcoded colors.
 
 ## Agents (.claude/agents/)
 - codebase-scout (haiku) — read-only feature/file mapper, one directory per call.

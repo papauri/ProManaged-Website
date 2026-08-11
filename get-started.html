@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ProManaged IT - Get Started with Our IT Solutions">
+    <title>Get Started - ProManaged IT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/global_styles.css">
+    <link rel="stylesheet" href="css/footer_promanaged.css">
+    <link rel="stylesheet" href="css/get-started.css">
+    <link rel="stylesheet" href="css/scroll_top.css">
+    <link rel="stylesheet" href="css/book_appointment.css">
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container hero-content">
+            <h1>Welcome to ProManaged IT</h1>
+            <p>Let us help you bridge the gap between technology and your needs. Discover our affordable, tailored
+                solutions.</p>
+            <a href="#services" class="btn primary">Explore Services</a>
+        </div>
+    </header>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose-us" class="why-choose-us">
+        <div class="container">
+            <h2>Why Get Started with Us?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-wallet"></i>
+                    <h3>Affordable Pricing</h3>
+                    <p>Enjoy high-quality IT solutions tailored to your budget and income, ensuring maximum value for
+                        your investment.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-globe"></i>
+                    <h3>Cross-Continental Reach</h3>
+                    <p>We specialize in connecting customers across Ireland and Africa, offering seamless cross-border
+                        IT solutions.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-cart-plus"></i>
+                    <h3>Easy Purchases</h3>
+                    <p>Buy laptops, gaming consoles, and more in your local currency. We handle the logistics, so you
+                        don’t have to.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-code"></i>
+                    <h3>Custom Websites</h3>
+                    <p>Get a website tailored to your pocket and your business goals. Whether personal or corporate,
+                        we’ve got you covered.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2>Services You Can Start With</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Gaming Solutions</h3>
+                    <p>Access the best deals on games and gaming consoles. We help you find the latest options and
+                        deliver them to your location.</p>
+                    <a href="pages/gaming_services.html" class="btn secondary">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <h3>IT Hardware</h3>
+                    <p>Purchase laptops, desktops, and other IT accessories with ease. Pay in your local currency and
+                        enjoy fast delivery.</p>
+                    <a href="pages/it_equipment.html" class="btn secondary">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <h3>Custom Websites</h3>
+                    <p>Whether you're a startup or an established business, we’ll design a website that fits your brand
+                        and your budget.</p>
+                    <a href="pages/custom_websites.html" class="btn secondary">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <h3>IT Support</h3>
+                    <p>Our team provides remote and on-site network support to ensure your tech runs smoothly at all
+                        times.</p>
+                    <a href="pages/network_infrastructure.html" class="btn secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-item">
+                    <p>“ProManaged IT made it easy for me to buy a gaming console from Ireland while I was in Malawi.
+                        Super smooth and affordable!”</p>
+                    <h4>John D.</h4>
+                </div>
+                <div class="testimonial-item">
+                    <p>“I needed a website for my small business, and they delivered beyond my expectations. Highly
+                        recommended!”</p>
+                    <h4>Mary K.</h4>
+                </div>
+                <div class="testimonial-item">
+                    <p>“Great service! Got my laptop delivered in time for my remote work. The support team is amazing
+                        too!”</p>
+                    <h4>Samuel O.</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Section-->
+    <section class="booking-section">
+        <div class="container">
+            <h2>Book an Appointment</h2>
+            <p>Select your service, choose a time, and let us take care of the rest!</p>
+            <!-- Booking Button -->
+            <button id="open-booking-modal" class="btn primary">Book Now</button>
+        </div>
+    </section>
+
+    <!-- Modal for Booking Form -->
+    <div id="booking-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <span id="close-booking-modal" class="close">&times;</span>
+            <h2>Book an Appointment</h2>
+            <form id="booking-form" action="php/booking.php" method="POST">
+                <div class="form-row">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-row">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-row">
+                    <label for="service">Service</label>
+                    <select id="service" name="service" required>
+                        <option value="Custom Websites" selected>Custom Websites</option>
+                        <option value="Network Infrastructure">Network Infrastructure</option>
+                        <option value="IT Equipment">IT Equipment</option>
+                        <option value="Gaming Services">Gaming Services</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-row">
+                    <label for="time">Time</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+                <button type="submit" class="btn primary">Confirm Appointment</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="footer-section"> <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-divider"></div>
+
+            <div class="footer-content container">
+                <!-- Quick Links -->
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html">Services</a></li>
+                        <li><a href="#" id="get-in-touch-link">Get in Touch</a></li>
+                        <li><a href="privacy_policy.html">Privacy Policy</a></li>
+                        <!-- Updated to link to new page -->
+                    </ul>
+                </div>
+
+                <!-- Brand Information -->
+                <div class="footer-brand">
+                    <h3>ProManaged IT</h3>
+                    <p>Your go-to partner for sleek IT solutions that simplify technology. Transform your IT experience
+                        with
+                        top-notch services.</p>
+                    <p>
+                        <strong>Contact Emails:</strong>
+                    <p></p>
+                    <a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a>
+                    <p></p>
+                    <a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a>
+                    <p></p>
+                    <a href="mailto:johnpaulchirwa@promanaged-it.com">johnpaulchirwa@promanaged-it.com</a>
+                    </p>
+                </div>
+
+                <!-- Newsletter Section -->
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get the latest updates and exclusive offers straight to your inbox.</p>
+                    <form>
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="footer-bottom">
+                <p>
+                    &copy; 2024 ProManaged IT. All Rights Reserved. |
+                    <a href="#">Terms of Service</a> |
+                    <a href="privacy_policy.html">Privacy Policy</a> <!-- Updated to link to new page -->
+                </p>
+                <p>
+                    <strong>Company Registration Number:</strong> 749512 |
+                    <a href="https://core.cro.ie/e-commerce/company/5379600" target="_blank">Verify Registration</a>
+                </p>
+            </div>
+        </footer>
+
+
+    </div>
+
+
+    <!-- Include necessary scripts -->
+    <script src="js/service_tab_switching.js" defer></script>
+    <script src="js/booking_form.js" defer></script>
+
+    <script src="js/contact_dialog.js"></script>
+</body>
+
+</html>

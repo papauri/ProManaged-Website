@@ -1,0 +1,199 @@
+/* FOOTER - MODERN, MINIMAL, AND SUBTLE */
+.footer {
+    background: var(--color-surface-2);
+    color: var(--color-text-muted);
+    padding: 40px 20px;
+    border-top: 1px solid var(--color-border); /* Subtle border for separation */
+    position: relative;
+    z-index: 1;
+}
+
+/* Footer Content Layout */
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+    text-align: left;
+}
+
+/* Footer Brand Section */
+.footer-brand h3 {
+    font-family: var(--font-sans);
+    font-size: 1.8rem;
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.footer-brand p {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin-bottom: 15px;
+}
+
+/* Footer Links */
+.footer-links h4 {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: 10px;
+    font-weight: var(--weight-semibold);
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color var(--transition);
+}
+
+.footer-links a:hover,
+.footer-links a:focus {
+    color: var(--color-accent);
+}
+
+/* Social Media Section */
+.footer-social h4 {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: 10px;
+    font-weight: var(--weight-semibold);
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    justify-content: flex-start;
+}
+
+.footer-social a {
+    color: var(--color-text-muted);
+    font-size: 1.5rem;
+    transition: color var(--transition);
+}
+
+.footer-social a:hover,
+.footer-social a:focus {
+    color: var(--color-accent);
+}
+
+/* Newsletter Section */
+.footer-newsletter h4 {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: 10px;
+    font-weight: var(--weight-semibold);
+}
+
+.footer-newsletter p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.footer-newsletter form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.footer-newsletter input {
+    padding: 12px 15px;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    flex: 1;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color var(--transition);
+}
+
+.footer-newsletter input:focus {
+    border: 1px solid var(--color-accent);
+    background: var(--color-bg);
+}
+
+.footer-newsletter button {
+    padding: 12px 25px;
+    border-radius: var(--radius);
+    border: none;
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.footer-newsletter button:hover,
+.footer-newsletter button:focus {
+    background: var(--color-accent-hover);
+}
+
+/* Bottom Footer */
+.footer-bottom {
+    background: var(--color-surface-2);
+    padding: 15px 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-text-subtle);
+    border-top: 1px solid var(--color-border);
+}
+
+.footer-bottom a {
+    color: var(--color-text-subtle);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.footer-bottom a:hover,
+.footer-bottom a:focus {
+    color: var(--color-accent);
+}
+
+
+
+/* Responsive Footer Design */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr; /* Single-column layout for smaller screens */
+        text-align: center;
+    }
+
+    .footer-brand,
+    .footer-links,
+    .footer-social,
+    .footer-newsletter {
+        text-align: center;
+    }
+
+    .footer-newsletter form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .footer-social-icons {
+        justify-content: center;
+    }
+}
