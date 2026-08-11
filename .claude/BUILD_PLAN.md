@@ -107,10 +107,19 @@ None beyond CSS rules and one `<link>` swap per page. No new files, no JS.
 2. **There is no visual content to put in the tiles.** The repo contains exactly one photograph (`images/founder.png`) plus `icon.png`. Every bento reference — Apple, Linear, Vercel — is carried by screenshots, product UI, or photography. A 12-column bento of text-and-FontAwesome-icon tiles is still a page of boxes of text, which is the same complaint the owner already raised. Owner must choose: (a) supply real screenshots/photography, (b) approve a type-and-colour-led tile design (large numerals, accent-filled tiles, oversized type as the visual), or (c) approve budget for stock/illustration.
 
 ## Phases
-### Phase 1: Type system — Goal: `--font-display` + fluid display sizes live, font links identical on 7 pages. Exit: every H1/H2 renders in the display face, no page missing the link.
-### Phase 2: Canonical bento on index.html — Goal: prove the 12-col system on `service_cards.css` + `why_band.css` + hero facts. Exit: homepage grids use 12-col/`--bento-gap`/dense, owner-visible change confirmed in browser.
-### Phase 3: Roll out — Goal: apply the identical system to hardware_sourcing, networking, custom_websites, get-started, learn-more. Exit: zero hardcoded gaps site-wide; all grids 12-col.
-### Phase 4: Verify — Goal: browser QA at 375/768/1280 on all 7 pages. Exit: no overflow, no console errors, contrast AA holds.
+> Execute **one unchecked task at a time**, only after AGENT LEAD approval. Completion Criteria are acceptance tests, not coding tasks.
+
+### Phase 1: Type system
+- [ ] **P1. Implement modern type only.** Files: `css/tokens.css`, `css/global_styles.css`, `css/privacy_policy.css`, and font-link lines in the 7 listed HTML pages. Apply the exact typography changes above; do not touch grid CSS. Exit: `--font-display` and fluid sizes exist, every H1/H2 receives the display face, and all 7 font-link strings match.
+
+### Phase 2: Homepage bento proof
+- [ ] **P2. Implement the canonical bento system on the homepage only.** Files: `css/service_cards.css`, `css/why_band.css`, `css/hero_section.css`, `css/mission_vision.css`. Use the exact span table above; do not edit HTML. Exit: homepage grids use 12 columns, `--bento-gap`, dense packing, and responsive spans; visual result is browser-reviewed before rollout.
+
+### Phase 3: Rollout
+- [ ] **P3. Roll the approved homepage system across remaining grids.** Files: `css/hardware_sourcing.css`, `css/networking.css`, `css/custom_websites.css`, `css/get-started.css`, `css/learn-more.css`. Use the exact span table above. Exit: all listed grids use the canonical system and no listed hardcoded grid gaps remain.
+
+### Phase 4: Verification
+- [ ] **P4. Verify; do not redesign.** Browser-test all 7 pages at 375/768/1280px; report console errors, overflow, font loading, and criterion failures. Code changes require a separate fix plan. Exit: all Completion Criteria can be checked by AGENT LEAD.
 
 ---
 
