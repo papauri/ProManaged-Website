@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head id="main-head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,9 +26,7 @@
     <link rel="stylesheet" href="css/contact_section.css">
     <script>document.documentElement.classList.add('js-on');</script>
 </head>
-
 <body id="main-body">
-
     <div id="header-section">
         <button type="button" class="nav-trigger" id="nav-trigger" aria-expanded="false" aria-controls="nav-panel" aria-label="Open navigation menu">
             <img src="images/icon.png" alt="ProManaged IT" class="logo">
@@ -37,10 +34,7 @@
         </button>
         <div class="nav-panel" id="nav-panel" hidden>
             <div class="nav-panel-rail">
-                <div class="nav-panel-top">
-                    <span class="nav-panel-brand"><img src="images/icon.png" alt="" aria-hidden="true">ProManaged IT</span>
-                    <button type="button" class="nav-close" id="nav-close" aria-label="Close navigation menu"><span></span><span></span></button>
-                </div>
+                <div class="nav-panel-top"><span class="nav-panel-brand"><img src="images/icon.png" alt="" aria-hidden="true">ProManaged IT</span><button type="button" class="nav-close" id="nav-close" aria-label="Close navigation menu"><span></span><span></span></button></div>
                 <nav class="nav-bento" aria-label="Primary">
                     <a class="nav-tile nav-tile--primary" href="get-started.html"><span class="nav-tile-index">Start here</span><span class="nav-tile-label">Start a Project</span><span class="nav-tile-desc">Bring us the problem. Book a call and get a scope, a timeline and an honest answer.</span></a>
                     <a class="nav-tile nav-tile--half" href="index.html"><span class="nav-tile-index">01</span><span class="nav-tile-label">Home</span><span class="nav-tile-desc">The whole picture.</span></a>
@@ -63,12 +57,25 @@
                     <h1 id="hero-title">Technology that behaves itself.</h1>
                     <p id="hero-subtitle">We build the software you run on, source the equipment you need, and set up the networks that carry both — one small team, answering directly, wherever you work.</p>
                     <div class="hero-buttons"><a href="get-started.html" class="btn primary" id="hero-get-started">Start a project</a><a href="learn_more.html" class="btn secondary" id="hero-learn-more">How we work</a></div>
+                    <div class="hero-microproof"><span><i class="fas fa-circle-check" aria-hidden="true"></i> Direct access to the team</span><span><i class="fas fa-circle-check" aria-hidden="true"></i> Software, hardware &amp; connectivity</span><span><i class="fas fa-circle-check" aria-hidden="true"></i> Built for real-world budgets</span></div>
                 </div>
                 <div class="hero-visual">
                     <div class="hero-feature">
                         <i class="fas fa-layer-group" aria-hidden="true"></i>
                         <span class="hero-figure">Three</span>
                         <span class="hero-figure-label">capabilities under one point of contact — no handoffs, no ticket queue, no account manager in between.</span>
+                    </div>
+                    <div class="hero-project-grid" aria-label="Selected interface examples">
+                        <article class="hero-project-card">
+                            <div class="hero-project-topline"><span>Interface fragment</span><span>Build</span></div>
+                            <div class="hero-project-media hero-project-media--hotel" aria-hidden="true"><span class="interface-window interface-window--booking"><span></span><span></span><span></span><b>BOOKING</b><i></i><i></i><i></i></span></div>
+                            <div class="hero-project-copy"><span class="hero-project-title">Operations &amp; booking UI</span><span class="hero-project-desc">A visual slice of the kind of booking, availability and workflow interfaces we build.</span></div>
+                        </article>
+                        <article class="hero-project-card hero-project-card--controller">
+                            <div class="hero-project-topline"><span>Interface fragment</span><span>Connect</span></div>
+                            <div class="hero-project-media hero-project-media--controller" aria-hidden="true"><span class="controller-ui"><i></i><i></i><i></i><b>STATUS</b><em>CONNECTED</em></span></div>
+                            <div class="hero-project-copy"><span class="hero-project-title">Device &amp; network control</span><span class="hero-project-desc">Dashboard-style interaction patterns for connected equipment and infrastructure.</span></div>
+                        </article>
                     </div>
                     <div class="hero-support">
                         <div class="hero-support-row"><i class="fas fa-globe" aria-hidden="true"></i><div class="hero-support-text"><span class="hero-support-title">Across borders</span><span class="hero-support-desc">Remote delivery, international sourcing</span></div></div>
@@ -80,63 +87,52 @@
     </div>
 
     <section id="what-we-are" class="section section--ivory why-band" data-blocks="settle-side">
-        <div class="rail">
-            <div class="grid why-grid">
-                <div class="block block--7 block--bare why-lead"><span class="eyebrow">What ProManaged is</span><h2>A small studio for people who were quoted enterprise prices for an ordinary problem.</h2></div>
-                <div class="block block--5 block--bare why-note"><p>Most technology work does not need a department. It needs someone who will listen properly, say plainly what a thing will cost, and then actually deliver it.</p><p>That is the whole company. We take on software, hardware and connectivity work for individuals, founders, families and small teams — and we stay reachable long after the invoice is settled.</p></div>
-            </div>
-            <div class="grid why-facts">
-                <div class="block block--4 block--stone why-fact"><span class="mark" aria-hidden="true"><i class="fas fa-comments"></i></span><div class="block__body"><h3>You talk to the builder</h3><p>The person scoping your project is the person writing the code or placing the order. Nothing gets lost being relayed.</p></div></div>
-                <div class="block block--4 block--stone why-fact"><span class="mark" aria-hidden="true"><i class="fas fa-scale-balanced"></i></span><div class="block__body"><h3>Scoped to your budget</h3><p>We work to the number you have, not the one we would prefer. If it will not stretch far enough, we say so and suggest what to drop.</p></div></div>
-                <div class="block block--4 block--stone why-fact"><span class="mark" aria-hidden="true"><i class="fas fa-arrows-rotate"></i></span><div class="block__body"><h3>We stay after launch</h3><p>Delivery is where the real questions start. Support and iteration are part of the work, not a separate contract you discover later.</p></div></div>
-            </div>
-        </div>
+        <div class="rail"><div class="grid why-grid"><div class="block block--7 block--bare why-lead"><span class="eyebrow">What ProManaged is</span><h2>A small studio for people who were quoted enterprise prices for an ordinary problem.</h2></div><div class="block block--5 block--bare why-note"><p>Most technology work does not need a department. It needs someone who will listen properly, say plainly what a thing will cost, and then actually deliver it.</p><p>That is the whole company. We take on software, hardware and connectivity work for individuals, founders, families and small teams — and we stay reachable long after the invoice is settled.</p></div></div><div class="grid why-facts"><div class="block block--4 block--stone why-fact"><span class="mark" aria-hidden="true"><i class="fas fa-comments"></i></span><div class="block__body"><h3>You talk to the builder</h3><p>The person scoping your project is the person writing the code or placing the order. Nothing gets lost being relayed.</p></div></div><div class="block block--4 block--stone why-fact"><span class="mark" aria-hidden="true"><i class="fas fa-scale-balanced"></i></span><div class="block__body"><h3>Scoped to your budget</h3><p>We work to the number you have, not the one we would prefer. If it will not stretch far enough, we say so and suggest what to drop.</p></div></div><div class="block block--4 block--stone why-fact"><span class="mark" aria-hidden="true"><i class="fas fa-arrows-rotate"></i></span><div class="block__body"><h3>We stay after launch</h3><p>Delivery is where the real questions start. Support and iteration are part of the work, not a separate contract you discover later.</p></div></div></div></div>
     </section>
 
     <section id="services" class="section services" aria-labelledby="services-title" data-blocks="scale-in">
-        <div class="rail">
-            <div class="chapter-head"><span class="eyebrow">Capabilities</span><h2 id="services-title">Build, Source, Connect.</h2><p class="lede">Three ways we help, in the order most clients need them. Take one or take all three — it is the same team either way.</p></div>
-            <div class="grid services-grid">
-                <div class="block block--12 block--row block--graphite block--interactive service-card capability capability--lead" data-target="pages/custom_websites.html" role="link" tabindex="0" aria-label="Build — software and web apps, learn more"><div class="block__aside"><span class="mark" aria-hidden="true"><i class="fas fa-laptop-code"></i></span></div><div class="block__body"><span class="capability-index">01</span><h3>Build</h3><p class="capability-lede">The booking system, the internal dashboard, the product you have been describing to people for a year. We scope it, design it, build it, launch it — and keep improving it once real users arrive.</p><ul class="list"><li>Custom web apps, internal tools and dashboards</li><li>SaaS platforms, from first version through to scale</li><li>Business websites when that is genuinely the right answer</li></ul><span class="capability-cue">Explore Build <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div>
-                <div class="block block--6 block--interactive service-card capability" data-target="pages/hardware_sourcing.html" role="link" tabindex="0" aria-label="Source — hardware sourcing, learn more"><span class="mark" aria-hidden="true"><i class="fas fa-boxes-stacked"></i></span><div class="block__body"><span class="capability-index">02</span><h3>Source</h3><p class="capability-lede">Tell us the kit and the budget. We handle supplier coordination, purchasing, shipping and delivery, so you never have to argue with a retailer that will not ship to you.</p><ul class="list"><li>Laptops, desktops and workstations</li><li>Servers, components and peripherals</li><li>Local-friendly payment on international orders</li></ul><span class="capability-cue">Explore Source <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div>
-                <div class="block block--6 block--interactive service-card capability" data-target="pages/network_infrastructure.html" role="link" tabindex="0" aria-label="Connect — network infrastructure, learn more"><span class="mark" aria-hidden="true"><i class="fas fa-network-wired"></i></span><div class="block__body"><span class="capability-index">03</span><h3>Connect</h3><p class="capability-lede">Satellite and fibre, home and office WiFi, cabling, secure remote access — installed properly the first time and monitored so problems surface before you notice them.</p><ul class="list"><li>Connectivity planning and installation</li><li>Secure access, segmentation and monitoring</li><li>Ongoing maintenance and remote troubleshooting</li></ul><span class="capability-cue">Explore Connect <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div>
-            </div>
-        </div>
+        <div class="rail"><div class="chapter-head"><span class="eyebrow">Capabilities</span><h2 id="services-title">Build, Source, Connect.</h2><p class="lede">Three ways we help, in the order most clients need them. Take one or take all three — it is the same team either way.</p></div><div class="grid services-grid"><div class="block block--12 block--row block--graphite block--interactive service-card capability capability--lead" data-target="pages/custom_websites.html" role="link" tabindex="0" aria-label="Build — software and web apps, learn more"><div class="block__aside"><span class="mark" aria-hidden="true"><i class="fas fa-laptop-code"></i></span></div><div class="block__body"><span class="capability-index">01</span><h3>Build</h3><p class="capability-lede">The booking system, the internal dashboard, the product you have been describing to people for a year. We scope it, design it, build it, launch it — and keep improving it once real users arrive.</p><ul class="list"><li>Custom web apps, internal tools and dashboards</li><li>SaaS platforms, from first version through to scale</li><li>Business websites when that is genuinely the right answer</li></ul><span class="capability-cue">Explore Build <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div><div class="block block--6 block--interactive service-card capability" data-target="pages/hardware_sourcing.html" role="link" tabindex="0" aria-label="Source — hardware sourcing, learn more"><span class="mark" aria-hidden="true"><i class="fas fa-boxes-stacked"></i></span><div class="block__body"><span class="capability-index">02</span><h3>Source</h3><p class="capability-lede">Tell us the kit and the budget. We handle supplier coordination, purchasing, shipping and delivery.</p><ul class="list"><li>Laptops, desktops and workstations</li><li>Servers, components and peripherals</li><li>Local-friendly payment on international orders</li></ul><span class="capability-cue">Explore Source <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div><div class="block block--6 block--interactive service-card capability" data-target="pages/network_infrastructure.html" role="link" tabindex="0" aria-label="Connect — network infrastructure, learn more"><span class="mark" aria-hidden="true"><i class="fas fa-network-wired"></i></span><div class="block__body"><span class="capability-index">03</span><h3>Connect</h3><p class="capability-lede">Satellite and fibre, home and office WiFi, cabling, secure remote access — installed properly and monitored.</p><ul class="list"><li>Connectivity planning and installation</li><li>Secure access, segmentation and monitoring</li><li>Ongoing maintenance and remote troubleshooting</li></ul><span class="capability-cue">Explore Connect <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div></div></div>
     </section>
 
-    <section id="how-we-work" class="section section--graphite process" data-blocks="sequence-in">
-        <div class="rail"><div class="chapter-head"><span class="eyebrow">How we work</span><h2>Four steps, and you always know which one you are in.</h2></div><ol class="process-steps"><li class="process-step"><span class="step-num">01</span><h3>Listen</h3><p>You describe the problem in plain words. No brief required, no vocabulary test. We ask until we genuinely understand what is going wrong.</p></li><li class="process-step"><span class="step-num">02</span><h3>Plan</h3><p>We come back with a scope, a realistic timeline and an honest cost — including whether we are the right people at all.</p></li><li class="process-step"><span class="step-num">03</span><h3>Deliver</h3><p>We build, source or install, showing progress as we go. Nothing is unveiled at the end for the first time.</p></li><li class="process-step"><span class="step-num">04</span><h3>Stay close</h3><p>Questions after launch are part of the relationship. We stay reachable while the work settles into real life.</p></li></ol></div>
-    </section>
+    <section id="how-we-work" class="section section--graphite process" data-blocks="sequence-in"><div class="rail"><div class="chapter-head"><span class="eyebrow">How we work</span><h2>Four steps, and you always know which one you are in.</h2></div><ol class="process-steps"><li class="process-step"><span class="step-num">01</span><h3>Listen</h3><p>You describe the problem in plain words. No brief required.</p></li><li class="process-step"><span class="step-num">02</span><h3>Plan</h3><p>We come back with a scope, realistic timeline and honest cost.</p></li><li class="process-step"><span class="step-num">03</span><h3>Deliver</h3><p>We build, source or install, showing progress as we go.</p></li><li class="process-step"><span class="step-num">04</span><h3>Stay close</h3><p>Questions after launch are part of the relationship.</p></li></ol></div></section>
 
-    <section id="about" class="section about" data-blocks="settle-up">
+    <section id="about" class="section about" data-blocks="settle-up"><div class="rail"><div class="chapter-head"><span class="eyebrow">Founder / Story</span><h2>A technology company should still feel human.</h2></div><div class="about-grid"><div class="about-media about-media--portrait"><img src="images/founder.png" alt="John-Paul Chirwa, founder of ProManaged IT" loading="lazy" width="800" height="800"></div><div class="about-story"><span class="about-kicker">John-Paul Chirwa · Founder</span><h3>Built for people who want the answer, not another layer.</h3><p>ProManaged grew from a practical belief: useful technology should make work simpler, not give people another system to manage.</p><p>That means building what genuinely needs to be built, sourcing what is better bought, and connecting the physical and digital pieces so they behave as one.</p><div class="about-details"><span><i class="fas fa-cubes" aria-hidden="true"></i> Build</span><span><i class="fas fa-truck-ramp-box" aria-hidden="true"></i> Source</span><span><i class="fas fa-tower-broadcast" aria-hidden="true"></i> Connect</span></div></div></div></div></section>
+
+    <section id="mission-vision" class="section section--stone mission-vision" data-blocks="settle-side"><div class="rail"><div class="grid mission-grid"><div class="block block--7 block--bare"><span class="eyebrow">Mission</span><h2>Make dependable technology feel attainable.</h2><p class="lede">Good engineering starts with knowing what matters and refusing to add what does not.</p></div><div class="block block--5 block--bare"><span class="eyebrow">Vision</span><h2>One trusted technology partner, without the overhead.</h2><p class="lede">A smaller, clearer way to get software, equipment and connectivity working together.</p></div></div></div></section>
+
+    <section id="contact" class="section contact-section section--ivory" data-blocks="scale-in"><div class="rail"><div class="chapter-head"><span class="eyebrow">Start a conversation</span><h2>Bring us the problem.</h2><p class="lede">Tell us what is getting in the way. We will help you work out what should happen next.</p><div class="hero-buttons"><a href="get-started.html" class="btn primary">Start a project</a><a href="mailto:info@promanaged-it.com" class="btn secondary">Email ProManaged</a></div></div></div></section>
+
+    <footer class="footer">
         <div class="rail">
-            <div class="chapter-head"><span class="eyebrow">Founder / Story</span><h2>A technology company should still feel human.</h2></div>
-            <div class="about-grid">
-                <div class="about-media about-media--portrait">
-                    <img src="images/founder.png" alt="John-Paul Chirwa, founder of ProManaged IT" loading="lazy" width="800" height="800">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>ProManaged IT</h3>
+                    <p>Useful technology, built around how you actually work.</p>
+                    <span class="footer-label">Build · Source · Connect</span>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a></li>
+                        <li><a href="get-started.html">Start a project</a></li>
+                    </ul>
                 </div>
-                <div class="about-story">
-                    <span class="about-kicker">John-Paul Chirwa · Founder</span>
-                    <h3>Built for people who want the answer, not another layer.</h3>
-                    <p>ProManaged grew from a practical belief: useful technology should make work simpler, not give people another system to manage.</p>
-                    <p>That means building what genuinely needs to be built, sourcing what is better bought, and connecting the physical and digital pieces so they behave as one.</p>
-                    <div class="about-details"><span><i class="fas fa-cubes" aria-hidden="true"></i> Build</span><span><i class="fas fa-truck-ramp-box" aria-hidden="true"></i> Source</span><span><i class="fas fa-tower-broadcast" aria-hidden="true"></i> Connect</span></div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="learn_more.html">How we work</a></li>
+                        <li><a href="pages/custom_websites.html">Software &amp; Web Apps</a></li>
+                        <li><a href="pages/hardware_sourcing.html">Hardware Sourcing</a></li>
+                        <li><a href="pages/network_infrastructure.html">Network Infrastructure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Keep in touch</h4>
+                    <p>For new work, sourcing questions or a problem you are not sure how to frame, start with a conversation.</p>
+                    <a class="btn secondary" href="get-started.html">Talk to ProManaged</a>
                 </div>
             </div>
+            <div class="footer-bottom"><p>&copy; 2026 ProManaged IT. All rights reserved.</p><a href="privacy_policy.html">Privacy Policy</a></div>
         </div>
-    </section>
-
-    <section id="mission-vision" class="section section--stone mission-vision" data-blocks="settle-side">
-        <div class="rail"><div class="grid mission-grid"><div class="block block--7 block--bare"><span class="eyebrow">Mission</span><h2>Make dependable technology feel attainable.</h2><p class="lede">Not because every project should be cheap, but because good engineering starts with knowing what matters and refusing to add what does not.</p></div><div class="block block--5 block--bare"><span class="eyebrow">Vision</span><h2>One trusted technology partner, without the overhead.</h2><p class="lede">A smaller, clearer way to get software, equipment and connectivity working together.</p></div></div></div>
-    </section>
-
-    <section id="contact" class="section contact-section section--ivory" data-blocks="scale-in">
-        <div class="rail">
-            <div class="chapter-head"><span class="eyebrow">Start a conversation</span><h2>Bring us the problem.</h2><p class="lede">Tell us what is getting in the way. We will help you work out what should happen next.</p></div>
-        </div>
-    </section>
-
-    <footer class="footer-promanaged"><div class="rail"><span>ProManaged IT</span><span>Build · Source · Connect</span></div></footer>
+    </footer>
 
     <script src="js/main.js"></script>
     <script src="js/mobile_phone_navbar.js"></script>
