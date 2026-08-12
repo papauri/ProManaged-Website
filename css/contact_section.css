@@ -8,9 +8,11 @@
 }
 
 .contact .section-header h2 {
-    font-family: var(--font-sans);
-    font-size: var(--text-4xl);
-    font-weight: var(--weight-bold);
+    font-family: var(--font-display);
+    font-size: var(--display-2);
+    font-weight: var(--weight-normal);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-display);
     color: var(--color-text);
     margin-bottom: 15px;
     animation: fadeInUp 1.5s ease-out;
@@ -183,9 +185,7 @@
         padding: 30px;
     }
 
-    .contact .section-header h2 {
-        font-size: 2rem;
-    }
+    /* h2 is fluid via --display-2; no breakpoint override needed. */
 
     .contact .section-header .subtitle_contact {
         font-size: 1rem;
