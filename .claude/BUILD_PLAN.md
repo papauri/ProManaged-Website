@@ -4,13 +4,23 @@
 Execute one complete site-wide redesign and copy rewrite. Make ProManaged feel like a premium, human-led technology studio and practical technology partner for software/web apps, hardware sourcing, and network infrastructure. Use original editorial inspiration only; never copy a reference site's words, art, code, branding, or exact layout.
 
 ## Wants vs Needs
-- **Want:** award-calibre visual polish, bold typography, editorial/bento rhythm, full copy rewrite, and one coherent identity across every page.
+- **Want:** award-calibre visual polish, bold typography, editorial/bento rhythm, full copy rewrite, and a distinctive loading/scroll experience built around modular blocks.
 - **Need:** visitors understand the three services quickly, trust the company, and know exactly how to start.
 - **Audience:** global individuals, founders, families, small teams, and organisations. Position globally; do not introduce exact countries/regions in rewritten marketing copy. Preserve the meaning of international reach and local-friendly payment options.
-- **Success Moment:** any page immediately feels like the same premium ProManaged brand and offers one obvious next action.
+- **Success Moment:** the page arrives as a composed set of building blocks, then reveals more blocks as the visitor scrolls; the whole site feels intentional, premium and distinctly ProManaged.
 
 ## Creative North Star — Signal & Systems
-Editorial technology journal + engineering workshop. Use oversized type, large image/content blocks, full-width chapter backgrounds, asymmetric composition, warm ivory/stone/graphite surfaces, and restrained blue interaction accents. Minimal cards; no dashboard aesthetic. Use `images/founder.png` as the main human visual anchor. Motion is limited to subtle reveal/hover/focus; no parallax, looping backgrounds, or gimmicks.
+Editorial technology journal + engineering workshop. Use oversized type, large image/content blocks, full-width chapter backgrounds, asymmetric composition, warm ivory/stone/graphite surfaces, and restrained blue interaction accents. Minimal cards; no dashboard aesthetic. Use `images/founder.png` as the main human visual anchor.
+
+### Signature Motion Concept — “Building Blocks”
+The site should visually communicate **systems being assembled**.
+- During initial page load, the first visible page composition should reveal as a small sequence of large rectangular/rounded blocks settling into place vertically, like architectural/building blocks assembling into the page.
+- During scrolling, major editorial chapters should reveal/settle into place with the same block language: a large block can enter first, then supporting blocks follow with short staggered offsets. The effect should feel like **construction, assembly and connection**, not a generic fade-up animation.
+- Motion must be subtle and premium: short durations, low travel distance, no bouncing, no continuous animation, no parallax, no spinning, no floating UI, and no distracting movement while reading.
+- Prefer CSS transforms/opacity with existing JS only where a scroll observer is already appropriate. Do not add a heavy animation library.
+- Respect `prefers-reduced-motion: reduce`: disable stagger/reveal motion and show all content immediately.
+- Do not animate every tiny element. Animate **chapter-level blocks** and the initial hero composition only.
+- No loading screen that hides the site for an arbitrary delay. Content should remain accessible and usable while the assembly effect runs.
 
 ## Reference Systems
 - K46 — take: human opening, direct positioning, capability-led storytelling, contact-forward rhythm — avoid copying content/layout.
@@ -31,7 +41,10 @@ Editorial technology journal + engineering workshop. Use oversized type, large i
 - [ ] No obsolete eBay/RAWG/game/shopping/render references remain in active code or `.claude` docs.
 - [ ] No dead script/stylesheet references remain; delete only assets proven unused.
 - [ ] Contact, booking, SMTP, PHPMailer, honeypot, JS hooks, PHP endpoints, links, IDs and accessibility remain functional.
+- [ ] **Building-block loading animation exists:** the initial visible composition assembles from a small number of large blocks; no arbitrary delay; accessible immediately; reduced-motion supported.
+- [ ] **Building-block scroll reveals exist:** major editorial chapters reveal as block groups with short stagger, consistent with the loading language; no element-by-element animation spam.
 - [ ] Playwright reviews every page in a headed browser at the real available window size first; records actual dimensions and captures full-page screenshots. Then checks 768px and 375px.
+- [ ] Playwright verifies initial-load motion and at least two scroll-triggered chapter transitions on representative pages; visual QA confirms motion is subtle and does not obscure content.
 - [ ] Zero console errors, horizontal overflow, broken internal links, broken CTAs, or broken forms.
 - [ ] No `.yml`/`.yaml` files remain.
 - [ ] Implementation is committed directly to `main` and pushed to `origin/main`.
@@ -55,6 +68,10 @@ All 7 public pages above.
 ### Page CSS
 `css/service_cards.css`, `css/about_section.css`, `css/mission_vision.css`, `css/why_band.css`, `css/get-started.css`, `css/learn-more.css`, `css/custom_websites.css`, `css/hardware_sourcing.css`, `css/networking.css`.
 
+### Motion / interaction
+- Use the existing shared JS entry points where a scroll observer already exists; otherwise a small shared motion helper may be added only if necessary.
+- Do not add a new animation framework/library.
+
 ### Cleanup / documentation
 Current `js/*.js`, `css/*.css`, `php/*.php`, `.claude/PROJECT_CONTEXT.md`, `.claude/SYSTEM_MAP.md`, and `.claude/agents/*.md` only where obsolete references or unused assets are proven.
 
@@ -75,6 +92,7 @@ Current `js/*.js`, `css/*.css`, `php/*.php`, `.claude/PROJECT_CONTEXT.md`, `.cla
 - Founder: `images/founder.png` as a large visual anchor with factual founder copy.
 - Mission/Vision: unequal editorial blocks.
 - Contact: strong closing invitation + existing contact form; preserve behavior.
+- Add page-level motion hooks only to major chapter wrappers and the hero block group so the building-block reveal can be applied consistently.
 
 ### Secondary HTML pages
 - `get-started.html`: guided intake around “bring us the problem”; preserve booking fields/actions/JS.
@@ -83,15 +101,16 @@ Current `js/*.js`, `css/*.css`, `php/*.php`, `.claude/PROJECT_CONTEXT.md`, `.cla
 - `pages/custom_websites.html`: software/web apps/SaaS outcomes, process and CTA; remove all pricing UI/copy.
 - `pages/hardware_sourcing.html`: guided sourcing, supplier coordination, delivery support, local-friendly payment options.
 - `pages/network_infrastructure.html`: practical WiFi, internet, Starlink/fiber, cabling, security, monitoring and maintenance outcomes.
+- Add the same chapter-level motion hooks where page structure contains major editorial sections; do not animate legal/privacy paragraphs individually.
 
 ### Shared design system
-- `css/tokens.css`: define the single palette, type, spacing, radius, shadow and layout source of truth. Palette = ivory/off-white, warm stone/sand/greige, charcoal, muted text, restrained earthy accent; blue only secondary interaction/identity. Define modern display face + Inter UI/body and fluid heading scale. Wide rail target ~1440–1560px with generous desktop gutters.
-- `css/global_styles.css`: support full-bleed section backgrounds and wide inner rails; remove generic narrow-shell rules; constrain text measure separately.
+- `css/tokens.css`: define the single palette, type, spacing, radius, shadow and layout source of truth. Palette = ivory/off-white, warm stone/sand/greige, charcoal, muted text, restrained earthy accent; blue only secondary interaction/identity. Define modern display face + Inter UI/body and fluid heading scale. Wide rail target ~1440–1560px with generous desktop gutters. Add motion tokens for short duration and stagger gap.
+- `css/global_styles.css`: support full-bleed section backgrounds and wide inner rails; remove generic narrow-shell rules; constrain text measure separately. Add shared block-reveal states/classes and `prefers-reduced-motion` fallback.
 - `css/navbar.css` + `css/logo.css`: one canonical navbar/header, identical across all 7 pages and breakpoints. Same dimensions, spacing, states, fixed-header offsets, and mobile menu behavior.
 - `css/footer_promanaged.css`: one canonical footer, identical across all 7 pages. Same columns, spacing, typography, surface, links and contact hierarchy.
-- `css/hero_section.css`: shared editorial hero grammar; page-specific content only. No narrow centered SaaS composition.
+- `css/hero_section.css`: shared editorial hero grammar and initial block-assembly choreography; page-specific content only.
 - `css/contact_section.css`: editorial contact styling only; do not alter form behavior.
-- All page CSS: migrate existing selectors onto shared tokens and shared rhythm; avoid independent page design systems.
+- All page CSS: migrate existing selectors onto shared tokens and shared rhythm; use the same chapter/block reveal classes; avoid independent page design systems.
 
 ### Legacy cleanup
 - Audit every HTML `<script src>` and stylesheet `<link>` against current tree and actual page usage.
@@ -105,15 +124,18 @@ Current `js/*.js`, `css/*.css`, `php/*.php`, `.claude/PROJECT_CONTEXT.md`, `.cla
 1. Run a headed browser at the real available browser/window size. Do not use `page.setViewportSize()` for primary desktop review.
 2. For each of the 7 public pages record: `window.innerWidth`, `window.innerHeight`, `document.documentElement.clientWidth`, `document.documentElement.scrollWidth`.
 3. Capture full-page screenshots of every public page.
-4. Inspect every screenshot for: full-width use, typography, chapter transitions, card clutter, navbar/footer uniformity, imagery, spacing, and obvious visual defects.
+4. Inspect every screenshot for: full-width use, typography, chapter transitions, block composition, card clutter, navbar/footer uniformity, imagery, spacing, and obvious visual defects.
+5. On at least one full reload of `index.html`, visually confirm the initial building-block assembly completes without hiding content or causing layout jump.
 
 ### Responsive verification
-5. Only after real-window desktop review passes, run 768px and 375px emulation.
-6. Check intentional collapse, mobile navigation, text wrapping, tap targets, images, forms and footer.
+6. Only after real-window desktop review passes, run 768px and 375px emulation.
+7. Check intentional collapse, mobile navigation, text wrapping, tap targets, images, forms and footer.
+8. Confirm `prefers-reduced-motion` removes the block movement while content remains immediately visible.
 
 ### Functional verification
-7. Check internal links, CTAs, contact form, booking form, mobile menu, font loading, missing assets and console errors.
-8. If any required browser check cannot be performed, report the exact limitation; never claim it passed.
+9. Check internal links, CTAs, contact form, booking form, mobile menu, font loading, missing assets and console errors.
+10. Scroll through `index.html` and at least one secondary service page to confirm two or more block-level scroll reveals occur without obscuring text or controls.
+11. If any required browser check cannot be performed, report the exact limitation; never claim it passed.
 
 ## New Code Needed
 ```text
@@ -121,9 +143,11 @@ Current `js/*.js`, `css/*.css`, `php/*.php`, `.claude/PROJECT_CONTEXT.md`, `.cla
 2. Rebuild index.html into semantic editorial chapters.
 3. Apply the same chapter/block language to all secondary pages.
 4. Rewrite all marketing copy from verified ProManaged facts.
-5. Remove software pricing and proven-unused legacy assets/references.
-6. Execute Playwright real-window QA for all 7 pages, then 768/375 checks.
-7. Fix all failures before completion and push one finished implementation to origin/main.
+5. Add one small shared block-reveal system for initial load and major chapter scroll reveals.
+6. Respect reduced-motion and keep all content immediately accessible.
+7. Remove software pricing and proven-unused legacy assets/references.
+8. Execute Playwright real-window QA for all 7 pages, then 768/375 checks.
+9. Fix all failures before completion and push one finished implementation to origin/main.
 ```
 
 ## Constraints / Things NOT to Touch
@@ -134,30 +158,33 @@ Current `js/*.js`, `css/*.css`, `php/*.php`, `.claude/PROJECT_CONTEXT.md`, `.cla
 - Do not alter `privacy_policy.html` legal/privacy text.
 - No hardcoded palette outside `css/tokens.css`.
 - No gradients, parallax, looping backgrounds, gimmicky animation, excessive shadows or dashboard styling.
+- Loading/scroll motion must be short, block-level, and non-blocking; no artificial splash screen or fixed delay.
+- No new animation framework/library.
 - No modal reintroduction.
 - No sub-branches, PRs, detached work or force-pushes. `main` → `origin/main` only.
 - Never commit `.yml`/`.yaml`; delete temporary YAML immediately and verify it is absent.
 
 ## Open Questions
-None. Make design, layout and copy decisions autonomously within these explicit constraints.
+None. Make design, layout, motion and copy decisions autonomously within these explicit constraints.
 
 ## Known Trade-offs
 - “Award-winning” is a quality target, not a claim that the site has won an award.
 - Existing photography is limited; typography, composition, founder imagery, icons and restrained surfaces must carry the identity.
 - Full-site consistency increases implementation scope, but it is a hard requirement.
+- Building-block motion adds a small amount of JS/CSS complexity, but the effect is part of the brand signature and must remain lightweight.
 
 ## Phases
 ### Phase 1: Shared system + homepage
-- Goal: build Signal & Systems tokens, typography, canonical header/footer, rewrite homepage copy, and structurally redesign `index.html`.
-- Exit: homepage visibly establishes the new identity and shared shell.
-- Files: `index.html` + shared CSS.
+- Goal: build Signal & Systems tokens, typography, canonical header/footer, rewrite homepage copy, structurally redesign `index.html`, and add the shared building-block motion system.
+- Exit: homepage visibly establishes the new identity, loads/reveals smoothly, and content remains accessible.
+- Files: `index.html` + shared CSS + smallest required shared JS change.
 
 ### Phase 2: Full-site rollout
-- Goal: rewrite and redesign all six remaining public pages to the same system; remove software pricing.
+- Goal: rewrite and redesign all six remaining public pages to the same system; add major-chapter block reveal hooks; remove software pricing.
 - Exit: every page visually belongs to the same site and retains all functionality.
 - Files: secondary HTML + page CSS.
 
 ### Phase 3: Cleanup + QA + delivery
-- Goal: remove proven-unused legacy logic/docs and complete Playwright real-window + 768/375 verification for all 7 pages.
+- Goal: remove proven-unused legacy logic/docs and complete Playwright real-window + 768/375 verification for all 7 pages, including loading/scroll motion.
 - Exit: all completion criteria pass; implementation committed to `main`, pushed to `origin/main`, and reported only as Changed / Blockers / Ready for review.
 - Files: cleanup list + scoped fixes only.
