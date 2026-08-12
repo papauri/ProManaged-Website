@@ -1,41 +1,40 @@
-# Build Plan: ProManaged IT — Full-Width Bento Redesign
+# Build Plan: ProManaged IT — Full-Width Bento Redesign + Legacy Logic Cleanup
 
 > ACTIVE TASK. Previous bento/type attempts are superseded by this plan and must not be repeated.
-> **OWNER DIRECTIVE:** The current site still looks centered, boxed-in, and visually unchanged. This task is a real redesign, not another token/grid cleanup.
+> **OWNER DIRECTIVE:** Deliver the visual redesign and remove obsolete application logic/references in the same pass. Do not stop for cosmetic micro-reviews.
 > **GIT:** Work only on `main`; commit and push directly to `origin/main`. No branches, PRs, force-pushes, or detached work.
 > **YAML:** Never commit `.yml` or `.yaml`. Temporary YAML must be deleted immediately and verified absent.
 
 ## Goal
-Replace the current centered card-stack appearance with a visibly new, full-width editorial/bento composition inspired by the supplied Mockuuups examples. The design must use the page width deliberately, varied tile sizes, strong typography, restrained colour, and clear visual storytelling. Mockuuups describes effective bento examples as structured compartments, bold typography, muted colour, generous whitespace, mixed media/text, and storytelling through sequential blocks. citeturn697555view0
+Replace the centered card-stack appearance with a visibly new, full-width editorial/bento composition inspired by the supplied Mockuuups examples, while removing stale render/widget logic and obsolete eBay/game-price/RAWG references that no longer belong to the product.
 
 ## Wants vs Needs
-- **Want:** a site that actually looks like the modern bento examples, not a collection of centered cards.
-- **Need:** remove the narrow-middle feeling, use full-width section containers, create deliberate asymmetric compositions, and make the hero itself visually distinctive.
-- **End user:** prospective ProManaged clients who need immediate trust, clarity, and an obvious path to enquire/book.
-- **Friction today:** content is trapped in repeated centered boxes; typography and layout do not create a strong story.
+- **Want:** a site that looks like a modern bento/editorial product site, not centered boxes; no irrelevant eBay/game/render leftovers.
+- **Need:** wide composition, stronger typography, restrained palette, and a lean runtime containing only features the current site actually uses.
+- **Friction today:** stale agent/docs references make obsolete functionality look active; unnecessary JS/CSS/PHP increases confusion and maintenance cost.
 
 ## Success Moment
-At desktop width, the homepage immediately reads as a premium modern IT/SaaS site: a wide editorial hero, one dominant visual/text tile, asymmetric bento sections spanning most of the viewport, and typography that looks intentional before the visitor scrolls.
+The homepage looks intentionally composed across the viewport, and a developer opening the project sees only current ProManaged functionality—no obsolete shopping/game/eBay/render pipeline references.
 
 ## Reference Systems
-- **Mockuuups Bento examples** — take: mixed media/text compartments, varied proportions, bold type, muted palette, generous whitespace, storytelling. Avoid copying a specific composition or artwork. citeturn697555view0
-- **Apple** — take: full-width storytelling and strong feature hierarchy. Avoid product-ad imagery we do not own.
-- **Linear** — take: restrained typography and minimal visual chrome. Avoid dark-theme dependency.
+- **Mockuuups Bento examples** — take: mixed visual/text compartments, varied proportions, bold type, muted colour, whitespace, sequential storytelling; avoid literal copying.
+- **Apple** — take: full-width storytelling and feature hierarchy; avoid image-heavy imitation.
+- **Linear** — take: restrained typography/chrome; avoid dark-theme dependence.
 
 ## Completion Criteria (Definition of Done)
-- [ ] Homepage no longer reads as a narrow centered stack; primary content sections use a wide container with deliberate full-width backgrounds and asymmetric internal composition.
-- [ ] Hero is a real editorial/bento composition: large headline block + adjacent visual/fact block(s), not a centered text column.
-- [ ] At least 3 homepage sections use clearly different tile sizes/spans and fill the available content width.
-- [ ] Service section has one dominant feature tile and supporting tiles with visible asymmetry.
-- [ ] At least one section uses a large visual/text tile rather than four equal card boxes.
-- [ ] Typography uses a modern display face + Inter body/UI, with clear display hierarchy and fluid sizing.
-- [ ] Palette is modern and restrained: neutral/slate base, one blue accent, no random legacy accent colours or decorative gradients.
-- [ ] The layout remains coherent at 375 / 768 / 1280px with no horizontal overflow and no console errors.
-- [ ] Desktop content visibly uses the available width; no arbitrary narrow `max-width` wrappers causing the boxed-in appearance.
+- [ ] Homepage is visually transformed: wide editorial hero, asymmetric service/content bands, deliberate full-width backgrounds.
+- [ ] At least 3 homepage sections use varied tile sizes and the available desktop width.
+- [ ] Modern display typography + Inter body/UI; restrained slate/blue palette only.
+- [ ] No obsolete eBay, RAWG, game-price, game-review, shopping-widget, or abandoned render-pipeline references remain in active application code or `.claude` project docs.
+- [ ] Every remaining JS/CSS/PHP asset is referenced by at least one current page or required by a current form/runtime path; unused assets are deleted.
+- [ ] No dead `<script>`/stylesheet references remain.
+- [ ] Existing contact/booking functionality still works; do not remove PHP mail/SMTP or honeypot behaviour.
+- [ ] Verified at 375 / 768 / 1280px with no overflow and no console errors.
 - [ ] No `.yml` or `.yaml` files remain.
-- [ ] Final implementation is committed to `main` and pushed to `origin/main`.
+- [ ] Final implementation committed to `main` and pushed to `origin/main`.
 
 ## Files to Change
+### Design
 - `css/tokens.css`
 - `css/global_styles.css`
 - `css/hero_section.css`
@@ -44,89 +43,87 @@ At desktop width, the homepage immediately reads as a premium modern IT/SaaS sit
 - `css/about_section.css`
 - `css/mission_vision.css`
 - `css/footer_promanaged.css`
-- `index.html` — layout markup may be changed only where required to create the new editorial/bento composition; preserve content and functionality.
+- `index.html`
 
-Do not expand scope to the other pages until the homepage is approved as the visual reference implementation.
+### Logic/reference cleanup audit
+- `index.html`
+- `get-started.html`
+- `learn_more.html`
+- `privacy_policy.html`
+- `pages/custom_websites.html`
+- `pages/hardware_sourcing.html`
+- `pages/network_infrastructure.html`
+- `js/booking_form.js`
+- `js/contact__form.js`
+- `js/custom_websites.js`
+- `js/main.js`
+- `js/mobile_phone_navbar.js`
+- `js/networking.js`
+- `js/privacy_policy.js`
+- all current `css/*.css` files listed in the repository tree
+- `php/booking.php`
+- `php/contact.php`
+- `php/env.php`
+- `php/mailer.php`
+- `.claude/PROJECT_CONTEXT.md`
+- `.claude/SYSTEM_MAP.md`
+- `.claude/agents/backend-specialist.md`
+- `.claude/agents/codebase-scout.md`
+- `.claude/agents/frontend-specialist.md`
+- `.claude/agents/build-planner.md`
 
 ## Exact Changes
-### css/tokens.css
-- Section: layout/typography/colour tokens.
-- Change: establish a wide container token (target ~1440px), generous horizontal page padding, display type scale, one radius family, one shadow family, neutral/slate surfaces, and the existing blue accent.
-- Reason: the current centered composition is partly caused by overly narrow layout constraints.
+### Homepage design files
+- Rebuild the homepage as a wide editorial/bento composition: large unequal hero zones, asymmetric service tiles, broad storytelling bands, and deliberate use of viewport width.
+- Use a modern display face for H1/H2, Inter for body/UI, and only neutral/slate surfaces plus the existing blue accent.
+- Remove narrow generic wrappers or fixed widths that cause the current boxed-in appearance.
 
-### css/global_styles.css
-- Section: containers, headings, page rhythm.
-- Change: remove narrow generic wrappers that force every section into the same centered width; establish wide-section defaults and strong heading hierarchy.
-- Reason: the site needs width and rhythm before individual bento tiles can work.
-
-### css/hero_section.css
-- Section: hero.
-- Change: rebuild as a wide two-zone editorial composition using the available viewport: dominant headline/CTA area plus a large asymmetric bento/fact/visual area. Use large type, whitespace, and one accent surface; avoid centered hero copy.
-- Reason: hero is the first proof that the redesign is real.
-
-### css/service_cards.css
-- Section: services grid.
-- Change: redesign to a clearly asymmetric bento composition with one lead tile spanning most of a row and supporting tiles at different sizes. Use the full content width. Avoid equal-height/equal-width card rows.
-- Reason: services are the main commercial content and need the strongest bento signal.
-
-### css/why_band.css
-- Section: why/proof band.
-- Change: make the section a broad storytelling band with one large statement tile and smaller supporting tiles rather than centered cards.
-- Reason: reinforces editorial storytelling.
-
-### css/about_section.css
-- Section: About.
-- Change: use a split editorial layout: larger founder visual area + text block + optional supporting accent block. Do not center the whole section into a narrow column.
-- Reason: introduces human/brand storytelling instead of another card grid.
-
-### css/mission_vision.css
-- Section: mission/vision.
-- Change: use a broad two-part bento composition with distinct visual weights for Mission and Vision; no tabbed/boxed equal treatment.
-- Reason: preserves hierarchy and storytelling.
-
-### css/footer_promanaged.css
-- Section: footer.
-- Change: allow the footer content to use the wide container consistently; simplify into clear columns with strong spacing and no cramped centered block.
-- Reason: completes the full-width visual system.
-
-### index.html
-- Section: homepage section wrappers only.
-- Change: permit the new wide/asymmetric CSS composition and add only the minimal semantic wrappers/classes needed for the new hero/service/about/mission structures. Preserve all existing copy, links, forms, IDs, and functional hooks.
-- Reason: CSS alone cannot create the required composition if the current DOM prevents it.
+### Logic cleanup audit
+- Inspect every current HTML `<script>` and stylesheet reference against the current repository tree.
+- Delete only files proven unused by current pages/runtime.
+- Remove obsolete eBay/RAWG/game-price/game-review/shopping-widget/render-pipeline code and references if any remain in the listed active files or project docs.
+- Remove dead event handlers, duplicate render code, unused selectors/classes, and abandoned server-variant references when their callers are absent.
+- Do not remove `js/booking_form.js`, `js/contact__form.js`, `php/booking.php`, `php/contact.php`, `php/mailer.php`, or honeypot logic if still referenced by live forms.
+- Update `.claude/PROJECT_CONTEXT.md` and `.claude/SYSTEM_MAP.md` so they describe the current tree and no longer advertise deleted game/eBay/render systems.
+- Verify no HTML references deleted assets.
 
 ## New Code Needed
 Pseudocode only:
-1. Set page container to wide desktop width with generous side padding.
-2. Build hero as two unequal columns with a nested bento cluster.
-3. Build services as lead tile + smaller support tiles using explicit spans.
-4. Build why/about/mission as wide editorial bands with varied tile weights.
-5. Collapse to one-column storytelling at mobile widths.
+1. Use wide page container + full-width section backgrounds.
+2. Compose hero from unequal editorial zones.
+3. Compose services as one lead tile plus supporting asymmetric tiles.
+4. Remove dead runtime paths and stale documentation references.
+5. Re-run reference checks and browser QA after cleanup.
 
 ## Constraints / Things NOT to Touch
-- Do not modify PHP, form handlers, booking/contact JS, API behaviour, authentication, or business logic.
-- Do not redesign other pages in this task; homepage is the canonical reference first.
-- Do not add stock assets, fake metrics, fake clients, or invented portfolio claims.
-- Keep Inter for body/UI and use one modern display face for headings.
-- No dark theme. No decorative multi-stop gradients. No random accent colours.
-- Do not reintroduce modal UI.
+- Do not invent new business features or data.
+- Do not add stock assets, fake metrics, fake clients, or fabricated portfolio claims.
+- Do not remove working contact/booking/SMTP/honeypot functionality.
+- No dark theme or random accent colours.
+- No modal reintroduction.
 - No bulk line-ending/rewrite scripts.
 - `origin/main` only.
 - Never commit YAML files.
 
 ## Known Trade-offs
-- Homepage will diverge visually from secondary pages until a later rollout; this is intentional so the visual direction can be judged once instead of repeating weak site-wide tweaks.
-- A wider container increases whitespace responsibility; tiles must be composed deliberately rather than simply stretched.
+- Secondary pages are not fully redesigned in this pass; homepage remains the canonical visual reference.
+- Deleting truly unused JS/CSS/PHP is preferable to keeping speculative compatibility code.
 
 ## Open Questions
-None. Implement the homepage direction decisively using the reference principles above.
+None.
 
 ## Phases
-### Phase 1: Homepage redesign
-- Goal: implement the full-width editorial/bento system across hero, services, why, about, mission/vision, and footer.
-- Exit condition: desktop screenshot/visual review clearly shows a transformed site, not a centered card stack.
-- Files: `css/tokens.css`, `css/global_styles.css`, `css/hero_section.css`, `css/service_cards.css`, `css/why_band.css`, `css/about_section.css`, `css/mission_vision.css`, `css/footer_promanaged.css`, `index.html`.
+### Phase 1: Remove obsolete logic + stale references
+- Goal: current runtime contains only used functionality; eBay/game/RAWG/render leftovers are gone from active code and project docs.
+- Exit: reference audit shows no dead scripts/styles or obsolete feature names.
+- Files: cleanup audit list above.
 
-### Phase 2: Verification
-- Goal: test 375 / 768 / 1280px, console, overflow, typography loading, and all existing homepage interactions/links.
-- Exit condition: all Completion Criteria pass.
-- Files: same as Phase 1, fixes only.
+### Phase 2: Full-width homepage redesign
+- Goal: visually transform the homepage using the approved editorial/bento direction.
+- Exit: desktop clearly reads as a new site, not a centered card stack.
+- Files: design list above.
+
+### Phase 3: Verification
+- Goal: browser-test 375 / 768 / 1280, console, overflow, links, forms, and font loading.
+- Exit: all Completion Criteria pass and implementation is pushed to `origin/main`.
+- Files: same lists, fixes only.
