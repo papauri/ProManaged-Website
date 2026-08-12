@@ -45,23 +45,21 @@
   --radius-sm: 6px; --radius: 10px; --radius-lg: 18px; --radius-full: 9999px;
   --shadow-sm: 0 1px 2px rgba(28,27,25,.06),0 2px 6px rgba(28,27,25,.05);
   --shadow-lg: 0 18px 40px rgba(28,27,25,.13),0 4px 12px rgba(28,27,25,.06);
-  --rail-visual: 2200px; --rail-max: var(--rail-visual); --rail-pad: clamp(1.25rem,2.8vw,4.5rem); --grid-gap: clamp(1rem,1.8vw,2.75rem); --grid-cols: 12; --header-h: 92px;
+  --rail-visual: 1880px; --rail-max: var(--rail-visual); --rail-pad: clamp(1.25rem,5vw,4rem); --grid-gap: clamp(1rem,1.6vw,2.25rem); --grid-cols: 12; --header-h: 92px;
   --transition: 160ms cubic-bezier(.4,0,.2,1);
-  /* Building Blocks: visible enough to notice, still premium rather than cartoonish. */
-  --block-duration: 680ms;
-  --block-stagger: 96ms;
-  --block-travel: 34px;
-  --block-scale: .965;
-  --block-scale-in: .92;
+  /* slow, soft editorial motion — noticeable but never cartoonish */
+  --block-duration: 900ms;
+  --block-stagger: 120ms;
+  --block-travel: 28px;
+  --block-scale: .975;
+  --block-scale-in: .955;
   --block-sequence-mult: 1.25;
-  --block-tilt: 0.65deg;
-  --ease-settle: cubic-bezier(.16,.86,.24,1.18);
+  --ease-settle: cubic-bezier(.2,.78,.2,1);
   --ease-fade: cubic-bezier(.16,.72,.24,1);
   --portrait-size: 260px;
   --ratio-portrait: 3 / 4; --ratio-square: 1 / 1; --ratio-landscape: 16 / 10; --ratio-panorama: 21 / 9;
 }
-@media (max-width: 1440px){:root{--rail-pad:clamp(1.25rem,4vw,3.5rem)}}
-@media (min-width: 1800px){:root{--block-duration:720ms;--block-stagger:104ms;--block-travel:40px;--block-scale:.955;--block-scale-in:.90;--grid-gap:clamp(1.5rem,2vw,3rem)}}
-@media (max-width: 1024px){:root{--block-travel:24px;--block-stagger:72ms;--block-duration:560ms;--block-scale-in:.94;--portrait-size:210px;--rail-pad:clamp(1.25rem,5vw,3rem)}}
-@media (max-width: 768px){:root{--header-h:80px;--block-travel:20px;--block-stagger:60ms;--block-duration:500ms;--block-scale:.975;--block-scale-in:.95}}
-@media (max-width:680px){:root{--block-travel:14px;--block-stagger:48ms;--block-duration:460ms;--block-scale:.985;--block-scale-in:.965;--portrait-size:148px;--rail-pad:1rem;--grid-gap:1rem}}
+@media (max-width:1024px){:root{--block-travel:22px;--block-stagger:95ms;--block-duration:780ms;--block-scale-in:.96;--portrait-size:210px}}
+@media (max-width:768px){:root{--header-h:80px;--block-travel:18px;--block-stagger:80ms;--block-duration:700ms;--block-scale-in:.965}}
+@media (max-width:680px){:root{--block-travel:12px;--block-stagger:65ms;--block-duration:620ms;--block-scale:.985;--block-scale-in:.975;--portrait-size:148px;--rail-pad:1rem;--grid-gap:1rem}}
+@media (prefers-reduced-motion: reduce){:root{--block-duration:1ms;--block-stagger:0ms;--block-travel:0px;--block-scale:1;--block-scale-in:1}}
