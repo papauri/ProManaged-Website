@@ -1,54 +1,43 @@
 # PROJECT_CONTEXT.md — ProManaged IT Website
 
-> Updated 2026-08-13 after the Signal & Systems visual, form, email and wide-desktop composition work.
+> Updated 2026-08-13 after the balanced Signal & Systems reset.
 
 ## 1. What this project is
-The marketing website for **ProManaged IT** (promanaged-it.com), a small, human-led technology studio. Its three capabilities are presented consistently as **Build / Source / Connect**:
+The marketing website for **ProManaged IT**, a small, human-led technology studio. Its three capabilities are presented consistently as **Build / Source / Connect**:
 
 - **Build** — custom web apps, SaaS platforms and business websites.
 - **Source** — hardware sourcing: supplier coordination, purchasing, shipping and delivery.
 - **Connect** — network infrastructure: satellite/fibre, WiFi, cabling, security, monitoring.
 
-**Frontend:** static HTML + CSS + vanilla JS at the repo root. No framework or bundler.
-**Backend:** PHP under `php/`, sending through vendored PHPMailer via SMTP.
-**Design:** `css/tokens.css` is the single source of truth. Warm neutral surfaces, restrained earthy accent, blue reserved for interaction/identity, and Plus Jakarta Sans for every text role.
-**Navigation:** no traditional navbar. A visible ProManaged logo tile opens a full-viewport bento navigation panel.
-**Forms:** shared bento intake presentation with `js/form_intake.js`; endpoint contracts remain unchanged.
-**Email:** reusable branded HTML/plain-text templates and SMTP transport live in `php/mailer.php`.
+Frontend is static HTML + CSS + vanilla JS. Backend is PHP + vendored PHPMailer + SMTP.
 
-## 2. End users & core problem
-Individuals, families, founders, small teams and organisations who need software built, equipment sourced, or connectivity set up without an enterprise IT department.
+## 2. Current design contract
+- Design direction: Signal & Systems — editorial technology studio / engineering workshop.
+- Typography: Plus Jakarta Sans for every text role.
+- Palette source of truth: `css/tokens.css`.
+- Navigation: no traditional navbar; the visible ProManaged logo tile opens the bento panel.
+- **Hero/layout baseline: balanced editorial 7/5 composition on the approved ~1880px visual rail.** Do not stretch the design into an oversized full-canvas island.
+- Text width remains independently constrained from visual width.
+- Bento layouts vary by breakpoint, but composition must remain calm and intentional.
+- Founder portrait is a smaller circular crop from the existing 800×800 asset.
 
-The site must convert a visitor into a lead by feeling credible, calm, human and easy to act on.
+## 3. Content / evidence
+The site may use verified, anonymous interface/project fragments as visual evidence: dashboards, booking flows, product UI, network diagrams, hardware details and controller/interface motifs.
 
-## 3. Positioning rules
-- Position globally. Do not introduce exact countries/cities/regions into new marketing headlines or hero copy.
-- Preserve the meaning of international reach and local-friendly payment options.
-- Registration details are factual footer credentials, not marketing claims.
-- Never invent clients, metrics, awards, partnerships or testimonials.
-- `pages/custom_websites.html` contains no visible pricing.
+Never invent clients, metrics, awards, testimonials or project results. Do not publicly name a client/project in new marketing copy unless explicitly approved.
 
-## 4. Design direction
-Signal & Systems: an editorial technology studio / engineering workshop.
+## 4. Motion contract — Slow Building Blocks
+- Hero assembles on initial load.
+- Major chapters and bento navigation reveal on scroll/open.
+- Approved variants: `settle-up`, `settle-side`, `scale-in`, `sequence-in`.
+- Motion is deliberately slower and more noticeable than the earlier pass, but still premium: roughly 800–1000ms hero, 700–900ms chapter transitions, with controlled stagger.
+- Only transform/opacity are animated. No parallax, looping animation, continuous floating or cartoon bounce.
+- `prefers-reduced-motion` exposes final states immediately.
 
-- Oversized modern typography.
-- **Expansive desktop visual rail:** on 1600px+ screens, major hero/chapter compositions should use most of the available canvas with controlled gutters rather than reading as a narrow centered content island.
-- Text measures remain independently constrained so wider grids never create unreadably long prose lines.
-- Asymmetric bento compositions with varied spans, ratios, ordering and whitespace.
-- Desktop, tablet and mobile are deliberately recomposed; mobile is not a simple desktop card stack.
-- Smaller circular founder portrait.
-- No dashboard aesthetic, gradients, parallax, looping backgrounds or decorative chaos.
+## 5. Forms / email
+Contact, hardware request and booking forms use the shared bento intake design. Preserve field names, PHP endpoints, SMTP, PHPMailer and honeypot contracts.
 
-## 5. Signature interaction
-**Building Blocks / Weighted Block Settle**: the hero assembles on load; major chapters and bento navigation tiles reveal on scroll/open. Approved motion variants are `settle-up`, `settle-side`, `scale-in`, and `sequence-in`. Motion is device-aware and reduced-motion safe.
+Internal and customer emails use reusable branded HTML + plain-text templates in `php/mailer.php`; submitted values are escaped before HTML output.
 
-## 6. Forms & email touchpoints
-- Contact, hardware request and booking forms use grouped bento intake boards with modern focus, validation, loading and success states.
-- `php/contact.php` and `php/booking.php` validate server-side and send through `php/mailer.php`.
-- Internal emails are designed as compact information boards for triage.
-- Customer replies are designed as branded confirmations with concise summaries and factual next steps.
-- Both HTML and plain-text alternatives are required.
-- Submitted values are escaped before entering HTML email.
-
-## 7. Non-goals
-No new framework, bundler, third-party backend, account system, modal flow, CAPTCHA, or unrelated hosting redesign. Render.com cleanup concerns only actual deployment/hosting dependencies; ordinary uses of the word “render” remain untouched.
+## 6. Non-goals
+No new framework, animation library, account system, modal flow, CAPTCHA or unrelated hosting redesign. Render cleanup only concerns actual Render.com deployment infrastructure. `privacy_policy.html` remains unchanged.
