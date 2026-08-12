@@ -1,202 +1,124 @@
-# Build Plan: K46-Inspired ProManaged Site Refresh
+# Build Plan: ProManaged IT — Signal & Systems Global Redesign
 
 ## Goal
-Refresh the ProManaged IT website to use the **spirit** of `k46team.webflow.io`: bold collective-style landing page, strong editorial blocks/cards, playful visual rhythm, direct contact prompts, and a consistent visual system across every public page. Use only ProManaged IT business information and fully reworded original copy. Do **not** copy K46 text, images, code, exact layout, or branding.
+Create an original, award-calibre ProManaged website concept: **Signal & Systems** — a human-led technology partner that turns unclear technology problems into practical software, dependable infrastructure, and sourced hardware. The site should feel like a digital design studio and engineering partner, not a generic IT support template.
+
+Use inspiration from strong editorial/agency work: oversized typography, image-led storytelling, horizontal rhythm, confident negative space, bold transitions and restrained micro-interactions. Award-oriented references show that typography, storytelling, transitions and large visual composition are recurring strengths in high-quality agency work. citeturn260629search1turn260629search2turn260629search24
 
 ## Wants vs Needs
-- Wants: “Clone” the visual feel across every page, reword copy, add pictures if useful, and make the implementation agent autonomous within this plan.
-- Needs: Original ProManaged-branded implementation that avoids copyright/trademark copying, improves consistency across all pages, and works with the existing static HTML/CSS/JS/PHP site.
-- End user: Individuals and small businesses in Ireland, Malawi, and worldwide who need software, hardware sourcing, or networking help.
-- Friction: Visitors may not immediately understand ProManaged’s three service lines or how to start.
-- Success Moment: A visitor lands on any public page and quickly thinks, “This is a modern, trustworthy IT partner, and I know exactly what to click next.”
+- **Want:** an award-winning visual concept with completely rewritten copy and a coherent identity across every page.
+- **Need:** one recognizable ProManaged system, immediate understanding of the three capabilities, trust without exaggerated claims, and a clear CTA.
+- **Audience:** global clients who need software/web apps, hardware sourcing or network infrastructure, with practical reach into markets where access, fulfilment and local payment options matter.
+- **Do not lead with exact countries/regions.** Position ProManaged as global and remote-first; mention regional accessibility only where useful in supporting copy.
+- **Success Moment:** any page feels unmistakably ProManaged, explains its purpose in seconds, and gives the visitor an obvious next action.
+
+## Core Concept — “Signal & Systems”
+Visual language: **editorial technology journal + engineering workshop**.
+- Large type introduces ideas, not service-card titles.
+- Sections behave like designed chapters: full-width colour fields, image blocks, oversized statements, offset grids and controlled overlaps.
+- Warm ivory/stone/graphite base with one electric blue interaction accent; blue never dominates the canvas.
+- Use the existing founder image as the human anchor; use icons as small functional marks, not decorative card art.
+- Motion is subtle: reveal, hover, underline/shift, and section transitions only. No looping backgrounds, parallax or gimmicks.
 
 ## Reference Systems
-- K46 Medienkollektiv — take: bold human-first intro, overlapping/varied editorial blocks, direct positioning, strong contact prompts — avoid: copied German text, names, images, exact composition.
-- Linear — take: crisp spacing, confident section rhythm, restrained modern UI — avoid: overly abstract SaaS language.
-- Stripe-style landing pages — take: clear information hierarchy, trust-building explanatory sections and decisive CTAs — avoid: dense corporate copy.
+- K46 — take: human opening, direct positioning, capability-led storytelling, contact-forward rhythm — avoid copying content/layout.
+- Editorial/award sites — take: typography as navigation, strong visual pacing, large image blocks and restrained transitions — avoid spectacle without purpose.
+- Linear — take: precision, clarity and product-like polish — avoid abstract SaaS jargon.
 
 ## Completion Criteria (Definition of Done)
-- [ ] Every public HTML page has refreshed, original ProManaged copy and visual rhythm aligned with the new site direction.
-- [ ] Homepage hero, service sections, about, mission/vision, contact, and footer feel cohesive and K46-inspired without copying protected assets or wording.
-- [ ] Service pages keep their existing purpose but get stronger page intros, editorial/card-based sections, and clearer CTAs.
-- [ ] **Navbar/header is visually identical across every public page**: same logo sizing, spacing, typography, link states, fixed-header behavior, and mobile menu treatment.
-- [ ] **Footer is visually identical across every public page**: same structure, columns, spacing, typography, surface treatment, links and contact hierarchy.
-- [ ] Typography, colours, spacing, radii, buttons and section rhythm are shared across all public pages.
-- [ ] Existing forms, links, scripts, and PHP endpoints remain wired exactly as before unless text-only labels change.
-- [ ] Existing business facts remain: ProManaged IT, John-Paul Chirwa, Ireland/Malawi/worldwide reach, software/web apps/SaaS, hardware sourcing, network infrastructure, local-currency support, listed emails.
-- [ ] No pricing is shown anywhere on `pages/custom_websites.html`.
-- [ ] No broken relative asset paths or navigation links.
-- [ ] Responsive behavior remains usable on mobile and desktop.
-- [ ] **Playwright performs real-window/headed desktop review first for every public page.** No custom fixed viewport is used for the primary desktop review.
-- [ ] **Playwright records actual browser dimensions** using `window.innerWidth`, `window.innerHeight`, `document.documentElement.clientWidth`, and `document.documentElement.scrollWidth` for every public page.
-- [ ] Full-page screenshots are captured at the real available browser size for every public page.
-- [ ] After real-window desktop review, Playwright checks **768px and 375px** as secondary responsive emulation only.
-- [ ] Playwright reports zero console errors, zero horizontal overflow, no broken internal links, and no broken CTA/form interactions.
+- [ ] All 7 public pages have rewritten, original copy and one visual system.
+- [ ] Header and footer are identical in structure and visual treatment across every page.
+- [ ] Homepage opens with a full-width statement-led hero and a distinctive visual composition.
+- [ ] Every page has 3–5 major editorial chapters with varied block scale; no repetitive equal-card grid as the primary story.
+- [ ] Software, hardware and networking are immediately understandable without reading large paragraphs.
+- [ ] Founder/story section is substantial and human; factual only.
+- [ ] Global positioning is used; exact location is secondary, not the headline identity.
+- [ ] `pages/custom_websites.html` contains no prices or pricing tables.
+- [ ] No obsolete eBay/RAWG/game/shopping/render references remain in active code/docs.
+- [ ] Forms, PHP, SMTP, JS hooks, links and accessibility remain functional.
+- [ ] Modern display font + Inter body/UI; strong responsive type scale.
+- [ ] Warm-neutral visual system with blue used only as accent/interaction.
+- [ ] Playwright reviews every page in the real available headed browser first, full-page screenshots included; then 768px/375px emulation.
+- [ ] Zero console errors, overflow, broken links or broken forms.
 - [ ] No `.yml`/`.yaml` files remain.
-- [ ] All implementation work is committed directly to `main` and pushed to `origin/main`.
-- [ ] Claude/Codex reports only: **Changed / Blockers / Ready for review**.
-
-## Public Pages
-- `index.html`
-- `get-started.html`
-- `learn_more.html`
-- `privacy_policy.html`
-- `pages/custom_websites.html`
-- `pages/hardware_sourcing.html`
-- `pages/network_infrastructure.html`
+- [ ] Implementation committed directly to `main` and pushed to `origin/main`.
 
 ## Files to Change
-### Shared shell/design
-- `css/tokens.css`
-- `css/global_styles.css`
-- `css/navbar.css`
-- `css/logo.css`
-- `css/footer_promanaged.css`
-- `css/hero_section.css`
-- `css/contact_section.css`
-
-### Homepage
-- `index.html`
-- `css/service_cards.css`
-- `css/about_section.css`
-- `css/mission_vision.css`
-- `css/why_band.css`
-
-### Secondary pages
-- `get-started.html`
-- `learn_more.html`
-- `privacy_policy.html` — visual shell/header/footer consistency only; do not rewrite legal/privacy copy
-- `pages/custom_websites.html`
-- `pages/hardware_sourcing.html`
-- `pages/network_infrastructure.html`
-- page-specific CSS files already linked by those pages: `css/get-started.css`, `css/learn-more.css`, `css/custom_websites.css`, `css/hardware_sourcing.css`, `css/networking.css`
-
-### Cleanup audit
-- current `*.html`
-- current `js/*.js`
-- current `css/*.css`
-- current `php/*.php`
-- `.claude/PROJECT_CONTEXT.md`
-- `.claude/SYSTEM_MAP.md`
-- `.claude/agents/backend-specialist.md`
-- `.claude/agents/codebase-scout.md`
-- `.claude/agents/frontend-specialist.md`
-- `.claude/agents/build-planner.md`
+- `index.html`, `get-started.html`, `learn_more.html`, `privacy_policy.html`
+- `pages/custom_websites.html`, `pages/hardware_sourcing.html`, `pages/network_infrastructure.html`
+- Shared: `css/tokens.css`, `css/global_styles.css`, `css/navbar.css`, `css/logo.css`, `css/footer_promanaged.css`, `css/hero_section.css`, `css/contact_section.css`
+- Page CSS: `css/service_cards.css`, `css/about_section.css`, `css/mission_vision.css`, `css/why_band.css`, `css/get-started.css`, `css/learn-more.css`, `css/custom_websites.css`, `css/hardware_sourcing.css`, `css/networking.css`
+- Cleanup audit: current HTML/JS/CSS/PHP plus `.claude/PROJECT_CONTEXT.md`, `.claude/SYSTEM_MAP.md`, `.claude/agents/*` maps
 
 ## Exact Changes
-### `index.html`
-- Section: `head metadata`
-- Change: Reword description/keywords for modern IT collective/partner positioning.
-- Reason: Align search snippet and brand promise.
-- Section: `#header-section`
-- Change: Keep existing nav destinations, logo path, mobile-menu hooks and behavior; visual treatment must match the canonical shared navbar.
-- Reason: Avoid breaking mobile JS while making the shell uniform.
-- Section: Hero
-- Change: Rework into a bold ProManaged statement, not a conventional SaaS headline. Keep existing CTAs and use factual Ireland/Malawi/worldwide/local-payment facts. Use large editorial blocks rather than a small card cluster.
-- Reason: Capture K46’s confident intro without copying it.
-- Section: Services
-- Change: Keep the three service destinations; rewrite each as a concise problem/solution editorial block with different visual weight.
-- Reason: Make services immediately understandable.
-- Section: Why/About/Mission-Vision/Contact/Footer
-- Change: Reword and restyle into connected editorial chapters, founder/trust story, direct contact prompt, and the canonical footer.
-- Reason: Cohesive whole-page narrative.
+### Copy system — all HTML pages
+- Rewrite every marketing sentence in original ProManaged language; do not merely paraphrase the existing headings.
+- Voice: direct, calm, confident, technical without jargon, human without hype.
+- Positioning: “We make technology work in the real world” conceptually; emphasize outcomes, practical delivery and proximity.
+- Global framing: say **global**, **remote**, **cross-border**, **wherever the work needs to happen**; avoid making a country the identity.
+- Preserve verified business facts only; no invented case studies, metrics or clients.
 
-### `get-started.html`
-- Sections: hero, why, services, testimonials, booking
-- Change: Rewrite as a guided “tell us what you need” page; keep booking form fields, actions and JS hooks unchanged. Use the same header/footer and visual language as `index.html`.
+### `index.html` — lead experience
+- Build chapters: Statement → What we solve → Capabilities → How we work → Founder/Trust → Mission/Vision → Contact.
+- Replace card catalogue with unequal editorial blocks and large statements.
+- First screen must explain what ProManaged does and offer one primary CTA.
 
-### `learn_more.html`
-- Sections: hero, company/service sections, footer
-- Change: Reword to explain who ProManaged helps, how cross-border support works, and what clients can expect. Match the shared shell and editorial rhythm.
+### Shared shell
+- `navbar.css` / `logo.css`: one canonical responsive header.
+- `footer_promanaged.css`: one canonical editorial footer across all pages.
+- `tokens.css` / `global_styles.css`: one palette, type system, spacing, radius, shadow and wide-layout source of truth.
+- `hero_section.css`: shared hero grammar with page-specific composition.
 
-### `privacy_policy.html`
-- Sections: page shell only
-- Change: Apply the canonical navbar/footer, typography, spacing, colours and page-width system without rewriting legal/privacy content.
-- Reason: Privacy page must still feel like the same site.
+### Service pages
+- `custom_websites`: software/web apps/SaaS outcomes, process, examples/types, CTA; remove all pricing.
+- `hardware_sourcing`: sourcing, fulfilment, verification, delivery and local-payment practicality.
+- `network_infrastructure`: connectivity, WiFi, Starlink/fiber, security and maintenance framed around reliability.
+- `get-started`: guided “bring us the problem” journey.
+- `learn_more`: company philosophy, capability story and how engagement works.
+- `privacy_policy`: preserve legal copy; apply canonical shell only.
 
-### `pages/custom_websites.html`
-- Sections: hero, process, build types, projects, FAQ, CTA
-- Change: Rewrite around software/web apps/SaaS outcomes; keep existing page purpose and booking/enquiry flow; **remove all visible prices, pricing tables, package amounts, “starting at” amounts and price-led UI/copy**.
-- Reason: Pricing is no longer wanted on the software page.
+### Cleanup
+- Audit every script/style reference.
+- Remove proven-unused eBay/RAWG/game/shopping/render/server-variant code and stale docs.
+- Never remove working form/mail/honeypot paths without proof they are unused.
 
-### `pages/hardware_sourcing.html`
-- Sections: hero, sourcing intro, categories, request form, footer
-- Change: Rewrite around stress-free sourcing, delivery, local-currency payment; keep request/contact form behavior unchanged and match the shared visual system.
-
-### `pages/network_infrastructure.html`
-- Sections: hero, service sections/cards, CTA, footer
-- Change: Rewrite around reliable internet, WiFi, Starlink/fiber, security and maintenance; keep scripts unchanged and match the shared visual system.
-
-### Shared CSS
-- `css/tokens.css`: adjust only the shared design tokens needed for the refreshed system.
-- `css/global_styles.css`: add shared wide-layout, section rhythm and editorial helpers only if needed.
-- `css/navbar.css`: one canonical navbar style for all pages.
-- `css/logo.css`: one canonical logo sizing rule across all breakpoints.
-- `css/footer_promanaged.css`: one canonical footer structure/style across all pages.
-- `css/hero_section.css`: shared bold editorial hero language with page-specific content.
-- `css/contact_section.css`: shared contact styling only; do not alter form behavior.
-- Page CSS files: align existing selectors to the shared system; do not create one-off page-specific visual languages unless required by genuinely different content.
-
-## New Code Needed
-```text
-For each listed HTML page:
-  preserve existing navigation, forms, scripts, IDs and functional hooks
-  replace generic copy with original ProManaged copy based on verified repo facts
-  organize content into bold intro + editorial blocks + clear CTA
-  apply the same canonical header/footer and visual system
-
-For CSS:
-  reuse shared tokens and shared shell styles
-  create small helpers only where necessary
-  avoid duplicated page-specific design systems
-  keep mobile-safe wrapping and existing functional breakpoints
-
-For QA:
-  use Playwright headed browser at the real available window size first
-  capture full-page screenshots for every public page
-  record actual tab/window dimensions and document width values
-  inspect visual consistency page-to-page
-  then run secondary checks at 768px and 375px
-```
+## Playwright QA — MANDATORY
+1. Launch headed browser at the real available window size; do not set an artificial primary desktop viewport.
+2. Record `window.innerWidth`, `window.innerHeight`, `document.documentElement.clientWidth`, `document.documentElement.scrollWidth` for every page.
+3. Capture full-page screenshots of all 7 pages and review consistency.
+4. Then use 768px and 375px emulation for secondary responsive checks.
+5. Test navigation, mobile menu, CTAs, contact/booking forms, fonts, internal links and console.
+6. Do not claim visual QA unless it was actually performed.
 
 ## Constraints / Things NOT to Touch
-- Do not copy K46 wording, images, source code, names, biographies, legal pages, or exact design.
-- Do not add paid/external image dependencies unless the plan explicitly requires them; prefer existing repo assets and existing icon CDN already in use.
-- Do not change PHP form endpoints, input `name` attributes, or JavaScript file paths.
-- Do not alter `privacy_policy.html` legal/privacy copy; only bring its visual shell into consistency.
-- Do not introduce hardcoded colour palettes outside `css/tokens.css`.
-- Do not remove accessibility attributes or form labels.
-- Do not remove working contact/booking/SMTP/honeypot behavior.
-- Do not remove a script/CSS/PHP file unless its usage has been verified absent from all current public pages/runtime paths.
-- Do not create or use sub-branches. All commits go directly to `main` and are pushed to `origin/main`.
-- Never commit `.yml` or `.yaml` files; delete temporary YAML after use.
-
-## Open Questions
-None. Use existing ProManaged business information in the repo and make the implementation decisions autonomously within this scope.
+- Do not copy K46 or any reference site's text, artwork, branding or exact layout.
+- Do not invent facts, clients, awards, metrics or imagery.
+- Preserve PHP endpoints, form field names, JS paths, SMTP and honeypot behaviour.
+- No site-wide dark mode, decorative gradients, parallax or looping animation.
+- No hardcoded colours outside `tokens.css`.
+- No new external image dependency unless explicitly approved.
+- No sub-branches, PRs, detached work or force-pushes; `main` → `origin/main` only.
+- Never commit YAML.
 
 ## Known Trade-offs
-- Medium: A literal clone is not allowed; the implementation should be inspired, not copied.
-- Medium: “Add pics if you have to” is limited to existing assets and already-approved icon/CDN sources unless a new dependency is explicitly approved.
-- Low: Updating every page increases review scope, but uniformity across every public page is a hard requirement.
-- Low: Visual polish is constrained by the existing static HTML/CSS architecture; structural HTML changes are allowed where necessary to achieve the approved visual direction.
+- The concept prioritizes brand clarity and editorial quality over maximal UI density.
+- Existing assets limit photography variety; typography, composition, founder imagery and controlled colour blocks must carry the visual identity.
+
+## Open Questions
+None. Make autonomous design and copy decisions within these constraints.
 
 ## Phases
-### Phase 1: Shared shell + homepage foundation
-- Goal: Refresh `index.html` plus shared/core CSS so the new ProManaged visual direction is established, including the canonical navbar and footer.
-- Exit condition: Homepage has original copy, bold editorial blocks, working nav/CTAs/contact, canonical header/footer, and responsive layout.
-- Files: `index.html`, shared CSS list, homepage CSS list.
+### Phase 1: Concept + shared system
+- Goal: establish Signal & Systems direction, global copy voice, typography, palette, header, footer and layout primitives.
+- Exit: homepage visibly establishes the new identity.
+- Files: shared shell + `index.html`.
 
-### Phase 2: Secondary top-level pages
-- Goal: Refresh `get-started.html`, `learn_more.html`, and `privacy_policy.html` to match the homepage style and voice without changing legal content.
-- Exit condition: All three pages keep existing forms/scripts/links and use the same header/footer/type/colour/spacing language.
-- Files: listed secondary pages + page CSS.
+### Phase 2: Full-site rollout
+- Goal: rewrite and redesign all remaining public pages to the same standard; remove software pricing.
+- Exit: no page looks like a leftover template.
+- Files: secondary pages + page CSS.
 
-### Phase 3: Service pages
-- Goal: Refresh all three service pages with clearer copy, editorial blocks, stronger CTAs, and the same global design system. Remove all software pricing.
-- Exit condition: Software, hardware and networking pages are visually consistent and retain working relative paths and forms.
-- Files: listed service pages + page CSS.
-
-### Phase 4: Legacy cleanup + browser QA
-- Goal: Remove obsolete references/assets only where proven unused, then perform full Playwright review using the real available desktop window followed by 768/375 checks.
-- Exit condition: All Completion Criteria pass and the final implementation is pushed to `origin/main`.
-- Files: cleanup audit list + fixes only from prior phases.
+### Phase 3: Cleanup + verification
+- Goal: remove proven-unused legacy logic/docs and complete Playwright visual/functional QA.
+- Exit: all criteria pass and commit is pushed to `origin/main`.
+- Files: cleanup audit + fixes only.
