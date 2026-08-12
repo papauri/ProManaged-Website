@@ -44,7 +44,7 @@
    the wrapper creates no stacking context and its children blend against the page. */
 .pm-cursor { display: contents }
 
-.pm-cursor-ring,
+.pm-cursor-frame,
 .pm-cursor-dot,
 .pm-cursor-label {
     position: fixed;
@@ -58,29 +58,65 @@
     will-change: transform;
 }
 
-.pm-cursor.is-live .pm-cursor-ring,
+.pm-cursor.is-live .pm-cursor-frame,
 .pm-cursor.is-live .pm-cursor-dot { opacity: 1 }
 
-.pm-cursor[data-mode="off"] .pm-cursor-ring,
+.pm-cursor[data-mode="off"] .pm-cursor-frame,
 .pm-cursor[data-mode="off"] .pm-cursor-dot { opacity: 0 }
 
-/* The ring. Its size, radius and position are written per frame by the script — this
-   rule owns only what it looks like, never where it is. Width and height are NOT
-   transitioned here: the script already springs them, and a second easing in the
-   stylesheet would compound into visible lag.
-
-   difference blending is what makes one ring work on warm paper, on stone, on the
-   graphite chapters and on the dark navigation panel. See --cursor-ink in tokens.css
-   for why the ink is near-ivory rather than white. */
-.pm-cursor-ring {
+/* ---------- The reticle ----------
+   The frame is an invisible box; the four corner brackets inside it are the cursor.
+   Its size and position are written per frame by the script, so this rule owns only
+   what it looks like, never where it is. Width and height are deliberately NOT
+   transitioned: the script already springs them, and a second easing here would
+   compound into visible lag. */
+.pm-cursor-frame {
     width: var(--cursor-ring);
     height: var(--cursor-ring);
-    border: 1.5px solid var(--cursor-ink);
-    border-radius: var(--radius-full);
+}
+
+/* Each bracket is one element carrying two borders — a corner, drawn. `difference`
+   blending is what makes one reticle work on warm paper, on stone, on the graphite
+   chapters and on the dark navigation panel; see --cursor-ink in tokens.css for why
+   the ink is near-ivory rather than white. */
+.pm-corner {
+    position: absolute;
+    width: var(--corner-len, 9px);
+    height: var(--corner-len, 9px);
+    border: 0 solid var(--cursor-ink);
     mix-blend-mode: difference;
     transition:
-        border-width 180ms var(--ease-out),
-        opacity 180ms var(--ease-out);
+        width 200ms var(--ease-out),
+        height 200ms var(--ease-out),
+        border-radius 200ms var(--ease-out);
+}
+
+/* Each corner takes only the two borders that meet there, and the matching quarter of
+   the frame's radius — so on a card the brackets curve exactly like the card does.
+
+   The width is set per EDGE rather than with the `border-width` shorthand. That is
+   deliberate: a mode rule using the shorthand would reinstate all four borders and
+   turn every bracket into a complete little box, which is the opposite of the mark
+   this is trying to draw. Mode rules below change --corner-len only. */
+.pm-corner--tl {
+    top: -1px; left: -1px;
+    border-top-width: var(--corner-w, 2px); border-left-width: var(--corner-w, 2px);
+    border-top-left-radius: var(--corner-r, 3px);
+}
+.pm-corner--tr {
+    top: -1px; right: -1px;
+    border-top-width: var(--corner-w, 2px); border-right-width: var(--corner-w, 2px);
+    border-top-right-radius: var(--corner-r, 3px);
+}
+.pm-corner--br {
+    bottom: -1px; right: -1px;
+    border-bottom-width: var(--corner-w, 2px); border-right-width: var(--corner-w, 2px);
+    border-bottom-right-radius: var(--corner-r, 3px);
+}
+.pm-corner--bl {
+    bottom: -1px; left: -1px;
+    border-bottom-width: var(--corner-w, 2px); border-left-width: var(--corner-w, 2px);
+    border-bottom-left-radius: var(--corner-r, 3px);
 }
 
 /* The dot is the honest one: it is exactly where the pointer is, with no spring, so
@@ -97,24 +133,27 @@
         height 200ms var(--ease-out);
 }
 
-/* Frame mode — the ring has become the card's outline, so a dot floating in the
-   middle of it is noise. */
-.pm-cursor[data-mode="frame"] .pm-cursor-ring { border-width: 1px }
+/* ---------- Modes ----------
+   Frame — the brackets have latched onto a card. They lengthen, because they are now
+   marking out real geometry rather than floating, and the dot goes: a point in the
+   middle of an acquired target is noise. */
+.pm-cursor[data-mode="frame"] .pm-corner { --corner-len: 34px; --corner-w: 2.5px }
 .pm-cursor[data-mode="frame"] .pm-cursor-dot { opacity: 0 }
 
-/* Link mode — a control, not a region. The ring closes in on the pointer and the dot
-   swells to meet it. */
-.pm-cursor[data-mode="link"] .pm-cursor-ring { border-width: 2px }
+/* Link — a control, not a region. The brackets close in and thicken, the dot swells
+   to meet them. */
+.pm-cursor[data-mode="link"] .pm-corner { --corner-len: 12px; --corner-w: 2.5px }
 .pm-cursor[data-mode="link"] .pm-cursor-dot { width: 10px; height: 10px }
 
-/* Text mode — the ring collapses into a caret over running copy, which is the one
-   place a circle tells the visitor nothing. */
-.pm-cursor[data-mode="text"] .pm-cursor-ring {
-    border-radius: 2px;
-    border-width: 0;
-    background: var(--cursor-ink);
+/* Text — brackets are the wrong instrument over running copy, where the only useful
+   information is where the insertion point would land. They retract to nothing and
+   the dot becomes a caret bar. */
+.pm-cursor[data-mode="text"] .pm-corner { --corner-len: 0px; --corner-w: 0px }
+.pm-cursor[data-mode="text"] .pm-cursor-dot {
+    width: 2px;
+    height: 24px;
+    border-radius: 1px;
 }
-.pm-cursor[data-mode="text"] .pm-cursor-dot { opacity: 0 }
 
 /* The label rides under the ring in frame mode and names the destination. Deliberately
    NOT blended: a legible chip is worth more than a clever one, and this is the only
@@ -259,15 +298,41 @@
     transform: none;
 }
 
-/* ---------- Reduced motion / no pointer ----------
-   Belt and braces: the script never adds .pm-pointer in these conditions, and the
-   stylesheet independently refuses to move anything even if it somehow did. */
+/* ---------- Reduced motion ----------
+   Graded, not a kill switch — see the long note in js/interface_motion.js for why a
+   reticle that tracks the visitor's own pointer is not what this preference is
+   protecting against. The reticle stays; everything that MOVES ON ITS OWN goes.
+
+   Written against .pm-calm (set by the script) rather than only the media query, so
+   the two can never disagree about which mode the page is in.
+
+   The card light and the traced edge survive, because they are state rather than
+   motion — but they arrive instantly instead of easing in. The 3D tilt and the mark's
+   rotation are removed outright: those are real movement of real page content, which
+   is precisely the thing being asked for less of. */
+.pm-calm .pm-cursor-frame,
+.pm-calm .pm-cursor-dot,
+.pm-calm .pm-corner,
+.pm-calm .pm-cursor-label { transition: none }
+
+.pm-calm [data-field]::before,
+.pm-calm [data-field]::after,
+.pm-calm [data-field] .mark { transition: none }
+
+@media (hover: hover) and (pointer: fine) {
+    .pm-calm [data-field]:hover,
+    .pm-calm [data-field]:not(.block-reveal):hover { transform: none }
+    .pm-calm [data-field]:hover .mark { transform: none }
+}
+
+/* Belt and braces. If the script somehow tagged the page without setting .pm-calm,
+   the stylesheet still refuses to move page content under the preference. The reticle
+   is deliberately NOT hidden here — it is the pointer, and taking it away would leave
+   `cursor: none` with nothing drawn in its place. */
 @media (prefers-reduced-motion: reduce) {
-    .pm-cursor { display: none }
-    .pm-pointer.pm-cursor-live,
-    .pm-pointer.pm-cursor-live * { cursor: auto }
     [data-field]::before,
     [data-field]::after,
-    [data-field] .mark,
-    .pm-pointer [data-field]:hover { transition: none; transform: none }
+    [data-field] .mark { transition: none }
+    .pm-pointer [data-field]:not(.block-reveal):hover,
+    .pm-pointer [data-field]:hover .mark { transform: none }
 }

@@ -87,8 +87,8 @@
      The custom cursor and the card "field" (the light that tracks the pointer across
      a block). Both are pure enhancement: css/interaction.css only ever activates them
      behind (hover:hover) and (pointer:fine), so touch and keyboard are untouched. */
-  --cursor-ring: 34px;
-  --cursor-dot: 6px;
+  --cursor-ring: 26px;
+  --cursor-dot: 5px;
   /* Blend ink. mix-blend-mode:difference against this near-ivory resolves to graphite
      on paper surfaces and to ivory on graphite ones, so ONE cursor reads correctly on
      every surface the site has without a per-section override. */

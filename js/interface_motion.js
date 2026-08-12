@@ -92,12 +92,28 @@
        ========================================================================== */
     function initPointer() {
         // A hovering, precise pointer on a viewport with room for the effect. Coarse
-        // pointers, hybrid devices in touch mode and reduced-motion visitors never
-        // reach any of the code below.
-        if (reduced) return;
+        // pointers and hybrid devices in touch mode never reach any of the code below.
         if (!window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1024px)').matches) return;
 
+        /* ---------- Reduced motion is GRADED, not a kill switch ----------
+           `prefers-reduced-motion` exists for vestibular triggers: large-area travel,
+           parallax, spin, zoom. A reticle that tracks the visitor's own pointer is not
+           one of those — it IS the pointer, redrawn. Refusing to show it does not make
+           the page calmer, it just takes the instrument away from the people most
+           likely to be navigating deliberately.
+
+           So under the preference the pointer layer still runs, and the parts that are
+           genuinely motion are the parts that are dropped:
+             - the ring's spring lag becomes 1:1 tracking (EASE below is 1);
+             - cards no longer tilt in 3D or rotate their marks (css/interaction.css);
+             - the reticle snaps between shapes instead of easing (same file).
+           What remains is state: the light, the traced edge, the geometry it snaps to.
+
+           The scroll choreography is untouched by this and stays fully suppressed —
+           content that moves on its own is exactly what the preference is asking us
+           not to do. */
         root.classList.add('pm-pointer');
+        if (reduced) root.classList.add('pm-calm');
 
         /* ---------- Tag the surfaces ----------
            Done here rather than in the markup so a card added to any page in future
@@ -114,12 +130,29 @@
 
         /* ---------- Cursor DOM ----------
            Built in script, never in the markup: it is decoration with no accessible
-           meaning, and a page served without JS should not carry an empty div for it. */
+           meaning, and a page served without JS should not carry an empty div for it.
+
+           The reticle is FOUR CORNER BRACKETS rather than a circle. A ring that grows
+           and shrinks is the house style of every cursor library on the internet;
+           brackets that latch onto the corners of a thing read as an instrument
+           acquiring a target, which is the language this site is already speaking —
+           the fragments, the readouts, the status chips. Each corner is one element
+           with two borders, positioned by the frame it sits in, so snapping to a card
+           costs four transforms and no reflow. */
         var cursor = document.createElement('div');
         cursor.className = 'pm-cursor';
         cursor.setAttribute('aria-hidden', 'true');
+
         var ring = document.createElement('span');
-        ring.className = 'pm-cursor-ring';
+        ring.className = 'pm-cursor-frame';
+        var corners = [];
+        ['tl', 'tr', 'br', 'bl'].forEach(function (name) {
+            var c = document.createElement('i');
+            c.className = 'pm-corner pm-corner--' + name;
+            ring.appendChild(c);
+            corners.push(c);
+        });
+
         var dot = document.createElement('span');
         dot.className = 'pm-cursor-dot';
         var label = document.createElement('span');
@@ -130,10 +163,11 @@
         document.body.appendChild(cursor);
         root.classList.add('pm-cursor-live');
 
-        var RING = 34;
-        // How hard the ring chases the pointer. Low enough to read as weight, high
-        // enough that it never feels detached from the hand.
-        var EASE = 0.19;
+        var RING = 26;
+        // How hard the reticle chases the pointer. Low enough to read as weight, high
+        // enough that it never feels detached from the hand. Reduced motion takes 1,
+        // which is exact tracking with no lag at all.
+        var EASE = reduced ? 1 : 0.19;
         // How far a framed card pulls its outline toward the pointer. Small on
         // purpose — it should read as the card acknowledging you, not as a wobble.
         var MAGNET = 7;
@@ -185,9 +219,11 @@
 
             ring.style.width = ringPos.w + 'px';
             ring.style.height = ringPos.h + 'px';
-            ring.style.borderRadius = target.r + 'px';
             ring.style.transform =
                 'translate3d(' + ringPos.x + 'px,' + ringPos.y + 'px,0) translate(-50%,-50%) scale(' + scale + ')';
+            // The corner brackets inherit the frame's radius so they curve with the
+            // card they have latched onto rather than staying square on a rounded one.
+            ring.style.setProperty('--corner-r', target.r + 'px');
 
             dot.style.transform =
                 'translate3d(' + pointer.x + 'px,' + pointer.y + 'px,0) translate(-50%,-50%)';
@@ -263,7 +299,9 @@
             if (el.closest(TEXTUAL)) {
                 setMode('text');
                 setLabel('');
-                target.w = 2; target.h = 26; target.r = 1;
+                // The frame collapses onto the pointer; the caret itself is the dot,
+                // restyled into a bar by css/interaction.css.
+                target.w = 2; target.h = 24; target.r = 1;
                 return;
             }
 
@@ -312,7 +350,12 @@
                 target.y = box.top + box.height / 2 + (py - 0.5) * 2 * MAGNET;
                 target.w = box.width + 12;
                 target.h = box.height + 12;
-                target.r = radius + 6;
+                // The card's own radius, NOT radius + the 6px the frame stands off by.
+                // Matching the offset exactly would make the bracket a concentric arc
+                // of the card's corner, and at a bento card's 18px radius a 34px
+                // bracket is then almost entirely curve. Holding the tighter radius
+                // leaves a straight run at each end, so it reads as a bracket.
+                target.r = radius;
             }
         };
 

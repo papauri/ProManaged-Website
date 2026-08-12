@@ -106,6 +106,26 @@
         padding: var(--space-10);
         justify-content: center;
     }
+
+    /* Measured at 2844px, the lead block ran roughly 250px taller than its copy, so
+       the checklist sat marooned above a floor of empty graphite. The mark, the copy
+       and the cue now centre as ONE group in the tall column.
+
+       Both declarations are needed. `justify-content` on the block alone does nothing
+       while .block__body carries the shared `flex: 1`, because the body stretches to
+       fill whatever the block gives it; and releasing the body alone would centre the
+       copy while leaving the mark stranded at the top, since the mark is a sibling of
+       the body rather than a child of it. */
+    .services-grid .capability--lead .block__body {
+        flex: 0 0 auto;
+    }
+
+    /* And the cue travels with the copy rather than being pushed to the floor by the
+       shared `margin-top: auto`, which is what opened the gap in the first place. */
+    .services-grid .capability--lead .capability-cue {
+        margin-top: var(--space-8);
+        padding-top: 0;
+    }
 }
 
 /* Two list columns only once the lead block is genuinely wide enough for them. At
