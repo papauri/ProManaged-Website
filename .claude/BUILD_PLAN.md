@@ -22,6 +22,18 @@ The site should visually communicate **systems being assembled**.
 - Do not animate every tiny element. Animate **chapter-level blocks** and the initial hero composition only.
 - No loading screen that hides the site for an arbitrary delay. Content should remain accessible and usable while the assembly effect runs.
 
+## Typography Direction — Premium Modern System
+Typography is a core brand asset, not a finishing touch. Use one distinctive, modern family consistently across the site, with enough range to handle display, navigation, body copy, forms, captions and metadata without looking like a default web template.
+
+- **Primary family: Plus Jakarta Sans** for H1–H6, body copy, navigation, buttons, forms, labels, cards, metadata and footer. Use its variable weights deliberately rather than mixing several unrelated sans families. Plus Jakarta Sans is a contemporary geometric/humanist sans with variable weight and enough personality to feel more branded than Inter while remaining highly usable for UI and long-form text. citeturn647712search2turn647712search6
+- **Optional display treatment:** use the same family at extreme weight/size with tight tracking for hero statements instead of introducing a second decorative font. The site should feel like one coherent typographic identity.
+- **Prohibited unless explicitly justified in the plan:** Inter, Raleway, Montserrat, Space Grotesk, Arial, system UI stacks, or a second display family. Do not fall back to a mixed-font template.
+- Use fluid display sizes (`clamp()`), clear weight hierarchy, and restrained letter-spacing. Avoid all-caps body copy and excessive tracking.
+- Define tokens for `font-family`, display sizes, body sizes, weights, line-heights and tracking in `css/tokens.css`; every public page must consume those shared tokens.
+- Load only the weights actually used and prefer one variable-font request where supported. Keep `font-display: swap` and verify the final computed font in Playwright.
+- If the chosen webfont cannot load, fail loudly in QA rather than silently falling back to an old font stack.
+- Typography acceptance: headings must look noticeably more distinctive and contemporary than the current Inter-based design, while body/forms remain highly readable and trustworthy. The overall impression should be premium, calm and confident rather than playful or juvenile.
+
 ## Reference Systems
 - K46 — take: human opening, direct positioning, capability-led storytelling, contact-forward rhythm — avoid copying content/layout.
 - Mockuuups Bento 07 — take: varied block proportions and broad visual compartments — avoid a wall of equal cards.
@@ -31,6 +43,7 @@ The site should visually communicate **systems being assembled**.
 ## Completion Criteria (Definition of Done)
 - [ ] All 7 public HTML pages have fully rewritten original marketing copy, except legal/privacy text which remains unchanged.
 - [ ] All 7 pages share one navbar, footer, typography, colour tokens, button language, spacing, radius, and editorial rhythm.
+- [ ] All 7 pages use **Plus Jakarta Sans consistently** for display, body, UI and supporting text; no page falls back to Inter as its intended font.
 - [ ] `index.html` is structurally redesigned: Hero → What ProManaged Is → Build/Source/Connect → How We Work → Founder/Story → Mission/Vision → Contact → Footer.
 - [ ] Every page has 3–5 substantial editorial chapters with varied block scale; no page's primary story is an equal-card grid.
 - [ ] Hero uses an oversized statement, dominant visual/content block, and supporting block; it is full-width within generous desktop gutters.
@@ -104,13 +117,14 @@ Current `js/*.js`, `css/*.css`, `php/*.php`, `.claude/PROJECT_CONTEXT.md`, `.cla
 - Add the same chapter-level motion hooks where page structure contains major editorial sections; do not animate legal/privacy paragraphs individually.
 
 ### Shared design system
-- `css/tokens.css`: define the single palette, type, spacing, radius, shadow and layout source of truth. Palette = ivory/off-white, warm stone/sand/greige, charcoal, muted text, restrained earthy accent; blue only secondary interaction/identity. Define modern display face + Inter UI/body and fluid heading scale. Wide rail target ~1440–1560px with generous desktop gutters. Add motion tokens for short duration and stagger gap.
+- `css/tokens.css`: define the single palette, type, spacing, radius, shadow and layout source of truth. Palette = ivory/off-white, warm stone/sand/greige, charcoal, muted text, restrained earthy accent; blue only secondary interaction/identity. Define Plus Jakarta Sans as the single type family, display/body/UI sizes, weights, line-heights and tracking. Wide rail target ~1440–1560px with generous desktop gutters. Add motion tokens for short duration and stagger gap.
 - `css/global_styles.css`: support full-bleed section backgrounds and wide inner rails; remove generic narrow-shell rules; constrain text measure separately. Add shared block-reveal states/classes and `prefers-reduced-motion` fallback.
 - `css/navbar.css` + `css/logo.css`: one canonical navbar/header, identical across all 7 pages and breakpoints. Same dimensions, spacing, states, fixed-header offsets, and mobile menu behavior.
 - `css/footer_promanaged.css`: one canonical footer, identical across all 7 pages. Same columns, spacing, typography, surface, links and contact hierarchy.
 - `css/hero_section.css`: shared editorial hero grammar and initial block-assembly choreography; page-specific content only.
 - `css/contact_section.css`: editorial contact styling only; do not alter form behavior.
 - All page CSS: migrate existing selectors onto shared tokens and shared rhythm; use the same chapter/block reveal classes; avoid independent page design systems.
+- All 7 HTML `<head>` sections: use one consistent font-loading strategy for Plus Jakarta Sans; remove stale Inter/other font requests and verify identical font loading across pages.
 
 ### Legacy cleanup
 - Audit every HTML `<script src>` and stylesheet `<link>` against current tree and actual page usage.
@@ -126,20 +140,21 @@ Current `js/*.js`, `css/*.css`, `php/*.php`, `.claude/PROJECT_CONTEXT.md`, `.cla
 3. Capture full-page screenshots of every public page.
 4. Inspect every screenshot for: full-width use, typography, chapter transitions, block composition, card clutter, navbar/footer uniformity, imagery, spacing, and obvious visual defects.
 5. On at least one full reload of `index.html`, visually confirm the initial building-block assembly completes without hiding content or causing layout jump.
+6. Verify computed font-family on `body`, `h1`, `h2`, `.nav-link`, buttons, form controls and footer text is Plus Jakarta Sans (or its intended variable-font computed family) with no stale Inter rule winning.
 
 ### Responsive verification
-6. Only after real-window desktop review passes, run 768px and 375px emulation.
-7. Check intentional collapse, mobile navigation, text wrapping, tap targets, images, forms and footer.
-8. Confirm `prefers-reduced-motion` removes the block movement while content remains immediately visible.
+7. Only after real-window desktop review passes, run 768px and 375px emulation.
+8. Check intentional collapse, mobile navigation, text wrapping, tap targets, images, forms and footer.
+9. Confirm `prefers-reduced-motion` removes the block movement while content remains immediately visible.
 
 ### Functional verification
-9. Check internal links, CTAs, contact form, booking form, mobile menu, font loading, missing assets and console errors.
-10. Scroll through `index.html` and at least one secondary service page to confirm two or more block-level scroll reveals occur without obscuring text or controls.
-11. If any required browser check cannot be performed, report the exact limitation; never claim it passed.
+10. Check internal links, CTAs, contact form, booking form, mobile menu, font loading, missing assets and console errors.
+11. Scroll through `index.html` and at least one secondary service page to confirm two or more block-level scroll reveals occur without obscuring text or controls.
+12. If any required browser check cannot be performed, report the exact limitation; never claim it passed.
 
 ## New Code Needed
 ```text
-1. Establish shared tokens + canonical header/footer.
+1. Establish shared tokens + canonical header/footer + Plus Jakarta Sans typography.
 2. Rebuild index.html into semantic editorial chapters.
 3. Apply the same chapter/block language to all secondary pages.
 4. Rewrite all marketing copy from verified ProManaged facts.
@@ -185,6 +200,6 @@ None. Make design, layout, motion and copy decisions autonomously within these e
 - Files: secondary HTML + page CSS.
 
 ### Phase 3: Cleanup + QA + delivery
-- Goal: remove proven-unused legacy logic/docs and complete Playwright real-window + 768/375 verification for all 7 pages, including loading/scroll motion.
+- Goal: remove proven-unused legacy logic/docs and complete Playwright real-window + 768/375 verification for all 7 pages, including loading/scroll motion and typography.
 - Exit: all completion criteria pass; implementation committed to `main`, pushed to `origin/main`, and reported only as Changed / Blockers / Ready for review.
 - Files: cleanup list + scoped fixes only.
