@@ -4,7 +4,7 @@
 /* The two dominant banner blocks take display-face headlines and a wider measure. */
 #what-we-do .block--row h3 {
     font-family: var(--font-display);
-    font-weight: var(--weight-normal);
+    font-weight: var(--weight-display);
     font-size: var(--display-3);
     letter-spacing: var(--tracking-display);
     line-height: var(--leading-tight);
@@ -24,7 +24,7 @@
 
 .expectation h3 {
     font-family: var(--font-display);
-    font-weight: var(--weight-normal);
+    font-weight: var(--weight-display);
     font-size: var(--display-3);
     letter-spacing: var(--tracking-display);
     line-height: var(--leading-tight);

@@ -1,18 +1,21 @@
-/* logo.css — one canonical logo sizing rule for every page and breakpoint.
-   Sized against --header-h so the header never changes height between pages. */
+/* logo.css — canonical logo sizing wherever the mark appears.
+   The logo lives in the navigation trigger tile (see navbar.css) and in the open
+   panel's brand row. One size ramp, every page, every breakpoint. */
 .logo {
-    height: 44px;
+    height: 40px;
     width: auto;
     object-fit: contain;
-    transition: opacity var(--transition);
-}
-
-.nav-brand:hover .logo {
-    opacity: 0.82;
+    display: block;
 }
 
 @media (max-width: 900px) {
     .logo {
-        height: 38px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 600px) {
+    .logo {
+        height: 32px;
     }
 }

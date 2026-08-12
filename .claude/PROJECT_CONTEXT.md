@@ -15,8 +15,10 @@ studio. It offers three capabilities, presented site-wide as **Build / Source / 
 **Backend:** PHP only, under `php/` (`contact.php`, `booking.php`), sending via SMTP through
 vendored PHPMailer using `php/mailer.php` + `php/env.php` and an untracked root `.env`.
 **Design system:** `css/tokens.css` is the single source of truth — warm neutral surfaces,
-a restrained earthy accent, blue reserved for interaction, Instrument Serif display + Inter UI,
-and a wide ~1560px editorial rail.
+a restrained earthy accent, blue reserved for interaction, Plus Jakarta Sans as the single
+type family for every role, and a wide ~1560px editorial rail.
+**Navigation:** no navbar strip. A fixed logo tile opens a full-viewport bento panel of
+destination blocks; see SYSTEM_MAP.md for the accessibility contract.
 
 ## 2. End users & core problem
 - **Primary users:** individuals, families, founders, small teams and organisations who need

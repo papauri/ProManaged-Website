@@ -18,25 +18,34 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // In-page nav links: offset the smooth scroll by the fixed header height.
-    // Cross-page links (e.g. ../index.html#about) are left to navigate normally —
-    // those land correctly via the scroll-margin-top rule in global_styles.css.
-    const header = document.querySelector('.header');
-    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+    // In-page anchors: smooth-scroll with the floating logo tile's height as the
+    // offset. There is no header element to measure any more, so the offset comes
+    // from the same --header-h token the CSS uses for scroll-margin-top.
+    const headerOffset = (() => {
+        const raw = parseInt(
+            getComputedStyle(document.documentElement).getPropertyValue('--header-h'),
+            10
+        );
+        return Number.isFinite(raw) ? raw : 92;
+    })();
 
-    document.querySelectorAll('.nav-link').forEach(link => {
+    // Matches both "#about" and "index.html#about" pointing at the current page, so
+    // the navigation panel's homepage links scroll instead of reloading when you are
+    // already on the homepage. Genuine cross-page links are left alone.
+    document.querySelectorAll('a[href]').forEach(link => {
         link.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (!href || !href.startsWith('#') || href === '#') {
-                return;
-            }
-            const targetElement = document.getElementById(href.substring(1));
-            if (!targetElement) {
-                return;
-            }
+            const url = new URL(this.href, window.location.href);
+            if (!url.hash || url.hash === '#') return;
+            if (url.pathname !== window.location.pathname || url.origin !== window.location.origin) return;
+
+            const targetElement = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+            if (!targetElement) return;
+
             e.preventDefault();
-            const top = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
+            const top = targetElement.getBoundingClientRect().top + window.scrollY - headerOffset;
             window.scrollTo({ top, behavior: 'smooth' });
+            // Keep the address bar in step without triggering a second jump.
+            history.pushState(null, '', url.hash);
         });
     });
 

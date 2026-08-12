@@ -6,7 +6,8 @@
 .hero {
     background: var(--color-graphite);
     color: var(--color-text-on-dark);
-    /* The navbar is fixed and overlays content at y:0, so the offset is explicit. */
+    /* The floating navigation logo tile overlays the top-left, so the hero reserves
+       explicit clearance for it. */
     padding-top: calc(var(--header-h) + var(--section-y));
     padding-bottom: var(--section-y);
     position: relative;
@@ -41,7 +42,7 @@
 #hero-title {
     font-family: var(--font-display);
     font-size: var(--display-1);
-    font-weight: var(--weight-normal);
+    font-weight: var(--weight-display);
     letter-spacing: var(--tracking-display);
     line-height: var(--leading-display);
     color: var(--color-text-on-dark);
@@ -97,6 +98,7 @@
     display: block;
     font-family: var(--font-display);
     font-size: var(--display-figure);
+    font-weight: var(--weight-display);
     line-height: 0.95;
     letter-spacing: var(--tracking-display);
     margin-top: var(--space-6);

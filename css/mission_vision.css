@@ -29,7 +29,7 @@
 .pane .pane-text {
     font-family: var(--font-display);
     font-size: var(--display-3);
-    font-weight: var(--weight-normal);
+    font-weight: var(--weight-display);
     letter-spacing: var(--tracking-display);
     line-height: var(--leading-tight);
     color: var(--color-text);

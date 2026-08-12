@@ -4,7 +4,7 @@
 > This describes the repository as it actually is now.
 
 ## Pages (7)
-All seven share one shell: canonical navbar, canonical footer, the shared editorial hero,
+All seven share one shell: the bento navigation, canonical footer, the shared editorial hero,
 one type scale and one chapter rhythm. Page files add content only.
 
 1. **index.html** — landing page and primary design reference. Chapter order is fixed:
@@ -27,9 +27,37 @@ one type scale and one chapter rhythm. Page files add content only.
 `css/tokens.css` is the single source of truth and the only file allowed to hold a raw colour.
 Palette: warm neutrals (paper/ivory/stone/sand/greige) + graphite, a restrained earthy accent
 (`--color-accent-earth`) carrying the decorative weight, and blue reserved for interaction and
-identity (buttons, links, focus). Instrument Serif is the display face (H1/H2 only); Inter
-carries body and UI. Fluid display scale, one radius set, two shadows, `--rail-max: 1560px`
-with generous `--rail-pad` gutters, and `--section-y` as the one chapter rhythm.
+identity (buttons, links, focus).
+
+**Typography is ONE family — Plus Jakarta Sans — for every text role** (headings, body,
+navigation, buttons, form controls, labels, captions, footer). Loaded once per page from a
+single Google Fonts request. `--font-display` and `--font-sans` are kept as readable role
+aliases but both resolve to `--font-primary`; there is no second family. Because the display
+face is now a sans, hierarchy comes from weight and tracking: `--weight-display: 800` with
+`--tracking-display: -0.035em` for oversized statement type. Any rule that sets the display
+face at `--weight-normal` is a bug — 400 is far too light at those sizes.
+
+Fluid display scale, one radius set, two shadows, `--rail-max: 1560px` with generous
+`--rail-pad` gutters, and `--section-y` as the one chapter rhythm.
+
+## Navigation — "Bento Control Panel"
+There is **no horizontal navbar strip** anywhere on the site; do not reintroduce one.
+
+- **Trigger** (`#nav-trigger`, styled in `navbar.css`): a fixed logo tile carrying the mark
+  plus the word "Menu". It is both the brand anchor and the only navigation control, and it
+  stays visible at all times — the company identity is never hidden behind a menu glyph.
+- **Panel** (`#nav-panel`): a full-viewport bento of 7 destination tiles — Start a Project
+  (primary, largest, earthy fill), Home, Contact, How We Work, Software & Web Apps (wider:
+  Build is the lead capability), Hardware Sourcing, Network Infrastructure. Tiles assemble
+  with a staggered settle, the same block language as the page, finishing in ~560ms.
+- The homepage's in-page sections (About / Services / Mission & Vision) live in the panel's
+  secondary link row, so every previous destination is still reachable without nesting
+  anchors inside a tile.
+- Mobile uses the same full-screen bento in one column — never a drawer or hamburger list.
+- `js/mobile_phone_navbar.js` (path kept because every page references it) owns
+  `aria-expanded`, focus trap, Escape, background scroll lock with scrollbar compensation,
+  and returning focus to the trigger on close. `--header-h` is now the floating tile's
+  clearance, used by the hero's top padding and by `scroll-margin-top`.
 
 ## CSS (19 files, all under `css/`, all referenced)
 Shared shell, loaded by every page: `tokens.css`, `global_styles.css`, `navbar.css`, `logo.css`,
@@ -73,9 +101,12 @@ not `getBoundingClientRect`, which would include the transform).
 
 ## JS (6 files, all under `js/`, all referenced)
 - `main.js` — loaded on all 7 pages. Capability-block navigation (`.service-card[data-target]`,
-  keyboard-activatable), header-offset smooth scroll for in-page nav links, the building-block
-  motion system described above, and the back-to-top control.
-- `mobile_phone_navbar.js` — shared hamburger/overlay toggle, all 7 pages.
+  keyboard-activatable), smooth scroll for in-page anchors (offset read from `--header-h`,
+  and matching `index.html#about` against the current page so panel links scroll rather than
+  reload when already home), the building-block motion system described above, and the
+  back-to-top control.
+- `mobile_phone_navbar.js` — the bento navigation panel (see above), all 7 pages. The
+  filename is legacy; the behaviour is not.
 - `contact__form.js` — contact + equipment-request form submit (index, hardware_sourcing).
 - `booking_form.js` — booking form submit (get-started).
 - `custom_websites.js` — FAQ accordion class toggle (custom_websites).
@@ -93,7 +124,7 @@ API integrations.
 visual anchor in the homepage About chapter).
 
 ## Known non-blocking backlog
-- Inter, Instrument Serif and Font Awesome are served from CDNs; self-hosting would remove the
+- Plus Jakarta Sans and Font Awesome are served from CDNs; self-hosting would remove the
   external dependency.
 - `networking.js` requests browser geolocation on page load, which prompts the visitor. Worth
   revisiting in favour of an explicit currency toggle.

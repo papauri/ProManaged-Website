@@ -1,240 +1,394 @@
-/* navbar.css — the one canonical header, identical on all 7 pages and breakpoints.
-   Base/reset/type rules live in global_styles.css; this file styles the header only.
-   The DOM shape and every class hook (.hamburger-menu, .nav-menu.mobile, .nav-overlay)
-   are unchanged, because js/mobile_phone_navbar.js binds to them. */
+/* navbar.css — the "Bento Control Panel" navigation.
+   There is NO horizontal navbar strip. Navigation is a single always-visible logo
+   tile that opens a full-viewport bento panel of destination blocks. Identical on
+   every page and at every breakpoint — mobile gets the same panel, never a drawer.
 
-.header {
-    position: relative;
-    z-index: 1000;
-}
+   Behaviour lives in js/mobile_phone_navbar.js (path kept deliberately): it owns
+   aria-expanded, focus trap, Escape, scroll lock and focus restoration. */
 
-.navbar {
+/* ---------- Trigger: the logo tile ----------
+   Brand anchor and navigation control in one. It stays visible at all times so the
+   company identity is never hidden behind an anonymous menu glyph. */
+.nav-trigger {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--header-h);
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--color-border);
-    z-index: 1000;
-}
-
-/* The translucent blur lives on a pseudo-element, NOT on .navbar itself.
-   backdrop-filter (like filter and transform) makes an element a containing block for
-   its position:fixed descendants — putting it on .navbar collapsed .nav-overlay and
-   .nav-menu.mobile into the 92px header box instead of the viewport. Keep it here. */
-.navbar::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 253, 250, 0.88);
-    -webkit-backdrop-filter: saturate(180%) blur(12px);
-    backdrop-filter: saturate(180%) blur(12px);
-}
-
-.nav-container {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: var(--rail-max);
-    margin-inline: auto;
-    padding-inline: var(--rail-pad);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--space-6);
-}
-
-.nav-brand {
+    top: var(--space-5);
+    left: var(--rail-pad);
+    z-index: 1500;
     display: inline-flex;
     align-items: center;
-    text-decoration: none;
-    /* Keeps a >=44px tap target even at the smallest logo size. */
-    padding-block: var(--space-2);
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-5) var(--space-3) var(--space-3);
+    background: rgba(255, 253, 250, 0.9);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    backdrop-filter: saturate(180%) blur(12px);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    font-family: var(--font-primary);
+    transition: transform var(--transition), box-shadow var(--transition),
+        border-color var(--transition), opacity var(--transition);
 }
 
-/* ---------- Desktop menu ---------- */
-.nav-menu {
-    display: none;
-    list-style: none;
-    align-items: center;
-    margin: 0;
-    padding: 0;
+.nav-trigger:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-border-strong);
 }
 
-.nav-menu.desktop {
-    display: flex;
-    justify-content: flex-end;
-    gap: var(--space-2);
-}
-
-.nav-link {
-    display: inline-block;
-    text-decoration: none;
-    color: var(--color-text);
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
-    letter-spacing: var(--tracking-tight);
-    padding: var(--space-3) var(--space-4);
-    border-radius: var(--radius-full);
-    transition: background var(--transition), color var(--transition);
-}
-
-.nav-link:hover,
-.nav-link.active,
-.nav-link[aria-current="page"] {
-    background: var(--color-accent-earth-soft);
-    color: var(--color-accent-earth);
-}
-
-.nav-link:focus-visible {
+.nav-trigger:focus-visible {
     outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
+    outline-offset: 3px;
 }
 
-/* ---------- Hamburger ---------- */
-.hamburger-menu {
+/* The word "Menu" plus a two-bar glyph: the tile has to read as a control, not just
+   a logo, or the navigation becomes a guessing game. */
+.nav-trigger-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text);
+}
+
+.nav-trigger-bars {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 18px;
+}
+
+.nav-trigger-bars span {
+    display: block;
+    height: 2px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent-earth);
+    transition: transform var(--transition);
+}
+
+.nav-trigger:hover .nav-trigger-bars span:first-child {
+    transform: scaleX(0.7);
+    transform-origin: left;
+}
+
+/* Hidden while the panel is open — the panel carries its own brand and close control,
+   and two logos on screen at once reads as a bug. */
+.nav-is-open .nav-trigger {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ---------- Panel ---------- */
+.nav-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: var(--color-graphite);
+    color: var(--color-text-on-dark);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    opacity: 0;
+    transition: opacity 260ms var(--ease-settle);
+}
+
+/* `hidden` must win over the display used above, or the panel would stay in the
+   layout and swallow clicks while "closed". */
+.nav-panel[hidden] {
     display: none;
+}
+
+.nav-panel.is-open {
+    opacity: 1;
+}
+
+.nav-panel-rail {
+    min-height: 100%;
+    max-width: var(--rail-max);
+    margin-inline: auto;
+    padding: var(--space-6) var(--rail-pad) var(--space-12);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.nav-panel-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    min-height: 56px;
+}
+
+.nav-panel-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth-soft);
+}
+
+/* The mark is dark navy, so on the graphite panel it needs a light chip behind it —
+   without this it is very nearly invisible. */
+.nav-panel-brand img {
+    height: 32px;
+    width: auto;
+    padding: var(--space-2);
+    background: var(--color-paper);
+    border-radius: var(--radius-sm);
+    box-sizing: content-box;
+}
+
+.nav-close {
     position: relative;
     width: 48px;
     height: 48px;
-    padding: 0;
-    background: var(--color-ivory);
-    border: 1px solid var(--color-border);
+    flex-shrink: 0;
+    background: rgba(247, 243, 236, 0.1);
+    border: 1px solid rgba(247, 243, 236, 0.22);
     border-radius: var(--radius-full);
     cursor: pointer;
-    z-index: 1002;
-    transition: background var(--transition), border-color var(--transition);
+    transition: background var(--transition), transform var(--transition);
 }
 
-.hamburger-menu:hover {
-    background: var(--color-stone);
+.nav-close:hover {
+    background: rgba(247, 243, 236, 0.18);
+    transform: rotate(90deg);
 }
 
-.hamburger-menu:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
+.nav-close:focus-visible {
+    outline: 2px solid var(--color-text-on-dark);
+    outline-offset: 3px;
 }
 
-.hamburger-menu span {
+.nav-close span {
     position: absolute;
+    top: 50%;
     left: 50%;
-    width: 22px;
+    width: 18px;
     height: 2px;
-    background-color: var(--color-text);
+    background: var(--color-text-on-dark);
     border-radius: var(--radius-full);
-    transition: transform var(--transition), opacity var(--transition);
 }
 
-.hamburger-menu span:nth-child(1) {
-    top: 17px;
-    transform: translateX(-50%);
+.nav-close span:first-child { transform: translate(-50%, -50%) rotate(45deg); }
+.nav-close span:last-child { transform: translate(-50%, -50%) rotate(-45deg); }
+
+/* ---------- Bento destinations ----------
+   Deliberately unequal: one primary block, one dominant service block, and smaller
+   supporting blocks — the same block language as the page chapters. */
+.nav-bento {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--grid-gap);
+    align-content: center;
 }
 
-.hamburger-menu span:nth-child(2) {
-    top: 23px;
-    transform: translateX(-50%);
-}
-
-.hamburger-menu span:nth-child(3) {
-    top: 29px;
-    transform: translateX(-50%);
-}
-
-.hamburger-menu.active span:nth-child(1) {
-    transform: translateX(-50%) translateY(6px) rotate(45deg);
-}
-
-.hamburger-menu.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger-menu.active span:nth-child(3) {
-    transform: translateX(-50%) translateY(-6px) rotate(-45deg);
-}
-
-/* ---------- Mobile panel ---------- */
-.nav-menu.mobile {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: min(88vw, 380px);
-    height: 100vh;
-    height: 100dvh;
-    background: var(--color-ivory);
-    border-left: 1px solid var(--color-border);
+.nav-tile {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
+    justify-content: flex-end;
     gap: var(--space-2);
-    padding: var(--space-16) var(--space-8);
-    transform: translateX(100%);
-    transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1001;
-}
-
-.nav-menu.mobile.open {
-    transform: translateX(0);
-}
-
-.nav-menu.mobile li {
-    list-style: none;
-}
-
-.nav-menu.mobile .nav-link {
-    display: block;
-    font-family: var(--font-display);
-    font-size: var(--text-3xl);
-    font-weight: var(--weight-normal);
-    letter-spacing: var(--tracking-display);
-    color: var(--color-text);
-    padding: var(--space-3) var(--space-4);
-    border-radius: var(--radius);
-}
-
-.nav-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(28, 27, 25, 0.55);
+    min-height: 150px;
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    background: var(--color-graphite-soft);
+    border: 1px solid rgba(247, 243, 236, 0.16);
+    color: var(--color-text-on-dark);
+    text-decoration: none;
+    /* The same settle language as the page's building blocks, but quicker: this is an
+       overlay the visitor is waiting on, so the whole panel finishes in ~560ms rather
+       than the page's more leisurely load choreography. */
     opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition), visibility var(--transition);
-    z-index: 1000;
+    transform: translate3d(0, var(--block-travel), 0) scale(var(--block-scale));
+    transition:
+        opacity 380ms var(--ease-settle) var(--_d, 0ms),
+        transform 380ms var(--ease-settle) var(--_d, 0ms),
+        background var(--transition),
+        border-color var(--transition);
 }
 
-.nav-overlay.visible {
+.nav-panel.is-open .nav-tile {
     opacity: 1;
-    visibility: visible;
+    transform: none;
 }
 
-/* ---------- Breakpoints ---------- */
-@media (min-width: 901px) {
-    .hamburger-menu {
-        display: none;
-    }
+/* Assembly order — staggered so the panel builds rather than appearing at once.
+   Last tile starts at 180ms and lands at ~560ms. */
+.nav-tile:nth-child(1) { --_d: 0ms; }
+.nav-tile:nth-child(2) { --_d: 30ms; }
+.nav-tile:nth-child(3) { --_d: 60ms; }
+.nav-tile:nth-child(4) { --_d: 90ms; }
+.nav-tile:nth-child(5) { --_d: 120ms; }
+.nav-tile:nth-child(6) { --_d: 150ms; }
+.nav-tile:nth-child(7) { --_d: 180ms; }
 
-    .nav-menu.desktop {
-        display: flex;
-    }
-
-    .nav-menu.mobile {
-        display: none;
-    }
+.nav-tile:hover {
+    background: rgba(247, 243, 236, 0.1);
+    border-color: rgba(247, 243, 236, 0.4);
 }
 
+.nav-tile:focus-visible {
+    outline: 2px solid var(--color-text-on-dark);
+    outline-offset: 3px;
+}
+
+.nav-tile-index {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth-soft);
+    margin-bottom: auto;
+}
+
+.nav-tile-label {
+    font-size: var(--display-3);
+    font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-tight);
+}
+
+.nav-tile-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-on-dark-muted);
+    max-width: 40ch;
+}
+
+/* Primary destination — the largest block, in the brand accent. */
+.nav-tile--primary {
+    grid-column: span 6;
+    grid-row: span 2;
+    background: var(--color-accent-earth);
+    border-color: transparent;
+    min-height: 240px;
+}
+
+.nav-tile--primary:hover {
+    background: var(--color-accent-earth-hover);
+    border-color: transparent;
+}
+
+.nav-tile--primary .nav-tile-index {
+    color: var(--color-text-on-dark);
+}
+
+.nav-tile--primary .nav-tile-label {
+    font-size: var(--display-2);
+}
+
+.nav-tile--primary .nav-tile-desc {
+    color: var(--color-text-on-dark);
+}
+
+/* Build is the lead capability, so its block is wider than the other two services. */
+.nav-tile--wide {
+    grid-column: span 6;
+}
+
+.nav-tile--half {
+    grid-column: span 3;
+}
+
+/* ---------- Secondary links ----------
+   The homepage's in-page sections, preserved as real destinations without adding
+   more top-level bento blocks (and without nesting anchors inside a tile). */
+.nav-panel-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid rgba(247, 243, 236, 0.16);
+}
+
+.nav-panel-foot-label {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-text-on-dark-muted);
+}
+
+.nav-panel-foot a {
+    font-size: var(--text-sm);
+    color: var(--color-text-on-dark-muted);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.nav-panel-foot a:hover {
+    color: var(--color-text-on-dark);
+    text-decoration: underline;
+}
+
+.nav-panel-foot a:focus-visible {
+    outline: 2px solid var(--color-text-on-dark);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+
+/* ---------- Responsive ----------
+   The same bento at every size — a two-column then one-column composition, never a
+   collapsed list. */
 @media (max-width: 900px) {
-    .hamburger-menu {
-        display: block;
+    .nav-tile--primary {
+        grid-column: span 12;
+        grid-row: span 1;
+        min-height: 190px;
     }
 
-    .nav-menu.desktop {
-        display: none;
+    .nav-tile--wide,
+    .nav-tile--half {
+        grid-column: span 6;
     }
 
-    .nav-menu.mobile {
-        display: flex;
+    .nav-tile {
+        min-height: 130px;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-trigger {
+        top: var(--space-4);
+        padding: var(--space-2) var(--space-4) var(--space-2) var(--space-2);
+    }
+
+    .nav-tile--primary,
+    .nav-tile--wide,
+    .nav-tile--half {
+        grid-column: span 12;
+    }
+
+    .nav-tile {
+        min-height: 0;
+        padding: var(--space-5);
+    }
+
+    .nav-tile-label,
+    .nav-tile--primary .nav-tile-label {
+        font-size: var(--text-2xl);
+    }
+
+    .nav-bento {
+        align-content: start;
+    }
+}
+
+/* Reduced motion: the panel appears without assembly, immediately usable. */
+@media (prefers-reduced-motion: reduce) {
+    .nav-panel,
+    .nav-tile {
+        transition: none;
+    }
+
+    .nav-tile {
+        opacity: 1;
+        transform: none;
     }
 }

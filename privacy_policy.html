@@ -9,7 +9,7 @@
     <link rel="icon" href="images/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <link rel="stylesheet" href="css/tokens.css">
@@ -28,35 +28,81 @@
 
 <body>
     <div id="header-section">
-        <header class="header" id="header">
-            <nav class="navbar">
-                <div class="nav-container">
-                    <a href="index.html" class="nav-brand">
-                        <img src="images/icon.png" alt="ProManaged IT Logo" class="logo">
-                    </a>
-                    <button class="hamburger-menu" aria-label="Toggle navigation">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+        <!-- Logo tile: brand anchor AND the navigation trigger. There is no
+             horizontal navbar strip anywhere on the site. -->
+        <button type="button" class="nav-trigger" id="nav-trigger"
+                aria-expanded="false" aria-controls="nav-panel"
+                aria-label="Open navigation menu">
+            <img src="images/icon.png" alt="ProManaged IT" class="logo">
+            <span class="nav-trigger-label">
+                Menu
+                <span class="nav-trigger-bars" aria-hidden="true">
+                    <span></span><span></span>
+                </span>
+            </span>
+        </button>
+
+        <!-- Full-viewport bento navigation panel -->
+        <div class="nav-panel" id="nav-panel" hidden>
+            <div class="nav-panel-rail">
+                <div class="nav-panel-top">
+                    <span class="nav-panel-brand">
+                        <img src="images/icon.png" alt="" aria-hidden="true">
+                        ProManaged IT
+                    </span>
+                    <button type="button" class="nav-close" id="nav-close"
+                            aria-label="Close navigation menu">
+                        <span></span><span></span>
                     </button>
-                    <ul class="nav-menu desktop">
-                        <li><a href="index.html#home" class="nav-link">Home</a></li>
-                        <li><a href="index.html#about" class="nav-link">About</a></li>
-                        <li><a href="index.html#services" class="nav-link">Services</a></li>
-                        <li><a href="index.html#mission-vision" class="nav-link">Mission & Vision</a></li>
-                        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                    </ul>
-                    <ul class="nav-menu mobile">
-                        <li><a href="index.html#home" class="nav-link">Home</a></li>
-                        <li><a href="index.html#about" class="nav-link">About</a></li>
-                        <li><a href="index.html#services" class="nav-link">Services</a></li>
-                        <li><a href="index.html#mission-vision" class="nav-link">Mission & Vision</a></li>
-                        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                    </ul>
                 </div>
-                <div class="nav-overlay"></div>
-            </nav>
-        </header>
+
+                <nav class="nav-bento" aria-label="Primary">
+                    <a class="nav-tile nav-tile--primary" href="get-started.html">
+                        <span class="nav-tile-index">Start here</span>
+                        <span class="nav-tile-label">Start a Project</span>
+                        <span class="nav-tile-desc">Bring us the problem. Book a call and get a scope, a timeline and an honest answer.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--half" href="index.html">
+                        <span class="nav-tile-index">01</span>
+                        <span class="nav-tile-label">Home</span>
+                        <span class="nav-tile-desc">The whole picture.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--half" href="index.html#contact">
+                        <span class="nav-tile-index">02</span>
+                        <span class="nav-tile-label">Contact</span>
+                        <span class="nav-tile-desc">Send a message.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--wide" href="learn_more.html">
+                        <span class="nav-tile-index">03</span>
+                        <span class="nav-tile-label">How We Work</span>
+                        <span class="nav-tile-desc">Listen, plan, deliver, support — and what to expect.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--wide" href="pages/custom_websites.html">
+                        <span class="nav-tile-index">Build</span>
+                        <span class="nav-tile-label">Software &amp; Web Apps</span>
+                        <span class="nav-tile-desc">Web apps, SaaS platforms and business websites, built end to end.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--half" href="pages/hardware_sourcing.html">
+                        <span class="nav-tile-index">Source</span>
+                        <span class="nav-tile-label">Hardware Sourcing</span>
+                        <span class="nav-tile-desc">Sourced, shipped, delivered.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--half" href="pages/network_infrastructure.html">
+                        <span class="nav-tile-index">Connect</span>
+                        <span class="nav-tile-label">Network Infrastructure</span>
+                        <span class="nav-tile-desc">Connectivity that stays quiet.</span>
+                    </a>
+                </nav>
+
+                <div class="nav-panel-foot">
+                    <span class="nav-panel-foot-label">On the homepage</span>
+                    <a class="nav-link" href="index.html#about">About</a>
+                    <a class="nav-link" href="index.html#services">Services</a>
+                    <a class="nav-link" href="index.html#mission-vision">Mission &amp; Vision</a>
+                    <a href="privacy_policy.html">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- ================= HERO ================= -->

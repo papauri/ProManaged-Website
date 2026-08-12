@@ -51,10 +51,14 @@
   --color-danger: #b91c1c;
 
   /* ---- Typography ----
-     Instrument Serif is the editorial display face (H1/H2 and figures only);
-     Inter carries every piece of UI and body copy. */
-  --font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+     ONE family for every text role — headings, body, navigation, buttons, form
+     controls, labels, captions and footer. Plus Jakarta Sans is a variable face, so
+     hierarchy is carried by weight and tracking rather than by a second family.
+     --font-display and --font-sans are kept as aliases so existing role-based
+     references stay readable; both intentionally resolve to the same family. */
+  --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-primary);
+  --font-sans: var(--font-primary);
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -72,10 +76,13 @@
   --display-3: clamp(1.5rem, 1.18rem + 1.3vw, 2.25rem);
   --display-figure: clamp(3rem, 1.8rem + 4.8vw, 5.5rem);
 
-  --tracking-display: -0.025em;
-  --tracking-tight: -0.011em;
+  /* Display type is a SANS now, so it needs tighter tracking and real weight to hold
+     the same editorial presence a serif carried at weight 400. Optical sizing: the
+     larger the type, the tighter the tracking. */
+  --tracking-display: -0.035em;
+  --tracking-tight: -0.015em;
   --tracking-eyebrow: 0.1em;
-  --leading-display: 1.02;
+  --leading-display: 1.04;
   --leading-tight: 1.16;
   --leading-normal: 1.62;
 
@@ -83,6 +90,8 @@
   --weight-medium: 500;
   --weight-semibold: 600;
   --weight-bold: 700;
+  /* Reserved for oversized statement type only (h1/h2, hero figures). */
+  --weight-display: 800;
 
   /* Text measure — applied separately from layout width so a wide rail never
      produces an unreadable line length. */
@@ -120,7 +129,8 @@
   --rail-pad: clamp(1.25rem, 5vw, 5rem);
   --grid-gap: clamp(1rem, 1.6vw, 1.75rem);
   --grid-cols: 12;
-  /* Fixed-header offset, shared by the hero top padding and every scroll-margin. */
+  /* Clearance for the floating navigation logo tile. There is no header strip; this
+     is the space the tile occupies, shared by the hero top padding and scroll-margin. */
   --header-h: 92px;
 
   /* ---- Motion: reveal / hover / focus only ---- */
