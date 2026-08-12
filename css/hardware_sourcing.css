@@ -1,128 +1,57 @@
-/* Hardware Sourcing page */
-.sourcing-intro {
-    padding: 4rem 2rem;
-    background: var(--color-bg);
-    color: var(--color-text);
+/* hardware_sourcing.css — page-specific layer only.
+   Chapters, blocks, process steps, buttons and the enquiry form all come from the
+   shared stylesheets. This file only adds the weight the dominant blocks carry. */
+
+.sourcing-note {
+    padding-top: var(--space-3);
 }
 
-.sourcing-intro .container {
-    max-width: 900px;
-    text-align: center;
-}
-
-.sourcing-intro h2 {
-    font-size: var(--display-2);
-    margin-bottom: var(--space-4);
-}
-
-.sourcing-intro p {
+.sourcing-note p {
     font-size: var(--text-lg);
     color: var(--color-text-muted);
-    line-height: var(--leading-normal);
-    margin-bottom: var(--space-4);
 }
 
-.sourcing-track-record {
-    background: var(--color-accent-soft);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: var(--space-6);
-    margin-top: var(--space-8);
-    text-align: left;
+.sourcing-note p + p {
+    margin-top: var(--space-5);
 }
 
-.sourcing-track-record h3 {
-    color: var(--color-accent);
-    margin-top: 0;
-    margin-bottom: var(--space-2);
-    font-size: var(--text-xl);
+/* This chapter has three steps rather than four. */
+.process-steps--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.sourcing-track-record p {
-    margin-bottom: 0;
-    color: var(--color-text);
-}
-
-/* Category grid — descriptive only, no outbound shop links */
-.sourcing-categories {
-    padding: 0 2rem 4rem;
-    background: var(--color-bg);
-}
-
-.sourcing-categories .section-header {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto var(--space-8);
-}
-
-.sourcing-categories .section-header h2 {
+#track-record h2 {
     font-size: var(--display-3);
-    margin-bottom: var(--space-2);
+    max-width: 34ch;
 }
 
-.sourcing-categories .section-header p {
-    color: var(--color-text-muted);
-}
-
-.category-grid {
-    display: grid;
-    grid-template-columns: repeat(var(--bento-cols), 1fr);
-    grid-auto-flow: dense;
-    gap: var(--bento-gap);
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.category-card-featured {
-    grid-column: span 6;
-}
-
-.category-card {
-    grid-column: span 3;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    padding: var(--space-8);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.category-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-}
-
-.category-card i {
-    font-size: var(--text-4xl);
-    color: var(--color-accent);
-    margin-bottom: var(--space-3);
-}
-
-.category-card h3 {
+#track-record p {
+    margin-top: var(--space-5);
     font-size: var(--text-lg);
-    margin-bottom: var(--space-2);
+    max-width: 68ch;
 }
 
-.category-card p {
-    color: var(--color-text-muted);
-    font-size: var(--text-sm);
-    margin: 0;
+#categories .block--row h3 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-normal);
+    font-size: var(--display-3);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-tight);
 }
 
-@media (max-width: 768px) {
-    .category-card {
-        grid-column: span 6;
+#categories .block--row p {
+    font-size: var(--text-lg);
+    max-width: 60ch;
+}
+
+@media (max-width: 900px) {
+    .process-steps--three {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
-    .category-card-featured {
-        grid-column: span 12;
-    }
 }
 
-@media (max-width: 480px) {
-    .category-card,
-    .category-card-featured {
-        grid-column: span 12;
+@media (max-width: 560px) {
+    .process-steps--three {
+        grid-template-columns: 1fr;
     }
 }

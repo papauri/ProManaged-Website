@@ -1,135 +1,99 @@
-.about {
-    padding: var(--space-24) var(--container-pad);
-    background: var(--color-ivory);
-    color: var(--color-text);
-    position: relative;
-    z-index: 1;
-}
+/* about_section.css — homepage chapter 5, founder / story.
+   The founder portrait is a large editorial anchor, not a small circular avatar. */
 
-/* Editorial header: left-aligned, not centered into a narrow column. */
-.about .section-header {
-    text-align: left;
-    margin-bottom: var(--space-12);
-}
-
-.section-header h2 {
-    font-size: var(--display-2);
-    margin-bottom: var(--space-3);
-    color: var(--color-text);
-}
-
-.section-header .subtitle_into {
-    font-size: var(--text-lg);
-    font-weight: var(--weight-normal);
-    color: var(--color-text-muted);
-    margin-bottom: 0;
-    max-width: 640px;
-    line-height: var(--leading-normal);
-}
-
-/* Wide editorial story: the founder photo is a large proportional visual anchor (not a
-   fixed narrow column), the story text flows directly on the section — no card border/
-   background — and a separate accent statement band below adds the third visual tier. */
-.about-content {
+.about-grid {
     display: grid;
-    grid-template-columns: 4fr 5fr;
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(2.5rem, 5vw, 6rem);
     align-items: center;
-    gap: var(--space-16);
 }
 
-.about-photo {
+.about-portrait {
+    margin: 0;
     border-radius: var(--radius-lg);
-    aspect-ratio: 4 / 5;
-    width: 100%;
     overflow: hidden;
+    background: var(--color-stone);
     box-shadow: var(--shadow-lg);
-    transition: transform var(--transition), box-shadow var(--transition);
+    /* A tall editorial crop rather than a square thumbnail. */
+    aspect-ratio: 4 / 5;
 }
 
-.about-photo img {
+.about-portrait img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-}
-
-.about-photo:hover {
-    transform: scale(1.01);
+    object-position: center top;
 }
 
 .about-story {
-    text-align: left;
-    color: var(--color-text-muted);
-    line-height: var(--leading-normal);
-    font-size: var(--text-lg);
+    min-width: 0;
 }
 
-.about-story h3 {
+.about-story h2 {
+    max-width: 18ch;
+}
+
+/* Pulled-out line: the story's thesis, set in the display face.
+   Selector is qualified with .about-story so it outranks `.about-story p` below —
+   otherwise that rule's higher specificity resets the quote back to body size. */
+.about-story .about-quote {
+    margin-block: var(--space-8);
+    padding-left: var(--space-8);
+    border-left: 2px solid var(--color-accent-earth);
     font-family: var(--font-display);
     font-size: var(--display-3);
     font-weight: var(--weight-normal);
-    margin-bottom: var(--space-5);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-tight);
     color: var(--color-text);
+    max-width: 30ch;
 }
 
 .about-story p {
-    max-width: 60ch;
-    margin-bottom: var(--space-5);
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    line-height: var(--leading-normal);
+}
+
+.about-story p + p {
+    margin-top: var(--space-5);
 }
 
 .about-story strong {
-    color: var(--color-accent-earthy); /* Highlight key terms in the earthy accent, not blue */
+    color: var(--color-accent-earth);
+    font-weight: var(--weight-semibold);
 }
 
-/* Accent statement band — a standalone editorial line, not nested inside the story text. */
-.about-statement {
-    margin-top: var(--space-12);
-    padding-top: var(--space-8);
+.about-signature {
+    margin-top: var(--space-10) !important;
+    padding-top: var(--space-6);
     border-top: 1px solid var(--color-border);
-    font-family: var(--font-display);
-    font-size: var(--display-3);
-    font-weight: var(--weight-normal);
-    color: var(--color-accent-earthy);
-    text-align: left;
+    font-size: var(--text-sm) !important;
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-text-subtle) !important;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .about {
-        padding: var(--space-16) var(--container-pad);
-    }
-
-    .about .section-header {
-        text-align: center;
-    }
-
-    .section-header .subtitle_into {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .about-content {
+@media (max-width: 900px) {
+    .about-grid {
         grid-template-columns: 1fr;
-        gap: var(--space-8);
+        gap: var(--space-10);
     }
 
-    .about-photo {
-        max-width: 260px;
+    .about-portrait {
+        max-width: 420px;
         aspect-ratio: 1 / 1;
-        margin: 0 auto;
     }
 
-    .about-story {
-        text-align: center;
-    }
-
-    .about-story p {
+    .about-story h2 {
         max-width: none;
-        margin-left: auto;
-        margin-right: auto;
     }
+}
 
-    .about-statement {
-        text-align: center;
+@media (max-width: 680px) {
+    .about-story .about-quote {
+        padding-left: var(--space-5);
+        max-width: none;
     }
 }

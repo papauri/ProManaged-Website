@@ -1,81 +1,86 @@
-/* FOOTER - MODERN, MINIMAL, AND SUBTLE */
+/* footer_promanaged.css — the one canonical footer, identical on all 7 pages.
+   Same columns, spacing, typography, surface, link and contact hierarchy everywhere. */
+
 .footer {
-    background: var(--color-stone);
-    color: var(--color-text-muted);
-    padding: var(--space-16) 0 var(--space-10);
+    background: var(--color-graphite);
+    color: var(--color-text-on-dark-muted);
+    padding-block: var(--section-y) var(--space-10);
     position: relative;
-    z-index: 1;
 }
 
-/* Inset divider: separates the footer band from the page above */
-.footer-divider {
-    max-width: var(--container-max);
-    margin: 0 auto var(--space-12);
-    padding: 0 var(--container-pad);
-    border-top: 1px solid var(--color-border);
-}
-
-/* Footer Content Layout — explicit columns (brand wider) rather than uniform auto-fit tiles. */
+/* Brand column dominates; links and newsletter are equal supporting columns. */
 .footer-content {
     display: grid;
-    grid-template-columns: 1fr 1.4fr 1fr;
-    gap: var(--space-10);
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--container-pad);
-    text-align: left;
+    grid-template-columns: 1.5fr 1fr 1.2fr;
+    gap: clamp(2rem, 4vw, 5rem);
+    align-items: start;
 }
 
-/* Consistent heading style across all footer columns */
 .footer-content h3,
 .footer-content h4 {
     font-family: var(--font-sans);
-    font-size: var(--text-lg);
-    font-weight: var(--weight-semibold);
-    color: var(--color-text);
-    margin-bottom: var(--space-4);
-}
-
-/* Footer Brand Section */
-.footer-brand p {
-    font-family: var(--font-sans);
     font-size: var(--text-sm);
-    line-height: var(--leading-normal);
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-2);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth-soft);
+    margin-bottom: var(--space-6);
 }
 
-.footer-brand a {
+/* ---------- Brand column ---------- */
+.footer-brand p {
+    font-family: var(--font-display);
+    font-size: var(--display-3);
+    font-weight: var(--weight-normal);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-tight);
+    color: var(--color-text-on-dark);
+    max-width: 22ch;
+    margin-bottom: var(--space-8);
+}
+
+.footer-label {
+    display: block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-text-on-dark-muted);
+    margin-bottom: var(--space-3);
+}
+
+.footer-contact {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-contact a {
     display: inline-block;
-    padding: var(--space-3) 0;
-    /* --color-accent-active (darker than --color-accent) — the plain --color-accent blue
-       drops under 4.5:1 on the new warm-stone footer background. */
-    color: var(--color-accent-active);
+    padding-block: var(--space-2);
+    color: var(--color-text-on-dark);
     text-decoration: none;
     font-size: var(--text-sm);
     transition: color var(--transition);
 }
 
-.footer-brand a:hover,
-.footer-brand a:focus {
-    color: var(--color-accent-hover);
+.footer-contact a:hover,
+.footer-contact a:focus {
+    color: var(--color-accent-earth-soft);
+    text-decoration: underline;
 }
 
-/* Footer Links */
+/* ---------- Quick links column ---------- */
 .footer-links ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.footer-links li {
-    margin-bottom: var(--space-1);
-}
-
 .footer-links a {
     display: inline-block;
-    padding: var(--space-3) 0;
-    color: var(--color-text-muted);
+    padding-block: var(--space-2);
+    color: var(--color-text-on-dark-muted);
     text-decoration: none;
     font-size: var(--text-sm);
     transition: color var(--transition);
@@ -83,46 +88,54 @@
 
 .footer-links a:hover,
 .footer-links a:focus {
-    color: var(--color-accent-active);
+    color: var(--color-text-on-dark);
 }
 
-/* Newsletter Section */
+/* ---------- Newsletter column ---------- */
 .footer-newsletter p {
     font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-4);
+    color: var(--color-text-on-dark-muted);
     line-height: var(--leading-normal);
+    max-width: 34ch;
+    margin-bottom: var(--space-5);
 }
 
 .footer-newsletter form {
     display: flex;
-    align-items: center;
-    gap: var(--space-2);
     flex-wrap: wrap;
+    gap: var(--space-3);
 }
 
 .footer-newsletter input {
+    flex: 1 1 12rem;
+    min-width: 0;
     padding: var(--space-3) var(--space-4);
     border-radius: var(--radius);
-    border: 1px solid var(--color-border);
-    background: var(--color-bg);
-    color: var(--color-text);
-    flex: 1;
+    border: 1px solid rgba(247, 243, 236, 0.24);
+    background: var(--color-graphite-soft);
+    color: var(--color-text-on-dark);
+    font-family: var(--font-sans);
     font-size: var(--text-sm);
-    outline: none;
-    transition: border-color var(--transition);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.footer-newsletter input::placeholder {
+    color: rgba(247, 243, 236, 0.5);
 }
 
 .footer-newsletter input:focus {
-    border-color: var(--color-accent);
+    outline: none;
+    border-color: var(--color-accent-earth-soft);
+    box-shadow: 0 0 0 3px rgba(247, 243, 236, 0.12);
 }
 
 .footer-newsletter button {
     padding: var(--space-3) var(--space-6);
-    border-radius: var(--radius);
     border: none;
-    background: var(--color-accent);
-    color: var(--color-accent-contrast);
+    border-radius: var(--radius);
+    background: var(--color-accent-earth-soft);
+    color: var(--color-graphite);
+    font-family: var(--font-sans);
     font-size: var(--text-sm);
     font-weight: var(--weight-semibold);
     cursor: pointer;
@@ -131,53 +144,70 @@
 
 .footer-newsletter button:hover,
 .footer-newsletter button:focus {
-    background: var(--color-accent-hover);
+    background: var(--color-text-on-dark);
 }
 
-/* Bottom Footer */
+/* ---------- Bottom bar ---------- */
 .footer-bottom {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    max-width: var(--container-max);
-    margin: var(--space-12) auto 0;
-    padding: var(--space-5) var(--container-pad) 0;
-    border-top: 1px solid var(--color-border);
-    text-align: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-top: var(--section-y);
+    padding-top: var(--space-6);
+    border-top: 1px solid rgba(247, 243, 236, 0.16);
     font-size: var(--text-sm);
-    color: var(--color-text-muted);
+    color: var(--color-text-on-dark-muted);
+}
+
+.footer-bottom p {
+    max-width: none;
+    margin: 0;
 }
 
 .footer-bottom a {
-    color: var(--color-text-muted);
+    color: var(--color-text-on-dark-muted);
     text-decoration: none;
     transition: color var(--transition);
 }
 
 .footer-bottom a:hover,
 .footer-bottom a:focus {
-    color: var(--color-accent-active);
+    color: var(--color-text-on-dark);
 }
 
-/* Visible keyboard focus ring, consistent with the accent-based focus treatment used site-wide */
+/* Visible keyboard focus, consistent with the rest of the site. */
 .footer-links a:focus-visible,
-.footer-brand a:focus-visible,
-.footer-bottom a:focus-visible {
-    outline: 2px solid var(--color-accent);
+.footer-contact a:focus-visible,
+.footer-bottom a:focus-visible,
+.footer-newsletter button:focus-visible {
+    outline: 2px solid var(--color-text-on-dark);
     outline-offset: 2px;
     border-radius: var(--radius-sm);
 }
 
-/* Responsive Footer Design */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .footer-content {
-        grid-template-columns: 1fr;
-        gap: var(--space-8);
-        text-align: center;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-10);
     }
 
-    .footer-newsletter form {
+    .footer-brand {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 680px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-10);
+    }
+
+    .footer-brand {
+        grid-column: span 1;
+    }
+
+    .footer-bottom {
         flex-direction: column;
-        gap: var(--space-2);
     }
 }

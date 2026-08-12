@@ -1,18 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Handle navigation for service cards
+    // Capability blocks navigate to their data-target. They carry role="link" and
+    // tabindex="0" in the HTML, so Enter/Space must activate them like a click.
     document.querySelectorAll('.service-card').forEach(card => {
         const navigate = () => {
             const targetUrl = card.getAttribute('data-target');
             if (targetUrl) {
-                window.location.href = targetUrl; // Navigate to the specified URL
-            } else {
-                console.warn("No target URL specified for this card.");
+                window.location.href = targetUrl;
             }
         };
         card.addEventListener('click', navigate);
-        // Keyboard support: card carries role="link" + tabindex="0" in the HTML,
-        // so Enter/Space must activate it the same as a click.
         card.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
@@ -21,85 +18,83 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Adjust scroll behavior for navbar links
-    const navbarLinks = document.querySelectorAll('.nav-link');
-    const headerHeight = document.querySelector('.header').offsetHeight; // Get the height of the fixed header
+    // In-page nav links: offset the smooth scroll by the fixed header height.
+    // Cross-page links (e.g. ../index.html#about) are left to navigate normally —
+    // those land correctly via the scroll-margin-top rule in global_styles.css.
+    const header = document.querySelector('.header');
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
 
-    navbarLinks.forEach(link => {
+    document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            if (!href || !href.startsWith('#')) {
-                return; // Let cross-page links (e.g. ../index.html#about) navigate normally
+            if (!href || !href.startsWith('#') || href === '#') {
+                return;
             }
-            e.preventDefault(); // Prevent default anchor behavior
-            const targetId = href.substring(1); // Get the ID of the target section
-            const targetElement = document.getElementById(targetId);
-
-            if (targetElement) {
-                const targetPosition = targetElement.offsetTop; // Top position of the target section
-                const scrollPosition = targetPosition - headerHeight; // Adjust for the header height
-
-                // Smooth scroll to the adjusted position
-                window.scrollTo({
-                    top: scrollPosition,
-                    behavior: 'smooth'
-                });
+            const targetElement = document.getElementById(href.substring(1));
+            if (!targetElement) {
+                return;
             }
+            e.preventDefault();
+            const top = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
+            window.scrollTo({ top, behavior: 'smooth' });
         });
     });
 
-    // Ripple Effect for Buttons
-    document.querySelectorAll('.btn').forEach(button => {
-        button.addEventListener('click', function (e) {
-            const circle = document.createElement('span');
-            const diameter = Math.max(this.clientWidth, this.clientHeight);
-            const radius = diameter / 2;
+    // Subtle reveal on scroll — the only entrance motion on the site.
+    // The .reveal class (which sets opacity:0) is applied HERE rather than in the
+    // markup, so if this script never runs the content is simply visible instead of
+    // permanently invisible.
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            circle.style.width = circle.style.height = `${diameter}px`;
-            circle.style.left = `${e.clientX - this.offsetLeft - radius}px`;
-            circle.style.top = `${e.clientY - this.offsetTop - radius}px`;
-            circle.classList.add('ripple');
+    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+        const targets = document.querySelectorAll(
+            '.chapter-head, .block, .process-step, .about-grid > *, .contact-grid > *, .expectation'
+        );
 
-            const existingRipple = this.getElementsByClassName('ripple')[0];
-            if (existingRipple) {
-                existingRipple.remove();
-            }
+        // Clearing both classes returns the element to its own (faster) hover/focus
+        // transition timing, and makes the hidden state impossible to get stuck in.
+        const settle = (el) => el.classList.remove('reveal', 'is-visible');
+        const show = (el) => {
+            el.classList.add('is-visible');
+            window.setTimeout(() => settle(el), 600);
+        };
 
-            this.appendChild(circle);
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                revealObserver.unobserve(entry.target);
+                show(entry.target);
+            });
+        }, { threshold: 0, rootMargin: '0px 0px 15% 0px' });
+
+        targets.forEach(el => {
+            el.classList.add('reveal');
+            revealObserver.observe(el);
         });
-    });
 
-    // Hover feedback for buttons and service cards is handled in CSS (:hover rules
-    // using var(--shadow-md) and a restrained lift) — see service_cards.css and
-    // the .btn hover rules in get-started.css / learn-more.css / hero_section.css.
+        // Safety net: content must never stay invisible. If anything has not been
+        // revealed by now — a viewport that jumped past it, a stalled observer, a
+        // print or screenshot pass — drop the hidden state unconditionally.
+        window.setTimeout(() => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                revealObserver.unobserve(el);
+                settle(el);
+            });
+        }, 4000);
+    }
 
-    // Scroll Effect with Intersection Observer
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            } else {
-                entry.target.classList.remove('visible');
-            }
-        });
-    }, { threshold: 0.3 });
-
-    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-
-    // Scroll-to-Top Button
+    // Back-to-top control.
     const scrollTopButton = document.createElement('button');
-    scrollTopButton.innerHTML = '↑';
+    scrollTopButton.type = 'button';
+    scrollTopButton.innerHTML = '&uarr;';
+    scrollTopButton.setAttribute('aria-label', 'Scroll back to top');
     scrollTopButton.classList.add('scroll-top-btn');
-    scrollTopButton.style.display = 'none';
+    scrollTopButton.hidden = true;
     document.body.appendChild(scrollTopButton);
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            scrollTopButton.style.display = 'block';
-        } else {
-            scrollTopButton.style.display = 'none';
-        }
-    });
+        scrollTopButton.hidden = window.scrollY <= 400;
+    }, { passive: true });
 
     scrollTopButton.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });

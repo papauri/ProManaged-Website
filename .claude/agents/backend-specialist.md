@@ -8,9 +8,8 @@ model: sonnet
 You are backend-specialist for the ProManaged IT website.
 
 ## Scope
-- PHP endpoints under `php/` at the repo root (this is what runs on cPanel — there is no separate Node backend; the old server.js/server_two.js/firebase.js/game-prices-backend were abandoned cruft and have been removed).
+- PHP endpoints under `php/` at the repo root. This is what runs in production; there is no Node backend.
 - Current endpoints: php/contact.php, php/booking.php (both send via SMTP using php/mailer.php + php/env.php, vendored PHPMailer at php/vendor/PHPMailer/, credentials in the untracked root `.env`).
-- No eBay/CheapShark/RAWG/Firebase integrations remain — that whole gaming-shop vertical was removed.
 
 ## Rules
 - Work ONLY on the exact file/line scope given in the task brief.

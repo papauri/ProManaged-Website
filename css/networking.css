@@ -1,148 +1,88 @@
-/* Network Section Container */
-.network-section {
-    background: var(--color-bg);
-    color: var(--color-text);
-    padding: 4rem 2rem;
+/* networking.css — page-specific layer only.
+   Chapters, blocks, lists and buttons come from global_styles.css. This file styles the
+   price plate and the hover state that js/networking.js toggles. */
+
+.network-note {
+    padding-top: var(--space-3);
 }
 
-.network-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Header Styling */
-.network-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.network-header h2 {
-    font-size: var(--display-2);
-    margin-bottom: 1rem;
-    color: var(--color-text);
-}
-
-/* Grid Layout — canonical 12-column bento */
-.network-grid {
-    display: grid;
-    grid-template-columns: repeat(var(--bento-cols), 1fr);
-    grid-auto-flow: dense;
-    gap: var(--bento-gap);
-    margin: 2rem 0;
-}
-
-/* Card Styling */
-.network-card {
-    grid-column: span 3;
-    background: var(--color-surface);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    padding: var(--space-8);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid var(--color-border);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.network-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-}
-
-.network-card.primary {
-    border: 2px solid var(--color-accent);
-    background: var(--color-accent-soft);
-    grid-column: span 6;
-}
-
-.network-card.primary h3 {
-    font-size: var(--text-2xl);
-}
-
-.network-card.active {
-    border: 2px solid var(--color-success); /* Highlight with green border */
-    background: var(--color-surface); /* Subtle green background */
-    box-shadow: var(--shadow-md); /* Add shadow */
-}
-
-/* Icon Styling */
-.card-icon {
-    font-size: var(--text-4xl);
-    margin-bottom: 1.5rem;
-    color: var(--color-accent);
-}
-
-/* Service List Styling */
-.service-list {
-    list-style: none;
-    padding: 0;
-    margin: 1.5rem 0;
-}
-
-.service-list li {
-    padding: 0.8rem 0;
-    padding-left: 1.5rem;
-    position: relative;
+.network-note p {
+    font-size: var(--text-lg);
     color: var(--color-text-muted);
-    border-bottom: 1px solid var(--color-border);
 }
 
-.service-list li:last-child {
-    border-bottom: none;
+.network-note p + p {
+    margin-top: var(--space-5);
 }
 
-.service-list li:before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--color-accent);
+.network-grid .block--row h3 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-normal);
+    font-size: var(--display-3);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-tight);
 }
 
-/* Price Information */
+.network-grid .block--row > .block__body > p {
+    font-size: var(--text-lg);
+    max-width: 52ch;
+}
+
+/* ---------- Price plate ----------
+   js/networking.js rewrites the contents of every .price-info (EUR, MWK, or both),
+   so each one holds exactly one .service-fee span and must stay in the DOM. */
+.price-group {
+    margin-top: auto;
+    padding-top: var(--space-8);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
 .price-info {
-    margin-top: auto; /* Pin to bottom so cards align evenly within a row */
-    padding: 1rem;
-    background: var(--color-accent-soft);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-ivory);
     border-radius: var(--radius);
 }
 
-.price-info span {
+.price-info .service-fee {
     display: block;
-    margin: 0.5rem 0;
-    font-weight: bold;
-    color: var(--color-accent);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    white-space: nowrap;
 }
 
-/* Currency Display */
-.currency-display {
-    font-size: 0.9rem;
+.price-info .converted-price {
+    font-weight: var(--weight-normal);
     color: var(--color-text-subtle);
-    margin-top: 0.5rem;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .network-card {
-        grid-column: span 4;
-    }
-
-    .network-card.primary {
-        grid-column: span 8;
-    }
+.block--tint .price-info {
+    background: var(--color-paper);
 }
 
-@media (max-width: 768px) {
-    .network-section {
-        padding: 2rem 1rem;
-    }
+.block--graphite .price-info {
+    background: rgba(247, 243, 236, 0.12);
+}
 
-    .network-card,
-    .network-card.primary {
-        grid-column: span 12;
-    }
+.block--graphite .price-info .service-fee {
+    color: var(--color-text-on-dark);
+}
 
-    /* .network-header h2 is fluid via --display-2; no breakpoint override needed. */
+.block--graphite .price-info .converted-price {
+    color: var(--color-text-on-dark-muted);
+}
+
+/* js/networking.js adds .active on mouseenter and removes it on mouseleave. */
+.network-card.active {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-accent-earth);
+}
+
+@media (max-width: 680px) {
+    .price-info .service-fee {
+        white-space: normal;
+    }
 }

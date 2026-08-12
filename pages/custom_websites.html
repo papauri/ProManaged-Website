@@ -4,23 +4,25 @@
 <head id="services_head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ProManaged IT - Software & App Development: custom web apps, SaaS platforms, and websites, designed and built end to end.">
-    <title>Software & App Development - ProManaged IT</title>
+    <title>Build — Software &amp; Web Apps | ProManaged IT</title>
+    <meta name="description" content="ProManaged IT builds custom web apps, SaaS platforms and business websites end to end — discovery, design, build, launch and ongoing support.">
+    <link rel="icon" href="../images/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link rel="stylesheet" href="../css/tokens.css">
     <link rel="stylesheet" href="../css/global_styles.css">
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/logo.css">
     <link rel="stylesheet" href="../css/hero_section.css">
-    <link rel="stylesheet" href="../css/book_appointment.css">
     <link rel="stylesheet" href="../css/footer_promanaged.css">
+    <link rel="stylesheet" href="../css/scroll_top.css">
     <link rel="stylesheet" href="../css/custom_websites.css">
 </head>
 
-<body class="custom-websites-body">
+<body>
     <div id="header-section">
         <header class="header" id="header">
             <nav class="navbar">
@@ -53,38 +55,39 @@
         </header>
     </div>
 
+    <!-- ================= HERO ================= -->
     <div id="hero-section">
         <section id="home" class="hero">
-            <div class="container hero-content">
-                <div class="hero-main">
-                    <span class="hero-eyebrow">Software & Web Apps</span>
-                    <h1 id="hero-title">Software, Web Apps & SaaS</h1>
-                    <p id="hero-subtitle">We design and build the software your business runs on — custom web apps and SaaS platforms, and websites too if that's what you need.</p>
+            <div class="hero-rail rail">
+                <div class="hero-statement">
+                    <span class="hero-eyebrow">Build</span>
+                    <h1 id="hero-title">The system you keep describing, actually built.</h1>
+                    <p id="hero-subtitle">Most of our work is web apps and SaaS platforms — the tools a business runs on, not just a page describing it. If a straightforward website is what you need, we build those too.</p>
                     <div class="hero-buttons">
-                        <a href="../get-started.html" class="btn primary" id="hero-get-started">Get Started</a>
-                        <a href="../learn_more.html" class="btn secondary" id="hero-learn-more">Learn More</a>
+                        <a href="../get-started.html#booking" class="btn primary" id="hero-get-started">Book a call</a>
+                        <a href="#what-we-build" class="btn secondary" id="hero-learn-more">What we build</a>
                     </div>
                 </div>
-                <div class="hero-facts">
-                    <div class="hero-fact">
+                <div class="hero-visual">
+                    <div class="hero-feature">
                         <i class="fas fa-diagram-project" aria-hidden="true"></i>
-                        <div class="hero-fact-body">
-                            <span class="hero-fact-title">4-Step Process</span>
-                            <span class="hero-fact-desc">Discovery to launch, no surprises</span>
-                        </div>
+                        <span class="hero-figure">Four</span>
+                        <span class="hero-figure-label">steps from first conversation to launch, with working previews at every one — nothing is revealed at the end for the first time.</span>
                     </div>
-                    <div class="hero-fact">
-                        <i class="fas fa-cloud" aria-hidden="true"></i>
-                        <div class="hero-fact-body">
-                            <span class="hero-fact-title">Web Apps &amp; SaaS</span>
-                            <span class="hero-fact-desc">Built to grow with your users</span>
+                    <div class="hero-support">
+                        <div class="hero-support-row">
+                            <i class="fas fa-cloud" aria-hidden="true"></i>
+                            <div class="hero-support-text">
+                                <span class="hero-support-title">Web apps &amp; SaaS</span>
+                                <span class="hero-support-desc">Built to grow with your users</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="hero-fact">
-                        <i class="fas fa-coins" aria-hidden="true"></i>
-                        <div class="hero-fact-body">
-                            <span class="hero-fact-title">Pay Locally</span>
-                            <span class="hero-fact-desc">EUR or Malawian Kwacha</span>
+                        <div class="hero-support-row">
+                            <i class="fas fa-hand-holding-dollar" aria-hidden="true"></i>
+                            <div class="hero-support-text">
+                                <span class="hero-support-title">Local-friendly payment</span>
+                                <span class="hero-support-desc">Flexible payment arrangements</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,127 +95,148 @@
         </section>
     </div>
 
-
-    <section class="custom-websites">
-        <div class="website-header">
-            <h2>From idea to working software</h2>
-            <p>
-                Most of what we build these days is web apps and SaaS platforms — the tools businesses actually run
-                on, not just a page that describes them. If a straightforward website is what you need, we build
-                those too. Either way, we'll walk you through every step, from scoping what you need to launching
-                something that works.
-            </p>
-        </div>
-
-        <!-- Steps Section -->
-        <div class="steps-section">
-            <h3>How It Works: Step-by-Step</h3>
-            <div class="steps-strip">
-                <div class="step-card">
-                    <span class="step-number">01</span>
-                    <h4>Discovery</h4>
-                    <p>We discuss your goals, budget, and the problem you're trying to solve — whether that's a
-                        customer-facing app, an internal tool, or a full SaaS product.</p>
+    <!-- ================= THE PROBLEM ================= -->
+    <section id="premise" class="section section--ivory">
+        <div class="rail">
+            <div class="grid">
+                <div class="block block--7 block--bare">
+                    <span class="eyebrow">Why people call us</span>
+                    <h2>Every business eventually outgrows the spreadsheet.</h2>
                 </div>
-                <div class="step-card">
-                    <span class="step-number">02</span>
-                    <h4>Design & Build</h4>
-                    <p>We design the experience and build it, keeping you in the loop with regular previews so
-                        there are no surprises at the end.</p>
-                </div>
-                <div class="step-card">
-                    <span class="step-number">03</span>
-                    <h4>Testing & Launch</h4>
-                    <p>We test thoroughly, set up hosting and infrastructure, and launch — handling the technical
-                        parts so you don't have to.</p>
-                </div>
-                <div class="step-card">
-                    <span class="step-number">04</span>
-                    <h4>Support & Iteration</h4>
-                    <p>Software is never really "done" — we offer ongoing support and maintenance packages so your
-                        product keeps improving after launch.</p>
+                <div class="block block--5 block--bare premise-note">
+                    <p>It starts as one shared file. Then a second copy. Then a rule only one person understands, and a monthly evening spent reconciling the two.</p>
+                    <p>That is usually the point at which someone gets in touch — not because they want software, but because the workaround has quietly become the job.</p>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- What We Build Section -->
-        <div class="website-types-section">
-            <h3>What We Build</h3>
-            <div class="custom-websites-grid">
-                <!-- Web Applications -->
-                <div class="website-card">
-                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
-                    <h4>Web Applications</h4>
-                    <ul class="service-list">
-                        <li>Custom internal tools & dashboards</li>
-                        <li>Booking, scheduling & workflow systems</li>
-                        <li>Integrations with the tools you already use</li>
-                    </ul>
+    <!-- ================= PROCESS ================= -->
+    <section id="how-it-works" class="section section--graphite">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">How it works</span>
+                <h2>From a rough idea to working software.</h2>
+                <p class="lede">You do not need a specification to start. Bring the problem and we turn it into something people can actually use.</p>
+            </div>
+            <ol class="process-steps">
+                <li class="process-step">
+                    <span class="step-num">01</span>
+                    <h3>Discovery</h3>
+                    <p>We talk through the goal, the budget and the problem behind it — whether that is a customer-facing app, an internal tool or a full product.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">02</span>
+                    <h3>Design &amp; build</h3>
+                    <p>We design the experience and build it, showing working previews as we go so nothing is a surprise at the end.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">03</span>
+                    <h3>Testing &amp; launch</h3>
+                    <p>We test properly, set up hosting and infrastructure, and launch — handling the technical parts so you do not have to.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">04</span>
+                    <h3>Support &amp; iteration</h3>
+                    <p>Software is never really finished. Ongoing support keeps it improving once real users arrive with real opinions.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ================= WHAT WE BUILD ================= -->
+    <section id="what-we-build" class="section">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">What we build</span>
+                <h2>Three shapes most projects take.</h2>
+            </div>
+            <div class="grid">
+                <div class="block block--12 block--row block--tint">
+                    <div class="block__aside">
+                        <span class="mark" aria-hidden="true"><i class="fas fa-laptop-code"></i></span>
+                    </div>
+                    <div class="block__body">
+                        <h3>Web applications</h3>
+                        <p>The most common request, and the one that changes a working week the most: software your team logs into and uses every day.</p>
+                        <ul class="list">
+                            <li>Custom internal tools and dashboards</li>
+                            <li>Booking, scheduling and workflow systems</li>
+                            <li>Integrations with the tools you already use</li>
+                        </ul>
+                    </div>
                 </div>
-
-                <!-- SaaS Platforms -->
-                <div class="website-card">
-                    <div class="card-icon"><i class="fas fa-cloud"></i></div>
-                    <h4>SaaS Platforms</h4>
-                    <ul class="service-list">
-                        <li>Multi-tenant products, from MVP to scale</li>
-                        <li>Subscription billing & user accounts</li>
-                        <li>Built to grow with your user base</li>
-                    </ul>
+                <div class="block block--6">
+                    <span class="mark" aria-hidden="true"><i class="fas fa-cloud"></i></span>
+                    <div class="block__body">
+                        <h3>SaaS platforms</h3>
+                        <ul class="list">
+                            <li>Multi-tenant products, from first version to scale</li>
+                            <li>Subscription billing and user accounts</li>
+                            <li>Architecture that grows with your user base</li>
+                        </ul>
+                    </div>
                 </div>
-
-                <!-- Business Websites -->
-                <div class="website-card">
-                    <div class="card-icon"><i class="fas fa-briefcase"></i></div>
-                    <h4>Business Websites</h4>
-                    <ul class="service-list">
-                        <li>Custom branding and layouts</li>
-                        <li>SEO-optimized content</li>
-                        <li>Responsive design for all devices</li>
-                    </ul>
+                <div class="block block--6">
+                    <span class="mark" aria-hidden="true"><i class="fas fa-briefcase"></i></span>
+                    <div class="block__body">
+                        <h3>Business websites</h3>
+                        <ul class="list">
+                            <li>Custom branding and layouts</li>
+                            <li>Fast, search-friendly, responsive pages</li>
+                            <li>Content you can manage yourself</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Projects Section -->
-        <div class="projects-section">
-            <h3>What We've Built</h3>
-            <p class="projects-intro">A few examples of the kind of work we do — internal tools, client-facing
-                products, and the systems that keep them running.</p>
-            <div class="projects-grid">
-                <div class="project-card project-card-featured">
-                    <span class="project-tag">Web App</span>
-                    <h4>Client Booking & Scheduling Platform</h4>
-                    <p>A booking system for a service business, handling staff calendars, availability, and
-                        automated confirmation emails.</p>
+    <!-- ================= SELECTED WORK ================= -->
+    <section id="projects" class="section section--stone">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">Selected work</span>
+                <h2>What we have built.</h2>
+                <p class="lede">Internal tools, client-facing products, and the systems that keep them running.</p>
+            </div>
+            <div class="grid">
+                <div class="block block--12 block--row block--graphite">
+                    <div class="block__aside">
+                        <span class="mark" aria-hidden="true"><i class="fas fa-calendar-check"></i></span>
+                    </div>
+                    <div class="block__body">
+                        <span class="project-tag">Web App</span>
+                        <h3>Client booking &amp; scheduling platform</h3>
+                        <p>A booking system for a service business — staff calendars, availability rules and automated confirmation emails — replacing a shared spreadsheet and a great many phone calls.</p>
+                    </div>
                 </div>
-                <div class="project-card">
+                <div class="block block--4">
                     <span class="project-tag">Internal Tool</span>
-                    <h4>Equipment Sourcing & Delivery Tracker</h4>
-                    <p>The internal tool behind our own hardware sourcing work — tracking requests, orders, and
-                        deliveries from the UK and Europe through to Malawi.</p>
+                    <h3>Equipment sourcing &amp; delivery tracker</h3>
+                    <p>The internal tool behind our own sourcing work, tracking requests, orders and deliveries from supplier through to arrival.</p>
                 </div>
-                <div class="project-card">
+                <div class="block block--4">
                     <span class="project-tag">SaaS</span>
-                    <h4>Inventory & Order Tracker</h4>
-                    <p>A lightweight SaaS product for small retailers to track stock and orders without relying on
-                        spreadsheets.</p>
+                    <h3>Inventory &amp; order tracker</h3>
+                    <p>A lightweight product letting small retailers track stock and orders without relying on spreadsheets.</p>
                 </div>
-                <div class="project-card">
+                <div class="block block--4">
                     <span class="project-tag">Website</span>
-                    <h4>Business Website Refresh</h4>
-                    <p>A modern, fast marketing site rebuild for a local business, with a content system the client
-                        manages themselves.</p>
+                    <h3>Business website refresh</h3>
+                    <p>A fast marketing site rebuild for a local business, with a content system the client manages themselves.</p>
                 </div>
             </div>
         </div>
+    </section>
 
-
-        <!-- FAQ Section -->
-        <div class="faq-section">
-            <div class="faq-header">
-                <h3>Frequently Asked Questions</h3>
-                <p>Find quick answers to common questions about our services</p>
+    <!-- ================= FAQ ================= -->
+    <section id="faq" class="section">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">Questions</span>
+                <h2>Frequently asked.</h2>
+                <p class="lede">Select a question to read the answer.</p>
             </div>
 
             <div class="faq-container">
@@ -220,14 +244,14 @@
                     <div class="faq-question">Do you only build websites, or web apps and SaaS too?</div>
                     <div class="faq-answer">
                         Web apps and SaaS platforms are most of what we build today. We still build straightforward
-                        business websites when that's the right fit — just tell us what you're trying to achieve.
+                        business websites when that is the right fit — just tell us what you are trying to achieve.
                     </div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">What's the difference between a website and a web app?</div>
+                    <div class="faq-question">What is the difference between a website and a web app?</div>
                     <div class="faq-answer">
-                        A website mainly presents information. A web app lets users log in and do things — book
+                        A website mainly presents information. A web app lets people log in and do things — book
                         appointments, manage data, track orders. Most businesses eventually need both.
                     </div>
                 </div>
@@ -235,7 +259,7 @@
                 <div class="faq-item">
                     <div class="faq-question">Do I need to know what I want built before contacting you?</div>
                     <div class="faq-answer">
-                        No. Most projects start as a rough idea or a problem you're trying to solve — we help you
+                        No. Most projects start as a rough idea or a problem you are trying to solve — we help you
                         turn that into a clear scope during the discovery step.
                     </div>
                 </div>
@@ -243,106 +267,107 @@
                 <div class="faq-item">
                     <div class="faq-question">How long does a project take?</div>
                     <div class="faq-answer">
-                        It depends on scope. A simple website can take 1-2 weeks, while a full web app or SaaS
-                        platform typically takes 4-8 weeks or more.
+                        It depends entirely on scope. A simple website is a matter of weeks; a full web app or SaaS
+                        platform takes considerably longer. You get a realistic timeline in writing after discovery,
+                        before any commitment.
                     </div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">Do you offer payment plans?</div>
+                    <div class="faq-question">How do payments work?</div>
                     <div class="faq-answer">
-                        Yes, we offer flexible payment plans, and you can pay in your local currency including
-                        Malawian Kwacha.
+                        We use flexible payment arrangements agreed up front, and support local-friendly payment
+                        options so you are not forced through awkward international transfers.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">Do you handle hosting and maintenance after launch?</div>
                     <div class="faq-answer">
-                        Yes. We set up hosting and infrastructure as part of the build, and offer ongoing maintenance
-                        packages if you'd rather we handle updates.
+                        Yes. We set up hosting and infrastructure as part of the build, and offer ongoing
+                        maintenance if you would rather we handle updates.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">Will it be secure?</div>
                     <div class="faq-answer">
-                        Yes. We follow standard security practices for authentication, data handling, and hosting,
+                        Yes. We follow standard security practices for authentication, data handling and hosting,
                         and use SSL/TLS across every project.
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="feedback-section">
-                <p>Book an appointment with us below</p>
+    <!-- ================= CLOSING CTA (the real booking form lives on get-started.html) ================= -->
+    <section class="section section--graphite cta-band">
+        <div class="rail">
+            <div class="chapter-head chapter-head--center">
+                <span class="eyebrow">Next step</span>
+                <h2>Tell us what it needs to do.</h2>
+                <p class="lede">Book a call and describe the problem. You will get a scope and an honest answer about whether it is worth building.</p>
+                <div class="btn-row btn-row--center">
+                    <a href="../get-started.html#booking" class="btn primary">Book a call</a>
+                    <a href="../index.html#contact" class="btn secondary">Send a message</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Booking CTA — the real form now lives on get-started.html, not duplicated per page -->
-    <section class="booking-cta">
-        <div class="container">
-            <h2>Book an Appointment</h2>
-            <p>Select your service, choose a time, and let us take care of the rest!</p>
-            <a href="../get-started.html#booking" class="booking-cta-btn">Book Now</a>
-        </div>
-    </section>
-
-
+    <!-- ================= FOOTER ================= -->
     <div id="footer-section">
         <footer class="footer">
-            <div class="footer-divider"></div>
+            <div class="footer-content rail">
+                <div class="footer-brand">
+                    <h3>ProManaged IT</h3>
+                    <p>Build, Source, Connect.</p>
+                    <span class="footer-label">Contact</span>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a></li>
+                        <li><a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a></li>
+                        <li><a href="mailto:johnpaulchirwa@promanaged-it.com">johnpaulchirwa@promanaged-it.com</a></li>
+                    </ul>
+                </div>
 
-            <div class="footer-content container">
                 <div class="footer-links">
-                    <h4>Quick Links</h4>
+                    <h4>Explore</h4>
                     <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="../index.html#about">About Us</a></li>
-                        <li><a href="../index.html">Services</a></li>
-                        <li><a href="../index.html#contact">Get in Touch</a></li>
+                        <li><a href="../index.html#home">Home</a></li>
+                        <li><a href="../index.html#services">Services</a></li>
+                        <li><a href="../index.html#about">About</a></li>
+                        <li><a href="custom_websites.html">Build</a></li>
+                        <li><a href="hardware_sourcing.html">Source</a></li>
+                        <li><a href="network_infrastructure.html">Connect</a></li>
+                        <li><a href="../learn_more.html">How we work</a></li>
+                        <li><a href="../get-started.html">Get started</a></li>
                         <li><a href="../privacy_policy.html">Privacy Policy</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-brand">
-                    <h3>ProManaged IT</h3>
-                    <p>Your go-to partner for sleek IT solutions that simplify technology. Transform your IT experience with top-notch services.</p>
-                    <p>
-                        <strong>Contact Emails:</strong>
-                    <p></p>
-                    <a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a>
-                    <p></p>
-                    <a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a>
-                    <p></p>
-                    <a href="mailto:johnpaulchirwa@promanaged-it.com">johnpaulchirwa@promanaged-it.com</a>
-                    </p>
-                </div>
-
                 <div class="footer-newsletter">
                     <h4>Newsletter</h4>
-                    <p>Subscribe to get the latest updates and exclusive offers straight to your inbox.</p>
+                    <p>Occasional notes on what we are building and sourcing. No noise.</p>
                     <form>
-                        <input type="email" placeholder="Enter your email address" aria-label="Email address" required>
+                        <label for="footer-email" class="visually-hidden">Email address</label>
+                        <input type="email" id="footer-email" placeholder="Enter your email address" aria-label="Email address" required>
                         <button type="submit">Subscribe</button>
                     </form>
                 </div>
             </div>
 
-            <div class="footer-bottom">
+            <div class="footer-bottom rail">
+                <p>&copy; 2026 ProManaged IT. All rights reserved.</p>
                 <p>
-                    &copy; 2024 ProManaged IT. All Rights Reserved. |
-                    <a href="#">Terms of Service</a> |
-                    <a href="../privacy_policy.html">Privacy Policy</a>
-                </p>
-                <p>
-                    <strong>Company Registration Number:</strong> 749512 |
-                    <a href="https://core.cro.ie/e-commerce/company/5379600" target="_blank">Verify Registration</a>
+                    Company Registration Number 749512 &middot;
+                    <a href="https://core.cro.ie/e-commerce/company/5379600" target="_blank" rel="noopener">Verify registration</a>
+                    &middot; <a href="../privacy_policy.html">Privacy Policy</a>
                 </p>
             </div>
         </footer>
     </div>
 
+    <script src="../js/main.js" defer></script>
     <script src="../js/mobile_phone_navbar.js" defer></script>
     <script src="../js/custom_websites.js" defer></script>
 </body>

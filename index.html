@@ -2,57 +2,40 @@
 <html lang="en">
 
 <head id="main-head">
-    <title>ProManaged IT - Software, Hardware & Network Solutions</title>
-    <!-- components/styles.html -->
-
-    <!-- Metadata -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ProManaged IT - Custom web apps and SaaS platforms, hardware sourcing, and network solutions for personal and business needs.">
-    <meta name="keywords" content="web apps, SaaS, software development, ProManaged IT, network setup, hardware sourcing">
-    <meta name="author" content="ProManaged IT Team">
+    <title>ProManaged IT — Build, Source, Connect</title>
+    <meta name="description" content="ProManaged IT is a human-led technology studio. We build software and web apps, source hardware across borders, and set up the networks that carry it all.">
+    <meta name="keywords" content="software development, web apps, SaaS, hardware sourcing, network infrastructure, ProManaged IT">
+    <meta name="author" content="ProManaged IT">
+    <link rel="icon" href="images/icon.png">
 
-    <!-- External Fonts and Icons -->
+    <!-- Fonts and icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Design Tokens -->
+    <!-- Design tokens (must load first) -->
     <link rel="stylesheet" href="css/tokens.css">
-
-    <!-- Global Styles -->
+    <!-- Shared shell -->
     <link rel="stylesheet" href="css/global_styles.css">
-
-    <!-- Component Styles -->
-    <!-- Header and Navigation -->
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/logo.css">
-
-    <!-- Hero Section -->
     <link rel="stylesheet" href="css/hero_section.css">
-
-    <!-- Services and Features -->
-    <link rel="stylesheet" href="css/service_cards.css">
-
-    <!-- About and Contact -->
-    <link rel="stylesheet" href="css/about_section.css">
-    <link rel="stylesheet" href="css/contact_section.css">
-
-    <!-- Footer -->
     <link rel="stylesheet" href="css/footer_promanaged.css">
-
-    <!-- Miscellaneous -->
-    <link rel="stylesheet" href="css/mission_vision.css">
     <link rel="stylesheet" href="css/scroll_top.css">
+    <!-- Homepage chapters -->
     <link rel="stylesheet" href="css/why_band.css">
-
+    <link rel="stylesheet" href="css/service_cards.css">
+    <link rel="stylesheet" href="css/about_section.css">
+    <link rel="stylesheet" href="css/mission_vision.css">
+    <link rel="stylesheet" href="css/contact_section.css">
 </head>
 
 <body id="main-body">
 
-
-    <div id="header-section"> <!-- Header dynamically loaded -->
+    <div id="header-section">
         <header class="header" id="header">
             <nav class="navbar">
                 <div class="nav-container">
@@ -87,101 +70,39 @@
         </header>
     </div>
 
-    <div id="hero-section"> <!-- Hero dynamically loaded -->
-
-        <section id="home" class="hero hero-dark">
-            <div class="hero-rail">
-                <div class="hero-tile hero-tile-headline">
-                    <span class="hero-eyebrow">Ireland &middot; Malawi &middot; Worldwide</span>
-                    <h1 id="hero-title">Software, Hardware & Network Solutions</h1>
-                    <p id="hero-subtitle">We build web apps and SaaS platforms, source IT and gaming hardware, and set up networks — with local support in Ireland and Malawi.</p>
+    <!-- ================= 1. HERO ================= -->
+    <div id="hero-section">
+        <section id="home" class="hero">
+            <div class="hero-rail rail">
+                <div class="hero-statement">
+                    <span class="hero-eyebrow">Build &middot; Source &middot; Connect</span>
+                    <h1 id="hero-title">Technology that behaves itself.</h1>
+                    <p id="hero-subtitle">We build the software you run on, source the equipment you need, and set up the networks that carry both — one small team, answering directly, wherever you work.</p>
                     <div class="hero-buttons">
-                        <a href="get-started.html" class="btn primary" id="hero-get-started">Get Started</a>
-                        <a href="learn_more.html" class="btn secondary" id="hero-learn-more">Learn More</a>
+                        <a href="get-started.html" class="btn primary" id="hero-get-started">Start a project</a>
+                        <a href="learn_more.html" class="btn secondary" id="hero-learn-more">How we work</a>
                     </div>
                 </div>
                 <div class="hero-visual">
-                    <div class="hero-tile hero-tile-stat">
+                    <div class="hero-feature">
                         <i class="fas fa-layer-group" aria-hidden="true"></i>
-                        <span class="hero-tile-figure">3</span>
-                        <span class="hero-tile-label">Core Services — Software &middot; Hardware &middot; Networks</span>
+                        <span class="hero-figure">Three</span>
+                        <span class="hero-figure-label">capabilities under one point of contact — no handoffs, no ticket queue, no account manager in between.</span>
                     </div>
-                    <div class="hero-tile hero-tile-support">
+                    <div class="hero-support">
                         <div class="hero-support-row">
-                            <i class="fas fa-earth-africa" aria-hidden="true"></i>
-                            <div>
-                                <span class="hero-tile-title">Ireland &amp; Malawi</span>
-                                <span class="hero-tile-desc">Local support on two continents</span>
+                            <i class="fas fa-globe" aria-hidden="true"></i>
+                            <div class="hero-support-text">
+                                <span class="hero-support-title">Across borders</span>
+                                <span class="hero-support-desc">Remote delivery, international sourcing</span>
                             </div>
                         </div>
                         <div class="hero-support-row">
-                            <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
-                            <div>
-                                <span class="hero-tile-title">Pay Locally</span>
-                                <span class="hero-tile-desc">Local currency, no forex hassle</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </div>
-
-    <div id="services-section"> <!-- Services dynamically loaded -->
-        <section id="services" class="services" aria-labelledby="services-title">
-            <div class="services-rail">
-                <div class="section-header">
-                    <h2 id="services-title" class="services-title">Our Services</h2>
-                    <p class="subtitles">Explore our wide range of IT solutions tailored to meet your needs.</p>
-                </div>
-                <div class="services-grid">
-
-                    <!-- Software & Web Apps -->
-                    <div class="service-card service-card-featured" data-target="pages/custom_websites.html" role="link" tabindex="0" aria-label="Software & Web Apps — learn more">
-                        <i class="fas fa-laptop-code" aria-hidden="true"></i>
-                        <h3>Software & Web Apps</h3>
-                        <p>Custom web apps and SaaS platforms, built end to end — and websites too if that's what
-                            you need.</p>
-                    </div>
-
-                    <div class="services-support">
-                        <!-- Hardware Sourcing -->
-                        <div class="service-card" data-target="pages/hardware_sourcing.html" role="link" tabindex="0" aria-label="Hardware Sourcing — learn more">
-                            <i class="fas fa-laptop" aria-hidden="true"></i>
-                            <h3>Hardware Sourcing</h3>
-                            <p>IT and gaming equipment sourced and delivered worldwide, with convenient payment in your local currency.</p>
-                        </div>
-
-                        <!-- Network Infrastructure -->
-                        <div class="service-card" data-target="pages/network_infrastructure.html" role="link" tabindex="0" aria-label="Network Infrastructure — learn more">
-                            <i class="fas fa-network-wired" aria-hidden="true"></i>
-                            <h3>Network Infrastructure</h3>
-                            <p>Simple and effective network setup for homes and businesses.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <div id="why-section"> <!-- Why ProManaged IT — inline bento band (replaces the old welcome popup) -->
-        <section class="why-band">
-            <div class="why-rail">
-                <div class="why-grid">
-                    <div class="why-tile why-tile-lead">
-                        <h2>Discover the ProManaged IT Difference</h2>
-                        <p>From Ireland to Malawi and beyond, we're here to simplify your tech journey. Whether you're buying your child their first laptop or upgrading your own gear, we'll guide you every step of the way.</p>
-                    </div>
-                    <div class="why-support">
-                        <div class="why-support-item">
                             <i class="fas fa-hand-holding-dollar" aria-hidden="true"></i>
-                            <p>Need advice before making a purchase? We've got you covered. Pay in your local currency, and let us handle everything from ordering to delivery — no stress, no confusion.</p>
-                        </div>
-                        <div class="why-support-item">
-                            <i class="fas fa-handshake" aria-hidden="true"></i>
-                            <p>ProManaged IT is more than a service; it's your partner in bridging the gap between technology and your needs, wherever you are. Let us make IT work for you!</p>
+                            <div class="hero-support-text">
+                                <span class="hero-support-title">Local-friendly payment</span>
+                                <span class="hero-support-desc">Pay in the currency you actually hold</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -189,166 +110,308 @@
         </section>
     </div>
 
-    <div id="about-section"> <!-- About Us Section -->
-        <section id="about" class="about">
-            <div class="about-rail">
-                <div class="section-header">
-                    <h2>About Us</h2>
-                    <p class="subtitle_into">ProManaged IT delivers cutting-edge technology with personalized solutions to simplify your IT experience.</p>
+    <!-- ================= 2. WHAT PROMANAGED IS ================= -->
+    <section id="what-we-are" class="section section--ivory why-band">
+        <div class="rail">
+            <div class="grid why-grid">
+                <div class="block block--7 block--bare why-lead">
+                    <span class="eyebrow">What ProManaged is</span>
+                    <h2>A small studio for people who were quoted enterprise prices for an ordinary problem.</h2>
                 </div>
-                <div class="about-content">
-                    <div class="about-photo">
-                        <img src="images/founder.png" alt="John-Paul Chirwa - Founder of ProManaged IT" class="founder-photo">
-                    </div>
-                    <div class="about-story">
-                        <h3>Welcome to ProManaged IT</h3>
-                        <p>
-                            Hi, I’m <strong>John-Paul Chirwa</strong>, the founder of ProManaged IT. My passion for technology and innovation drives this company. Our mission? To make IT solutions accessible, reliable, and tailored for individuals and businesses of all sizes.
-                        </p>
-                        <p>
-                            Whether it's a custom web app, a SaaS platform, network setup, or sourcing hardware, we’re here to simplify your technology challenges. By bridging global expertise with local support — especially in Malawi and Africa — we deliver unmatched value.
-                        </p>
-                    </div>
+                <div class="block block--5 block--bare why-note">
+                    <p>Most technology work does not need a department. It needs someone who will listen properly, say plainly what a thing will cost, and then actually deliver it.</p>
+                    <p>That is the whole company. We take on software, hardware and connectivity work for individuals, founders, families and small teams — and we stay reachable long after the invoice is settled.</p>
                 </div>
-                <p class="about-statement"><strong>Let us make your IT experience seamless.</strong></p>
             </div>
-        </section>
-    </div>
-    
 
-    <div id="mission-vision-section"> <!-- Mission & Vision Section -->
-
-        <section id="mission-vision" class="mission-vision-panes">
-            <div class="mission-rail">
-                <h2 class="section-header">Mission & Vision</h2>
-                <div class="panes-grid">
-                    <div class="pane-card">
-                        <span class="pane-label">Mission</span>
-                        <p>Our mission is to make IT accessible and affordable for all, delivering cost-effective
-                            solutions with excellent customer service.</p>
+            <div class="grid why-facts">
+                <div class="block block--4 block--stone why-fact">
+                    <span class="mark" aria-hidden="true"><i class="fas fa-comments"></i></span>
+                    <div class="block__body">
+                        <h3>You talk to the builder</h3>
+                        <p>The person scoping your project is the person writing the code or placing the order. Nothing gets lost being relayed.</p>
                     </div>
-                    <div class="pane-card">
-                        <span class="pane-label">Vision</span>
-                        <p>Our vision is to lead in IT innovation, bringing ease and efficiency to individuals and
-                            businesses globally.</p>
+                </div>
+                <div class="block block--4 block--stone why-fact">
+                    <span class="mark" aria-hidden="true"><i class="fas fa-scale-balanced"></i></span>
+                    <div class="block__body">
+                        <h3>Scoped to your budget</h3>
+                        <p>We work to the number you have, not the one we would prefer. If it will not stretch far enough, we say so and suggest what to drop.</p>
+                    </div>
+                </div>
+                <div class="block block--4 block--stone why-fact">
+                    <span class="mark" aria-hidden="true"><i class="fas fa-arrows-rotate"></i></span>
+                    <div class="block__body">
+                        <h3>We stay after launch</h3>
+                        <p>Delivery is where the real questions start. Support and iteration are part of the work, not a separate contract you discover later.</p>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
-    <div id="contact-section"> <!-- Contact Section -->
-        <section id="contact" class="contact">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Contact Us</h2>
-                    <p class="subtitle_contact">We'd love to hear from you! Feel free to reach out with any questions, feedback,
-                        or requests.</p>
+    <!-- ================= 3. BUILD / SOURCE / CONNECT ================= -->
+    <section id="services" class="section services" aria-labelledby="services-title">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">Capabilities</span>
+                <h2 id="services-title">Build, Source, Connect.</h2>
+                <p class="lede">Three ways we help, in the order most clients need them. Take one or take all three — it is the same team either way.</p>
+            </div>
+
+            <div class="grid services-grid">
+                <!-- BUILD — the lead capability, visually dominant -->
+                <div class="block block--12 block--row block--graphite block--interactive service-card capability capability--lead"
+                     data-target="pages/custom_websites.html" role="link" tabindex="0"
+                     aria-label="Build — software and web apps, learn more">
+                    <div class="block__aside">
+                        <span class="mark" aria-hidden="true"><i class="fas fa-laptop-code"></i></span>
+                    </div>
+                    <div class="block__body">
+                        <span class="capability-index">01</span>
+                        <h3>Build</h3>
+                        <p class="capability-lede">The booking system, the internal dashboard, the product you have been describing to people for a year. We scope it, design it, build it, launch it — and keep improving it once real users arrive.</p>
+                        <ul class="list">
+                            <li>Custom web apps, internal tools and dashboards</li>
+                            <li>SaaS platforms, from first version through to scale</li>
+                            <li>Business websites when that is genuinely the right answer</li>
+                        </ul>
+                        <span class="capability-cue">Explore Build <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </div>
                 </div>
 
-                <!-- Add feedback message placeholders -->
-                <div id="form-feedback" class="form-feedback"></div>
+                <!-- SOURCE -->
+                <div class="block block--6 block--interactive service-card capability"
+                     data-target="pages/hardware_sourcing.html" role="link" tabindex="0"
+                     aria-label="Source — hardware sourcing, learn more">
+                    <span class="mark" aria-hidden="true"><i class="fas fa-boxes-stacked"></i></span>
+                    <div class="block__body">
+                        <span class="capability-index">02</span>
+                        <h3>Source</h3>
+                        <p class="capability-lede">Tell us the kit and the budget. We handle supplier coordination, purchasing, shipping and delivery, so you never have to argue with a retailer that will not ship to you.</p>
+                        <ul class="list">
+                            <li>Laptops, desktops and workstations</li>
+                            <li>Servers, components and peripherals</li>
+                            <li>Local-friendly payment on international orders</li>
+                        </ul>
+                        <span class="capability-cue">Explore Source <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </div>
+                </div>
 
-                <!-- Contact Form -->
-                <form class="contact-form" id="contact-form" action="php/contact.php" method="POST">
-                    <div class="form-group">
-                        <div class="input-container">
-                            <input type="text" id="name" name="name" placeholder=" " required>
-                            <label for="name">Full Name</label>
-                        </div>
+                <!-- CONNECT -->
+                <div class="block block--6 block--interactive service-card capability"
+                     data-target="pages/network_infrastructure.html" role="link" tabindex="0"
+                     aria-label="Connect — network infrastructure, learn more">
+                    <span class="mark" aria-hidden="true"><i class="fas fa-network-wired"></i></span>
+                    <div class="block__body">
+                        <span class="capability-index">03</span>
+                        <h3>Connect</h3>
+                        <p class="capability-lede">Satellite and fibre, home and office WiFi, cabling, secure remote access — installed properly the first time and monitored so problems surface before you notice them.</p>
+                        <ul class="list">
+                            <li>Connectivity planning and installation</li>
+                            <li>Secure access, segmentation and monitoring</li>
+                            <li>Ongoing maintenance and remote troubleshooting</li>
+                        </ul>
+                        <span class="capability-cue">Explore Connect <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                     </div>
-                    <div class="form-group">
-                        <div class="input-container">
-                            <input type="email" id="email" name="email" placeholder=" " required>
-                            <label for="email">Email Address</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-container">
-                            <input type="tel" id="phone" name="phone" placeholder=" " required>
-                            <label for="phone">Phone Number</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-container">
-                            <textarea id="message" name="message" rows="4" placeholder=" " required></textarea>
-                            <label for="message">Your Message</label>
-                        </div>
-                    </div>
-                    <div class="form-group hp-field" aria-hidden="true">
-                        <label for="website">Website</label>
-                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-                    </div>
-                    <div class="button-container">
-                        <button type="submit" class="btn primary">Send Message</button>
-                    </div>
-                </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- ================= 4. HOW WE WORK ================= -->
+    <section id="how-we-work" class="section section--graphite process">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">How we work</span>
+                <h2>Four steps, and you always know which one you are in.</h2>
+            </div>
+
+            <ol class="process-steps">
+                <li class="process-step">
+                    <span class="step-num">01</span>
+                    <h3>Listen</h3>
+                    <p>You describe the problem in plain words. No brief required, no vocabulary test. We ask until we genuinely understand what is going wrong.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">02</span>
+                    <h3>Plan</h3>
+                    <p>We come back with a scope, a realistic timeline and an honest cost — including whether we are the right people at all.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">03</span>
+                    <h3>Deliver</h3>
+                    <p>We build, source or install, showing progress as we go. Nothing is unveiled at the end for the first time.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">04</span>
+                    <h3>Support</h3>
+                    <p>We stay reachable afterwards for the changes, questions and fixes that only appear once something is genuinely in use.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ================= 5. FOUNDER / STORY ================= -->
+    <section id="about" class="section section--ivory about">
+        <div class="rail">
+            <div class="about-grid">
+                <figure class="about-portrait">
+                    <img src="images/founder.png" alt="John-Paul Chirwa, founder of ProManaged IT" width="960" height="1200">
+                </figure>
+                <div class="about-story">
+                    <span class="eyebrow">The person behind it</span>
+                    <h2>Founded by someone who still does the work.</h2>
+                    <p class="about-quote">&ldquo;Most people do not need more technology. They need someone to take one problem seriously and finish it.&rdquo;</p>
+                    <p>ProManaged IT is led by <strong>John-Paul Chirwa</strong>. It began with a pattern that kept repeating: capable people being quoted enterprise prices, sold things they did not need, or left to work out international shipping and payment on their own.</p>
+                    <p>So the company was built the other way round. It is deliberately small, it takes on software, hardware and connectivity work directly, and the person you brief is the person who delivers. That is also the limit we are honest about — we take on what we can genuinely finish.</p>
+                    <p class="about-signature">John-Paul Chirwa &middot; Founder, ProManaged IT</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 6. MISSION / VISION ================= -->
+    <section id="mission-vision" class="section mission-vision">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">What we are aiming at</span>
+                <h2>Mission &amp; Vision</h2>
+            </div>
+            <div class="grid">
+                <div class="block block--7 block--earth pane">
+                    <span class="pane-label">Mission</span>
+                    <p class="pane-text">Make good technology reachable — honest pricing, straight answers, and solutions scoped to the budget in front of us rather than the one we wish existed.</p>
+                </div>
+                <div class="block block--5 block--bare pane">
+                    <span class="pane-label">Vision</span>
+                    <p class="pane-text">A world where where you happen to live stops deciding what technology you can get hold of, or how well it works once you have it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 7. CONTACT ================= -->
+    <div id="contact-section">
+        <section id="contact" class="section section--stone contact">
+            <div class="rail">
+                <div class="contact-grid">
+                    <div class="contact-invite">
+                        <span class="eyebrow">Start here</span>
+                        <h2>Tell us what you need.</h2>
+                        <p class="lede">A rough idea is enough. Send it over and we will come back with honest next steps — no obligation and no sales script.</p>
+                        <ul class="contact-direct">
+                            <li>
+                                <a href="mailto:info@promanaged-it.com">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i>info@promanaged-it.com
+                                </a>
+                            </li>
+                            <li>
+                                <a href="mailto:support@promanaged-it.com">
+                                    <i class="fas fa-life-ring" aria-hidden="true"></i>support@promanaged-it.com
+                                </a>
+                            </li>
+                            <li>
+                                <a href="get-started.html#booking">
+                                    <i class="fas fa-calendar-check" aria-hidden="true"></i>Book a call instead
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="contact-form-wrap">
+                        <!-- Feedback message placeholder (filled by js/contact__form.js) -->
+                        <div id="form-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+
+                        <form class="contact-form" id="contact-form" action="php/contact.php" method="POST">
+                            <div class="form-group">
+                                <div class="input-container">
+                                    <input type="text" id="name" name="name" placeholder=" " required>
+                                    <label for="name">Full Name</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-container">
+                                    <input type="email" id="email" name="email" placeholder=" " required>
+                                    <label for="email">Email Address</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-container">
+                                    <input type="tel" id="phone" name="phone" placeholder=" " required>
+                                    <label for="phone">Phone Number</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-container">
+                                    <textarea id="message" name="message" rows="4" placeholder=" " required></textarea>
+                                    <label for="message">Your Message</label>
+                                </div>
+                            </div>
+                            <div class="form-group hp-field" aria-hidden="true">
+                                <label for="website">Website</label>
+                                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                            </div>
+                            <div class="button-container">
+                                <button type="submit" class="btn primary">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
-
     </div>
 
-    <div id="footer-section"> <!-- Footer Section -->
+    <!-- ================= FOOTER ================= -->
+    <div id="footer-section">
         <footer class="footer">
-            <div class="footer-divider"></div>
-
-            <div class="footer-content container">
-                <!-- Quick Links -->
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home" class="nav-link">Home</a></li>
-                        <li><a href="#about" class="nav-link">About</a></li>
-                        <li><a href="#services" class="nav-link">Services</a></li>
-                        <li><a href="#contact">Get in Touch</a></li>
-                        <li><a href="privacy_policy.html">Privacy Policy</a></li> <!-- Updated to link to new page -->
+            <div class="footer-content rail">
+                <div class="footer-brand">
+                    <h3>ProManaged IT</h3>
+                    <p>Build, Source, Connect.</p>
+                    <span class="footer-label">Contact</span>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a></li>
+                        <li><a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a></li>
+                        <li><a href="mailto:johnpaulchirwa@promanaged-it.com">johnpaulchirwa@promanaged-it.com</a></li>
                     </ul>
                 </div>
 
-                <!-- Brand Information -->
-                <div class="footer-brand">
-                    <h3>ProManaged IT</h3>
-                    <p>Your go-to partner for sleek IT solutions that simplify technology. Transform your IT experience
-                        with
-                        top-notch services.</p>
-                    <p>
-                        <strong>Contact Emails:</strong>
-                    <p></p>
-                    <a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a>
-                    <p></p>
-                    <a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a>
-                    <p></p>
-                    <a href="mailto:johnpaulchirwa@promanaged-it.com">johnpaulchirwa@promanaged-it.com</a>
-                    </p>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="pages/custom_websites.html">Build</a></li>
+                        <li><a href="pages/hardware_sourcing.html">Source</a></li>
+                        <li><a href="pages/network_infrastructure.html">Connect</a></li>
+                        <li><a href="learn_more.html">How we work</a></li>
+                        <li><a href="get-started.html">Get started</a></li>
+                        <li><a href="privacy_policy.html">Privacy Policy</a></li>
+                    </ul>
                 </div>
 
-                <!-- Newsletter Section -->
                 <div class="footer-newsletter">
                     <h4>Newsletter</h4>
-                    <p>Subscribe to get the latest updates and exclusive offers straight to your inbox.</p>
+                    <p>Occasional notes on what we are building and sourcing. No noise.</p>
                     <form>
-                        <input type="email" placeholder="Enter your email address" aria-label="Email address" required>
+                        <label for="footer-email" class="visually-hidden">Email address</label>
+                        <input type="email" id="footer-email" placeholder="Enter your email address" aria-label="Email address" required>
                         <button type="submit">Subscribe</button>
                     </form>
                 </div>
             </div>
 
-            <!-- Bottom Footer -->
-            <div class="footer-bottom">
+            <div class="footer-bottom rail">
+                <p>&copy; 2026 ProManaged IT. All rights reserved.</p>
                 <p>
-                    &copy; 2024 ProManaged IT. All Rights Reserved. |
-                    <a href="#">Terms of Service</a> |
-                    <a href="privacy_policy.html">Privacy Policy</a> <!-- Updated to link to new page -->
-                </p>
-                <p>
-                    <strong>Company Registration Number:</strong> 749512 |
-                    <a href="https://core.cro.ie/e-commerce/company/5379600" target="_blank">Verify Registration</a>
+                    Company Registration Number 749512 &middot;
+                    <a href="https://core.cro.ie/e-commerce/company/5379600" target="_blank" rel="noopener">Verify registration</a>
+                    &middot; <a href="privacy_policy.html">Privacy Policy</a>
                 </p>
             </div>
         </footer>
-
-
     </div>
 
     <script src="js/main.js" defer></script>

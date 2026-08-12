@@ -1,26 +1,18 @@
+/* logo.css — one canonical logo sizing rule for every page and breakpoint.
+   Sized against --header-h so the header never changes height between pages. */
 .logo {
-    height: 56px;
+    height: 44px;
     width: auto;
-    max-width: 100%;
     object-fit: contain;
-    cursor: pointer;
     transition: opacity var(--transition);
 }
 
-.logo:hover {
-    opacity: 0.85;
+.nav-brand:hover .logo {
+    opacity: 0.82;
 }
 
-/* Responsive Adjustments for Mobile Devices */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .logo {
-        height: 48px;
-    }
-}
-
-/* Extra Small Screens */
-@media (max-width: 480px) {
-    .logo {
-        height: 40px;
+        height: 38px;
     }
 }

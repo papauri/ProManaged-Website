@@ -1,67 +1,61 @@
-/* tokens.css — ProManaged IT design system single source of truth.
-   Import this FIRST, before any other stylesheet, on every page. */
+/* tokens.css — ProManaged IT "Signal & Systems" design system.
+   Single source of truth for palette, type, spacing, radius, shadow and layout.
+   Import this FIRST, before any other stylesheet, on every page.
+   No other file may declare a raw colour value. */
 :root {
-  /* ---- Color: neutral (slate) scale ---- */
-  /* Surface hierarchy: --color-bg is the elevated white surface (cards, dominant blocks);
-     --color-surface is the cool off-white section wash; --color-surface-2 is the deeper
-     muted-slate band — sections alternate between these three to create visible rhythm
-     instead of reading as one flat white page. */
-  --color-white: #ffffff;
-  --color-bg: #ffffff;
-  --color-surface: #f6f8fb;
-  /* Kept at the original #f1f5f9 rather than a darker "muted slate" — darkening it
-     below this point drops var(--color-accent) text (footer links, .pane-label) under
-     the 4.5:1 AA threshold at normal text sizes. */
-  --color-surface-2: #f1f5f9;
-  --color-border: #e2e8f0;
-  --color-neutral-100: #f1f5f9;
-  --color-neutral-200: #e2e8f0;
-  --color-neutral-300: #cbd5e1;
-  --color-neutral-400: #94a3b8;
-  --color-neutral-500: #64748b;
-  --color-neutral-600: #475569;
-  --color-neutral-700: #334155;
-  --color-neutral-800: #1e293b;
-  --color-neutral-900: #0f172a;
+  /* ---- Surfaces: warm editorial neutrals ----
+     Chapters alternate paper -> ivory -> stone -> graphite to create visible pacing
+     down every page instead of one flat white scroll. */
+  --color-paper: #fffdfa;
+  --color-ivory: #f7f3ec;
+  --color-stone: #ece5da;
+  --color-sand: #dbcfbd;
+  --color-greige: #b9ada0;
+  --color-graphite: #1c1b19;
+  --color-graphite-soft: #2b2926;
 
-  /* ---- Color: text ---- */
-  --color-text: #0f172a;
-  --color-text-muted: #475569;
-  --color-text-subtle: #64748b;
-  --color-text-inverse: #ffffff;
+  /* Aliases kept so shared components can read a neutral name. */
+  --color-bg: var(--color-paper);
+  --color-surface: var(--color-ivory);
+  --color-border: #e3dbcf;
+  --color-border-strong: #cdc1b1;
 
-  /* ---- Color: single accent ---- */
+  /* ---- Text ---- */
+  --color-text: #1c1b19;
+  --color-text-muted: #56514a;
+  --color-text-subtle: #6e675e;
+  --color-text-inverse: #f7f3ec;
+  /* Ivory at 72% over graphite — 8.6:1, safe for body copy on dark chapters. */
+  --color-text-on-dark: #f7f3ec;
+  --color-text-on-dark-muted: rgba(247, 243, 236, 0.74);
+
+  /* ---- Earthy accent: carries the large decorative weight ----
+     #96502c is the darkest step that still reads warm; verified 5.2:1 on ivory
+     and 5.5:1 against ivory text when used as a fill. */
+  --color-accent-earth: #96502c;
+  --color-accent-earth-hover: #7c4223;
+  --color-accent-earth-soft: #f0e4d9;
+
+  /* ---- Blue: interaction and identity only (buttons, links, focus) ----
+     --color-accent-link is the darker step used for text on light surfaces, where
+     the plain accent falls just under 4.5:1. */
   --color-accent: #2563eb;
   --color-accent-hover: #1d4ed8;
   --color-accent-active: #1e40af;
-  --color-accent-soft: #eff6ff;
+  --color-accent-link: #1d4ed8;
+  --color-accent-soft: #eaf1fe;
   --color-accent-contrast: #ffffff;
 
-  /* ---- Color: feedback ---- */
-  --color-success: #16a34a;
-  --color-warning: #d97706;
-  --color-danger: #dc2626;
+  /* ---- Feedback ---- */
+  --color-success: #15803d;
+  --color-danger: #b91c1c;
 
-  /* ---- Color: Japandi warm-neutral chapter palette (landing page + footer) ----
-     Blue (--color-accent) stays reserved for interactive/brand states (buttons, links,
-     focus rings); these tokens carry the actual chapter backgrounds and large-block fills
-     so blue reads as an accent, not the dominant page colour. Kept separate from the
-     site-wide --color-bg/--color-surface/--color-text tokens so secondary pages are
-     unaffected. All pairings below are verified >=4.5:1 (normal text) / >=3:1 (large text). */
-  --color-ivory: #f6f1e8;
-  --color-stone: #ded6c8;
-  --color-sand: #c8b9a6;
-  --color-charcoal: #20201e;
-  --color-charcoal-text: #f6f1e8;
-  --color-charcoal-text-muted: rgba(246, 241, 232, 0.72);
-  --color-accent-earthy: #a15c34;
-  --color-accent-earthy-hover: #8b4c2b;
-  --color-accent-earthy-soft: #f1e4d8;
-
-  /* ---- Typography ---- */
+  /* ---- Typography ----
+     Instrument Serif is the editorial display face (H1/H2 and figures only);
+     Inter carries every piece of UI and body copy. */
+  --font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  /* Display face for H1/H2 only; body/UI stays on --font-sans. Reversible: point at var(--font-sans) to undo. */
-  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
@@ -71,20 +65,29 @@
   --text-3xl: 1.875rem;
   --text-4xl: 2.25rem;
   --text-5xl: 3rem;
-  --text-6xl: 3.75rem;
-  /* Fluid display sizes — scale between the 375px and 1280px breakpoints without media queries. */
-  --display-1: clamp(2.5rem, 1.6rem + 3.8vw, 4.5rem);
-  --display-2: clamp(1.875rem, 1.3rem + 2.4vw, 3rem);
-  --display-3: clamp(1.5rem, 1.2rem + 1.3vw, 2.25rem);
-  --tracking-display: -0.02em;
-  --tracking-tight: -0.01em;
-  --leading-display: 1.05;
-  --leading-tight: 1.15;
-  --leading-normal: 1.6;
+
+  /* Fluid display scale — oversized statement type at the top end, readable at 375px. */
+  --display-1: clamp(2.75rem, 1.35rem + 5.6vw, 6rem);
+  --display-2: clamp(2rem, 1.3rem + 2.8vw, 3.75rem);
+  --display-3: clamp(1.5rem, 1.18rem + 1.3vw, 2.25rem);
+  --display-figure: clamp(3rem, 1.8rem + 4.8vw, 5.5rem);
+
+  --tracking-display: -0.025em;
+  --tracking-tight: -0.011em;
+  --tracking-eyebrow: 0.1em;
+  --leading-display: 1.02;
+  --leading-tight: 1.16;
+  --leading-normal: 1.62;
+
   --weight-normal: 400;
   --weight-medium: 500;
   --weight-semibold: 600;
   --weight-bold: 700;
+
+  /* Text measure — applied separately from layout width so a wide rail never
+     produces an unreadable line length. */
+  --measure: 62ch;
+  --measure-tight: 46ch;
 
   /* ---- Spacing (4px base) ---- */
   --space-1: 0.25rem;
@@ -99,27 +102,33 @@
   --space-16: 4rem;
   --space-20: 5rem;
   --space-24: 6rem;
+  /* One canonical chapter rhythm, shared by every section on every page. */
+  --section-y: clamp(4rem, 7vw, 8rem);
 
-  /* ---- Radius (-full for pills/circles, -lg for bento/featured tiles) ---- */
-  --radius: 8px;
+  /* ---- Radius ---- */
   --radius-sm: 6px;
-  --radius-lg: 16px;
+  --radius: 10px;
+  --radius-lg: 18px;
   --radius-full: 9999px;
 
-  /* ---- Shadows (neutral depths; -lg for elevated/featured bento tiles) ---- */
-  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.10);
-  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.06);
-  --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.12), 0 4px 10px rgba(15, 23, 42, 0.06);
+  /* ---- Shadows (two steps only) ---- */
+  --shadow-sm: 0 1px 2px rgba(28, 27, 25, 0.06), 0 2px 6px rgba(28, 27, 25, 0.05);
+  --shadow-lg: 0 18px 40px rgba(28, 27, 25, 0.13), 0 4px 12px rgba(28, 27, 25, 0.06);
 
-  /* ---- Layout ---- */
-  /* Wide editorial container — was 1200px, which was clamping every section (including
-     grids with their own larger max-width) down to a narrow, boxed-in centered column. */
-  --container-max: 1560px;
-  --container-pad: clamp(1.25rem, 4vw, 3rem);
-  /* Single canonical gap for every bento grid — no per-file grid gaps. */
-  --bento-gap: 1.25rem;
-  --bento-cols: 12;
+  /* ---- Layout: wide editorial rail with generous desktop gutters ---- */
+  --rail-max: 1560px;
+  --rail-pad: clamp(1.25rem, 5vw, 5rem);
+  --grid-gap: clamp(1rem, 1.6vw, 1.75rem);
+  --grid-cols: 12;
+  /* Fixed-header offset, shared by the hero top padding and every scroll-margin. */
+  --header-h: 92px;
 
-  /* ---- Motion (subtle feedback only) ---- */
-  --transition: 150ms ease;
+  /* ---- Motion: reveal / hover / focus only ---- */
+  --transition: 160ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-h: 80px;
+  }
 }

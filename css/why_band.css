@@ -1,89 +1,49 @@
-/* "Why ProManaged IT" — inline bento band (replaces the old welcome-popup modal).
-   One dominant accent statement block + one supporting compartment (split in two
-   internally by a hairline, not two more bordered cards) — a mosaic, not a card row. */
-.why-band {
-    padding: var(--space-16) var(--container-pad);
-    background: var(--color-stone);
-}
+/* why_band.css — homepage chapter 2, "What ProManaged is".
+   A wide statement set against a short counter-column, then three quiet supporting
+   blocks. Blocks and grid come from global_styles.css. */
 
 .why-grid {
-    display: grid;
-    grid-template-columns: repeat(var(--bento-cols), 1fr);
-    gap: var(--bento-gap);
-    align-items: stretch;
+    align-items: start;
+    margin-bottom: var(--section-y);
 }
 
-.why-tile-lead {
-    grid-column: span 6;
-    background: var(--color-charcoal);
-    color: var(--color-charcoal-text);
-    border-radius: var(--radius-lg);
-    padding: var(--space-10);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.why-lead h2 {
+    /* Slightly tighter than a chapter headline so the statement fills the column. */
+    max-width: 17ch;
 }
 
-.why-tile-lead h2 {
-    font-size: var(--display-3);
-    margin-bottom: var(--space-3);
+.why-lead .eyebrow {
+    margin-bottom: var(--space-6);
 }
 
-.why-tile-lead p {
-    color: var(--color-charcoal-text-muted);
-    line-height: var(--leading-normal);
-    margin: 0;
+.why-note {
+    padding-top: var(--space-3);
 }
 
-.why-support {
-    grid-column: span 6;
-    background: var(--color-ivory);
-    border-radius: var(--radius-lg);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.why-support-item {
-    padding: var(--space-10) var(--space-8);
-}
-
-.why-support-item + .why-support-item {
-    border-left: 1px solid var(--color-border);
-}
-
-.why-support-item i {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
+.why-note p {
     font-size: var(--text-lg);
-    color: var(--color-accent-earthy);
-    background: var(--color-accent-earthy-soft);
-    border-radius: var(--radius);
-    margin-bottom: var(--space-4);
-}
-
-.why-support-item p {
     color: var(--color-text-muted);
     line-height: var(--leading-normal);
-    margin: 0;
+}
+
+.why-note p + p {
+    margin-top: var(--space-5);
+}
+
+.why-fact .mark {
+    background: var(--color-paper);
 }
 
 @media (max-width: 900px) {
-    .why-tile-lead,
-    .why-support {
-        grid-column: span 12;
-    }
-}
-
-@media (max-width: 600px) {
-    .why-support {
-        grid-template-columns: 1fr;
+    .why-grid {
+        margin-bottom: var(--space-16);
     }
 
-    .why-support-item + .why-support-item {
-        border-left: none;
-        border-top: 1px solid var(--color-border);
+    .why-lead h2 {
+        max-width: none;
+    }
+
+    .why-note {
+        padding-top: 0;
     }
 }
