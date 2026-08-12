@@ -1,96 +1,214 @@
-# Build Plan: ProManaged IT — Refined Signal & Systems
+# ProManaged IT — EXECUTION BUILD PLAN
 
-## Goal
-Return the site to the balanced editorial hero/composition that was working before the over-wide pass, then modernise it through richer evidence, stronger bento variety and **slow, deliberate building-block motion**. The site should feel premium, calm and confident—not stretched or over-animated.
+> This file is the implementation contract. Follow it literally. Do not reinterpret the visual direction.
 
-## Wants vs Needs
-- Want: modern bento layouts, subtle project/interface evidence, richer sections, slow transitions and a strong founder presentation.
-- Need: preserve the working ProManaged visual system, forms, emails, navigation, accessibility and business facts.
-- End user: global individuals, founders, families, teams and organisations that need software, hardware sourcing or connectivity without enterprise overhead.
-- Success moment: the visitor sees a distinctive technology studio with real evidence of capability and feels confident about starting a conversation.
+## 0. NON-NEGOTIABLE BASELINE
 
-## Completion Criteria
-- [ ] Hero uses the established balanced 7/5 editorial composition; no forced full-width visual stretching beyond the approved 1880px rail.
-- [ ] Buttons use the existing `.btn` system and remain visually stable across hover/focus/active states.
-- [ ] Sections retain intentional bento variety without becoming oversized empty canvases.
-- [ ] Project evidence is anonymous and visual: interface fragments, dashboards, booking/product screens, network diagrams or controller/interface motifs where assets are verified; never name a client/project unless explicitly approved.
-- [ ] No fabricated metrics, clients, testimonials, awards or project claims.
-- [ ] Founder section remains a strong editorial composition with a genuinely circular 800×800 portrait, deliberate crop and responsive sizing.
-- [ ] Build / Source / Connect remain the three clear capabilities, with Build visually dominant.
-- [ ] Motion is visible but slow and premium: hero assembly on load, chapter reveals while scrolling, bento navigation assembly and founder reveal.
-- [ ] Motion uses transform/opacity only, has varied direction/scale, and settles once without cartoon bounce, parallax or looping movement.
-- [ ] Motion is slower on larger screens and appropriately shortened on tablet/mobile; reduced-motion shows final states immediately.
-- [ ] Contact/booking forms and branded internal/customer emails remain functional and unchanged in their backend contracts.
-- [ ] No software-page pricing, Render.com deployment logic, YAML commits, branches or PRs.
+The site is a premium, human-led technology studio website built around **Build / Source / Connect**.
 
-## Files to Change
-- `css/tokens.css` — balanced 1880px visual rail and slow responsive motion tokens.
-- `css/hero_section.css` — balanced hero composition and motion-ready geometry.
-- `css/about_section.css` — circular founder portrait, crop and editorial layout.
-- `css/global_styles.css` — only shared styling required for approved motion/bento behaviour; preserve the current button system.
-- `css/why_band.css` — preserve evidence mosaic without oversized desktop stretching.
-- `js/main.js` — slow, one-time load/scroll block choreography using the existing observer.
-- `index.html` — anonymous visual/project evidence only where verified; do not add client names.
-- `.claude/PROJECT_CONTEXT.md` — record the balanced composition and slow-motion design contract.
-- `.claude/SYSTEM_MAP.md` — update only if architecture changes.
+The correct visual baseline is the balanced editorial composition that existed before the wide-desktop experiment.
 
-## Exact Changes
+**Do not return to the oversized full-canvas layout.**
+
+### Hard layout rules
+- Desktop composition rail: **1880px maximum**.
+- The rail is centred with responsive side padding.
+- The hero desktop split is **7fr / 5fr**.
+- Text measures remain independently capped; never let a 4K/ultrawide monitor create enormous paragraphs.
+- Full-bleed section backgrounds are allowed; the content rail is not full-canvas.
+- Bento cards may have unequal spans and offsets, but the overall composition must remain balanced.
+- Do not introduce another max-width system without first checking these rules.
+
+### Hard visual rules
+- No traditional horizontal navbar.
+- The persistent ProManaged logo tile opens the bento navigation panel.
+- Plus Jakarta Sans remains the sole site typeface unless an explicit future design decision changes it everywhere.
+- Existing `.btn`, `.primary`, `.secondary`, `.hero-buttons` classes are canonical. Do not rename them.
+- Founder portrait is circular and based on the existing 800×800 asset.
+- Do not enlarge the founder portrait merely to fill desktop space.
+- Footer must remain present and use the canonical `.footer` structure/classes.
+
+## 1. CURRENT PRODUCT CONTRACT
+
+### Public capabilities
+1. **Build** — custom web apps, SaaS platforms and business websites.
+2. **Source** — hardware sourcing, purchasing, shipping and delivery.
+3. **Connect** — network infrastructure, connectivity, WiFi, cabling, security and monitoring.
+
+### Audience
+Global individuals, founders, families, small teams and organisations. Avoid implying a single geographic market. Local delivery/payment realities can be described without making the company appear geographically restricted.
+
+### Trust standard
+Every visual and sentence must increase confidence. Never fabricate:
+- clients;
+- project names;
+- metrics;
+- awards;
+- testimonials;
+- logos;
+- certifications;
+- project outcomes.
+
+Anonymous interface fragments are allowed when they are genuinely present in repository assets or clearly labelled as illustrative UI.
+
+## 2. FILE OWNERSHIP
+
+### Design tokens
+`css/tokens.css`
+- Owns colours, type, spacing, radii, shadows, rail width and motion timings.
+- `--rail-visual` MUST remain `1880px`.
+- Do not put component-specific styling here.
+
+### Global design
+`css/global_styles.css`
+- Owns reset, typography, rail, grid, blocks, buttons, shared motion primitives and accessibility utilities.
+- Do not break `.btn`, `.primary`, `.secondary`, `.hero-buttons`.
+- Do not use global CSS to force individual sections into a new geometry.
+
 ### Hero
-- `css/hero_section.css`
-- Keep the established 7fr/5fr desktop split and the existing 1600px+ refinement.
-- Keep text measures constrained while allowing the visual column to breathe naturally.
-- Do not create a new oversized desktop rail or a new hard max-width smaller than `--rail-visual`.
-
-### Evidence / content richness
-- `index.html` + `css/why_band.css`
-- Retain or add small, anonymous interface/project snapshots only when backed by repository assets or clearly presented as illustrative UI fragments.
-- Prefer subtle evidence: dashboard fragments, booking flow panels, product UI, network topology, hardware detail and controller/interface motifs.
-- Use crops and small metadata labels as supporting content—not giant stock-photo sections.
-- Do not expose a hotel/client/project name in public marketing copy.
+`css/hero_section.css`
+- Desktop: **7fr / 5fr**.
+- Tablet/mobile: stack/recompose cleanly.
+- Preserve the existing hero statement, visual evidence and CTA hierarchy.
+- No giant empty desktop columns.
 
 ### Founder
-- `css/about_section.css` + `index.html`
-- Preserve the 800×800 portrait as a true circular crop using `width`, `height`, `aspect-ratio`, `border-radius:50%`, `overflow:hidden`, `object-fit:cover` and deliberate `object-position`.
-- Keep the portrait important but not oversized; support it with founder identity, Build/Source/Connect markers and one strong statement.
+`css/about_section.css`
+- Use the existing founder image.
+- Circular crop: `border-radius: 50%`, square aspect ratio, `object-fit: cover`.
+- Keep the portrait visually important but restrained.
+- Preserve founder name, story and Build/Source/Connect details.
 
-### Slow Building Blocks
-- `css/tokens.css` + `js/main.js`
-- Initial hero assembly: roughly 800–1000ms with ~100–130ms stagger.
-- Scroll chapter reveals: roughly 700–900ms with ~90–120ms stagger.
-- Tablet/mobile: reduce travel and total duration while keeping the motion perceptible.
-- Approved variants: `settle-up`, `settle-side`, `scale-in`, `sequence-in`.
-- Choose variants per chapter; do not randomise.
-- One tiny landing overshoot is acceptable; no second bounce.
-- Trigger slightly before the chapter enters the viewport so the visitor sees the composition arrive.
-- Clear classes only after the complete transition, with a safety timeout that can never leave content hidden.
-- `prefers-reduced-motion`: final state immediately with no transform/stagger/delay.
+### Motion
+`js/main.js` + `css/global_styles.css` + `css/tokens.css`
+- Use IntersectionObserver and the existing `data-blocks` system.
+- Motion is one-time per chapter, not looping.
+- Approved variants only: `settle-up`, `settle-side`, `scale-in`, `sequence-in`.
+- Animate only opacity and transform.
+- No parallax, no perpetual floating, no animation libraries.
 
-### Controls / buttons
-- `css/global_styles.css`
-- Do not redesign the button component while changing motion/layout.
-- Preserve `.btn`, `.primary`, `.secondary`, focus-visible, hover and active behaviour.
+### Navigation
+`css/navbar.css` + `js/mobile_phone_navbar.js`
+- Keep the bento navigation concept.
+- Preserve keyboard/focus behaviour, Escape close, scroll lock and `aria-expanded`.
 
-## Constraints / NOT TO TOUCH
-- Keep PHP endpoints, form field names, SMTP, PHPMailer, honeypot, accessibility labels, working links and email contracts intact.
-- Do not introduce frameworks, animation libraries, gradients, parallax, infinite animations, dashboard styling or modal flows.
-- Do not fabricate or download unverified project imagery.
-- Do not name clients/projects in marketing copy; show interface evidence anonymously.
-- `privacy_policy.html` legal copy remains unchanged.
-- Work only on `main`. Never create a branch or PR.
-- Never commit `.yml` or `.yaml` files.
+### Forms
+`css/contact_section.css`, `css/book_appointment.css`, `js/form_intake.js`, PHP endpoints
+- Preserve field names, IDs, actions, honeypot, validation and submission contracts.
+- Do not redesign the backend while making visual fixes.
 
-## Phases
-### Phase 1: Restore balanced baseline
-- Goal: return hero/section geometry and buttons to the known balanced state and keep the founder circular.
-- Exit: no over-wide visual island, buttons stable, founder portrait correct.
-- Files: `css/tokens.css`, `css/hero_section.css`, `css/global_styles.css`, `css/about_section.css`, `css/why_band.css`.
+### Email
+`php/mailer.php`
+- Preserve internal/customer email generation, escaping and SMTP behaviour.
+- Branded HTML email templates may be visually refined only if the backend contract remains unchanged.
 
-### Phase 2: Modern evidence + slow motion
-- Goal: make the site richer without stretching it—anonymous project/interface evidence plus deliberate slow Building Blocks transitions.
-- Exit: evidence feels native to the design and motion is visible on initial load and during scroll without becoming distracting.
-- Files: `index.html`, `css/why_band.css`, `css/hero_section.css`, `css/about_section.css`, `js/main.js`, `css/tokens.css`.
+### Footer
+`css/footer_promanaged.css`
+- Canonical selector is `.footer`.
+- Homepage must not use an obsolete `.footer-promanaged` replacement.
+- Keep the footer visible and structurally compatible with its stylesheet.
 
-### Phase 3: Final consistency
-- Goal: ensure the refined baseline is consistent across pages, forms, navigation and email touchpoints.
-- Exit: no button regressions, no pricing, no Render deployment references and no new unverified claims.
-- Files: only scoped fixes discovered in Phases 1–2 plus `.claude/PROJECT_CONTEXT.md` / `.claude/SYSTEM_MAP.md` if required.
+## 3. REQUIRED IMPLEMENTATION ORDER
+
+### Phase A — Stabilise geometry
+1. Set `--rail-visual: 1880px`.
+2. Set hero desktop grid to `7fr 5fr`.
+3. Verify `.rail`, `.container`, `.grid`, `.block` and `.btn` are not overridden later by page CSS.
+4. Verify founder portrait is circular and restrained.
+5. Verify homepage footer uses the canonical footer markup/classes.
+
+**Exit condition:** desktop looks like a balanced editorial website, not a stretched landing page.
+
+### Phase B — Restore signature motion
+1. Hero assembles on initial load.
+2. Each major section reveals when approaching the viewport.
+3. Bento navigation reveals when opened.
+4. Founder section participates in the reveal.
+5. Use slow timing:
+   - desktop hero: 800–1000ms;
+   - desktop chapters: 700–900ms;
+   - stagger: approximately 90–120ms;
+   - tablet/mobile: shorter travel and duration, still clearly visible.
+6. Reduced motion must expose final state immediately.
+
+**Exit condition:** motion is unmistakable but calm; no content flashes, disappears permanently or loops.
+
+### Phase C — Evidence without clutter
+Use small visual fragments in selected bento areas:
+- dashboard/interface crops;
+- booking/product UI fragments;
+- network topology/interface diagrams;
+- hardware/controller details.
+
+Rules:
+- never name an unapproved client/project;
+- never use a hotel/project name in marketing copy;
+- never fabricate an image;
+- do not turn evidence into giant hero photography;
+- evidence supports the story rather than replacing it.
+
+### Phase D — Forms and email
+Confirm:
+- contact form submits;
+- booking form submits;
+- validation works;
+- honeypot remains intact;
+- success/error states remain accessible;
+- internal email is structured and branded;
+- customer reply is structured and branded;
+- plain-text alternatives remain available.
+
+### Phase E — Final audit
+Search the entire repository for:
+- `render.com`
+- `render.yaml`
+- Render deploy hooks/integrations
+- `.yml` / `.yaml` files introduced by this work
+- pricing on the software page
+- client/project names that were not explicitly approved
+- stale `.footer-promanaged` markup
+- accidental `.hero-buttons` removal
+- `console.log` / debug leftovers
+- broken image paths
+- broken CSS/JS references
+
+Do not alter normal English uses of the word “render”.
+
+## 4. ABSOLUTE DO-NOT-DO LIST
+
+- Do not widen the rail beyond 1880px.
+- Do not create a new “ultra-wide” visual system.
+- Do not replace the balanced hero with equal 50/50 columns.
+- Do not rewrite application logic for a visual task.
+- Do not rename existing form fields.
+- Do not replace PHP mail handling.
+- Do not add a framework.
+- Do not add GSAP, Framer Motion or another animation library.
+- Do not add parallax or infinite motion.
+- Do not create a branch.
+- Do not create a PR.
+- Work directly on `main`.
+- Do not commit YAML/YML files.
+- Do not modify `privacy_policy.html`.
+
+## 5. DEFINITION OF DONE
+
+The task is complete only when all are true:
+
+- [ ] Hero is balanced 7/5 on desktop.
+- [ ] Rail is capped at 1880px.
+- [ ] Reading measures remain comfortable.
+- [ ] Buttons work and retain canonical classes/styles.
+- [ ] Founder portrait is circular, sharp and restrained.
+- [ ] Bento cards vary without creating visual chaos.
+- [ ] Building Blocks motion is visible on load and scroll.
+- [ ] Motion is slow, deliberate and one-time.
+- [ ] Reduced-motion mode is safe.
+- [ ] Navigation remains bento and accessible.
+- [ ] Contact/booking forms still submit with original contracts.
+- [ ] Branded internal/customer emails remain functional.
+- [ ] Footer is present and styled by the canonical footer CSS.
+- [ ] No unapproved client/project names or fabricated claims.
+- [ ] No Render deployment logic remains.
+- [ ] No new YAML/YML files.
+- [ ] No unrelated backend or legal changes.
