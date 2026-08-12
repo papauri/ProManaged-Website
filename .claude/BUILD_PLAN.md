@@ -1,121 +1,132 @@
-# Build Plan: Bento Design System + Modern Type
+# Build Plan: ProManaged IT — Full-Width Bento Redesign
 
-> ACTIVE TASK. Everything below the ARCHIVE line is finished — do not redo it.
-> **OWNER EXECUTION DIRECTIVE (2026-08-12):** execute the full active objective uninterrupted, including implementation and verification. Do not stop between fix cycles. Report once when the complete bundle is done or only if technically impossible to continue.
-> **GIT TARGET DIRECTIVE:** all implementation commits for this active task must be committed to `origin/main`. Do not create, switch to, commit on, push to, or hand off work from any sub-branch. `main` is the only allowed branch for task commits.
+> ACTIVE TASK. Previous bento/type attempts are superseded by this plan and must not be repeated.
+> **OWNER DIRECTIVE:** The current site still looks centered, boxed-in, and visually unchanged. This task is a real redesign, not another token/grid cleanup.
+> **GIT:** Work only on `main`; commit and push directly to `origin/main`. No branches, PRs, force-pushes, or detached work.
+> **YAML:** Never commit `.yml` or `.yaml`. Temporary YAML must be deleted immediately and verified absent.
 
 ## Goal
-Complete the ProManaged IT visual redesign so the site is unmistakably modern and professionally designed: a coherent bento/editorial layout system, modern typography, restrained contemporary colour use, strong visual hierarchy, and responsive behaviour that is verified rather than assumed.
+Replace the current centered card-stack appearance with a visibly new, full-width editorial/bento composition inspired by the supplied Mockuuups examples. The design must use the page width deliberately, varied tile sizes, strong typography, restrained colour, and clear visual storytelling. Mockuuups describes effective bento examples as structured compartments, bold typography, muted colour, generous whitespace, mixed media/text, and storytelling through sequential blocks. citeturn697555view0
 
 ## Wants vs Needs
-- **Want:** "update the design, bento inspo, modern fonts."
-- **Need:** a visible redesign, not another micro-pass of spacing/shadows. Bento layouts must read as one system across pages, typography must visibly change the brand tone, and the colour system must feel contemporary, calm, and intentional.
-- **End user:** prospective IT/SaaS and hardware clients who need quick trust, clear services, and an easy path to contact/book.
-- **Friction:** repetitive equal-weight cards, dated heading treatment, inconsistent grid logic, and weak visual hierarchy make the site feel templated.
+- **Want:** a site that actually looks like the modern bento examples, not a collection of centered cards.
+- **Need:** remove the narrow-middle feeling, use full-width section containers, create deliberate asymmetric compositions, and make the hero itself visually distinctive.
+- **End user:** prospective ProManaged clients who need immediate trust, clarity, and an obvious path to enquire/book.
+- **Friction today:** content is trapped in repeated centered boxes; typography and layout do not create a strong story.
 
 ## Success Moment
-Owner loads the homepage and immediately says "this is a different site" before reading the body copy; the same visual language should remain credible across every page.
+At desktop width, the homepage immediately reads as a premium modern IT/SaaS site: a wide editorial hero, one dominant visual/text tile, asymmetric bento sections spanning most of the viewport, and typography that looks intentional before the visitor scrolls.
 
 ## Reference Systems
-- **Mockuuups Studio bento examples** — take: varied tile sizes, whitespace, modular composition, editorial storytelling. Avoid literal copying.
-- **Apple product pages** — take: strong sequencing and varied modular blocks. Avoid imagery-heavy layouts the repo cannot support.
-- **Linear** — take: restrained colour, tight display typography, confident whitespace. Avoid dark-theme styling.
-- **Vercel** — take: disciplined grid rhythm and subtle borders. Avoid dashboard/data-density styling.
+- **Mockuuups Bento examples** — take: mixed media/text compartments, varied proportions, bold type, muted palette, generous whitespace, storytelling. Avoid copying a specific composition or artwork. citeturn697555view0
+- **Apple** — take: full-width storytelling and strong feature hierarchy. Avoid product-ad imagery we do not own.
+- **Linear** — take: restrained typography and minimal visual chrome. Avoid dark-theme dependency.
 
 ## Completion Criteria (Definition of Done)
-- [ ] Every target content/card grid uses the canonical 12-column bento system, `gap: var(--bento-gap)`, and `grid-auto-flow: dense`
-- [ ] No target grid uses `auto-fit`, `minmax(...)`, or hardcoded grid gaps
-- [ ] Featured tiles visibly vary in span and hierarchy on desktop
-- [ ] Hero uses the same bento/editorial language as the rest of the site
-- [ ] `--font-display` exists and drives every H1/H2; Inter remains body/UI
-- [ ] Heading sizes are fluid via `clamp()` and no breakpoint overrides defeat the fluid tokens
-- [ ] All 7 target pages load the identical combined font link
-- [ ] Font choice reads as modern/editorial, not default/system/legacy
-- [ ] Colour system is contemporary and restrained: neutral/slate base + one blue accent; no new competing accent palettes, neon effects, or decorative gradients
-- [ ] Existing token colours are used consistently instead of hardcoded page-specific colours in the changed design files
-- [ ] Uppercase/letter-spacing eyebrow treatment is removed where identified as dated
-- [ ] Verified in-browser at 375 / 768 / 1280px with zero console errors
-- [ ] No horizontal overflow at 375px on any page
-- [ ] No `.yml` or `.yaml` files remain in the working tree; temporary YAML is deleted immediately after use
-- [ ] All task implementation commits land on `origin/main`; no sub-branch is created or used
+- [ ] Homepage no longer reads as a narrow centered stack; primary content sections use a wide container with deliberate full-width backgrounds and asymmetric internal composition.
+- [ ] Hero is a real editorial/bento composition: large headline block + adjacent visual/fact block(s), not a centered text column.
+- [ ] At least 3 homepage sections use clearly different tile sizes/spans and fill the available content width.
+- [ ] Service section has one dominant feature tile and supporting tiles with visible asymmetry.
+- [ ] At least one section uses a large visual/text tile rather than four equal card boxes.
+- [ ] Typography uses a modern display face + Inter body/UI, with clear display hierarchy and fluid sizing.
+- [ ] Palette is modern and restrained: neutral/slate base, one blue accent, no random legacy accent colours or decorative gradients.
+- [ ] The layout remains coherent at 375 / 768 / 1280px with no horizontal overflow and no console errors.
+- [ ] Desktop content visibly uses the available width; no arbitrary narrow `max-width` wrappers causing the boxed-in appearance.
+- [ ] No `.yml` or `.yaml` files remain.
+- [ ] Final implementation is committed to `main` and pushed to `origin/main`.
 
 ## Files to Change
-`css/tokens.css`, `css/global_styles.css`, `css/privacy_policy.css`, `css/service_cards.css`, `css/why_band.css`, `css/hero_section.css`, `css/mission_vision.css`, `css/hardware_sourcing.css`, `css/networking.css`, `css/custom_websites.css`, `css/get-started.css`, `css/learn-more.css`, and the `<head>` font links only in these 7 HTML pages: `index.html`, `get-started.html`, `learn_more.html`, `privacy_policy.html`, `pages/custom_websites.html`, `pages/hardware_sourcing.html`, `pages/network_infrastructure.html`.
+- `css/tokens.css`
+- `css/global_styles.css`
+- `css/hero_section.css`
+- `css/service_cards.css`
+- `css/why_band.css`
+- `css/about_section.css`
+- `css/mission_vision.css`
+- `css/footer_promanaged.css`
+- `index.html` — layout markup may be changed only where required to create the new editorial/bento composition; preserve content and functionality.
+
+Do not expand scope to the other pages until the homepage is approved as the visual reference implementation.
 
 ## Exact Changes
 ### css/tokens.css
-- Section: `Typography`
-- Change: use one modern display face via `--font-display`; keep Inter as `--font-sans`; retain a restrained modular/Fluid display scale and tight tracking tokens.
-- Section: `Colour`
-- Change: preserve the neutral/slate foundation and `#2563eb` blue accent as the only brand accent; remove/avoid any new competing accent colours in changed design styles.
-- Section: `Layout`
-- Change: define `--bento-gap` and `--bento-cols: 12` as the single grid system source of truth.
-- Reason: one token layer prevents visual drift.
+- Section: layout/typography/colour tokens.
+- Change: establish a wide container token (target ~1440px), generous horizontal page padding, display type scale, one radius family, one shadow family, neutral/slate surfaces, and the existing blue accent.
+- Reason: the current centered composition is partly caused by overly narrow layout constraints.
 
 ### css/global_styles.css
-- Change: apply `--font-display`, display tracking, fluid display sizing, and restrained heading weight to H1/H2 without page-specific fixed-size overrides.
-- Reason: typography must feel intentionally different everywhere.
-
-### css/privacy_policy.css
-- Change: mirror the same H1/H2 display typography because this page does not load `global_styles.css`.
-- Reason: avoid one visually inconsistent page.
-
-### All target grid files
-- Every target grid container: `grid-template-columns: repeat(var(--bento-cols), 1fr)`, `gap: var(--bento-gap)`, `grid-auto-flow: dense`.
-- No `auto-fit`, `minmax(...)`, or hardcoded grid gaps in target grids.
-- Every target tile receives an explicit desktop span from the approved table below and responsive span rules only; do not introduce a second grid system.
-- Keep tile treatment coherent: token padding, `--radius-lg`, border, restrained shadow, and subtle hover only.
-
-| File | Grid | Approved desktop spans |
-|---|---|---|
-| service_cards.css | `.services-grid` | featured `12`, other 2 `6` |
-| why_band.css | `.why-grid` | `.why-tile-lead` `6`, other 2 `3` |
-| hardware_sourcing.css | `.category-grid` | featured `6` each, standard `3` each |
-| networking.css | `.network-grid` | `.primary` `6`, next 2 `3`, remaining 4 `3` |
-| custom_websites.css | `.steps-strip` | all `3` |
-| custom_websites.css | `.projects-grid` | featured `12`, other 3 `4` |
-| get-started.css | `.features-grid` | first `12`, other 3 `4` |
-| get-started.css | `.services-grid` | `6 / 3 / 3` |
-| get-started.css | `.testimonials-grid` | all `4` |
-| learn-more.css | `.features-grid` | first `6`, second `6`, remaining 6 `4` |
-| footer_promanaged.css | `.footer-content` | leave as-is; not a bento grid |
+- Section: containers, headings, page rhythm.
+- Change: remove narrow generic wrappers that force every section into the same centered width; establish wide-section defaults and strong heading hierarchy.
+- Reason: the site needs width and rhythm before individual bento tiles can work.
 
 ### css/hero_section.css
-- Section: `.hero`, `#hero-title`, `.hero-facts`
-- Change: make the hero an unmistakable editorial/bento composition: strong display headline on one side and a real grid-based fact cluster on the other; remove dated uppercase eyebrow styling; use fluid heading size with no fixed breakpoint override.
-- Reason: the hero is the first proof that the redesign actually happened.
+- Section: hero.
+- Change: rebuild as a wide two-zone editorial composition using the available viewport: dominant headline/CTA area plus a large asymmetric bento/fact/visual area. Use large type, whitespace, and one accent surface; avoid centered hero copy.
+- Reason: hero is the first proof that the redesign is real.
+
+### css/service_cards.css
+- Section: services grid.
+- Change: redesign to a clearly asymmetric bento composition with one lead tile spanning most of a row and supporting tiles at different sizes. Use the full content width. Avoid equal-height/equal-width card rows.
+- Reason: services are the main commercial content and need the strongest bento signal.
+
+### css/why_band.css
+- Section: why/proof band.
+- Change: make the section a broad storytelling band with one large statement tile and smaller supporting tiles rather than centered cards.
+- Reason: reinforces editorial storytelling.
+
+### css/about_section.css
+- Section: About.
+- Change: use a split editorial layout: larger founder visual area + text block + optional supporting accent block. Do not center the whole section into a narrow column.
+- Reason: introduces human/brand storytelling instead of another card grid.
 
 ### css/mission_vision.css
-- Change: use the same bento tile language and typography hierarchy; do not reintroduce tabs/modals.
-- Reason: storytelling should feel continuous rather than component-by-component.
+- Section: mission/vision.
+- Change: use a broad two-part bento composition with distinct visual weights for Mission and Vision; no tabbed/boxed equal treatment.
+- Reason: preserves hierarchy and storytelling.
 
-### All 7 HTML heads
-- Change: one identical combined Google Fonts request containing Inter 400/500/600/700 plus the chosen display face at the minimum required weight; keep `preconnect` and `display=swap`.
-- Reason: consistent modern typography and consistent loading behaviour.
+### css/footer_promanaged.css
+- Section: footer.
+- Change: allow the footer content to use the wide container consistently; simplify into clear columns with strong spacing and no cramped centered block.
+- Reason: completes the full-width visual system.
+
+### index.html
+- Section: homepage section wrappers only.
+- Change: permit the new wide/asymmetric CSS composition and add only the minimal semantic wrappers/classes needed for the new hero/service/about/mission structures. Preserve all existing copy, links, forms, IDs, and functional hooks.
+- Reason: CSS alone cannot create the required composition if the current DOM prevents it.
 
 ## New Code Needed
-None beyond the scoped CSS changes and existing `<head>` font-link changes.
+Pseudocode only:
+1. Set page container to wide desktop width with generous side padding.
+2. Build hero as two unequal columns with a nested bento cluster.
+3. Build services as lead tile + smaller support tiles using explicit spans.
+4. Build why/about/mission as wide editorial bands with varied tile weights.
+5. Collapse to one-column storytelling at mobile widths.
 
 ## Constraints / Things NOT to Touch
-- Do not expand scope beyond the exact files above.
-- Do not touch `php/`, form-submit JS, booking/contact JS, honeypot fields, or navbar/footer markup.
-- No HTML restructuring beyond the listed `<head>` font-link lines.
-- Keep the existing light theme.
-- Do not introduce additional brand accent colours, neon treatments, heavy gradients, glow effects, or decorative animation.
-- Do not revert working functional behaviour.
-- Never use bulk line-ending/rewrite scripts.
-- **YAML safety:** never commit `.yml` or `.yaml`; temporary YAML must be deleted immediately and verified absent.
-- **Git target:** `origin/main` only. No sub-branches, no PR workflow, no force-push.
+- Do not modify PHP, form handlers, booking/contact JS, API behaviour, authentication, or business logic.
+- Do not redesign other pages in this task; homepage is the canonical reference first.
+- Do not add stock assets, fake metrics, fake clients, or invented portfolio claims.
+- Keep Inter for body/UI and use one modern display face for headings.
+- No dark theme. No decorative multi-stop gradients. No random accent colours.
+- Do not reintroduce modal UI.
+- No bulk line-ending/rewrite scripts.
+- `origin/main` only.
+- Never commit YAML files.
 
 ## Known Trade-offs
-- A display serif such as Instrument Serif creates the strongest visible contrast against Inter; if rendering or readability proves poor, use a modern sans display alternative rather than reverting to a generic system font.
-- Explicit bento spans are intentional; if content counts change later, spans must be recalculated.
+- Homepage will diverge visually from secondary pages until a later rollout; this is intentional so the visual direction can be judged once instead of repeating weak site-wide tweaks.
+- A wider container increases whitespace responsibility; tiles must be composed deliberately rather than simply stretched.
 
 ## Open Questions
-- None. Use the approved modern/editorial display direction and restrained slate + blue palette.
+None. Implement the homepage direction decisively using the reference principles above.
 
 ## Phases
-### Final Implementation + Verification
-- Goal: finish the design as one coherent pass, not another incremental tuning cycle.
-- Exit condition: all Completion Criteria pass, including real browser verification at 375/768/1280px and confirmation that the visual hierarchy, font treatment, bento layout, and colour system are consistent.
-- Files: exactly the listed CSS files and 7 HTML `<head>` font links.
+### Phase 1: Homepage redesign
+- Goal: implement the full-width editorial/bento system across hero, services, why, about, mission/vision, and footer.
+- Exit condition: desktop screenshot/visual review clearly shows a transformed site, not a centered card stack.
+- Files: `css/tokens.css`, `css/global_styles.css`, `css/hero_section.css`, `css/service_cards.css`, `css/why_band.css`, `css/about_section.css`, `css/mission_vision.css`, `css/footer_promanaged.css`, `index.html`.
+
+### Phase 2: Verification
+- Goal: test 375 / 768 / 1280px, console, overflow, typography loading, and all existing homepage interactions/links.
+- Exit condition: all Completion Criteria pass.
+- Files: same as Phase 1, fixes only.
