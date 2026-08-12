@@ -22,9 +22,14 @@
     <link rel="stylesheet" href="../css/custom_websites.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
          before first paint. Without JS this class is never added, the hiding rule
-         never matches, and all content renders normally. The timer is a failsafe:
-         if main.js never runs the choreography, the hero resolves anyway. -->
-    <script>document.documentElement.classList.add('js-on');setTimeout(function(){document.documentElement.classList.add('load-failsafe');},3000);</script>
+         never matches, and all content renders normally.
+
+         pmHeroFailsafe is the bounded fallback for the case where JS IS enabled but
+         main.js never stages the choreography (404, parse error, throw). main.js
+         clears it only AFTER arming its own release timer, so on every path the hero
+         is exposed by something. If it fires before a slow main.js arrives, main.js
+         clears the class again and the choreography still runs. -->
+    <script>(function(d,w){var r=d.documentElement;r.classList.add('js-on');w.pmHeroFailsafe=w.setTimeout(function(){r.classList.add('load-failsafe');},1200);})(document,window);</script>
 </head>
 
 <body>

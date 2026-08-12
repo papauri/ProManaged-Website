@@ -10,8 +10,8 @@
      base    single column, asymmetric evidence pair
      560px   evidence pair becomes an equal two-up
      768px   the visual becomes its own 12-column bento beneath the statement
-     1180px  the balanced 7fr / 5fr desktop split
-     1400px  evidence returns to a two-up inside the 5fr column
+     1440px  the balanced 7fr / 5fr desktop split, evidence two-up
+
 
    Every visual row sizes intrinsically (`align-content:start` on an auto-row grid),
    so hero-support can never ride up into the evidence cards. There are no negative
@@ -359,15 +359,30 @@
     .hero-project-grid { grid-column: 1 / -1; gap: var(--grid-gap); --evidence-media-h: 180px }
 }
 
-/* ---------- 1180px — the balanced 7fr / 5fr desktop hero ---------- */
-@media (min-width: 1180px) {
+/* ---------- 1440px — the balanced 7fr / 5fr desktop hero ----------
+   Deliberately NOT at 1180px. Measured at 1180–1439×900, the 5fr column has to stack
+   the capability block, a full-width evidence pair and the support facts, which made
+   the row ~1270px tall; the statement centres inside that and the primary CTA landed
+   at y=985–1024, i.e. off the first screen on exactly the laptop widths where it
+   matters most. Below 1440px the hero keeps the 768px composition — statement across
+   the top, visual bento beneath — which puts the CTA at ~673px instead.
+
+   The hero also takes its own tighter vertical rhythm here. At 1920×900 and 2560×900
+   the section-y padding pushed the CTA to y=903/921, just off the fold; this is
+   padding, not composition, so no evidence is reduced to buy the space. */
+@media (min-width: 1440px) {
+    .hero {
+        padding-top: calc(var(--header-h) + clamp(3rem, 3.4vw, 4.5rem));
+        padding-bottom: clamp(3rem, 3.4vw, 4.5rem);
+    }
+
     .hero-rail {
         grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
         gap: clamp(2.5rem, 4vw, 5rem);
         min-height: clamp(620px, 46vw, 780px);
     }
 
-    .hero-statement { padding-block: clamp(1rem, 3vw, 4rem) }
+    .hero-statement { padding-block: clamp(1rem, 2vw, 2.5rem) }
 
     /* Back to a single stacked column inside the narrower 5fr rail. Centred, so the
        shorter service-page heroes sit level with their statement instead of
@@ -376,12 +391,23 @@
     .hero-visual { grid-template-columns: minmax(0, 1fr); align-content: center }
     .hero-feature { grid-column: auto; min-height: clamp(260px, 19vw, 340px) }
     .hero-support { grid-column: auto; align-content: start }
-    .hero-project-grid { grid-column: auto; grid-template-columns: minmax(0, 1fr); --evidence-media-h: 190px }
+    .hero-project-grid {
+        grid-column: auto;
+        grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+        --evidence-media-h: 180px;
+    }
 }
 
-/* ---------- 1400px — evidence returns to a two-up inside the 5fr column ---------- */
-@media (min-width: 1400px) {
-    .hero-project-grid { grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr); --evidence-media-h: 180px }
+/* At 1440px card two is the narrower half of the 1.12/0.88 split at 225px, where the
+   full-size label wrapped to two lines and pushed its media panel 18px below card
+   one's. Tightening the label keeps both toplines to one line. Above 1800px the
+   column is wide enough for the full-size label, so this is scoped to the band. */
+@media (min-width: 1440px) and (max-width: 1799px) {
+    .hero-project-topline {
+        font-size: .6rem;
+        letter-spacing: .05em;
+        gap: var(--space-2);
+    }
 }
 
 /* ---------- 1800px — more composition, same 1880px rail ---------- */

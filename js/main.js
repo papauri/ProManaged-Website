@@ -125,37 +125,57 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         if (!canAnimate) {
+            // Reduced motion / no IntersectionObserver: final state, immediately.
+            // The stylesheet already forces this independently of us.
             release();
         } else {
-            const step = cssMs('--load-stagger', 90);
-            const duration = cssMs('--load-duration', 860);
-            const compact = isCompact();
-            let cursor = 0;
-            let lastDelay = 0;
+            try {
+                const step = cssMs('--load-stagger', 90);
+                const duration = cssMs('--load-duration', 860);
+                const compact = isCompact();
+                let cursor = 0;
+                let lastDelay = 0;
 
-            LOAD_PHASES.forEach((phase) => {
-                const found = [...assembleRoot.querySelectorAll(phase.sel)];
-                if (!found.length) return;
-                cursor += Math.round(step * phase.gap * (compact ? 0.7 : 1));
-                const perCard = phase.stagger && !compact ? step : 0;
-                found.forEach((el, i) => {
-                    const delay = cursor + i * perCard;
-                    el.style.setProperty('--block-delay', delay + 'ms');
-                    staged.push(el);
-                    if (delay > lastDelay) lastDelay = delay;
+                LOAD_PHASES.forEach((phase) => {
+                    const found = [...assembleRoot.querySelectorAll(phase.sel)];
+                    if (!found.length) return;
+                    cursor += Math.round(step * phase.gap * (compact ? 0.7 : 1));
+                    const perCard = phase.stagger && !compact ? step : 0;
+                    found.forEach((el, i) => {
+                        const delay = cursor + i * perCard;
+                        el.style.setProperty('--block-delay', delay + 'ms');
+                        staged.push(el);
+                        if (delay > lastDelay) lastDelay = delay;
+                    });
+                    cursor += (found.length - 1) * perCard;
                 });
-                cursor += (found.length - 1) * perCard;
-            });
 
-            if (!staged.length) {
+                if (!staged.length) {
+                    release();
+                } else {
+                    // ORDER MATTERS. Arm our own bounded release FIRST, and only then
+                    // stand the inline failsafe down. Between those two statements
+                    // the hero is covered by both; it is never covered by neither.
+                    window.setTimeout(release, lastDelay + duration + 240);
+                    if (window.pmHeroFailsafe) {
+                        window.clearTimeout(window.pmHeroFailsafe);
+                        window.pmHeroFailsafe = 0;
+                    }
+                    // If a slow page let the failsafe fire before we got here, undo
+                    // it so the choreography still runs rather than snapping open.
+                    document.documentElement.classList.remove('load-failsafe');
+
+                    // Two frames: the first paints the pre-load state, the second
+                    // flips it. Without this the browser coalesces both and skips
+                    // the motion entirely.
+                    requestAnimationFrame(() => requestAnimationFrame(() => {
+                        staged.forEach((el) => el.classList.add('is-settled'));
+                    }));
+                }
+            } catch (err) {
+                // Anything unexpected while staging: show the hero rather than leave
+                // a viewport of hidden content behind a thrown exception.
                 release();
-            } else {
-                // Two frames: the first paints the pre-load state, the second flips
-                // it. Without this the browser coalesces both and skips the motion.
-                requestAnimationFrame(() => requestAnimationFrame(() => {
-                    staged.forEach((el) => el.classList.add('is-settled'));
-                }));
-                window.setTimeout(release, lastDelay + duration + 240);
             }
         }
     }

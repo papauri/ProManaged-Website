@@ -243,9 +243,16 @@ a:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-
      Phase 2 — scroll chapters.  js/main.js adds .block-reveal + a variant class to a
        group's units as it enters the viewport, once only.
 
-   Both are gated on .js-on, which an inline <head> script adds. A visitor with no
-   JavaScript never sees a hidden composition. A second inline timer adds
-   .load-failsafe, which force-resolves the hero if main.js never got that far. */
+   Three independent guarantees that content is never left hidden:
+     1. Both are gated on .js-on, added by an inline <head> script. No JavaScript
+        means the hiding rules never match at all.
+     2. .load-failsafe, armed by that same inline script at 1200ms and stood down by
+        main.js only once main.js has armed its own release, force-resolves the hero
+        if main.js 404s, fails to parse or throws.
+     3. The reduced-motion block at the end of this file forces the final state with
+        !important, entirely independently of any script.
+   .block-reveal needs no failsafe: it is only ever ADDED by the script that removes
+   it, so a dead script simply never hides a chapter. */
 
 /* The navigation control resolves first, and does it in pure CSS so the only
    navigation affordance on the page can never depend on a script. `backwards` holds
