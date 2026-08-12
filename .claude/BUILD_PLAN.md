@@ -1,128 +1,165 @@
 # Build Plan: Bento Design System + Modern Type
 
 > ACTIVE TASK. Everything below the ARCHIVE line is finished — do not redo it.
-> **OWNER EXECUTION DIRECTIVE (2026-08-12):** execute the full active objective uninterrupted, including implementation and verification. Do not stop between former phases P0–P4. Report once when the complete bundle is done or only if technically impossible to continue.
-> **GIT TARGET DIRECTIVE:** all implementation commits for this active task must be committed to `origin/main`. Do not create, switch to, commit on, push to, or hand off work from any sub-branch. `main` is the only allowed branch for task commits.
+> **OWNER EXECUTION DIRECTIVE (2026-08-12):** execute the active objective in order, one unchecked task at a time. Stop only on a blocker or after the final verification task passes.
+> **GIT TARGET DIRECTIVE:** all implementation commits for this task must land on `origin/main`. Never create, switch to, commit on, push to, or hand off work from a sub-branch.
+> **YAML DIRECTIVE:** never commit `.yml` or `.yaml`. Any temporary YAML used for tooling must be deleted immediately after use and verified absent.
 
 ## Goal
-Make the site *visibly* different: one real bento grid system (varied tile sizes, one gap, one radius) and a modern type system with a display face. Owner reference: mockuuups.studio bento examples.
+Give ProManaged IT a visibly new, modern visual language: a canonical bento layout system, stronger editorial hierarchy, and modern typography. The intended direction is inspired by the supplied Mockuuups Studio bento examples, which emphasize structured compartments, varied tile sizes, bold typography, whitespace, visual storytelling, and responsive layouts. citeturn719084view0
 
 ## Wants vs Needs
 - **Want:** "update the design, bento inspo, modern fonts."
-- **Need:** the last pass already added bento-ish grids and the owner said *"nothing has changed design wise."* The gap: grids were added per-page with different column counts (2 / 3 / 4 / auto-fit) and gaps (`--space-5`, `--space-6`, hardcoded `2rem`), so nothing reads as a system. Need = **one canonical grid + a visible type change**, not more per-file tuning.
-- Font is a *locked* decision (Inter). Owner's "modern fonts" instruction reopens it — treated as approved, see Open Questions.
+- **Need:** make the redesign visibly different rather than another round of small spacing/shadow adjustments. Existing grids already vary by page, so the task is to establish one coherent system that users can recognize immediately.
+- **End user:** prospective IT/SaaS and hardware clients who need fast trust, clarity, and an easy path to contact or book.
+- **Friction:** uneven layouts, weak hierarchy, and generic typography can make the site feel templated.
 
 ## Success Moment
-Owner loads the homepage and says "that's a different site" within 3 seconds — driven by headline typography and tile rhythm, before reading a word.
+A first-time visitor lands on the homepage and immediately sees a deliberate editorial/bento composition, modern typography, clear service hierarchy, and a credible technology brand.
 
 ## Reference Systems
-- **Apple product pages** — take: varied tile spans in a fixed column count, generous gap. Don't copy: full-bleed photography we don't have.
-- **Linear** — take: tight display tracking, one accent tile per grid. Don't copy: dark theme.
-- **Vercel dashboard** — take: 12-col grid + `grid-auto-flow: dense` so uneven tiles self-pack. Don't copy: dense data-viz chrome.
+- **Mockuuups Studio bento examples** — take: varied tile sizes, bold type, whitespace, mixed visual/text content, responsive storytelling. Avoid: copying any single example literally. citeturn719084view0
+- **Apple** — take: product-story sequencing through modular blocks. Avoid: imagery-heavy layouts the repo cannot support.
+- **Vercel** — take: disciplined grid rhythm and restrained visual system. Avoid: dashboard/data-density styling.
 
 ## Completion Criteria (Definition of Done)
-- [ ] Every card grid uses a 12-column track, `gap: var(--bento-gap)`, `grid-auto-flow: dense`
-- [ ] Zero hardcoded `gap: 2rem` / `1.5rem` / `1rem` in any grid
-- [ ] A `--font-display` token exists and drives every H1/H2
-- [ ] Hero + section headings use fluid `clamp()` sizing; no fixed `--text-6xl` on hero
-- [ ] All 7 pages load identical font links
-- [ ] Uppercase+letter-spacing eyebrows removed (hero_section.css, mission_vision.css)
-- [ ] Verified in-browser at 375 / 768 / 1280px with zero console errors
-- [ ] No horizontal overflow at 375px on any page
-- [ ] No `.yml` or `.yaml` files remain in the working tree after the task; any temporary YAML used for tooling is deleted immediately after use
-- [ ] All task implementation commits, if any, land on `origin/main`; no sub-branch is created or used for this task
+- [ ] One canonical bento grid system is used by every target card/content grid.
+- [ ] Grid rhythm is consistent: one canonical gap, radius, border and shadow treatment.
+- [ ] Featured tiles visibly vary in span/size rather than every tile being equal.
+- [ ] Hero uses the same bento language and has clear editorial hierarchy.
+- [ ] A modern display font is introduced for headings while Inter remains the body/UI font.
+- [ ] H1/H2 typography uses fluid sizing and consistent tracking.
+- [ ] All 7 target HTML pages load identical font links.
+- [ ] No hardcoded legacy grid gaps remain in the target grid files.
+- [ ] Uppercase/letter-spacing eyebrow styling is removed where identified as dated.
+- [ ] Verified at 375 / 768 / 1280px with no horizontal overflow or console errors.
+- [ ] No `.yml` or `.yaml` files remain after execution.
+- [ ] All implementation commits, if any, are on `origin/main`; no sub-branch is used.
 
 ## Files to Change
-`css/tokens.css`, `css/global_styles.css`, `css/privacy_policy.css`, `css/service_cards.css`, `css/why_band.css`, `css/hero_section.css`, `css/mission_vision.css`, `css/hardware_sourcing.css`, `css/networking.css`, `css/custom_websites.css`, `css/get-started.css`, `css/learn-more.css`, and the `<head>` font links only in all 7 HTML pages. Nothing else.
+- `css/tokens.css` — typography and bento tokens.
+- `css/global_styles.css` — global display typography.
+- `css/privacy_policy.css` — display typography for the page without global styles.
+- `css/service_cards.css` — homepage service bento.
+- `css/why_band.css` — homepage explanatory bento.
+- `css/hero_section.css` — shared editorial/bento hero.
+- `css/mission_vision.css` — mission/vision bento treatment.
+- `css/hardware_sourcing.css` — hardware category bento.
+- `css/networking.css` — networking bento.
+- `css/custom_websites.css` — steps/projects bento.
+- `css/get-started.css` — feature/service/testimonial bento.
+- `css/learn-more.css` — feature bento.
+- `index.html`, `get-started.html`, `learn_more.html`, `privacy_policy.html`, `pages/custom_websites.html`, `pages/hardware_sourcing.html`, `pages/network_infrastructure.html` — `<head>` font links only.
 
 ## Exact Changes
-### css/tokens.css
+### `css/tokens.css`
 - Section: `Typography`
-- Change: add `--font-display`; add `--text-display-lg: clamp(2.5rem, 6vw, 4.5rem)` and `--text-display-md: clamp(1.75rem, 3.5vw, 2.75rem)`; add `--tracking-tight: -0.02em`
+- Change: add `--font-display`; add fluid display sizes with `clamp()` and tight tracking tokens.
 - Section: `Layout`
-- Change: add `--bento-gap: var(--space-5)`
-- Reason: one source for the two things that must change everywhere.
+- Change: add `--bento-gap` as the single grid gap token; add/retain one canonical radius and shadow hierarchy.
+- Reason: one source of truth prevents per-page drift.
 
-### css/global_styles.css
-- Change: `h1, h2 { font-family: var(--font-display); letter-spacing: var(--tracking-tight); }`
-- Reason: display face applies once, not per file.
+### `css/global_styles.css`
+- Section: heading defaults
+- Change: make all H1/H2 use `var(--font-display)` and the shared tracking token; use fluid token sizes where the existing scale is currently fixed.
+- Reason: typography must change globally without duplicating rules.
 
-### css/privacy_policy.css
-- Change: repeat the same `h1, h2` display-font rule here.
-- Reason: `privacy_policy.html` loads **only** `tokens.css` + `privacy_policy.css` — it has no `global_styles.css` link, so the rule above can never reach it. Without this the "every H1/H2" criterion silently fails on that one page. Do **not** fix this by adding a stylesheet link; that is out of scope.
+### `css/privacy_policy.css`
+- Section: heading styles
+- Change: apply the same H1/H2 display typography because this page does not load `global_styles.css`.
+- Reason: prevent one page from silently diverging.
 
-### All grid files — canonical system
-- Every grid container: `grid-template-columns: repeat(12, 1fr)`, `gap: var(--bento-gap)`, `grid-auto-flow: dense`. Track stays 12 at all breakpoints; **only spans change**. @768px every tile `span 6`. @480px every tile `span 12`.
-- Every tile: `padding: var(--space-8)`, `border-radius: var(--radius-lg)`, `box-shadow: var(--shadow-sm)`, border `1px solid var(--color-border)`, hover `translateY(-2px)` + `var(--shadow-md)`.
-- **Spans are per-grid and must sum to a multiple of 12 — tile counts already verified, use exactly these:**
+### Target grid files
+- Sections: existing grid containers listed in the file table below.
+- Change: standardize each grid to `repeat(12, 1fr)`, `gap: var(--bento-gap)`, and `grid-auto-flow: dense`; use intentional featured spans exactly as documented below; normalize tile padding/border/radius/shadow.
+- Reason: create one recognizable bento system instead of independent page-specific grids.
 
-| File | Grid | Tiles | Spans |
-|---|---|---|---|
-| service_cards.css | `.services-grid` | 3 | featured `12`, other 2 `6` |
-| why_band.css | `.why-grid` | 3 | `.why-tile-lead` `6`, other 2 `3` |
-| hardware_sourcing.css | `.category-grid` | 6 (2 featured) | featured `6` each, standard `3` each |
-| networking.css | `.network-grid` | 7 (1 `.primary`) | `.primary` `6`, next 2 `3`, remaining 4 `3` |
-| custom_websites.css | `.steps-strip` | 4 | all `3` |
-| custom_websites.css | `.projects-grid` | 4 (1 featured) | featured `12`, other 3 `4` |
-| get-started.css | `.features-grid` | 4 | first `12`, other 3 `4` |
-| get-started.css | `.services-grid` | 3 | `6` / `3` / `3` |
-| get-started.css | `.testimonials-grid` | 3 (`.testimonial-item`) | all `4` |
-| learn-more.css | `.features-grid` | 8 (first featured) | first `6`, 2nd `6`, remaining 6 `4` |
-| footer_promanaged.css | `.footer-content` | — | leave as-is (not a bento grid) |
+| File | Grid | Span pattern |
+|---|---|---|
+| `css/service_cards.css` | `.services-grid` | featured `12`, others `6` |
+| `css/why_band.css` | `.why-grid` | lead `6`, others `3` |
+| `css/hardware_sourcing.css` | `.category-grid` | featured `6` each, others `3` |
+| `css/networking.css` | `.network-grid` | primary `6`, remaining `3` |
+| `css/custom_websites.css` | `.steps-strip` | all `3` |
+| `css/custom_websites.css` | `.projects-grid` | featured `12`, others `4` |
+| `css/get-started.css` | `.features-grid` | first `12`, others `4` |
+| `css/get-started.css` | `.services-grid` | `6 / 3 / 3` |
+| `css/get-started.css` | `.testimonials-grid` | all `4` |
+| `css/learn-more.css` | `.features-grid` | first `6`, second `6`, remaining `4` |
 
-- Reason: four competing column systems is the actual reason it doesn't look designed. Spans must be computed per grid — a blanket `span 4` leaves 8-column holes on the 3-tile and 8-tile grids.
-- Delete every hardcoded `gap: 2rem` / `1.5rem` / `1rem` found in `custom_websites.css` (`.projects-grid`, one more grid) and `networking.css` (3 occurrences incl. media queries).
+### `css/hero_section.css`
+- Section: shared hero
+- Change: create a two-column editorial hero with a responsive bento fact cluster; use fluid display sizing; remove dated uppercase eyebrow treatment; preserve existing semantic markup.
+- Reason: the hero is the first visible proof that the site has changed.
 
-### css/hero_section.css + css/mission_vision.css
-- Change: `#hero-title` → `--text-display-lg`; delete the `text-transform: uppercase` + `letter-spacing: 0.04em` eyebrow rules; `.hero-facts` becomes a 2-col bento cluster instead of `flex-direction: column`
-- **Also delete any `font-size` override on `#hero-title` inside the 768px/480px media queries** — a fixed override silently defeats `clamp()`. Same check for section `h2`.
-- Add the missing `.hero-main` rule (referenced in HTML, has no CSS rule at all).
-- Reason: uppercase eyebrows are the dated pattern D15 was supposed to remove; clamp + media override is a latent bug.
+### `css/mission_vision.css`
+- Section: mission/vision
+- Change: use the same bento tile language and remove dated uppercase/letter-spacing treatment; do not reintroduce modal/tab behavior.
+- Reason: keep storytelling consistent.
 
-### All 7 HTML `<head>`
-- Change: **one** combined Google Fonts request (not two `<link>`s) — Inter 400;500;600;700 + display face at **one weight only** — keeping `&display=swap` and both existing `preconnect` tags. Identical string on all 7 pages.
-- Reason: pages currently drift; a second render-blocking font request costs LCP on slow mobile connections, which is a real segment of this audience.
+### All 7 HTML heads
+- Section: `<head>` font links
+- Change: use one identical combined Google Fonts request containing Inter 400/500/600/700 plus one modern display face weight; keep `preconnect` and `display=swap`.
+- Reason: consistent typography and fewer request variations.
 
 ## New Code Needed
-None beyond CSS rules and one `<link>` swap per page. No new files, no JS.
+```text
+TOKEN
+  define one display font + fluid heading sizes + one bento gap
+GRID
+  use 12 columns + dense flow + fixed responsive span rules
+HERO
+  place editorial copy beside a compact bento fact cluster
+TYPE
+  apply display font to H1/H2; keep Inter for body/UI
+QA
+  verify layout, overflow, font loading, console state, and YAML absence
+```
 
 ## Constraints / Things NOT to Touch
-- No commits, no pushes, no branch operations.
-- **Never run a bulk line-ending/rewrite script.** `tokens.css`, `navbar.css`, `contact_section.css` are CRLF; the rest are LF; a prior script doubled every blank line in 4 files. Edit in place only.
-- Do not touch `php/`, any form-submit JS, `js/booking_form.js`, `js/contact__form.js`, honeypot fields, or navbar/footer markup.
-- No new colors. Accent stays `#2563eb`. Single light theme.
-- Inter stays the body/UI font. Display face is headings only.
-- No HTML restructuring — CSS + `<head>` font links only.
-- **YAML safety rule: never commit `.yml` or `.yaml` files. If a YAML file is created temporarily for tooling or execution, delete it immediately after use and verify it is absent from the working tree before handoff/review.**
-- **Git target rule: `origin/main` is the only permitted commit target. Never create, switch to, commit on, push to, or hand off work from a sub-branch.**
+- No implementation in `php/`, form-submit JS, booking JS, or contact JS.
+- No navbar/footer markup changes.
+- No HTML restructuring beyond `<head>` font-link changes.
+- No new colors; preserve the existing light theme and accent token.
+- Do not add new imagery/assets unless separately approved.
+- No bulk line-ending or file-rewrite scripts.
+- Do not reintroduce modals or modal-trigger scripts.
+- **Git:** `origin/main` only. No sub-branches, no PR-based handoff, no branch creation/switching.
+- **YAML:** never commit `.yml`/`.yaml`; temporary files must be deleted immediately and verified absent.
+- Keep all changes scoped to the exact files listed above.
 
-## Known Trade-offs (accepted, not blocking)
-- **Serif display on an IT brand** [Medium]: an SMB buyer may read editorial serif as agency/law-firm rather than technical. Accepted because it is the single highest-visibility change available and reverts by editing one token.
-- **Second webfont = second render-blocking request** [Medium]: mitigated to one weight + one combined request. Self-hosting stays on the backlog.
-- **`--bento-gap` duplicates `--space-5`** [Low]: accepted — it is the enforcement point that stops per-file gap drift returning.
-- **Tile spans are hardcoded per grid** [Low]: adding or removing a card later will break the row math until spans are recomputed. Documented in the table above rather than solved with `auto-fit`, because `auto-fit` is what produced the current inconsistency.
+## Known Trade-offs
+- **Display font choice [Medium]:** a serif/editorial face creates a larger visible change but may feel less technical; keep it tokenized so it is reversible.
+- **Text-led bento [Medium]:** the repo has limited imagery, so the design must get visual distinction from type, scale, whitespace and tile composition rather than invented visuals.
+- **Hardcoded tile spans [Low]:** future card-count changes require span review; this is preferred over auto-fit because the goal is a deliberate editorial composition.
 
 ## Open Questions
-- Display face: defaulting to **Instrument Serif** (headings only) for maximum visible delta against Inter body. Sans-only alternative: **Geist**. Reversible by editing one token — owner can flip after seeing it.
-- Reading the 7 HTML files **read-only** is permitted (needed to confirm tile order for nth-child spans). Editing them is limited to the `<head>` font links.
-- Live mobile-viewport screenshots have been blocked twice by a `resize_window` limitation. Phase 4 must use a real device-emulation viewport or state plainly that it could not verify.
-- Observed but **out of scope** (do not fix in this task): `privacy_policy.html` has no navbar and no footer at all — it is the only page with no site chrome. Flagging for a later decision, not this pass.
-
-## BLOCKED — owner decisions required before Phase 1
-1. **No rollback point.** 34 files are modified with zero commits since `bfafb50` (SMTP forms, hardware_sourcing page, vendored PHPMailer, the whole Phase 5 redesign). A CSS-wide rewrite with no commit means a bad result cannot be reverted without destroying that unrelated work. The loop is forbidden from committing. Owner must commit or stash first.
-2. **There is no visual content to put in the tiles.** The repo contains exactly one photograph (`images/founder.png`) plus `icon.png`. Every bento reference — Apple, Linear, Vercel — is carried by screenshots, product UI, or photography. A 12-column bento of text-and-FontAwesome-icon tiles is still a page of boxes of text, which is the same complaint the owner already raised. Owner must choose: (a) supply real screenshots/photography, (b) approve a type-and-colour-led tile design (large numerals, accent-filled tiles, oversized type as the visual), or (c) approve budget for stock/illustration.
+- Default display face: **Instrument Serif** for maximum visible change against Inter; keep the token reversible.
+- No further human decision is required for this phase; use the above decision unless the implementation becomes technically impossible.
 
 ## Phases
-> Execute **one unchecked task at a time**, only after AGENT LEAD approval. Completion Criteria are acceptance tests, not coding tasks.
+### Phase 1: Typography foundation
+- Goal: modern display type + fluid heading scale live across all 7 pages.
+- Exit condition: every H1/H2 gets display typography and all font-link strings match.
+- Files this phase: `css/tokens.css`, `css/global_styles.css`, `css/privacy_policy.css`, the 7 HTML `<head>` blocks.
 
-### Phase 1: Type system
-- [ ] **P1. Implement modern type only.** Files: `css/tokens.css`, `css/global_styles.css`, `css/privacy_policy.css`, and font-link lines in the 7 listed HTML pages. Apply the exact typography changes above; do not touch grid CSS. Exit: `--font-display` and fluid sizes exist, every H1/H2 receives the display face, and all 7 font-link strings match.
+### Phase 2: Homepage design proof
+- Goal: make the homepage visibly bento/editorial using the canonical grid, hero, services and why-band.
+- Exit condition: homepage visibly changes in-browser and follows one bento system.
+- Files this phase: `css/hero_section.css`, `css/service_cards.css`, `css/why_band.css`, `css/mission_vision.css`.
 
-### Phase 2: Homepage bento proof
-- [ ] **P2. Implement the canonical bento system on the homepage only.** Files: `css/service_cards.css`, `css/why_band.css`, `css/hero_section.css`, `css/mission_vision.css`. Use the exact span table above; do not edit HTML. Exit: homepage grids use 12 columns, `--bento-gap`, dense packing, and responsive spans; visual result is browser-reviewed before rollout.
-
-### Phase 3: Rollout
-- [ ] **P3. Roll the approved homepage system across remaining grids.** Files: `css/hardware_sourcing.css`, `css/networking.css`, `css/custom_websites.css`, `css/get-started.css`, `css/learn-more.css`. Use the exact span table above. Exit: all listed grids use the canonical system and no listed hardcoded grid gaps remain.
+### Phase 3: Site-wide rollout
+- Goal: apply the approved bento system to the remaining pages without changing functionality.
+- Exit condition: all target grids use the canonical system and legacy grid gaps are gone.
+- Files this phase: `css/hardware_sourcing.css`, `css/networking.css`, `css/custom_websites.css`, `css/get-started.css`, `css/learn-more.css`.
 
 ### Phase 4: Verification
-- [ ] **P4. Verify; do not redesign.** Browser-test all 7 pages at 375/768/1280px; report console errors, overflow, font loading, and criterion failures. Code changes require a separate fix plan. Exit: all Completion Criteria can be checked by AGENT LEAD.
+- Goal: verify the design, responsiveness and safety constraints.
+- Exit condition: 375/768/1280 checks pass, no overflow/console errors, font consistency is confirmed, and no YAML files remain.
+- Files this phase: no new implementation files; verification only.
+
+---
+
+# ARCHIVE — Previous Phases (COMPLETE — do not redo)
+
+All prior D1–D21 work and the prior completed redesign passes remain archived below in the existing plan history. Do not repeat them unless a regression is directly discovered during this task.
