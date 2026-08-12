@@ -30,7 +30,7 @@
     pointer-events: none;
 }
 
-/* Editorial split: text + CTAs on the left, a small bento fact-cluster on the right */
+/* Editorial split: dominant text + CTAs on the left, an asymmetric bento fact-cluster on the right */
 .hero-content {
     z-index: 1;
     position: relative;
@@ -38,8 +38,8 @@
     margin: 0 auto;
     width: 100%;
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: var(--space-16);
+    grid-template-columns: 1.3fr 1fr;
+    gap: var(--space-20);
     align-items: center;
     text-align: left;
 }
@@ -117,10 +117,12 @@
     box-shadow: var(--shadow-md);
 }
 
-/* Bento fact cluster — the hero's "editorial grid" companion to the text column */
+/* Bento fact cluster — the hero's real asymmetric companion block, not three equal stacked cards:
+   the first fact becomes a tall accent-filled lead tile; the other two stack beside it. */
 .hero-facts {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
     gap: var(--space-4);
     position: relative;
     z-index: 1;
@@ -141,6 +143,41 @@
 .hero-fact:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
+}
+
+.hero-fact:first-child {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-accent-contrast);
+}
+
+.hero-fact:first-child i {
+    background: rgba(255, 255, 255, 0.18);
+    color: var(--color-accent-contrast);
+}
+
+.hero-fact:first-child .hero-fact-title {
+    color: var(--color-accent-contrast);
+}
+
+.hero-fact:first-child .hero-fact-desc {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-fact:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.hero-fact:nth-child(3) {
+    grid-column: 2;
+    grid-row: 2;
 }
 
 .hero-fact i {
@@ -202,13 +239,22 @@
     }
 
     .hero-facts {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
     }
 
-    .hero-fact {
-        flex: 1 1 220px;
+    .hero-fact,
+    .hero-fact:first-child,
+    .hero-fact:nth-child(2),
+    .hero-fact:nth-child(3) {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .hero-fact:first-child {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
     }
 
     /* #hero-title size is fluid via --display-1; no breakpoint override needed. */
@@ -232,7 +278,5 @@
         padding-right: var(--container-pad);
     }
 
-    .hero-facts {
-        flex-direction: column;
-    }
+    /* .hero-facts is already a single column from the 768px breakpoint. */
 }

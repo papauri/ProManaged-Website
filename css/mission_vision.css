@@ -8,12 +8,13 @@
     margin-bottom: var(--space-10);
 }
 
+/* Broad two-part band: Mission is the dominant accent-filled tile, Vision the supporting one —
+   deliberately unequal weight rather than a tabbed/boxed pair. */
 .panes-grid {
     display: grid;
     grid-template-columns: repeat(var(--bento-cols), 1fr);
-    grid-auto-flow: dense;
     gap: var(--bento-gap);
-    max-width: 900px;
+    max-width: var(--container-max);
     margin: 0 auto;
 }
 
@@ -33,6 +34,18 @@
     box-shadow: var(--shadow-md);
 }
 
+.pane-card:first-child {
+    grid-column: span 7;
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-accent-contrast);
+    padding: var(--space-12) var(--space-10);
+}
+
+.pane-card:nth-child(2) {
+    grid-column: span 5;
+}
+
 .pane-label {
     display: inline-block;
     font-size: var(--text-sm);
@@ -42,6 +55,10 @@
     margin-bottom: var(--space-4);
 }
 
+.pane-card:first-child .pane-label {
+    color: rgba(255, 255, 255, 0.85);
+}
+
 .pane-card p {
     color: var(--color-text-muted);
     font-size: var(--text-lg);
@@ -49,8 +66,14 @@
     margin: 0;
 }
 
+.pane-card:first-child p {
+    color: rgba(255, 255, 255, 0.92);
+}
+
 @media (max-width: 768px) {
-    .pane-card {
+    .pane-card,
+    .pane-card:first-child,
+    .pane-card:nth-child(2) {
         grid-column: span 12;
     }
 }

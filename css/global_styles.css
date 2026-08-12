@@ -41,9 +41,9 @@ h3 {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: var(--container-max);
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 var(--container-pad);
 }
 
 /* Honeypot field: invisible to real visitors, catches simple bots that fill in every field. */

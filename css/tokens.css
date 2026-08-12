@@ -89,8 +89,10 @@
   --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.12), 0 4px 10px rgba(15, 23, 42, 0.06);
 
   /* ---- Layout ---- */
-  --container-max: 1200px;
-  --container-pad: 1.25rem;
+  /* Wide editorial container — was 1200px, which was clamping every section (including
+     grids with their own larger max-width) down to a narrow, boxed-in centered column. */
+  --container-max: 1440px;
+  --container-pad: clamp(1.25rem, 4vw, 3rem);
   /* Single canonical gap for every bento grid — no per-file grid gaps. */
   --bento-gap: 1.25rem;
   --bento-cols: 12;
