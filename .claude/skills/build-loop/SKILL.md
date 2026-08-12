@@ -1,41 +1,47 @@
 ---
 name: build-loop
-description: Autonomous, token-efficient redesign loop for the ProManaged IT site. planner picks one task, specialist builds, ui-designer polishes UI, qa-auditor verifies, mark done or retry once, then advance. Runs continuously until PROJECT COMPLETE.
+description: Autonomous, token-efficient implementation/review loop for the ProManaged IT Signal & Systems site. Follow BUILD_PLAN.md exactly and stop only for a genuine blocker or completion.
 ---
 
 # /build-loop
 
-Drive the ProManaged IT modern-minimalist redesign autonomously against `.claude/BUILD_PLAN.md`.
+Drive the ProManaged IT implementation against `.claude/BUILD_PLAN.md`.
 
 ## Preconditions
-Read `.claude/PROJECT_CONTEXT.md` and `.claude/BUILD_PLAN.md` before the first cycle.
+Read `.claude/PROJECT_CONTEXT.md`, `.claude/BUILD_PLAN.md`, and `.claude/SYSTEM_MAP.md` before the first cycle.
 
 ## The cycle
-1. **Plan** — build-planner picks the ONE next unchecked task (strict phase order Learn → Stabilise → Complete → Polish), with acceptance criteria + exact file scope + assigned specialist.
-2. **Build** — the assigned specialist (frontend-specialist / backend-specialist) makes the change, only within the exact file/line scope.
-3. **Polish** — if it was UI work, ui-designer refines ONLY the files just touched (tokens, responsive, a11y).
-4. **Verify** — qa-auditor reviews the diff against acceptance criteria. PASS -> mark [x]. FAIL -> retry once; fail twice -> mark blocked with a specific question and move on.
-5. **Advance** — immediately auto-pull the next task in the SAME run. Do not pause after one task.
+1. **Plan** — identify the next unchecked plan requirement and its exact file scope.
+2. **Build** — make the smallest implementation that satisfies the requirement.
+3. **Polish** — for UI work, keep the shared Signal & Systems tokens, responsive bento system, accessibility and motion language coherent.
+4. **Verify** — test the actual rendered behavior where browser tooling is available; also inspect the diff and relevant edge cases.
+5. **Advance** — continue through the active phase without stopping for a separate approval unless the plan requires human input.
 
-## Autonomy (default: continuous)
-- Treat every /build-loop invocation as continuous unless the user says "run one cycle only".
-- Never stop after a single task — auto-advance.
-- Ambiguous-but-not-blocking: make a reasonable assumption, document it in BUILD_PLAN STATUS, continue.
-- Only STOP for: (a) a decision-blocking item, (b) a retry that failed twice, (c) a safety-rail violation, or (d) all PROJECT COMPLETE WHEN boxes checked.
-- When every deliverable is [x]: print a final "PROJECT COMPLETE" report and HALT. Do not look for extra work.
+## Current architecture rails
+- Frontend: static HTML + CSS + vanilla JS.
+- Backend: PHP + vendored PHPMailer + SMTP.
+- Shared form behavior: `js/form_intake.js`.
+- Shared mail templates: `php/mailer.php`.
+- Typography: Plus Jakarta Sans only.
+- Navigation: logo-triggered full-screen bento panel; no traditional horizontal navbar.
+- Motion: Building Blocks / Weighted Block Settle; no animation framework.
+
+## Git
+- Work only on `main`.
+- Commit completed implementation directly to `main` and push to `origin/main`.
+- Never create a branch or PR as a workaround.
+- Never force-push.
+- Never commit `.yml` or `.yaml` files.
 
 ## Cost & safety rails
-- Models: Haiku for read-only/lint (codebase-scout, qa-auditor lint) where possible; Sonnet for build/execution; Opus/Fable only for setup & planning — never routine execution.
-- Cap concurrent specialist spawns at 2.
-- Run /compact after every 3 completed tasks; /clear when switching phases.
-- Every subagent brief must state exact file/line scope.
-- NEVER commit or push. NEVER run destructive SQL or delete data. Never print committed secrets.
-- Park decision-needed items as "blocked" and keep going.
+- Prefer the minimum files and smallest safe diff needed to satisfy the plan.
+- Preserve PHP endpoints, form field names, SMTP/PHPMailer, honeypot, IDs, accessibility, links and legal/privacy copy.
+- Never print or commit secrets.
+- Never introduce a framework or unrelated infrastructure.
+- Never remove ordinary UI uses of the word “render”; Render cleanup only targets actual Render.com deployment infrastructure.
 
-## Reporting
-- **STATUS block every cycle:** just finished, in progress, next 3 queued, blocked (with specific questions).
-- **/cost checkpoint** printed every full loop cycle.
-- **SESSION SUMMARY at end of each run:** tasks completed, remaining by phase, blockers, one-line recommendation.
+## Verification
+For visual work, Playwright is the preferred QA path: headed real-window desktop first, full-page screenshots, then 1440px/768px/375px checks. Verify bento variety, founder portrait, navigation, motion, forms, console errors, links, fonts and overflow. If an environment cannot perform a required check, report the limitation honestly.
 
-## Scope ceiling
-The PROJECT COMPLETE WHEN list in BUILD_PLAN.md is fixed. Do NOT add deliverables. New ideas -> FUTURE IDEAS, flagged to the user as "out of scope, needs approval."
+## Completion
+Use BUILD_PLAN.md as the fixed scope ceiling. Do not invent extra deliverables. When all completion criteria are satisfied, report completion and stop.
