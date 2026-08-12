@@ -7,11 +7,11 @@
 }
 
 .website-header h2 {
-    font-size: 3rem;
+    font-size: var(--display-2);
     margin-bottom: 1rem;
     color: var(--color-text);
     text-align: center;
-    line-height: 1.3;
+    line-height: var(--leading-display);
 }
 
 .website-header p {
@@ -39,8 +39,9 @@
 /* Storytelling strip — sequential, connected flow rather than a plain uniform grid */
 .steps-strip {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-6);
+    grid-template-columns: repeat(var(--bento-cols), 1fr);
+    grid-auto-flow: dense;
+    gap: var(--bento-gap);
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
@@ -59,6 +60,7 @@
 }
 
 .step-card {
+    grid-column: span 3;
     background: var(--color-surface);
     border-radius: var(--radius-lg);
     padding: var(--space-6);
@@ -123,7 +125,7 @@
 .custom-websites-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    gap: var(--bento-gap);
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -354,10 +356,15 @@
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(var(--bento-cols), 1fr);
+    grid-auto-flow: dense;
+    gap: var(--bento-gap);
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.project-card {
+    grid-column: span 4;
 }
 
 .project-card {
@@ -376,7 +383,7 @@
 }
 
 .project-card-featured {
-    grid-column: span 2;
+    grid-column: span 12;
 }
 
 .project-card .project-tag {
@@ -404,30 +411,31 @@
 }
 
 @media (max-width: 900px) {
-    .steps-strip {
-        grid-template-columns: repeat(2, 1fr);
+    .step-card {
+        grid-column: span 6;
     }
 
     .steps-strip::before {
         display: none;
     }
 
+    .project-card {
+        grid-column: span 6;
+    }
+
     .project-card-featured {
-        grid-column: span 2;
+        grid-column: span 12;
     }
 }
 
 @media (max-width: 600px) {
-    .steps-strip {
-        grid-template-columns: 1fr;
-    }
-
-    .custom-websites-grid,
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
+    .step-card,
+    .project-card,
     .project-card-featured {
-        grid-column: span 1;
+        grid-column: span 12;
+    }
+
+    .custom-websites-grid {
+        grid-template-columns: 1fr;
     }
 }

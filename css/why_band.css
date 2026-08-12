@@ -9,12 +9,14 @@
     max-width: var(--container-max);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(var(--bento-cols), 1fr);
+    grid-auto-flow: dense;
     grid-auto-rows: 1fr;
-    gap: var(--space-5);
+    gap: var(--bento-gap);
 }
 
 .why-tile {
+    grid-column: span 3;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -29,7 +31,7 @@
 }
 
 .why-tile-lead {
-    grid-column: span 2;
+    grid-column: span 6;
     grid-row: span 1;
     background: var(--color-accent);
     color: var(--color-accent-contrast);
@@ -39,8 +41,7 @@
 }
 
 .why-tile-lead h2 {
-    font-size: var(--text-2xl);
-    font-weight: var(--weight-bold);
+    font-size: var(--display-3);
     margin-bottom: var(--space-3);
 }
 
@@ -70,21 +71,18 @@
 }
 
 @media (max-width: 900px) {
-    .why-grid {
-        grid-template-columns: 1fr 1fr;
+    .why-tile {
+        grid-column: span 6;
     }
 
     .why-tile-lead {
-        grid-column: span 2;
+        grid-column: span 12;
     }
 }
 
 @media (max-width: 480px) {
-    .why-grid {
-        grid-template-columns: 1fr;
-    }
-
+    .why-tile,
     .why-tile-lead {
-        grid-column: span 1;
+        grid-column: span 12;
     }
 }

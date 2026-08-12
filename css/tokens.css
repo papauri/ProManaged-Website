@@ -37,6 +37,8 @@
 
   /* ---- Typography ---- */
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* Display face for H1/H2 only; body/UI stays on --font-sans. Reversible: point at var(--font-sans) to undo. */
+  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
@@ -47,6 +49,13 @@
   --text-4xl: 2.25rem;
   --text-5xl: 3rem;
   --text-6xl: 3.75rem;
+  /* Fluid display sizes — scale between the 375px and 1280px breakpoints without media queries. */
+  --display-1: clamp(2.5rem, 1.6rem + 3.8vw, 4.5rem);
+  --display-2: clamp(1.875rem, 1.3rem + 2.4vw, 3rem);
+  --display-3: clamp(1.5rem, 1.2rem + 1.3vw, 2.25rem);
+  --tracking-display: -0.02em;
+  --tracking-tight: -0.01em;
+  --leading-display: 1.05;
   --leading-tight: 1.15;
   --leading-normal: 1.6;
   --weight-normal: 400;
@@ -82,6 +91,9 @@
   /* ---- Layout ---- */
   --container-max: 1200px;
   --container-pad: 1.25rem;
+  /* Single canonical gap for every bento grid — no per-file grid gaps. */
+  --bento-gap: 1.25rem;
+  --bento-cols: 12;
 
   /* ---- Motion (subtle feedback only) ---- */
   --transition: 150ms ease;

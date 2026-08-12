@@ -18,6 +18,28 @@ body {
     box-sizing: inherit;
 }
 
+/* Display typography: H1/H2 use the display face, body/UI stays on Inter.
+   Sizes are fluid, so per-section font-size overrides should be removed rather than re-tuned. */
+h1,
+h2 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-normal);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-display);
+}
+
+h1 {
+    font-size: var(--display-1);
+}
+
+h2 {
+    font-size: var(--display-2);
+}
+
+h3 {
+    letter-spacing: var(--tracking-tight);
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;

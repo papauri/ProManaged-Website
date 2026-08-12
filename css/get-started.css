@@ -7,7 +7,11 @@ body {
     line-height: 1.6;
 }
 
-h1, h2, h3, h4 {
+h1, h2 {
+    margin: 0;
+}
+
+h3, h4 {
     margin: 0;
     font-weight: 500;
 }
@@ -26,21 +30,22 @@ h1, h2, h3, h4 {
 }
 
 .why-choose-us h2 {
-    font-size: var(--text-3xl);
-    font-weight: var(--weight-bold);
+    font-size: var(--display-2);
     margin-bottom: var(--space-10);
     color: var(--color-text);
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-5);
+    grid-template-columns: repeat(var(--bento-cols), 1fr);
+    grid-auto-flow: dense;
+    gap: var(--bento-gap);
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .feature-item {
+    grid-column: span 4;
     background: var(--color-white);
     padding: var(--space-6);
     border-radius: var(--radius-lg);
@@ -75,7 +80,7 @@ h1, h2, h3, h4 {
 
 /* Featured tile — spans the full row as a horizontal banner */
 .features-grid .feature-item:first-child {
-    grid-column: span 3;
+    grid-column: span 12;
     display: flex;
     align-items: center;
     gap: var(--space-6);
@@ -102,8 +107,7 @@ h1, h2, h3, h4 {
 }
 
 .services-section h2 {
-    font-size: var(--text-3xl);
-    font-weight: var(--weight-bold);
+    font-size: var(--display-2);
     margin-bottom: var(--space-10);
     text-align: center;
     color: var(--color-text);
@@ -111,8 +115,18 @@ h1, h2, h3, h4 {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--space-5);
+    grid-template-columns: repeat(var(--bento-cols), 1fr);
+    grid-auto-flow: dense;
+    gap: var(--bento-gap);
+}
+
+/* 6 / 3 / 3 — the first service reads as the lead tile */
+.services-grid .service-card {
+    grid-column: span 3;
+}
+
+.services-grid .service-card:first-child {
+    grid-column: span 6;
 }
 
 .service-card {
@@ -170,11 +184,13 @@ h1, h2, h3, h4 {
 /* Testimonials Section */
 .testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--space-5);
+    grid-template-columns: repeat(var(--bento-cols), 1fr);
+    grid-auto-flow: dense;
+    gap: var(--bento-gap);
 }
 
 .testimonial-item {
+    grid-column: span 4;
     background: var(--color-white);
     padding: var(--space-6);
     border-radius: var(--radius-lg);
@@ -208,21 +224,19 @@ h1, h2, h3, h4 {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .features-grid,
-    .services-grid,
-    .testimonials-grid {
-        grid-template-columns: 1fr;
+    .feature-item,
+    .testimonial-item,
+    .services-grid .service-card,
+    .services-grid .service-card:first-child {
+        grid-column: span 12;
     }
 
     .features-grid .feature-item:first-child {
-        grid-column: span 1;
+        grid-column: span 12;
         flex-direction: column;
         text-align: center;
         padding: var(--space-6);
     }
 
-    .services-section h2,
-    .testimonials-section h2 {
-        font-size: var(--text-2xl);
-    }
+    /* Section headings are fluid via --display-*; no breakpoint override needed. */
 }
