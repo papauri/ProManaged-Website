@@ -26,6 +26,154 @@
 
 .why-facts {
     align-items: start;
+    counter-reset: whyfact;
+}
+
+/* ================= THE PROOF BLOCKS: A CARD THAT ASSEMBLES =================
+   Everywhere else on the site a chapter unit settles as one plane. These three do
+   not: the block arrives, and THEN its contents arrive inside it — the mark unfolds
+   from a quarter-turn, the claim rises, the explanation follows, and a ghost numeral
+   slides in behind the copy. It is the same Weighted Block Settle language read at a
+   second scale, and it is the reason this chapter reads as three built things rather
+   than three boxes that faded in.
+
+   NO NEW JAVASCRIPT. js/main.js already puts .block-reveal on each card, writes
+   --block-delay on it and flips .is-settled; custom properties inherit, so every rule
+   below simply reads the delay its own card was given and offsets from it. When
+   main.js strips those classes at the end of the group, all of this stops matching
+   and the card is left in its plain resting state with no leftover will-change.
+
+   Every offset is a FRACTION of --block-duration rather than a fixed millisecond
+   value, so the inner sequence always finishes inside the window main.js keeps the
+   classes alive for — on a phone's 600ms clock exactly as on a 1440px 820ms one.
+
+   transform and opacity only, and the whole file is overridden by the reduced-motion
+   block in global_styles.css, which forces the final state with !important. */
+
+.why-fact {
+    position: relative;
+    overflow: hidden;
+}
+
+.why-fact.block-reveal .mark,
+.why-fact.block-reveal h3,
+.why-fact.block-reveal p,
+.why-fact.block-reveal .block__body::before {
+    opacity: 0;
+    /* Applied instantly, for the same reason the .block-reveal hidden state is: these
+       elements are visible until the observer fires, and a transition on the hidden
+       state would animate them OUT and then reverse mid-flight. */
+    transition: none;
+}
+
+.why-fact.block-reveal .mark { transform: scale(.6) rotate(-20deg) }
+.why-fact.block-reveal h3 { transform: translate3d(0, 14px, 0) }
+.why-fact.block-reveal p { transform: translate3d(0, 18px, 0) }
+.why-fact.block-reveal .block__body::before { transform: translate3d(28px, 0, 0) }
+
+.why-fact.block-reveal.is-settled .mark,
+.why-fact.block-reveal.is-settled h3,
+.why-fact.block-reveal.is-settled p {
+    opacity: 1;
+    transform: none;
+}
+
+.why-fact.block-reveal.is-settled .block__body::before {
+    opacity: .12;
+    transform: none;
+}
+
+.why-fact.block-reveal.is-settled .mark {
+    transition:
+        opacity calc(var(--block-duration) * .5) var(--ease-fade) calc(var(--block-delay, 0ms) + var(--block-duration) * .16),
+        transform calc(var(--block-duration) * .75) var(--ease-settle) calc(var(--block-delay, 0ms) + var(--block-duration) * .16);
+}
+
+.why-fact.block-reveal.is-settled h3 {
+    transition:
+        opacity calc(var(--block-duration) * .5) var(--ease-fade) calc(var(--block-delay, 0ms) + var(--block-duration) * .26),
+        transform calc(var(--block-duration) * .7) var(--ease-settle) calc(var(--block-delay, 0ms) + var(--block-duration) * .26);
+}
+
+.why-fact.block-reveal.is-settled p,
+.why-fact.block-reveal.is-settled .block__body::before {
+    transition:
+        opacity calc(var(--block-duration) * .5) var(--ease-fade) calc(var(--block-delay, 0ms) + var(--block-duration) * .36),
+        transform calc(var(--block-duration) * .7) var(--ease-settle) calc(var(--block-delay, 0ms) + var(--block-duration) * .36);
+}
+
+/* ---------- The ghost numeral ----------
+   Drawn from a CSS counter, so it stays correct if the order of the blocks ever
+   changes and it never reaches the accessibility tree — the claims are already in
+   reading order and a decorative "01" announced before each one would be noise.
+
+   Sits at z-index -1 inside .block__body's own stacking context: behind the copy,
+   still in front of the card surface and the pointer light. */
+.why-fact { counter-increment: whyfact }
+
+/* The z-index is what makes -1 mean "behind this card's copy" rather than "behind the
+   card". Stated here rather than relying on the [data-field] rule in interaction.css,
+   which only exists on devices with a fine pointer — without it the numeral would fall
+   behind the block's own surface on touch and simply vanish. */
+.why-fact .block__body { position: relative; z-index: 1 }
+
+.why-fact .block__body::before {
+    content: counter(whyfact, decimal-leading-zero);
+    position: absolute;
+    right: -.12em;
+    bottom: -.34em;
+    z-index: -1;
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 3rem + 8vw, 9.5rem);
+    font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-display);
+    line-height: 1;
+    color: var(--color-accent-earth);
+    opacity: .12;
+    pointer-events: none;
+}
+
+.why-facts .why-fact:nth-child(3) .block__body::before { color: var(--color-accent-earth-soft) }
+
+/* ---------- Hover ----------
+   The shared card field in css/interaction.css already gives every block on the site
+   its pointer-tracked light, its lean and its traced edge. These three cards take
+   that further because they are the only place on the homepage where a card is pure
+   claim: the mark inverts into the accent, the claim steps aside for the pointer, and
+   the numeral behind it comes up out of the surface. */
+@media (hover: hover) and (pointer: fine) {
+    .why-fact .mark,
+    .why-fact h3,
+    .why-fact .block__body::before {
+        transition:
+            transform var(--transition-slow),
+            opacity var(--transition-slow),
+            background var(--transition),
+            color var(--transition);
+    }
+
+    .why-fact:not(.block-reveal):hover {
+        box-shadow: var(--shadow-lg);
+    }
+
+    .why-fact:not(.block-reveal):hover .mark {
+        background: var(--color-accent-earth);
+        color: var(--color-text-on-dark);
+    }
+
+    .why-facts .why-fact:nth-child(3):not(.block-reveal):hover .mark {
+        background: var(--color-accent-earth-soft);
+        color: var(--color-graphite);
+    }
+
+    .why-fact:not(.block-reveal):hover h3 {
+        transform: translate3d(5px, 0, 0);
+    }
+
+    .why-fact:not(.block-reveal):hover .block__body::before {
+        opacity: .22;
+        transform: translate3d(0, -6px, 0);
+    }
 }
 
 /* ---------- Phone art direction ---------- */
@@ -67,6 +215,13 @@
 
 .why-facts .why-fact:nth-child(3) h3 { color: var(--color-text-on-dark) }
 .why-facts .why-fact:nth-child(3) p { color: var(--color-text-on-dark-muted) }
+
+/* This block is graphite by RULE, not by carrying .block--graphite, so the on-dark
+   variants in css/interaction.css do not match it. Both have to be restated or the
+   pointer light and the traced edge stay in their paper-surface inks and disappear
+   into the dark surface. */
+.why-facts .why-fact:nth-child(3) { --field-ink: var(--field-glow-dark) }
+.why-facts .why-fact:nth-child(3)::before { background: var(--color-accent-earth-soft) }
 
 /* ---------- Tablet: the tinted block leads, the supporting pair shares a row ----------
    Written at .grid.why-facts specificity so it beats the generic tablet stage in

@@ -35,6 +35,21 @@
     color: var(--color-text-on-dark);
 }
 
+/* ---------- What we build: the tablet composition ----------
+   The desktop figure is a pinwheel — an 8-wide banner, a 4-wide block standing through
+   both rows, then a second banner. Those spans all resolve to full width in the shared
+   tablet stage, which would leave three stacked bands here. Between 600 and 899px the
+   chapter becomes a lead banner with the two smaller kinds of work paired beneath it. */
+@media (min-width: 600px) and (max-width: 899px) {
+    #what-we-build .grid > .block:first-child {
+        grid-column: 1 / -1;
+    }
+
+    #what-we-build .grid > .block:not(:first-child) {
+        grid-column: span 6;
+    }
+}
+
 /* Dominant blocks take a display-face headline. */
 #what-we-build .block--row h3,
 #projects .block--row h3 {
@@ -136,6 +151,6 @@
 
     #faq .chapter-head {
         position: sticky;
-        top: calc(var(--header-h) + var(--space-8));
+        top: calc(var(--header-h) + var(--nav-float) + var(--space-8));
     }
 }

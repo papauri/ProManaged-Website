@@ -28,7 +28,12 @@
     display: block;
     margin-bottom: var(--space-10);
     font-family: var(--font-display);
-    font-size: clamp(3.5rem, 15vw, 15rem);
+    /* Tuned to the WORDMARK, not picked. The signature is `white-space: nowrap` and
+       meant to run almost the full width of the rail, so the vw factor has to fall as
+       the name gets longer or the line overflows and body's overflow-x:hidden crops
+       it off-centre. "ProManaged IT" is 13 characters against the 10 this was set for,
+       hence 15vw -> 11.2vw (15 x 10/13). Change the name, re-derive this. */
+    font-size: clamp(2.4rem, 11.2vw, 11.4rem);
     font-weight: var(--weight-display);
     letter-spacing: var(--tracking-display);
     line-height: .82;

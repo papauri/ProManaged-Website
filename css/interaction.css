@@ -1,0 +1,273 @@
+/* interaction.css — the pointer layer.
+
+   Two systems live here, and both are PURE ENHANCEMENT. Every rule is gated behind
+   `.pm-pointer` (written by js/interface_motion.js only when the device has a real
+   hovering pointer, a wide enough viewport and no reduced-motion preference), so a
+   phone, a keyboard user, a screen reader and a visitor with motion sensitivity all
+   get the site exactly as it was before this file existed.
+
+     1. THE INSTRUMENT CURSOR — a precise dot that tracks 1:1, a ring that lags behind
+        it on a spring, and — the part that makes it more than a blob — a ring that
+        SNAPS to the geometry of whatever it is over. Hovering a bento card does not
+        inflate a circle; it draws the card's own outline, at the card's own radius,
+        pulled a few pixels toward the pointer. The cursor stops being a decoration
+        and starts reporting what the interface is: a target, a link, a line of text.
+
+     2. THE CARD FIELD — every surfaced block on the site becomes pointer-aware. A
+        soft light follows the pointer across the card, the card tilts a few degrees
+        toward it, and a hairline traces its top edge. js/interface_motion.js writes
+        --mx/--my (light position) and --fx/--fy (tilt) on the hovered card only; one
+        rAF loop serves the whole page.
+
+   NOTHING HERE IS LOAD CHOREOGRAPHY. The Building Blocks reveal in global_styles.css
+   still owns entrances, and every hover transform below is explicitly held off while
+   a card is mid-reveal (`:not(.block-reveal)`) so the two never fight over transform. */
+
+/* ================= 1. THE INSTRUMENT CURSOR ================= */
+
+/* The native cursor is only surrendered once the custom one is actually live, so a
+   failed script can never leave the page with no pointer at all. */
+.pm-pointer.pm-cursor-live,
+.pm-pointer.pm-cursor-live * { cursor: none }
+
+/* Text entry keeps its native caret. An I-beam is information — where the insertion
+   point will land — and no decorative ring replaces it. The script mirrors this by
+   hiding the ring over the same controls. */
+.pm-pointer.pm-cursor-live input,
+.pm-pointer.pm-cursor-live textarea,
+.pm-pointer.pm-cursor-live select { cursor: auto }
+
+/* `display: contents` is load-bearing, not tidiness. mix-blend-mode blends an element
+   with the backdrop of its PARENT stacking context, so a positioned, z-indexed wrapper
+   would isolate the ring and the dot inside their own group — they would blend against
+   an empty box and the whole effect would silently do nothing. With no box of its own,
+   the wrapper creates no stacking context and its children blend against the page. */
+.pm-cursor { display: contents }
+
+.pm-cursor-ring,
+.pm-cursor-dot,
+.pm-cursor-label {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Above the navigation panel (z-index 2000) so the cursor still reads correctly
+       over the open bento. */
+    z-index: 9000;
+    pointer-events: none;
+    opacity: 0;
+    will-change: transform;
+}
+
+.pm-cursor.is-live .pm-cursor-ring,
+.pm-cursor.is-live .pm-cursor-dot { opacity: 1 }
+
+.pm-cursor[data-mode="off"] .pm-cursor-ring,
+.pm-cursor[data-mode="off"] .pm-cursor-dot { opacity: 0 }
+
+/* The ring. Its size, radius and position are written per frame by the script — this
+   rule owns only what it looks like, never where it is. Width and height are NOT
+   transitioned here: the script already springs them, and a second easing in the
+   stylesheet would compound into visible lag.
+
+   difference blending is what makes one ring work on warm paper, on stone, on the
+   graphite chapters and on the dark navigation panel. See --cursor-ink in tokens.css
+   for why the ink is near-ivory rather than white. */
+.pm-cursor-ring {
+    width: var(--cursor-ring);
+    height: var(--cursor-ring);
+    border: 1.5px solid var(--cursor-ink);
+    border-radius: var(--radius-full);
+    mix-blend-mode: difference;
+    transition:
+        border-width 180ms var(--ease-out),
+        opacity 180ms var(--ease-out);
+}
+
+/* The dot is the honest one: it is exactly where the pointer is, with no spring, so
+   precision is never traded for personality. */
+.pm-cursor-dot {
+    width: var(--cursor-dot);
+    height: var(--cursor-dot);
+    border-radius: var(--radius-full);
+    background: var(--cursor-ink);
+    mix-blend-mode: difference;
+    transition:
+        opacity 160ms var(--ease-out),
+        width 200ms var(--ease-out),
+        height 200ms var(--ease-out);
+}
+
+/* Frame mode — the ring has become the card's outline, so a dot floating in the
+   middle of it is noise. */
+.pm-cursor[data-mode="frame"] .pm-cursor-ring { border-width: 1px }
+.pm-cursor[data-mode="frame"] .pm-cursor-dot { opacity: 0 }
+
+/* Link mode — a control, not a region. The ring closes in on the pointer and the dot
+   swells to meet it. */
+.pm-cursor[data-mode="link"] .pm-cursor-ring { border-width: 2px }
+.pm-cursor[data-mode="link"] .pm-cursor-dot { width: 10px; height: 10px }
+
+/* Text mode — the ring collapses into a caret over running copy, which is the one
+   place a circle tells the visitor nothing. */
+.pm-cursor[data-mode="text"] .pm-cursor-ring {
+    border-radius: 2px;
+    border-width: 0;
+    background: var(--cursor-ink);
+}
+.pm-cursor[data-mode="text"] .pm-cursor-dot { opacity: 0 }
+
+/* The label rides under the ring in frame mode and names the destination. Deliberately
+   NOT blended: a legible chip is worth more than a clever one, and this is the only
+   part of the cursor that carries words. */
+.pm-cursor-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 7px 13px;
+    border-radius: var(--radius-control);
+    background: var(--color-graphite);
+    color: var(--color-text-on-dark);
+    font-family: var(--font-sans);
+    font-size: .6875rem;
+    font-weight: var(--weight-semibold);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: var(--shadow-lg);
+    /* No transform transition: the script writes transform every frame, and easing it
+       twice turns a label that follows the pointer into one that trails it. */
+    transition: opacity 200ms var(--ease-out);
+}
+
+.pm-cursor.is-live.has-label .pm-cursor-label { opacity: 1 }
+
+.pm-cursor-label::after {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-top: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+    transform: rotate(45deg);
+}
+
+/* ================= 2. THE CARD FIELD =================
+   js/interface_motion.js tags every surfaced block, navigation tile and evidence card
+   with [data-field]; nothing in the markup has to know about it. Bare blocks are
+   excluded by the script — they have no surface for a light to fall on. */
+
+[data-field] {
+    position: relative;
+    /* Contains the light and the traced edge inside the card's own radius. Outlines
+       are drawn outside the box and are NOT clipped by this, so every focus ring in
+       the site survives untouched. */
+    overflow: hidden;
+}
+
+/* The light. One radial gradient parked at the pointer's position in the card's own
+   coordinate space, faded in on hover and out again — opacity is the only thing that
+   animates, the gradient position simply follows. */
+[data-field]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+        18rem circle at var(--mx, 50%) var(--my, 50%),
+        var(--field-ink, var(--field-glow)),
+        transparent 68%);
+    transition: opacity var(--transition-slow);
+}
+
+/* Dark surfaces need the light to be light. */
+.block--graphite,
+.block--earth,
+.nav-tile,
+.section--graphite [data-field] { --field-ink: var(--field-glow-dark) }
+
+/* Everything the card actually says sits above the light. */
+[data-field] > * { position: relative; z-index: 1 }
+
+/* The traced edge — a hairline that draws across the top of the card from the side
+   the pointer is nearest. transform only, so it costs a composite and nothing else. */
+[data-field]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 2;
+    pointer-events: none;
+    background: var(--color-accent-earth);
+    transform: scaleX(0);
+    transform-origin: var(--trace-origin, left) center;
+    transition: transform var(--transition-slow);
+}
+
+.block--graphite::before,
+.block--earth::before,
+.nav-tile::before { background: var(--color-accent-earth-soft) }
+
+@media (hover: hover) and (pointer: fine) {
+    .pm-pointer [data-field]:hover::after { opacity: 1 }
+    .pm-pointer [data-field]:hover::before { transform: scaleX(1) }
+
+    /* The tilt. Held off while the card is mid-reveal: .block-reveal owns transform
+       during an entrance, and two systems writing the same property is how cards end
+       up snapping. Specificity here (0,3,0) deliberately beats the generic
+       .block--interactive:hover lift in global_styles.css so the two compose into one
+       transform instead of overriding each other unpredictably. */
+    .pm-pointer [data-field]:not(.block-reveal):hover {
+        transform:
+            perspective(1100px)
+            rotateX(var(--fx, 0deg))
+            rotateY(var(--fy, 0deg))
+            translate3d(0, var(--field-lift), 0);
+    }
+
+    /* The mark leans into the pointer with the card and warms up. */
+    [data-field] .mark {
+        transition:
+            transform var(--transition-slow),
+            background var(--transition),
+            color var(--transition);
+    }
+
+    .pm-pointer [data-field]:hover .mark {
+        transform: translate3d(0, -2px, 0) scale(1.06) rotate(-6deg);
+    }
+
+    /* A navigation tile carries a per-tile assembly delay (--_d, up to 180ms) in its
+       transition so the bento builds rather than appearing at once. That delay is for
+       the ENTRANCE; left in place it also postpones the hover lean by the same amount,
+       which reads as a tile that ignores the pointer for a fifth of a second. */
+    .pm-pointer .nav-tile:hover { --_d: 0ms }
+}
+
+/* The navigation tile already draws its own accent stripe on ::before, so the traced
+   edge would double it. The tile keeps the light and gives up the trace. */
+.nav-tile--lead::before {
+    top: 0;
+    right: auto;
+    bottom: 0;
+    width: 3px;
+    height: auto;
+    background: var(--color-accent-earth);
+    transform: none;
+}
+
+/* ---------- Reduced motion / no pointer ----------
+   Belt and braces: the script never adds .pm-pointer in these conditions, and the
+   stylesheet independently refuses to move anything even if it somehow did. */
+@media (prefers-reduced-motion: reduce) {
+    .pm-cursor { display: none }
+    .pm-pointer.pm-cursor-live,
+    .pm-pointer.pm-cursor-live * { cursor: auto }
+    [data-field]::before,
+    [data-field]::after,
+    [data-field] .mark,
+    .pm-pointer [data-field]:hover { transition: none; transform: none }
+}

@@ -35,10 +35,17 @@
     line-height: var(--leading-normal);
 }
 
-/* Build is the lead capability: a full-width graphite banner with a larger headline
-   and a wider text measure than the two supporting capabilities. Source then takes
-   the tinted surface and Connect stays on paper, so the row is three distinct blocks
-   rather than one dark card and two clones. */
+/* ---------- The bento ----------
+   Was a full-width banner with two equal halves stacked beneath it — three rows of
+   one shape, which is a stack with a wide lid rather than a bento. Build is now a
+   TALL block: it takes seven columns and both rows, and Source and Connect stack in
+   the five columns beside it. Two axes of inequality (width and height) in one figure
+   is what makes a composition read as deliberate; one axis reads as a grid that ran
+   out of items.
+
+   Build also keeps the dominant surface and the largest headline, Source takes the
+   tinted surface and Connect stays on paper — so no two blocks in the chapter share a
+   size AND a surface. */
 .capability--lead h3 {
     font-size: var(--display-2);
 }
@@ -55,6 +62,7 @@
 .capability--lead .list li {
     break-inside: avoid;
 }
+
 
 .services-grid .capability:nth-child(2) {
     background: var(--color-accent-earth-soft);
@@ -80,7 +88,30 @@
     }
 }
 
+/* ---------- Desktop: the tall lead ----------
+   Seven columns wide and two rows tall, with Source and Connect stacked in the
+   remaining five. `align-items: stretch` on .grid means the two satellites fill their
+   own rows, so the right-hand column reads as one continuous stack against the lead
+   rather than two cards floating at different heights. */
 @media (min-width: 900px) {
+    .services-grid {
+        align-items: stretch;
+    }
+
+    .services-grid .capability--lead {
+        grid-row: span 2;
+        /* The lead used to be a .block--row banner, which carried --space-10 of
+           padding. Dropping the row layout would otherwise have quietly demoted the
+           dominant block to the standard --space-8, so the padding is restated. */
+        padding: var(--space-10);
+        justify-content: center;
+    }
+}
+
+/* Two list columns only once the lead block is genuinely wide enough for them. At
+   900px seven columns is ~600px, and two columns there would be two very short
+   measures side by side. */
+@media (min-width: 1280px) {
     .capability--lead .list {
         columns: 2;
         column-gap: var(--space-10);
@@ -118,40 +149,23 @@
 }
 
 /* ---------- Wide desktop ----------
-   Measured at 2545px, the lead capability's copy filled only ~51% of its full-width
-   block, so the dominant element on the page read as half-empty. Splitting the body
-   into two columns fills it as COMPOSITION: the checklist moves beside the copy, and
-   no individual line of text gets any longer. */
+   The lead is no longer a full-width banner, so it no longer needs its body split
+   into two columns to avoid reading as half-empty — spanning two rows already gives
+   it the presence that fix was buying. What it needs at this width is air: more
+   padding inside the dominant block, and a headline allowed to run larger than the
+   two satellites beside it. */
 @media (min-width: 1600px) {
-    .capability--lead .block__body {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        /* Rows are declared EXPLICITLY, one per item in the left column. Without
-           them the grid has no explicit rows, so `grid-row: 1 / -1` on the list
-           resolves to row 1 alone — which stretched the "01" label from ~15px to
-           114px and tore a gap open above the heading. min-content also stops any
-           row growing beyond its own content. */
-        grid-template-rows: repeat(4, min-content);
-        column-gap: clamp(3rem, 5vw, 7rem);
-        align-content: start;
-        align-items: start;
+    .services-grid .capability--lead {
+        padding: clamp(var(--space-10), 3.4vw, var(--space-16));
+        justify-content: center;
     }
 
-    .capability--lead .capability-index,
-    .capability--lead h3,
-    .capability--lead .capability-lede,
-    .capability--lead .capability-cue {
-        grid-column: 1;
+    .capability--lead .capability-lede {
+        font-size: var(--text-2xl);
+        max-width: 44ch;
     }
 
-    /* Now that the list owns half the block it no longer needs its own inner columns,
-       which were only ever a way to use up a capped 72ch strip. */
-    .capability--lead .list {
-        grid-column: 2;
-        grid-row: 1 / -1;
-        columns: 1;
-        max-width: none;
-        margin-top: 0;
-        align-self: center;
+    .services-grid .capability:not(.capability--lead) {
+        padding: var(--space-10);
     }
 }

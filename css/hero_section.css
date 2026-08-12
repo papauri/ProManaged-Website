@@ -20,7 +20,7 @@
 .hero {
     background: var(--color-graphite);
     color: var(--color-text-on-dark);
-    padding-top: calc(var(--header-h) + var(--space-10));
+    padding-top: calc(var(--header-h) + var(--nav-float) + var(--space-10));
     padding-bottom: var(--section-y);
     position: relative;
     /* Also the guard rail for the lateral travel in the load choreography. */
@@ -396,7 +396,7 @@
 
 /* ---------- 768px — the visual becomes its own bento beneath the statement ---------- */
 @media (min-width: 768px) {
-    .hero { padding-top: calc(var(--header-h) + var(--section-y)) }
+    .hero { padding-top: calc(var(--header-h) + var(--nav-float) + var(--section-y)) }
     .hero-rail { gap: var(--space-12) }
 
     #hero-title { max-width: 14ch; margin-bottom: var(--space-8) }
@@ -436,7 +436,7 @@
    padding, not composition, so no evidence is reduced to buy the space. */
 @media (min-width: 1440px) {
     .hero {
-        padding-top: calc(var(--header-h) + clamp(3rem, 3.4vw, 4.5rem));
+        padding-top: calc(var(--header-h) + var(--nav-float) + clamp(3rem, 3.4vw, 4.5rem));
         padding-bottom: clamp(3rem, 3.4vw, 4.5rem);
     }
 

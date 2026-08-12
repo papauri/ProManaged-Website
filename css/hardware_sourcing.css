@@ -101,6 +101,23 @@
     max-width: var(--measure);
 }
 
+/* ---------- Categories: the tablet composition ----------
+   The desktop bento reads 7/5-tall, 7, 5/7, 12 — spans that the shared tablet stage
+   in global_styles.css sends to full width one after another, which would leave this
+   chapter as six stacked bands between 600 and 899px. Restated here as three pairs
+   and a closer, at .grid #categories specificity so it beats the shared stage. */
+@media (min-width: 600px) and (max-width: 899px) {
+    /* Two pairs, then two banners. Nothing is left alone in a half-empty row: the
+       fifth block and the graphite closer both take the full width deliberately. */
+    #categories .grid > .block:nth-child(-n+4) {
+        grid-column: span 6;
+    }
+
+    #categories .grid > .block:nth-child(n+5) {
+        grid-column: 1 / -1;
+    }
+}
+
 #categories .block--row h3 {
     font-family: var(--font-display);
     font-weight: var(--weight-display);

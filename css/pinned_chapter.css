@@ -108,7 +108,7 @@
     .pinned-stage {
         display: block;
         position: sticky;
-        top: calc(var(--header-h) + var(--space-8));
+        top: calc(var(--header-h) + var(--nav-float) + var(--space-8));
         min-width: 0;
     }
 

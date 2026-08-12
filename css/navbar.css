@@ -31,25 +31,25 @@
    before); once the page scrolls onto paper it resolves into a solid bar with a
    hairline. js/main.js owns the .nav-over-hero flag; with no JS the class is never
    added and the rail simply stays solid everywhere — legible, just not blended. */
+/* PHONE BASE: a flush bar. A detached capsule at 375px spends vertical space the
+   hero cannot afford and puts rounded corners against the screen edge for no gain.
+   The capsule is a capability wider screens earn, further down this file. */
 .nav-rail {
     position: fixed;
-    top: 0;
+    top: var(--nav-float);
     left: 0;
     right: 0;
     z-index: 1500;
-    background: rgba(255, 253, 250, .88);
-    -webkit-backdrop-filter: blur(14px) saturate(1.35);
-    backdrop-filter: blur(14px) saturate(1.35);
-    border-bottom: 1px solid var(--color-border);
     transition:
-        background var(--transition),
-        border-color var(--transition),
+        transform 420ms var(--ease-settle),
         opacity var(--transition);
 }
 
-/* Shares the page's visual rail, so the control, wordmark and action line up with
-   the content beneath them at every width. */
+/* The surface itself. On the phone it is the whole bar; from 768px up it becomes a
+   floating capsule and this is the element that carries the glass, the hairline and
+   the radius — which is why the background lives here and not on .nav-rail. */
 .nav-rail-inner {
+    position: relative;
     width: 100%;
     max-width: var(--rail-visual);
     margin-inline: auto;
@@ -61,6 +61,100 @@
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: var(--space-4);
+    background: rgba(255, 253, 250, .88);
+    -webkit-backdrop-filter: blur(14px) saturate(1.35);
+    backdrop-filter: blur(14px) saturate(1.35);
+    border-bottom: 1px solid var(--color-border);
+    transition:
+        background var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition-slow),
+        max-width var(--transition-slow),
+        min-height var(--transition-slow);
+}
+
+/* ---------- Reading position ----------
+   A hairline along the lower edge of the bar, scaled to how far down the page you
+   are. js/interface_motion.js writes --pm-progress on <html>; nothing else is needed,
+   and with no JS the line simply sits at zero width and reads as part of the rule.
+
+   Inset from the corners at capsule widths rather than clipped with overflow:hidden —
+   clipping the capsule would also clip the focus ring of the action inside it. */
+.nav-rail-inner::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+    transform: scaleX(var(--pm-progress, 0));
+    transform-origin: left center;
+}
+
+/* ---------- Tucked ----------
+   Scrolling DOWN is a statement that you want the page, not the chrome. The rail
+   steps out of the way and comes straight back the moment you scroll up, focus enters
+   it, or the panel opens — see js/interface_motion.js, which refuses to tuck in any
+   of those cases and never tucks in the first 420px of a page at all. */
+.nav-tucked .nav-rail {
+    transform: translate3d(0, calc(-100% - var(--nav-float) - 6px), 0);
+}
+
+/* ---------- The floating capsule (768px and up) ----------
+   From tablet width the bar detaches from the viewport edge and becomes a single
+   rounded control surface. Its left and right edges land exactly on the content rail
+   beneath it — `--rail-visual` minus the rail's own padding — so the capsule reads as
+   part of the page composition rather than a widget parked over it.
+
+   Nothing about the navigation CONTRACT changes here. There is still no link bar: a
+   control, a wordmark and one action, with every destination inside the bento panel. */
+@media (min-width: 768px) {
+    .nav-rail { padding-inline: var(--rail-pad) }
+
+    .nav-rail-inner {
+        max-width: calc(var(--rail-visual) - var(--rail-pad) * 2);
+        padding-inline: var(--space-6);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 1px 2px rgba(28, 27, 25, .04);
+    }
+
+    /* Inset past the corner radius so the line ends where the curve begins. */
+    .nav-rail-inner::after {
+        left: var(--radius-lg);
+        right: var(--radius-lg);
+        bottom: 3px;
+        height: 2px;
+    }
+
+    /* ---------- Condensed ----------
+       Once the page has moved, the capsule draws itself in: a little narrower, a
+       little shorter, a little more opaque, and lifted off the page with a real
+       shadow. The whole gesture is the chrome acknowledging that it is now floating
+       over content instead of sitting at the head of it. */
+    .nav-condensed .nav-rail-inner {
+        max-width: min(calc(var(--rail-visual) - var(--rail-pad) * 2), 1240px);
+        min-height: calc(var(--header-h) - 12px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    /* Kept off the hero deliberately: over the artwork the rail is meant to disappear
+       into it, and a brightened surface there would reintroduce exactly the pasted-on
+       chip this design removed. */
+    .nav-condensed:not(.nav-over-hero) .nav-rail-inner {
+        background: rgba(255, 253, 250, .94);
+        border-color: var(--color-border-strong);
+    }
+
+    .nav-condensed.nav-over-hero .nav-rail-inner {
+        background: rgba(28, 27, 25, .82);
+    }
+}
+
+@media (min-width: 1024px) {
+    .nav-rail-inner { padding-inline: var(--space-8) }
 }
 
 /* ---------- Trigger: the control ----------
@@ -123,14 +217,17 @@
 
 .nav-cta::after { width: 7px; height: 7px }
 
-/* Below 600px the wordmark is the first thing to go: the control identifies the
-   brand already, and the action has to keep its full label.
+/* Below 768px the wordmark is the first thing to go: the control identifies the
+   brand already, and the action has to keep its full label. The cut used to be at
+   600px, and moved up when the wordmark became "ProManaged IT" — thirteen tracked-out
+   uppercase characters need roughly 250px, which at 600px leaves the centre slot
+   pressing against both the control and the action.
 
    The column count has to drop with it. `display: none` takes the wordmark out of
    the grid entirely rather than leaving an empty track, so the action auto-placed
    into the middle column — measured at 375px it sat jammed against the Menu control
    with 100px of dead rail to its right. Two tracks put it back on the edge. */
-@media (max-width: 599px) {
+@media (max-width: 767px) {
     .nav-rail-inner { grid-template-columns: auto 1fr; gap: var(--space-3) }
     .nav-wordmark { display: none }
     .nav-cta { padding: 9px 13px; font-size: .78125rem }
@@ -204,7 +301,12 @@
 @media (min-width: 600px) {
     .nav-trigger { padding: var(--space-2) var(--space-4) var(--space-2) 0 }
     .nav-trigger-word { font-size: var(--text-sm); letter-spacing: var(--tracking-tight); text-transform: none }
-    .nav-wordmark { font-size: var(--text-base); letter-spacing: .2em }
+}
+
+/* The wordmark reappears here (see the max-width step above), so its display size
+   belongs here too rather than at 600px where it is no longer rendered. */
+@media (min-width: 768px) {
+    .nav-wordmark { font-size: var(--text-base); letter-spacing: .18em }
 }
 
 /* ---------- Blended over the hero ----------
@@ -228,7 +330,7 @@
    the rail now has content across its full width, so it needs something behind it.
    Hairline stays off — the bar should still read as part of the hero, not as chrome
    sitting on top of it. */
-.nav-over-hero .nav-rail {
+.nav-over-hero .nav-rail-inner {
     background: rgba(28, 27, 25, .72);
     border-bottom-color: transparent;
     -webkit-backdrop-filter: blur(14px);
@@ -679,8 +781,12 @@
     .nav-tile-desc { max-width: 46ch }
 }
 
-/* Reduced motion: the panel appears without assembly, immediately usable. */
+/* Reduced motion: the panel appears without assembly, immediately usable, and the
+   rail neither slides away nor slides back — it is simply always there. */
 @media (prefers-reduced-motion: reduce) {
+    .nav-rail { transition: none }
+    .nav-tucked .nav-rail { transform: none }
+    .nav-rail-inner { transition: none }
     .nav-panel,
     .nav-panel.is-open,
     .nav-panel-rail,

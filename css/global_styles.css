@@ -5,7 +5,7 @@ body{font-family:var(--font-sans);font-size:var(--text-base);line-height:var(--l
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-behavior:smooth}
 img{max-width:100%;display:block}
-[id]{scroll-margin-top:calc(var(--header-h) + var(--space-4))}
+[id]{scroll-margin-top:calc(var(--header-h) + var(--nav-float) + var(--space-4))}
 h1,h2{font-family:var(--font-display);font-weight:var(--weight-display);letter-spacing:var(--tracking-display);line-height:var(--leading-display);color:var(--color-text)}
 h1{font-size:var(--display-1)}
 h2{font-size:var(--display-2)}
@@ -65,10 +65,20 @@ p{max-width:var(--measure)}
     .grid>.block--3:nth-child(odd):last-child,
     .grid>.block--4:nth-child(odd):last-child,
     .grid>.block--6:nth-child(odd):last-child{grid-column:1/-1}
+    /* A tall block is a DESKTOP figure. On a tablet there is no second column for it
+       to stand beside, so it takes the row and reads as the lead block it is. */
+    .grid>.block--tall{grid-column:1/-1}
 }
 @media (min-width:900px){
     .block{grid-column:span 4}
     .block--3{grid-column:span 3}.block--5{grid-column:span 5}.block--6{grid-column:span 6}.block--7{grid-column:span 7}.block--8{grid-column:span 8}.block--9{grid-column:span 9}.block--12{grid-column:span 12}
+    /* ---------- The second axis ----------
+       A bento needs blocks that differ in HEIGHT as well as width; vary only the
+       spans and the result is a stack with a wide lid. .block--tall makes a block
+       occupy two rows, so the blocks beside it stack in the columns it leaves free.
+       Pair it with a span (e.g. .block--5.block--tall) — the span still decides the
+       width, this only decides how many rows the block claims. */
+    .block--tall{grid-row:span 2}
     .block--row{flex-direction:row;align-items:flex-start;gap:var(--space-8);padding:var(--space-10)}
 }
 @media (min-width:1024px){.chapter-head{margin-bottom:var(--space-16)}}

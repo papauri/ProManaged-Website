@@ -77,6 +77,26 @@
   --grid-gap: 1rem;
   --grid-cols: 12;
   --header-h: 76px;
+  /* The navigation capsule floats clear of the viewport edge instead of sitting flush
+     against it. Phones get 0 — at 375px a detached bar wastes the only vertical space
+     the hero has — so this is a capability wider screens earn, like every other token
+     in this file. Anything that offsets content for the fixed rail must add it. */
+  --nav-float: 0px;
+
+  /* ---------- Pointer layer ----------
+     The custom cursor and the card "field" (the light that tracks the pointer across
+     a block). Both are pure enhancement: css/interaction.css only ever activates them
+     behind (hover:hover) and (pointer:fine), so touch and keyboard are untouched. */
+  --cursor-ring: 34px;
+  --cursor-dot: 6px;
+  /* Blend ink. mix-blend-mode:difference against this near-ivory resolves to graphite
+     on paper surfaces and to ivory on graphite ones, so ONE cursor reads correctly on
+     every surface the site has without a per-section override. */
+  --cursor-ink: #f0ece5;
+  --field-glow: rgba(150, 80, 44, .13);
+  --field-glow-dark: rgba(247, 243, 236, .10);
+  --field-lift: -5px;
+  --field-tilt: 3.4deg;
 
   /* ---------- Motion (phone base) ----------
      Two clocks in one easing family:
@@ -129,6 +149,7 @@
 @media (min-width:768px) {
   :root {
     --header-h:84px;
+    --nav-float:10px;
     --rail-pad:clamp(1.5rem,4vw,3rem);
     --grid-gap:clamp(1.25rem,2.2vw,2rem);
     --block-travel:24px; --block-stagger:84ms; --block-duration:710ms;
@@ -142,6 +163,7 @@
 @media (min-width:1024px) {
   :root {
     --header-h:88px;
+    --nav-float:14px;
     --block-travel:28px; --block-stagger:96ms; --block-duration:770ms;
     --block-scale:.97; --block-scale-in:.932;
     --load-travel:34px; --load-stagger:92ms; --load-duration:860ms;
@@ -153,6 +175,7 @@
 @media (min-width:1440px) {
   :root {
     --header-h:92px;
+    --nav-float:16px;
     --rail-pad:clamp(2rem,2.8vw,4.5rem);
     --grid-gap:clamp(1.25rem,1.8vw,2.75rem);
     --block-travel:34px; --block-stagger:108ms; --block-duration:820ms;

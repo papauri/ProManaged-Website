@@ -13,9 +13,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // The fixed rail is the capsule's own height PLUS the gap it floats above the
+    // viewport edge, so both tokens have to be read here — otherwise an anchor lands
+    // --nav-float too high and the target's first line sits under the bar.
     const headerOffset = (() => {
-        const raw = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h'), 10);
-        return Number.isFinite(raw) ? raw : 92;
+        const styles = getComputedStyle(document.documentElement);
+        const read = (name, fallback) => {
+            const raw = parseInt(styles.getPropertyValue(name), 10);
+            return Number.isFinite(raw) ? raw : fallback;
+        };
+        return read('--header-h', 92) + read('--nav-float', 0);
     })();
 
     document.querySelectorAll('a[href]').forEach(link => {

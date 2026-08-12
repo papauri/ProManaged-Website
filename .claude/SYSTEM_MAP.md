@@ -30,7 +30,7 @@ Single source of truth for:
 Shared reset and design primitives:
 - `.rail` / `.container`;
 - `.grid`;
-- `.block` and span modifiers;
+- `.block`, span modifiers, and `.block--tall` (the second bento axis: a block that claims two grid rows, so blocks beside it stack in the columns it leaves free);
 - typography;
 - `.btn`, `.primary`, `.secondary`;
 - focus states;
@@ -47,7 +47,14 @@ Hero geometry and supporting visual cards.
 Founder / Story composition. The portrait uses the existing 800×800 asset and must remain circular and restrained.
 
 ### `css/navbar.css`
-Persistent logo/menu tile and bento navigation panel. There is no traditional horizontal navbar.
+Persistent logo/menu control and bento navigation panel. There is no traditional horizontal navbar.
+
+Closed state, from 768px up, is a **floating capsule**: detached from the viewport edge by `--nav-float`, aligned to the content rail, with a reading-progress hairline along its lower edge. It condenses on scroll (`.nav-condensed`) and tucks away on downward scroll (`.nav-tucked`). Both flags are written by `js/interface_motion.js`. The phone keeps a flush bar.
+
+Anything that offsets content for the fixed rail must add `--nav-float` to `--header-h`.
+
+### `css/interaction.css`
+The pointer layer: the instrument cursor and the card field (pointer-tracked light, lean and traced edge on every surfaced block). Entirely gated behind `.pm-pointer`, which `js/interface_motion.js` adds only for a fine hovering pointer at ≥1024px with no reduced-motion preference. Pure enhancement — nothing here is required for the site to work.
 
 ### `css/footer_promanaged.css`
 Canonical footer component. Root class is `.footer`.
@@ -68,6 +75,16 @@ Motion variants are fixed:
 - `sequence-in`.
 
 Use IntersectionObserver where supported and expose final states for reduced motion/failure cases.
+
+### `js/interface_motion.js`
+Three independent, additive modules:
+- scroll state — `--pm-progress`, `.nav-condensed`, `.nav-tucked` (all devices);
+- the card field — writes `--mx`/`--my`/`--fx`/`--fy` on the hovered card only;
+- the instrument cursor — tracking dot, spring ring, and a ring that snaps to the geometry of what it is over.
+
+The last two share one rAF loop that parks itself when nothing is moving. No element is ever hidden by this file, so a failure here cannot strand content.
+
+Cards opt in automatically: the script tags `.grid > .block:not(.block--bare)` and `.nav-tile` with `data-field`. A card can name itself to the cursor with `data-cursor-label`.
 
 ### `js/mobile_phone_navbar.js`
 Owns mobile/bento navigation interaction, focus management, Escape handling, scroll lock and restoration.
