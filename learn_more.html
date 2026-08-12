@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="css/footer_promanaged.css">
     <link rel="stylesheet" href="css/scroll_top.css">
     <link rel="stylesheet" href="css/learn-more.css">
+    <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
+         before first paint. Without JS this class is never added, the hiding rule
+         never matches, and all content renders normally. -->
+    <script>document.documentElement.classList.add('js-on');</script>
 </head>
 
 <body>
@@ -58,7 +62,7 @@
     <!-- ================= HERO ================= -->
     <div id="hero-section">
         <section id="home" class="hero">
-            <div class="hero-rail rail">
+            <div class="hero-rail rail" data-assemble>
                 <div class="hero-statement">
                     <span class="hero-eyebrow">How we work</span>
                     <h1 id="hero-title">Listen first. Then build.</h1>
@@ -96,7 +100,7 @@
     </div>
 
     <!-- ================= WHO WE HELP ================= -->
-    <section id="who-we-help" class="section section--ivory">
+    <section id="who-we-help" class="section section--ivory" data-blocks>
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">Who we help</span>
@@ -130,7 +134,7 @@
     </section>
 
     <!-- ================= THE METHOD ================= -->
-    <section id="method" class="section section--graphite">
+    <section id="method" class="section section--graphite" data-blocks>
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">The method</span>
@@ -163,7 +167,7 @@
     </section>
 
     <!-- ================= WHAT WE TAKE ON ================= -->
-    <section id="what-we-do" class="section">
+    <section id="what-we-do" class="section" data-blocks>
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">What we take on</span>
@@ -221,7 +225,7 @@
     </section>
 
     <!-- ================= WHAT TO EXPECT ================= -->
-    <section id="expectations" class="section section--stone">
+    <section id="expectations" class="section section--stone" data-blocks>
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">What to expect</span>
@@ -249,7 +253,7 @@
     </section>
 
     <!-- ================= CLOSING CTA ================= -->
-    <section class="section section--graphite cta-band">
+    <section class="section section--graphite cta-band" data-blocks>
         <div class="rail">
             <div class="chapter-head chapter-head--center">
                 <span class="eyebrow">Next step</span>

@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="css/footer_promanaged.css">
     <link rel="stylesheet" href="css/scroll_top.css">
     <link rel="stylesheet" href="css/privacy_policy.css">
+    <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
+         before first paint. Without JS this class is never added, the hiding rule
+         never matches, and all content renders normally. -->
+    <script>document.documentElement.classList.add('js-on');</script>
 </head>
 
 <body>
@@ -58,7 +62,7 @@
     <!-- ================= HERO ================= -->
     <div id="hero-section">
         <section id="home" class="hero">
-            <div class="hero-rail rail">
+            <div class="hero-rail rail" data-assemble>
                 <div class="hero-statement">
                     <span class="hero-eyebrow">Legal</span>
                     <h1 id="hero-title">Privacy Policy</h1>
@@ -92,7 +96,7 @@
     </div>
 
     <!-- ================= POLICY ================= -->
-    <main class="section">
+    <main class="section" data-blocks>
         <div class="rail">
             <section class="privacy-policy-content">
                 <div class="privacy-section" id="introduction">

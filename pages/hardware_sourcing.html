@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="../css/scroll_top.css">
     <link rel="stylesheet" href="../css/contact_section.css">
     <link rel="stylesheet" href="../css/hardware_sourcing.css">
+    <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
+         before first paint. Without JS this class is never added, the hiding rule
+         never matches, and all content renders normally. -->
+    <script>document.documentElement.classList.add('js-on');</script>
 </head>
 
 <body>
@@ -59,7 +63,7 @@
     <!-- ================= HERO ================= -->
     <div id="hero-section">
         <section id="home" class="hero">
-            <div class="hero-rail rail">
+            <div class="hero-rail rail" data-assemble>
                 <div class="hero-statement">
                     <span class="hero-eyebrow">Source</span>
                     <h1 id="hero-title">You pick the kit. We handle everything after that.</h1>
@@ -97,7 +101,7 @@
     </div>
 
     <!-- ================= THE PROBLEM ================= -->
-    <section id="premise" class="section section--ivory">
+    <section id="premise" class="section section--ivory" data-blocks>
         <div class="rail">
             <div class="grid">
                 <div class="block block--7 block--bare">
@@ -113,7 +117,7 @@
     </section>
 
     <!-- ================= HOW SOURCING WORKS ================= -->
-    <section id="how-sourcing-works" class="section section--graphite">
+    <section id="how-sourcing-works" class="section section--graphite" data-blocks>
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">How it works</span>
@@ -140,7 +144,7 @@
     </section>
 
     <!-- ================= TRACK RECORD ================= -->
-    <section id="track-record" class="section section--stone section--tight">
+    <section id="track-record" class="section section--stone section--tight" data-blocks>
         <div class="rail">
             <div class="grid">
                 <div class="block block--12 block--row block--earth">
@@ -158,7 +162,7 @@
     </section>
 
     <!-- ================= CATEGORIES ================= -->
-    <section id="categories" class="section">
+    <section id="categories" class="section" data-blocks>
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">What we source</span>
@@ -220,7 +224,7 @@
 
     <!-- ================= REQUEST FORM ================= -->
     <div id="contact-section">
-        <section id="contact" class="section section--ivory contact">
+        <section id="contact" class="section section--ivory contact" data-blocks>
             <div class="rail">
                 <div class="contact-grid">
                     <div class="contact-invite">

@@ -44,7 +44,15 @@ and a wide ~1560px editorial rail.
   of equal cards.
 - **Linear** — precision, polish, a tight type scale and near-zero decorative motion.
 
-## 5. Non-goals
+## 5. Signature motion
+The site's motion identity is **building blocks**: large blocks settle into place, first as
+the hero composition on load and then chapter by chapter on scroll. It is deliberately
+restrained — short durations, small travel, decelerating easing, no bounce, no parallax, no
+continuous animation, and no loading screen. Only chapter-level blocks animate; text, icons
+and list items never do. See SYSTEM_MAP.md for the implementation contract, including the
+before-first-paint requirement and the no-JS / reduced-motion guarantees.
+
+## 6. Non-goals
 Backend/API behaviour beyond the existing contact/booking SMTP flow, new third-party
 integrations, and hosting configuration are out of scope for visual work unless separately
 approved. No modals, no gradients, no parallax, no dashboard styling.

@@ -47,11 +47,34 @@ Shared form chapters: `contact_section.css` (index + hardware_sourcing), `book_a
 Page-specific: `get-started.css`, `learn-more.css`, `privacy_policy.css`, `custom_websites.css`,
 `hardware_sourcing.css`, `networking.css`.
 
+## Signature motion — "building blocks"
+Large blocks settle into place: the hero composition assembles on load, then each major
+chapter assembles as it is scrolled to. Only chapter-level blocks move — never text, icons
+or list items. Tokens live in `tokens.css` (`--block-duration`, `--block-stagger`,
+`--block-travel`, `--block-scale`, `--ease-settle`); states live in `global_styles.css`.
+
+Two deliberately different mechanisms:
+
+- **Initial load** — `[data-assemble]` on the hero rail. Hidden by CSS via *element*
+  selectors (`.js-on [data-assemble] .hero-statement`…), gated on a `.js-on` class set by a
+  tiny inline `<head>` script so the rule is live **before first paint**. This is the whole
+  point: a JS-added class could only apply after paint, letting the hero render and then
+  blink out. `main.js` staggers `.is-settled` onto the three hero blocks, then removes the
+  `data-assemble` attribute, which makes every hiding rule stop matching at once.
+- **Scroll** — `data-blocks` on each major chapter `<section>`. `main.js` applies
+  `.block-reveal` to that chapter's blocks and an IntersectionObserver settles them with a
+  capped stagger. These start below the fold, so a JS-applied class cannot flash.
+
+Guarantees, all covered by `qa-motion`: no JS → nothing is ever hidden; reduced motion →
+nothing is scheduled and CSS forces everything visible; a 4s safety net clears any stuck
+state; chapters already on screen at load are skipped; and the animation is transform +
+opacity only, so the layout box never changes (verified via `offsetLeft`/`offsetWidth`,
+not `getBoundingClientRect`, which would include the transform).
+
 ## JS (6 files, all under `js/`, all referenced)
 - `main.js` — loaded on all 7 pages. Capability-block navigation (`.service-card[data-target]`,
-  keyboard-activatable), header-offset smooth scroll for in-page nav links, the scroll reveal
-  (the `.reveal` class is added by JS, never in markup, so content stays visible without JS),
-  and the back-to-top control.
+  keyboard-activatable), header-offset smooth scroll for in-page nav links, the building-block
+  motion system described above, and the back-to-top control.
 - `mobile_phone_navbar.js` — shared hamburger/overlay toggle, all 7 pages.
 - `contact__form.js` — contact + equipment-request form submit (index, hardware_sourcing).
 - `booking_form.js` — booking form submit (get-started).

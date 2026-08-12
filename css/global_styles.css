@@ -612,23 +612,60 @@ a:focus-visible {
     border: 0;
 }
 
-/* Subtle reveal — the only entrance motion on the site. js/main.js adds .is-visible. */
-.reveal {
+/* ---------- "Building blocks" assembly ----------
+   The site's signature motion: large blocks settle into place, first as the initial
+   hero composition and then chapter by chapter as the visitor scrolls. It is applied
+   to whole blocks — never to individual words, icons or list items.
+
+   Two separate mechanisms, deliberately:
+
+   1. INITIAL LOAD (`[data-assemble]`) is hidden by CSS, but only under `.js-on` —
+      a class set by a tiny inline script in <head>. Without JS the class is never
+      added, the rule never matches, and the hero is simply visible. Hiding via CSS
+      (rather than waiting for main.js) is what stops the hero flashing in unstyled
+      and then re-animating.
+
+   2. SCROLL (`.block-reveal`) is applied by JS, because those chapters start below
+      the fold where there is nothing to flash. If the script fails they stay visible.
+
+   Both settle to exactly `transform: none`, so a block's own hover/focus transform is
+   never fighting a leftover entrance transform. */
+/* The hero units are matched by ELEMENT SELECTOR, not by a JS-added class. A class
+   added in main.js could only apply after the first paint, which would let the hero
+   render visible and then blink out — exactly the flash `.js-on` exists to prevent.
+   `.js-on` is set by an inline <head> script, so this rule is live before first paint. */
+.js-on [data-assemble] .hero-statement,
+.js-on [data-assemble] .hero-feature,
+.js-on [data-assemble] .hero-support,
+.block-reveal {
     opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 520ms ease, transform 520ms ease;
+    transform: translate3d(0, var(--block-travel), 0) scale(var(--block-scale));
+    /* Per-element stagger; js/main.js sets --block-delay on each unit. */
+    transition:
+        opacity var(--block-duration) var(--ease-settle) var(--block-delay, 0ms),
+        transform var(--block-duration) var(--ease-settle) var(--block-delay, 0ms);
+    will-change: opacity, transform;
 }
 
-.reveal.is-visible {
+/* Equal specificity to the rule above, declared after it, so it wins. */
+.js-on [data-assemble] .is-settled,
+.block-reveal.is-settled {
     opacity: 1;
     transform: none;
 }
 
-/* Never let the entrance state hide content in print. */
+/* When the assembly finishes, main.js removes the [data-assemble] attribute outright.
+   Every rule above stops matching at once, so no hero element is left carrying a
+   stale will-change, transition-delay or hidden state. */
+
+/* Never let an entrance state hide content in print. */
 @media print {
-    .reveal {
-        opacity: 1;
-        transform: none;
+    .js-on [data-assemble] .hero-statement,
+    .js-on [data-assemble] .hero-feature,
+    .js-on [data-assemble] .hero-support,
+    .block-reveal {
+        opacity: 1 !important;
+        transform: none !important;
     }
 }
 
@@ -637,10 +674,16 @@ a:focus-visible {
         scroll-behavior: auto;
     }
 
-    .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
+    /* No assembly, no stagger, no travel — everything is simply present.
+       main.js also skips scheduling the choreography entirely under this preference,
+       so this is a belt-and-braces guarantee rather than the only line of defence. */
+    .js-on [data-assemble] .hero-statement,
+    .js-on [data-assemble] .hero-feature,
+    .js-on [data-assemble] .hero-support,
+    .block-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
     }
 
     *,

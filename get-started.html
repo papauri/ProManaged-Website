@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="css/scroll_top.css">
     <link rel="stylesheet" href="css/get-started.css">
     <link rel="stylesheet" href="css/book_appointment.css">
+    <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
+         before first paint. Without JS this class is never added, the hiding rule
+         never matches, and all content renders normally. -->
+    <script>document.documentElement.classList.add('js-on');</script>
 </head>
 
 <body>
@@ -59,7 +63,7 @@
     <!-- ================= HERO ================= -->
     <div id="hero-section">
         <section id="home" class="hero">
-            <div class="hero-rail rail">
+            <div class="hero-rail rail" data-assemble>
                 <div class="hero-statement">
                     <span class="hero-eyebrow">Get started</span>
                     <h1 id="hero-title">Bring us the problem.</h1>
@@ -97,7 +101,7 @@
     </div>
 
     <!-- ================= WHAT TO BRING ================= -->
-    <section id="intake" class="section section--ivory">
+    <section id="intake" class="section section--ivory" data-blocks>
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">What to bring</span>
@@ -146,7 +150,7 @@
     </section>
 
     <!-- ================= PICK A STARTING POINT ================= -->
-    <section id="services" class="section services-section">
+    <section id="services" class="section services-section" data-blocks>
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">Pick a starting point</span>
@@ -189,7 +193,7 @@
     </section>
 
     <!-- ================= WHAT HAPPENS NEXT ================= -->
-    <section id="what-happens" class="section section--stone">
+    <section id="what-happens" class="section section--stone" data-blocks>
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">What happens next</span>
@@ -221,7 +225,7 @@
     </section>
 
     <!-- ================= BOOKING (the site's single real booking form) ================= -->
-    <section id="booking" class="section section--graphite booking-section">
+    <section id="booking" class="section section--graphite booking-section" data-blocks>
         <div class="rail booking-grid">
             <div class="booking-intro">
                 <span class="eyebrow">Book an appointment</span>
