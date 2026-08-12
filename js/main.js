@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
         '.booking-grid > *',
         '.faq-container',
         '.privacy-section',
+        '.evidence-rail > div',
         '.footer-content > *'
     ].join(', ');
     const cssMs = (name, fallback) => {

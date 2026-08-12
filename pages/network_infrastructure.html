@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../css/hero_section.css">
     <link rel="stylesheet" href="../css/footer_promanaged.css">
     <link rel="stylesheet" href="../css/scroll_top.css">
+    <link rel="stylesheet" href="../css/evidence.css">
     <link rel="stylesheet" href="../css/networking.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
          before first paint. Without JS this class is never added, the hiding rule
@@ -173,6 +174,101 @@
         </div>
     </section>
 
+    <!-- ================= HOW AN INSTALL RUNS =================
+         The infrastructure flow. Connectivity work is the one capability where the
+         client cannot see the thing being built, so the sequence has to be stated. -->
+    <section id="how-it-runs" class="section section--graphite" data-blocks="sequence-in">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">How an install runs</span>
+                <h2>Survey first. Cable once.</h2>
+                <p class="lede">Most bad networks were not installed badly — they were installed before anyone had walked the building. So that is where we start.</p>
+            </div>
+            <ol class="process-steps">
+                <li class="process-step">
+                    <span class="step-num">01</span>
+                    <h3>Survey</h3>
+                    <p>We walk the site, find where the signal actually dies, and note the walls, distances and dead corners that decide everything after this.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">02</span>
+                    <h3>Design</h3>
+                    <p>A layout: where the line lands, where the access points go, how the network is divided, and what it costs — written down before anything is ordered.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">03</span>
+                    <h3>Install</h3>
+                    <p>Cabling run properly and labelled, equipment mounted and configured, and the whole thing tested in the rooms people will actually use it in.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">04</span>
+                    <h3>Monitor</h3>
+                    <p>Quiet checks on the connection afterwards, so the usual outcome is us telling you something went wrong rather than the other way round.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ================= TOPOLOGY / EVIDENCE =================
+         The composition that makes the page concrete. Fragments are CSS-drawn and
+         illustrative — abstract geometry with generic system labels, no site data,
+         no client, no numbers presented as a measurement. -->
+    <section id="topology" class="section section--stone" data-blocks="scale-in">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">What we hand over</span>
+                <h2>A network you could draw on a napkin.</h2>
+                <p class="lede">Every install leaves behind the same three things: a layout you can understand, a segmented network, and a way to see it is still healthy.</p>
+            </div>
+
+            <div class="grid">
+                <div class="block block--7 block--graphite evidence-card">
+                    <div class="evidence-topline"><span>Illustrative layout</span><b>Design</b></div>
+                    <div class="evidence-media evidence-media--wide evidence-media--cool" aria-hidden="true">
+                        <span class="fragment fragment--topology">
+                            <b>UPLINK<em>SEGMENTED</em></b>
+                            <span class="topo"><s></s><s></s><s></s><s></s></span>
+                        </span>
+                    </div>
+                    <div class="evidence-copy">
+                        <h3>The layout, on one page</h3>
+                        <p>Where the line enters, what hangs off it, and which parts are deliberately kept apart — guests away from the till, cameras away from the laptops. You get the drawing, not just the result.</p>
+                    </div>
+                </div>
+
+                <div class="block block--5 evidence-card">
+                    <div class="evidence-topline"><span>Illustrative readout</span><b>Monitor</b></div>
+                    <div class="evidence-media evidence-media--tall evidence-media--deep" aria-hidden="true">
+                        <span class="fragment fragment--signal">
+                            <b>LINK<em>HEALTHY</em></b>
+                            <span class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                            <b>COVERAGE</b>
+                        </span>
+                    </div>
+                    <div class="evidence-copy">
+                        <h3>Proof it is actually working</h3>
+                        <p>Coverage measured in the rooms that matter, not at the router. If the back office is weak, you find out from us on install day.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="evidence-rail">
+                <div>
+                    <span class="evidence-rail-label">Labelled</span>
+                    <p>Every run and port marked, so the next person to open the cabinet is not guessing.</p>
+                </div>
+                <div>
+                    <span class="evidence-rail-label">Segmented</span>
+                    <p>Guests, staff and devices on separate networks by default, not as a paid extra.</p>
+                </div>
+                <div>
+                    <span class="evidence-rail-label">Documented</span>
+                    <p>Passwords, layout and equipment list handed over in writing. It is your network.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ================= SERVICES ================= -->
     <section id="networking-services" class="section network-section" data-blocks="settle-side">
         <div class="rail">
@@ -306,7 +402,7 @@
     </section>
 
     <!-- ================= CLOSING CTA ================= -->
-    <section class="section section--graphite cta-band" data-blocks="scale-in">
+    <section class="section section--graphite cta-band" data-blocks="settle-up">
         <div class="rail">
             <div class="chapter-head chapter-head--center">
                 <span class="eyebrow">Next step</span>

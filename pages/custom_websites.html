@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../css/hero_section.css">
     <link rel="stylesheet" href="../css/footer_promanaged.css">
     <link rel="stylesheet" href="../css/scroll_top.css">
+    <link rel="stylesheet" href="../css/evidence.css">
     <link rel="stylesheet" href="../css/custom_websites.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
          before first paint. Without JS this class is never added, the hiding rule
@@ -255,38 +256,80 @@
     </section>
 
     <!-- ================= SELECTED WORK ================= -->
-    <section id="projects" class="section section--stone" data-blocks="settle-side">
+    <section id="projects" class="section section--stone" data-blocks="scale-in">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">Selected work</span>
                 <h2>What we have built.</h2>
                 <p class="lede">Internal tools, client-facing products, and the systems that keep them running.</p>
             </div>
+            <!-- A mosaic, not four equal cards: 7/5 then 5/7, so the proportions
+                 mirror across the two rows. Media wells hold CSS-drawn interface
+                 fragments — abstract geometry with generic system labels. No
+                 screenshots, no client data, no named projects. -->
             <div class="grid">
-                <div class="block block--12 block--row block--graphite">
-                    <div class="block__aside">
-                        <span class="mark" aria-hidden="true"><i class="fas fa-calendar-check"></i></span>
+                <div class="block block--7 evidence-card">
+                    <div class="evidence-topline"><span>Interface fragment</span><b>Web app</b></div>
+                    <div class="evidence-media evidence-media--wide evidence-media--warm" aria-hidden="true">
+                        <span class="fragment fragment--board">
+                            <b>BOOKING</b>
+                            <i><span></span><span></span><span></span></i>
+                            <i><span></span><span></span></i>
+                            <i><span></span><span></span><span></span></i>
+                        </span>
                     </div>
-                    <div class="block__body">
+                    <div class="evidence-copy">
                         <span class="project-tag">Web App</span>
                         <h3>Client booking &amp; scheduling platform</h3>
                         <p>A booking system for a service business — staff calendars, availability rules and automated confirmation emails — replacing a shared spreadsheet and a great many phone calls.</p>
                     </div>
                 </div>
-                <div class="block block--4">
-                    <span class="project-tag">Internal Tool</span>
-                    <h3>Equipment sourcing &amp; delivery tracker</h3>
-                    <p>The internal tool behind our own sourcing work, tracking requests, orders and deliveries from supplier through to arrival.</p>
+
+                <div class="block block--5 block--graphite evidence-card">
+                    <div class="evidence-topline"><span>Interface fragment</span><b>SaaS</b></div>
+                    <div class="evidence-media evidence-media--tall evidence-media--deep" aria-hidden="true">
+                        <span class="fragment fragment--table">
+                            <b>ORDERS<em>IN STOCK</em></b>
+                            <i><u></u><u></u><u></u></i>
+                            <i><u></u><u></u><u></u></i>
+                            <i><u></u><u></u><u></u></i>
+                            <i><u></u><u></u><u></u></i>
+                        </span>
+                    </div>
+                    <div class="evidence-copy">
+                        <span class="project-tag">SaaS</span>
+                        <h3>Inventory &amp; order tracker</h3>
+                        <p>A lightweight product letting small retailers track stock and orders without relying on spreadsheets.</p>
+                    </div>
                 </div>
-                <div class="block block--4">
-                    <span class="project-tag">SaaS</span>
-                    <h3>Inventory &amp; order tracker</h3>
-                    <p>A lightweight product letting small retailers track stock and orders without relying on spreadsheets.</p>
+
+                <div class="block block--5 evidence-card">
+                    <div class="evidence-topline"><span>Interface fragment</span><b>Website</b></div>
+                    <div class="evidence-media evidence-media--tall evidence-media--slate" aria-hidden="true">
+                        <span class="fragment fragment--layout">
+                            <span class="bar"><u></u><u></u><u></u><u></u></span>
+                            <span class="split"><i></i><i></i></span>
+                            <span class="run"><i></i><i></i><i></i></span>
+                        </span>
+                    </div>
+                    <div class="evidence-copy">
+                        <span class="project-tag">Website</span>
+                        <h3>Business website refresh</h3>
+                        <p>A fast marketing site rebuild for a local business, with a content system the client manages themselves.</p>
+                    </div>
                 </div>
-                <div class="block block--4">
-                    <span class="project-tag">Website</span>
-                    <h3>Business website refresh</h3>
-                    <p>A fast marketing site rebuild for a local business, with a content system the client manages themselves.</p>
+
+                <!-- Deliberately the one card in the mosaic with no media well: it
+                     breaks the rhythm and stops the chapter reading as a gallery. -->
+                <div class="block block--7 block--row block--tint">
+                    <div class="block__aside">
+                        <span class="mark" aria-hidden="true"><i class="fas fa-truck-ramp-box"></i></span>
+                    </div>
+                    <div class="block__body">
+                        <span class="project-tag">Internal Tool</span>
+                        <h3>Equipment sourcing &amp; delivery tracker</h3>
+                        <p>The internal tool behind our own sourcing work, tracking requests, orders and deliveries from supplier through to arrival. We run our own business on the kind of software we build for other people — which is the only reference we can offer without naming somebody else's.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -363,7 +406,7 @@
     </section>
 
     <!-- ================= CLOSING CTA (the real booking form lives on get-started.html) ================= -->
-    <section class="section section--graphite cta-band" data-blocks="settle-side">
+    <section class="section section--graphite cta-band" data-blocks="settle-up">
         <div class="rail">
             <div class="chapter-head chapter-head--center">
                 <span class="eyebrow">Next step</span>

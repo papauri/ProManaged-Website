@@ -76,6 +76,19 @@
     .expectation-grid .expectation:nth-child(4) { grid-column: span 7; margin-top: var(--space-10) }
 }
 
+/* The number sits on the rule above each promise, which is what turns the weave into
+   a numbered ledger rather than four floating paragraphs. Decorative only — the
+   promises are already in reading order, so it is aria-hidden in the markup. */
+.expectation-index {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-eyebrow);
+    color: var(--color-accent-earth);
+    margin-bottom: var(--space-4);
+}
+
 .expectation h3 {
     font-family: var(--font-display);
     font-weight: var(--weight-display);

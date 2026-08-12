@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/hero_section.css">
     <link rel="stylesheet" href="css/footer_promanaged.css">
     <link rel="stylesheet" href="css/scroll_top.css">
+    <link rel="stylesheet" href="css/evidence.css">
     <link rel="stylesheet" href="css/learn-more.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
          before first paint. Without JS this class is never added, the hiding rule
@@ -224,6 +225,52 @@
         </div>
     </section>
 
+    <!-- ================= WHAT THE PLAN LOOKS LIKE =================
+         The proof layer between the method and the detail: two illustrative
+         fragments, CSS-drawn, showing the two artefacts every project produces.
+         Abstract geometry with generic labels — no client work is reproduced. -->
+    <section id="what-you-get" class="section section--stone" data-blocks="scale-in">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">What you actually get</span>
+                <h2>Two documents, and neither of them is a surprise.</h2>
+                <p class="lede">&ldquo;We will keep you posted&rdquo; is not a plan. Every piece of work produces a written scope before it starts and a visible state while it runs.</p>
+            </div>
+
+            <div class="grid">
+                <div class="block block--5 evidence-card">
+                    <div class="evidence-topline"><span>Illustrative document</span><b>Before</b></div>
+                    <div class="evidence-media evidence-media--tall evidence-media--warm" aria-hidden="true">
+                        <span class="fragment fragment--scope">
+                            <b>SCOPE</b>
+                            <span class="lines"><span><u></u></span><span><u></u></span><span><u></u></span><span><u></u></span></span>
+                        </span>
+                    </div>
+                    <div class="evidence-copy">
+                        <h3>The scope, in writing</h3>
+                        <p>What is included, what is deliberately left out, the timeline and the cost — agreed before work starts, so &ldquo;that was not in the price&rdquo; never happens halfway through.</p>
+                    </div>
+                </div>
+
+                <div class="block block--7 block--graphite evidence-card">
+                    <div class="evidence-topline"><span>Illustrative view</span><b>During</b></div>
+                    <div class="evidence-media evidence-media--wide evidence-media--deep" aria-hidden="true">
+                        <span class="fragment fragment--board">
+                            <b>IN PROGRESS</b>
+                            <i><span></span><span></span><span></span></i>
+                            <i><span></span><span></span></i>
+                            <i><span></span><span></span><span></span></i>
+                        </span>
+                    </div>
+                    <div class="evidence-copy">
+                        <h3>The state of it, while it happens</h3>
+                        <p>You can see what is done, what is being worked on and what is waiting on you — for software that is a working preview, for sourcing an order and a shipment, for a network install a date and a survey. Nothing is unveiled at the end for the first time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ================= WHAT WE TAKE ON ================= -->
     <section id="what-we-do" class="section" data-blocks="settle-side">
         <div class="rail">
@@ -289,20 +336,28 @@
                 <span class="eyebrow">What to expect</span>
                 <h2>The promises we can actually keep.</h2>
             </div>
+            <!-- A ledger, not a 2x2. css/learn-more.css weaves these into 7/5 then
+                 5/7 with an offset at >=900px; the block--6 spans here are what keeps
+                 them pairing correctly through the 600-899px tablet stage. The number
+                 on each promise is decorative — reading order already carries it. -->
             <div class="grid expectation-grid">
                 <div class="block block--6 block--bare expectation">
+                    <span class="expectation-index" aria-hidden="true">01</span>
                     <h3>We will tell you when to spend less</h3>
                     <p>If a cheaper machine does the job, or the feature you asked for is not worth building yet, that is what we will say. It costs us a little now and saves the relationship later.</p>
                 </div>
                 <div class="block block--6 block--bare expectation">
+                    <span class="expectation-index" aria-hidden="true">02</span>
                     <h3>We will tell you when we are not the right fit</h3>
                     <p>We are a small team and we take on what we can genuinely finish. A referral or an honest no is more useful to you than an over-committed yes.</p>
                 </div>
                 <div class="block block--6 block--bare expectation">
+                    <span class="expectation-index" aria-hidden="true">03</span>
                     <h3>You will always know the cost before we start</h3>
                     <p>Scope and price go in writing after the planning step. Where something genuinely cannot be fixed up front — international shipping, for instance — we say so and show the range.</p>
                 </div>
                 <div class="block block--6 block--bare expectation">
+                    <span class="expectation-index" aria-hidden="true">04</span>
                     <h3>We will still be here afterwards</h3>
                     <p>Support is part of the work, not a separate contract you find out about later. You will have a person to contact, not a queue.</p>
                 </div>
