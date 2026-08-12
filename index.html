@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="css/hero_section.css">
     <link rel="stylesheet" href="css/footer_promanaged.css">
     <link rel="stylesheet" href="css/scroll_top.css">
+    <link rel="stylesheet" href="css/evidence.css">
+    <link rel="stylesheet" href="css/pinned_chapter.css">
     <link rel="stylesheet" href="css/why_band.css">
     <link rel="stylesheet" href="css/service_cards.css">
     <link rel="stylesheet" href="css/about_section.css">
@@ -37,19 +39,28 @@
 </head>
 <body id="main-body">
     <div id="header-section">
-        <!-- Logo tile: brand anchor AND the navigation control. There is no horizontal
-             navbar strip anywhere on the site. -->
-        <button type="button" class="nav-trigger" id="nav-trigger"
-                aria-expanded="false" aria-controls="nav-panel"
-                aria-label="Open navigation menu">
-            <img src="images/icon.png" alt="ProManaged IT" class="logo">
-            <span class="nav-trigger-label">
-                <span class="nav-trigger-word">Menu</span>
-                <span class="nav-trigger-bars" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                </span>
-            </span>
-        </button>
+        <!-- Closed state of the navigation: a fixed rail with the control left, the
+             wordmark centred and one persistent action right. Still no link bar —
+             every destination lives in the bento panel below. -->
+        <div class="nav-rail">
+            <div class="nav-rail-inner">
+                <button type="button" class="nav-trigger" id="nav-trigger"
+                        aria-expanded="false" aria-controls="nav-panel"
+                        aria-label="Open navigation menu">
+                    <img src="images/icon.png" alt="ProManaged IT" class="logo">
+                    <span class="nav-trigger-label">
+                        <span class="nav-trigger-word">Menu</span>
+                        <span class="nav-trigger-bars" aria-hidden="true">
+                            <span></span><span></span><span></span>
+                        </span>
+                    </span>
+                </button>
+                <a class="nav-wordmark" href="index.html">ProManaged</a>
+                <div class="nav-rail-actions">
+                    <a class="btn primary nav-cta" href="get-started.html">Start a project</a>
+                </div>
+            </div>
+        </div>
 
         <!-- Full-viewport bento navigation panel. Behaviour (aria-expanded, focus
              trap, Escape, scroll lock, focus restoration) lives in
@@ -125,6 +136,11 @@
         <section id="home" class="hero">
             <div class="hero-rail rail" data-assemble>
                 <div class="hero-statement">
+                    <!-- The only claim in the hero that can be checked by clicking it. -->
+                    <a class="hero-badge" href="https://core.cro.ie/e-commerce/company/5379600" target="_blank" rel="noopener">
+                        <span>Registered company <b>749512</b></span>
+                        <span class="hero-badge-cue" aria-hidden="true">Verify</span>
+                    </a>
                     <span class="hero-eyebrow">Build · Source · Connect</span>
                     <h1 id="hero-title">Technology that behaves itself.</h1>
                     <p id="hero-subtitle">We build the software you run on, source the equipment you need, and set up the networks that carry both — one small team, answering directly, wherever you work.</p>
@@ -166,7 +182,98 @@
         <div class="rail"><div class="chapter-head"><span class="eyebrow">Capabilities</span><h2 id="services-title">Build, Source, Connect.</h2><p class="lede">Three ways we help, in the order most clients need them. Take one or take all three — it is the same team either way.</p></div><div class="grid services-grid"><div class="block block--12 block--row block--graphite block--interactive service-card capability capability--lead" data-target="pages/custom_websites.html" role="link" tabindex="0" aria-label="Build — software and web apps, learn more"><div class="block__aside"><span class="mark" aria-hidden="true"><i class="fas fa-laptop-code"></i></span></div><div class="block__body"><span class="capability-index">01</span><h3>Build</h3><p class="capability-lede">The booking system, the internal dashboard, the product you have been describing to people for a year. We scope it, design it, build it, launch it — and keep improving it once real users arrive.</p><ul class="list"><li>Custom web apps, internal tools and dashboards</li><li>SaaS platforms, from first version through to scale</li><li>Business websites when that is genuinely the right answer</li></ul><span class="capability-cue">Explore Build <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div><div class="block block--6 block--interactive service-card capability" data-target="pages/hardware_sourcing.html" role="link" tabindex="0" aria-label="Source — hardware sourcing, learn more"><span class="mark" aria-hidden="true"><i class="fas fa-boxes-stacked"></i></span><div class="block__body"><span class="capability-index">02</span><h3>Source</h3><p class="capability-lede">Tell us the kit and the budget. We handle supplier coordination, purchasing, shipping and delivery.</p><ul class="list"><li>Laptops, desktops and workstations</li><li>Servers, components and peripherals</li><li>Local-friendly payment on international orders</li></ul><span class="capability-cue">Explore Source <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div><div class="block block--6 block--interactive service-card capability" data-target="pages/network_infrastructure.html" role="link" tabindex="0" aria-label="Connect — network infrastructure, learn more"><span class="mark" aria-hidden="true"><i class="fas fa-network-wired"></i></span><div class="block__body"><span class="capability-index">03</span><h3>Connect</h3><p class="capability-lede">Satellite and fibre, home and office WiFi, cabling, secure remote access — installed properly and monitored.</p><ul class="list"><li>Connectivity planning and installation</li><li>Secure access, segmentation and monitoring</li><li>Ongoing maintenance and remote troubleshooting</li></ul><span class="capability-cue">Explore Connect <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div></div></div>
     </section>
 
-    <section id="how-we-work" class="section section--graphite process" data-blocks="sequence-in"><div class="rail"><div class="chapter-head"><span class="eyebrow">How we work</span><h2>Four steps, and you always know which one you are in.</h2></div><ol class="process-steps"><li class="process-step"><span class="step-num">01</span><h3>Listen</h3><p>You describe the problem in plain words. No brief required.</p></li><li class="process-step"><span class="step-num">02</span><h3>Plan</h3><p>We come back with a scope, realistic timeline and honest cost.</p></li><li class="process-step"><span class="step-num">03</span><h3>Deliver</h3><p>We build, source or install, showing progress as we go.</p></li><li class="process-step"><span class="step-num">04</span><h3>Stay close</h3><p>Questions after launch are part of the relationship.</p></li></ol></div></section>
+    <!-- ================= HOW WE WORK — the pinned chapter =================
+         The stage pins while the four steps scroll past it, and the fragment beside
+         each step swaps to match: the spreadsheet you arrive with, the scope we write,
+         the work in progress, the health check afterwards.
+
+         js/main.js drives the active state. Step 01 and its visual carry .is-current
+         in the markup, so with no JavaScript the chapter is a readable list with its
+         first fragment showing. Below 1024px the stage is not rendered at all — the
+         visuals are decorative and duplicate nothing in the copy. -->
+    <section id="how-we-work" class="section section--graphite process" data-blocks="sequence-in">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">How we work</span>
+                <h2>Four steps, and you always know which one you are in.</h2>
+            </div>
+
+            <div class="pinned" data-pinned>
+                <ol class="pinned-steps">
+                    <li class="process-step pinned-step is-current" data-pinned-step="1">
+                        <span class="step-num">01</span>
+                        <h3>Listen</h3>
+                        <p>You describe the problem in plain words. No brief required — most people arrive with a spreadsheet and a workaround that has quietly become the job.</p>
+                    </li>
+                    <li class="process-step pinned-step" data-pinned-step="2">
+                        <span class="step-num">02</span>
+                        <h3>Plan</h3>
+                        <p>We come back with a scope, realistic timeline and honest cost — including what we would leave out, and whether the budget is better spent elsewhere.</p>
+                    </li>
+                    <li class="process-step pinned-step" data-pinned-step="3">
+                        <span class="step-num">03</span>
+                        <h3>Deliver</h3>
+                        <p>We build, source or install, showing progress as we go. You can see what is done, what is moving and what is waiting on you.</p>
+                    </li>
+                    <li class="process-step pinned-step" data-pinned-step="4">
+                        <span class="step-num">04</span>
+                        <h3>Stay close</h3>
+                        <p>Questions after launch are part of the relationship. Quiet checks, fixes and second opinions — not a separate contract you discover later.</p>
+                    </li>
+                </ol>
+
+                <div class="pinned-stage" aria-hidden="true">
+                    <div class="pinned-frame">
+                        <div class="pinned-visual is-current" data-pinned-panel="1">
+                            <div class="evidence-media evidence-media--slate">
+                                <span class="fragment fragment--table">
+                                    <b>WHAT YOU HAVE<em>MANUAL</em></b>
+                                    <i><u></u><u></u><u></u></i>
+                                    <i><u></u><u></u><u></u></i>
+                                    <i><u></u><u></u><u></u></i>
+                                    <i><u></u><u></u><u></u></i>
+                                </span>
+                            </div>
+                            <div class="pinned-caption"><span>The starting point</span><span>Listen</span></div>
+                        </div>
+
+                        <div class="pinned-visual" data-pinned-panel="2">
+                            <div class="evidence-media evidence-media--warm">
+                                <span class="fragment fragment--scope">
+                                    <b>SCOPE</b>
+                                    <span class="lines"><span><u></u></span><span><u></u></span><span><u></u></span><span><u></u></span></span>
+                                </span>
+                            </div>
+                            <div class="pinned-caption"><span>Agreed in writing</span><span>Plan</span></div>
+                        </div>
+
+                        <div class="pinned-visual" data-pinned-panel="3">
+                            <div class="evidence-media evidence-media--deep">
+                                <span class="fragment fragment--board">
+                                    <b>IN PROGRESS</b>
+                                    <i><span></span><span></span><span></span></i>
+                                    <i><span></span><span></span></i>
+                                    <i><span></span><span></span><span></span></i>
+                                </span>
+                            </div>
+                            <div class="pinned-caption"><span>Visible as it happens</span><span>Deliver</span></div>
+                        </div>
+
+                        <div class="pinned-visual" data-pinned-panel="4">
+                            <div class="evidence-media evidence-media--cool">
+                                <span class="fragment fragment--signal">
+                                    <b>HEALTH<em>STEADY</em></b>
+                                    <span class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                                    <b>AFTER LAUNCH</b>
+                                </span>
+                            </div>
+                            <div class="pinned-caption"><span>Still watching</span><span>Stay close</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="about" class="section about" data-blocks="settle-up"><div class="rail"><div class="chapter-head"><span class="eyebrow">Founder / Story</span><h2>A technology company should still feel human.</h2></div><div class="about-grid"><div class="about-media about-media--portrait"><img src="images/founder.png" alt="John-Paul Chirwa, founder of ProManaged IT" loading="lazy" decoding="async" width="800" height="800"></div><div class="about-story"><span class="about-kicker">John-Paul Chirwa · Founder</span><h3>Built for people who want the answer, not another layer.</h3><p>ProManaged grew from a practical belief: useful technology should make work simpler, not give people another system to manage.</p><p>That means building what genuinely needs to be built, sourcing what is better bought, and connecting the physical and digital pieces so they behave as one.</p><div class="about-details"><span><i class="fas fa-cubes" aria-hidden="true"></i> Build</span><span><i class="fas fa-truck-ramp-box" aria-hidden="true"></i> Source</span><span><i class="fas fa-tower-broadcast" aria-hidden="true"></i> Connect</span></div></div></div></div></section>
 
@@ -177,6 +284,10 @@
     <!-- ================= FOOTER ================= -->
     <div id="footer-section">
         <footer class="footer" data-blocks="settle-up">
+            <!-- Decorative brand signature. aria-hidden: the accessible name is the
+                 .footer-brand heading immediately below it. -->
+            <div class="footer-signature rail" aria-hidden="true">ProManaged</div>
+
             <div class="footer-content rail">
                 <div class="footer-brand">
                     <h3>ProManaged IT</h3>

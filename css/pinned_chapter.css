@@ -1,0 +1,200 @@
+/* pinned_chapter.css — the sticky stepper chapter.
+
+   The homepage's "How we work" holds its evidence still while the four steps scroll
+   past it: the stage pins, the active step lights up, and the fragment beside it
+   swaps to match. It is the one place on the site where scrolling drives a state
+   change rather than just a reveal, which is what makes it read as the signature
+   chapter rather than one more list.
+
+   NOT SCROLL-JACKING. `position: sticky` only — the page never takes control of the
+   scroll, never slows it, never snaps. Remove the JavaScript and the chapter is a
+   legible list with its first fragment showing; remove the CSS and it is an ordinary
+   ordered list. Nothing here is load-bearing for content.
+
+   MOBILE FIRST: below 1024px there is no stage at all. The steps are the existing
+   numbered timeline, and the fragments — which are decorative, aria-hidden and
+   duplicate nothing — simply do not render. A phone gets the content faster and the
+   sticky column has nowhere useful to pin on a narrow viewport anyway.
+
+   Only index.html loads this file. The other pages keep the horizontal timeline, so
+   the two treatments stay distinguishable. */
+
+.pinned {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-8);
+}
+
+/* ---------- Steps ----------
+   The <li>s keep .process-step, so they inherit the rule, the accent stub and the
+   Building Blocks reveal from global_styles.css. Only the container changes. */
+.pinned-steps {
+    list-style: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-8);
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+}
+
+/* global_styles.css staggers .process-step:nth-child(n) downward for the horizontal
+   four-column timeline. That rule is not scoped to .process-steps, so it would drift
+   these down the column for no reason. Cancelled explicitly. */
+.pinned-steps .process-step { margin-top: 0 }
+
+.pinned-step { min-width: 0 }
+
+.pinned-stage { display: none }
+
+/* ---------- Desktop: the pin ---------- */
+@media (min-width: 1024px) {
+    .pinned {
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        gap: clamp(2.5rem, 5vw, 6rem);
+        align-items: start;
+    }
+
+    /* Each step owns enough height to give the pinned stage something to scroll
+       against. Without this the four steps are shorter than the stage and the pin
+       never engages — the column just sits there.
+
+       The trailing padding is what lets the LAST step have its turn. A sticky element
+       is released at the bottom of its grid area, and the area ends with the steps
+       column: measured without this, the stage began sliding away at the same moment
+       step 04 became current, so the fourth fragment was never actually seen at rest.
+       The padding extends the area past the final step and holds the pin through it. */
+    .pinned-steps { gap: 0; padding-bottom: 26vh }
+
+    .pinned-step {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 42vh;
+        padding-block: var(--space-10);
+    }
+
+    /* ---------- The dim state, gated on the controller being alive ----------
+       [data-pinned-ready] is written by js/main.js only once the step controller is
+       actually wired up. Without that gate the dim is a trap: measured with
+       JavaScript disabled, steps 02–04 sat at 42% opacity forever, because nothing
+       was ever going to set .is-current on them. A permanently half-faded paragraph
+       is worse than no effect at all — so if the thing that resolves the dim is not
+       running, the dim does not exist. Same principle as the .js-on gate on the hero
+       assembly in global_styles.css. */
+    .pinned[data-pinned-ready] .pinned-step {
+        /* Inactive steps recede rather than disappear: they stay readable, which
+           matters because this is real content, not a carousel. */
+        opacity: .42;
+        transition: opacity var(--transition-slow);
+    }
+
+    .pinned[data-pinned-ready] .pinned-step.is-current { opacity: 1 }
+
+    /* The accent stub from global_styles.css becomes the progress marker: it grows
+       along the step's top rule as that step takes over. */
+    .pinned[data-pinned-ready] .pinned-step::before {
+        transition: width var(--transition-slow), background var(--transition-slow);
+    }
+
+    .pinned[data-pinned-ready] .pinned-step.is-current::before { width: 100% }
+
+    .pinned-step h3 { font-size: var(--display-3); font-family: var(--font-display); font-weight: var(--weight-display) }
+    .pinned-step p { max-width: 40ch }
+
+    /* ---------- Stage ----------
+       Pinned just below the fixed rail. A fixed aspect ratio rather than a height, so
+       the fragment inside keeps its proportion as the column widens. */
+    .pinned-stage {
+        display: block;
+        position: sticky;
+        top: calc(var(--header-h) + var(--space-8));
+        min-width: 0;
+    }
+
+    .pinned-frame {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        max-height: 62vh;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        border: 1px solid rgba(247, 243, 236, .14);
+        background: var(--color-graphite-soft);
+    }
+
+    /* The four visuals are stacked in one frame and cross-faded, so the stage never
+       changes size and nothing below it can shift. */
+    .pinned-visual {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(1.015);
+        transition:
+            opacity 420ms var(--ease-fade),
+            transform 620ms var(--ease-settle),
+            visibility 0s linear 420ms;
+    }
+
+    .pinned-visual.is-current {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        transition:
+            opacity 420ms var(--ease-fade),
+            transform 620ms var(--ease-settle),
+            visibility 0s;
+    }
+
+    /* The evidence media well fills the frame here rather than holding its own
+       ratio — the frame is already the shape. */
+    .pinned-visual .evidence-media {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: auto;
+        max-height: none;
+        border-radius: 0;
+    }
+
+    /* A caption strip over the foot of the frame, naming what is on screen. */
+    .pinned-caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: var(--space-4);
+        padding: var(--space-5) var(--space-6);
+        background: linear-gradient(to top, rgba(16, 16, 15, .88), transparent);
+        font-size: var(--text-xs);
+        font-weight: var(--weight-semibold);
+        letter-spacing: var(--tracking-eyebrow);
+        text-transform: uppercase;
+        color: var(--color-text-on-dark);
+    }
+
+    .pinned-caption span:last-child { color: var(--color-accent-earth-soft) }
+}
+
+@media (min-width: 1440px) {
+    .pinned-step { min-height: 46vh }
+    .pinned-frame { aspect-ratio: 5 / 4; max-height: 62vh }
+}
+
+/* Reduced motion: the pin stays (it is layout, not animation) but every state change
+   is instant. Sticky positioning moves nothing on its own — the element simply stops
+   scrolling — so it is not a vestibular trigger the way a parallax or a scroll-driven
+   transform would be. */
+@media (prefers-reduced-motion: reduce) {
+    .pinned-step,
+    .pinned-step::before,
+    .pinned-visual { transition: none !important }
+    /* Every step at full strength: the dim is a focus effect, and dimming three
+       quarters of the copy is exactly the kind of change someone who has asked for
+       reduced motion does not want tracking their scroll position. The stage still
+       pins and still swaps — sticky moves nothing on its own. */
+    .pinned[data-pinned-ready] .pinned-step { opacity: 1 !important }
+}

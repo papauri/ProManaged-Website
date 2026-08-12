@@ -281,7 +281,10 @@
    A document with a checked run of lines. What "you get it in writing" looks like. */
 .fragment--scope { grid-template-rows: auto 1fr; gap: 9px; background: rgba(247,243,236,.94); border-color: rgba(28,27,25,.16) }
 .fragment--scope b { color: rgba(28,27,25,.6) }
-.fragment--scope .lines { display: grid; grid-auto-rows: min-content; gap: 8px; align-content: start }
+/* Centred, not top-aligned: in a tall well — the pinned stage in particular — four
+   start-aligned lines left two thirds of the document empty and the fragment read as
+   a blank page rather than a written scope. */
+.fragment--scope .lines { display: grid; grid-auto-rows: min-content; gap: 8px; align-content: center }
 .fragment--scope .lines span { display: grid; grid-template-columns: 9px 1fr; align-items: center; gap: 7px }
 .fragment--scope .lines span::before {
     content: "";

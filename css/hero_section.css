@@ -51,6 +51,61 @@
     margin-bottom: var(--space-5);
 }
 
+/* ---------- Trust badge ----------
+   A pill above the headline, in the position a "backed by" or "new release" badge
+   normally occupies on a product site. Ours carries the one credential we can
+   actually prove: the company registration, linking to the public register entry
+   already cited in the footer. No award, no metric, no logo wall — if it cannot be
+   verified by clicking it, it does not belong here. */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    align-self: flex-start;
+    max-width: 100%;
+    margin-bottom: var(--space-5);
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid rgba(247, 243, 236, .22);
+    border-radius: var(--radius-full);
+    background: rgba(247, 243, 236, .07);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    line-height: 1.4;
+    color: var(--color-text-on-dark-muted);
+    text-decoration: none;
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+/* A live status dot, not an icon font — it reads as "currently true". */
+.hero-badge::before {
+    content: "";
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: var(--radius-full);
+    background: #8ee0a7;
+    box-shadow: 0 0 0 3px rgba(142, 224, 167, .18);
+}
+
+.hero-badge b { font-weight: var(--weight-semibold); color: var(--color-text-on-dark) }
+
+.hero-badge .hero-badge-cue {
+    flex-shrink: 0;
+    padding-left: var(--space-3);
+    border-left: 1px solid rgba(247, 243, 236, .2);
+    color: var(--color-accent-earth-soft);
+}
+
+@media (hover: hover) {
+    .hero-badge:hover {
+        background: rgba(247, 243, 236, .12);
+        border-color: rgba(247, 243, 236, .42);
+        color: var(--color-text-on-dark);
+    }
+}
+
+.hero-badge:focus-visible { outline: 2px solid var(--color-text-on-dark); outline-offset: 3px }
+
 #hero-title {
     font-family: var(--font-display);
     font-size: var(--display-1);
@@ -418,6 +473,55 @@
         font-size: .6rem;
         letter-spacing: .05em;
         gap: var(--space-2);
+    }
+}
+
+/* ---------- The overlap ----------
+   The hero's evidence column breaks out of the hero's bottom edge and sits over the
+   chapter below, so the two sections interlock instead of stacking as two flat bands.
+   It is the cheapest way to make a page feel composed rather than assembled, and it
+   costs one negative margin.
+
+   Three things make it safe:
+     - `overflow-x: clip` with `overflow-y: visible` replaces the hero's blanket
+       `overflow: hidden`. The lateral guard rail for the load choreography is kept;
+       only the vertical axis is opened. `clip` is deliberate — pairing `visible`
+       with `hidden` would compute back to `auto` and reintroduce a scroll container.
+     - The evidence column is raised above the following section's background, or the
+       paper surface would simply paint over it.
+     - The section after the hero gains matching top padding, so nothing it contains
+       can ever end up underneath the protruding cards.
+
+   Held back until 900px. Below that the hero is a single column and the "overlap"
+   would just be a gap of the wrong size. */
+@media (min-width: 900px) {
+    /* Declared on :root so the following section can use the same number without
+       restating the clamp — it sits outside .hero and cannot inherit from it. */
+    :root { --hero-overlap: clamp(2.5rem, 5vw, 6rem) }
+
+    .hero {
+        overflow-x: clip;
+        overflow-y: visible;
+        /* The hero's own bottom padding is handed to the overlap. Leaving it in place
+           simply absorbed the protrusion — measured at 1440px, a 65px pull past a
+           49px padding surfaced 16px of card, which reads as a misaligned edge rather
+           than a deliberate interlock. The visual's negative margin now provides the
+           closing space, and it provides it BELOW the fold line instead of above. */
+        padding-bottom: 0;
+    }
+
+    .hero-visual {
+        position: relative;
+        z-index: 2;
+        margin-bottom: calc(-1 * var(--hero-overlap));
+        /* Bottom-aligned so the protruding edge is the CARD, not empty box. At 1440px
+           the column is centred inside a min-height row, which left the last card
+           short of the box's bottom edge and the overlap invisible. */
+        align-content: end;
+    }
+
+    #hero-section + .section {
+        padding-top: calc(var(--section-y) + var(--hero-overlap));
     }
 }
 

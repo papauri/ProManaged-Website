@@ -11,6 +11,51 @@
     color: var(--color-text-on-dark-muted);
     padding-block: var(--section-y) var(--space-8);
     position: relative;
+    /* The signature below is deliberately wider than the viewport. */
+    overflow: hidden;
+}
+
+/* ---------- Brand signature ----------
+   The page closes on the name at architectural scale — outlined rather than filled,
+   so it reads as a watermark cut into the graphite instead of a headline competing
+   with the footer's actual content.
+
+   Decorative and aria-hidden: the accessible name is already in the .footer-brand
+   heading directly beneath it, and announcing "ProManaged" twice in a row is noise.
+   `white-space: nowrap` plus the container's overflow lets the word run off both
+   edges at narrow widths, which is the intended crop, not a bug. */
+.footer-signature {
+    display: block;
+    margin-bottom: var(--space-10);
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 15vw, 15rem);
+    font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-display);
+    line-height: .82;
+    white-space: nowrap;
+    text-align: center;
+    user-select: none;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(247, 243, 236, .17);
+}
+
+/* -webkit-text-stroke is very widely supported but is not a standard property. If it
+   is ignored the text is `color: transparent` and the signature silently disappears —
+   which is the correct failure for a decorative element, but a filled fallback reads
+   better where the stroke is unavailable. @supports gates on the property itself. */
+@supports not ((-webkit-text-stroke: 1px black) or (text-stroke: 1px black)) {
+    .footer-signature { color: rgba(247, 243, 236, .07) }
+}
+
+@media (min-width: 900px) {
+    .footer-signature {
+        margin-bottom: var(--space-12);
+        -webkit-text-stroke-width: 1.5px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .footer-signature { transition: none }
 }
 
 .footer-content {
@@ -123,6 +168,12 @@
         justify-content: space-between;
         align-items: baseline;
         gap: var(--space-3) var(--space-6);
+        /* Clearance for the fixed scroll-to-top control, which is pinned to the same
+           bottom-right corner. Measured at 1440px the button (48px wide, at the rail
+           padding) sat on top of the last ~30px of the legal line, so "Verify
+           registration" and "Privacy Policy" were partly unclickable at the very
+           bottom of every page — exactly where a visitor goes looking for them. */
+        padding-right: calc(48px + var(--space-4));
     }
 }
 

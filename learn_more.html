@@ -35,19 +35,28 @@
 
 <body>
     <div id="header-section">
-        <!-- Logo tile: brand anchor AND the navigation control. There is no horizontal
-             navbar strip anywhere on the site. -->
-        <button type="button" class="nav-trigger" id="nav-trigger"
-                aria-expanded="false" aria-controls="nav-panel"
-                aria-label="Open navigation menu">
-            <img src="images/icon.png" alt="ProManaged IT" class="logo">
-            <span class="nav-trigger-label">
-                <span class="nav-trigger-word">Menu</span>
-                <span class="nav-trigger-bars" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                </span>
-            </span>
-        </button>
+        <!-- Closed state of the navigation: a fixed rail with the control left, the
+             wordmark centred and one persistent action right. Still no link bar —
+             every destination lives in the bento panel below. -->
+        <div class="nav-rail">
+            <div class="nav-rail-inner">
+                <button type="button" class="nav-trigger" id="nav-trigger"
+                        aria-expanded="false" aria-controls="nav-panel"
+                        aria-label="Open navigation menu">
+                    <img src="images/icon.png" alt="ProManaged IT" class="logo">
+                    <span class="nav-trigger-label">
+                        <span class="nav-trigger-word">Menu</span>
+                        <span class="nav-trigger-bars" aria-hidden="true">
+                            <span></span><span></span><span></span>
+                        </span>
+                    </span>
+                </button>
+                <a class="nav-wordmark" href="index.html">ProManaged</a>
+                <div class="nav-rail-actions">
+                    <a class="btn primary nav-cta" href="get-started.html">Start a project</a>
+                </div>
+            </div>
+        </div>
 
         <!-- Full-viewport bento navigation panel. Behaviour (aria-expanded, focus
              trap, Escape, scroll lock, focus restoration) lives in
@@ -383,6 +392,10 @@
     <!-- ================= FOOTER ================= -->
     <div id="footer-section">
         <footer class="footer" data-blocks="settle-up">
+            <!-- Decorative brand signature. aria-hidden: the accessible name is the
+                 .footer-brand heading immediately below it. -->
+            <div class="footer-signature rail" aria-hidden="true">ProManaged</div>
+
             <div class="footer-content rail">
                 <div class="footer-brand">
                     <h3>ProManaged IT</h3>

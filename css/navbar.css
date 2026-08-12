@@ -17,23 +17,62 @@
    The trigger's own entrance lives in global_styles.css, in pure CSS, so the only
    navigation affordance on the page can never be hidden by a script failure. */
 
-/* ---------- Trigger: the control tile ----------
-   Brand anchor and navigation control in one, so the company identity is never
-   hidden behind an anonymous glyph. Deliberately reads as a control chip: a soft
-   rectangle with a hairline, a label, and a three-bar mark that resolves on hover —
-   not a bare hamburger. */
-.nav-trigger {
+/* ---------- The rail ----------
+   The control no longer floats loose in the corner. It sits in a fixed top rail with
+   three slots — control left, wordmark centred, primary action right — which is what
+   makes the resting state of the navigation read as designed chrome rather than a
+   hamburger someone forgot to style. The bento panel behind it is unchanged: this is
+   the closed state, not a replacement for it.
+
+   Still not a link bar. The centre is the brand, the right is one action, and every
+   destination remains inside the panel — so "no traditional horizontal navbar" holds.
+
+   Over the hero the rail is invisible (the control blends into the artwork, as
+   before); once the page scrolls onto paper it resolves into a solid bar with a
+   hairline. js/main.js owns the .nav-over-hero flag; with no JS the class is never
+   added and the rail simply stays solid everywhere — legible, just not blended. */
+.nav-rail {
     position: fixed;
-    top: var(--space-4);
-    left: var(--rail-pad);
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 1500;
+    background: rgba(255, 253, 250, .88);
+    -webkit-backdrop-filter: blur(14px) saturate(1.35);
+    backdrop-filter: blur(14px) saturate(1.35);
+    border-bottom: 1px solid var(--color-border);
+    transition:
+        background var(--transition),
+        border-color var(--transition),
+        opacity var(--transition);
+}
+
+/* Shares the page's visual rail, so the control, wordmark and action line up with
+   the content beneath them at every width. */
+.nav-rail-inner {
+    width: 100%;
+    max-width: var(--rail-visual);
+    margin-inline: auto;
+    padding-inline: var(--rail-pad);
+    min-height: var(--header-h);
+    display: grid;
+    /* 1fr / auto / 1fr rather than space-between: the wordmark is centred on the
+       VIEWPORT, not on whatever is left over between two unequal side slots. */
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+/* ---------- Trigger: the control ----------
+   Brand anchor and navigation control in one, so the company identity is never
+   hidden behind an anonymous glyph. The mark and the word sit directly on the rail
+   and take their colour from whatever is behind them. The touch target is held by
+   min-height plus padding, not by a visible surface. */
+.nav-trigger {
+    justify-self: start;
     display: inline-flex;
     align-items: center;
     gap: var(--space-3);
-    /* No chip, plate or pill. The mark and the word sit directly on the page and
-       take their colour from whatever is behind them, so the control belongs to the
-       hero instead of floating above it in its own box. The touch target is held by
-       min-height plus the vertical padding, not by a visible surface. */
     min-height: 48px;
     padding: var(--space-2) var(--space-2) var(--space-2) 0;
     background: none;
@@ -44,6 +83,57 @@
     font-family: var(--font-primary);
     -webkit-tap-highlight-color: transparent;
     transition: opacity var(--transition), transform var(--transition);
+}
+
+/* ---------- Centred wordmark ----------
+   Type, not a second copy of the logo image — the mark already sits in the control
+   to its left, and two identical logos in one rail reads as a bug. */
+.nav-wordmark {
+    justify-self: center;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-display);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--color-text);
+    transition: color var(--transition), opacity var(--transition);
+}
+
+@media (hover: hover) { .nav-wordmark:hover { opacity: .72 } }
+
+.nav-wordmark:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+}
+
+/* ---------- Persistent action ----------
+   The one thing a visitor is most likely to want, always reachable without opening
+   the panel first. Shorter than a page CTA on purpose: it is chrome, not a hero
+   control, and at full .btn height it would set the rail 20px taller on every page. */
+.nav-rail-actions { justify-self: end; display: flex; align-items: center }
+
+.nav-cta {
+    min-height: 42px;
+    padding: 9px 16px;
+    font-size: .8125rem;
+    gap: var(--space-2);
+}
+
+.nav-cta::after { width: 7px; height: 7px }
+
+/* Below 600px the wordmark is the first thing to go: the control identifies the
+   brand already, and the action has to keep its full label.
+
+   The column count has to drop with it. `display: none` takes the wordmark out of
+   the grid entirely rather than leaving an empty track, so the action auto-placed
+   into the middle column — measured at 375px it sat jammed against the Menu control
+   with 100px of dead rail to its right. Two tracks put it back on the edge. */
+@media (max-width: 599px) {
+    .nav-rail-inner { grid-template-columns: auto 1fr; gap: var(--space-3) }
+    .nav-wordmark { display: none }
+    .nav-cta { padding: 9px 13px; font-size: .78125rem }
 }
 
 /* The mark is dark navy and would disappear into the graphite hero. It is re-inked
@@ -112,11 +202,9 @@
 }
 
 @media (min-width: 600px) {
-    .nav-trigger {
-        top: var(--space-5);
-        padding: var(--space-2) var(--space-4) var(--space-2) var(--space-2);
-    }
+    .nav-trigger { padding: var(--space-2) var(--space-4) var(--space-2) 0 }
     .nav-trigger-word { font-size: var(--text-sm); letter-spacing: var(--tracking-tight); text-transform: none }
+    .nav-wordmark { font-size: var(--text-base); letter-spacing: .2em }
 }
 
 /* ---------- Blended over the hero ----------
@@ -129,13 +217,33 @@
 
    js/main.js owns the .nav-over-hero flag. Without JS the class is never added and
    the control stays the solid chip — legible everywhere, just not blended. */
-.nav-over-hero .nav-trigger-word { color: var(--color-text-on-dark) }
+/* Over the hero the rail takes a graphite scrim rather than going fully transparent.
+   At the top of the page the scrim is the hero's own colour, so the bar is invisible
+   and the control, wordmark and action appear to sit directly on the artwork — the
+   blend this design wants.
+
+   The scrim earns its place the moment the page moves: fully transparent, the hero's
+   subtitle scrolled straight through the centred wordmark and the two sets of type
+   overlapped. That was legible enough with only a small control in the corner, but
+   the rail now has content across its full width, so it needs something behind it.
+   Hairline stays off — the bar should still read as part of the hero, not as chrome
+   sitting on top of it. */
+.nav-over-hero .nav-rail {
+    background: rgba(28, 27, 25, .72);
+    border-bottom-color: transparent;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+}
+
+.nav-over-hero .nav-trigger-word,
+.nav-over-hero .nav-wordmark { color: var(--color-text-on-dark) }
 .nav-over-hero .nav-trigger-bars span { background: var(--color-accent-earth-soft) }
-.nav-over-hero .nav-trigger:focus-visible { outline-color: var(--color-text-on-dark) }
+.nav-over-hero .nav-trigger:focus-visible,
+.nav-over-hero .nav-wordmark:focus-visible { outline-color: var(--color-text-on-dark) }
 
 /* Hidden while the panel is open — the panel carries its own brand and close
    control, and two logos on screen at once reads as a bug. */
-.nav-is-open .nav-trigger {
+.nav-is-open .nav-rail {
     opacity: 0;
     pointer-events: none;
 }

@@ -297,11 +297,13 @@ a:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-
    removes it, so a dead script simply never hides a chapter. Its 7s safety sweep is
    registered before the first one is applied, covering a mid-setup throw. */
 
-/* The navigation control resolves first, and does it in pure CSS so the only
+/* The navigation rail resolves first, and does it in pure CSS so the only
    navigation affordance on the page can never depend on a script. `backwards` holds
    the hidden state through the delay; no forwards fill, so :hover still owns
-   transform once the animation has finished. */
-.js-on .nav-trigger{animation:pm-control-in 620ms var(--ease-settle) 120ms backwards}
+   transform once the animation has finished. The whole rail settles as one plane —
+   control, wordmark and action arrive together, because they are one piece of
+   chrome rather than three separate elements that happen to share a row. */
+.js-on .nav-rail{animation:pm-control-in 620ms var(--ease-settle) 120ms backwards}
 @keyframes pm-control-in{from{opacity:0;transform:translate3d(0,-14px,0)}to{opacity:1;transform:none}}
 
 /* THE hiding rule. Exactly one selector list decides whether hero content is
@@ -380,12 +382,12 @@ a:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-
 .block-reveal.is-settled{transition:opacity calc(var(--block-duration)*.7) var(--ease-fade) var(--block-delay,0ms),transform var(--block-duration) var(--ease-settle) var(--block-delay,0ms)}
 
 @media print{
-    .js-on .nav-trigger{animation:none}
+    .js-on .nav-rail{animation:none}
     .js-on [data-assemble] .hero-statement,.js-on [data-assemble] .hero-feature,.js-on [data-assemble] .hero-project-card,.js-on [data-assemble] .hero-support,.js-on [data-assemble] .hero-buttons,.js-on [data-assemble] .hero-microproof,.block-reveal{opacity:1!important;transform:none!important}
 }
 @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    .js-on .nav-trigger{animation:none}
+    .js-on .nav-rail{animation:none}
     .js-on [data-assemble] .hero-statement,.js-on [data-assemble] .hero-feature,.js-on [data-assemble] .hero-project-card,.js-on [data-assemble] .hero-support,.js-on [data-assemble] .hero-buttons,.js-on [data-assemble] .hero-microproof,.block-reveal{opacity:1!important;transform:none!important;transition:none!important}
     *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }

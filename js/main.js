@@ -45,6 +45,11 @@ document.addEventListener("DOMContentLoaded", function () {
         '.chapter-head',
         '.grid > .block',
         '.process-steps > .process-step',
+        // The pinned chapter's steps live in a different container. Above 1024px they
+        // arrive lit and then three of them dim once the step controller below marks
+        // the chapter ready — it assembles, then focus narrows onto one step. Below
+        // 1024px there is no dim state, so they settle like any other chapter.
+        '.pinned-steps > .process-step',
         '.about-grid > *',
         '.contact-grid > *',
         '.booking-grid > *',
@@ -272,6 +277,97 @@ document.addEventListener("DOMContentLoaded", function () {
                 groupObserver.observe(group);
             }
         });
+    }
+
+    /* ---------- Pinned stepper chapter ----------
+       The stage is pinned by CSS (position: sticky). All this does is decide which
+       step is the current one and mirror that onto the matching visual — it never
+       touches the scroll position, never writes a transform, and never animates
+       anything itself. Every visual consequence belongs to the stylesheet.
+
+       "Which step is current" is a question about POSITION, so it is answered by
+       measuring position, not by watching transitions. An IntersectionObserver
+       band was tried first and is the wrong tool: it reports edge crossings, and
+       crossings get coalesced when the viewport jumps. Measured, scrolling in 90px
+       increments, step 03 was never activated once — the observer went straight from
+       02 to 04 — and an anchor jump into the middle of the chapter left it stuck on
+       whichever step happened to be current beforehand. Nearest-to-the-line cannot
+       skip a step or get stranded, because it re-derives the answer from scratch
+       every time it runs.
+
+       Cost is four getBoundingClientRect calls, rAF-throttled, on a passive listener,
+       and only while the chapter is actually near the viewport — the same pattern the
+       nav-surface sync below already uses.
+
+       Additive throughout: step 1 and its visual carry .is-current in the markup, so
+       if none of this runs the chapter is still a legible list with its first fragment
+       showing. Below 1024px the stage is display:none and this never starts. */
+    const pinnedRoot = document.querySelector('[data-pinned]');
+    if (pinnedRoot && window.matchMedia('(min-width: 1024px)').matches) {
+        const steps = [...pinnedRoot.querySelectorAll('[data-pinned-step]')];
+        const panels = [...pinnedRoot.querySelectorAll('[data-pinned-panel]')];
+
+        if (steps.length && panels.length) {
+            let current = null;
+            let queued = false;
+            let near = true;
+
+            const setCurrent = (key) => {
+                if (!key || key === current) return;
+                current = key;
+                steps.forEach(el => el.classList.toggle('is-current', el.dataset.pinnedStep === key));
+                panels.forEach(el => el.classList.toggle('is-current', el.dataset.pinnedPanel === key));
+            };
+
+            // The step whose extent is nearest the middle of the viewport wins.
+            // Distance is zero for a step that spans the line — and since the steps
+            // are contiguous and never overlap, at most one ever does. Past the last
+            // step (the trailing padding that holds the pin) the nearest is still
+            // step 04, which is what keeps the final fragment on screen.
+            const pick = () => {
+                queued = false;
+                const line = window.innerHeight / 2;
+                let best = null;
+                let bestDistance = Infinity;
+                steps.forEach((el) => {
+                    const box = el.getBoundingClientRect();
+                    const distance = box.top > line ? box.top - line
+                        : box.bottom < line ? line - box.bottom
+                        : 0;
+                    if (distance < bestDistance) {
+                        bestDistance = distance;
+                        best = el;
+                    }
+                });
+                if (best) setCurrent(best.dataset.pinnedStep);
+            };
+
+            const requestPick = () => {
+                if (queued || !near) return;
+                queued = true;
+                requestAnimationFrame(pick);
+            };
+
+            // Gate the listener on the chapter being roughly on screen, so scrolling
+            // the rest of the page costs nothing at all.
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        near = entry.isIntersecting;
+                        if (near) requestPick();
+                    });
+                }, { rootMargin: '250px 0px 250px 0px' }).observe(pinnedRoot);
+            }
+
+            window.addEventListener('scroll', requestPick, { passive: true });
+            window.addEventListener('resize', requestPick);
+            pick();
+
+            // Only now does the stylesheet get permission to dim the inactive steps.
+            // Set last, after the listeners are attached and a first step has been
+            // chosen, so the dim can never outlive the thing that resolves it.
+            pinnedRoot.dataset.pinnedReady = 'true';
+        }
     }
 
     /* ---------- Navigation control: blend with the hero ----------
