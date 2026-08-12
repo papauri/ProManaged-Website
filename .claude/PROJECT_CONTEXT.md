@@ -1,6 +1,6 @@
 # PROJECT_CONTEXT.md — ProManaged IT Website
 
-> Updated 2026-08-13 after the Signal & Systems visual, form and email work.
+> Updated 2026-08-13 after the Signal & Systems visual, form, email and wide-desktop composition work.
 
 ## 1. What this project is
 The marketing website for **ProManaged IT** (promanaged-it.com), a small, human-led technology studio. Its three capabilities are presented consistently as **Build / Source / Connect**:
@@ -32,7 +32,8 @@ The site must convert a visitor into a lead by feeling credible, calm, human and
 Signal & Systems: an editorial technology studio / engineering workshop.
 
 - Oversized modern typography.
-- Wide visual composition rails with independently constrained text measures.
+- **Expansive desktop visual rail:** on 1600px+ screens, major hero/chapter compositions should use most of the available canvas with controlled gutters rather than reading as a narrow centered content island.
+- Text measures remain independently constrained so wider grids never create unreadably long prose lines.
 - Asymmetric bento compositions with varied spans, ratios, ordering and whitespace.
 - Desktop, tablet and mobile are deliberately recomposed; mobile is not a simple desktop card stack.
 - Smaller circular founder portrait.
