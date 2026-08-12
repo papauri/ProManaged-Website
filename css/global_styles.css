@@ -99,16 +99,37 @@ p {
 }
 
 /* ---------- Rail ----------
-   Chapter backgrounds are full-bleed; the rail is the only thing constraining content
-   width. `.container` is retained as an alias because existing markup still uses it. */
+   Chapter backgrounds are full-bleed; the rail constrains the COMPOSITION only.
+   `.container` is retained as an alias because existing markup still uses it.
+
+   The rail is deliberately wide, so it must never be the thing that sets line
+   length. Text is constrained independently, by measure, in the rules just below —
+   that separation is what lets the composition grow on large desktops without prose
+   becoming unreadable. */
 .rail,
 .container {
     width: 100%;
-    max-width: var(--rail-max);
+    max-width: var(--rail-visual);
     margin-inline: auto;
     padding-inline: var(--rail-pad);
     position: relative;
     z-index: 1;
+}
+
+/* ---------- Text measure ----------
+   The counterweight to the wide rail. Prose keeps its own readable width wherever it
+   sits, so a block that spans half a 1880px rail still wraps at a comfortable line.
+   `p` is capped globally further down; these cap the remaining long-form roles. */
+.chapter-head h1,
+.chapter-head h2 {
+    max-width: var(--measure-display);
+}
+
+/* A capped heading inside a centred head would otherwise sit hard against the left
+   edge of the rail, with only its text centred inside the box. */
+.chapter-head--center h1,
+.chapter-head--center h2 {
+    margin-inline: auto;
 }
 
 /* ---------- Chapters ---------- */

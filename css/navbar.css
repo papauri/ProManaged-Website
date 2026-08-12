@@ -103,9 +103,11 @@
     opacity: 1;
 }
 
+/* Shares the page's visual rail, so the panel is a composition on the same grid as
+   the chapters behind it rather than a separately-sized overlay. */
 .nav-panel-rail {
     min-height: 100%;
-    max-width: var(--rail-max);
+    max-width: var(--rail-visual);
     margin-inline: auto;
     padding: var(--space-6) var(--rail-pad) var(--space-12);
     display: flex;
@@ -331,6 +333,25 @@
     outline: 2px solid var(--color-text-on-dark);
     outline-offset: 3px;
     border-radius: var(--radius-sm);
+}
+
+/* ---------- Wide desktop ----------
+   Taller tiles and a wider descriptor measure, so the bento fills the widened rail
+   as a deliberate composition instead of a row of short blocks stranded in space.
+   Spans are unchanged — the proportions that make it a bento still hold. */
+@media (min-width: 1600px) {
+    .nav-tile {
+        min-height: 210px;
+        padding: var(--space-8);
+    }
+
+    .nav-tile--primary {
+        min-height: 340px;
+    }
+
+    .nav-tile-desc {
+        max-width: 46ch;
+    }
 }
 
 /* ---------- Responsive ----------

@@ -94,9 +94,13 @@
   --weight-display: 800;
 
   /* Text measure — applied separately from layout width so a wide rail never
-     produces an unreadable line length. */
+     produces an unreadable line length. ~55-75 characters is the readable band;
+     62ch sits in the middle of it. */
   --measure: 62ch;
   --measure-tight: 46ch;
+  /* Display headings tolerate far fewer characters per line than prose before they
+     stop reading as a statement and start reading as a sentence. */
+  --measure-display: 26ch;
 
   /* ---- Spacing (4px base) ---- */
   --space-1: 0.25rem;
@@ -124,10 +128,21 @@
   --shadow-sm: 0 1px 2px rgba(28, 27, 25, 0.06), 0 2px 6px rgba(28, 27, 25, 0.05);
   --shadow-lg: 0 18px 40px rgba(28, 27, 25, 0.13), 0 4px 12px rgba(28, 27, 25, 0.06);
 
-  /* ---- Layout: wide editorial rail with generous desktop gutters ---- */
-  --rail-max: 1560px;
-  --rail-pad: clamp(1.25rem, 5vw, 5rem);
-  --grid-gap: clamp(1rem, 1.6vw, 1.75rem);
+  /* ---- Layout: TWO independent constraints ----
+     --rail-visual is how wide the composition may get (grids, blocks, hero, the
+     navigation panel). --measure* below is how wide TEXT may get. They are
+     deliberately decoupled: widening the rail must never turn a paragraph into a
+     200-character line, so prose is capped by its own measure regardless of how
+     much room the surrounding composition is given. */
+  --rail-visual: 1880px;
+  /* Alias — every existing .rail/.container consumer reads this name. */
+  --rail-max: var(--rail-visual);
+  /* Identical below a 1280px viewport (5vw is still the active term there), so
+     tablet and mobile gutters are untouched; only the large-screen cap tightens,
+     from 5rem to 4rem, to stop wide desktops wasting margin. */
+  --rail-pad: clamp(1.25rem, 5vw, 4rem);
+  /* Cap raised for wide screens only; below ~1000px the 1rem floor still wins. */
+  --grid-gap: clamp(1rem, 1.6vw, 2.25rem);
   --grid-cols: 12;
   /* Clearance for the floating navigation logo tile. There is no header strip; this
      is the space the tile occupies, shared by the hero top padding and scroll-margin. */

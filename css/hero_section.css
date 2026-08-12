@@ -14,7 +14,10 @@
     overflow: hidden;
 }
 
-/* 7/5 asymmetric split — statement dominates, visual cluster supports. */
+/* 7/5 asymmetric split — statement dominates, visual cluster supports.
+   The rail underneath is wide (--rail-visual), so this grid grows with the screen.
+   What must NOT grow is the text: #hero-title stays at ~16ch and #hero-subtitle at
+   ~50ch below, so the extra width becomes composition rather than line length. */
 .hero-rail {
     display: grid;
     grid-template-columns: 7fr 5fr;
@@ -164,6 +167,28 @@
 .hero-support-desc {
     font-size: var(--text-xs);
     color: var(--color-text-on-dark-muted);
+}
+
+/* ---------- Wide desktop ----------
+   On a large screen the visual cluster gets a slightly larger share and a taller
+   floor, so the hero reads as an architectural composition rather than a wide text
+   column with a small graphic parked beside it. The statement column still holds the
+   dominant position; only the balance shifts. */
+@media (min-width: 1600px) {
+    .hero-rail {
+        grid-template-columns: 6.5fr 5fr;
+    }
+
+    /* Taller than the base floor so the tile holds the wider composition, but capped:
+       past ~420px the gap between the icon and the figure stops reading as deliberate
+       whitespace and starts reading as an empty block. */
+    .hero-feature {
+        min-height: clamp(340px, 20vw, 420px);
+    }
+
+    .hero-support {
+        padding: var(--space-8);
+    }
 }
 
 /* ---------- Responsive ---------- */
