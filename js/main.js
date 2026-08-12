@@ -257,6 +257,35 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    /* ---------- Navigation control: blend with the hero ----------
+       The control is fixed over a dark graphite hero at the top of every page and
+       over paper surfaces once you scroll. This flags which one is behind it so
+       css/navbar.css can switch the control between its glass and solid treatments.
+
+       Geometry rather than a fixed scroll offset, because the hero's height varies
+       per page and per breakpoint: the flag is on while the hero still covers the
+       bottom edge of the control. Reads are rAF-throttled so a scroll never does
+       layout work more than once a frame, and the listener is passive. */
+    const heroForNav = document.querySelector('#hero-section') || document.querySelector('.hero');
+    const navControl = document.querySelector('#nav-trigger');
+    if (heroForNav && navControl) {
+        let queued = false;
+        const syncNavSurface = () => {
+            queued = false;
+            const overHero = heroForNav.getBoundingClientRect().bottom
+                > navControl.getBoundingClientRect().bottom;
+            document.documentElement.classList.toggle('nav-over-hero', overHero);
+        };
+        const requestNavSync = () => {
+            if (queued) return;
+            queued = true;
+            requestAnimationFrame(syncNavSurface);
+        };
+        syncNavSurface();
+        window.addEventListener('scroll', requestNavSync, { passive: true });
+        window.addEventListener('resize', requestNavSync);
+    }
+
     // The footer year is written into the markup so it is correct without JS, and
     // refreshed here so it stays correct after the calendar rolls over.
     document.querySelectorAll('[data-current-year]').forEach((el) => {

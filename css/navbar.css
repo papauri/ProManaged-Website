@@ -45,6 +45,20 @@
         border-color var(--transition), opacity var(--transition), background var(--transition);
 }
 
+/* The mark is dark navy and would disappear into the graphite hero. It is re-inked
+   rather than given a light plate behind it: a plate reads as a white sticker inside
+   the control, and adding one only over the hero would resize the control mid-scroll.
+   The filter only changes colour, so the geometry is identical in both states, and
+   the slight transparency lands it on the same warm ivory as the label beside it. */
+.nav-trigger .logo {
+    transition: filter var(--transition), opacity var(--transition);
+}
+
+.nav-over-hero .nav-trigger .logo {
+    filter: brightness(0) invert(1);
+    opacity: .92;
+}
+
 .nav-trigger-label {
     display: inline-flex;
     align-items: center;
@@ -58,6 +72,7 @@
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--color-text);
+    transition: color var(--transition);
 }
 
 /* Three bars of deliberately unequal width — the same "unequal proportion" idea the
@@ -107,6 +122,37 @@
     }
     .nav-trigger-word { font-size: var(--text-sm); letter-spacing: var(--tracking-tight); text-transform: none }
 }
+
+/* ---------- Blended over the hero ----------
+   The control sits on the dark graphite hero at the top of every page, where a solid
+   paper chip reads as a sticker pasted over the artwork. While the hero is behind it
+   the control becomes glass: it borrows the hero's own surface through a blur, keeps
+   only a hairline for definition, and switches its type and bars to the on-dark
+   palette. Once the page scrolls past the hero onto paper it resolves back into the
+   solid chip, which is what keeps it legible there.
+
+   js/main.js owns the .nav-over-hero flag. Without JS the class is never added and
+   the control stays the solid chip — legible everywhere, just not blended. */
+.nav-over-hero .nav-trigger {
+    background: rgba(247, 243, 236, .07);
+    border-color: rgba(247, 243, 236, .22);
+    box-shadow: inset 0 1px 0 rgba(247, 243, 236, .10);
+    -webkit-backdrop-filter: saturate(150%) blur(12px);
+    backdrop-filter: saturate(150%) blur(12px);
+}
+
+.nav-over-hero .nav-trigger-word { color: var(--color-text-on-dark) }
+.nav-over-hero .nav-trigger-bars span { background: var(--color-accent-earth-soft) }
+
+@media (hover: hover) {
+    .nav-over-hero .nav-trigger:hover {
+        background: rgba(247, 243, 236, .13);
+        border-color: rgba(247, 243, 236, .42);
+        box-shadow: inset 0 1px 0 rgba(247, 243, 236, .16), 0 16px 30px -18px rgba(0, 0, 0, .8);
+    }
+}
+
+.nav-over-hero .nav-trigger:focus-visible { outline-color: var(--color-text-on-dark) }
 
 /* Hidden while the panel is open — the panel carries its own brand and close
    control, and two logos on screen at once reads as a bug. */
