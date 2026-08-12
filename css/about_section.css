@@ -75,6 +75,18 @@
     color: var(--color-text-subtle) !important;
 }
 
+/* ---------- Wide desktop ----------
+   The founder portrait is the site's main human anchor, so it takes a larger share of
+   the widened rail once there is room. The story column still ends up wider than it
+   was before Phase 1, and its text measure is untouched — only the media column and
+   the grid change. */
+@media (min-width: 1600px) {
+    .about-grid {
+        grid-template-columns: 5.5fr 6.5fr;
+        gap: clamp(4rem, 5vw, 7rem);
+    }
+}
+
 @media (max-width: 900px) {
     .about-grid {
         grid-template-columns: 1fr;

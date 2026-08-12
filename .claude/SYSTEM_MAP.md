@@ -37,8 +37,28 @@ face is now a sans, hierarchy comes from weight and tracking: `--weight-display:
 `--tracking-display: -0.035em` for oversized statement type. Any rule that sets the display
 face at `--weight-normal` is a bug — 400 is far too light at those sizes.
 
-Fluid display scale, one radius set, two shadows, `--rail-max: 1560px` with generous
-`--rail-pad` gutters, and `--section-y` as the one chapter rhythm.
+Fluid display scale, one radius set, two shadows, and `--section-y` as the one chapter
+rhythm.
+
+### Width: two independent constraints
+This is the rule that keeps a very wide desktop readable, and it is easy to break by
+accident:
+
+- **`--rail-visual` (1880px)** is how wide the COMPOSITION may get — grids, blocks, the
+  hero, the navigation panel. `.rail`/`.container` use it. `--rail-max` is kept only as
+  an alias because existing rules read that name.
+- **`--measure` (62ch) / `--measure-tight` / `--measure-display` (26ch)** are how wide
+  TEXT may get, applied separately.
+
+The rail must never be the thing that sets line length. Widening the rail without a
+matching text cap is what turns a 1880px page into 200-character lines. Chapter
+compositions that need to fill the wide rail do so by adding COLUMNS (see the lead
+capability block in `service_cards.css`), never by letting a paragraph run wider.
+
+Wide-screen composition rules live behind `@media (min-width: 1600px)` in
+`hero_section.css`, `navbar.css`, `service_cards.css`, `about_section.css`,
+`mission_vision.css` and `why_band.css`. Nothing below 1600px is affected, so tablet
+and mobile layouts are unchanged by any of it.
 
 ## Navigation — "Bento Control Panel"
 There is **no horizontal navbar strip** anywhere on the site; do not reintroduce one.
@@ -75,11 +95,24 @@ Shared form chapters: `contact_section.css` (index + hardware_sourcing), `book_a
 Page-specific: `get-started.css`, `learn-more.css`, `privacy_policy.css`, `custom_websites.css`,
 `hardware_sourcing.css`, `networking.css`.
 
-## Signature motion — "building blocks"
+## Signature motion — "Weighted Block Settle"
 Large blocks settle into place: the hero composition assembles on load, then each major
-chapter assembles as it is scrolled to. Only chapter-level blocks move — never text, icons
-or list items. Tokens live in `tokens.css` (`--block-duration`, `--block-stagger`,
-`--block-travel`, `--block-scale`, `--ease-settle`); states live in `global_styles.css`.
+chapter assembles as it is scrolled to, and the bento navigation tiles use the same
+language. Only chapter-level blocks move — never a heading, paragraph, icon, list item or
+individual form control, and never legal/privacy copy.
+
+Tokens live in `tokens.css`; states live in `global_styles.css` and `navbar.css`.
+Measured shape: 24px rise, 1.5% scale settle, 80ms capped group stagger, ~560ms, and
+**exactly one** small landing overshoot (~2.1px) before coming to rest.
+
+- `--ease-settle` drives TRANSFORM and deliberately overshoots (y2 > 1). That single
+  overshoot is the whole spring character — there is no second oscillation.
+- `--ease-fade` drives OPACITY and never overshoots, over ~70% of the duration, so a
+  block is legible slightly before it stops moving.
+
+Only transform and opacity are animated, never a layout property, so the layout box is
+constant throughout (verify with `offsetLeft`/`offsetWidth`, **not**
+`getBoundingClientRect`, which includes the transform and will look like a layout shift).
 
 Two deliberately different mechanisms:
 

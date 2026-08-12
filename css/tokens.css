@@ -151,16 +151,24 @@
   /* ---- Motion: reveal / hover / focus only ---- */
   --transition: 160ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* ---- Motion: "building blocks" assembly ----
-     Blocks settle into place; they never bounce, overshoot or drift. The easing is
-     purely decelerating so a block reads as coming to rest, not springing.
-     --block-travel is deliberately small: at larger values the page reads as sliding
-     around rather than assembling. */
-  --block-duration: 520ms;
-  --block-stagger: 70ms;
-  --block-travel: 20px;
-  --block-scale: 0.988;
-  --ease-settle: cubic-bezier(0.16, 0.72, 0.24, 1);
+  /* ---- Motion: "Weighted Block Settle" ----
+     One motion language for every major reveal: hero groups, chapter blocks and the
+     bento navigation tiles. A block rises, then lands with a single small overshoot
+     — the weight of something coming to rest, not a bounce.
+
+     --ease-settle carries a deliberate overshoot (y2 > 1), peaking ~9% past the
+     target before settling ONCE. That is the whole spring character; there is no
+     second oscillation, no elastic wobble and no looping.
+     --ease-fade is separate and purely decelerating: opacity must not overshoot,
+     since values above 1 just clamp and buy nothing.
+
+     Only transform and opacity are ever animated — never a layout property. */
+  --block-duration: 560ms;
+  --block-stagger: 80ms;
+  --block-travel: 24px;
+  --block-scale: 0.985;
+  --ease-settle: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  --ease-fade: cubic-bezier(0.16, 0.72, 0.24, 1);
 }
 
 @media (max-width: 768px) {

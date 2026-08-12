@@ -663,9 +663,12 @@ a:focus-visible {
 .block-reveal {
     opacity: 0;
     transform: translate3d(0, var(--block-travel), 0) scale(var(--block-scale));
-    /* Per-element stagger; js/main.js sets --block-delay on each unit. */
+    /* Per-element stagger; js/main.js sets --block-delay on each unit.
+       Opacity resolves over ~70% of the travel and never overshoots, so the block is
+       fully legible slightly before it finishes settling — the overshoot then reads
+       as physical weight rather than as text still fading in. */
     transition:
-        opacity var(--block-duration) var(--ease-settle) var(--block-delay, 0ms),
+        opacity calc(var(--block-duration) * 0.7) var(--ease-fade) var(--block-delay, 0ms),
         transform var(--block-duration) var(--ease-settle) var(--block-delay, 0ms);
     will-change: opacity, transform;
 }

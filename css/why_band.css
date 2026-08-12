@@ -34,6 +34,18 @@
     background: var(--color-paper);
 }
 
+/* ---------- Wide desktop ----------
+   Rebalanced to an even split. At 7/5 the lead headline filled only ~66% of its
+   column on a wide screen while the note column stayed cramped; 6/6 tightens the
+   headline block and gives the supporting copy room. Both remain capped by their own
+   measures, so no line gets longer. */
+@media (min-width: 1600px) {
+    .why-grid .why-lead,
+    .why-grid .why-note {
+        grid-column: span 6;
+    }
+}
+
 @media (max-width: 900px) {
     .why-grid {
         margin-bottom: var(--space-16);

@@ -82,6 +82,45 @@
     transform: translateX(4px);
 }
 
+/* ---------- Wide desktop ----------
+   Measured at 2545px, the lead capability's copy filled only ~51% of its full-width
+   block, so the dominant element on the page read as half-empty. Splitting the body
+   into two columns fills it as COMPOSITION: the checklist moves beside the copy, and
+   no individual line of text gets any longer. */
+@media (min-width: 1600px) {
+    .capability--lead .block__body {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        /* Rows are declared EXPLICITLY, one per item in the left column. Without
+           them the grid has no explicit rows, so `grid-row: 1 / -1` on the list
+           resolves to row 1 alone — which stretched the "01" label from ~15px to
+           114px and tore a gap open above the heading. min-content also stops any
+           row growing beyond its own content. */
+        grid-template-rows: repeat(4, min-content);
+        column-gap: clamp(3rem, 5vw, 7rem);
+        align-content: start;
+        align-items: start;
+    }
+
+    .capability--lead .capability-index,
+    .capability--lead h3,
+    .capability--lead .capability-lede,
+    .capability--lead .capability-cue {
+        grid-column: 1;
+    }
+
+    /* Now that the list owns half the block it no longer needs its own inner columns,
+       which were only ever a way to use up a capped 72ch strip. */
+    .capability--lead .list {
+        grid-column: 2;
+        grid-row: 1 / -1;
+        columns: 1;
+        max-width: none;
+        margin-top: 0;
+        align-self: center;
+    }
+}
+
 @media (max-width: 900px) {
     .capability--lead .list {
         columns: 1;

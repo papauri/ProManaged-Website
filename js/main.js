@@ -67,7 +67,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Which elements count as a "block" inside a chapter. These are the large
     // rectangles of the layout — grid blocks, process steps, the chapter heading, the
-    // founder portrait/story pair, form columns. Nothing smaller.
+    // founder portrait/story pair, whole form columns. Nothing smaller: never a
+    // heading, paragraph, icon, list item or individual form control on its own.
+    //
+    // Legal/privacy copy is deliberately absent. privacy_policy.html still carries a
+    // data-blocks attribute, but nothing inside it matches, so the group is skipped
+    // and the policy text is simply present from the first paint.
     const UNIT_SELECTOR = [
         '.chapter-head',
         '.grid > .block',
@@ -75,22 +80,24 @@ document.addEventListener("DOMContentLoaded", function () {
         '.about-grid > *',
         '.contact-grid > *',
         '.booking-grid > *',
-        '.faq-container',
-        '.privacy-policy-content'
+        '.faq-container'
     ].join(', ');
 
     // Cap the stagger so a chapter with many blocks still finishes promptly —
     // without this an 8-block chapter would take over half a second just to start
     // its last block.
     const MAX_STAGGER_STEPS = 5;
-    // Read the token once; falls back if the custom property is missing or unparseable.
-    const STAGGER_MS = (() => {
+    // Read the tokens once. CSS stays the single source of truth for the motion's
+    // shape; JS only needs the numbers to know when a group has finished settling.
+    const cssMs = (name, fallback) => {
         const raw = parseInt(
-            getComputedStyle(document.documentElement).getPropertyValue('--block-stagger'),
+            getComputedStyle(document.documentElement).getPropertyValue(name),
             10
         );
-        return Number.isFinite(raw) ? raw : 70;
-    })();
+        return Number.isFinite(raw) ? raw : fallback;
+    };
+    const STAGGER_MS = cssMs('--block-stagger', 80);
+    const DURATION_MS = cssMs('--block-duration', 560);
     const staggerMs = (index) => Math.min(index, MAX_STAGGER_STEPS) * STAGGER_MS;
 
     // Remove every trace of the entrance once it has played, so no element keeps a
@@ -105,8 +112,10 @@ document.addEventListener("DOMContentLoaded", function () {
             el.style.setProperty('--block-delay', staggerMs(i) + 'ms');
             el.classList.add('is-settled');
         });
-        // Longest delay + the transition itself, then tidy up.
-        const total = staggerMs(units.length - 1) + 700;
+        // Longest delay + the transition itself (plus a small margin for the
+        // overshoot to come to rest), then tidy up. Derived from the tokens so it
+        // cannot silently go stale if the motion is retuned.
+        const total = staggerMs(units.length - 1) + DURATION_MS + 140;
         window.setTimeout(() => {
             units.forEach(clearMotion);
             if (onDone) onDone();

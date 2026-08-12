@@ -208,8 +208,11 @@
        than the page's more leisurely load choreography. */
     opacity: 0;
     transform: translate3d(0, var(--block-travel), 0) scale(var(--block-scale));
+    /* Same Weighted Block Settle language as the page, but on a shorter clock: this
+       is an overlay someone is waiting on. Last tile starts at 180ms and lands at
+       ~560ms, which is the same perceived duration as a page chapter group. */
     transition:
-        opacity 380ms var(--ease-settle) var(--_d, 0ms),
+        opacity 300ms var(--ease-fade) var(--_d, 0ms),
         transform 380ms var(--ease-settle) var(--_d, 0ms),
         background var(--transition),
         border-color var(--transition);

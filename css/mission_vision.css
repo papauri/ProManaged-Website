@@ -40,6 +40,20 @@
     color: var(--color-text-on-dark);
 }
 
+/* ---------- Wide desktop ----------
+   More generous internal padding so the accent block reads as a deliberately airy
+   editorial pane rather than a large fill with a small statement parked in a corner.
+   The statement's own measure is unchanged — this is padding, not line length. */
+@media (min-width: 1600px) {
+    .pane.block--earth {
+        padding: var(--space-16) var(--space-12);
+    }
+
+    .pane.block--bare {
+        padding-block: var(--space-16);
+    }
+}
+
 @media (max-width: 900px) {
     .pane,
     .pane.block--earth {
