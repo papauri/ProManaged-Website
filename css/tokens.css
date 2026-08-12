@@ -1,11 +1,8 @@
 /* tokens.css — ProManaged IT "Signal & Systems" design system.
    Single source of truth for palette, type, spacing, radius, shadow and layout.
    Import this FIRST, before any other stylesheet, on every page.
-   No other file may declare a raw colour value. */
+   No other file may declare a raw colour. */
 :root {
-  /* ---- Surfaces: warm editorial neutrals ----
-     Chapters alternate paper -> ivory -> stone -> graphite to create visible pacing
-     down every page instead of one flat white scroll. */
   --color-paper: #fffdfa;
   --color-ivory: #f7f3ec;
   --color-stone: #ece5da;
@@ -14,31 +11,22 @@
   --color-graphite: #1c1b19;
   --color-graphite-soft: #2b2926;
 
-  /* Aliases kept so shared components can read a neutral name. */
   --color-bg: var(--color-paper);
   --color-surface: var(--color-ivory);
   --color-border: #e3dbcf;
   --color-border-strong: #cdc1b1;
 
-  /* ---- Text ---- */
   --color-text: #1c1b19;
   --color-text-muted: #56514a;
   --color-text-subtle: #6e675e;
   --color-text-inverse: #f7f3ec;
-  /* Ivory at 72% over graphite — 8.6:1, safe for body copy on dark chapters. */
   --color-text-on-dark: #f7f3ec;
   --color-text-on-dark-muted: rgba(247, 243, 236, 0.74);
 
-  /* ---- Earthy accent: carries the large decorative weight ----
-     #96502c is the darkest step that still reads warm; verified 5.2:1 on ivory
-     and 5.5:1 against ivory text when used as a fill. */
   --color-accent-earth: #96502c;
   --color-accent-earth-hover: #7c4223;
   --color-accent-earth-soft: #f0e4d9;
 
-  /* ---- Blue: interaction and identity only (buttons, links, focus) ----
-     --color-accent-link is the darker step used for text on light surfaces, where
-     the plain accent falls just under 4.5:1. */
   --color-accent: #2563eb;
   --color-accent-hover: #1d4ed8;
   --color-accent-active: #1e40af;
@@ -46,16 +34,9 @@
   --color-accent-soft: #eaf1fe;
   --color-accent-contrast: #ffffff;
 
-  /* ---- Feedback ---- */
   --color-success: #15803d;
   --color-danger: #b91c1c;
 
-  /* ---- Typography ----
-     ONE family for every text role — headings, body, navigation, buttons, form
-     controls, labels, captions and footer. Plus Jakarta Sans is a variable face, so
-     hierarchy is carried by weight and tracking rather than by a second family.
-     --font-display and --font-sans are kept as aliases so existing role-based
-     references stay readable; both intentionally resolve to the same family. */
   --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-display: var(--font-primary);
   --font-sans: var(--font-primary);
@@ -70,15 +51,11 @@
   --text-4xl: 2.25rem;
   --text-5xl: 3rem;
 
-  /* Fluid display scale — oversized statement type at the top end, readable at 375px. */
   --display-1: clamp(2.75rem, 1.35rem + 5.6vw, 6rem);
   --display-2: clamp(2rem, 1.3rem + 2.8vw, 3.75rem);
   --display-3: clamp(1.5rem, 1.18rem + 1.3vw, 2.25rem);
   --display-figure: clamp(3rem, 1.8rem + 4.8vw, 5.5rem);
 
-  /* Display type is a SANS now, so it needs tighter tracking and real weight to hold
-     the same editorial presence a serif carried at weight 400. Optical sizing: the
-     larger the type, the tighter the tracking. */
   --tracking-display: -0.035em;
   --tracking-tight: -0.015em;
   --tracking-eyebrow: 0.1em;
@@ -90,19 +67,12 @@
   --weight-medium: 500;
   --weight-semibold: 600;
   --weight-bold: 700;
-  /* Reserved for oversized statement type only (h1/h2, hero figures). */
   --weight-display: 800;
 
-  /* Text measure — applied separately from layout width so a wide rail never
-     produces an unreadable line length. ~55-75 characters is the readable band;
-     62ch sits in the middle of it. */
   --measure: 62ch;
   --measure-tight: 46ch;
-  /* Display headings tolerate far fewer characters per line than prose before they
-     stop reading as a statement and start reading as a sentence. */
   --measure-display: 26ch;
 
-  /* ---- Spacing (4px base) ---- */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -115,83 +85,51 @@
   --space-16: 4rem;
   --space-20: 5rem;
   --space-24: 6rem;
-  /* One canonical chapter rhythm, shared by every section on every page. */
   --section-y: clamp(4rem, 7vw, 8rem);
 
-  /* ---- Radius ---- */
   --radius-sm: 6px;
   --radius: 10px;
   --radius-lg: 18px;
   --radius-full: 9999px;
 
-  /* ---- Shadows (two steps only) ---- */
   --shadow-sm: 0 1px 2px rgba(28, 27, 25, 0.06), 0 2px 6px rgba(28, 27, 25, 0.05);
   --shadow-lg: 0 18px 40px rgba(28, 27, 25, 0.13), 0 4px 12px rgba(28, 27, 25, 0.06);
 
-  /* ---- Layout: TWO independent constraints ----
-     --rail-visual is how wide the composition may get (grids, blocks, hero, the
-     navigation panel). --measure* below is how wide TEXT may get. They are
-     deliberately decoupled: widening the rail must never turn a paragraph into a
-     200-character line, so prose is capped by its own measure regardless of how
-     much room the surrounding composition is given. */
-  --rail-visual: 1880px;
-  /* Alias — every existing .rail/.container consumer reads this name. */
+  /* Composition and text have separate width contracts. On large monitors the
+     visual rail should actually use the available canvas; it must not read like a
+     centered 1100–1300px website with empty walls around it. */
+  --rail-visual: 2200px;
   --rail-max: var(--rail-visual);
-  /* Identical below a 1280px viewport (5vw is still the active term there), so
-     tablet and mobile gutters are untouched; only the large-screen cap tightens,
-     from 5rem to 4rem, to stop wide desktops wasting margin. */
-  --rail-pad: clamp(1.25rem, 5vw, 4rem);
-  /* Cap raised for wide screens only; below ~1000px the 1rem floor still wins. */
-  --grid-gap: clamp(1rem, 1.6vw, 2.25rem);
+  --rail-pad: clamp(1.25rem, 2.8vw, 4.5rem);
+  --grid-gap: clamp(1rem, 1.8vw, 2.75rem);
   --grid-cols: 12;
-  /* Clearance for the floating navigation logo tile. There is no header strip; this
-     is the space the tile occupies, shared by the hero top padding and scroll-margin. */
   --header-h: 92px;
 
-  /* ---- Motion: reveal / hover / focus only ---- */
   --transition: 160ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* ---- Motion: "Weighted Block Settle" ----
-     One motion language for every major reveal: hero groups, chapter blocks and the
-     bento navigation tiles. A block rises, then lands with a single small overshoot
-     — the weight of something coming to rest, not a bounce.
-
-     --ease-settle carries a deliberate overshoot (y2 > 1), peaking ~9% past the
-     target before settling ONCE. That is the whole spring character; there is no
-     second oscillation, no elastic wobble and no looping.
-     --ease-fade is separate and purely decelerating: opacity must not overshoot,
-     since values above 1 just clamp and buy nothing.
-
-     Only transform and opacity are ever animated — never a layout property. */
   --block-duration: 560ms;
   --block-stagger: 80ms;
   --block-travel: 24px;
   --block-scale: 0.985;
-  /* scale-in variant starts from a slightly deeper scale than the settle variants. */
   --block-scale-in: 0.955;
-  /* sequence-in deals its blocks out one at a time, so its gap is longer. */
   --block-sequence-mult: 1.5;
   --ease-settle: cubic-bezier(0.18, 0.89, 0.32, 1.28);
   --ease-fade: cubic-bezier(0.16, 0.72, 0.24, 1);
 
-  /* ---- Founder portrait ----
-     images/founder.png is an 800x800 square source, so a circular crop needs no
-     upscaling: the largest size below is 260px, still under 2x DPR of the source. */
   --portrait-size: 260px;
 
-  /* ---- Bento geometry ----
-     Media ratios used to break up the compositions. Blocks are deliberately NOT all
-     the same shape; these are the approved set. */
   --ratio-portrait: 3 / 4;
   --ratio-square: 1 / 1;
   --ratio-landscape: 16 / 10;
   --ratio-panorama: 21 / 9;
 }
 
-/* ---- Device-aware motion ----
-   Same motion language everywhere, scaled to the device. A 24px rise that reads as
-   weight on a 27" display reads as a lurch on a phone, where the whole viewport is
-   the size of one desktop block — so travel, stagger and duration all come down. */
+@media (max-width: 1440px) {
+  :root {
+    --rail-pad: clamp(1.25rem, 4vw, 3.5rem);
+  }
+}
+
 @media (max-width: 1024px) {
   :root {
     --block-travel: 18px;
@@ -199,6 +137,7 @@
     --block-duration: 480ms;
     --block-scale-in: 0.965;
     --portrait-size: 210px;
+    --rail-pad: clamp(1.25rem, 5vw, 3rem);
   }
 }
 
@@ -216,5 +155,7 @@
     --block-scale: 0.99;
     --block-scale-in: 0.975;
     --portrait-size: 148px;
+    --rail-pad: 1rem;
+    --grid-gap: 1rem;
   }
 }
