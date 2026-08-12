@@ -1,49 +1,46 @@
-# Build Plan: ProManaged IT — Bento 07 Landing Page Redesign + Legacy Logic Cleanup
+# Build Plan: ProManaged IT — Concrete Bento 07 Landing Page Redesign + Cleanup
 
-> ACTIVE TASK. Previous bento/type attempts are superseded by this plan and must not be repeated.
-> **OWNER DIRECTIVE:** The landing page (`index.html`) is the primary product. This is a real visual redesign, not a grid/token cleanup. Use the supplied Mockuuups Bento 07 image as the primary visual composition reference: https://assets.mockuuups.com/mo/image/upload/c_limit%2Cw_680/v1708508072/bento-07_wd3t7l
+> ACTIVE TASK. Previous bento/type attempts are superseded. Do not repeat them.
+> **OWNER DIRECTIVE:** The landing page (`index.html`) is the product. Implement a real visual redesign, not token/grid tuning. Use the supplied Bento 07 image as the primary composition reference: https://assets.mockuuups.com/mo/image/upload/c_limit%2Cw_680/v1708508072/bento-07_wd3t7l
 > **GIT:** Work only on `main`; commit and push directly to `origin/main`. No branches, PRs, force-pushes, or detached work.
-> **YAML:** Never commit `.yml` or `.yaml`. Temporary YAML must be deleted immediately and verified absent.
+> **YAML:** Never commit `.yml` or `.yaml`. Delete temporary YAML immediately and verify it is absent.
 
 ## Goal
-Transform `index.html` into a premium, editorial, full-width bento landing page inspired specifically by Mockuuups Bento 07. Recreate the design language, not the artwork: edge-to-edge/as-wide-as-appropriate compartments, unequal tile proportions, dominant visual/text blocks, strong typography, restrained colour, generous whitespace, and storytelling through composition. At the same time remove obsolete eBay/RAWG/game-price/shopping/render leftovers from active code and project documentation.
+Turn `index.html` into a premium editorial/bento landing page that visibly resembles the supplied Bento 07 design language: full-width chapters, large asymmetric blocks, strong type, warm-neutral/Japandi colour, minimal nested cards, and clear visual rhythm while scrolling. Remove obsolete application logic/references at the same time. Remove all pricing from the software/web-app page.
 
 ## Wants vs Needs
-- **Want:** the landing page should feel like the supplied Bento 07 reference, not like a conventional website made from centered cards.
-- **Need:** the composition must use the available viewport deliberately, reduce nested cards, vary visual weight, and make the page read as a designed composition before it reads as a set of UI components.
-- **End user:** prospective ProManaged clients who need immediate trust, clarity, and a clear path to enquire/book.
-- **Friction today:** the page still feels boxed-in and centered; previous bento attempts changed CSS mechanics without producing a strong visual transformation.
-
-## Success Moment
-At 1280px, the first screen and first 2–3 sections visibly resemble the supplied Bento 07 design language: wide asymmetric blocks, one or two dominant areas, smaller supporting compartments, strong display type, and no repetitive equal-card rows.
+- **Want:** a landing page that looks designed like the reference, not a centered corporate template.
+- **Need:** full-width composition, large block transitions, warm-neutral surfaces, strong typography, fewer small cards, and a decisive first-screen transformation.
+- **Success Moment:** At 1280px, the hero fills the viewport width, the first 2–3 sections read as connected bento chapters, and the page no longer looks blue-on-white or boxed into the middle.
 
 ## Reference Systems
-- **Mockuuups Bento 07** — take: asymmetric collage-like composition, large dominant blocks, mixed text/visual compartments, generous negative space, restrained palette, visual hierarchy. Avoid literal copying of artwork or proprietary assets.
-- **Apple editorial/product pages** — take: wide storytelling and clear feature hierarchy. Avoid image-heavy imitation.
-- **Linear** — take: restrained chrome and typography. Avoid dark-theme dependency.
+- **Mockuuups Bento 07** — take: asymmetric collage, dominant blocks, broad visual areas, varied heights, generous negative space, strong hierarchy. Do not copy artwork.
+- **Apple editorial/product pages** — take: full-width storytelling and strong section hierarchy. Avoid imagery we do not own.
+- **Japandi/editorial web layouts** — take: ivory, sand, warm stone, muted charcoal, restrained earthy accent, calm whitespace. Avoid beige overload or decorative clutter.
 
 ## Completion Criteria (Definition of Done)
-- [ ] `index.html` is the primary acceptance target and is visibly transformed at 1280px.
-- [ ] Hero is a wide editorial composition, not a centered text column plus a stack of equal cards.
-- [ ] Hero and major sections visually extend across the available viewport; do not wrap the entire story inside one narrow centered shell.
-- [ ] Sections transition as large bento-like blocks while scrolling: backgrounds, imagery, typography and block heights should create a clear rhythm rather than repeated isolated cards.
-- [ ] At least 4 landing-page sections use varied block proportions; no repetitive equal-card rows in the primary story.
-- [ ] At least one dominant visual/text block spans most of a desktop row; supporting blocks occupy the remaining space.
-- [ ] Existing founder image and existing Font Awesome icons are used intentionally; no fake imagery, metrics, clients, or fabricated work.
-- [ ] Modern display type + Inter body/UI; display hierarchy is clearly visible.
-- [ ] Colour system is visibly modern and warm-neutral/Japandi-inspired rather than blue-on-white: use a soft off-white/ivory base, warm stone/sand/greige surfaces, muted charcoal text, and a restrained earthy accent. Blue may remain only where required for existing identity/accessibility, not as the dominant page colour. No decorative gradients.
-- [ ] Backgrounds are deliberately varied and may use subtle static texture/noise or very restrained CSS ambience; no looping animation, parallax gimmicks, or distracting motion.
-- [ ] Desktop content deliberately uses the available width; readable text measure is constrained independently of the visual composition.
-- [ ] No obsolete eBay/RAWG/game-price/game-review/shopping-widget/render-pipeline references remain in active code or `.claude` project docs.
-- [ ] No dead `<script>` or stylesheet references remain.
-- [ ] Existing contact/booking/SMTP/honeypot functionality remains intact.
-- [ ] `pages/custom_websites.html` software/web-app page contains **no prices or pricing tables**; remove price-led UI/copy only, preserving service descriptions and CTAs.
-- [ ] Verified at 1280px first, then 768px and 375px; no overflow and no console errors.
-- [ ] No `.yml` or `.yaml` files remain.
-- [ ] Final implementation committed to `main` and pushed to `origin/main`.
+- [ ] `index.html` is structurally changed where needed; CSS-only restyling is insufficient and not accepted.
+- [ ] Hero is effectively full viewport width at desktop, with no single narrow centered shell controlling the whole composition.
+- [ ] Hero uses one dominant text block, one dominant visual/content block, and at least one smaller supporting block; no stack of equal cards.
+- [ ] At least 4 homepage chapters use different block proportions and background surfaces; scrolling feels like moving through bento chapters.
+- [ ] Services section uses one dominant block + two differently weighted supporting blocks; no equal-card row.
+- [ ] About uses the existing founder image as a large visual anchor, not a small circular portrait beside a centered card.
+- [ ] Mission/Vision use unequal visual weight and warm-neutral surfaces; no blue card pair.
+- [ ] Major section backgrounds change deliberately between chapters using ivory / warm stone / sand / muted charcoal as appropriate; transitions are static and subtle.
+- [ ] Blue is an accent, not the dominant page background.
+- [ ] No decorative gradients, looping background animation, parallax, or gimmicky motion.
+- [ ] No excessive nested rounded cards; large blocks may use restrained radius, but the page must still read as a composition.
+- [ ] Modern display font + Inter body/UI, with clearly visible scale/weight contrast.
+- [ ] `pages/custom_websites.html` contains zero visible prices, price tables, package amounts, or pricing-led UI/copy.
+- [ ] No obsolete eBay/RAWG/game-price/game-review/shopping/render references remain in active code or `.claude` docs.
+- [ ] No dead script/stylesheet references remain; unused assets proven unnecessary are deleted.
+- [ ] Contact, booking, SMTP, and honeypot functionality remains intact.
+- [ ] Browser verified at 1280px first, then 768px and 375px; zero console errors and zero horizontal overflow.
+- [ ] No `.yml`/`.yaml` files remain.
+- [ ] Final implementation is committed to `main` and pushed to `origin/main`.
 
 ## Files to Change
-### Landing-page redesign
+### Landing page
 - `index.html`
 - `css/tokens.css`
 - `css/global_styles.css`
@@ -54,18 +51,12 @@ At 1280px, the first screen and first 2–3 sections visibly resemble the suppli
 - `css/mission_vision.css`
 - `css/footer_promanaged.css`
 
-### Software page pricing removal
+### Software pricing removal
 - `pages/custom_websites.html`
 - `css/custom_websites.css`
 
-### Logic/reference cleanup
-- `index.html`
-- `get-started.html`
-- `learn_more.html`
-- `privacy_policy.html`
-- `pages/custom_websites.html`
-- `pages/hardware_sourcing.html`
-- `pages/network_infrastructure.html`
+### Cleanup audit
+- current `*.html` pages
 - current `js/*.js`
 - current `css/*.css`
 - current `php/*.php`
@@ -77,111 +68,99 @@ At 1280px, the first screen and first 2–3 sections visibly resemble the suppli
 - `.claude/agents/build-planner.md`
 
 ## Exact Changes
-### `index.html` — primary design file
-- Section: hero, services, why/proof, about, mission/vision, contact, footer wrappers.
-- Change: restructure where necessary to support the Bento 07 composition. Preserve all real copy, links, IDs, forms, CTA targets, accessibility hooks, and existing functionality. Create deliberate visual groupings instead of one repeated-card pattern.
-- Reason: CSS-only tweaks have not produced the requested visual transformation.
+### `index.html`
+- Section: homepage DOM.
+- Change: restructure hero + major content wrappers so each chapter can span the viewport width and contain asymmetric blocks. Preserve existing real copy, links, IDs, forms, accessibility hooks, and CTA targets. You may add semantic wrappers/classes required for the composition.
+- Required chapter order: Hero → Services → Why/Proof → About → Mission/Vision → Contact → Footer.
+- Required rule: do not keep a single `.container` wrapping the entire page story.
+- Reason: the old DOM is preventing a true editorial composition.
 
 ### `css/tokens.css`
-- Section: layout, typography, colour.
-- Change: define a wide visual container (~1440–1560px), generous horizontal gutters, modern display type, soft ivory/off-white background, warm stone/greige surfaces, muted charcoal text, subdued earthy accent tokens, and only a restrained blue identity token for cases where the existing brand element requires it. Keep consistent radius/shadow hierarchy.
-- Reason: the previous blue-and-white treatment is not achieving the requested modern/Japandi direction.
+- Section: colour/layout/type.
+- Change: use a wide canvas token around 1440–1560px, generous gutters, soft ivory/off-white base, warm stone and sand surfaces, muted charcoal text, one subdued earthy accent, and one blue identity token only for required brand/interactive states. Define display type + fluid heading scale.
+- Required visual palette direction: ivory `#F6F1E8` family, warm stone `#DED6C8` family, sand `#C8B9A6` family, charcoal `#20201E` family; tune exact tokens to maintain WCAG AA. Do not introduce bright multicolour accents.
+- Reason: the current blue-dominant system is explicitly rejected by the owner.
 
 ### `css/global_styles.css`
-- Section: container and heading defaults.
-- Change: stop forcing every section into the same narrow centered block; allow full-width section backgrounds and wide visual compositions while keeping readable text measure constrained.
-- Reason: eliminate the boxed-in feel at the layout root.
+- Section: page canvas, containers, headings.
+- Change: remove any global rule that forces every section into a narrow centered shell. Introduce full-bleed section backgrounds and allow an inner wide content rail only where needed for readability.
+- Required: body/page should not visually stop at a small central rectangle on 1280px.
 
 ### `css/hero_section.css`
-- Section: landing hero.
-- Change: make the hero effectively full-width within viewport gutters. Build a Bento 07-inspired composition with one dominant copy block and one dominant adjacent visual/content block, plus smaller supporting compartments. Avoid a centered `max-width` that shrinks the entire hero. Use layered block backgrounds and editorial spacing rather than a stack of floating cards.
-- Reason: the hero is the strongest proof of the redesign and must feel immersive immediately.
+- Section: `.hero`, `.hero-content`, supporting hero blocks.
+- Change: make hero effectively full-width with 32–64px desktop gutters. Use a 60/40-ish split: large left copy block, large right visual/content block. Add one smaller supporting block integrated into the right composition. No centered text.
+- Required composition: one block may be tall; one block may be wide; supporting block must not match the dominant block size.
+- Required background: warm neutral or charcoal chapter surface, not blue.
+- Required motion: none beyond existing subtle hover/focus.
 
 ### `css/service_cards.css`
-- Section: services.
-- Change: replace equal-card treatment with a wide asymmetrical composition: one dominant service block, one medium support block, one smaller support block, with enough block height/width to create a scrolling story. Do not hard-code a two-row-only model.
-- Reason: services should look like editorial content tiles, not a card catalogue.
+- Section: `.services-grid` and cards.
+- Change: use a wide asymmetric 3-block composition: lead = 2/3-ish width, support A = 1/3-ish width, support B = 1/3-ish width with a different height/position. Avoid a fixed two-row-only template and avoid equal card heights.
+- Required: large blocks should visually touch the chapter rhythm; do not float three isolated white cards inside a small middle box.
 
 ### `css/why_band.css`
-- Section: why/proof.
-- Change: create one large statement/proof block plus a smaller supporting compartment with a distinct background surface; use generous vertical rhythm so it reads as the next visual chapter.
-- Reason: extend the storytelling rhythm beyond the hero.
+- Section: why/proof chapter.
+- Change: use a large statement block + smaller supporting proof block with contrasting warm-neutral surfaces. Let the chapter background itself carry visual weight.
 
 ### `css/about_section.css`
-- Section: about.
-- Change: use the founder image as a large visual anchor and pair it with a broad text/story block plus a small accent statement. Avoid a conventional 50/50 card split and avoid constraining the whole band to a narrow central module.
-- Reason: human storytelling needs stronger visual hierarchy.
+- Section: about chapter.
+- Change: founder image occupies a large visual block, ideally 40–50% of the inner rail; story occupies the remaining area; add one small supporting accent statement if it improves composition. No circle portrait.
 
 ### `css/mission_vision.css`
-- Section: mission/vision.
-- Change: make Mission and Vision deliberately unequal in visual weight; use one dominant statement block and one supporting block, with contrasting warm-neutral surfaces rather than blue cards.
-- Reason: create editorial rhythm and reinforce the new palette.
+- Section: mission/vision chapter.
+- Change: Mission = dominant large block; Vision = smaller supporting block. Use charcoal/ivory/warm stone hierarchy rather than blue cards.
 
 ### `css/footer_promanaged.css`
 - Section: footer.
-- Change: use the same wide container language and strong spacing; keep footer functional and readable; continue the neutral/Japandi visual language instead of reverting to a generic light-grey footer.
-- Reason: finish the visual system without a cramped centre column.
+- Change: wide inner rail with calm warm-neutral surface, generous spacing, clear columns. Avoid reverting to generic blue/grey footer styling.
 
-### `pages/custom_websites.html` + `css/custom_websites.css`
-- Section: software/web-app service/pricing content.
-- Change: remove all visible prices, pricing amounts, price tables, and price-led UI/copy. Keep the service positioning, capability descriptions, proof/context that is not fabricated, and CTA flow intact. Do not remove the page itself.
-- Reason: owner does not want prices on the software page.
+### `pages/custom_websites.html`
+- Section: all pricing-related content.
+- Change: remove every visible price, currency amount, pricing table, package price, “starting at” price, and price-led CTA copy. Preserve service descriptions and enquiry CTA.
+- Reason: software/web-app pricing should not be displayed.
 
-### Logic/reference cleanup
-- Audit every current HTML script/stylesheet reference against the current tree.
-- Delete only assets proven unused by the current application.
-- Remove any remaining eBay/RAWG/game-price/game-review/shopping-widget/render-pipeline references from active code and `.claude` docs.
-- Remove dead event handlers, duplicate rendering code, and abandoned server-variant references only when their callers are absent.
-- Do not remove live contact/booking/SMTP/honeypot logic.
-- Update stale `.claude` maps/docs after cleanup.
+### `css/custom_websites.css`
+- Section: pricing styles.
+- Change: remove selectors used only by deleted pricing UI. Keep styles still used by the page.
+
+### Cleanup audit
+- Audit every `<script src>` and `<link rel="stylesheet">` against the current tree.
+- Search active code/docs for `ebay`, `rawg`, `game_price`, `game_reviews`, `game_search`, `shopping`, `render`, and abandoned server variants.
+- Delete only files proven unused by current pages/runtime. Do not delete working form or mail paths.
+- Update `.claude` maps/docs so they reflect the current repository, not the old application.
 
 ## New Code Needed
 Pseudocode only:
-1. Give the page a wide visual canvas with full-width section backgrounds.
-2. Compose hero as one dominant block + adjacent dominant visual block + small support compartment(s).
-3. Compose services/why/about/mission as unequal editorial blocks with large vertical rhythm and chapter-like background changes.
-4. Use founder image/icons as intentional visual anchors.
-5. Remove obsolete runtime paths and stale references.
-6. Remove all software-page pricing UI/copy.
-7. Browser-test at 1280px first, then 768px/375px.
+1. Make page sections full-bleed with wide inner rails.
+2. Build hero as dominant text + dominant visual + smaller support block.
+3. Build services/why/about/mission as connected large chapters with unequal blocks.
+4. Use warm-neutral surfaces to make scroll transitions feel like changing bento panels.
+5. Remove unused legacy logic and pricing UI.
+6. Test 1280 first, then 768/375.
 
 ## Constraints / Things NOT to Touch
-- Do not invent business features, metrics, clients, projects, or imagery.
-- Do not add stock assets or copy the reference artwork.
+- Do not invent business facts, metrics, clients, projects, or imagery.
+- Do not add stock/reference artwork.
 - Do not remove working contact/booking/SMTP/honeypot functionality.
-- No dark theme. No decorative multi-stop gradients.
-- No random bright colours; avoid making blue the dominant background colour.
-- No looping background animations, parallax, or distracting motion. Any ambience must be static and subtle.
-- No modal reintroduction.
-- No bulk line-ending/rewrite scripts.
+- No dark theme; charcoal may be used as a chapter surface, but not as a full site dark mode.
+- No decorative gradients, looping background animations, or parallax.
+- No excessive shadows or floating-card effects.
 - `origin/main` only.
-- Never commit YAML files.
-- Secondary pages are not the visual acceptance target in this pass, except `pages/custom_websites.html`, where price removal is explicitly required.
-
-## Known Trade-offs
-- Secondary pages may remain visually behind the landing page until a later rollout; this is intentional.
-- Because the repo has limited imagery, typography, warm-neutral colour blocking, founder photography, and iconography must carry more of the visual composition.
-
-## Open Questions
-None. Implement decisively from the Bento 07 composition reference and the warm-neutral/Japandi direction above.
+- Never commit YAML.
+- Do not redesign secondary pages except the explicit software pricing removal.
 
 ## Phases
-### Phase 1: Logic cleanup + reference cleanup
-- Goal: remove obsolete eBay/RAWG/render leftovers and stale documentation while preserving current functionality.
-- Exit: no dead references or obsolete feature names remain.
-- Files: cleanup list above.
+### Phase 1: Landing-page structural redesign
+- Goal: change `index.html` + homepage CSS so the landing page is visibly full-width, chaptered, and Bento 07-inspired.
+- Exit: at 1280px the page no longer looks centered/blue/card-based.
+- Files: landing-page list.
 
-### Phase 2: Landing-page redesign
-- Goal: transform `index.html` decisively using the Bento 07 composition language, full-width section transitions, and the warm-neutral/Japandi colour direction.
-- Exit: at 1280px the landing page clearly reads as an immersive asymmetric editorial composition, not a centered card stack.
-- Files: landing-page design list above.
+### Phase 2: Software pricing removal + legacy cleanup
+- Goal: remove software pricing and obsolete runtime/doc references without breaking active features.
+- Exit: no prices and no dead/legacy references.
+- Files: pricing + cleanup lists.
 
-### Phase 3: Software page pricing removal
-- Goal: remove all pricing from the software/web-app page while preserving its service story and CTAs.
-- Exit: no visible prices or pricing UI remain.
-- Files: `pages/custom_websites.html`, `css/custom_websites.css`.
-
-### Phase 4: Final verification
-- Goal: browser-test 1280/768/375, console, overflow, font loading, links, forms, software-page pricing absence, and asset references.
-- Exit: all Completion Criteria pass and Claude has committed/pushed to `origin/main`.
-- Files: same lists, fixes only.
+### Phase 3: Verification
+- Goal: browser-test 1280/768/375, console, overflow, font loading, links and forms.
+- Exit: all Completion Criteria pass; commit pushed to `origin/main`.
+- Files: fixes only from the scoped lists.
