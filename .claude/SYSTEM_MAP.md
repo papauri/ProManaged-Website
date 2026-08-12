@@ -1,6 +1,6 @@
 # SYSTEM_MAP.md — ProManaged IT current tree
 
-> Updated 2026-08-13 after the Signal & Systems visual, responsive bento, form and email work.
+> Updated 2026-08-13 after the Signal & Systems visual, responsive bento, form, email and wide-desktop composition work.
 
 ## Pages (7)
 All seven share one visual system: bento navigation, canonical footer, Plus Jakarta Sans, warm-neutral palette, editorial chapter rhythm, responsive block compositions and shared motion.
@@ -21,6 +21,7 @@ All seven share one visual system: bento navigation, canonical footer, Plus Jaka
 - Blue is reserved for interaction/identity.
 - Plus Jakarta Sans is the sole intended type family for every text role.
 - `--rail-visual` controls composition width independently from `--measure*` text widths.
+- `--rail-visual` is now 2200px for large displays, with responsive gutters. At 1600px+ the rail is intended to visually occupy most of the available canvas rather than read as a narrow centered island.
 - Bento geometry uses unequal spans, varied aspect ratios, offsets and open editorial space.
 
 ## Navigation — Bento Control Panel
