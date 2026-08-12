@@ -90,8 +90,8 @@
     <div id="hero-section"> <!-- Hero dynamically loaded -->
 
         <section id="home" class="hero">
-            <div class="container hero-content">
-                <div class="hero-main">
+            <div class="container hero-grid">
+                <div class="hero-tile hero-tile-headline">
                     <span class="hero-eyebrow">Ireland &middot; Malawi &middot; Worldwide</span>
                     <h1 id="hero-title">Software, Hardware & Network Solutions</h1>
                     <p id="hero-subtitle">We build web apps and SaaS platforms, source IT and gaming hardware, and set up networks — with local support in Ireland and Malawi.</p>
@@ -100,28 +100,20 @@
                         <a href="learn_more.html" class="btn secondary" id="hero-learn-more">Learn More</a>
                     </div>
                 </div>
-                <div class="hero-facts">
-                    <div class="hero-fact">
-                        <i class="fas fa-earth-africa" aria-hidden="true"></i>
-                        <div class="hero-fact-body">
-                            <span class="hero-fact-title">Ireland &amp; Malawi</span>
-                            <span class="hero-fact-desc">Local support on two continents</span>
-                        </div>
-                    </div>
-                    <div class="hero-fact">
-                        <i class="fas fa-layer-group" aria-hidden="true"></i>
-                        <div class="hero-fact-body">
-                            <span class="hero-fact-title">3 Core Services</span>
-                            <span class="hero-fact-desc">Software &middot; Hardware &middot; Networks</span>
-                        </div>
-                    </div>
-                    <div class="hero-fact">
-                        <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
-                        <div class="hero-fact-body">
-                            <span class="hero-fact-title">Pay Locally</span>
-                            <span class="hero-fact-desc">Local currency, no forex hassle</span>
-                        </div>
-                    </div>
+                <div class="hero-tile hero-tile-stat">
+                    <i class="fas fa-layer-group" aria-hidden="true"></i>
+                    <span class="hero-tile-figure">3</span>
+                    <span class="hero-tile-label">Core Services — Software &middot; Hardware &middot; Networks</span>
+                </div>
+                <div class="hero-tile hero-tile-fact">
+                    <i class="fas fa-earth-africa" aria-hidden="true"></i>
+                    <span class="hero-tile-title">Ireland &amp; Malawi</span>
+                    <span class="hero-tile-desc">Local support on two continents</span>
+                </div>
+                <div class="hero-tile hero-tile-fact">
+                    <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
+                    <span class="hero-tile-title">Pay Locally</span>
+                    <span class="hero-tile-desc">Local currency, no forex hassle</span>
                 </div>
             </div>
         </section>
@@ -136,13 +128,15 @@
                         <h2>Discover the ProManaged IT Difference</h2>
                         <p>From Ireland to Malawi and beyond, we're here to simplify your tech journey. Whether you're buying your child their first laptop or upgrading your own gear, we'll guide you every step of the way.</p>
                     </div>
-                    <div class="why-tile">
-                        <i class="fas fa-hand-holding-dollar" aria-hidden="true"></i>
-                        <p>Need advice before making a purchase? We've got you covered. Pay in your local currency, and let us handle everything from ordering to delivery — no stress, no confusion.</p>
-                    </div>
-                    <div class="why-tile">
-                        <i class="fas fa-handshake" aria-hidden="true"></i>
-                        <p>ProManaged IT is more than a service; it's your partner in bridging the gap between technology and your needs, wherever you are. Let us make IT work for you!</p>
+                    <div class="why-support">
+                        <div class="why-support-item">
+                            <i class="fas fa-hand-holding-dollar" aria-hidden="true"></i>
+                            <p>Need advice before making a purchase? We've got you covered. Pay in your local currency, and let us handle everything from ordering to delivery — no stress, no confusion.</p>
+                        </div>
+                        <div class="why-support-item">
+                            <i class="fas fa-handshake" aria-hidden="true"></i>
+                            <p>ProManaged IT is more than a service; it's your partner in bridging the gap between technology and your needs, wherever you are. Let us make IT work for you!</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -197,7 +191,7 @@
                     <div class="about-photo">
                         <img src="images/founder.png" alt="John-Paul Chirwa - Founder of ProManaged IT" class="founder-photo">
                     </div>
-                    <div class="about-text">
+                    <div class="about-story">
                         <h3>Welcome to ProManaged IT</h3>
                         <p>
                             Hi, I’m <strong>John-Paul Chirwa</strong>, the founder of ProManaged IT. My passion for technology and innovation drives this company. Our mission? To make IT solutions accessible, reliable, and tailored for individuals and businesses of all sizes.
@@ -205,11 +199,9 @@
                         <p>
                             Whether it's a custom web app, a SaaS platform, network setup, or sourcing hardware, we’re here to simplify your technology challenges. By bridging global expertise with local support — especially in Malawi and Africa — we deliver unmatched value.
                         </p>
-                        <p class="cta-text">
-                            <strong>Let us make your IT experience seamless.</strong>
-                        </p>
                     </div>
                 </div>
+                <p class="about-statement"><strong>Let us make your IT experience seamless.</strong></p>
             </div>
         </section>
     </div>

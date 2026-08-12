@@ -1,6 +1,6 @@
 .mission-vision-panes {
     padding: var(--space-24) 20px;
-    background: var(--color-surface);
+    background: var(--color-surface-2);
     text-align: center;
 }
 
@@ -42,8 +42,17 @@
     padding: var(--space-12) var(--space-10);
 }
 
+/* Vision is a plain flowing text block, not a second card — keeps the pair deliberately unequal. */
 .pane-card:nth-child(2) {
     grid-column: span 5;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: var(--space-12) var(--space-4);
+}
+
+.pane-card:nth-child(2):hover {
+    transform: none;
 }
 
 .pane-label {

@@ -2,9 +2,16 @@
    Import this FIRST, before any other stylesheet, on every page. */
 :root {
   /* ---- Color: neutral (slate) scale ---- */
+  /* Surface hierarchy: --color-bg is the elevated white surface (cards, dominant blocks);
+     --color-surface is the cool off-white section wash; --color-surface-2 is the deeper
+     muted-slate band — sections alternate between these three to create visible rhythm
+     instead of reading as one flat white page. */
   --color-white: #ffffff;
   --color-bg: #ffffff;
-  --color-surface: #f8fafc;
+  --color-surface: #f6f8fb;
+  /* Kept at the original #f1f5f9 rather than a darker "muted slate" — darkening it
+     below this point drops var(--color-accent) text (footer links, .pane-label) under
+     the 4.5:1 AA threshold at normal text sizes. */
   --color-surface-2: #f1f5f9;
   --color-border: #e2e8f0;
   --color-neutral-100: #f1f5f9;

@@ -1,8 +1,9 @@
-/* "Why ProManaged IT" — inline bento band (replaces the old welcome-popup modal) */
+/* "Why ProManaged IT" — inline bento band (replaces the old welcome-popup modal).
+   One dominant accent statement block + one supporting compartment (split in two
+   internally by a hairline, not two more bordered cards) — a mosaic, not a card row. */
 .why-band {
     padding: var(--space-16) var(--container-pad);
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface-2);
 }
 
 .why-grid {
@@ -10,31 +11,16 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(var(--bento-cols), 1fr);
-    grid-auto-flow: dense;
-    grid-auto-rows: 1fr;
     gap: var(--bento-gap);
-}
-
-.why-tile {
-    grid-column: span 3;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-8);
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.why-tile:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
+    align-items: stretch;
 }
 
 .why-tile-lead {
     grid-column: span 6;
-    grid-row: span 1;
     background: var(--color-accent);
     color: var(--color-accent-contrast);
+    border-radius: var(--radius-lg);
+    padding: var(--space-10);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,13 +31,29 @@
     margin-bottom: var(--space-3);
 }
 
-.why-tile.why-tile-lead p {
+.why-tile-lead p {
     color: rgba(255, 255, 255, 0.9);
     line-height: var(--leading-normal);
     margin: 0;
 }
 
-.why-tile i {
+.why-support {
+    grid-column: span 6;
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.why-support-item {
+    padding: var(--space-10) var(--space-8);
+}
+
+.why-support-item + .why-support-item {
+    border-left: 1px solid var(--color-border);
+}
+
+.why-support-item i {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,25 +66,26 @@
     margin-bottom: var(--space-4);
 }
 
-.why-tile p {
+.why-support-item p {
     color: var(--color-text-muted);
     line-height: var(--leading-normal);
     margin: 0;
 }
 
 @media (max-width: 900px) {
-    .why-tile {
-        grid-column: span 6;
-    }
-
-    .why-tile-lead {
+    .why-tile-lead,
+    .why-support {
         grid-column: span 12;
     }
 }
 
-@media (max-width: 480px) {
-    .why-tile,
-    .why-tile-lead {
-        grid-column: span 12;
+@media (max-width: 600px) {
+    .why-support {
+        grid-template-columns: 1fr;
+    }
+
+    .why-support-item + .why-support-item {
+        border-left: none;
+        border-top: 1px solid var(--color-border);
     }
 }
