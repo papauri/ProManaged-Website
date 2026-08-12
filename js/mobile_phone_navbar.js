@@ -32,6 +32,17 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = 'hidden';
         document.documentElement.classList.add('nav-is-open');
 
+        // Anchor the unfold to the control the visitor actually pressed, so the panel
+        // grows out of it the way an app opens from its icon. Measured at open time
+        // rather than hard-coded because the control moves with --rail-pad across
+        // breakpoints. Percentages keep the origin correct if the viewport is
+        // resized while the panel is open.
+        const box = trigger.getBoundingClientRect();
+        if (box.width) {
+            panel.style.setProperty('--nav-origin-x', ((box.left + box.width / 2) / window.innerWidth * 100) + '%');
+            panel.style.setProperty('--nav-origin-y', ((box.top + box.height / 2) / window.innerHeight * 100) + '%');
+        }
+
         panel.hidden = false;
         trigger.setAttribute('aria-expanded', 'true');
         // The label described the ACTION but never changed, so a screen reader

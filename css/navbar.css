@@ -30,19 +30,20 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-3);
+    /* No chip, plate or pill. The mark and the word sit directly on the page and
+       take their colour from whatever is behind them, so the control belongs to the
+       hero instead of floating above it in its own box. The touch target is held by
+       min-height plus the vertical padding, not by a visible surface. */
     min-height: 48px;
-    padding: var(--space-2) var(--space-3) var(--space-2) var(--space-2);
-    background: rgba(255, 253, 250, 0.86);
-    -webkit-backdrop-filter: saturate(180%) blur(14px);
-    backdrop-filter: saturate(180%) blur(14px);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 1px 2px rgba(28, 27, 25, .06), 0 10px 24px -16px rgba(28, 27, 25, .5);
+    padding: var(--space-2) var(--space-2) var(--space-2) 0;
+    background: none;
+    border: 0;
+    border-radius: var(--radius);
+    box-shadow: none;
     cursor: pointer;
     font-family: var(--font-primary);
     -webkit-tap-highlight-color: transparent;
-    transition: transform var(--transition), box-shadow var(--transition),
-        border-color var(--transition), opacity var(--transition), background var(--transition);
+    transition: opacity var(--transition), transform var(--transition);
 }
 
 /* The mark is dark navy and would disappear into the graphite hero. It is re-inked
@@ -98,17 +99,12 @@
 .nav-trigger-bars span:nth-child(3) { width: 84% }
 
 @media (hover: hover) {
-    .nav-trigger:hover {
-        transform: translateY(-2px);
-        border-color: var(--color-border-strong);
-        box-shadow: 0 2px 4px rgba(28, 27, 25, .07), 0 18px 34px -18px rgba(28, 27, 25, .6);
-    }
-
-    /* All three resolve to full width — the control "completes" on hover. */
+    /* All three bars resolve to full width — the control "completes" on hover.
+       That is the whole affordance now that there is no box to lift. */
     .nav-trigger:hover .nav-trigger-bars span { width: 100% }
 }
 
-.nav-trigger:active { transform: translateY(0) }
+.nav-trigger:active { transform: scale(.97) }
 
 .nav-trigger:focus-visible {
     outline: 2px solid var(--color-accent);
@@ -133,25 +129,8 @@
 
    js/main.js owns the .nav-over-hero flag. Without JS the class is never added and
    the control stays the solid chip — legible everywhere, just not blended. */
-.nav-over-hero .nav-trigger {
-    background: rgba(247, 243, 236, .07);
-    border-color: rgba(247, 243, 236, .22);
-    box-shadow: inset 0 1px 0 rgba(247, 243, 236, .10);
-    -webkit-backdrop-filter: saturate(150%) blur(12px);
-    backdrop-filter: saturate(150%) blur(12px);
-}
-
 .nav-over-hero .nav-trigger-word { color: var(--color-text-on-dark) }
 .nav-over-hero .nav-trigger-bars span { background: var(--color-accent-earth-soft) }
-
-@media (hover: hover) {
-    .nav-over-hero .nav-trigger:hover {
-        background: rgba(247, 243, 236, .13);
-        border-color: rgba(247, 243, 236, .42);
-        box-shadow: inset 0 1px 0 rgba(247, 243, 236, .16), 0 16px 30px -18px rgba(0, 0, 0, .8);
-    }
-}
-
 .nav-over-hero .nav-trigger:focus-visible { outline-color: var(--color-text-on-dark) }
 
 /* Hidden while the panel is open — the panel carries its own brand and close
@@ -177,24 +156,48 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     opacity: 0;
-    /* Kept at 260ms: js/mobile_phone_navbar.js sets `hidden` 280ms after close, so a
-       longer fade here would be cut off mid-flight. */
-    transition: opacity 260ms var(--ease-out);
+    /* The surface itself expands out of the control rather than cross-fading in
+       place, so opening reads as the menu unfolding from the thing you pressed —
+       the way an app opens from its icon. The origin is the control's own centre,
+       written by js/mobile_phone_navbar.js as --nav-origin-x / --nav-origin-y; the
+       fallback is the control's resting position at the top left.
+
+       Durations are asymmetric on purpose. Opening is expansive; closing must finish
+       inside the 280ms after which the script sets `hidden`, or the collapse would be
+       cut off mid-flight. These are the CLOSE values — the open values are on
+       .is-open below. */
+    transform: scale(.86);
+    transform-origin: var(--nav-origin-x, 6%) var(--nav-origin-y, 4%);
+    transition: opacity 170ms var(--ease-out), transform 200ms var(--ease-out);
 }
 
 /* `hidden` must win over the display used above, or the panel would stay in the
    layout and swallow clicks while "closed". */
 .nav-panel[hidden] { display: none }
 
-.nav-panel.is-open { opacity: 1 }
-.nav-panel.is-open .nav-panel-rail { opacity: 1; transform: none }
+/* Opening: the surface unfolds first, the content resolves just behind it. */
+.nav-panel.is-open {
+    opacity: 1;
+    transform: none;
+    /* The fill resolves in 140ms while the scale keeps running for 460ms, so what
+       expands is an OPAQUE surface. Ramping the opacity over the full scale instead
+       left the page ghosting through the panel for a quarter of a second, which read
+       as two layers fighting rather than one surface unfolding. */
+    transition: opacity 140ms var(--ease-out), transform 460ms var(--ease-out);
+}
+
+.nav-panel.is-open .nav-panel-rail {
+    opacity: 1;
+    transform: none;
+    transition: opacity 300ms var(--ease-out) 90ms, transform 420ms var(--ease-out) 90ms;
+}
 
 /* Shares the page's visual rail, so the panel is a composition on the same grid as
    the chapters behind it rather than a separately-sized overlay. */
 .nav-panel-rail {
     opacity: 0;
-    transform: translate3d(0, 10px, 0);
-    transition: opacity 240ms var(--ease-out) 40ms, transform 340ms var(--ease-out) 40ms;
+    transform: translate3d(0, 14px, 0);
+    transition: opacity 150ms var(--ease-out), transform 180ms var(--ease-out);
     min-height: 100%;
     max-width: var(--rail-visual);
     margin-inline: auto;
@@ -568,8 +571,13 @@
 /* Reduced motion: the panel appears without assembly, immediately usable. */
 @media (prefers-reduced-motion: reduce) {
     .nav-panel,
+    .nav-panel.is-open,
     .nav-panel-rail,
+    .nav-panel.is-open .nav-panel-rail,
     .nav-tile { transition: none }
+    .nav-panel,
     .nav-panel-rail,
-    .nav-tile { opacity: 1; transform: none }
+    .nav-tile { transform: none }
+    .nav-panel-rail,
+    .nav-tile { opacity: 1 }
 }
