@@ -90,6 +90,11 @@ h1, h2, h3, h4 {
     flex-shrink: 0;
 }
 
+/* Darker body copy on the tinted featured tile — subtle grey misses AA there */
+.features-grid .feature-item:first-child p {
+    color: var(--color-text-muted);
+}
+
 /* Services Section */
 .services-section {
     padding: var(--space-16) 20px;
