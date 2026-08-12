@@ -1,163 +1,78 @@
 # SYSTEM_MAP.md — ProManaged IT current tree
 
-> Rewritten 2026-08-12 after the "Signal & Systems" full-site redesign.
-> This describes the repository as it actually is now.
+> Updated 2026-08-13 after the Signal & Systems visual, responsive bento, form and email work.
 
 ## Pages (7)
-All seven share one shell: the bento navigation, canonical footer, the shared editorial hero,
-one type scale and one chapter rhythm. Page files add content only.
+All seven share one visual system: bento navigation, canonical footer, Plus Jakarta Sans, warm-neutral palette, editorial chapter rhythm, responsive block compositions and shared motion.
 
-1. **index.html** — landing page and primary design reference. Chapter order is fixed:
-   Hero (`#home`) → What ProManaged Is (`#what-we-are`) → Build/Source/Connect (`#services`)
-   → How We Work (`#how-we-work`) → Founder/Story (`#about`) → Mission/Vision (`#mission-vision`)
-   → Contact (`#contact`) → Footer.
-2. **get-started.html** — guided intake ("bring us the problem") + the site's single real
-   booking form (`#booking`).
-3. **learn_more.html** — how we work: who we help, the four-step method, what we take on,
-   what to expect.
-4. **privacy_policy.html** — same shell as every other page; legal copy is unchanged and
-   must stay that way.
-5. **pages/custom_websites.html** — Build. Software / web apps / SaaS. **Contains no prices.**
-6. **pages/hardware_sourcing.html** — Source. Sourcing, supplier coordination, delivery,
-   local-friendly payment. Carries the equipment-request form.
-7. **pages/network_infrastructure.html** — Connect. Satellite/fibre, WiFi, cabling, security,
-   monitoring, maintenance.
+1. `index.html` — landing page: Hero → What ProManaged Is → Build/Source/Connect → How We Work → Founder/Story → Mission/Vision → Contact → Footer.
+2. `get-started.html` — guided intake + booking form.
+3. `learn_more.html` — how we work and what to expect.
+4. `privacy_policy.html` — shared shell with unchanged legal copy.
+5. `pages/custom_websites.html` — Build: software/web apps/SaaS; no visible pricing.
+6. `pages/hardware_sourcing.html` — Source: sourcing + equipment request form.
+7. `pages/network_infrastructure.html` — Connect: networking/connectivity.
 
 ## Design system
-`css/tokens.css` is the single source of truth and the only file allowed to hold a raw colour.
-Palette: warm neutrals (paper/ivory/stone/sand/greige) + graphite, a restrained earthy accent
-(`--color-accent-earth`) carrying the decorative weight, and blue reserved for interaction and
-identity (buttons, links, focus).
+`css/tokens.css` is the only raw-colour source.
 
-**Typography is ONE family — Plus Jakarta Sans — for every text role** (headings, body,
-navigation, buttons, form controls, labels, captions, footer). Loaded once per page from a
-single Google Fonts request. `--font-display` and `--font-sans` are kept as readable role
-aliases but both resolve to `--font-primary`; there is no second family. Because the display
-face is now a sans, hierarchy comes from weight and tracking: `--weight-display: 800` with
-`--tracking-display: -0.035em` for oversized statement type. Any rule that sets the display
-face at `--weight-normal` is a bug — 400 is far too light at those sizes.
+- Surfaces: paper / ivory / stone / sand / greige / graphite.
+- Earthy accent carries decorative weight.
+- Blue is reserved for interaction/identity.
+- Plus Jakarta Sans is the sole intended type family for every text role.
+- `--rail-visual` controls composition width independently from `--measure*` text widths.
+- Bento geometry uses unequal spans, varied aspect ratios, offsets and open editorial space.
 
-Fluid display scale, one radius set, two shadows, and `--section-y` as the one chapter
-rhythm.
+## Navigation — Bento Control Panel
+There is no horizontal navbar strip.
 
-### Width: two independent constraints
-This is the rule that keeps a very wide desktop readable, and it is easy to break by
-accident:
+- `#nav-trigger` is a persistent ProManaged logo tile and navigation trigger.
+- `#nav-panel` is a full-viewport bento of destination tiles.
+- Desktop, tablet and mobile use the same concept but recompose tile spans/layout.
+- `js/mobile_phone_navbar.js` owns focus trap, Escape, scroll lock, focus restore and `aria-expanded`.
 
-- **`--rail-visual` (1880px)** is how wide the COMPOSITION may get — grids, blocks, the
-  hero, the navigation panel. `.rail`/`.container` use it. `--rail-max` is kept only as
-  an alias because existing rules read that name.
-- **`--measure` (62ch) / `--measure-tight` / `--measure-display` (26ch)** are how wide
-  TEXT may get, applied separately.
+## Signature motion
+`js/main.js` + shared CSS implement Building Blocks / Weighted Block Settle.
 
-The rail must never be the thing that sets line length. Widening the rail without a
-matching text cap is what turns a 1880px page into 200-character lines. Chapter
-compositions that need to fill the wide rail do so by adding COLUMNS (see the lead
-capability block in `service_cards.css`), never by letting a paragraph run wider.
+Approved variants:
+- `settle-up`
+- `settle-side`
+- `scale-in`
+- `sequence-in`
 
-Wide-screen composition rules live behind `@media (min-width: 1600px)` in
-`hero_section.css`, `navbar.css`, `service_cards.css`, `about_section.css`,
-`mission_vision.css` and `why_band.css`. Nothing below 1600px is affected, so tablet
-and mobile layouts are unchanged by any of it.
+Motion applies to hero blocks, major chapter blocks, bento navigation tiles and the founder portrait — not individual text controls or legal copy. Desktop/tablet/mobile use different travel/stagger/duration values from `css/tokens.css`. `prefers-reduced-motion` immediately exposes final states.
 
-## Navigation — "Bento Control Panel"
-There is **no horizontal navbar strip** anywhere on the site; do not reintroduce one.
+## Founder
+`images/founder.png` is an 800x800 source and is rendered as a smaller responsive circular portrait with `object-fit: cover`; it must not be artificially upscaled.
 
-- **Trigger** (`#nav-trigger`, styled in `navbar.css`): a fixed logo tile carrying the mark
-  plus the word "Menu". It is both the brand anchor and the only navigation control, and it
-  stays visible at all times — the company identity is never hidden behind a menu glyph.
-- **Panel** (`#nav-panel`): a full-viewport bento of 7 destination tiles — Start a Project
-  (primary, largest, earthy fill), Home, Contact, How We Work, Software & Web Apps (wider:
-  Build is the lead capability), Hardware Sourcing, Network Infrastructure. Tiles assemble
-  with a staggered settle, the same block language as the page, finishing in ~560ms.
-- The homepage's in-page sections (About / Services / Mission & Vision) live in the panel's
-  secondary link row, so every previous destination is still reachable without nesting
-  anchors inside a tile.
-- Mobile uses the same full-screen bento in one column — never a drawer or hamburger list.
-- `js/mobile_phone_navbar.js` (path kept because every page references it) owns
-  `aria-expanded`, focus trap, Escape, background scroll lock with scrollbar compensation,
-  and returning focus to the trigger on close. `--header-h` is now the floating tile's
-  clearance, used by the hero's top padding and by `scroll-margin-top`.
+## Forms
+`js/form_intake.js` is the shared client-side behavior for contact, hardware request and booking forms.
 
-## CSS (19 files, all under `css/`, all referenced)
-Shared shell, loaded by every page: `tokens.css`, `global_styles.css`, `navbar.css`, `logo.css`,
-`hero_section.css`, `footer_promanaged.css`, `scroll_top.css`.
+- Inline validation and focus management.
+- Submitting state.
+- Success/error feedback.
+- Existing form actions, IDs, names and honeypot are preserved.
+- `css/contact_section.css` owns the shared bento intake-board presentation.
+- `css/book_appointment.css` layers booking-specific layout on the same system.
 
-`global_styles.css` owns the shared vocabulary: rails, `.section` chapters and surfaces,
-`.chapter-head`/`.eyebrow`/`.lede`, the `.grid` + `.block` editorial system (span and fill
-modifiers), `.mark`, `.step-num`, `.list`, `.process-steps`, `.btn`, `.cta-band` and the single
-responsive collapse. **Note:** the dark-surface text-colour overrides sit deliberately at the
-end of that file so they win the cascade at equal specificity — do not move them earlier.
+## Email architecture
+`php/contact.php` and `php/booking.php` call shared helpers in `php/mailer.php`.
 
-Homepage chapters: `why_band.css`, `service_cards.css`, `about_section.css`, `mission_vision.css`.
-Shared form chapters: `contact_section.css` (index + hardware_sourcing), `book_appointment.css`
-(get-started).
-Page-specific: `get-started.css`, `learn-more.css`, `privacy_policy.css`, `custom_websites.css`,
-`hardware_sourcing.css`, `networking.css`.
+- `pm_internal_email()` creates the internal triage/information-board email.
+- `pm_customer_email()` creates the customer confirmation.
+- Both return HTML + plain-text alternatives.
+- `pm_esc()` / `pm_esc_multiline()` escape submitted values before HTML output.
+- SMTP uses the authenticated account as From and the visitor only as Reply-To.
+- No secrets or server internals are included in messages.
 
-## Signature motion — "Weighted Block Settle"
-Large blocks settle into place: the hero composition assembles on load, then each major
-chapter assembles as it is scrolled to, and the bento navigation tiles use the same
-language. Only chapter-level blocks move — never a heading, paragraph, icon, list item or
-individual form control, and never legal/privacy copy.
+## PHP
+- `php/contact.php` — validates contact input and sends internal + customer mail.
+- `php/booking.php` — validates booking identity/service/date/time and sends internal + customer mail.
+- `php/mailer.php` — shared mail transport/templates.
+- `php/env.php` — environment loader; SMTP credentials remain outside committed source.
+- `php/vendor/PHPMailer/` — vendored PHPMailer.
 
-Tokens live in `tokens.css`; states live in `global_styles.css` and `navbar.css`.
-Measured shape: 24px rise, 1.5% scale settle, 80ms capped group stagger, ~560ms, and
-**exactly one** small landing overshoot (~2.1px) before coming to rest.
-
-- `--ease-settle` drives TRANSFORM and deliberately overshoots (y2 > 1). That single
-  overshoot is the whole spring character — there is no second oscillation.
-- `--ease-fade` drives OPACITY and never overshoots, over ~70% of the duration, so a
-  block is legible slightly before it stops moving.
-
-Only transform and opacity are animated, never a layout property, so the layout box is
-constant throughout (verify with `offsetLeft`/`offsetWidth`, **not**
-`getBoundingClientRect`, which includes the transform and will look like a layout shift).
-
-Two deliberately different mechanisms:
-
-- **Initial load** — `[data-assemble]` on the hero rail. Hidden by CSS via *element*
-  selectors (`.js-on [data-assemble] .hero-statement`…), gated on a `.js-on` class set by a
-  tiny inline `<head>` script so the rule is live **before first paint**. This is the whole
-  point: a JS-added class could only apply after paint, letting the hero render and then
-  blink out. `main.js` staggers `.is-settled` onto the three hero blocks, then removes the
-  `data-assemble` attribute, which makes every hiding rule stop matching at once.
-- **Scroll** — `data-blocks` on each major chapter `<section>`. `main.js` applies
-  `.block-reveal` to that chapter's blocks and an IntersectionObserver settles them with a
-  capped stagger. These start below the fold, so a JS-applied class cannot flash.
-
-Guarantees, all covered by `qa-motion`: no JS → nothing is ever hidden; reduced motion →
-nothing is scheduled and CSS forces everything visible; a 4s safety net clears any stuck
-state; chapters already on screen at load are skipped; and the animation is transform +
-opacity only, so the layout box never changes (verified via `offsetLeft`/`offsetWidth`,
-not `getBoundingClientRect`, which would include the transform).
-
-## JS (6 files, all under `js/`, all referenced)
-- `main.js` — loaded on all 7 pages. Capability-block navigation (`.service-card[data-target]`,
-  keyboard-activatable), smooth scroll for in-page anchors (offset read from `--header-h`,
-  and matching `index.html#about` against the current page so panel links scroll rather than
-  reload when already home), the building-block motion system described above, and the
-  back-to-top control.
-- `mobile_phone_navbar.js` — the bento navigation panel (see above), all 7 pages. The
-  filename is legacy; the behaviour is not.
-- `contact__form.js` — contact + equipment-request form submit (index, hardware_sourcing).
-- `booking_form.js` — booking form submit (get-started).
-- `custom_websites.js` — FAQ accordion class toggle (custom_websites).
-- `networking.js` — geolocation-based currency display over `.price-info` / `.service-fee`
-  (network_infrastructure). The price plates in that page's markup are its contract.
-
-## PHP (4 files, all under `php/`)
-`contact.php` and `booking.php` send via SMTP through vendored PHPMailer
-(`php/vendor/PHPMailer/`) using `mailer.php` + `env.php` and an untracked root `.env`.
-Both forms use a `website` honeypot field. There is no Node backend and no third-party
-API integrations.
-
-## Assets
-`images/icon.png` (logo + favicon), `images/founder.png` (founder portrait, used as the large
-visual anchor in the homepage About chapter).
-
-## Known non-blocking backlog
-- Plus Jakarta Sans and Font Awesome are served from CDNs; self-hosting would remove the
-  external dependency.
-- `networking.js` requests browser geolocation on page load, which prompts the visitor. Worth
-  revisiting in favour of an explicit currency toggle.
+## Cleanup / current state
+- Old `js/contact__form.js` and `js/booking_form.js` were replaced by shared `js/form_intake.js`.
+- Render.com repository audit found no actual Render deployment dependency; normal UI uses of the word “render” remain valid.
+- No pricing is present on the software page.
