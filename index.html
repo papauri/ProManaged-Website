@@ -158,7 +158,7 @@
     </div>
 
     <!-- ================= 2. WHAT PROMANAGED IS ================= -->
-    <section id="what-we-are" class="section section--ivory why-band" data-blocks>
+    <section id="what-we-are" class="section section--ivory why-band" data-blocks="settle-side">
         <div class="rail">
             <div class="grid why-grid">
                 <div class="block block--7 block--bare why-lead">
@@ -198,7 +198,7 @@
     </section>
 
     <!-- ================= 3. BUILD / SOURCE / CONNECT ================= -->
-    <section id="services" class="section services" aria-labelledby="services-title" data-blocks>
+    <section id="services" class="section services" aria-labelledby="services-title" data-blocks="scale-in">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">Capabilities</span>
@@ -267,7 +267,7 @@
     </section>
 
     <!-- ================= 4. HOW WE WORK ================= -->
-    <section id="how-we-work" class="section section--graphite process" data-blocks>
+    <section id="how-we-work" class="section section--graphite process" data-blocks="sequence-in">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">How we work</span>
@@ -300,11 +300,11 @@
     </section>
 
     <!-- ================= 5. FOUNDER / STORY ================= -->
-    <section id="about" class="section section--ivory about" data-blocks>
+    <section id="about" class="section section--ivory about" data-blocks="settle-side">
         <div class="rail">
             <div class="about-grid">
                 <figure class="about-portrait">
-                    <img src="images/founder.png" alt="John-Paul Chirwa, founder of ProManaged IT" width="960" height="1200">
+                    <img src="images/founder.png" alt="John-Paul Chirwa, founder of ProManaged IT" width="800" height="800" loading="lazy" decoding="async">
                 </figure>
                 <div class="about-story">
                     <span class="eyebrow">The person behind it</span>
@@ -319,7 +319,7 @@
     </section>
 
     <!-- ================= 6. MISSION / VISION ================= -->
-    <section id="mission-vision" class="section mission-vision" data-blocks>
+    <section id="mission-vision" class="section mission-vision" data-blocks="scale-in">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">What we are aiming at</span>
@@ -340,7 +340,7 @@
 
     <!-- ================= 7. CONTACT ================= -->
     <div id="contact-section">
-        <section id="contact" class="section section--stone contact" data-blocks>
+        <section id="contact" class="section section--stone contact" data-blocks="settle-up">
             <div class="rail">
                 <div class="contact-grid">
                     <div class="contact-invite">
@@ -367,40 +367,61 @@
                     </div>
 
                     <div class="contact-form-wrap">
-                        <!-- Feedback message placeholder (filled by js/contact__form.js) -->
+                        <!-- Feedback message placeholder (filled by js/form_intake.js) -->
                         <div id="form-feedback" class="form-feedback" role="status" aria-live="polite"></div>
 
-                        <form class="contact-form" id="contact-form" action="php/contact.php" method="POST">
-                            <div class="form-group">
-                                <div class="input-container">
-                                    <input type="text" id="name" name="name" placeholder=" " required>
-                                    <label for="name">Full Name</label>
-                                </div>
+                        <form class="intake" id="contact-form" action="php/contact.php" method="POST">
+                            <div class="intake-grid">
+                                <fieldset class="intake-group intake-group--lead">
+                                    <legend class="intake-legend">
+                                        <span class="intake-step">01</span>
+                                        <span class="intake-title">You</span>
+                                    </legend>
+                                    <p class="intake-hint">So we know who we are talking to.</p>
+                                    <div class="field">
+                                        <input type="text" id="name" name="name" placeholder=" " required autocomplete="name" aria-describedby="name-msg">
+                                        <label for="name">Full name</label>
+                                        <span class="field-msg" id="name-msg" data-for="name"></span>
+                                    </div>
+                                    <div class="field-row">
+                                        <div class="field">
+                                            <input type="email" id="email" name="email" placeholder=" " required autocomplete="email" aria-describedby="email-msg">
+                                            <label for="email">Email address</label>
+                                            <span class="field-msg" id="email-msg" data-for="email"></span>
+                                        </div>
+                                        <div class="field">
+                                            <input type="tel" id="phone" name="phone" placeholder=" " required autocomplete="tel" aria-describedby="phone-msg">
+                                            <label for="phone">Phone number</label>
+                                            <span class="field-msg" id="phone-msg" data-for="phone"></span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="intake-group intake-group--message">
+                                    <legend class="intake-legend">
+                                        <span class="intake-step">02</span>
+                                        <span class="intake-title">What you need</span>
+                                    </legend>
+                                    <p class="intake-hint">A rough idea is plenty — we will ask the rest.</p>
+                                    <div class="field field--grow">
+                                        <textarea id="message" name="message" rows="5" placeholder=" " required aria-describedby="message-msg"></textarea>
+                                        <label for="message">Your message</label>
+                                        <span class="field-msg" id="message-msg" data-for="message"></span>
+                                    </div>
+                                </fieldset>
                             </div>
-                            <div class="form-group">
-                                <div class="input-container">
-                                    <input type="email" id="email" name="email" placeholder=" " required>
-                                    <label for="email">Email Address</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-container">
-                                    <input type="tel" id="phone" name="phone" placeholder=" " required>
-                                    <label for="phone">Phone Number</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-container">
-                                    <textarea id="message" name="message" rows="4" placeholder=" " required></textarea>
-                                    <label for="message">Your Message</label>
-                                </div>
-                            </div>
+
                             <div class="form-group hp-field" aria-hidden="true">
                                 <label for="website">Website</label>
                                 <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
                             </div>
-                            <div class="button-container">
-                                <button type="submit" class="btn primary">Send Message</button>
+
+                            <div class="intake-action">
+                                <button type="submit" class="btn primary intake-submit">
+                                    <span class="intake-submit-label">Send message</span>
+                                    <span class="intake-spinner" aria-hidden="true"></span>
+                                </button>
+                                <p class="intake-assurance">No obligation, and we reply to every message.</p>
                             </div>
                         </form>
                     </div>
@@ -463,7 +484,7 @@
 
     <script src="js/main.js" defer></script>
     <script src="js/mobile_phone_navbar.js" defer></script>
-    <script src="js/contact__form.js" defer></script>
+    <script src="js/form_intake.js" defer></script>
 </body>
 
 </html>

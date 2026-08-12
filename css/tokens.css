@@ -167,12 +167,54 @@
   --block-stagger: 80ms;
   --block-travel: 24px;
   --block-scale: 0.985;
+  /* scale-in variant starts from a slightly deeper scale than the settle variants. */
+  --block-scale-in: 0.955;
+  /* sequence-in deals its blocks out one at a time, so its gap is longer. */
+  --block-sequence-mult: 1.5;
   --ease-settle: cubic-bezier(0.18, 0.89, 0.32, 1.28);
   --ease-fade: cubic-bezier(0.16, 0.72, 0.24, 1);
+
+  /* ---- Founder portrait ----
+     images/founder.png is an 800x800 square source, so a circular crop needs no
+     upscaling: the largest size below is 260px, still under 2x DPR of the source. */
+  --portrait-size: 260px;
+
+  /* ---- Bento geometry ----
+     Media ratios used to break up the compositions. Blocks are deliberately NOT all
+     the same shape; these are the approved set. */
+  --ratio-portrait: 3 / 4;
+  --ratio-square: 1 / 1;
+  --ratio-landscape: 16 / 10;
+  --ratio-panorama: 21 / 9;
+}
+
+/* ---- Device-aware motion ----
+   Same motion language everywhere, scaled to the device. A 24px rise that reads as
+   weight on a 27" display reads as a lurch on a phone, where the whole viewport is
+   the size of one desktop block — so travel, stagger and duration all come down. */
+@media (max-width: 1024px) {
+  :root {
+    --block-travel: 18px;
+    --block-stagger: 60ms;
+    --block-duration: 480ms;
+    --block-scale-in: 0.965;
+    --portrait-size: 210px;
+  }
 }
 
 @media (max-width: 768px) {
   :root {
     --header-h: 80px;
+  }
+}
+
+@media (max-width: 680px) {
+  :root {
+    --block-travel: 12px;
+    --block-stagger: 45ms;
+    --block-duration: 420ms;
+    --block-scale: 0.99;
+    --block-scale-in: 0.975;
+    --portrait-size: 148px;
   }
 }

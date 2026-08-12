@@ -1,9 +1,14 @@
-/* contact_section.css — shared editorial contact styling.
-   Used by the contact chapter on index.html and the equipment-request chapter on
-   pages/hardware_sourcing.html. Visual only: form action, field `name` attributes,
-   IDs, the honeypot and the JS hooks are untouched. */
+/* contact_section.css — the bento intake board.
 
-/* Invitation on the left, form on the right — not a centred narrow card. */
+   Shared by the contact chapter on index.html and the equipment-request chapter on
+   pages/hardware_sourcing.html; book_appointment.css layers the booking-only bits on
+   top of the same system.
+
+   This is a composition of grouped surfaces, not one flat form box: each fieldset is
+   its own numbered block, fields inside are unequal (paired short fields, a full-width
+   message), and one primary action closes it. Form action, field `name` attributes,
+   IDs, labels and the honeypot are untouched — this is presentation only. */
+
 .contact-grid {
     display: grid;
     grid-template-columns: 5fr 7fr;
@@ -34,12 +39,13 @@
     color: var(--color-text);
     font-size: var(--text-base);
     text-decoration: none;
-    transition: color var(--transition);
+    transition: color var(--transition), padding-left var(--transition);
 }
 
 .contact-direct a:hover,
 .contact-direct a:focus {
     color: var(--color-accent-earth);
+    padding-left: var(--space-2);
 }
 
 .contact-direct i {
@@ -48,57 +54,173 @@
     color: var(--color-accent-earth);
 }
 
-/* ---------- Form ---------- */
-.contact-form {
-    width: 100%;
-    background: var(--color-paper);
+/* ---------- Intake board ---------- */
+.intake {
+    display: flex;
+    flex-direction: column;
+    gap: var(--grid-gap);
+}
+
+.intake-grid {
+    display: grid;
+    gap: var(--grid-gap);
+}
+
+.intake-group {
+    /* fieldset needs these reset before it will behave as a layout block. */
+    min-width: 0;
+    margin: 0;
+    padding: clamp(var(--space-5), 2vw, var(--space-8));
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: clamp(var(--space-6), 3vw, var(--space-10));
-    box-shadow: var(--shadow-sm);
-    text-align: left;
-}
-
-.form-group {
-    margin-bottom: var(--space-5);
-}
-
-.input-container {
-    position: relative;
-    width: 100%;
-}
-
-.input-container input,
-.input-container textarea {
-    width: 100%;
-    padding: var(--space-5) var(--space-4) var(--space-3);
-    border: 1px solid var(--color-border-strong);
-    border-radius: var(--radius);
-    outline: none;
-    font-family: var(--font-sans);
-    font-size: var(--text-base);
-    line-height: 1.4;
-    color: var(--color-text);
     background: var(--color-paper);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
     transition: border-color var(--transition), box-shadow var(--transition);
 }
 
-.input-container textarea {
-    display: block;
-    resize: vertical;
-    min-height: 8rem;
+/* The group the visitor is working in lifts slightly out of the board. */
+.intake-group:focus-within {
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-sm);
 }
 
-.input-container input:focus,
-.input-container textarea:focus {
+/* .intake-group is display:flex, so the legend participates as a flex item — no
+   float needed, and a float here would be ignored anyway. */
+.intake-legend {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 0;
+    width: 100%;
+    margin-bottom: var(--space-2);
+}
+
+.intake-step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    border-radius: var(--radius-full);
+    background: var(--color-accent-earth-soft);
+    color: var(--color-accent-earth-hover);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+}
+
+.intake-title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text);
+}
+
+/* The board's groups are ALWAYS light surfaces, even when the chapter around them is
+   graphite (the booking page). `.section--graphite p` is (0,1,1) and would otherwise
+   win over a bare `.intake-hint`, painting this ivory-on-white and all but invisible.
+   The `.intake` prefix raises specificity to (0,2,0) so the board owns its own text
+   colour regardless of the chapter it sits in. */
+.intake .intake-hint {
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+    margin: 0;
+    max-width: 46ch;
+}
+
+.intake .intake-group,
+.intake .intake-group p,
+.intake .intake-group label,
+.intake .intake-group li {
+    color: var(--color-text);
+}
+
+/* ---------- Fields ---------- */
+.field {
+    position: relative;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Paired short fields — the deliberate inequality against the full-width message. */
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+.field--grow {
+    flex: 1;
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: var(--space-6) var(--space-4) var(--space-3);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius);
+    outline: none;
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    line-height: 1.4;
+    color: var(--color-text);
+    background: var(--color-ivory);
+    transition: border-color var(--transition), box-shadow var(--transition),
+        background var(--transition);
+}
+
+.field textarea {
+    display: block;
+    resize: vertical;
+    min-height: 9rem;
+}
+
+.field select {
+    appearance: none;
+    cursor: pointer;
+    /* Room for the chevron drawn by .field--select::after. */
+    padding-right: var(--space-10);
+}
+
+.field--select {
+    position: relative;
+}
+
+.field--select::after {
+    content: '';
+    position: absolute;
+    right: var(--space-5);
+    top: 60%;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--color-text-subtle);
+    border-bottom: 2px solid var(--color-text-subtle);
+    transform: translateY(-50%) rotate(45deg);
+    pointer-events: none;
+}
+
+.field input:hover,
+.field select:hover,
+.field textarea:hover {
+    border-color: var(--color-greige);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    background: var(--color-paper);
     border-color: var(--color-accent);
     box-shadow: 0 0 0 3px var(--color-accent-soft);
 }
 
-/* Floating label. The input carries placeholder=" " so :placeholder-shown tracks
-   emptiness; the label is absolutely positioned and clipped so it can never widen
-   the field or the page. */
-.input-container label {
+/* ---------- Floating labels ----------
+   The input carries placeholder=" ", so :placeholder-shown tracks emptiness. The label
+   is absolutely positioned and clipped, so a long label can never widen the field. */
+.field label {
     position: absolute;
     top: var(--space-4);
     left: calc(var(--space-4) + 1px);
@@ -112,10 +234,14 @@
     transition: top var(--transition), font-size var(--transition), color var(--transition);
 }
 
-.input-container input:focus + label,
-.input-container input:not(:placeholder-shown) + label,
-.input-container textarea:focus + label,
-.input-container textarea:not(:placeholder-shown) + label {
+.field input:focus + label,
+.field input:not(:placeholder-shown) + label,
+.field textarea:focus + label,
+.field textarea:not(:placeholder-shown) + label,
+/* date/time/select always have a value, so their label sits raised permanently. */
+.field input[type="date"] + label,
+.field input[type="time"] + label,
+.field select + label {
     top: var(--space-2);
     font-size: var(--text-xs);
     font-weight: var(--weight-semibold);
@@ -124,34 +250,196 @@
     color: var(--color-accent-earth);
 }
 
-.button-container {
-    margin-top: var(--space-8);
+.field input:focus + label,
+.field textarea:focus + label,
+.field select:focus + label {
+    color: var(--color-accent);
 }
 
-.contact-form .btn {
-    width: 100%;
+/* ---------- Validation ----------
+   .is-invalid is set by the form script, never by :invalid alone — otherwise every
+   empty required field would be red before the visitor has typed anything. */
+.field-msg {
+    display: none;
+    margin-top: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-danger);
+}
+
+.field.is-invalid .field-msg {
+    display: block;
+}
+
+.field.is-invalid input,
+.field.is-invalid select,
+.field.is-invalid textarea {
+    border-color: var(--color-danger);
+    background: var(--color-paper);
+}
+
+.field.is-invalid input:focus,
+.field.is-invalid select:focus,
+.field.is-invalid textarea:focus {
+    box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.14);
+}
+
+/* ---------- Action ---------- */
+.intake-action {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-6);
+}
+
+.intake-submit {
+    position: relative;
+    min-width: 14rem;
+}
+
+.intake-assurance {
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+    margin: 0;
+    max-width: 34ch;
+}
+
+/* Submitting state: the button reports progress and blocks a second submit. */
+.intake-spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-top-color: var(--color-accent-contrast);
+    border-radius: 50%;
+    animation: intake-spin 700ms linear infinite;
+}
+
+.intake.is-sending .intake-spinner {
+    display: block;
+}
+
+.intake.is-sending .intake-submit {
+    pointer-events: none;
+    opacity: 0.75;
+}
+
+@keyframes intake-spin {
+    to { transform: rotate(360deg); }
 }
 
 /* ---------- Feedback ----------
-   js/contact__form.js sets textContent and an inline colour on this node (no class
-   toggle), so it stays hidden until it actually holds a message. */
+   js/form_intake.js writes into #form-feedback; it stays
+   hidden until it actually holds a message. */
 .form-feedback {
-    padding: var(--space-4);
-    margin-bottom: var(--space-5);
+    padding: var(--space-5);
     font-size: var(--text-base);
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
     border: 1px solid var(--color-border);
-    background: var(--color-ivory);
+    background: var(--color-paper);
     display: none;
 }
 
 .form-feedback:not(:empty) {
     display: block;
+    margin-bottom: var(--grid-gap);
 }
 
-@media (max-width: 900px) {
+.form-feedback.is-success {
+    border-color: var(--color-success);
+    background: #f0f8f2;
+    color: #14532d;
+}
+
+.form-feedback.is-error {
+    border-color: var(--color-danger);
+    background: #fdf2f2;
+    color: #7f1d1d;
+}
+
+/* Success: the board is replaced by the confirmation rather than sitting behind it. */
+.intake.is-sent {
+    display: none;
+}
+
+/* ---------- Desktop composition ----------
+   Two groups side by side with the message group taller, so the board is a bento
+   rather than two stacked strips. */
+@media (min-width: 901px) {
+    .intake-grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: stretch;
+    }
+
+    .intake-group--message {
+        display: flex;
+    }
+}
+
+/* Booking has three groups: identity and service share the top row, "when" spans. */
+@media (min-width: 901px) {
+    .booking-form .intake-grid {
+        grid-template-columns: 1.15fr 1fr;
+    }
+
+    .booking-form .intake-group--when {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (min-width: 1600px) {
+    .booking-form .intake-group--when .field-row {
+        grid-template-columns: 1fr 1fr 2fr;
+    }
+
+    /* The third column is intentionally empty space, so the two short date/time
+       fields stay short instead of stretching across the whole board. */
+    .booking-form .intake-group--when .field-row::after {
+        content: '';
+    }
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1024px) {
     .contact-grid {
         grid-template-columns: 1fr;
         gap: var(--space-10);
+    }
+}
+
+/* ---------- Mobile: a deliberate stack, not a squeezed grid ---------- */
+@media (max-width: 680px) {
+    .intake-group {
+        padding: var(--space-5);
+        gap: var(--space-4);
+    }
+
+    /* Paired fields separate — two half-width inputs are unusable at this size. */
+    .field-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+
+    .field textarea {
+        min-height: 7.5rem;
+    }
+
+    .intake-action {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .intake-submit {
+        width: 100%;
+    }
+
+    .intake-assurance {
+        max-width: none;
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .intake-spinner {
+        animation: none;
     }
 }

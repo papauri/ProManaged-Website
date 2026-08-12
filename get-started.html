@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/hero_section.css">
     <link rel="stylesheet" href="css/footer_promanaged.css">
     <link rel="stylesheet" href="css/scroll_top.css">
+    <link rel="stylesheet" href="css/contact_section.css">
     <link rel="stylesheet" href="css/get-started.css">
     <link rel="stylesheet" href="css/book_appointment.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
@@ -147,7 +148,7 @@
     </div>
 
     <!-- ================= WHAT TO BRING ================= -->
-    <section id="intake" class="section section--ivory" data-blocks>
+    <section id="intake" class="section section--ivory" data-blocks="scale-in">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">What to bring</span>
@@ -196,7 +197,7 @@
     </section>
 
     <!-- ================= PICK A STARTING POINT ================= -->
-    <section id="services" class="section services-section" data-blocks>
+    <section id="services" class="section services-section" data-blocks="scale-in">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">Pick a starting point</span>
@@ -239,7 +240,7 @@
     </section>
 
     <!-- ================= WHAT HAPPENS NEXT ================= -->
-    <section id="what-happens" class="section section--stone" data-blocks>
+    <section id="what-happens" class="section section--stone" data-blocks="sequence-in">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">What happens next</span>
@@ -271,7 +272,7 @@
     </section>
 
     <!-- ================= BOOKING (the site's single real booking form) ================= -->
-    <section id="booking" class="section section--graphite booking-section" data-blocks>
+    <section id="booking" class="section section--graphite booking-section" data-blocks="settle-up">
         <div class="rail booking-grid">
             <div class="booking-intro">
                 <span class="eyebrow">Book an appointment</span>
@@ -292,36 +293,78 @@
                     </div>
                 </div>
             </div>
-            <form id="booking-form" class="booking-form" action="php/booking.php" method="POST">
-                <div class="form-row">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
+            <div id="form-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+
+            <form class="intake booking-form" id="booking-form" data-success-message="Thanks — your requested time is with us. We will confirm by email, or offer the nearest slot that works." action="php/booking.php" method="POST">
+                <div class="intake-grid">
+                    <fieldset class="intake-group intake-group--lead">
+                        <legend class="intake-legend">
+                            <span class="intake-step">01</span>
+                            <span class="intake-title">You</span>
+                        </legend>
+                        <p class="intake-hint">Where we send the confirmation.</p>
+                        <div class="field">
+                            <input type="text" id="name" name="name" placeholder=" " required autocomplete="name" aria-describedby="name-msg">
+                            <label for="name">Name</label>
+                            <span class="field-msg" id="name-msg" data-for="name"></span>
+                        </div>
+                        <div class="field">
+                            <input type="email" id="email" name="email" placeholder=" " required autocomplete="email" aria-describedby="email-msg">
+                            <label for="email">Email</label>
+                            <span class="field-msg" id="email-msg" data-for="email"></span>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="intake-group intake-group--service">
+                        <legend class="intake-legend">
+                            <span class="intake-step">02</span>
+                            <span class="intake-title">What you need</span>
+                        </legend>
+                        <p class="intake-hint">Pick whichever is closest.</p>
+                        <div class="field field--select">
+                            <select id="service" name="service" required aria-describedby="service-msg">
+                                <option value="Software &amp; Web Apps" selected>Build &mdash; Software &amp; Web Apps</option>
+                                <option value="Network Infrastructure">Connect &mdash; Network Infrastructure</option>
+                                <option value="Hardware Sourcing">Source &mdash; Hardware Sourcing</option>
+                            </select>
+                            <label for="service">Service</label>
+                            <span class="field-msg" id="service-msg" data-for="service"></span>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="intake-group intake-group--when">
+                        <legend class="intake-legend">
+                            <span class="intake-step">03</span>
+                            <span class="intake-title">When suits</span>
+                        </legend>
+                        <p class="intake-hint">We confirm by email, or offer the nearest slot.</p>
+                        <div class="field-row">
+                            <div class="field">
+                                <input type="date" id="date" name="date" required aria-describedby="date-msg">
+                                <label for="date">Date</label>
+                                <span class="field-msg" id="date-msg" data-for="date"></span>
+                            </div>
+                            <div class="field">
+                                <input type="time" id="time" name="time" required aria-describedby="time-msg">
+                                <label for="time">Time</label>
+                                <span class="field-msg" id="time-msg" data-for="time"></span>
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
-                <div class="form-row">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-row">
-                    <label for="service">Service</label>
-                    <select id="service" name="service" required>
-                        <option value="Software & Web Apps" selected>Build — Software &amp; Web Apps</option>
-                        <option value="Network Infrastructure">Connect — Network Infrastructure</option>
-                        <option value="Hardware Sourcing">Source — Hardware Sourcing</option>
-                    </select>
-                </div>
-                <div class="form-row">
-                    <label for="date">Date</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-                <div class="form-row">
-                    <label for="time">Time</label>
-                    <input type="time" id="time" name="time" required>
-                </div>
+
                 <div class="form-row hp-field" aria-hidden="true">
                     <label for="website">Website</label>
                     <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
                 </div>
-                <button type="submit" class="btn primary">Confirm Appointment</button>
+
+                <div class="intake-action">
+                    <button type="submit" class="btn primary intake-submit">
+                        <span class="intake-submit-label">Request this time</span>
+                        <span class="intake-spinner" aria-hidden="true"></span>
+                    </button>
+                    <p class="intake-assurance">A request, not a charge — nothing is confirmed until we reply.</p>
+                </div>
             </form>
         </div>
     </section>
@@ -380,7 +423,7 @@
 
     <script src="js/main.js" defer></script>
     <script src="js/mobile_phone_navbar.js" defer></script>
-    <script src="js/booking_form.js" defer></script>
+    <script src="js/form_intake.js" defer></script>
 </body>
 
 </html>

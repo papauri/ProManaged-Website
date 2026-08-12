@@ -1,30 +1,49 @@
 /* about_section.css — homepage chapter 5, founder / story.
-   The founder portrait is a large editorial anchor, not a small circular avatar. */
+
+   BENTO PATTERN 2 of 3: "Offset editorial split".
+   The portrait is deliberately NOT the anchor any more — it is a small circular mark
+   that introduces the person, and the story carries the chapter. On desktop the
+   portrait sits in its own narrow rail beside an offset text column; on tablet it
+   moves inline above the story; on mobile it pairs with the signature line so the
+   chapter opens with a face rather than a wall of text. */
 
 .about-grid {
     display: grid;
-    grid-template-columns: 5fr 7fr;
-    gap: clamp(2.5rem, 5vw, 6rem);
-    align-items: center;
+    /* The portrait column is sized to the portrait, not to a fraction of the rail —
+       a small circle must never be stretched by the grid. */
+    grid-template-columns: var(--portrait-size) minmax(0, 1fr);
+    column-gap: clamp(2.5rem, 5vw, 6rem);
+    align-items: start;
 }
 
+/* ---------- Circular portrait ----------
+   images/founder.png is an 800x800 square source, so the square media box below is a
+   true 1:1 crop of a 1:1 file: no distortion, and no upscaling at any of the sizes in
+   tokens.css. object-position lifts the crop slightly so the face sits on the optical
+   centre of the circle rather than being cut at the chin. */
 .about-portrait {
+    width: var(--portrait-size);
+    height: var(--portrait-size);
+    aspect-ratio: var(--ratio-square);
     margin: 0;
-    border-radius: var(--radius-lg);
+    border-radius: 50%;
     overflow: hidden;
     background: var(--color-stone);
-    box-shadow: var(--shadow-lg);
-    /* A tall editorial crop rather than a square thumbnail. */
-    aspect-ratio: 4 / 5;
+    box-shadow: var(--shadow-sm);
+    /* A hairline ring keeps the circle defined against the ivory chapter. */
+    outline: 1px solid var(--color-border-strong);
+    outline-offset: 6px;
 }
 
 .about-portrait img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
+    object-position: 50% 28%;
+    display: block;
 }
 
+/* ---------- Story ---------- */
 .about-story {
     min-width: 0;
 }
@@ -76,36 +95,47 @@
 }
 
 /* ---------- Wide desktop ----------
-   The founder portrait is the site's main human anchor, so it takes a larger share of
-   the widened rail once there is room. The story column still ends up wider than it
-   was before Phase 1, and its text measure is untouched — only the media column and
-   the grid change. */
+   The story column is offset further from the portrait rail so the chapter reads as a
+   deliberate editorial split rather than two columns of equal weight. */
 @media (min-width: 1600px) {
     .about-grid {
-        grid-template-columns: 5.5fr 6.5fr;
-        gap: clamp(4rem, 5vw, 7rem);
+        column-gap: clamp(4rem, 7vw, 9rem);
+    }
+
+    .about-story {
+        padding-top: var(--space-4);
     }
 }
 
-@media (max-width: 900px) {
+/* ---------- Tablet: recomposed, not collapsed ----------
+   The portrait leaves its own column and sits inline above the story, which lets the
+   text run the full width instead of being squeezed beside a circle. */
+@media (max-width: 1024px) {
     .about-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-10);
-    }
-
-    .about-portrait {
-        max-width: 420px;
-        aspect-ratio: 1 / 1;
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: var(--space-8);
     }
 
     .about-story h2 {
-        max-width: none;
+        max-width: 24ch;
     }
 }
 
+/* ---------- Mobile ----------
+   Portrait and the chapter eyebrow pair on one line so the section opens with the
+   face at a human scale, rather than a large circle floating alone above the copy. */
 @media (max-width: 680px) {
+    .about-grid {
+        row-gap: var(--space-6);
+    }
+
+    .about-portrait {
+        outline-offset: 4px;
+    }
+
     .about-story .about-quote {
         padding-left: var(--space-5);
         max-width: none;
+        margin-block: var(--space-6);
     }
 }

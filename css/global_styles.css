@@ -673,9 +673,49 @@ a:focus-visible {
     will-change: opacity, transform;
 }
 
-/* Equal specificity to the rule above, declared after it, so it wins. */
+/* ---------- Transition variants ----------
+   One motion language, four approved entrances. js/main.js reads the variant from the
+   group's `data-blocks` value and tags that group's units, so a chapter enters as a
+   deliberate composition rather than every section moving identically. Each variant
+   only ever changes the FROM transform — duration, easing and stagger are shared, and
+   all four resolve to the same `transform: none`. */
+
+/* settle-up (default): rises and lands. */
+.block-reveal--up {
+    transform: translate3d(0, var(--block-travel), 0) scale(var(--block-scale));
+}
+
+/* settle-side: enters laterally. Alternate units come from the opposite edge so a
+   two-column chapter closes inward instead of sliding as one slab. */
+.block-reveal--side {
+    transform: translate3d(calc(var(--block-travel) * -1.15), 0, 0) scale(var(--block-scale));
+}
+
+.block-reveal--side:nth-child(even) {
+    transform: translate3d(calc(var(--block-travel) * 1.15), 0, 0) scale(var(--block-scale));
+}
+
+/* scale-in: settles in depth rather than distance — for blocks that are already in
+   position and should feel like they resolve into focus. */
+.block-reveal--scale {
+    transform: scale(var(--block-scale-in));
+}
+
+/* sequence-in: same rise, longer gap, so a numbered/stepped run deals out in order.
+   main.js applies the longer gap via --block-delay. */
+.block-reveal--seq {
+    transform: translate3d(0, calc(var(--block-travel) * 0.8), 0);
+}
+
+/* Equal specificity to the rules above, declared after them, so it wins for every
+   variant. */
 .js-on [data-assemble] .is-settled,
-.block-reveal.is-settled {
+.block-reveal.is-settled,
+.block-reveal--up.is-settled,
+.block-reveal--side.is-settled,
+.block-reveal--side:nth-child(even).is-settled,
+.block-reveal--scale.is-settled,
+.block-reveal--seq.is-settled {
     opacity: 1;
     transform: none;
 }

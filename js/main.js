@@ -96,26 +96,48 @@ document.addEventListener("DOMContentLoaded", function () {
         );
         return Number.isFinite(raw) ? raw : fallback;
     };
-    const STAGGER_MS = cssMs('--block-stagger', 80);
-    const DURATION_MS = cssMs('--block-duration', 560);
-    const staggerMs = (index) => Math.min(index, MAX_STAGGER_STEPS) * STAGGER_MS;
+    // Tokens are re-read per group rather than cached once, so the device-aware
+    // values in tokens.css (desktop / tablet / mobile) are always the ones in force.
+    const motion = () => ({
+        stagger: cssMs('--block-stagger', 80),
+        duration: cssMs('--block-duration', 560),
+    });
+
+    // The four approved entrances. A group names one via `data-blocks="settle-side"`;
+    // anything unrecognised falls back to the default rise, so a typo degrades to a
+    // working reveal rather than to invisible content.
+    const VARIANTS = {
+        'settle-up': { cls: 'block-reveal--up', mult: 1 },
+        'settle-side': { cls: 'block-reveal--side', mult: 1 },
+        'scale-in': { cls: 'block-reveal--scale', mult: 0.8 },
+        'sequence-in': { cls: 'block-reveal--seq', mult: 1.5 },
+    };
+    const variantOf = (name) => VARIANTS[name] || VARIANTS['settle-up'];
+
+    const staggerMs = (index, step) => Math.min(index, MAX_STAGGER_STEPS) * step;
 
     // Remove every trace of the entrance once it has played, so no element keeps a
     // stale will-change, transition-delay or hidden state for the rest of the session.
     const clearMotion = (el) => {
-        el.classList.remove('block-reveal', 'is-settled');
+        el.classList.remove(
+            'block-reveal', 'is-settled',
+            'block-reveal--up', 'block-reveal--side', 'block-reveal--scale', 'block-reveal--seq'
+        );
         el.style.removeProperty('--block-delay');
     };
 
-    const settleGroup = (units, onDone) => {
+    const settleGroup = (units, onDone, variantName) => {
+        const { stagger, duration } = motion();
+        const step = Math.round(stagger * variantOf(variantName).mult);
+
         units.forEach((el, i) => {
-            el.style.setProperty('--block-delay', staggerMs(i) + 'ms');
+            el.style.setProperty('--block-delay', staggerMs(i, step) + 'ms');
             el.classList.add('is-settled');
         });
         // Longest delay + the transition itself (plus a small margin for the
         // overshoot to come to rest), then tidy up. Derived from the tokens so it
         // cannot silently go stale if the motion is retuned.
-        const total = staggerMs(units.length - 1) + DURATION_MS + 140;
+        const total = staggerMs(units.length - 1, step) + duration + 140;
         window.setTimeout(() => {
             units.forEach(clearMotion);
             if (onDone) onDone();
@@ -160,7 +182,11 @@ document.addEventListener("DOMContentLoaded", function () {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) return;
                 groupObserver.unobserve(entry.target);
-                settleGroup([...entry.target.querySelectorAll(UNIT_SELECTOR)]);
+                settleGroup(
+                    [...entry.target.querySelectorAll(UNIT_SELECTOR)],
+                    null,
+                    entry.target.dataset.blocks
+                );
             });
         }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
 
@@ -170,7 +196,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // A chapter already on screen at load has nothing to reveal on scroll;
             // leaving it hidden would make above-the-fold content invisible.
             if (group.getBoundingClientRect().top < window.innerHeight * 0.9) return;
-            units.forEach(el => el.classList.add('block-reveal'));
+            const variantClass = variantOf(group.dataset.blocks).cls;
+            units.forEach(el => el.classList.add('block-reveal', variantClass));
             groupObserver.observe(group);
         });
 
