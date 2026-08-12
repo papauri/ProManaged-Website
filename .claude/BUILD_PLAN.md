@@ -3,7 +3,7 @@
 ## Mission
 Finish the website as a **mobile-first, modern premium editorial technology studio** with a distinctive bento language, sophisticated loading/transition choreography, strong visual evidence, excellent responsive behaviour, and zero regression of working forms, navigation, PHP, or email logic.
 
-This is the shared implementation contract for **ChatGPT, Claude, and Perplexity**. All three agents are expected to think about the whole product and challenge weak work. No agent has an isolated responsibility.
+This is the shared implementation contract for **ChatGPT, Claude, and Perplexity**. All three agents have the same responsibility for product quality. No agent has an isolated responsibility.
 
 Target feeling: **calm confidence + intelligent motion + crafted detail**. On a phone, the site must already feel complete and premium; desktop expands the composition rather than simply scaling the mobile layout upward.
 
@@ -15,7 +15,7 @@ This project is being developed collaboratively by:
 - Perplexity
 
 ### Shared responsibility
-ALL THREE AGENTS HAVE THE SAME RESPONSIBILITY FOR PRODUCT QUALITY.
+ALL THREE AGENTS HAVE THE SAME RESPONSIBILITY FOR THE QUALITY OF THE WHOLE PRODUCT.
 
 Every agent is expected to think about and challenge:
 - UI design;
@@ -41,17 +41,26 @@ Every agent is expected to think about and challenge:
 - regressions;
 - maintainability.
 
-Never defer an obvious issue by saying it belongs to another agent.
+Never defer an obvious issue by saying it belongs to another agent. Any agent may identify, challenge, recommend, review, or implement improvements when repository access permits.
 
-### Shared source of truth
-`.claude/BUILD_PLAN.md` is the shared product contract.
+### Live repository requirement — NON-NEGOTIABLE
+Before **any substantial recommendation, review, or implementation**, every agent must refresh its understanding from the current GitHub repository.
 
-All agents must:
-1. Read the entire file before recommending or changing anything.
-2. Use the current repository as the source of truth.
-3. Treat explicit requirements as requirements, not suggestions.
-4. Preserve approved systems unless there is a concrete reason to improve them.
-5. Challenge weak work rather than accepting it because it technically functions.
+Repository:
+`https://github.com/papauri/ProManaged-Website`
+
+Required current-context reading:
+1. `.claude/BUILD_PLAN.md`
+2. `.claude/PROJECT_CONTEXT.md` if present
+3. `.claude/SYSTEM_MAP.md` if present
+4. the current `main` implementation relevant to the task;
+5. recent commits on `main` when change history matters.
+
+The live repository is the implementation source of truth. Do not rely on stale conversation context, cached assumptions, previous screenshots, or an earlier version of the build plan.
+
+If repository state conflicts with an older conversation or remembered instruction, use the current repository/build plan unless the user explicitly overrides it.
+
+Before recommending a change, establish what currently exists, what is actually broken, what has already been implemented, and whether the proposed change could regress an approved system.
 
 ### Shared quality bar
 The target is not merely technically complete. The target is a:
@@ -89,6 +98,8 @@ Every agent should actively ask:
 9. What does not match the build plan?
 10. What would prevent this from feeling award-level?
 
+Do not approve work merely because another agent produced it.
+
 ### Shared response to defects
 When any agent identifies a defect:
 - verify it;
@@ -101,9 +112,7 @@ When any agent identifies a defect:
 Do not apply a superficial patch when the underlying architecture is wrong.
 
 ### Shared research standard
-External research may be used to improve interaction patterns, layout, motion, typography, responsive composition, navigation, forms and trust signals.
-
-Research must be translated into original ProManaged work. Never copy source code, wording, exact layouts, branding, logos, proprietary assets or project names.
+External research is welcome and should be refreshed when current design/UX patterns matter. Research must be translated into original ProManaged work. Never copy source code, wording, exact layouts, branding, logos, proprietary assets, or project names.
 
 ### Shared mobile-first standard
 Every major decision starts at:
@@ -159,7 +168,7 @@ This is a team, not a chain of command. Think together, challenge together, revi
 ### Visual character
 Combine:
 - editorial typography;
-- warm neutral Japandi-inspired surfaces;
+- warm neutral/Japandi-inspired surfaces;
 - graphite dark chapters;
 - controlled earthy accents with restrained blue interaction colour;
 - unequal bento proportions;
@@ -223,10 +232,9 @@ Required:
 The hero should feel populated with useful evidence, but not overcrowded. On mobile, use fewer simultaneous cards but preserve the narrative: statement → proof → action.
 
 ### C. PREMIUM PAGE-LOAD EXPERIENCE — highest priority
-The site needs a **modern loading choreography**, not a generic spinner.
+The site needs a modern loading choreography, not a generic spinner.
 
-Goal:
-As the initial page enters view, the design should appear to **assemble from blocks** in a controlled editorial sequence. The visitor should feel that the interface is resolving into place.
+Goal: as the initial page enters view, the design should appear to **assemble from blocks** in a controlled editorial sequence. The visitor should feel that the interface is resolving into place.
 
 Use existing vanilla JS/CSS architecture. Do not add an animation framework.
 
@@ -246,14 +254,16 @@ Rules:
 - no long blank screen;
 - no blocking preloader that delays usable content unnecessarily;
 - initial assembly should feel fancy, slow and premium, not slow for its own sake;
-- target first-visual choreography around **800–1100ms** with controlled 90–130ms stagger;
+- target first-visual choreography around 800–1100ms with controlled 90–130ms stagger;
 - hero blocks should settle at slightly different depths/directions;
 - a subtle final settle is acceptable; avoid repeated bouncing.
+
+Every load-phase element must participate in the actual hidden → settled sequence. Essential content must never depend on a successful cleanup callback to become visible. If JavaScript fails, reduced motion is enabled, or an animation is interrupted, the final content state must remain visible and usable.
 
 The load choreography must be visibly different on mobile vs desktop while remaining the same design language.
 
 ### D. SCROLL TRANSITIONS — highest priority
-The signature interaction is **Building Blocks** continuing down the page.
+The signature interaction is Building Blocks continuing down the page.
 
 Use the existing `data-blocks` + `IntersectionObserver` system.
 
@@ -489,7 +499,7 @@ Large screens should gain richness through composition, spacing and evidence—n
 
 ## 5. LOADING + MOTION QUALITY BAR
 
-The loading experience must read as a **designed transition system**, not a collection of unrelated CSS animations.
+The loading experience must read as a designed transition system, not a collection of unrelated CSS animations.
 
 Required:
 - consistent easing family;
@@ -587,7 +597,8 @@ Fix:
 - founder reveal;
 - device-aware timing;
 - reduced-motion fallback;
-- JS-failure visibility fallback.
+- JS-failure visibility fallback;
+- ensure every declared load-phase element actually participates in the sequence.
 
 ### Phase 3 — Responsive bento art direction
 Fix:
@@ -617,34 +628,56 @@ All must be true:
 - [ ] Bento patterns are visibly varied across the site.
 - [ ] Desktop/tablet/mobile are art-directed, not merely stacked.
 - [ ] Page-load animation feels like a premium block-assembly transition.
+- [ ] Every intended load-phase element actually participates in the choreography.
+- [ ] No essential content can remain hidden because JavaScript failed or cleanup did not run.
 - [ ] Scroll Building Blocks motion is clearly visible but slow and premium.
 - [ ] Motion runs once and respects reduced motion.
-- [ ] JavaScript failure can never leave important content hidden.
 - [ ] Founder portrait is circular, sharp and restrained.
 - [ ] CTA anchors no longer look generic/boring.
-- [ ] `.btn` class family is consistent everywhere.
-- [ ] Footer is complete and canonical.
-- [ ] Forms remain functional and visually premium.
-- [ ] Internal/customer email templates remain functional and branded.
-- [ ] No broken links/assets/CSS/JS references.
-- [ ] No unapproved client/project claims.
-- [ ] No pricing on software page.
-- [ ] No Render deployment logic.
-- [ ] No YAML/YML introduced.
-- [ ] No unrelated backend/legal changes.
+- [ ] Navigation is usable by touch and keyboard.
+- [ ] Forms remain wired to their existing backend contracts.
+- [ ] Email templates remain safe and branded.
+- [ ] Canonical footer is present on every required public page.
+- [ ] No pricing appears on the software page.
+- [ ] No unapproved client/project names or fabricated evidence are present.
+- [ ] No Render/eBay/RAWG legacy integration remains where it is not required.
+- [ ] No YAML/YML files are committed.
+- [ ] No horizontal overflow exists at required viewport sizes.
+- [ ] No obvious accessibility regression exists.
+- [ ] Full diff has been inspected before declaring completion.
 
-## 12. GIT / HANDOFF RULES
+## 12. REQUIRED HANDOFF PROMPT FOR CLAUDE
 
-- Work directly on `main`.
-- Push directly to `origin/main`.
-- Do not create a branch.
-- Do not create a PR.
-- Never force-push.
-- Never commit YAML/YML.
-- Inspect the full diff before every completion report.
+Use a fresh Claude session (`/clear`) and paste:
 
-### Shared completion language
-Use:
+Read `.claude/BUILD_PLAN.md` completely before touching any code.
+
+You are working as part of a shared three-agent team with ChatGPT and Perplexity. There are NO isolated responsibilities. All three agents share responsibility for the quality of the entire product.
+
+Before substantial work, refresh your understanding from the live GitHub repository:
+- `.claude/BUILD_PLAN.md`
+- `.claude/PROJECT_CONTEXT.md` if present
+- `.claude/SYSTEM_MAP.md` if present
+- relevant current files on `main`
+- recent commits when history matters
+
+The live repository is the source of truth. Do not rely on stale conversation context.
+
+Implement the entire active build plan in one continuous cycle. Think about design, UX, responsive behaviour, bento composition, typography, motion, loading, navigation, forms, email UX, accessibility, performance, business positioning, technical integrity and regressions—not just the files you edit.
+
+If something is technically correct but visually weak, improve it. If something is broken, fix the root cause. If a change risks regression, investigate before applying it. Do not wait for another agent to catch an obvious problem.
+
+Work directly on `main` and push directly to `origin/main`. Do not create a branch or PR. Never commit YAML/YML. Preserve PHP endpoints, form field names/IDs/actions, SMTP/PHPMailer, honeypots, navigation contracts and existing working application behaviour.
+
+Do not widen the 1880px rail or return to the previous oversized full-canvas design. Preserve the 7fr/5fr desktop hero, mobile-first composition, bento navigation, circular founder treatment, canonical footer, premium CTA family, anonymous project evidence, and Building Blocks motion language.
+
+The page-load experience must be a premium block-assembly sequence, not a spinner. Every declared load-phase element must participate in the actual hidden → settled choreography, with safe JavaScript-failure and reduced-motion fallbacks so essential content can never remain hidden.
+
+Start responsive work at 375px and 430px, then verify 768px, 1024px, 1440px, 1600px, 1920px and 2560px. Check hero overlap, bento recomposition, buttons, founder, navigation, forms, footer, motion, overflow, accessibility and assets.
+
+Before committing, inspect the complete diff and remove accidental or unrelated changes.
+
+Final response exactly:
 
 Changed:
 - <concise summary>
@@ -657,4 +690,49 @@ OR
 Ready for review:
 - Yes
 
-Do not use “looks good” as a substitute for verification.
+## 13. PERPLEXITY LIVE-CONTEXT PROMPT
+
+Use this as the standing instruction for Perplexity:
+
+You are working as part of the same ProManaged IT development team as ChatGPT and Claude. You have the same responsibility for product quality; you are not a research-only role.
+
+Before ANY substantial recommendation or review, refresh your understanding from the live GitHub repository:
+
+Repository:
+`https://github.com/papauri/ProManaged-Website`
+
+Read/review:
+1. `.claude/BUILD_PLAN.md`
+2. `.claude/PROJECT_CONTEXT.md` if present
+3. `.claude/SYSTEM_MAP.md` if present
+4. current `main` implementation relevant to the task
+5. recent commits on `main` when history matters
+
+The live repository is the source of truth. Do not rely on stale conversation context, cached assumptions, previous screenshots, or earlier build-plan versions.
+
+Think critically about the whole product: UI/UX, visual design, mobile-first composition, desktop composition, bento layouts, typography, page-load experience, scroll transitions, animation quality, navigation, CTAs, forms, email UX, accessibility, performance, content, business positioning, trust, technical integrity and regressions.
+
+You may identify bugs, challenge design decisions, identify responsive or motion problems, recommend concrete code changes, review Claude's implementation, challenge ChatGPT's recommendations, and identify regressions. If repository write access is available, implement appropriate fixes; otherwise provide exact actionable implementation guidance.
+
+Use current external research when it materially improves the product, especially for contemporary premium web patterns, mobile-first interaction, editorial bento systems, sophisticated but restrained motion, typography, navigation, forms and trust signals. Translate research into original ProManaged work. Never copy source code, wording, exact layouts, branding, logos, proprietary assets or project names.
+
+When reviewing, report:
+
+STRENGTHS
+- ...
+
+PROBLEMS
+- ...
+
+WHY THEY MATTER
+- ...
+
+RECOMMENDED CHANGE
+- ...
+
+PRIORITY
+- Critical / High / Medium / Low
+
+If genuinely ready, report `READY FOR REVIEW`. If not, report `REJECTED` with exact defects. Never approve work merely because another agent produced it.
+
+The objective is not to determine which model is best. The objective is to make ProManaged exceptional.
