@@ -1,19 +1,15 @@
 /* why_band.css — homepage chapter 2, "What ProManaged is".
 
    BENTO PATTERN 3 of 3: "Mosaic / stepped sequence".
-   The three supporting blocks are deliberately NOT a row of identical cards. They use
-   unequal spans, unequal heights and a descending vertical step, so the eye travels
-   down-right through them instead of scanning three clones. Every breakpoint gets its
-   own composition rather than a collapsed version of the one above it. */
+   The section uses the full visual rail on desktop so the composition reads like an
+   intentional editorial spread rather than a narrow centered text island. */
 
-/* ---------- Opening statement: offset split ---------- */
 .why-grid {
     align-items: start;
     margin-bottom: var(--section-y);
 }
 
 .why-lead h2 {
-    /* Slightly tighter than a chapter headline so the statement fills the column. */
     max-width: 17ch;
 }
 
@@ -35,7 +31,6 @@
     margin-top: var(--space-5);
 }
 
-/* ---------- Stepped mosaic ---------- */
 .why-facts {
     align-items: start;
 }
@@ -44,8 +39,6 @@
     background: var(--color-paper);
 }
 
-/* Desktop: 5 / 4 / 3 spans, each stepped further down than the last. The steps are
-   padding-driven, so they never change the layout box or create overflow. */
 @media (min-width: 901px) {
     .why-facts .why-fact:nth-child(1) {
         grid-column: span 5;
@@ -61,8 +54,6 @@
         margin-top: var(--space-20);
     }
 
-    /* The lead block of the mosaic carries more weight: bigger type and a warmer
-       surface, so the group has a clear entry point. */
     .why-facts .why-fact:nth-child(1) {
         background: var(--color-accent-earth-soft);
         border-color: transparent;
@@ -95,17 +86,51 @@
     }
 }
 
-/* ---------- Wide desktop: even split on the opening statement ---------- */
+/* On genuinely wide displays, give the opening statement more horizontal drama.
+   The copy remains constrained by its own measures; the extra canvas becomes open
+   space between columns and larger visual blocks rather than longer text lines. */
 @media (min-width: 1600px) {
+    .why-grid {
+        grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+        column-gap: clamp(5rem, 8vw, 11rem);
+        width: 100%;
+    }
+
     .why-grid .why-lead,
     .why-grid .why-note {
-        grid-column: span 6;
+        grid-column: auto;
+    }
+
+    .why-note {
+        padding-top: clamp(var(--space-4), 3vw, var(--space-10));
+    }
+
+    .why-note p {
+        max-width: 52ch;
+    }
+
+    .why-facts {
+        column-gap: clamp(1.5rem, 2.2vw, 3rem);
+    }
+
+    .why-facts .why-fact:nth-child(1) {
+        grid-column: span 5;
+        min-height: 330px;
+    }
+
+    .why-facts .why-fact:nth-child(2) {
+        grid-column: span 4;
+        min-height: 290px;
+        margin-top: clamp(var(--space-8), 4vw, var(--space-12));
+    }
+
+    .why-facts .why-fact:nth-child(3) {
+        grid-column: span 3;
+        min-height: 250px;
+        margin-top: clamp(var(--space-16), 7vw, var(--space-24));
     }
 }
 
-/* ---------- Tablet: 2-column mosaic, NOT three collapsed columns ----------
-   The lead fact spans the full width as a banner; the two supporting blocks share the
-   row beneath it. This is a different composition from both desktop and mobile. */
 @media (max-width: 900px) {
     .why-grid {
         margin-bottom: var(--space-16);
@@ -123,7 +148,6 @@
         grid-column: span 12;
         background: var(--color-accent-earth-soft);
         border-color: transparent;
-        /* Banner proportions: the mark sits beside the copy instead of above it. */
         flex-direction: row;
         align-items: flex-start;
         gap: var(--space-6);
@@ -140,24 +164,18 @@
     }
 }
 
-/* ---------- Mobile: art-directed, not a stack of identical rectangles ----------
-   All three go full width, but each has a different surface, a different internal
-   layout and a different height, so the column has rhythm. */
 @media (max-width: 680px) {
     .why-facts .why-fact:nth-child(1) {
-        /* Stays a banner: mark beside copy, tinted, shortest of the three. */
         flex-direction: row;
         padding: var(--space-6);
     }
 
     .why-facts .why-fact:nth-child(2) {
-        /* Tallest: mark above copy, plain surface, extra breathing room. */
         flex-direction: column;
         padding-block: var(--space-8);
     }
 
     .why-facts .why-fact:nth-child(3) {
-        /* Dark closing block, mark beside copy again but reversed emphasis. */
         background: var(--color-graphite);
         border-color: transparent;
         flex-direction: row;
