@@ -1,7 +1,6 @@
 /* hero_section.css — the shared editorial hero grammar.
-   Every page uses the same shape: a full-bleed graphite chapter, one oversized
-   statement block, one dominant visual/content block and one supporting block.
-   Only the content differs page to page. No narrow centred SaaS composition. */
+   Full-bleed graphite surface with an expansive composition rail. The desktop layout
+   deliberately uses the canvas instead of leaving a narrow centered island. */
 
 .hero {
     background: var(--color-graphite);
@@ -14,15 +13,18 @@
 
 .hero-rail {
     display: grid;
-    grid-template-columns: 7fr 5fr;
-    gap: clamp(2.5rem, 5vw, 6rem);
-    align-items: center;
+    grid-template-columns: minmax(0, 1fr) minmax(38rem, 1fr);
+    gap: clamp(3rem, 5vw, 7rem);
+    align-items: stretch;
+    min-height: clamp(620px, 46vw, 780px);
 }
 
 .hero-statement {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     min-width: 0;
+    padding-block: clamp(1rem, 3vw, 4rem);
 }
 
 .hero-eyebrow {
@@ -43,7 +45,7 @@
     letter-spacing: var(--tracking-display);
     line-height: var(--leading-display);
     color: var(--color-text-on-dark);
-    max-width: 16ch;
+    max-width: 14ch;
     margin-bottom: var(--space-8);
 }
 
@@ -52,7 +54,7 @@
     font-size: var(--text-xl);
     line-height: var(--leading-normal);
     color: var(--color-text-on-dark-muted);
-    max-width: 50ch;
+    max-width: 48ch;
     margin-bottom: 0;
 }
 
@@ -63,20 +65,40 @@
     margin-top: var(--space-10);
 }
 
-.hero-visual {
+.hero-microproof {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    margin-top: var(--space-8);
+    max-width: 58rem;
+}
+
+.hero-microproof span {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-on-dark-muted);
+}
+
+.hero-microproof i {
+    color: var(--color-accent-earth-soft);
+}
+
+.hero-visual {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(280px, 1.15fr) minmax(220px, 0.85fr) auto;
     gap: var(--grid-gap);
     min-width: 0;
 }
 
 .hero-feature {
-    flex: 2 1 auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    min-height: clamp(220px, 26vw, 340px);
-    padding: var(--space-8);
+    min-height: 0;
+    padding: clamp(var(--space-8), 3vw, var(--space-12));
     border-radius: var(--radius-lg);
     background: var(--color-accent-earth);
     color: var(--color-text-on-dark);
@@ -105,17 +127,123 @@
     font-weight: var(--weight-medium);
     line-height: var(--leading-normal);
     color: var(--color-text-on-dark);
-    max-width: 30ch;
+    max-width: 34ch;
     margin-top: var(--space-3);
 }
 
-.hero-support {
-    flex: 1 1 auto;
+.hero-project-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: var(--grid-gap);
+    min-width: 0;
+}
+
+.hero-project-card {
+    min-width: 0;
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    background: var(--color-graphite-soft);
+    border: 1px solid rgba(247, 243, 236, 0.12);
+    color: var(--color-text-on-dark);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: var(--space-4);
+}
+
+.hero-project-card--controller {
+    transform: translateY(var(--space-6));
+}
+
+.hero-project-topline {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-on-dark-muted);
+}
+
+.hero-project-media {
+    width: 100%;
+    min-height: 150px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background-color: #3a3834;
+    position: relative;
+}
+
+.hero-project-media--hotel {
+    min-height: 190px;
+    background:
+        linear-gradient(135deg, rgba(150,80,44,0.92), rgba(28,27,25,0.4)),
+        radial-gradient(circle at 72% 20%, rgba(247,243,236,0.42), transparent 28%),
+        linear-gradient(160deg, #8a5e43 0%, #4b4038 52%, #272624 100%);
+}
+
+.hero-project-media--hotel::after {
+    content: "RO"
+    ;
+    position: absolute;
+    right: 1rem;
+    bottom: 0.45rem;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 7rem);
+    font-weight: var(--weight-display);
+    line-height: 0.8;
+    color: rgba(247,243,236,0.9);
+    letter-spacing: -0.08em;
+}
+
+.hero-project-media--controller {
+    min-height: 190px;
+    background:
+        radial-gradient(circle at 50% 45%, rgba(37,99,235,0.42), transparent 34%),
+        linear-gradient(160deg, #202e49 0%, #181a1f 58%, #0e0f11 100%);
+}
+
+.hero-project-media--controller::before,
+.hero-project-media--controller::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(247,243,236,0.25);
+    border-radius: 44%;
+}
+
+.hero-project-media--controller::before {
+    inset: 21% 13% 18% 13%;
+    transform: rotate(-7deg);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.hero-project-media--controller::after {
+    inset: 30% 27% 26% 27%;
+    transform: rotate(7deg);
+}
+
+.hero-project-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.hero-project-title {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-on-dark);
+}
+
+.hero-project-desc {
+    font-size: var(--text-xs);
+    line-height: 1.45;
+    color: var(--color-text-on-dark-muted);
+}
+
+.hero-support {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-5);
-    padding: var(--space-6);
+    padding: clamp(var(--space-6), 2.4vw, var(--space-10));
     border-radius: var(--radius-lg);
     background: var(--color-graphite-soft);
     border: 1px solid rgba(247, 243, 236, 0.14);
@@ -158,35 +286,62 @@
     color: var(--color-text-on-dark-muted);
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1800px) {
     .hero-rail {
-        grid-template-columns: 6.5fr 5fr;
+        grid-template-columns: minmax(0, 1fr) minmax(42rem, 1fr);
+        gap: clamp(5rem, 6vw, 9rem);
+        min-height: clamp(680px, 44vw, 840px);
+    }
+
+    #hero-title {
+        max-width: 13ch;
     }
 
     .hero-feature {
-        min-height: clamp(340px, 20vw, 420px);
+        padding: var(--space-12);
     }
 
-    .hero-support {
-        padding: var(--space-8);
+    .hero-project-card {
+        padding: var(--space-6);
+    }
+
+    .hero-project-media--hotel,
+    .hero-project-media--controller {
+        min-height: 220px;
+    }
+}
+
+@media (max-width: 1440px) {
+    .hero-rail {
+        grid-template-columns: minmax(0, 1fr) minmax(34rem, 0.95fr);
+        min-height: 600px;
     }
 }
 
 @media (max-width: 1100px) {
     .hero-rail {
-        grid-template-columns: 6fr 5fr;
+        grid-template-columns: 1fr 1fr;
         gap: var(--space-10);
     }
 
-    #hero-title {
-        max-width: 18ch;
+    .hero-project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-project-card--controller {
+        transform: none;
     }
 }
 
 @media (max-width: 900px) {
     .hero-rail {
         grid-template-columns: 1fr;
+        min-height: 0;
         gap: var(--space-10);
+    }
+
+    .hero-statement {
+        padding-block: 0;
     }
 
     #hero-title,
@@ -194,8 +349,12 @@
         max-width: none;
     }
 
+    .hero-visual {
+        grid-template-rows: auto auto auto;
+    }
+
     .hero-feature {
-        min-height: 0;
+        min-height: 340px;
     }
 }
 
@@ -209,7 +368,21 @@
     }
 
     .hero-feature,
-    .hero-support {
+    .hero-support,
+    .hero-project-card {
         padding: var(--space-6);
+    }
+
+    .hero-project-grid,
+    .hero-support {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-project-card--controller {
+        transform: translateY(0);
+    }
+
+    .hero-feature {
+        min-height: 300px;
     }
 }
