@@ -42,6 +42,22 @@
   --color-warning: #d97706;
   --color-danger: #dc2626;
 
+  /* ---- Color: Japandi warm-neutral chapter palette (landing page + footer) ----
+     Blue (--color-accent) stays reserved for interactive/brand states (buttons, links,
+     focus rings); these tokens carry the actual chapter backgrounds and large-block fills
+     so blue reads as an accent, not the dominant page colour. Kept separate from the
+     site-wide --color-bg/--color-surface/--color-text tokens so secondary pages are
+     unaffected. All pairings below are verified >=4.5:1 (normal text) / >=3:1 (large text). */
+  --color-ivory: #f6f1e8;
+  --color-stone: #ded6c8;
+  --color-sand: #c8b9a6;
+  --color-charcoal: #20201e;
+  --color-charcoal-text: #f6f1e8;
+  --color-charcoal-text-muted: rgba(246, 241, 232, 0.72);
+  --color-accent-earthy: #a15c34;
+  --color-accent-earthy-hover: #8b4c2b;
+  --color-accent-earthy-soft: #f1e4d8;
+
   /* ---- Typography ---- */
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   /* Display face for H1/H2 only; body/UI stays on --font-sans. Reversible: point at var(--font-sans) to undo. */
@@ -98,7 +114,7 @@
   /* ---- Layout ---- */
   /* Wide editorial container — was 1200px, which was clamping every section (including
      grids with their own larger max-width) down to a narrow, boxed-in centered column. */
-  --container-max: 1440px;
+  --container-max: 1560px;
   --container-pad: clamp(1.25rem, 4vw, 3rem);
   /* Single canonical gap for every bento grid — no per-file grid gaps. */
   --bento-gap: 1.25rem;

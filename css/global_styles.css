@@ -46,6 +46,22 @@ h3 {
     padding: 0 var(--container-pad);
 }
 
+/* Landing-page chapter rails — each chapter section is full-bleed (its background spans the
+   viewport); this is only the inner content rail, kept as separate per-chapter classes rather
+   than one shared .container so the page isn't structured as a single container wrapping the
+   whole story. */
+.hero-rail,
+.services-rail,
+.why-rail,
+.about-rail,
+.mission-rail {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+    position: relative;
+    z-index: 1;
+}
+
 /* Honeypot field: invisible to real visitors, catches simple bots that fill in every field. */
 .hp-field {
     position: absolute;

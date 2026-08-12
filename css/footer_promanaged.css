@@ -1,6 +1,6 @@
 /* FOOTER - MODERN, MINIMAL, AND SUBTLE */
 .footer {
-    background: var(--color-surface-2);
+    background: var(--color-stone);
     color: var(--color-text-muted);
     padding: var(--space-16) 0 var(--space-10);
     position: relative;
@@ -48,7 +48,9 @@
 .footer-brand a {
     display: inline-block;
     padding: var(--space-3) 0;
-    color: var(--color-accent);
+    /* --color-accent-active (darker than --color-accent) — the plain --color-accent blue
+       drops under 4.5:1 on the new warm-stone footer background. */
+    color: var(--color-accent-active);
     text-decoration: none;
     font-size: var(--text-sm);
     transition: color var(--transition);
@@ -81,7 +83,7 @@
 
 .footer-links a:hover,
 .footer-links a:focus {
-    color: var(--color-accent);
+    color: var(--color-accent-active);
 }
 
 /* Newsletter Section */
@@ -154,7 +156,7 @@
 
 .footer-bottom a:hover,
 .footer-bottom a:focus {
-    color: var(--color-accent);
+    color: var(--color-accent-active);
 }
 
 /* Visible keyboard focus ring, consistent with the accent-based focus treatment used site-wide */

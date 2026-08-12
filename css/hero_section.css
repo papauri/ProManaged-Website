@@ -30,6 +30,16 @@
     pointer-events: none;
 }
 
+/* Landing-page hero chapter: solid charcoal fill, no decorative gradient. */
+.hero-dark {
+    background: var(--color-charcoal);
+    border-bottom: none;
+}
+
+.hero-dark::before {
+    display: none;
+}
+
 /* Editorial split: dominant text + CTAs on the left, an asymmetric bento fact-cluster on the right */
 .hero-content {
     z-index: 1;
@@ -210,43 +220,36 @@
     color: var(--color-text-muted);
 }
 
-/* Landing-page hero mosaic (index.html only) — one dominant headline block, an accent
-   statement tile, and two smaller fact tiles, all sharing one 6-column grid so the hero
-   reads as a single asymmetric composition rather than a text column plus a card list. */
-.hero-grid {
+/* Landing-page hero (index.html only) — a full-bleed dark chapter (the .hero section itself
+   spans the viewport; .hero-rail is only the inner content width). 60/40 split: one dominant
+   text block (left) + one dominant visual block plus one smaller supporting block sharing the
+   right-hand zone (not a stack of equal cards). */
+.hero-rail.hero-rail {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(2, minmax(150px, auto));
-    gap: var(--space-5);
-    position: relative;
-    z-index: 1;
-    max-width: var(--container-max);
-    margin: 0 auto;
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-16);
+    align-items: center;
     width: 100%;
 }
 
-.hero-tile-headline {
-    grid-column: 1 / span 4;
-    grid-row: 1 / span 2;
+.hero-visual {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    text-align: left;
-    padding-right: var(--space-10);
+    gap: var(--space-5);
+    height: 100%;
 }
 
+/* Dominant visual block — earthy accent fill, not blue. */
 .hero-tile-stat {
-    grid-column: 5 / span 2;
-    grid-row: 1;
+    flex: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background: var(--color-accent);
-    color: var(--color-accent-contrast);
+    background: var(--color-accent-earthy);
+    color: var(--color-charcoal-text);
     border-radius: var(--radius-lg);
-    padding: var(--space-6);
+    padding: var(--space-8);
 }
 
 .hero-tile-stat i {
@@ -266,56 +269,80 @@
     font-weight: var(--weight-semibold);
     margin-top: var(--space-2);
     max-width: 22ch;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--color-charcoal-text-muted);
 }
 
-.hero-tile-fact {
-    grid-row: 2;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
+/* Smaller supporting block — visibly shorter than the dominant visual block above it. */
+.hero-tile-support {
+    flex: 1;
+    background: var(--color-stone);
     border-radius: var(--radius-lg);
-    padding: var(--space-5);
+    padding: var(--space-5) var(--space-6);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: var(--space-2);
-    transition: transform var(--transition), box-shadow var(--transition);
+    gap: var(--space-4);
 }
 
-.hero-tile-fact:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
+.hero-support-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
 }
 
-.hero-tile-fact i {
+.hero-support-row div {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-tile-support i {
+    flex-shrink: 0;
     width: 36px;
     height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: var(--text-base);
-    color: var(--color-accent);
-    background: var(--color-accent-soft);
+    color: var(--color-charcoal);
+    background: var(--color-ivory);
     border-radius: var(--radius);
-}
-
-.hero-tile-fact:nth-child(3) {
-    grid-column: 5;
-}
-
-.hero-tile-fact:nth-child(4) {
-    grid-column: 6;
 }
 
 .hero-tile-title {
     font-weight: var(--weight-semibold);
-    color: var(--color-text);
+    color: var(--color-charcoal);
     font-size: var(--text-sm);
 }
 
 .hero-tile-desc {
     font-size: var(--text-xs);
-    color: var(--color-text-muted);
+    color: var(--color-charcoal);
+    opacity: 0.7;
+}
+
+/* Charcoal chapter surface + ivory text — recolors the shared hero text/button rules,
+   scoped to .hero-rail only so get-started/learn_more/pages/* (white hero) are unaffected. */
+.hero-rail #hero-title,
+.hero-rail #hero-subtitle {
+    color: var(--color-charcoal-text);
+}
+
+.hero-rail #hero-subtitle {
+    opacity: 0.82;
+}
+
+.hero-rail .hero-eyebrow {
+    color: var(--color-accent-earthy-soft);
+}
+
+.hero-rail #hero-learn-more {
+    background: transparent;
+    color: var(--color-charcoal-text);
+    border-color: rgba(246, 241, 232, 0.35);
+}
+
+.hero-rail #hero-learn-more:hover {
+    border-color: var(--color-charcoal-text);
 }
 
 @media (max-width: 768px) {
@@ -365,32 +392,24 @@
         text-align: left;
     }
 
-    .hero-grid {
+    .hero-rail.hero-rail {
         grid-template-columns: 1fr;
-        grid-template-rows: none;
-        gap: var(--space-4);
+        gap: var(--space-8);
     }
 
     .hero-tile-headline {
-        grid-column: 1;
-        grid-row: auto;
         padding-right: 0;
         align-items: center;
         text-align: center;
     }
 
     .hero-tile-stat {
-        grid-column: 1;
-        grid-row: auto;
         align-items: center;
         text-align: center;
     }
 
-    .hero-tile-fact,
-    .hero-tile-fact:nth-child(3),
-    .hero-tile-fact:nth-child(4) {
-        grid-column: 1;
-        grid-row: auto;
+    .hero-support-row {
+        justify-content: center;
     }
 
     /* #hero-title size is fluid via --display-1; no breakpoint override needed. */

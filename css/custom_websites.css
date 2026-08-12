@@ -174,38 +174,6 @@
     font-size: 1.2rem;
 }
 
-/* Ensure uniform placement of price-info */
-.price-info {
-    margin-top: auto; /* Push price-info to the bottom */
-    padding: 0.8rem 1rem;
-    background: var(--color-accent-soft);
-    border-radius: var(--radius);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.1rem;
-}
-
-.price-info span {
-    font-weight: bold;
-    color: var(--color-accent);
-}
-
-.currency-selector {
-    font-size: 1rem;
-    color: var(--color-text-inverse);
-    background: var(--color-accent);
-    border: none;
-    border-radius: var(--radius);
-    padding: 0.4rem 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.currency-selector:hover {
-    background: var(--color-accent-hover);
-}
-
 /* Ensure cards stretch evenly regardless of content */
 .website-card {
     display: flex;

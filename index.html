@@ -89,8 +89,8 @@
 
     <div id="hero-section"> <!-- Hero dynamically loaded -->
 
-        <section id="home" class="hero">
-            <div class="container hero-grid">
+        <section id="home" class="hero hero-dark">
+            <div class="hero-rail">
                 <div class="hero-tile hero-tile-headline">
                     <span class="hero-eyebrow">Ireland &middot; Malawi &middot; Worldwide</span>
                     <h1 id="hero-title">Software, Hardware & Network Solutions</h1>
@@ -100,29 +100,75 @@
                         <a href="learn_more.html" class="btn secondary" id="hero-learn-more">Learn More</a>
                     </div>
                 </div>
-                <div class="hero-tile hero-tile-stat">
-                    <i class="fas fa-layer-group" aria-hidden="true"></i>
-                    <span class="hero-tile-figure">3</span>
-                    <span class="hero-tile-label">Core Services — Software &middot; Hardware &middot; Networks</span>
-                </div>
-                <div class="hero-tile hero-tile-fact">
-                    <i class="fas fa-earth-africa" aria-hidden="true"></i>
-                    <span class="hero-tile-title">Ireland &amp; Malawi</span>
-                    <span class="hero-tile-desc">Local support on two continents</span>
-                </div>
-                <div class="hero-tile hero-tile-fact">
-                    <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
-                    <span class="hero-tile-title">Pay Locally</span>
-                    <span class="hero-tile-desc">Local currency, no forex hassle</span>
+                <div class="hero-visual">
+                    <div class="hero-tile hero-tile-stat">
+                        <i class="fas fa-layer-group" aria-hidden="true"></i>
+                        <span class="hero-tile-figure">3</span>
+                        <span class="hero-tile-label">Core Services — Software &middot; Hardware &middot; Networks</span>
+                    </div>
+                    <div class="hero-tile hero-tile-support">
+                        <div class="hero-support-row">
+                            <i class="fas fa-earth-africa" aria-hidden="true"></i>
+                            <div>
+                                <span class="hero-tile-title">Ireland &amp; Malawi</span>
+                                <span class="hero-tile-desc">Local support on two continents</span>
+                            </div>
+                        </div>
+                        <div class="hero-support-row">
+                            <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
+                            <div>
+                                <span class="hero-tile-title">Pay Locally</span>
+                                <span class="hero-tile-desc">Local currency, no forex hassle</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
     </div>
 
+    <div id="services-section"> <!-- Services dynamically loaded -->
+        <section id="services" class="services" aria-labelledby="services-title">
+            <div class="services-rail">
+                <div class="section-header">
+                    <h2 id="services-title" class="services-title">Our Services</h2>
+                    <p class="subtitles">Explore our wide range of IT solutions tailored to meet your needs.</p>
+                </div>
+                <div class="services-grid">
+
+                    <!-- Software & Web Apps -->
+                    <div class="service-card service-card-featured" data-target="pages/custom_websites.html" role="link" tabindex="0" aria-label="Software & Web Apps — learn more">
+                        <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                        <h3>Software & Web Apps</h3>
+                        <p>Custom web apps and SaaS platforms, built end to end — and websites too if that's what
+                            you need.</p>
+                    </div>
+
+                    <div class="services-support">
+                        <!-- Hardware Sourcing -->
+                        <div class="service-card" data-target="pages/hardware_sourcing.html" role="link" tabindex="0" aria-label="Hardware Sourcing — learn more">
+                            <i class="fas fa-laptop" aria-hidden="true"></i>
+                            <h3>Hardware Sourcing</h3>
+                            <p>IT and gaming equipment sourced and delivered worldwide, with convenient payment in your local currency.</p>
+                        </div>
+
+                        <!-- Network Infrastructure -->
+                        <div class="service-card" data-target="pages/network_infrastructure.html" role="link" tabindex="0" aria-label="Network Infrastructure — learn more">
+                            <i class="fas fa-network-wired" aria-hidden="true"></i>
+                            <h3>Network Infrastructure</h3>
+                            <p>Simple and effective network setup for homes and businesses.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
     <div id="why-section"> <!-- Why ProManaged IT — inline bento band (replaces the old welcome popup) -->
         <section class="why-band">
-            <div class="container">
+            <div class="why-rail">
                 <div class="why-grid">
                     <div class="why-tile why-tile-lead">
                         <h2>Discover the ProManaged IT Difference</h2>
@@ -143,46 +189,9 @@
         </section>
     </div>
 
-    <div id="services-section"> <!-- Services dynamically loaded -->
-        <section id="services" class="services" aria-labelledby="services-title">
-            <div class="container">
-                <div class="section-header">
-                    <h2 id="services-title" class="services-title">Our Services</h2>
-                    <p class="subtitles">Explore our wide range of IT solutions tailored to meet your needs.</p>
-                </div>
-                <div class="services-grid">
-
-                    <!-- Software & Web Apps -->
-                    <div class="service-card service-card-featured" data-target="pages/custom_websites.html" role="link" tabindex="0" aria-label="Software & Web Apps — learn more">
-                        <i class="fas fa-laptop-code" aria-hidden="true"></i>
-                        <h3>Software & Web Apps</h3>
-                        <p>Custom web apps and SaaS platforms, built end to end — and websites too if that's what
-                            you need.</p>
-                    </div>
-
-                    <!-- Hardware Sourcing -->
-                    <div class="service-card" data-target="pages/hardware_sourcing.html" role="link" tabindex="0" aria-label="Hardware Sourcing — learn more">
-                        <i class="fas fa-laptop" aria-hidden="true"></i>
-                        <h3>Hardware Sourcing</h3>
-                        <p>IT and gaming equipment sourced and delivered worldwide, with convenient payment in your
-                            local currency.</p>
-                    </div>
-
-                    <!-- Network Infrastructure -->
-                    <div class="service-card" data-target="pages/network_infrastructure.html" role="link" tabindex="0" aria-label="Network Infrastructure — learn more">
-                        <i class="fas fa-network-wired" aria-hidden="true"></i>
-                        <h3>Network Infrastructure</h3>
-                        <p>Simple and effective network setup for homes and businesses.</p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    </div>
-
     <div id="about-section"> <!-- About Us Section -->
         <section id="about" class="about">
-            <div class="container">
+            <div class="about-rail">
                 <div class="section-header">
                     <h2>About Us</h2>
                     <p class="subtitle_into">ProManaged IT delivers cutting-edge technology with personalized solutions to simplify your IT experience.</p>
@@ -210,7 +219,7 @@
     <div id="mission-vision-section"> <!-- Mission & Vision Section -->
 
         <section id="mission-vision" class="mission-vision-panes">
-            <div class="container">
+            <div class="mission-rail">
                 <h2 class="section-header">Mission & Vision</h2>
                 <div class="panes-grid">
                     <div class="pane-card">

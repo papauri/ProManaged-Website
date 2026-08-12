@@ -1,7 +1,7 @@
 /* Services Section */
 .services {
     padding: var(--space-24) 20px;
-    background: var(--color-bg);
+    background: var(--color-ivory);
 }
 
 .section-header {
@@ -45,20 +45,25 @@
     line-height: var(--leading-normal);
 }
 
-/* Services Grid — editorial content tiles, not a card catalogue: one dominant tile
-   spans a full row as a wide banner; the two supporting tiles auto-flow into the row
-   below at half width each. Normal grid flow only — no explicit row placement, so the
-   composition stays correct regardless of exactly how many supporting tiles exist. */
+/* Services Grid — wide asymmetric composition, not a card catalogue: a dominant lead block
+   (~2/3 width) beside a supporting column (~1/3 width) holding two tiles of different height/
+   position. Robust to content changes: the support column is its own flex stack, not an
+   assumption about exact grid-row placement in the parent grid. */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(var(--bento-cols), 1fr);
+    grid-template-columns: 2fr 1fr;
     gap: var(--bento-gap);
-    padding: 0 var(--space-8);
+    align-items: stretch;
+}
+
+.services-support {
+    display: flex;
+    flex-direction: column;
+    gap: var(--bento-gap);
 }
 
 /* Service Card */
 .service-card {
-    grid-column: span 6;
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -74,10 +79,18 @@
     max-width: 100%;
 }
 
+/* Different heights so the two supporting tiles are not equal — the first is the shorter one. */
+.services-support .service-card:first-child {
+    flex: 0.8;
+}
+
+.services-support .service-card:last-child {
+    flex: 1.2;
+}
+
 .service-card-featured {
-    grid-column: span 12;
-    background: var(--color-accent-soft);
-    border-color: var(--color-accent);
+    background: var(--color-accent-earthy-soft);
+    border-color: var(--color-accent-earthy);
     text-align: left;
     flex-direction: row;
     justify-content: flex-start;
@@ -90,6 +103,7 @@
     margin-bottom: 0;
     flex-shrink: 0;
     font-size: var(--text-6xl);
+    color: var(--color-accent-earthy);
 }
 
 .service-card-featured h3 {
@@ -145,12 +159,12 @@
 /* Responsive */
 @media (max-width: 768px) {
     .services-grid {
-        padding: 0 var(--space-4);
+        grid-template-columns: 1fr;
     }
 
-    .service-card,
-    .service-card-featured {
-        grid-column: span 12;
+    .services-support .service-card:first-child,
+    .services-support .service-card:last-child {
+        flex: none;
     }
 
     .service-card {

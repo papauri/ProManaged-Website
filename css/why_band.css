@@ -3,12 +3,10 @@
    internally by a hairline, not two more bordered cards) — a mosaic, not a card row. */
 .why-band {
     padding: var(--space-16) var(--container-pad);
-    background: var(--color-surface-2);
+    background: var(--color-stone);
 }
 
 .why-grid {
-    max-width: var(--container-max);
-    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(var(--bento-cols), 1fr);
     gap: var(--bento-gap);
@@ -17,8 +15,8 @@
 
 .why-tile-lead {
     grid-column: span 6;
-    background: var(--color-accent);
-    color: var(--color-accent-contrast);
+    background: var(--color-charcoal);
+    color: var(--color-charcoal-text);
     border-radius: var(--radius-lg);
     padding: var(--space-10);
     display: flex;
@@ -32,14 +30,14 @@
 }
 
 .why-tile-lead p {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--color-charcoal-text-muted);
     line-height: var(--leading-normal);
     margin: 0;
 }
 
 .why-support {
     grid-column: span 6;
-    background: var(--color-bg);
+    background: var(--color-ivory);
     border-radius: var(--radius-lg);
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -60,8 +58,8 @@
     width: 44px;
     height: 44px;
     font-size: var(--text-lg);
-    color: var(--color-accent);
-    background: var(--color-accent-soft);
+    color: var(--color-accent-earthy);
+    background: var(--color-accent-earthy-soft);
     border-radius: var(--radius);
     margin-bottom: var(--space-4);
 }

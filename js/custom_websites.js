@@ -1,33 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Currency conversion functionality
-    const currencySelectors = document.querySelectorAll('.currency-selector');
-    const exchangeRates = {
-        eur: 1,
-        mwk: 2000 // Example rate: 1 EUR = 2000 MWK
-    };
-    currencySelectors.forEach(selector => {
-        selector.addEventListener('change', function () {
-            const card = this.closest('.website-card');
-            if (!card) return; // Ensure the card exists
-            const priceSpan = card.querySelector('.price');
-            if (!priceSpan) return; // Ensure the price span exists
-            const selectedCurrency = this.value;
-            // Get the price range from data attributes
-            const eurRange = card.dataset.eur.split(' - ').map(num => parseFloat(num.replace(/[^0-9.-]+/g, '')));
-            if (selectedCurrency === 'eur') {
-                priceSpan.textContent = `€${eurRange[0]} - €${eurRange[1]}`;
-            } else {
-                const mwkMin = Math.round(eurRange[0] * exchangeRates.mwk);
-                const mwkMax = Math.round(eurRange[1] * exchangeRates.mwk);
-                priceSpan.textContent = `MK${mwkMin.toLocaleString()} - MK${mwkMax.toLocaleString()}`;
-            }
-        });
-        // Initialize to default currency (EUR)
-        const defaultCurrency = 'eur';
-        selector.value = defaultCurrency;
-        const event = new Event('change');
-        selector.dispatchEvent(event);
-    });
     // Smooth scroll for CTA button
     const ctaButton = document.querySelector('.cta-button');
     if (ctaButton) {

@@ -1,82 +1,70 @@
+/* Closing dark chapter before Contact — mirrors the hero's charcoal opening. */
 .mission-vision-panes {
     padding: var(--space-24) 20px;
-    background: var(--color-surface-2);
+    background: var(--color-charcoal);
     text-align: center;
 }
 
 .mission-vision-panes .section-header {
+    color: var(--color-charcoal-text);
     margin-bottom: var(--space-10);
 }
 
-/* Broad two-part band: Mission is the dominant accent-filled tile, Vision the supporting one —
-   deliberately unequal weight rather than a tabbed/boxed pair. */
+/* Broad two-part band: Mission is the dominant earthy-accent tile, Vision is a plain
+   flowing text block directly on the charcoal chapter — deliberately unequal weight
+   rather than a blue tabbed/boxed pair. */
 .panes-grid {
     display: grid;
     grid-template-columns: repeat(var(--bento-cols), 1fr);
     gap: var(--bento-gap);
-    max-width: var(--container-max);
-    margin: 0 auto;
 }
 
 .pane-card {
     grid-column: span 6;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    padding: var(--space-10) var(--space-8);
     text-align: left;
-    transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.pane-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
+    transition: transform var(--transition);
 }
 
 .pane-card:first-child {
     grid-column: span 7;
-    background: var(--color-accent);
-    border-color: var(--color-accent);
-    color: var(--color-accent-contrast);
+    background: var(--color-accent-earthy);
+    border-radius: var(--radius-lg);
+    color: var(--color-charcoal-text);
     padding: var(--space-12) var(--space-10);
+}
+
+.pane-card:first-child:hover {
+    transform: translateY(-3px);
 }
 
 /* Vision is a plain flowing text block, not a second card — keeps the pair deliberately unequal. */
 .pane-card:nth-child(2) {
     grid-column: span 5;
-    background: transparent;
-    border: none;
-    box-shadow: none;
     padding: var(--space-12) var(--space-4);
-}
-
-.pane-card:nth-child(2):hover {
-    transform: none;
 }
 
 .pane-label {
     display: inline-block;
     font-size: var(--text-sm);
     font-weight: var(--weight-semibold);
-    color: var(--color-accent);
+    color: var(--color-accent-earthy-soft);
     letter-spacing: var(--tracking-tight);
     margin-bottom: var(--space-4);
 }
 
 .pane-card:first-child .pane-label {
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(246, 241, 232, 0.85);
 }
 
 .pane-card p {
-    color: var(--color-text-muted);
+    color: var(--color-charcoal-text-muted);
     font-size: var(--text-lg);
     line-height: var(--leading-normal);
     margin: 0;
 }
 
 .pane-card:first-child p {
-    color: rgba(255, 255, 255, 0.92);
+    color: rgba(246, 241, 232, 0.92);
 }
 
 @media (max-width: 768px) {
