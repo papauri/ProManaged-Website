@@ -228,13 +228,16 @@
 
 /* The mark is dark navy, so on the graphite panel it needs a light chip behind it —
    without this it is very nearly invisible. */
+/* Transparent, like the control that opened the panel. The mark is dark navy, so it
+   is re-inked to the ivory on-dark palette rather than given a light plate behind
+   it — a plate reads as a white sticker on the graphite and is the one thing in the
+   panel that would not belong to it. */
 .nav-panel-brand img {
     height: 28px;
     width: auto;
-    padding: var(--space-2);
-    background: var(--color-paper);
-    border-radius: var(--radius-sm);
-    box-sizing: content-box;
+    background: none;
+    filter: brightness(0) invert(1);
+    opacity: .92;
 }
 
 .nav-close {

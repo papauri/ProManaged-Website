@@ -16,7 +16,13 @@ p{max-width:var(--measure)}
 .rail,.container{width:100%;max-width:var(--rail-visual);margin-inline:auto;padding-inline:var(--rail-pad);position:relative;z-index:1}
 .chapter-head h1,.chapter-head h2{max-width:var(--measure-display)}
 .chapter-head--center h1,.chapter-head--center h2{margin-inline:auto}
-.section{padding-block:var(--section-y);background:var(--color-paper);color:var(--color-text);position:relative}
+/* overflow-x:clip contains the settle-side swivel, whose outward travel briefly
+   extends the rightmost card past the viewport edge. body already has
+   overflow-x:hidden but html does not, so without this the page really was
+   horizontally scrollable for the length of the reveal — verified by scrolling
+   it. `clip` rather than `hidden` on purpose: it does not create a scroll
+   container, so position:sticky inside a chapter (the FAQ heading) still works. */
+.section{padding-block:var(--section-y);background:var(--color-paper);color:var(--color-text);position:relative;overflow-x:clip}
 .section--ivory{background:var(--color-ivory)}
 .section--stone{background:var(--color-stone)}
 .section--graphite{background:var(--color-graphite);color:var(--color-text-on-dark)}
@@ -337,13 +343,37 @@ a:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-
    is the correct place for it: a transition is read from the END state. */
 .block-reveal{opacity:0;transform:translate3d(0,var(--block-travel),0) scale(var(--block-scale));transition:none;will-change:opacity,transform}
 .block-reveal--up{transform:translate3d(0,var(--block-travel),0) scale(var(--block-scale))}
-.block-reveal--side{transform:translate3d(calc(var(--block-travel)*-1.15),0,0) scale(var(--block-scale))}
-.block-reveal--side:nth-child(even){transform:translate3d(calc(var(--block-travel)*1.15),0,0) scale(var(--block-scale))}
+/* ---------- settle-side: a swivel from the nearest edge ----------
+   Each card arrives from the side of the screen it already sits closest to, hinging
+   on that edge like a panel swinging into place. js/main.js measures the card's
+   centre against the viewport centre and writes --dir: -1 (left) or 1 (right); the
+   direction drives the hinge, the travel and the rotation from that single value.
+
+   `calc(50% + var(--dir) * 50%)` resolves to 0% for a left-hand card and 100% for a
+   right-hand one, so the transform-origin lands exactly on the edge it swings from.
+   Previously this alternated on :nth-child(even), which had nothing to do with where
+   a card actually was — cards on the left could fly in from the right across the
+   whole page. The rotation is small and the perspective distant on purpose: enough
+   to read as depth, not enough to look like a flipping tile. */
+.block-reveal--side{
+    --dir:-1;
+    /* Softer on a phone: cards there are full-width, so the hinge is the whole screen
+       edge and the same angle reads as a door slamming rather than a panel settling.
+       The wider the card can be, the more rotation it can carry. */
+    --swivel:3.5deg;
+    transform-origin:calc(50% + var(--dir) * 50%) center;
+    transform:perspective(1400px)
+              translate3d(calc(var(--block-travel) * 1.8 * var(--dir)),0,0)
+              rotateY(calc(var(--dir) * var(--swivel) * -1))
+              scale(var(--block-scale));
+}
+@media (min-width:600px){.block-reveal--side{--swivel:5deg}}
+@media (min-width:900px){.block-reveal--side{--swivel:7deg}}
 .block-reveal--scale{transform:scale(var(--block-scale-in))}
 .block-reveal--seq{transform:translate3d(0,calc(var(--block-travel)*.85),0)}
 
 .js-on:not(.load-failsafe) [data-assemble] .is-settled,
-.block-reveal.is-settled,.block-reveal--up.is-settled,.block-reveal--side.is-settled,.block-reveal--side:nth-child(even).is-settled,.block-reveal--scale.is-settled,.block-reveal--seq.is-settled{opacity:1;transform:none}
+.block-reveal.is-settled,.block-reveal--up.is-settled,.block-reveal--side.is-settled,.block-reveal--scale.is-settled,.block-reveal--seq.is-settled{opacity:1;transform:none}
 /* Chapter settle timing. Declared on the settled state so the transition runs on the
    way IN, from the instantly-applied hidden state above. Kept separate from the
    hero's --load-* clock so the two choreographies stay independently tunable. */

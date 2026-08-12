@@ -73,6 +73,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const clearMotion = (el) => {
         el.classList.remove('block-reveal', 'is-settled', 'block-reveal--up', 'block-reveal--side', 'block-reveal--scale', 'block-reveal--seq');
         el.style.removeProperty('--block-delay');
+        el.style.removeProperty('--dir');
+    };
+
+    /* settle-side hinges each card on the screen edge it is already nearest, so a
+       card on the left swings in from the left and one on the right from the right.
+       Measured once, at the moment the group is staged — reading it later would mean
+       reading a position the card has already started animating away from. */
+    const applyHinge = (el) => {
+        const rect = el.getBoundingClientRect();
+        if (!rect.width) return;
+        const fromLeft = rect.left + rect.width / 2 < window.innerWidth / 2;
+        el.style.setProperty('--dir', fromLeft ? '-1' : '1');
     };
 
     const settleGroup = (units, onDone, variantName) => {
@@ -226,6 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (nearViewport && !group.dataset.motionReady) {
                     group.dataset.motionReady = 'true';
                     units.forEach(el => {
+                        if (variant === 'settle-side') applyHinge(el);
                         el.classList.add('block-reveal', variantOf(variant).cls);
                     });
                     requestAnimationFrame(() => settleGroup(units, null, variant));
@@ -241,7 +254,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 const units = [...entry.target.querySelectorAll(UNIT_SELECTOR)];
                 if (!units.length) return;
                 entry.target.dataset.motionReady = 'true';
-                units.forEach(el => el.classList.add('block-reveal', variantOf(variant).cls));
+                units.forEach(el => {
+                    if (variant === 'settle-side') applyHinge(el);
+                    el.classList.add('block-reveal', variantOf(variant).cls);
+                });
                 requestAnimationFrame(() => settleGroup(units, null, variant));
             });
         }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
