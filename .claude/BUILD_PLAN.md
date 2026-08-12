@@ -1,37 +1,42 @@
-# Build Plan: ProManaged IT — Concrete Bento 07 Landing Page Redesign + Cleanup
+# Build Plan: ProManaged IT — K46-Inspired Editorial Landing Page + Cleanup
 
 > ACTIVE TASK. Previous bento/type attempts are superseded. Do not repeat them.
-> **OWNER DIRECTIVE:** The landing page (`index.html`) is the product. Implement a real visual redesign, not token/grid tuning. Use the supplied Bento 07 image as the primary composition reference: https://assets.mockuuups.com/mo/image/upload/c_limit%2Cw_680/v1708508072/bento-07_wd3t7l
+> **OWNER DIRECTIVE:** Rebuild the landing page around the visual language of the supplied K46 Medienkollektiv reference: https://k46team.webflow.io/ . Do not literally copy its text, artwork, branding, or proprietary assets. Recreate its composition principles using ProManaged IT content and assets.
+> **PRIMARY TARGET:** `index.html` landing page. Secondary pages are not redesign targets in this pass.
 > **GIT:** Work only on `main`; commit and push directly to `origin/main`. No branches, PRs, force-pushes, or detached work.
 > **YAML:** Never commit `.yml` or `.yaml`. Delete temporary YAML immediately and verify it is absent.
 
 ## Goal
-Turn `index.html` into a premium editorial/bento landing page that visibly resembles the supplied Bento 07 design language: full-width chapters, large asymmetric blocks, strong type, warm-neutral/Japandi colour, minimal nested cards, and clear visual rhythm while scrolling. Remove obsolete application logic/references at the same time. Remove all pricing from the software/web-app page.
+Replace the current corporate/card-stack homepage with a bold editorial landing page inspired by K46: a personal/direct opening statement, oversized typography, large image-led blocks, asymmetrical composition, capability-led storytelling, and a strong contact section. Adapt that structure to ProManaged IT: software/web apps, hardware sourcing, network infrastructure, and founder-led trust. Remove stale legacy logic and remove software pricing.
 
 ## Wants vs Needs
-- **Want:** a landing page that looks designed like the reference, not a centered corporate template.
-- **Need:** full-width composition, large block transitions, warm-neutral surfaces, strong typography, fewer small cards, and a decisive first-screen transformation.
-- **Success Moment:** At 1280px, the hero fills the viewport width, the first 2–3 sections read as connected bento chapters, and the page no longer looks blue-on-white or boxed into the middle.
+- **Want:** a homepage that feels like a modern creative/technology studio rather than a conventional IT services template.
+- **Need:** strong composition and storytelling, not another grid-token exercise.
+- **End user:** prospective clients who should understand what ProManaged does, see the person/company behind it, and reach contact quickly.
+- **Friction today:** centered wrappers, repetitive cards, blue-heavy UI, and too much “service catalogue” presentation.
+
+## Success Moment
+At 1280px the landing page opens with a huge direct headline, a strong visual composition, then moves through large editorial chapters with images/blocks and a clear contact invitation. It should feel closer to the supplied K46 reference than to the current ProManaged homepage.
 
 ## Reference Systems
-- **Mockuuups Bento 07** — take: asymmetric collage, dominant blocks, broad visual areas, varied heights, generous negative space, strong hierarchy. Do not copy artwork.
-- **Apple editorial/product pages** — take: full-width storytelling and strong section hierarchy. Avoid imagery we do not own.
-- **Japandi/editorial web layouts** — take: ivory, sand, warm stone, muted charcoal, restrained earthy accent, calm whitespace. Avoid beige overload or decorative clutter.
+- **K46 Medienkollektiv** — take: direct human opening, oversized typography, “not a traditional agency” positioning, capability list, image-led team/people story, repeated contact invitation, and a collage-like visual rhythm. Avoid copying German copy, member names, logos, artwork, or exact layouts. citeturn530581view0
+- **Mockuuups Bento 07** — take: unequal visual blocks and broad compartments. Avoid turning the page into a wall of cards.
+- **Apple/editorial studio sites** — take: strong typography and generous negative space. Avoid product-marketing mimicry.
 
 ## Completion Criteria (Definition of Done)
-- [ ] `index.html` is structurally changed where needed; CSS-only restyling is insufficient and not accepted.
-- [ ] Hero is effectively full viewport width at desktop, with no single narrow centered shell controlling the whole composition.
-- [ ] Hero uses one dominant text block, one dominant visual/content block, and at least one smaller supporting block; no stack of equal cards.
-- [ ] At least 4 homepage chapters use different block proportions and background surfaces; scrolling feels like moving through bento chapters.
-- [ ] Services section uses one dominant block + two differently weighted supporting blocks; no equal-card row.
-- [ ] About uses the existing founder image as a large visual anchor, not a small circular portrait beside a centered card.
-- [ ] Mission/Vision use unequal visual weight and warm-neutral surfaces; no blue card pair.
-- [ ] Major section backgrounds change deliberately between chapters using ivory / warm stone / sand / muted charcoal as appropriate; transitions are static and subtle.
-- [ ] Blue is an accent, not the dominant page background.
-- [ ] No decorative gradients, looping background animation, parallax, or gimmicky motion.
-- [ ] No excessive nested rounded cards; large blocks may use restrained radius, but the page must still read as a composition.
-- [ ] Modern display font + Inter body/UI, with clearly visible scale/weight contrast.
-- [ ] `pages/custom_websites.html` contains zero visible prices, price tables, package amounts, or pricing-led UI/copy.
+- [ ] `index.html` is structurally redesigned, not merely restyled.
+- [ ] The hero is effectively full-width and starts with an oversized direct statement, not a centered marketing headline + three small cards.
+- [ ] Hero has one major visual area using the existing founder image and/or existing iconography, with supporting content integrated into the composition.
+- [ ] The landing page uses an editorial story order: Hero → What ProManaged Is → Capabilities → Founder/Story → Mission/Vision → Contact → Footer.
+- [ ] At least 4 chapters use visibly different block proportions, spacing, and surface treatments; scrolling feels like moving through large designed panels.
+- [ ] Capabilities are presented as typography-led editorial blocks, not equal service cards.
+- [ ] Founder section is image-led and substantial; no small circular portrait beside a centered card.
+- [ ] Contact is visually prominent and repeated as a deliberate editorial CTA, matching the direct/contact-forward feel of the reference.
+- [ ] Typography is modern and oversized for major headings; Inter remains body/UI.
+- [ ] Palette is modern warm-neutral/Japandi: ivory/off-white, warm stone, sand/greige, muted charcoal, and one restrained earthy accent. Blue is secondary identity/interaction only, never the dominant page background.
+- [ ] Backgrounds are mostly static; no looping background animation, parallax, or gimmicky motion.
+- [ ] No excessive nested cards, shadows, or “dashboard” UI.
+- [ ] `pages/custom_websites.html` contains no visible prices, pricing tables, package amounts, or pricing-led CTA copy.
 - [ ] No obsolete eBay/RAWG/game-price/game-review/shopping/render references remain in active code or `.claude` docs.
 - [ ] No dead script/stylesheet references remain; unused assets proven unnecessary are deleted.
 - [ ] Contact, booking, SMTP, and honeypot functionality remains intact.
@@ -49,6 +54,7 @@ Turn `index.html` into a premium editorial/bento landing page that visibly resem
 - `css/why_band.css`
 - `css/about_section.css`
 - `css/mission_vision.css`
+- `css/contact_section.css`
 - `css/footer_promanaged.css`
 
 ### Software pricing removal
@@ -68,99 +74,112 @@ Turn `index.html` into a premium editorial/bento landing page that visibly resem
 - `.claude/agents/build-planner.md`
 
 ## Exact Changes
-### `index.html`
-- Section: homepage DOM.
-- Change: restructure hero + major content wrappers so each chapter can span the viewport width and contain asymmetric blocks. Preserve existing real copy, links, IDs, forms, accessibility hooks, and CTA targets. You may add semantic wrappers/classes required for the composition.
-- Required chapter order: Hero → Services → Why/Proof → About → Mission/Vision → Contact → Footer.
-- Required rule: do not keep a single `.container` wrapping the entire page story.
-- Reason: the old DOM is preventing a true editorial composition.
+### `index.html` — PRIMARY IMPLEMENTATION
+- Section: entire homepage DOM.
+- Change: remove the current repeated section/card composition and rebuild the page around large editorial chapters. Add semantic wrappers/classes as needed.
+- Required chapter order:
+  1. **Hero / personal opening** — large statement and visual.
+  2. **What ProManaged Is** — concise company statement and positioning.
+  3. **Capabilities** — software/web apps, hardware sourcing, network infrastructure presented as large editorial blocks with varied type sizes, not equal cards.
+  4. **Founder / Story** — John-Paul Chirwa + existing founder image as a primary visual anchor.
+  5. **Mission / Vision** — combined editorial block with unequal weights.
+  6. **Contact / CTA** — direct, prominent enquiry invitation and existing contact form.
+  7. **Footer**.
+- Required content direction: rewrite existing copy into direct, confident, human language for ProManaged; preserve factual claims already present in the repo; do not fabricate clients, metrics, projects, or awards.
+- Required hero direction: use a statement-style headline inspired by K46's direct introduction format, adapted to ProManaged. Example meaning, not mandatory copy: “ProManaged IT builds practical software, sources the technology you need, and connects people to better infrastructure.”
+- Required interaction: contact CTA should be obvious from the first screen and should scroll to the real contact section/form; do not reintroduce modal contact flows.
+- Reason: the existing DOM is the main reason previous CSS-only redesigns looked unchanged.
 
 ### `css/tokens.css`
 - Section: colour/layout/type.
-- Change: use a wide canvas token around 1440–1560px, generous gutters, soft ivory/off-white base, warm stone and sand surfaces, muted charcoal text, one subdued earthy accent, and one blue identity token only for required brand/interactive states. Define display type + fluid heading scale.
-- Required visual palette direction: ivory `#F6F1E8` family, warm stone `#DED6C8` family, sand `#C8B9A6` family, charcoal `#20201E` family; tune exact tokens to maintain WCAG AA. Do not introduce bright multicolour accents.
-- Reason: the current blue-dominant system is explicitly rejected by the owner.
+- Change: establish the new warm-neutral visual system and wide editorial canvas. Use tokens for ivory/off-white background, warm stone, sand/greige, charcoal, muted text, white surfaces, and one restrained earthy accent. Keep blue only as a secondary brand/interactive token.
+- Typography: modern display face for H1/H2; Inter for body/UI; large fluid display sizes.
+- Layout: wide inner rail around 1440–1560px with 32–64px desktop gutters; avoid a single narrow max-width wrapper for the entire story.
 
 ### `css/global_styles.css`
 - Section: page canvas, containers, headings.
-- Change: remove any global rule that forces every section into a narrow centered shell. Introduce full-bleed section backgrounds and allow an inner wide content rail only where needed for readability.
-- Required: body/page should not visually stop at a small central rectangle on 1280px.
+- Change: create full-bleed section support and wide inner rails. Global heading defaults should support oversized editorial type without forcing every section into a centered block.
 
 ### `css/hero_section.css`
-- Section: `.hero`, `.hero-content`, supporting hero blocks.
-- Change: make hero effectively full-width with 32–64px desktop gutters. Use a 60/40-ish split: large left copy block, large right visual/content block. Add one smaller supporting block integrated into the right composition. No centered text.
-- Required composition: one block may be tall; one block may be wide; supporting block must not match the dominant block size.
-- Required background: warm neutral or charcoal chapter surface, not blue.
-- Required motion: none beyond existing subtle hover/focus.
+- Section: hero.
+- Change: use an immersive, full-width opening with a huge headline, short supporting statement, CTA, and a large visual panel. Use the founder image and/or brand mark intentionally. The hero should feel like an editorial cover, not a two-column SaaS template.
+- Responsive: retain the visual hierarchy at 768/375px; do not shrink everything into tiny cards.
 
 ### `css/service_cards.css`
-- Section: `.services-grid` and cards.
-- Change: use a wide asymmetric 3-block composition: lead = 2/3-ish width, support A = 1/3-ish width, support B = 1/3-ish width with a different height/position. Avoid a fixed two-row-only template and avoid equal card heights.
-- Required: large blocks should visually touch the chapter rhythm; do not float three isolated white cards inside a small middle box.
+- Section: services/capabilities.
+- Change: replace equal card grid with three editorial capability blocks of different visual weights. Lead software/web-app block should dominate; hardware sourcing and networking support at different scales. Use typography, spacing, icon/image anchors, and block background differences instead of card chrome.
 
 ### `css/why_band.css`
-- Section: why/proof chapter.
-- Change: use a large statement block + smaller supporting proof block with contrasting warm-neutral surfaces. Let the chapter background itself carry visual weight.
+- Section: positioning/proof.
+- Change: convert to a wide statement-led chapter with a large phrase and one supporting content area. Do not make another card row.
 
 ### `css/about_section.css`
-- Section: about chapter.
-- Change: founder image occupies a large visual block, ideally 40–50% of the inner rail; story occupies the remaining area; add one small supporting accent statement if it improves composition. No circle portrait.
+- Section: founder/story.
+- Change: make founder image large and visually dominant; pair with editorial copy and a concise founder statement. No circle crop, no small avatar card.
 
 ### `css/mission_vision.css`
-- Section: mission/vision chapter.
-- Change: Mission = dominant large block; Vision = smaller supporting block. Use charcoal/ivory/warm stone hierarchy rather than blue cards.
+- Section: mission/vision.
+- Change: use unequal text blocks or one large statement + smaller counterpart, with warm-neutral surfaces and typography carrying the hierarchy.
+
+### `css/contact_section.css`
+- Section: contact.
+- Change: make contact feel like a major closing chapter: oversized invitation, supporting text, and the existing form. Keep form functionality exactly intact.
 
 ### `css/footer_promanaged.css`
 - Section: footer.
-- Change: wide inner rail with calm warm-neutral surface, generous spacing, clear columns. Avoid reverting to generic blue/grey footer styling.
+- Change: use a wide calm footer with strong spacing and editorial hierarchy, not a generic boxed light-grey footer.
 
-### `pages/custom_websites.html`
-- Section: all pricing-related content.
-- Change: remove every visible price, currency amount, pricing table, package price, “starting at” price, and price-led CTA copy. Preserve service descriptions and enquiry CTA.
-- Reason: software/web-app pricing should not be displayed.
-
-### `css/custom_websites.css`
-- Section: pricing styles.
-- Change: remove selectors used only by deleted pricing UI. Keep styles still used by the page.
+### `pages/custom_websites.html` + `css/custom_websites.css`
+- Section: software/web-app service/pricing.
+- Change: remove every visible price, currency amount, pricing table, package price, “starting at” amount, and price-led CTA copy. Preserve the service story, capabilities, proof/context that is factual, and enquiry CTA.
 
 ### Cleanup audit
-- Audit every `<script src>` and `<link rel="stylesheet">` against the current tree.
+- Audit every current `<script src>` and stylesheet link against the current tree.
 - Search active code/docs for `ebay`, `rawg`, `game_price`, `game_reviews`, `game_search`, `shopping`, `render`, and abandoned server variants.
 - Delete only files proven unused by current pages/runtime. Do not delete working form or mail paths.
-- Update `.claude` maps/docs so they reflect the current repository, not the old application.
+- Update `.claude` maps/docs after cleanup so they describe the current repository.
 
 ## New Code Needed
 Pseudocode only:
-1. Make page sections full-bleed with wide inner rails.
-2. Build hero as dominant text + dominant visual + smaller support block.
-3. Build services/why/about/mission as connected large chapters with unequal blocks.
-4. Use warm-neutral surfaces to make scroll transitions feel like changing bento panels.
-5. Remove unused legacy logic and pricing UI.
-6. Test 1280 first, then 768/375.
+1. Replace the existing homepage section DOM with large semantic editorial chapters.
+2. Use one wide visual rail plus full-bleed backgrounds; no single narrow wrapper around the entire page.
+3. Use founder image + typography + icons as visual anchors instead of equal cards.
+4. Make capability sections unequal and type-led.
+5. Make contact a major closing chapter.
+6. Remove obsolete runtime paths and software pricing.
+7. Verify at 1280 first, then 768/375.
 
 ## Constraints / Things NOT to Touch
-- Do not invent business facts, metrics, clients, projects, or imagery.
-- Do not add stock/reference artwork.
+- Do not literally copy K46 text, images, names, branding, or proprietary artwork.
+- Do not invent business facts, clients, metrics, projects, awards, or imagery.
 - Do not remove working contact/booking/SMTP/honeypot functionality.
-- No dark theme; charcoal may be used as a chapter surface, but not as a full site dark mode.
-- No decorative gradients, looping background animations, or parallax.
+- No dark theme. Warm charcoal may be used as a chapter surface but not as a site-wide dark mode.
+- No decorative gradients, looping background animations, parallax, or gimmicky motion.
 - No excessive shadows or floating-card effects.
+- No modal reintroduction.
 - `origin/main` only.
 - Never commit YAML.
-- Do not redesign secondary pages except the explicit software pricing removal.
+- Secondary pages are not redesign targets except `pages/custom_websites.html` pricing removal.
+
+## Known Trade-offs
+- Secondary pages may remain visually behind the landing page until a later rollout.
+- Limited imagery means typography, layout, founder photography and iconography must carry the design.
+
+## Open Questions
+None. Implement decisively from the K46 composition principles adapted to ProManaged IT.
 
 ## Phases
-### Phase 1: Landing-page structural redesign
-- Goal: change `index.html` + homepage CSS so the landing page is visibly full-width, chaptered, and Bento 07-inspired.
-- Exit: at 1280px the page no longer looks centered/blue/card-based.
-- Files: landing-page list.
+### Phase 1: Landing-page redesign
+- Goal: rebuild `index.html` and its homepage CSS around K46-inspired editorial storytelling.
+- Exit: at 1280px the homepage feels like a new creative/technology studio site, not the current IT card stack.
+- Files: landing page list.
 
 ### Phase 2: Software pricing removal + legacy cleanup
-- Goal: remove software pricing and obsolete runtime/doc references without breaking active features.
+- Goal: remove pricing and obsolete runtime/docs without breaking active functionality.
 - Exit: no prices and no dead/legacy references.
 - Files: pricing + cleanup lists.
 
 ### Phase 3: Verification
 - Goal: browser-test 1280/768/375, console, overflow, font loading, links and forms.
 - Exit: all Completion Criteria pass; commit pushed to `origin/main`.
-- Files: fixes only from the scoped lists.
+- Files: fixes only from scoped lists.
