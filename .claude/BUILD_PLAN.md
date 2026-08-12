@@ -154,11 +154,11 @@ This is a team, not a chain of command. Think together, challenge together, revi
 - Full-bleed surfaces are allowed; the content rail is not full-canvas.
 - Text measures remain constrained independently from visual rail width.
 - No return to the previous oversized 2200px/full-canvas experiment.
-- No traditional horizontal navbar. The persistent logo tile opens the bento navigation.
+- No traditional horizontal navbar. The persistent ProManaged logo tile opens the bento navigation.
 - Plus Jakarta Sans remains the current type system.
 - Existing `.btn`, `.primary`, `.secondary`, `.hero-buttons` are canonical and must not be renamed.
 - Founder image remains the existing 800×800 asset, rendered as a restrained circular portrait.
-- Footer must use the canonical `.footer` markup/classes, not placeholder compatibility markup.
+- **Every required public page must use the same canonical footer structure and `.footer` root.** Do not maintain page-specific footer variants or compatibility footer markup.
 - Work directly on `main`. Do not create a branch or PR.
 - Never commit `.yml` / `.yaml` files.
 - Do not modify privacy/legal content unless an objective broken-link/reference bug requires it.
@@ -263,7 +263,9 @@ Every load-phase element must participate in the actual hidden → settled seque
 The load choreography must be visibly different on mobile vs desktop while remaining the same design language.
 
 ### D. SCROLL TRANSITIONS — highest priority
-The signature interaction is Building Blocks continuing down the page.
+The signature interaction is **Building Blocks** continuing down the page and it must be applied **throughout the public site**, not only on the homepage.
+
+Every major page should visibly use the same motion language on its chapter/hero/content blocks.
 
 Use the existing `data-blocks` + `IntersectionObserver` system.
 
@@ -273,7 +275,9 @@ Required motion moments:
 - founder/story reveal;
 - selected evidence cards;
 - capability sections;
-- contact/form sections.
+- service-page sections;
+- contact/form sections;
+- footer reveal where it is visually appropriate.
 
 Approved variants only:
 - `settle-up`
@@ -305,12 +309,22 @@ A tiny physical settle is acceptable. It must never read as cartoon bounce.
 `prefers-reduced-motion` must show final state immediately.
 
 ### E. BENTO COMPOSITION SYSTEM — highest priority
-Do not make every section the same grid.
+The bento language must be a **site-wide design system**, not primarily a homepage treatment.
+
+Do not make every section the same grid, and do not ship service pages that visually collapse into ordinary stacked cards.
 
 Use at least three composition patterns across the public site:
 1. Dominant block + satellites.
 2. Offset editorial split.
 3. Stepped/mosaic sequence.
+
+Also use selected combinations such as:
+- large statement + two evidence satellites;
+- image/interface + text block + narrow fact rail;
+- split hero + stacked proof blocks;
+- asymmetric process timeline;
+- alternating dark/light chapter blocks;
+- visual index cards between narrative sections.
 
 Vary:
 - column spans;
@@ -318,7 +332,10 @@ Vary:
 - aspect ratios;
 - media placement;
 - whitespace;
-- statement vs card sections.
+- statement vs card sections;
+- background chapter surfaces.
+
+**Every public page must contain at least two visibly distinct bento/composition moments beyond a simple hero.**
 
 Mobile-first requirement:
 - Start with 1-column and occasional 2-column compositions.
@@ -337,7 +354,7 @@ Keep:
 - `.btn.secondary`
 - `.hero-buttons`
 
-Upgrade the visual language:
+Upgrade/refine the visual language:
 - confident but not oversized height;
 - refined radius;
 - subtle depth/border;
@@ -352,23 +369,29 @@ The same family must work in hero, capability cards, service pages, contact sect
 
 No generic plain-blue-pill appearance and no competing button systems.
 
-### G. NAVIGATION — high priority
-Preserve the bento navigation concept.
+### G. NAVIGATION — highest priority
+The current navigation must be treated as a major redesign target, not simply polished.
 
-Review:
-- logo tile visibility;
-- open/close affordance;
-- tile hierarchy;
-- varied tile spans;
+Preserve the bento navigation concept and existing accessibility/JS contracts, but make the visual experience feel unmistakably contemporary.
+
+Required:
+- modern persistent logo/control tile;
+- stronger bento hierarchy;
+- a visually rich opening state rather than a plain full-screen list;
+- more distinctive tile proportions and composition;
+- clearer primary CTA destination;
+- deliberate typography hierarchy;
+- strong open/close choreography linked to the page Building Blocks language;
+- better use of negative space and surface contrast;
 - touch target size;
 - keyboard focus;
 - Escape close;
 - focus restoration;
 - scroll locking;
 - mobile composition;
-- open animation that feels like a related part of the page loading language.
+- no old-fashioned hamburger/drawer appearance.
 
-On mobile, the navigation panel should be easy to scan with one-hand interaction and avoid tiny text or cramped tiles.
+Do not change the existing navigation behaviour contracts unless there is a concrete bug.
 
 ### H. FOUNDER / STORY — high priority
 Founder area must feel premium and personal rather than a generic profile card.
@@ -386,7 +409,7 @@ Required:
 - responsive re-composition;
 - founder reveal participates in the Building Blocks motion language.
 
-### I. SERVICES / CAPABILITIES — medium/high priority
+### I. SERVICES / CAPABILITIES — high priority
 Build should visually lead, with Source and Connect supporting.
 
 Use bento hierarchy rather than three identical cards.
@@ -396,9 +419,8 @@ Required:
 - clear destination/CTA;
 - enough content to establish credibility;
 - no pricing on software page;
-- service cards do not rely on hover alone.
-
-On mobile, Build can be the dominant lead block, followed by distinct Source and Connect treatments rather than three identical cards.
+- service cards do not rely on hover alone;
+- every service page inherits the same visual system rather than reverting to a generic article layout.
 
 ### J. PROJECT / EVIDENCE CONTENT — medium/high priority
 Use small anonymous interface evidence where useful:
@@ -456,21 +478,23 @@ Required:
 - safe escaping of submitted values;
 - no client-side JS in email.
 
-### M. FOOTER — high priority
-The footer is part of the identity system.
+### M. FOOTER — highest priority
+The footer is part of the identity system and must be a **shared component in markup and visual design**.
 
 Required:
-- canonical `.footer` structure;
-- ProManaged brand statement;
-- useful navigation links;
-- strong but appropriate final CTA;
+- canonical `.footer` structure on every public page;
+- same section ordering/semantics across pages;
+- same ProManaged brand statement;
+- same useful navigation links;
+- same contact destinations;
+- same final CTA concept;
 - privacy link;
 - current-year treatment;
 - mobile-first stacked composition;
 - desktop expansion only after mobile structure is solid;
 - same button language as the hero with dark-surface contrast.
 
-Never leave placeholder footer markup in a public page.
+Do not duplicate or redesign the footer separately on individual pages. Normalize the HTML so every page uses the canonical footer tree.
 
 ## 4. RESPONSIVE ART DIRECTION
 
@@ -575,44 +599,70 @@ Keep ordinary English uses of the word `render`.
 
 Never commit YAML/YML.
 
-## 10. IMPLEMENTATION ORDER
+## 10. IMPLEMENTATION ORDER — FULL IMPLEMENTATION CYCLE
 
-### Phase 1 — Mobile-first structural stability
+### Phase 1 — Shared structural normalization
+- Normalize the canonical footer HTML on every public page.
+- Remove page-specific/legacy footer structures.
+- Confirm all pages load the same shared footer CSS.
+- Normalize site-wide `data-blocks` coverage so motion exists on every intended public chapter.
+- Normalize navigation markup/classes where necessary while preserving JS contracts.
+
+### Phase 2 — Mobile-first art direction
 Fix first at 375/430:
 - hero geometry;
+- bento composition;
 - button hierarchy;
 - canonical footer;
 - founder circle/crop;
-- bento card composition;
 - navigation panel;
-- form ergonomics.
+- form ergonomics;
+- service-page composition.
 Then progressively enhance tablet/desktop.
 
-### Phase 2 — Premium page-load and scroll motion
+### Phase 3 — Premium page-load + scroll motion
 Fix:
 - first-screen block assembly;
 - hero evidence sequencing;
-- chapter reveals;
+- chapter reveals across **all public pages**;
 - bento navigation reveal;
 - founder reveal;
+- service-page reveals;
+- footer reveal where appropriate;
 - device-aware timing;
 - reduced-motion fallback;
 - JS-failure visibility fallback;
 - ensure every declared load-phase element actually participates in the sequence.
 
-### Phase 3 — Responsive bento art direction
-Fix:
-- mobile composition first;
-- tablet recomposition;
-- desktop hierarchy;
-- evidence mosaic;
-- capability hierarchy;
-- intentional open space.
+### Phase 4 — Bento redesign across the whole site
+Do not stop at the homepage.
 
-### Phase 4 — Forms/email consistency
+Implement visibly varied bento compositions across:
+- `index.html`
+- `get-started.html`
+- `learn_more.html`
+- `pages/custom_websites.html`
+- `pages/hardware_sourcing.html`
+- `pages/network_infrastructure.html`
+
+Each page should have its own chapter rhythm while sharing the same design language.
+
+### Phase 5 — Navigation redesign
+Treat the navigation as a premium bento control surface.
+
+Keep its existing JS/accessibility behaviour but improve:
+- visual hierarchy;
+- composition;
+- tile variation;
+- typography;
+- open/close transition;
+- CTA emphasis;
+- mobile ergonomics.
+
+### Phase 6 — Forms/email consistency
 Fix only UI/UX and presentation while preserving backend contracts.
 
-### Phase 5 — Final polish
+### Phase 7 — Final polish
 Typography, spacing, micro-interactions, image loading, focus states, CTA consistency, footer details and content rhythm.
 
 ## 11. DEFINITION OF DONE
@@ -625,19 +675,22 @@ All must be true:
 - [ ] Rail never exceeds 1880px.
 - [ ] Hero visual rows never overlap at large desktop sizes.
 - [ ] Hero contains purposeful interface/project evidence.
-- [ ] Bento patterns are visibly varied across the site.
+- [ ] Bento patterns are visibly varied across the site, not just on the homepage.
+- [ ] Every required public page has at least two deliberate bento/composition moments beyond a simple hero.
 - [ ] Desktop/tablet/mobile are art-directed, not merely stacked.
 - [ ] Page-load animation feels like a premium block-assembly transition.
 - [ ] Every intended load-phase element actually participates in the choreography.
 - [ ] No essential content can remain hidden because JavaScript failed or cleanup did not run.
-- [ ] Scroll Building Blocks motion is clearly visible but slow and premium.
+- [ ] Scroll Building Blocks motion is clearly visible on every required public page.
 - [ ] Motion runs once and respects reduced motion.
 - [ ] Founder portrait is circular, sharp and restrained.
 - [ ] CTA anchors no longer look generic/boring.
+- [ ] Navigation feels modern and premium rather than like an old-school drawer/hamburger.
 - [ ] Navigation is usable by touch and keyboard.
 - [ ] Forms remain wired to their existing backend contracts.
 - [ ] Email templates remain safe and branded.
-- [ ] Canonical footer is present on every required public page.
+- [ ] Canonical footer markup and CSS are shared across every required public page.
+- [ ] No legacy/page-specific footer variant remains.
 - [ ] No pricing appears on the software page.
 - [ ] No unapproved client/project names or fabricated evidence are present.
 - [ ] No Render/eBay/RAWG legacy integration remains where it is not required.
@@ -646,13 +699,32 @@ All must be true:
 - [ ] No obvious accessibility regression exists.
 - [ ] Full diff has been inspected before declaring completion.
 
-## 12. REQUIRED HANDOFF PROMPT FOR CLAUDE
+## 12. DEFAULT EXECUTION MODE
+
+**The Build Plan is the implementation instruction.**
+
+Do not wait for a separate review prompt after every implementation cycle.
+
+When the user says to implement the build plan, Claude must:
+1. Read the complete plan and live repository.
+2. Implement all currently active requirements in one continuous cycle.
+3. Inspect the entire diff.
+4. Fix incomplete or obviously weak implementation it finds itself.
+5. Commit directly to `main`.
+6. Push directly to `origin/main`.
+7. Report completion.
+
+The user will provide subjective feedback after seeing the result. Do not stop implementation waiting for ChatGPT review unless the user explicitly requests a review.
+
+## 13. REQUIRED HANDOFF PROMPT FOR CLAUDE
 
 Use a fresh Claude session (`/clear`) and paste:
 
 Read `.claude/BUILD_PLAN.md` completely before touching any code.
 
 You are working as part of a shared three-agent team with ChatGPT and Perplexity. There are NO isolated responsibilities. All three agents share responsibility for the quality of the entire product.
+
+The Build Plan is the implementation instruction. Do not wait for a separate review prompt after each cycle.
 
 Before substantial work, refresh your understanding from the live GitHub repository:
 - `.claude/BUILD_PLAN.md`
@@ -665,13 +737,17 @@ The live repository is the source of truth. Do not rely on stale conversation co
 
 Implement the entire active build plan in one continuous cycle. Think about design, UX, responsive behaviour, bento composition, typography, motion, loading, navigation, forms, email UX, accessibility, performance, business positioning, technical integrity and regressions—not just the files you edit.
 
+Do not stop after a token change, one CSS file, the homepage, or a superficial motion pass. Complete the entire site-wide active scope.
+
 If something is technically correct but visually weak, improve it. If something is broken, fix the root cause. If a change risks regression, investigate before applying it. Do not wait for another agent to catch an obvious problem.
 
 Work directly on `main` and push directly to `origin/main`. Do not create a branch or PR. Never commit YAML/YML. Preserve PHP endpoints, form field names/IDs/actions, SMTP/PHPMailer, honeypots, navigation contracts and existing working application behaviour.
 
-Do not widen the 1880px rail or return to the previous oversized full-canvas design. Preserve the 7fr/5fr desktop hero, mobile-first composition, bento navigation, circular founder treatment, canonical footer, premium CTA family, anonymous project evidence, and Building Blocks motion language.
+Do not widen the 1880px rail or return to the previous oversized full-canvas design. Preserve the 7fr/5fr desktop hero, mobile-first composition, bento navigation, circular founder treatment, canonical shared footer, premium CTA family, anonymous project evidence, and Building Blocks motion language.
 
 The page-load experience must be a premium block-assembly sequence, not a spinner. Every declared load-phase element must participate in the actual hidden → settled choreography, with safe JavaScript-failure and reduced-motion fallbacks so essential content can never remain hidden.
+
+Apply Building Blocks motion throughout the public site, not just the homepage. Redesign the bento composition of every required public page so each page has visibly varied editorial moments instead of ordinary stacked cards. Redesign the navigation presentation so it feels contemporary and premium while preserving its JS/accessibility behaviour. Normalize the footer so all required pages use the same canonical footer markup and CSS.
 
 Start responsive work at 375px and 430px, then verify 768px, 1024px, 1440px, 1600px, 1920px and 2560px. Check hero overlap, bento recomposition, buttons, founder, navigation, forms, footer, motion, overflow, accessibility and assets.
 
@@ -690,7 +766,7 @@ OR
 Ready for review:
 - Yes
 
-## 13. PERPLEXITY LIVE-CONTEXT PROMPT
+## 14. PERPLEXITY LIVE-CONTEXT PROMPT
 
 Use this as the standing instruction for Perplexity:
 
