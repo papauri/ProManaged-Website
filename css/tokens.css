@@ -1,7 +1,4 @@
-/* tokens.css — ProManaged IT "Signal & Systems" design system.
-   Single source of truth for palette, type, spacing, radius, shadow and layout.
-   Import this FIRST, before any other stylesheet, on every page.
-   No other file may declare a raw colour. */
+/* tokens.css — ProManaged IT "Signal & Systems" design system. */
 :root {
   --color-paper: #fffdfa;
   --color-ivory: #f7f3ec;
@@ -10,152 +7,61 @@
   --color-greige: #b9ada0;
   --color-graphite: #1c1b19;
   --color-graphite-soft: #2b2926;
-
   --color-bg: var(--color-paper);
   --color-surface: var(--color-ivory);
   --color-border: #e3dbcf;
   --color-border-strong: #cdc1b1;
-
   --color-text: #1c1b19;
   --color-text-muted: #56514a;
   --color-text-subtle: #6e675e;
   --color-text-inverse: #f7f3ec;
   --color-text-on-dark: #f7f3ec;
-  --color-text-on-dark-muted: rgba(247, 243, 236, 0.74);
-
+  --color-text-on-dark-muted: rgba(247,243,236,.74);
   --color-accent-earth: #96502c;
   --color-accent-earth-hover: #7c4223;
   --color-accent-earth-soft: #f0e4d9;
-
   --color-accent: #2563eb;
   --color-accent-hover: #1d4ed8;
   --color-accent-active: #1e40af;
   --color-accent-link: #1d4ed8;
   --color-accent-soft: #eaf1fe;
-  --color-accent-contrast: #ffffff;
-
+  --color-accent-contrast: #fff;
   --color-success: #15803d;
   --color-danger: #b91c1c;
-
   --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-display: var(--font-primary);
   --font-sans: var(--font-primary);
-
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
-  --text-5xl: 3rem;
-
-  --display-1: clamp(2.75rem, 1.35rem + 5.6vw, 6rem);
-  --display-2: clamp(2rem, 1.3rem + 2.8vw, 3.75rem);
-  --display-3: clamp(1.5rem, 1.18rem + 1.3vw, 2.25rem);
-  --display-figure: clamp(3rem, 1.8rem + 4.8vw, 5.5rem);
-
-  --tracking-display: -0.035em;
-  --tracking-tight: -0.015em;
-  --tracking-eyebrow: 0.1em;
-  --leading-display: 1.04;
-  --leading-tight: 1.16;
-  --leading-normal: 1.62;
-
-  --weight-normal: 400;
-  --weight-medium: 500;
-  --weight-semibold: 600;
-  --weight-bold: 700;
-  --weight-display: 800;
-
-  --measure: 62ch;
-  --measure-tight: 46ch;
-  --measure-display: 26ch;
-
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
-  --space-24: 6rem;
-  --section-y: clamp(4rem, 7vw, 8rem);
-
-  --radius-sm: 6px;
-  --radius: 10px;
-  --radius-lg: 18px;
-  --radius-full: 9999px;
-
-  --shadow-sm: 0 1px 2px rgba(28, 27, 25, 0.06), 0 2px 6px rgba(28, 27, 25, 0.05);
-  --shadow-lg: 0 18px 40px rgba(28, 27, 25, 0.13), 0 4px 12px rgba(28, 27, 25, 0.06);
-
-  /* Composition and text have separate width contracts. On large monitors the
-     visual rail should actually use the available canvas; it must not read like a
-     centered 1100–1300px website with empty walls around it. */
-  --rail-visual: 2200px;
-  --rail-max: var(--rail-visual);
-  --rail-pad: clamp(1.25rem, 2.8vw, 4.5rem);
-  --grid-gap: clamp(1rem, 1.8vw, 2.75rem);
-  --grid-cols: 12;
-  --header-h: 92px;
-
-  --transition: 160ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  --block-duration: 560ms;
-  --block-stagger: 80ms;
-  --block-travel: 24px;
-  --block-scale: 0.985;
-  --block-scale-in: 0.955;
-  --block-sequence-mult: 1.5;
-  --ease-settle: cubic-bezier(0.18, 0.89, 0.32, 1.28);
-  --ease-fade: cubic-bezier(0.16, 0.72, 0.24, 1);
-
+  --text-xs: .75rem; --text-sm: .875rem; --text-base: 1rem; --text-lg: 1.125rem; --text-xl: 1.25rem; --text-2xl: 1.5rem; --text-3xl: 1.875rem; --text-4xl: 2.25rem; --text-5xl: 3rem;
+  --display-1: clamp(2.75rem,1.35rem + 5.6vw,6rem);
+  --display-2: clamp(2rem,1.3rem + 2.8vw,3.75rem);
+  --display-3: clamp(1.5rem,1.18rem + 1.3vw,2.25rem);
+  --display-figure: clamp(3rem,1.8rem + 4.8vw,5.5rem);
+  --tracking-display: -.035em; --tracking-tight: -.015em; --tracking-eyebrow: .1em;
+  --leading-display: 1.04; --leading-tight: 1.16; --leading-normal: 1.62;
+  --weight-normal: 400; --weight-medium: 500; --weight-semibold: 600; --weight-bold: 700; --weight-display: 800;
+  --measure: 62ch; --measure-tight: 46ch; --measure-display: 26ch;
+  --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
+  --section-y: clamp(4rem,7vw,8rem);
+  --radius-sm: 6px; --radius: 10px; --radius-lg: 18px; --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px rgba(28,27,25,.06),0 2px 6px rgba(28,27,25,.05);
+  --shadow-lg: 0 18px 40px rgba(28,27,25,.13),0 4px 12px rgba(28,27,25,.06);
+  --rail-visual: 2200px; --rail-max: var(--rail-visual); --rail-pad: clamp(1.25rem,2.8vw,4.5rem); --grid-gap: clamp(1rem,1.8vw,2.75rem); --grid-cols: 12; --header-h: 92px;
+  --transition: 160ms cubic-bezier(.4,0,.2,1);
+  /* Building Blocks: visible enough to notice, still premium rather than cartoonish. */
+  --block-duration: 680ms;
+  --block-stagger: 96ms;
+  --block-travel: 34px;
+  --block-scale: .965;
+  --block-scale-in: .92;
+  --block-sequence-mult: 1.25;
+  --block-tilt: 0.65deg;
+  --ease-settle: cubic-bezier(.16,.86,.24,1.18);
+  --ease-fade: cubic-bezier(.16,.72,.24,1);
   --portrait-size: 260px;
-
-  --ratio-portrait: 3 / 4;
-  --ratio-square: 1 / 1;
-  --ratio-landscape: 16 / 10;
-  --ratio-panorama: 21 / 9;
+  --ratio-portrait: 3 / 4; --ratio-square: 1 / 1; --ratio-landscape: 16 / 10; --ratio-panorama: 21 / 9;
 }
-
-@media (max-width: 1440px) {
-  :root {
-    --rail-pad: clamp(1.25rem, 4vw, 3.5rem);
-  }
-}
-
-@media (max-width: 1024px) {
-  :root {
-    --block-travel: 18px;
-    --block-stagger: 60ms;
-    --block-duration: 480ms;
-    --block-scale-in: 0.965;
-    --portrait-size: 210px;
-    --rail-pad: clamp(1.25rem, 5vw, 3rem);
-  }
-}
-
-@media (max-width: 768px) {
-  :root {
-    --header-h: 80px;
-  }
-}
-
-@media (max-width: 680px) {
-  :root {
-    --block-travel: 12px;
-    --block-stagger: 45ms;
-    --block-duration: 420ms;
-    --block-scale: 0.99;
-    --block-scale-in: 0.975;
-    --portrait-size: 148px;
-    --rail-pad: 1rem;
-    --grid-gap: 1rem;
-  }
-}
+@media (max-width: 1440px){:root{--rail-pad:clamp(1.25rem,4vw,3.5rem)}}
+@media (min-width: 1800px){:root{--block-duration:720ms;--block-stagger:104ms;--block-travel:40px;--block-scale:.955;--block-scale-in:.90;--grid-gap:clamp(1.5rem,2vw,3rem)}}
+@media (max-width: 1024px){:root{--block-travel:24px;--block-stagger:72ms;--block-duration:560ms;--block-scale-in:.94;--portrait-size:210px;--rail-pad:clamp(1.25rem,5vw,3rem)}}
+@media (max-width: 768px){:root{--header-h:80px;--block-travel:20px;--block-stagger:60ms;--block-duration:500ms;--block-scale:.975;--block-scale-in:.95}}
+@media (max-width:680px){:root{--block-travel:14px;--block-stagger:48ms;--block-duration:460ms;--block-scale:.985;--block-scale-in:.965;--portrait-size:148px;--rail-pad:1rem;--grid-gap:1rem}}
