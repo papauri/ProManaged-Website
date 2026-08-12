@@ -1,15 +1,17 @@
 # Build Plan: ProManaged IT — Signal & Systems Global Redesign
 
 ## Goal
-Deliver a premium global ProManaged redesign across all seven public pages. Preserve the logo-triggered bento navigation and building-block visual language. Next work: correct the founder visual treatment, widen desktop compositions, make bento layouts deliberately surprising across desktop/tablet/mobile, increase tasteful device-aware motion, redesign the contact/booking forms as premium bento experiences, and upgrade all customer/internal email templates to the same ProManaged design language while removing actual Render.com deployment dependencies.
+Deliver a premium global ProManaged redesign across all seven public pages. Preserve the logo-triggered bento navigation and building-block visual language. Next work: correct the founder visual treatment, make desktop compositions genuinely expansive, make bento layouts deliberately surprising across desktop/tablet/mobile, increase tasteful device-aware motion, redesign the contact/booking forms as premium bento experiences, and upgrade all customer/internal email templates to the same ProManaged design language while removing actual Render.com deployment dependencies.
 
 ## Wants vs Needs
 - Want: a smaller circular HD founder portrait, surprising bento compositions, varied transitions, more life/motion on every device, and forms/emails that feel as polished as the website.
 - Need: visual impact without unreadable text, distraction, accessibility regressions, fragile mobile layouts, repetitive card grids, excessive motion, broken forms, or email-client compatibility problems.
-- Success moment: the site feels architectural and alive; the form feels like a guided premium intake rather than a generic contact box; the internal notification is scannable and useful; the customer confirmation feels like a thoughtful ProManaged response rather than an auto-generated receipt.
+- Success moment: the site feels architectural and alive; the desktop canvas feels intentionally occupied instead of presenting a narrow centered island; the form feels like a guided premium intake rather than a generic contact box; the internal notification is scannable and useful; the customer confirmation feels like a thoughtful ProManaged response rather than an auto-generated receipt.
 
 ## Completion Criteria
 - [ ] Founder image is circular across all relevant pages, smaller than the current oversized treatment, crisp, and never stretched or artificially upscaled.
+- [ ] **Large desktop screens use the available visual canvas aggressively:** hero and major chapter compositions visibly stretch toward the viewport edges with controlled gutters; they must not appear as a narrow centered ~1000–1300px island on a 1600px+ screen.
+- [ ] **Wide visual rail and readable text measure remain separate:** grids, hero visual blocks and bento surfaces may expand while headings and paragraphs retain independent readable max-widths.
 - [ ] Wide desktop compositions have no horizontal overflow, awkward empty margins, or squeezed visual blocks.
 - [ ] Long-form text remains independently constrained to roughly 55–75 characters per line.
 - [ ] Hero, bento navigation, capabilities, founder/story, contact and chapter grids share the wider composition system.
@@ -59,6 +61,7 @@ Deliver a premium global ProManaged redesign across all seven public pages. Pres
 - Establish a shared bento vocabulary rather than one universal grid: use unequal spans, portrait/square/landscape media ratios, offset blocks, full-width statement blocks, narrow supporting tiles and occasional edge-reaching visual blocks.
 - Use at least three distinct patterns across major chapters, for example: **Dominant + satellites**, **Offset editorial split**, and **Mosaic/stepped sequence**.
 - Do not make every section a bento grid. Alternate bento compositions with large editorial statements and open space so the site has rhythm.
+- **Large desktop:** visual composition rails should use the available viewport width. Treat the rail as the stage, not a centered card container. At 1600px+ the hero, capability grids, why/mission/contact compositions and bento navigation should visibly reach toward both sides of the viewport with controlled outer gutters.
 - Desktop: allow 2–4 column compositions with varied row/column spans. One dominant block should normally anchor each bento group, with supporting blocks intentionally unequal.
 - Tablet: recompose rather than simply collapse. Use 2-column mosaics, altered spans, portrait/landscape changes and deliberate offsets where they remain readable.
 - Mobile: use a carefully art-directed single-column/occasional two-column composition. Cards may become full-width, but vary their heights, media ratios, ordering and reveal direction so the page does not become a repetitive stack of identical rectangles.
@@ -119,9 +122,10 @@ Deliver a premium global ProManaged redesign across all seven public pages. Pres
 
 ### Wide composition
 - `css/tokens.css`: split visual rail from text measure; widen large-screen visual rails and reduce excessive desktop outer gutters while retaining safe tablet/mobile padding.
-- `css/global_styles.css`: `.rail` and `.container` use the wide visual rail; preserve a separate narrow text measure.
+- `css/global_styles.css`: `.rail` and `.container` use the wide visual rail; preserve a separate narrow text measure. **Do not reintroduce a hard desktop max-width smaller than the token rail.**
 - `css/hero_section.css` and `css/navbar.css`: let hero and bento tile compositions occupy the wider rail without making text unreadably wide.
 - Page CSS: widen primary visual grids/media columns only; retain heading/paragraph max-width.
+- On 1600px+ screens, the visual rail should be large enough that the screenshot reads as a deliberate full-canvas composition, not as a 1000–1300px content island floating inside a huge background.
 
 ### Render.com decommission
 - Audit only `render.yaml`, `render.com`, Render deploy hooks, Render GitHub actions, Render-specific environment variables and deployment documentation.
@@ -149,11 +153,12 @@ Deliver a premium global ProManaged redesign across all seven public pages. Pres
 9. Verify reveal-once behavior, reduced-motion final state, device-appropriate timings, navigation focus/Escape/focus restore, links, forms, console and overflow.
 10. Verify founder image is circular at every breakpoint and does not visually dominate the page.
 11. If Render dashboard access is unavailable, report that owner-only step as blocked; never mark it complete.
+12. **Large-screen composition check:** at a real 1600px+ viewport, the hero and first two homepage chapters must visually use most of the available width with intentional outer gutters; reject any result that reads as a narrow centered island even when text measures are correct.
 
 ## Phases
 ### Phase 1: Founder + wide shared composition
-- Goal: resize/circle the founder portrait, establish high-resolution handling, and update shared rails.
-- Exit: founder is polished and subordinate to the editorial composition; homepage/navigation use wide space cleanly; text remains readable.
+- Goal: resize/circle the founder portrait, establish high-resolution handling, and update shared rails so large desktop screens use the canvas instead of a narrow centered island.
+- Exit: founder is polished and subordinate to the editorial composition; homepage/navigation use wide space cleanly; text remains readable; 1600px+ hero and chapter compositions visibly occupy the available width.
 - Files: `css/tokens.css`, `css/global_styles.css`, `css/about_section.css`, `css/hero_section.css`, `css/navbar.css`.
 
 ### Phase 1B: Responsive bento + Weighted Block Settle Motion
