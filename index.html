@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en">
 <head id="main-head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,6 @@
     <link rel="stylesheet" href="css/contact_section.css">
     <script>document.documentElement.classList.add('js-on');</script>
 </head>
-
 <body id="main-body">
     <div id="header-section">
         <button type="button" class="nav-trigger" id="nav-trigger" aria-expanded="false" aria-controls="nav-panel" aria-label="Open navigation menu">
@@ -129,12 +128,47 @@
         <div class="rail"><div class="grid mission-grid"><div class="block block--7 block--bare"><span class="eyebrow">Mission</span><h2>Make dependable technology feel attainable.</h2><p class="lede">Not because every project should be cheap, but because good engineering starts with knowing what matters and refusing to add what does not.</p></div><div class="block block--5 block--bare"><span class="eyebrow">Vision</span><h2>One trusted technology partner, without the overhead.</h2><p class="lede">A smaller, clearer way to get software, equipment and connectivity working together.</p></div></div></div>
     </section>
 
-    <section id="contact" class="section contact-section section--ivory" data-blocks="scale-in"><div class="rail"><div class="chapter-head"><span class="eyebrow">Start a conversation</span><h2>Bring us the problem.</h2><p class="lede">Tell us what is getting in the way. We will help you work out what should happen next.</p></div></div></section>
+    <section id="contact" class="section contact-section section--ivory" data-blocks="scale-in"><div class="rail"><div class="chapter-head"><span class="eyebrow">Start a conversation</span><h2>Bring us the problem.</h2><p class="lede">Tell us what is getting in the way. We will help you work out what should happen next.</p></div>
+        <div class="contact-grid">
+            <div class="contact-intro">
+                <p>Use the short form and tell us what you are trying to achieve. We will get back to you using the details you provide.</p>
+            </div>
+            <form class="contact-form" action="php/contact.php" method="post" novalidate>
+                <div class="hp-field" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+                <div class="form-field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+                <div class="form-field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+                <div class="form-field"><label for="message">How can we help?</label><textarea id="message" name="message" rows="7" required></textarea></div>
+                <button type="submit" class="btn primary">Send message</button>
+                <p class="form-status" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+    </div></section>
 
-    <footer class="footer-promanaged"><div class="rail"><span>ProManaged IT</span><span>Build · Source · Connect</span></div></footer>
-
-    <script src="js/main.js"></script>
-    <script src="js/mobile_phone_navbar.js"></script>
-    <script src="js/form_intake.js"></script>
+    <footer class="footer">
+        <div class="rail">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>ProManaged IT</h3>
+                    <p>Build what matters. Source what fits. Connect what works.</p>
+                    <span class="footer-label">Contact</span>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigate</h4>
+                    <ul><li><a href="index.html">Home</a></li><li><a href="get-started.html">Start a Project</a></li><li><a href="learn_more.html">How We Work</a></li><li><a href="pages/custom_websites.html">Build</a></li><li><a href="pages/hardware_sourcing.html">Source</a></li><li><a href="pages/network_infrastructure.html">Connect</a></li><li><a href="privacy_policy.html">Privacy Policy</a></li></ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Stay in touch</h4>
+                    <p>Questions, partnerships, or a project you are still figuring out — email is the quickest route.</p>
+                    <a class="btn secondary" href="mailto:info@promanaged-it.com">Email ProManaged IT</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 ProManaged IT. All rights reserved.</p><a href="privacy_policy.html">Privacy Policy</a></div>
+        </div>
+    </footer>
+    <script src="js/main.js" defer></script>
+    <script src="js/form_intake.js" defer></script>
 </body>
 </html>
