@@ -27,7 +27,7 @@ This repo uses an autonomous, token-efficient implementation/review workflow for
 - Do not remove normal UI uses of the word “render”; Render cleanup means actual Render.com hosting/deployment infrastructure only.
 
 ## Verification
-Playwright is mandatory for visual work when available: real headed desktop window first, full-page screenshots, then 1440px/768px/375px responsive checks. Verify motion, bento composition, navigation, forms, links, console errors, font loading and overflow. If the environment cannot perform a required check, report that limitation honestly.
+For this run, the user explicitly waived Playwright/browser verification. Do not claim browser verification was performed. All code/repository checks that can be completed through GitHub should still be performed and reported honestly.
 
 ## Current architecture
 - Frontend: static HTML + CSS + vanilla JS.
