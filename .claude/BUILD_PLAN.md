@@ -1,20 +1,20 @@
 # Build Plan: ProManaged IT — Full-Width Bento Redesign + Legacy Logic Cleanup
 
 > ACTIVE TASK. Previous bento/type attempts are superseded by this plan and must not be repeated.
-> **OWNER DIRECTIVE:** Deliver the visual redesign and remove obsolete application logic/references in the same pass. Do not stop for cosmetic micro-reviews.
+> **OWNER DIRECTIVE:** Deliver the visual redesign and remove obsolete application logic/references in the same pass. The landing page (`index.html`) is the primary product surface and acceptance target. Do not stop for cosmetic micro-reviews.
 > **GIT:** Work only on `main`; commit and push directly to `origin/main`. No branches, PRs, force-pushes, or detached work.
 > **YAML:** Never commit `.yml` or `.yaml`. Temporary YAML must be deleted immediately and verified absent.
 
 ## Goal
-Replace the centered card-stack appearance with a visibly new, full-width editorial/bento composition inspired by the supplied Mockuuups examples, while removing stale render/widget logic and obsolete eBay/game-price/RAWG references that no longer belong to the product.
+Replace the centered card-stack appearance with a visibly new, full-width editorial/bento composition inspired by the supplied Mockuuups examples, with the **landing page (`index.html`) leading the design direction**, while removing stale render/widget logic and obsolete eBay/game-price/RAWG references that no longer belong to the product.
 
 ## Wants vs Needs
 - **Want:** a site that looks like a modern bento/editorial product site, not centered boxes; no irrelevant eBay/game/render leftovers.
-- **Need:** wide composition, stronger typography, restrained palette, and a lean runtime containing only features the current site actually uses.
-- **Friction today:** stale agent/docs references make obsolete functionality look active; unnecessary JS/CSS/PHP increases confusion and maintenance cost.
+- **Need:** the landing page must immediately feel transformed at desktop width: wide composition, strong typography, modern colour hierarchy, asymmetric sections, and deliberate storytelling using most of the viewport.
+- **Friction today:** the prior implementation still felt like centered cards with modest styling changes; secondary sections/pages must not dictate the landing-page composition.
 
 ## Success Moment
-The homepage looks intentionally composed across the viewport, and a developer opening the project sees only current ProManaged functionality—no obsolete shopping/game/eBay/render pipeline references.
+At 1280px desktop, a first-time visitor lands on `index.html` and immediately sees a premium, wide, editorial/bento IT/SaaS site: the hero stretches across the viewport, service tiles have deliberate unequal weights, section backgrounds create rhythm, and typography/colour establish a clearly new identity before the visitor scrolls.
 
 ## Reference Systems
 - **Mockuuups Bento examples** — take: mixed visual/text compartments, varied proportions, bold type, muted colour, whitespace, sequential storytelling; avoid literal copying.
@@ -22,9 +22,14 @@ The homepage looks intentionally composed across the viewport, and a developer o
 - **Linear** — take: restrained typography/chrome; avoid dark-theme dependence.
 
 ## Completion Criteria (Definition of Done)
-- [ ] Homepage is visually transformed: wide editorial hero, asymmetric service/content bands, deliberate full-width backgrounds.
-- [ ] At least 3 homepage sections use varied tile sizes and the available desktop width.
-- [ ] Modern display typography + Inter body/UI; restrained slate/blue palette only.
+- [ ] **Landing page first:** `index.html` is visually transformed and is the canonical reference for the rest of the site.
+- [ ] Landing page no longer reads as a narrow centered stack; primary sections deliberately use most of the available desktop width.
+- [ ] Hero is a true wide editorial/bento composition with unequal zones, not a centered text column with small cards.
+- [ ] At least 3 landing-page sections use visibly different tile sizes/weights and strong full-width section rhythm.
+- [ ] Services section has one dominant feature tile and supporting tiles with clearly unequal visual weight.
+- [ ] About section is a wide editorial story, not a conventional narrow two-column card layout.
+- [ ] Mission/Vision section uses asymmetric visual hierarchy rather than equal boxed cards.
+- [ ] Modern display typography + Inter body/UI; restrained slate/off-white/white palette with blue accent.
 - [ ] No obsolete eBay, RAWG, game-price, game-review, shopping-widget, or abandoned render-pipeline references remain in active application code or `.claude` project docs.
 - [ ] Every remaining JS/CSS/PHP asset is referenced by at least one current page or required by a current form/runtime path; unused assets are deleted.
 - [ ] No dead `<script>`/stylesheet references remain.
@@ -34,7 +39,7 @@ The homepage looks intentionally composed across the viewport, and a developer o
 - [ ] Final implementation committed to `main` and pushed to `origin/main`.
 
 ## Files to Change
-### Design
+### Landing-page design
 - `css/tokens.css`
 - `css/global_styles.css`
 - `css/hero_section.css`
@@ -73,10 +78,12 @@ The homepage looks intentionally composed across the viewport, and a developer o
 - `.claude/agents/build-planner.md`
 
 ## Exact Changes
-### Homepage design files
-- Rebuild the homepage as a wide editorial/bento composition: large unequal hero zones, asymmetric service tiles, broad storytelling bands, and deliberate use of viewport width.
-- Use a modern display face for H1/H2, Inter for body/UI, and only neutral/slate surfaces plus the existing blue accent.
-- Remove narrow generic wrappers or fixed widths that cause the current boxed-in appearance.
+### Landing-page design — primary acceptance scope
+- Rebuild `index.html` as a **wide editorial landing page**: large unequal hero zones, asymmetric service tiles, broad storytelling bands, deliberate use of viewport width, and clear vertical rhythm between sections.
+- Use `index.html` as the visual source of truth. Secondary pages must not constrain or define the landing-page layout in this phase.
+- Use a modern display face for H1/H2, Inter for body/UI, and a visibly refreshed neutral/slate/off-white/white palette with the existing blue accent.
+- Remove narrow generic wrappers or fixed widths that cause the landing page's boxed-in appearance.
+- Preserve all existing copy, links, section IDs, forms, CTA destinations, accessibility hooks, and functional behaviour unless a minimal HTML wrapper/class is required to achieve the new composition.
 
 ### Logic cleanup audit
 - Inspect every current HTML `<script>` and stylesheet reference against the current repository tree.
@@ -87,42 +94,45 @@ The homepage looks intentionally composed across the viewport, and a developer o
 - Update `.claude/PROJECT_CONTEXT.md` and `.claude/SYSTEM_MAP.md` so they describe the current tree and no longer advertise deleted game/eBay/render systems.
 - Verify no HTML references deleted assets.
 
-## FINAL FIX-ONLY DELTA AFTER REVIEW OF 785a7691
-The previous homepage implementation was rejected. Do not redesign unrelated functionality and do not repeat the same centered-card interpretation. Fix only these four issues, then verify the whole homepage.
+## FINAL FIX-ONLY DELTA — LANDING PAGE FIRST
+The previous homepage implementation was rejected. The **landing page is now the explicit primary target**. Do not treat the four fixes as isolated CSS cleanup; use them to make `index.html` visibly transformed and then verify the entire landing page.
 
 ### `css/service_cards.css`
 - Function/section: `.services-grid`, `.service-card`, `.service-card-featured`
 - Change: remove the brittle fixed two-row placement model; keep a wide 12-column editorial grid with one dominant lead tile and two supporting tiles, using explicit column spans and normal grid flow so the composition remains stable without assuming exactly two rows.
-- Reason: the current `grid-template-rows: repeat(2, ...)` is brittle and conflicts with the intended reusable bento system.
+- Reason: the landing page's main commercial section must feel editorial/bento, not like a fixed 3-card template.
 
 ### `css/about_section.css`
 - Function/section: `.about-content`, `.about-photo`, `.about-text`
-- Change: make the About band use the full available desktop container with a stronger asymmetric split; remove the visual feeling of a fixed narrow 380px column plus a conventional card. Keep readable text measure and the existing founder image.
-- Reason: the current layout is still a conventional centered two-column card arrangement rather than the requested editorial composition.
+- Change: make the About band use the full available desktop container with a stronger asymmetric split and larger visual presence; remove the visual feeling of a fixed narrow 380px column plus a conventional card. Keep readable text measure and the existing founder image.
+- Reason: the landing page must tell the company story using wide editorial composition rather than another centered card arrangement.
 
 ### `css/hero_section.css`
 - Function/section: `.hero`, `.hero-content`, desktop container rules
-- Change: allow the desktop hero composition to use the viewport width deliberately with consistent side gutters; keep only the text measure constrained, not the entire visual composition. Preserve the asymmetric fact cluster and responsive collapse.
-- Reason: a fixed centered `max-width` is still producing the boxed-in feeling on large screens.
+- Change: allow the landing-page desktop hero to deliberately use the viewport width with consistent side gutters; constrain only text measure, not the whole visual composition. Preserve the asymmetric fact cluster and responsive collapse.
+- Reason: the hero is the first acceptance test for the “use the available width” requirement.
 
 ### `css/tokens.css`
 - Function/section: colour and surface tokens
-- Change: establish a visibly refreshed modern palette hierarchy using slate/near-black text, cool off-white background, elevated white surface, muted slate surface, and the existing blue accent; update dependent tokens so sections visibly alternate rather than appearing as one flat white page. Do not introduce random colours or gradients.
-- Reason: the current palette treatment is too close to the previous design and does not satisfy the owner's explicit request for modern colour.
+- Change: establish a visibly refreshed modern palette hierarchy using slate/near-black text, cool off-white page background, elevated white surface, muted slate surface, and the existing blue accent; update dependent surface/border/text tokens so landing-page sections visibly alternate rather than appearing as one flat white page.
+- Reason: the owner explicitly asked for a modern colour system; this must be perceptible on `index.html`.
 
-### Verification required for this fix
-- Browser-test the homepage at 1280px first and confirm the page visually fills the viewport with asymmetric composition rather than a centered card stack.
+### Landing-page acceptance gate
+- Browser-test `index.html` at **1280px first**.
+- The landing page must visibly fill the viewport width with strong asymmetric composition; a centered card stack is an automatic failure.
+- Confirm hero, services, why, about, mission/vision, contact, and footer read as one coherent story with deliberate section rhythm.
 - Then test 768px and 375px for collapse/overflow.
-- Confirm no console errors, no dead asset references, and that contact/booking CTAs still work.
-- Commit and push the fix directly to `origin/main`.
+- Confirm no console errors, no dead asset references, contact/booking CTAs still work, and fonts actually load.
+- Only after the landing page passes may the implementation be considered ready for final review.
 
 ## New Code Needed
 Pseudocode only:
-1. Use wide page container + full-width section backgrounds.
+1. Use wide landing-page container + full-width section backgrounds.
 2. Compose hero from unequal editorial zones.
 3. Compose services as one lead tile plus supporting asymmetric tiles.
-4. Remove dead runtime paths and stale documentation references.
-5. Re-run reference checks and browser QA after cleanup.
+4. Shape About/Mission/Vision into broad storytelling bands with different visual weights.
+5. Remove dead runtime paths and stale documentation references.
+6. Re-run reference checks and browser QA after cleanup.
 
 ## Constraints / Things NOT to Touch
 - Do not invent new business features or data.
@@ -133,12 +143,12 @@ Pseudocode only:
 - No bulk line-ending/rewrite scripts.
 - `origin/main` only.
 - Never commit YAML files.
-- Do not make another broad redesign outside the four fix-only areas above during this cycle.
+- Do not let secondary pages dictate the landing-page design in this phase.
 
 ## Known Trade-offs
-- Secondary pages are not fully redesigned in this pass; homepage remains the canonical visual reference.
+- Secondary pages may remain visually different until a later rollout; this is intentional. `index.html` is the canonical reference implementation.
+- The landing page intentionally uses more viewport width; readable text remains independently constrained for legibility.
 - Deleting truly unused JS/CSS/PHP is preferable to keeping speculative compatibility code.
-- The homepage desktop composition intentionally uses more viewport width; readable text remains constrained independently.
 
 ## Open Questions
 None.
@@ -149,17 +159,17 @@ None.
 - Exit: reference audit shows no dead scripts/styles or obsolete feature names.
 - Files: cleanup audit list above.
 
-### Phase 2: Full-width homepage redesign
-- Goal: visually transform the homepage using the approved editorial/bento direction.
-- Exit: desktop clearly reads as a new site, not a centered card stack.
-- Files: design list above.
+### Phase 2: Landing page redesign
+- Goal: make `index.html` the canonical, visibly transformed full-width editorial/bento experience.
+- Exit: 1280px landing-page review clearly reads as a new site, not a centered card stack.
+- Files: landing-page design list above.
 
-### Phase 3: Final fix-only review cycle
-- Goal: resolve only the four rejected issues from commit `785a7691`.
-- Exit: desktop composition is genuinely wide/asymmetric, palette is visibly modern, service layout is not brittle, and About is not a narrow conventional split.
-- Files: `css/service_cards.css`, `css/about_section.css`, `css/hero_section.css`, `css/tokens.css`.
+### Phase 3: Final landing-page fix cycle
+- Goal: resolve the four rejected issues while prioritising the landing page.
+- Exit: hero, services, about, mission/vision, and section rhythm all use the available width with modern typography/colour and no brittle grid assumptions.
+- Files: `css/service_cards.css`, `css/about_section.css`, `css/hero_section.css`, `css/tokens.css`, `index.html` only where minimal wrappers/classes are required.
 
 ### Phase 4: Verification
-- Goal: browser-test 375 / 768 / 1280, console, overflow, links, forms, and font loading.
+- Goal: browser-test `index.html` at 1280/768/375, then verify links, forms, font loading, console state, overflow, and deleted-asset references.
 - Exit: all Completion Criteria pass and implementation is pushed to `origin/main`.
 - Files: same lists, fixes only.
