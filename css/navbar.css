@@ -131,7 +131,9 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     opacity: 0;
-    transition: opacity 260ms var(--ease-settle);
+    /* Kept at 260ms: js/mobile_phone_navbar.js sets `hidden` 280ms after close, so a
+       longer fade here would be cut off mid-flight. */
+    transition: opacity 260ms var(--ease-out);
 }
 
 /* `hidden` must win over the display used above, or the panel would stay in the
@@ -139,10 +141,14 @@
 .nav-panel[hidden] { display: none }
 
 .nav-panel.is-open { opacity: 1 }
+.nav-panel.is-open .nav-panel-rail { opacity: 1; transform: none }
 
 /* Shares the page's visual rail, so the panel is a composition on the same grid as
    the chapters behind it rather than a separately-sized overlay. */
 .nav-panel-rail {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+    transition: opacity 240ms var(--ease-out) 40ms, transform 340ms var(--ease-out) 40ms;
     min-height: 100%;
     max-width: var(--rail-visual);
     margin-inline: auto;
@@ -516,6 +522,8 @@
 /* Reduced motion: the panel appears without assembly, immediately usable. */
 @media (prefers-reduced-motion: reduce) {
     .nav-panel,
+    .nav-panel-rail,
     .nav-tile { transition: none }
+    .nav-panel-rail,
     .nav-tile { opacity: 1; transform: none }
 }

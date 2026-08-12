@@ -84,7 +84,17 @@
        --block-* drives the scroll chapter reveals.
      Phone travel is short and the stagger is tight so the page feels resolved fast;
      wider viewports lengthen both because there is more composition to assemble. */
-  --transition: 160ms cubic-bezier(.4,0,.2,1);
+  /* ---------- Interaction motion ----------
+     One easing for every micro-interaction on the site — hovers, focus rings, field
+     states, tiles, cards, the nav control. An ease-out with a long tail (expo-like)
+     leaves the surface quickly and arrives softly, which is what makes a control
+     feel resolved rather than mechanical; the old cubic-bezier(.4,0,.2,1) was the
+     stock Material curve and read as generic. --transition keeps its
+     "duration easing" shape because it is consumed as a shorthand value. */
+  --ease-out: cubic-bezier(.22,1,.36,1);
+  --transition-fast: 130ms var(--ease-out);
+  --transition: 190ms var(--ease-out);
+  --transition-slow: 340ms var(--ease-out);
   --load-duration: 700ms;
   --load-stagger: 64ms;
   --load-travel: 18px;

@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         panel.hidden = false;
         trigger.setAttribute('aria-expanded', 'true');
+        // The label described the ACTION but never changed, so a screen reader
+        // announced "Open navigation menu" on a menu that was already open.
+        trigger.setAttribute('aria-label', 'Close navigation menu');
 
         // Two frames: the first paints the pre-open state, the second flips it —
         // without this the assembly transition is skipped entirely.
@@ -50,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         panel.classList.remove('is-open');
         trigger.setAttribute('aria-expanded', 'false');
+        trigger.setAttribute('aria-label', 'Open navigation menu');
         document.documentElement.classList.remove('nav-is-open');
         document.body.style.overflow = '';
         document.body.style.paddingRight = '';
