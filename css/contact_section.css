@@ -25,6 +25,42 @@
     }
 }
 
+/* ---------- Closing chapter variant ----------
+   The homepage's final CTA has no form, so the default 5fr/7fr (sized for an intake
+   board) would strand the wider column. Measured at 1600px the statement-only
+   version left 48% of the rail — 762px across a 545px-tall chapter — which is the
+   dead zone this design is meant to avoid. Inverting to 7fr/5fr makes it a dominant
+   block plus satellite: the statement leads, and the routes fill what was empty
+   with real destinations rather than decoration. */
+.contact-routes {
+    min-width: 0;
+}
+
+.contact-routes-label {
+    display: block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+    margin-bottom: var(--space-4);
+}
+
+/* The routes are a directory, so they carry a little more weight than the compact
+   support links used beside a form. */
+.contact-grid--closing .contact-direct a {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-medium);
+    padding-block: var(--space-5);
+}
+
+@media (min-width: 1025px) {
+    .contact-grid--closing {
+        grid-template-columns: 7fr 5fr;
+        align-items: start;
+    }
+}
+
 .contact-invite .lede {
     margin-bottom: var(--space-8);
 }

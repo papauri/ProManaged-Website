@@ -114,9 +114,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const assembleRoot = document.querySelector('[data-assemble]');
     if (assembleRoot) {
         const staged = [];
-        // Dropping [data-assemble] retires the whole pre-load stylesheet in one go,
-        // so nothing is left carrying will-change or a stale delay.
+
+        // Visibility is MONOTONIC: every path below leads to "visible", and nothing
+        // here can ever hide something that is already on screen. Dropping
+        // [data-assemble] retires the whole pre-load stylesheet in one go, so no
+        // element is left carrying will-change or a stale delay.
         const release = () => {
+            if (window.pmHeroFailsafe) {
+                window.clearTimeout(window.pmHeroFailsafe);
+                window.pmHeroFailsafe = 0;
+            }
             assembleRoot.removeAttribute('data-assemble');
             staged.forEach((el) => {
                 el.classList.remove('is-settled');
@@ -124,9 +131,17 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         };
 
-        if (!canAnimate) {
-            // Reduced motion / no IntersectionObserver: final state, immediately.
-            // The stylesheet already forces this independently of us.
+        // The inline failsafe has already resolved the hero, which means this script
+        // arrived too late to choreograph it (slow network, slow device, blocked
+        // request that recovered). Take the final state and stop — re-hiding a hero
+        // the visitor can already read, just to animate it, is a flash, not a
+        // premium load. .load-failsafe is never removed by design.
+        const failsafeWon = document.documentElement.classList.contains('load-failsafe');
+
+        if (!canAnimate || failsafeWon) {
+            // Reduced motion / no IntersectionObserver / late script: final state,
+            // immediately. For reduced motion the stylesheet forces this anyway,
+            // independently of this script running at all.
             release();
         } else {
             try {
@@ -153,17 +168,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!staged.length) {
                     release();
                 } else {
-                    // ORDER MATTERS. Arm our own bounded release FIRST, and only then
-                    // stand the inline failsafe down. Between those two statements
-                    // the hero is covered by both; it is never covered by neither.
+                    // Arm the bounded release BEFORE starting, so the hero resolves
+                    // even if the frame callbacks below never run.
                     window.setTimeout(release, lastDelay + duration + 240);
+
+                    // Then stand the inline failsafe down. It exists only to cover
+                    // "main.js never took control"; we now have control and a bounded
+                    // release of our own, so leaving it armed would cut the tail of
+                    // the choreography short — the full sequence outlasts its 1200ms
+                    // on desktop, and the last blocks would snap instead of settling.
+                    // Only the pending TIMER is cancelled; the class is never removed,
+                    // so this cannot re-hide anything. If the class was already set we
+                    // never reach here — the failsafeWon branch above took over.
                     if (window.pmHeroFailsafe) {
                         window.clearTimeout(window.pmHeroFailsafe);
                         window.pmHeroFailsafe = 0;
                     }
-                    // If a slow page let the failsafe fire before we got here, undo
-                    // it so the choreography still runs rather than snapping open.
-                    document.documentElement.classList.remove('load-failsafe');
 
                     // Two frames: the first paints the pre-load state, the second
                     // flips it. Without this the browser coalesces both and skips
@@ -182,6 +202,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (canAnimate) {
         const groups = document.querySelectorAll('[data-blocks]');
+
+        // Registered FIRST, before a single .block-reveal is applied. If anything
+        // below throws mid-setup, this still runs and strips the hidden state off
+        // every chapter unit, so a partial failure can never leave a section of the
+        // page permanently invisible.
+        window.setTimeout(() => {
+            document.querySelectorAll('.block-reveal').forEach(clearMotion);
+        }, 7000);
+
         const settleVisibleGroups = () => {
             groups.forEach(group => {
                 const units = [...group.querySelectorAll(UNIT_SELECTOR)];
@@ -220,10 +249,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 groupObserver.observe(group);
             }
         });
-
-        window.setTimeout(() => {
-            document.querySelectorAll('.block-reveal').forEach(clearMotion);
-        }, 7000);
     }
 
     // The footer year is written into the markup so it is correct without JS, and

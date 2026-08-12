@@ -19,12 +19,16 @@
     max-width: none;
 }
 
+/* `none` here would be unbounded, not "full width of a phone": at 1024px — where the
+   intro still spans the whole rail — it produced a 927px, 111-character line. The
+   shared measure keeps it readable at every width below the desktop split, where the
+   narrower 44ch takes over. */
 .booking-intro > p {
     font-size: var(--text-lg);
     color: var(--color-text-on-dark-muted);
     line-height: var(--leading-normal);
     margin: var(--space-5) 0 var(--space-8);
-    max-width: none;
+    max-width: var(--measure);
 }
 
 /* ---------- Perks rail ---------- */

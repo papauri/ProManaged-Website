@@ -48,7 +48,7 @@
 #what-we-build .block--row p,
 #projects .block--row p {
     font-size: var(--text-lg);
-    max-width: 64ch;
+    max-width: var(--measure);
 }
 
 /* ---------- FAQ accordion ----------

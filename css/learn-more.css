@@ -12,7 +12,7 @@
 
 #what-we-do .block--row p {
     font-size: var(--text-lg);
-    max-width: 66ch;
+    max-width: var(--measure);
 }
 
 /* Expectations read as editorial statements on the chapter surface, separated by a

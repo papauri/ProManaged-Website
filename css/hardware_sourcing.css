@@ -28,10 +28,13 @@
     max-width: 34ch;
 }
 
+/* Was 68ch, which measured 98 characters per line at 1920px — past the point where
+   a line is comfortable to track back from. Uses the shared measure so this page
+   matches the rest of the site rather than carrying its own wider column. */
 #track-record p {
     margin-top: var(--space-5);
     font-size: var(--text-lg);
-    max-width: 68ch;
+    max-width: var(--measure);
 }
 
 #categories .block--row h3 {
@@ -44,6 +47,6 @@
 
 #categories .block--row p {
     font-size: var(--text-lg);
-    max-width: 60ch;
+    max-width: var(--measure);
 }
 

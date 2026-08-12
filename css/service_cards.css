@@ -44,7 +44,7 @@
 }
 
 .capability--lead .capability-lede {
-    max-width: 58ch;
+    max-width: var(--measure);
 }
 
 .capability--lead .list {

@@ -8,10 +8,10 @@
 
    Composition ladder:
      base    single column, asymmetric evidence pair
-     560px   evidence pair becomes an equal two-up
-     768px   the visual becomes its own 12-column bento beneath the statement
-     1440px  the balanced 7fr / 5fr desktop split, evidence two-up
-
+     560px   evidence pair becomes a two-up
+     768px   the visual becomes its own 12-column bento beneath the statement,
+             evidence pair takes its unequal 1.12 / 0.88 split
+     1440px  the balanced 7fr / 5fr desktop split
 
    Every visual row sizes intrinsically (`align-content:start` on an auto-row grid),
    so hero-support can never ride up into the evidence cards. There are no negative
@@ -353,10 +353,19 @@
     }
 
     /* Dominant block + satellite: the capability statement leads, the support facts
-       sit beside it, and the evidence pair spans the full width below. */
+       sit beside it, and the evidence pair spans the full width below.
+
+       The pair is deliberately unequal here, as it is at 1440px+. Measured at 768
+       and 1024 an even split produced two cards of exactly identical width (336/336
+       and 452/452), which is the equal-card grid this design is meant to avoid. */
     .hero-feature { grid-column: span 7; min-height: 280px; padding: var(--space-8) }
     .hero-support { grid-column: span 5; align-content: center }
-    .hero-project-grid { grid-column: 1 / -1; gap: var(--grid-gap); --evidence-media-h: 180px }
+    .hero-project-grid {
+        grid-column: 1 / -1;
+        grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+        gap: var(--grid-gap);
+        --evidence-media-h: 180px;
+    }
 }
 
 /* ---------- 1440px — the balanced 7fr / 5fr desktop hero ----------
@@ -398,11 +407,13 @@
     }
 }
 
-/* At 1440px card two is the narrower half of the 1.12/0.88 split at 225px, where the
-   full-size label wrapped to two lines and pushed its media panel 18px below card
-   one's. Tightening the label keeps both toplines to one line. Above 1800px the
-   column is wide enough for the full-size label, so this is scoped to the band. */
-@media (min-width: 1440px) and (max-width: 1799px) {
+/* Once the evidence cards sit side by side, the topline label has to survive the
+   NARROWER of the two columns. Measured wraps to two lines — which pushes that
+   card's media panel below its neighbour's and breaks the row — at 560px (245px
+   card) and again at 1440px (225px card, the narrow half of the 1.12/0.88 split).
+   Rather than patch two disjoint bands, the label is simply tighter for the whole
+   two-up range and relaxes again at 1800px where every column is wide enough. */
+@media (min-width: 560px) and (max-width: 1799px) {
     .hero-project-topline {
         font-size: .6rem;
         letter-spacing: .05em;

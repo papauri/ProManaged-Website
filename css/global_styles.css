@@ -137,19 +137,24 @@ p{max-width:var(--measure)}
 .btn:hover::after{transform:translateX(4px) rotate(45deg);opacity:1}
 }
 
-/* Primary — brand blue with a lit top edge and a grounded shadow, so it has
-   physical depth instead of a flat wash of colour. */
+/* Primary — FLAT brand blue. Deliberately not a gradient with a coloured glow:
+   that combination is the generic SaaS-pill signature this design avoids, and it
+   made blue read as the loudest thing on a warm paper page. Depth now comes from a
+   single hairline top highlight and a neutral graphite shadow, the same shadow
+   family every other surface uses, so blue stays flat brand ink used only for
+   interaction. White on #2563eb measures 5.1:1, above AA for this text size. */
 .btn.primary{
-    background:linear-gradient(180deg,#3273f5 0%,var(--color-accent) 52%,#2059d8 100%);
+    background:var(--color-accent);
     color:var(--color-accent-contrast);
-    border-color:#1f52c9;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 1px 2px rgba(28,27,25,.16),0 12px 24px -14px rgba(30,64,175,.85);
+    border-color:var(--color-accent-hover);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 1px 2px rgba(28,27,25,.12),0 10px 20px -14px rgba(28,27,25,.55);
 }
 @media (hover:hover){
 .btn.primary:hover{
-    background:linear-gradient(180deg,#2b68ec 0%,var(--color-accent-hover) 52%,#1b4fca 100%);
+    background:var(--color-accent-hover);
+    border-color:var(--color-accent-active);
     transform:translateY(-2px);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.32),0 2px 4px rgba(28,27,25,.14),0 18px 32px -16px rgba(30,64,175,.9);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 2px 4px rgba(28,27,25,.12),0 16px 28px -16px rgba(28,27,25,.6);
 }
 }
 .btn.primary:active{
@@ -243,16 +248,22 @@ a:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-
      Phase 2 — scroll chapters.  js/main.js adds .block-reveal + a variant class to a
        group's units as it enters the viewport, once only.
 
-   Three independent guarantees that content is never left hidden:
-     1. Both are gated on .js-on, added by an inline <head> script. No JavaScript
-        means the hiding rules never match at all.
-     2. .load-failsafe, armed by that same inline script at 1200ms and stood down by
-        main.js only once main.js has armed its own release, force-resolves the hero
-        if main.js 404s, fails to parse or throws.
-     3. The reduced-motion block at the end of this file forces the final state with
+   VISIBILITY IS MONOTONIC. Every mechanism below can only ever move content towards
+   visible; nothing can hide something already on screen. Four independent
+   guarantees, so no single failure can strand a hidden hero:
+     1. Everything is gated on .js-on, added by an inline <head> script. No
+        JavaScript means the hiding rules never match at all.
+     2. .load-failsafe, armed by that same inline script at 1200ms, is part of the
+        hiding CONDITION rather than a later override — see the rule below. It is
+        never removed, and main.js stands down entirely if it finds it already set,
+        so the fallback and the choreography can never fight over the same element.
+     3. main.js arms its own bounded release before it starts, and releases from a
+        catch block if staging throws.
+     4. The reduced-motion block at the end of this file forces the final state with
         !important, entirely independently of any script.
-   .block-reveal needs no failsafe: it is only ever ADDED by the script that removes
-   it, so a dead script simply never hides a chapter. */
+   .block-reveal needs no equivalent gate: it is only ever ADDED by the script that
+   removes it, so a dead script simply never hides a chapter. Its 7s safety sweep is
+   registered before the first one is applied, covering a mid-setup throw. */
 
 /* The navigation control resolves first, and does it in pure CSS so the only
    navigation affordance on the page can never depend on a script. `backwards` holds
@@ -261,12 +272,19 @@ a:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-
 .js-on .nav-trigger{animation:pm-control-in 620ms var(--ease-settle) 120ms backwards}
 @keyframes pm-control-in{from{opacity:0;transform:translate3d(0,-14px,0)}to{opacity:1;transform:none}}
 
-.js-on [data-assemble] .hero-statement,
-.js-on [data-assemble] .hero-feature,
-.js-on [data-assemble] .hero-project-card,
-.js-on [data-assemble] .hero-support,
-.js-on [data-assemble] .hero-buttons,
-.js-on [data-assemble] .hero-microproof{
+/* THE hiding rule. Exactly one selector list decides whether hero content is
+   hidden, and it is conditioned on BOTH gates at once:
+     .js-on                    scripting is available
+     :not(.load-failsafe)      the bounded fallback has not already resolved the hero
+   Because the failsafe is part of this condition rather than a later override, it
+   cannot be beaten by source order, and once .load-failsafe is set (it is never
+   removed) nothing here can hide content the visitor can already read. */
+.js-on:not(.load-failsafe) [data-assemble] .hero-statement,
+.js-on:not(.load-failsafe) [data-assemble] .hero-feature,
+.js-on:not(.load-failsafe) [data-assemble] .hero-project-card,
+.js-on:not(.load-failsafe) [data-assemble] .hero-support,
+.js-on:not(.load-failsafe) [data-assemble] .hero-buttons,
+.js-on:not(.load-failsafe) [data-assemble] .hero-microproof{
     opacity:0;
     transition:opacity calc(var(--load-duration)*.66) var(--ease-fade) var(--block-delay,0ms),
                transform var(--load-duration) var(--ease-settle) var(--block-delay,0ms);
@@ -276,14 +294,14 @@ a:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-
 /* Different depths and directions, so the hero assembles rather than fading in as
    one plane. The hero clips its own overflow, so the lateral travel cannot widen
    the page. */
-.js-on [data-assemble] .hero-statement{transform:translate3d(0,calc(var(--load-travel)*.75),0) scale(var(--block-scale))}
-.js-on [data-assemble] .hero-feature{transform:translate3d(calc(var(--load-travel)*.4),calc(var(--load-travel)*1.1),0) scale(var(--block-scale))}
-.js-on [data-assemble] .hero-project-card{transform:translate3d(0,calc(var(--load-travel)*1.3),0) scale(var(--block-scale-in))}
-.js-on [data-assemble] .hero-project-card--controller{transform:translate3d(calc(var(--load-travel)*.45),calc(var(--load-travel)*1.3),0) scale(var(--block-scale-in))}
-.js-on [data-assemble] .hero-support{transform:translate3d(calc(var(--load-travel)*-.45),calc(var(--load-travel)*1.05),0) scale(var(--block-scale))}
+.js-on:not(.load-failsafe) [data-assemble] .hero-statement{transform:translate3d(0,calc(var(--load-travel)*.75),0) scale(var(--block-scale))}
+.js-on:not(.load-failsafe) [data-assemble] .hero-feature{transform:translate3d(calc(var(--load-travel)*.4),calc(var(--load-travel)*1.1),0) scale(var(--block-scale))}
+.js-on:not(.load-failsafe) [data-assemble] .hero-project-card{transform:translate3d(0,calc(var(--load-travel)*1.3),0) scale(var(--block-scale-in))}
+.js-on:not(.load-failsafe) [data-assemble] .hero-project-card--controller{transform:translate3d(calc(var(--load-travel)*.45),calc(var(--load-travel)*1.3),0) scale(var(--block-scale-in))}
+.js-on:not(.load-failsafe) [data-assemble] .hero-support{transform:translate3d(calc(var(--load-travel)*-.45),calc(var(--load-travel)*1.05),0) scale(var(--block-scale))}
 /* The controls travel least — they resolve into place rather than fly in. */
-.js-on [data-assemble] .hero-buttons{transform:translate3d(0,calc(var(--load-travel)*.5),0)}
-.js-on [data-assemble] .hero-microproof{transform:translate3d(0,calc(var(--load-travel)*.4),0)}
+.js-on:not(.load-failsafe) [data-assemble] .hero-buttons{transform:translate3d(0,calc(var(--load-travel)*.5),0)}
+.js-on:not(.load-failsafe) [data-assemble] .hero-microproof{transform:translate3d(0,calc(var(--load-travel)*.4),0)}
 
 .block-reveal{opacity:0;transform:translate3d(0,var(--block-travel),0) scale(var(--block-scale));transition:opacity calc(var(--block-duration)*.7) var(--ease-fade) var(--block-delay,0ms),transform var(--block-duration) var(--ease-settle) var(--block-delay,0ms);will-change:opacity,transform}
 .block-reveal--up{transform:translate3d(0,var(--block-travel),0) scale(var(--block-scale))}
@@ -292,17 +310,8 @@ a:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-
 .block-reveal--scale{transform:scale(var(--block-scale-in))}
 .block-reveal--seq{transform:translate3d(0,calc(var(--block-travel)*.85),0)}
 
-.js-on [data-assemble] .is-settled,
+.js-on:not(.load-failsafe) [data-assemble] .is-settled,
 .block-reveal.is-settled,.block-reveal--up.is-settled,.block-reveal--side.is-settled,.block-reveal--side:nth-child(even).is-settled,.block-reveal--scale.is-settled,.block-reveal--seq.is-settled{opacity:1;transform:none}
-
-/* Failsafe — scoped to the hero only, because .block-reveal is added by the same
-   script that removes it, so a dead script simply never hides a chapter. */
-.load-failsafe [data-assemble] .hero-statement,
-.load-failsafe [data-assemble] .hero-feature,
-.load-failsafe [data-assemble] .hero-project-card,
-.load-failsafe [data-assemble] .hero-support,
-.load-failsafe [data-assemble] .hero-buttons,
-.load-failsafe [data-assemble] .hero-microproof{opacity:1;transform:none;transition:none}
 
 @media print{
     .js-on .nav-trigger{animation:none}

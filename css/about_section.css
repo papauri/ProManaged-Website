@@ -99,7 +99,7 @@
     font-size: var(--text-base);
     color: var(--color-text-muted);
     line-height: var(--leading-normal);
-    max-width: 56ch;
+    max-width: var(--measure);
 }
 
 .about-story p + p {
