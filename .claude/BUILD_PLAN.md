@@ -87,6 +87,35 @@ The homepage looks intentionally composed across the viewport, and a developer o
 - Update `.claude/PROJECT_CONTEXT.md` and `.claude/SYSTEM_MAP.md` so they describe the current tree and no longer advertise deleted game/eBay/render systems.
 - Verify no HTML references deleted assets.
 
+## FINAL FIX-ONLY DELTA AFTER REVIEW OF 785a7691
+The previous homepage implementation was rejected. Do not redesign unrelated functionality and do not repeat the same centered-card interpretation. Fix only these four issues, then verify the whole homepage.
+
+### `css/service_cards.css`
+- Function/section: `.services-grid`, `.service-card`, `.service-card-featured`
+- Change: remove the brittle fixed two-row placement model; keep a wide 12-column editorial grid with one dominant lead tile and two supporting tiles, using explicit column spans and normal grid flow so the composition remains stable without assuming exactly two rows.
+- Reason: the current `grid-template-rows: repeat(2, ...)` is brittle and conflicts with the intended reusable bento system.
+
+### `css/about_section.css`
+- Function/section: `.about-content`, `.about-photo`, `.about-text`
+- Change: make the About band use the full available desktop container with a stronger asymmetric split; remove the visual feeling of a fixed narrow 380px column plus a conventional card. Keep readable text measure and the existing founder image.
+- Reason: the current layout is still a conventional centered two-column card arrangement rather than the requested editorial composition.
+
+### `css/hero_section.css`
+- Function/section: `.hero`, `.hero-content`, desktop container rules
+- Change: allow the desktop hero composition to use the viewport width deliberately with consistent side gutters; keep only the text measure constrained, not the entire visual composition. Preserve the asymmetric fact cluster and responsive collapse.
+- Reason: a fixed centered `max-width` is still producing the boxed-in feeling on large screens.
+
+### `css/tokens.css`
+- Function/section: colour and surface tokens
+- Change: establish a visibly refreshed modern palette hierarchy using slate/near-black text, cool off-white background, elevated white surface, muted slate surface, and the existing blue accent; update dependent tokens so sections visibly alternate rather than appearing as one flat white page. Do not introduce random colours or gradients.
+- Reason: the current palette treatment is too close to the previous design and does not satisfy the owner's explicit request for modern colour.
+
+### Verification required for this fix
+- Browser-test the homepage at 1280px first and confirm the page visually fills the viewport with asymmetric composition rather than a centered card stack.
+- Then test 768px and 375px for collapse/overflow.
+- Confirm no console errors, no dead asset references, and that contact/booking CTAs still work.
+- Commit and push the fix directly to `origin/main`.
+
 ## New Code Needed
 Pseudocode only:
 1. Use wide page container + full-width section backgrounds.
@@ -104,10 +133,12 @@ Pseudocode only:
 - No bulk line-ending/rewrite scripts.
 - `origin/main` only.
 - Never commit YAML files.
+- Do not make another broad redesign outside the four fix-only areas above during this cycle.
 
 ## Known Trade-offs
 - Secondary pages are not fully redesigned in this pass; homepage remains the canonical visual reference.
 - Deleting truly unused JS/CSS/PHP is preferable to keeping speculative compatibility code.
+- The homepage desktop composition intentionally uses more viewport width; readable text remains constrained independently.
 
 ## Open Questions
 None.
@@ -123,7 +154,12 @@ None.
 - Exit: desktop clearly reads as a new site, not a centered card stack.
 - Files: design list above.
 
-### Phase 3: Verification
+### Phase 3: Final fix-only review cycle
+- Goal: resolve only the four rejected issues from commit `785a7691`.
+- Exit: desktop composition is genuinely wide/asymmetric, palette is visibly modern, service layout is not brittle, and About is not a narrow conventional split.
+- Files: `css/service_cards.css`, `css/about_section.css`, `css/hero_section.css`, `css/tokens.css`.
+
+### Phase 4: Verification
 - Goal: browser-test 375 / 768 / 1280, console, overflow, links, forms, and font loading.
 - Exit: all Completion Criteria pass and implementation is pushed to `origin/main`.
 - Files: same lists, fixes only.
