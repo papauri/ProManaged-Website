@@ -1,69 +1,93 @@
 # Build Plan: ProManaged IT — Signal & Systems Global Redesign
 
 ## Goal
-Deliver one complete award-calibre, global ProManaged redesign: premium editorial technology studio, original copy, distinctive building-block motion, logo-triggered bento navigation, and one coherent visual system across all 7 public pages.
+Deliver a premium, global ProManaged redesign with one coherent visual system across all seven public pages. Preserve the completed logo-triggered bento navigation and building-block design language; the next implementation focus is a deliberately wider desktop composition and removal of actual Render.com deployment dependencies.
 
-## Core Rules
-- Global positioning; do not introduce exact countries/regions in new marketing headlines.
-- Build / Source / Connect are the three service routes.
-- Plus Jakarta Sans across all text roles; modern fluid scale.
-- Warm ivory/stone/graphite base; blue is secondary accent only.
-- No gradients, parallax, looping animation, dashboard styling, or excessive cards.
-- `main` → `origin/main` only; never commit YAML.
-
-## Render Decommission — Hosting Only
-- “Render” means **Render.com hosting/deployment logic only**. Do not remove normal UI uses of the word render.
-- Audit and remove any actual Render.com config, deploy hook, GitHub integration reference, Render environment variable, or Render documentation.
-- Verify no `render.yaml`, Render workflow/action, deploy hook, or active Render reference remains in the repo.
-- External prerequisite: in the Render dashboard, disconnect/delete the Render service, disable auto-deploy, and disable Render notifications. Do not claim this external step is complete unless verified by the owner.
-
-## Wide Bento Composition
-- Expand visual desktop rails for hero, bento navigation, capabilities, founder/story, contact and major chapter grids.
-- Use full-bleed section surfaces with a wider inner visual grid; **do not** stretch paragraphs/headings edge-to-edge.
-- Constrain reading measures independently (target ~55–75 characters/line).
-- Reduce excessive desktop outer gutters while preserving safe tablet/mobile padding.
-- Review at the real desktop window plus explicit 1440px, 768px and 375px checks.
-- Acceptance: no horizontal overflow, awkward empty margins, squeezed visual blocks, or unreadably wide text.
-
-## Required Site Features
-- All 7 pages share identical header/footer, typography, spacing, buttons and visual language.
-- Traditional navbar is removed. Use the existing logo visibly in the hero as a trigger for a full-viewport bento navigation panel; accessible focus trap/Escape/focus restore required.
-- `index.html`: Hero → What ProManaged Is → Build/Source/Connect → How We Work → Founder/Story → Mission/Vision → Contact → Footer.
-- Software page: zero visible prices/pricing tables.
-- Building-block load animation plus chapter-level scroll reveals; non-blocking and reduced-motion safe.
-- Legacy eBay/RAWG/game/shopping/render-pipeline references removed only when proven obsolete; working forms/PHP/SMTP/honeypot preserved.
-
-## Files
-`index.html`, `get-started.html`, `learn_more.html`, `privacy_policy.html`, `pages/custom_websites.html`, `pages/hardware_sourcing.html`, `pages/network_infrastructure.html`; shared/page CSS listed in the repository plan; smallest required shared JS; `.claude` maps/docs only where obsolete references are proven.
-
-## Playwright QA — Mandatory
-1. Headed browser at real available window size first; no custom primary desktop viewport.
-2. Record `window.innerWidth`, `window.innerHeight`, `clientWidth`, `scrollWidth` on every page.
-3. Full-page screenshots for all 7 pages.
-4. Review width usage, typography, bento navigation, block transitions, logo visibility, header/footer consistency, and text measure.
-5. Then test 1440px, 768px, 375px; verify nav, forms, links, fonts, console and overflow.
-6. Verify reduced-motion and at least two scroll-triggered block reveals.
+## Wants vs Needs
+- Want: the bento hero and large sections feel expansive, modern and high-end on wide screens.
+- Need: use desktop space for visual composition without making copy hard to read, navigation unclear, or smaller screens fragile.
+- Success moment: at desktop width, the hero and chapter blocks feel architectural and confidently wide, while text remains calm and easy to scan.
 
 ## Completion Criteria
-- [ ] Full-site redesign visibly differs from the old site and feels premium/confident.
-- [ ] Wide bento composition uses desktop space without unreadable text.
-- [ ] Logo-triggered bento navigation works on desktop/mobile and is accessible.
-- [ ] Render.com hosting/deploy logic is removed from repo; external dashboard shutdown is separately confirmed.
-- [ ] No pricing on software page.
-- [ ] No dead/legacy references or broken assets.
-- [ ] All functional forms/endpoints remain intact.
-- [ ] Playwright QA passes all 7 pages at required sizes.
-- [ ] Changes committed to `main` and pushed to `origin/main`.
+- [ ] Visual compositions use more of wide desktop viewports without horizontal overflow.
+- [ ] Paragraphs and long-form copy retain an independent readable measure of roughly 55–75 characters per line.
+- [ ] Hero, navigation panel, capabilities, founder/story, contact and chapter grids share the same wider composition rules.
+- [ ] Desktop real-window and explicit 1440px, 768px and 375px checks show no awkward empty margins, squeezed blocks, broken navigation or unreadably wide text.
+- [ ] No Render.com configuration, deploy hook, GitHub integration reference, service environment variable or deployment documentation remains in the repository.
+- [ ] The owner separately confirms that the linked Render.com service is disconnected/deleted, auto-deploy is off and Render notifications are off.
+- [ ] Forms, booking, PHP endpoints, SMTP, honeypot, links, IDs and accessibility remain functional.
+
+## Files to Change
+- `css/tokens.css` — widen shared desktop visual-rail tokens without changing mobile-safe defaults.
+- `css/global_styles.css` — separate wide visual rails from narrower readable-copy measures.
+- `css/hero_section.css` — widen the hero block composition while retaining headline and supporting-copy measures.
+- `css/navbar.css` — widen the logo-triggered bento panel/grid and its desktop tile composition only.
+- `css/service_cards.css` — widen Build/Source/Connect visual composition only.
+- `css/about_section.css` — widen founder/story composition only.
+- `css/mission_vision.css` — widen editorial chapter grid only.
+- `css/contact_section.css` — widen contact composition only.
+- `css/why_band.css` — widen the visual chapter layout only.
+- `.claude/PROJECT_CONTEXT.md` and `.claude/SYSTEM_MAP.md` — update only if a real Render.com deployment reference is found or the shared rail architecture changes.
+
+## Exact Changes
+### `css/tokens.css`
+- Section: layout tokens `--rail-max`, `--rail-pad`, `--grid-gap`, `--grid-cols`.
+- Change: create separate wide visual-rail and text-measure tokens; increase only the large-screen visual rail and reduce excessive large-screen gutters. Keep current tablet/mobile padding unless QA proves a defect.
+- Reason: a single rail currently constrains both large visual blocks and readable copy.
+
+### `css/global_styles.css`
+- Section: `.rail`, `.container`, paragraph/text measure rules.
+- Change: retain `.rail`/`.container` as shared composition wrappers using the wider visual rail; add/use a narrow text wrapper or text measure so prose does not inherit visual-grid width. Do not make all text full width.
+- Reason: modern full-bleed composition needs independent typography constraints.
+
+### `css/hero_section.css`
+- Section: hero outer rail, visual/content grid, heading and supporting-copy rules.
+- Change: allow the block grid and supporting visual unit to occupy the widened rail; preserve headline at about 16ch and supporting copy near 50ch.
+- Reason: grow the composition, not line length.
+
+### `css/navbar.css`
+- Section: logo trigger, full-viewport navigation panel and destination-tile grid.
+- Change: use the wider visual rail for desktop tile spans and reduce unused side margins; preserve keyboard focus styles, focus trap behavior, Escape, scroll lock and mobile panel layout.
+- Reason: the navigation should feel like a deliberate bento composition at wide widths.
+
+### Page composition CSS
+- Files: `css/service_cards.css`, `css/about_section.css`, `css/mission_vision.css`, `css/contact_section.css`, `css/why_band.css`.
+- Change: widen only primary grid/block wrappers and visual media columns; keep existing heading/paragraph `max-width` values unless QA identifies a readability failure.
+- Reason: chapter-level blocks should use the screen without turning into stretched text rows.
+
+### Render.com decommission
+- Repository audit: search for `render.yaml`, `render.com`, Render deploy hooks, Render GitHub actions, Render-specific environment variables and Render service documentation.
+- Change: remove only verified Render.com hosting/deployment references. Do not remove ordinary browser/UI uses of the word `render`, or working mail/form logic.
+- External owner task: disable auto-deploy and notifications, then disconnect/delete the linked Render.com service in the Render dashboard.
+- Reason: GitHub cleanup cannot stop emails from an externally active Render service.
+
+## Constraints / Things NOT to Touch
+- Do not edit HTML or shared JS unless the existing layout markup cannot support the wider grid; if so, stop and report the exact blocker.
+- Do not alter PHP endpoints, form field names, SMTP, PHPMailer, honeypot, IDs, working links, legal/privacy copy, navigation accessibility or mobile behavior.
+- Do not remove normal UI/documentation uses of the word `render`.
+- No new framework, animation library, gradients, parallax, loops, dashboard styling or scope-expanding redesign.
+- `main` only; no branches, PRs, force-pushes or YAML files.
+
+## QA Gate
+1. Run headed browser at the real available desktop window; record `innerWidth`, `innerHeight`, `clientWidth` and `scrollWidth` for all seven pages.
+2. Capture full-page screenshots and inspect rail use, hero balance, section composition, text measure, logo visibility and bento navigation.
+3. Repeat explicit checks at 1440px, 768px and 375px.
+4. Verify bento open/close, keyboard focus trap, Escape, focus restore, links, contact/booking forms, console errors and horizontal overflow.
+5. Verify reduced motion still exposes content immediately.
+6. If Render.com account access is unavailable, report the dashboard shutdown as owner-blocked; never claim it passed.
 
 ## Phases
-### Phase 1: Shared system + homepage
-- Goal: typography, wide visual grid, bento nav, motion, homepage redesign.
-- Exit: homepage establishes the complete visual system.
+### Phase 1: Wide shared composition
+- Goal: update tokens, global rail behavior, hero and bento navigation desktop composition.
+- Exit condition: the homepage and navigation use wide desktop space cleanly, while text stays readable and mobile behavior is unchanged.
+- Files: `css/tokens.css`, `css/global_styles.css`, `css/hero_section.css`, `css/navbar.css`.
 
-### Phase 2: Full-site rollout + pricing removal
-- Goal: apply the system to all pages and remove software pricing.
-- Exit: no page looks like a legacy template.
+### Phase 2: Wide chapter rollout
+- Goal: apply the same visual rail to capabilities, founder/story, mission/vision, contact and why-band sections.
+- Exit condition: all target chapters use consistent wide composition without changing long-form reading measures.
+- Files: `css/service_cards.css`, `css/about_section.css`, `css/mission_vision.css`, `css/contact_section.css`, `css/why_band.css`.
 
-### Phase 3: Render/legacy cleanup + QA
-- Goal: remove obsolete hosting/code references, verify external Render shutdown with owner, then complete Playwright checks.
-- Exit: all criteria pass and final work is pushed to `origin/main`.
+### Phase 3: Render audit and QA
+- Goal: remove verified Render.com repository dependencies, obtain owner confirmation of dashboard shutdown, then complete full visual and functional QA.
+- Exit condition: all completion criteria pass; owner-only Render dashboard actions are explicitly confirmed or marked blocked.
+- Files: only proven Render.com references and relevant `.claude` documentation.
