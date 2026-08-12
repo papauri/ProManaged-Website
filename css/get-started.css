@@ -15,12 +15,28 @@
     font-size: var(--text-lg);
 }
 
-/* Starting-point blocks are equal by intent — the visitor is choosing between three
-   peers — so only the lead one takes the graphite fill. */
 .services-section .block h3 {
     font-family: var(--font-display);
     font-weight: var(--weight-display);
     font-size: var(--display-3);
     letter-spacing: var(--tracking-display);
     line-height: var(--leading-tight);
+}
+
+/* ---------- Starting points: dominant block + satellites ----------
+   Measured as three identical 431px cards. Build is the capability most visitors
+   arrive for, so it takes the wide graphite block and the two supporting choices sit
+   beside and beneath it — the same hierarchy the homepage capabilities use, but on a
+   7/5 split rather than a full-width banner, so the two pages stay distinct. */
+@media (min-width: 900px) {
+    .start-lead {
+        grid-column: span 7;
+        grid-row: span 2;
+        justify-content: center;
+    }
+
+    .start-lead h3 { font-size: var(--display-2) }
+    .start-lead p { font-size: var(--text-lg) }
+
+    .start-satellite { grid-column: span 5 }
 }

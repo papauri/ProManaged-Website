@@ -37,6 +37,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Phones get fewer stagger steps and a tighter clock: the same design language,
     // but the first screen has to resolve quickly on a small viewport.
     const isCompact = () => window.matchMedia('(max-width: 767px)').matches;
+    // What counts as one animated "block". Groups are marked with [data-blocks];
+    // these are the units inside them that actually settle. A chapter whose content
+    // matches none of these gets no visible motion, so every public page's chapters
+    // are represented here — including the footer and the legal page.
     const UNIT_SELECTOR = [
         '.chapter-head',
         '.grid > .block',
@@ -44,7 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
         '.about-grid > *',
         '.contact-grid > *',
         '.booking-grid > *',
-        '.faq-container'
+        '.faq-container',
+        '.privacy-section',
+        '.footer-content > *'
     ].join(', ');
     const cssMs = (name, fallback) => {
         const raw = parseInt(getComputedStyle(document.documentElement).getPropertyValue(name), 10);

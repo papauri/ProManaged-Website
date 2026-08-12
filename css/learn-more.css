@@ -15,11 +15,65 @@
     max-width: var(--measure);
 }
 
-/* Expectations read as editorial statements on the chapter surface, separated by a
-   rule rather than boxed into cards. */
+/* ---------- Who we help: dominant block + stacked satellites ----------
+   Measured as three identical 431px cards, which is the equal-card grid this design
+   avoids. The lead audience now takes a tall tinted block on the left and the two
+   supporting audiences stack beside it — a different pattern from the stepped mosaic
+   used on the homepage, so the two pages do not read as the same chapter twice. */
+@media (min-width: 900px) {
+    .audience-grid {
+        align-items: stretch;
+    }
+
+    .audience-lead {
+        grid-column: span 5;
+        /* Spans both satellite rows, which is what makes this a composition rather
+           than a 5/7 split with a gap under the short column. */
+        grid-row: span 2;
+        background: var(--color-accent-earth-soft);
+        border-color: transparent;
+        justify-content: center;
+    }
+
+    .audience-lead .mark { background: var(--color-paper) }
+
+    .audience-lead h3 {
+        font-family: var(--font-display);
+        font-size: var(--display-3);
+        font-weight: var(--weight-display);
+        letter-spacing: var(--tracking-display);
+        line-height: var(--leading-tight);
+    }
+
+    .audience-satellite {
+        grid-column: span 7;
+    }
+
+    /* Horizontal satellites: the mark sits beside the copy so the two blocks read as
+       rows against the lead block's column. */
+    .audience-satellite {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: var(--space-6);
+    }
+
+    .audience-satellite .mark { margin-bottom: 0 }
+}
+
+/* ---------- Expectations: an alternating weave ----------
+   Four equal 659px blocks read as a plain 2x2. Alternating the spans (7/5 then 5/7)
+   and dropping the second of each pair produces a woven rhythm while keeping the
+   reading order intact. */
 .expectation {
     padding-top: var(--space-8);
     border-top: 1px solid var(--color-border-strong);
+}
+
+@media (min-width: 900px) {
+    .expectation-grid .expectation:nth-child(1) { grid-column: span 7 }
+    .expectation-grid .expectation:nth-child(2) { grid-column: span 5; margin-top: var(--space-10) }
+    .expectation-grid .expectation:nth-child(3) { grid-column: span 5 }
+    .expectation-grid .expectation:nth-child(4) { grid-column: span 7; margin-top: var(--space-10) }
 }
 
 .expectation h3 {

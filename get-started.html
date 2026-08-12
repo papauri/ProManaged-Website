@@ -36,21 +36,24 @@
 
 <body>
     <div id="header-section">
-        <!-- Logo tile: brand anchor AND the navigation trigger. There is no
-             horizontal navbar strip anywhere on the site. -->
+        <!-- Logo tile: brand anchor AND the navigation control. There is no horizontal
+             navbar strip anywhere on the site. -->
         <button type="button" class="nav-trigger" id="nav-trigger"
                 aria-expanded="false" aria-controls="nav-panel"
                 aria-label="Open navigation menu">
             <img src="images/icon.png" alt="ProManaged IT" class="logo">
             <span class="nav-trigger-label">
-                Menu
+                <span class="nav-trigger-word">Menu</span>
                 <span class="nav-trigger-bars" aria-hidden="true">
-                    <span></span><span></span>
+                    <span></span><span></span><span></span>
                 </span>
             </span>
         </button>
 
-        <!-- Full-viewport bento navigation panel -->
+        <!-- Full-viewport bento navigation panel. Behaviour (aria-expanded, focus
+             trap, Escape, scroll lock, focus restoration) lives in
+             js/mobile_phone_navbar.js and binds to #nav-trigger / #nav-panel /
+             #nav-close / .is-open — those hooks are contractual. -->
         <div class="nav-panel" id="nav-panel" hidden>
             <div class="nav-panel-rail">
                 <div class="nav-panel-top">
@@ -64,41 +67,44 @@
                     </button>
                 </div>
 
+                <p class="nav-panel-lead">
+                    <span class="nav-panel-lead-eyebrow">Build &middot; Source &middot; Connect</span>
+                    <span class="nav-panel-lead-text">Three capabilities, one point of contact.</span>
+                </p>
+
                 <nav class="nav-bento" aria-label="Primary">
                     <a class="nav-tile nav-tile--primary" href="get-started.html">
                         <span class="nav-tile-index">Start here</span>
-                        <span class="nav-tile-label">Start a Project</span>
+                        <span class="nav-tile-label">Start a project</span>
                         <span class="nav-tile-desc">Bring us the problem. Book a call and get a scope, a timeline and an honest answer.</span>
+                        <span class="nav-tile-cue" aria-hidden="true">Book a call</span>
                     </a>
-                    <a class="nav-tile nav-tile--half" href="index.html">
-                        <span class="nav-tile-index">01</span>
-                        <span class="nav-tile-label">Home</span>
-                        <span class="nav-tile-desc">The whole picture.</span>
-                    </a>
-                    <a class="nav-tile nav-tile--half" href="index.html#contact">
-                        <span class="nav-tile-index">02</span>
-                        <span class="nav-tile-label">Contact</span>
-                        <span class="nav-tile-desc">Send a message.</span>
-                    </a>
-                    <a class="nav-tile nav-tile--wide" href="learn_more.html">
-                        <span class="nav-tile-index">03</span>
-                        <span class="nav-tile-label">How We Work</span>
-                        <span class="nav-tile-desc">Listen, plan, deliver, support — and what to expect.</span>
-                    </a>
-                    <a class="nav-tile nav-tile--wide" href="pages/custom_websites.html">
-                        <span class="nav-tile-index">Build</span>
+                    <a class="nav-tile nav-tile--lead" href="pages/custom_websites.html">
+                        <span class="nav-tile-index">01 &middot; Build</span>
                         <span class="nav-tile-label">Software &amp; Web Apps</span>
                         <span class="nav-tile-desc">Web apps, SaaS platforms and business websites, built end to end.</span>
                     </a>
-                    <a class="nav-tile nav-tile--half" href="pages/hardware_sourcing.html">
-                        <span class="nav-tile-index">Source</span>
+                    <a class="nav-tile nav-tile--service" href="pages/hardware_sourcing.html">
+                        <span class="nav-tile-index">02 &middot; Source</span>
                         <span class="nav-tile-label">Hardware Sourcing</span>
                         <span class="nav-tile-desc">Sourced, shipped, delivered.</span>
                     </a>
-                    <a class="nav-tile nav-tile--half" href="pages/network_infrastructure.html">
-                        <span class="nav-tile-index">Connect</span>
+                    <a class="nav-tile nav-tile--service" href="pages/network_infrastructure.html">
+                        <span class="nav-tile-index">03 &middot; Connect</span>
                         <span class="nav-tile-label">Network Infrastructure</span>
                         <span class="nav-tile-desc">Connectivity that stays quiet.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="index.html">
+                        <span class="nav-tile-index">Overview</span>
+                        <span class="nav-tile-label">Home</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="learn_more.html">
+                        <span class="nav-tile-index">Process</span>
+                        <span class="nav-tile-label">How We Work</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="index.html#contact">
+                        <span class="nav-tile-index">Direct</span>
+                        <span class="nav-tile-label">Contact</span>
                     </a>
                 </nav>
 
@@ -107,14 +113,14 @@
                     <a class="nav-link" href="index.html#about">About</a>
                     <a class="nav-link" href="index.html#services">Services</a>
                     <a class="nav-link" href="index.html#mission-vision">Mission &amp; Vision</a>
-                    <a href="privacy_policy.html">Privacy Policy</a>
+                    <a class="nav-link" href="privacy_policy.html">Privacy Policy</a>
+                    <a class="nav-panel-foot-mail" href="mailto:info@promanaged-it.com">info@promanaged-it.com</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ================= HERO ================= -->
-    <div id="hero-section">
+<div id="hero-section">
         <section id="home" class="hero">
             <div class="hero-rail rail" data-assemble>
                 <div class="hero-statement">
@@ -210,8 +216,8 @@
                 <h2>Not sure which one you need?</h2>
                 <p class="lede">Choose whichever is closest and we will work the rest out on the call. Plenty of projects turn out to be two of these at once.</p>
             </div>
-            <div class="grid">
-                <div class="block block--4 block--graphite">
+            <div class="grid start-grid">
+                <div class="block block--7 block--graphite start-lead">
                     <span class="mark" aria-hidden="true"><i class="fas fa-laptop-code"></i></span>
                     <div class="block__body">
                         <h3>Build</h3>
@@ -221,7 +227,7 @@
                         <a href="pages/custom_websites.html" class="btn secondary">Explore Build</a>
                     </div>
                 </div>
-                <div class="block block--4">
+                <div class="block block--5 start-satellite">
                     <span class="mark" aria-hidden="true"><i class="fas fa-boxes-stacked"></i></span>
                     <div class="block__body">
                         <h3>Source</h3>
@@ -231,7 +237,7 @@
                         <a href="pages/hardware_sourcing.html" class="btn secondary">Explore Source</a>
                     </div>
                 </div>
-                <div class="block block--4">
+                <div class="block block--5 start-satellite">
                     <span class="mark" aria-hidden="true"><i class="fas fa-network-wired"></i></span>
                     <div class="block__body">
                         <h3>Connect</h3>
@@ -377,7 +383,7 @@
 
     <!-- ================= FOOTER ================= -->
     <div id="footer-section">
-        <footer class="footer">
+        <footer class="footer" data-blocks="settle-up">
             <div class="footer-content rail">
                 <div class="footer-brand">
                     <h3>ProManaged IT</h3>

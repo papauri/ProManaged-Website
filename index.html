@@ -37,28 +37,91 @@
 </head>
 <body id="main-body">
     <div id="header-section">
-        <button type="button" class="nav-trigger" id="nav-trigger" aria-expanded="false" aria-controls="nav-panel" aria-label="Open navigation menu">
+        <!-- Logo tile: brand anchor AND the navigation control. There is no horizontal
+             navbar strip anywhere on the site. -->
+        <button type="button" class="nav-trigger" id="nav-trigger"
+                aria-expanded="false" aria-controls="nav-panel"
+                aria-label="Open navigation menu">
             <img src="images/icon.png" alt="ProManaged IT" class="logo">
-            <span class="nav-trigger-label">Menu<span class="nav-trigger-bars" aria-hidden="true"><span></span><span></span></span></span>
+            <span class="nav-trigger-label">
+                <span class="nav-trigger-word">Menu</span>
+                <span class="nav-trigger-bars" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                </span>
+            </span>
         </button>
+
+        <!-- Full-viewport bento navigation panel. Behaviour (aria-expanded, focus
+             trap, Escape, scroll lock, focus restoration) lives in
+             js/mobile_phone_navbar.js and binds to #nav-trigger / #nav-panel /
+             #nav-close / .is-open — those hooks are contractual. -->
         <div class="nav-panel" id="nav-panel" hidden>
             <div class="nav-panel-rail">
-                <div class="nav-panel-top"><span class="nav-panel-brand"><img src="images/icon.png" alt="" aria-hidden="true">ProManaged IT</span><button type="button" class="nav-close" id="nav-close" aria-label="Close navigation menu"><span></span><span></span></button></div>
+                <div class="nav-panel-top">
+                    <span class="nav-panel-brand">
+                        <img src="images/icon.png" alt="" aria-hidden="true">
+                        ProManaged IT
+                    </span>
+                    <button type="button" class="nav-close" id="nav-close"
+                            aria-label="Close navigation menu">
+                        <span></span><span></span>
+                    </button>
+                </div>
+
+                <p class="nav-panel-lead">
+                    <span class="nav-panel-lead-eyebrow">Build &middot; Source &middot; Connect</span>
+                    <span class="nav-panel-lead-text">Three capabilities, one point of contact.</span>
+                </p>
+
                 <nav class="nav-bento" aria-label="Primary">
-                    <a class="nav-tile nav-tile--primary" href="get-started.html"><span class="nav-tile-index">Start here</span><span class="nav-tile-label">Start a Project</span><span class="nav-tile-desc">Bring us the problem. Book a call and get a scope, a timeline and an honest answer.</span></a>
-                    <a class="nav-tile nav-tile--half" href="index.html"><span class="nav-tile-index">01</span><span class="nav-tile-label">Home</span><span class="nav-tile-desc">The whole picture.</span></a>
-                    <a class="nav-tile nav-tile--half" href="index.html#contact"><span class="nav-tile-index">02</span><span class="nav-tile-label">Contact</span><span class="nav-tile-desc">Send a message.</span></a>
-                    <a class="nav-tile nav-tile--wide" href="learn_more.html"><span class="nav-tile-index">03</span><span class="nav-tile-label">How We Work</span><span class="nav-tile-desc">Listen, plan, deliver, support — and what to expect.</span></a>
-                    <a class="nav-tile nav-tile--wide" href="pages/custom_websites.html"><span class="nav-tile-index">Build</span><span class="nav-tile-label">Software &amp; Web Apps</span><span class="nav-tile-desc">Web apps, SaaS platforms and business websites, built end to end.</span></a>
-                    <a class="nav-tile nav-tile--half" href="pages/hardware_sourcing.html"><span class="nav-tile-index">Source</span><span class="nav-tile-label">Hardware Sourcing</span><span class="nav-tile-desc">Sourced, shipped, delivered.</span></a>
-                    <a class="nav-tile nav-tile--half" href="pages/network_infrastructure.html"><span class="nav-tile-index">Connect</span><span class="nav-tile-label">Network Infrastructure</span><span class="nav-tile-desc">Connectivity that stays quiet.</span></a>
+                    <a class="nav-tile nav-tile--primary" href="get-started.html">
+                        <span class="nav-tile-index">Start here</span>
+                        <span class="nav-tile-label">Start a project</span>
+                        <span class="nav-tile-desc">Bring us the problem. Book a call and get a scope, a timeline and an honest answer.</span>
+                        <span class="nav-tile-cue" aria-hidden="true">Book a call</span>
+                    </a>
+                    <a class="nav-tile nav-tile--lead" href="pages/custom_websites.html">
+                        <span class="nav-tile-index">01 &middot; Build</span>
+                        <span class="nav-tile-label">Software &amp; Web Apps</span>
+                        <span class="nav-tile-desc">Web apps, SaaS platforms and business websites, built end to end.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--service" href="pages/hardware_sourcing.html">
+                        <span class="nav-tile-index">02 &middot; Source</span>
+                        <span class="nav-tile-label">Hardware Sourcing</span>
+                        <span class="nav-tile-desc">Sourced, shipped, delivered.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--service" href="pages/network_infrastructure.html">
+                        <span class="nav-tile-index">03 &middot; Connect</span>
+                        <span class="nav-tile-label">Network Infrastructure</span>
+                        <span class="nav-tile-desc">Connectivity that stays quiet.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="index.html">
+                        <span class="nav-tile-index">Overview</span>
+                        <span class="nav-tile-label">Home</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="learn_more.html">
+                        <span class="nav-tile-index">Process</span>
+                        <span class="nav-tile-label">How We Work</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="index.html#contact">
+                        <span class="nav-tile-index">Direct</span>
+                        <span class="nav-tile-label">Contact</span>
+                    </a>
                 </nav>
-                <div class="nav-panel-foot"><span class="nav-panel-foot-label">On the homepage</span><a class="nav-link" href="index.html#about">About</a><a class="nav-link" href="index.html#services">Services</a><a class="nav-link" href="index.html#mission-vision">Mission &amp; Vision</a><a href="privacy_policy.html">Privacy Policy</a></div>
+
+                <div class="nav-panel-foot">
+                    <span class="nav-panel-foot-label">On the homepage</span>
+                    <a class="nav-link" href="index.html#about">About</a>
+                    <a class="nav-link" href="index.html#services">Services</a>
+                    <a class="nav-link" href="index.html#mission-vision">Mission &amp; Vision</a>
+                    <a class="nav-link" href="privacy_policy.html">Privacy Policy</a>
+                    <a class="nav-panel-foot-mail" href="mailto:info@promanaged-it.com">info@promanaged-it.com</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="hero-section">
+<div id="hero-section">
         <section id="home" class="hero">
             <div class="hero-rail rail" data-assemble>
                 <div class="hero-statement">
@@ -111,37 +174,53 @@
 
     <section id="contact" class="section contact-section section--ivory" data-blocks="scale-in"><div class="rail"><div class="contact-grid contact-grid--closing"><div class="contact-invite"><span class="eyebrow">Start a conversation</span><h2>Bring us the problem.</h2><p class="lede">Tell us what is getting in the way. We will help you work out what should happen next.</p><div class="hero-buttons"><a href="get-started.html" class="btn primary">Start a project</a><a href="mailto:info@promanaged-it.com" class="btn secondary">Email ProManaged</a></div></div><div class="contact-routes"><span class="contact-routes-label">Or go straight to</span><ul class="contact-direct"><li><a href="get-started.html#booking"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book a call</a></li><li><a href="pages/custom_websites.html"><i class="fas fa-laptop-code" aria-hidden="true"></i>Software &amp; web apps</a></li><li><a href="pages/hardware_sourcing.html"><i class="fas fa-boxes-stacked" aria-hidden="true"></i>Hardware sourcing</a></li><li><a href="pages/network_infrastructure.html"><i class="fas fa-network-wired" aria-hidden="true"></i>Network infrastructure</a></li><li><a href="learn_more.html"><i class="fas fa-compass-drafting" aria-hidden="true"></i>How we work</a></li></ul></div></div></div></section>
 
-    <footer class="footer">
-        <div class="rail">
-            <div class="footer-content">
+    <!-- ================= FOOTER ================= -->
+    <div id="footer-section">
+        <footer class="footer" data-blocks="settle-up">
+            <div class="footer-content rail">
                 <div class="footer-brand">
                     <h3>ProManaged IT</h3>
-                    <p>Useful technology, built around how you actually work.</p>
-                    <span class="footer-label">Build · Source · Connect</span>
+                    <p>Build, Source, Connect.</p>
+                    <span class="footer-label">Contact</span>
                     <ul class="footer-contact">
                         <li><a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a></li>
-                        <li><a href="get-started.html">Start a project</a></li>
+                        <li><a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a></li>
+                        <li><a href="mailto:johnpaulchirwa@promanaged-it.com">johnpaulchirwa@promanaged-it.com</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-links">
                     <h4>Explore</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="pages/custom_websites.html">Build</a></li>
+                        <li><a href="pages/hardware_sourcing.html">Source</a></li>
+                        <li><a href="pages/network_infrastructure.html">Connect</a></li>
                         <li><a href="learn_more.html">How we work</a></li>
-                        <li><a href="pages/custom_websites.html">Software &amp; Web Apps</a></li>
-                        <li><a href="pages/hardware_sourcing.html">Hardware Sourcing</a></li>
-                        <li><a href="pages/network_infrastructure.html">Network Infrastructure</a></li>
+                        <li><a href="get-started.html">Get started</a></li>
+                        <li><a href="privacy_policy.html">Privacy Policy</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-newsletter">
                     <h4>Keep in touch</h4>
                     <p>For new work, sourcing questions or a problem you are not sure how to frame, start with a conversation.</p>
                     <a class="btn secondary" href="get-started.html">Talk to ProManaged</a>
                 </div>
             </div>
-            <div class="footer-bottom"><p>&copy; <span data-current-year>2026</span> ProManaged IT. All rights reserved.</p><a href="privacy_policy.html">Privacy Policy</a></div>
-        </div>
-    </footer>
+
+            <div class="footer-bottom rail">
+                <p>&copy; <span data-current-year>2026</span> ProManaged IT. All rights reserved.</p>
+                <p>
+                    Company Registration Number 749512 &middot;
+                    <a href="https://core.cro.ie/e-commerce/company/5379600" target="_blank" rel="noopener">Verify registration</a>
+                    &middot; <a href="privacy_policy.html">Privacy Policy</a>
+                </p>
+            </div>
+        </footer>
+    </div>
 
     <script src="js/main.js"></script>
     <script src="js/mobile_phone_navbar.js"></script>

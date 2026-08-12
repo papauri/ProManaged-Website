@@ -75,10 +75,36 @@ p{max-width:var(--measure)}
 .block--tint>.mark,.block--tint .mark{background:var(--color-paper)}.block--earth .mark,.block--graphite .mark{color:var(--color-text-on-dark);background:rgba(247,243,236,.15)}
 @media (min-width:900px){.block--row>.mark,.block--row .block__aside .mark{width:68px;height:68px;font-size:var(--text-3xl);margin-bottom:0}}
 .step-num{display:block;font-family:var(--font-display);font-size:var(--display-3);font-weight:var(--weight-display);letter-spacing:var(--tracking-display);line-height:1;color:var(--color-accent-earth);margin-bottom:var(--space-4)}.section--graphite .step-num,.block--earth .step-num,.block--graphite .step-num{color:var(--color-accent-earth-soft)}
-/* Process: mobile is a numbered ladder, tablet a 2×2, desktop a single row. */
-.process-steps{list-style:none;display:grid;grid-template-columns:1fr;gap:var(--space-8);padding:0;margin:0}.process-step{padding-top:var(--space-6);border-top:1px solid var(--color-border);min-width:0}.section--graphite .process-step{border-top-color:rgba(247,243,236,.22)}.process-step h3{font-size:var(--text-xl);margin-bottom:var(--space-3)}.process-step p{color:var(--color-text-muted);max-width:38ch}.section--graphite .process-step p{color:var(--color-text-on-dark-muted)}
+/* ---------- Process: an asymmetric timeline, not four equal columns ----------
+   Mobile is a numbered ladder, tablet a 2×2, desktop a staggered run. On desktop the
+   steps are deliberately UNEQUAL — the columns widen slightly as the work progresses
+   and each step sits a little lower than the one before, so the row reads as a
+   timeline with direction rather than four identical cards side by side. The rule
+   above each step is the timeline itself. Shared by every page that has a process
+   chapter, so the whole site inherits the same rhythm. */
+.process-steps{list-style:none;display:grid;grid-template-columns:1fr;gap:var(--space-8);padding:0;margin:0;counter-reset:pstep}
+.process-step{position:relative;padding-top:var(--space-6);border-top:1px solid var(--color-border);min-width:0}
+.section--graphite .process-step{border-top-color:rgba(247,243,236,.22)}
+.process-step h3{font-size:var(--text-xl);margin-bottom:var(--space-3)}
+.process-step p{color:var(--color-text-muted);max-width:38ch}
+.section--graphite .process-step p{color:var(--color-text-on-dark-muted)}
+/* A short accent stub over each step's rule — the marker on the timeline. */
+.process-step::before{content:"";position:absolute;top:-1px;left:0;width:28px;height:3px;background:var(--color-accent-earth);border-radius:var(--radius-full)}
+.section--graphite .process-step::before{background:var(--color-accent-earth-soft)}
 @media (min-width:560px){.process-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:1024px){.process-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--grid-gap)}.process-step{padding-top:var(--space-8)}.process-step p{max-width:34ch}}
+@media (min-width:1024px){
+    .process-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--grid-gap);align-items:start}
+    .process-step{padding-top:var(--space-8)}
+    .process-step p{max-width:34ch}
+    /* The stagger. Kept small — this is a drift down the row, not a broken grid. */
+    .process-step:nth-child(2){margin-top:var(--space-6)}
+    .process-step:nth-child(3){margin-top:var(--space-12)}
+    .process-step:nth-child(4){margin-top:var(--space-16)}
+}
+/* Unequal column proportions once there is room for them to read as intentional. */
+@media (min-width:1200px){
+    .process-steps{grid-template-columns:minmax(0,.86fr) minmax(0,.95fr) minmax(0,1.05fr) minmax(0,1.14fr)}
+}
 .list{list-style:none;padding:0;margin-top:var(--space-6)}.list li{position:relative;padding:var(--space-2) 0 var(--space-2) var(--space-6);color:var(--color-text-muted);line-height:var(--leading-normal);max-width:var(--measure)}.list li::before{content:"";position:absolute;left:0;top:1.05em;width:12px;height:1px;background:var(--color-accent-earth)}.block--earth .list li::before,.block--graphite .list li::before{background:var(--color-accent-earth-soft)}
 .block--graphite p,.block--graphite li,.block--graphite .list li,.section--graphite .block--bare p,.section--graphite .block--bare li{color:var(--color-text-on-dark-muted)}.block--earth p,.block--earth li,.block--earth .list li,.block--earth h2,.block--earth h3,.block--earth h4,.block--graphite h2,.block--graphite h3,.block--graphite h4{color:var(--color-text-on-dark)}
 
@@ -303,7 +329,13 @@ a:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-
 .js-on:not(.load-failsafe) [data-assemble] .hero-buttons{transform:translate3d(0,calc(var(--load-travel)*.5),0)}
 .js-on:not(.load-failsafe) [data-assemble] .hero-microproof{transform:translate3d(0,calc(var(--load-travel)*.4),0)}
 
-.block-reveal{opacity:0;transform:translate3d(0,var(--block-travel),0) scale(var(--block-scale));transition:opacity calc(var(--block-duration)*.7) var(--ease-fade) var(--block-delay,0ms),transform var(--block-duration) var(--ease-settle) var(--block-delay,0ms);will-change:opacity,transform}
+/* The hidden state applies INSTANTLY (transition:none). This matters: a chapter
+   unit is at opacity 1 until the observer fires, so if the hidden state carried
+   the transition the element would animate 1 -> 0 and the settle one frame later
+   would reverse it mid-flight — measured as a dip to ~0.98 and nothing more, i.e.
+   no visible motion anywhere on the site. The settle below owns the timing, which
+   is the correct place for it: a transition is read from the END state. */
+.block-reveal{opacity:0;transform:translate3d(0,var(--block-travel),0) scale(var(--block-scale));transition:none;will-change:opacity,transform}
 .block-reveal--up{transform:translate3d(0,var(--block-travel),0) scale(var(--block-scale))}
 .block-reveal--side{transform:translate3d(calc(var(--block-travel)*-1.15),0,0) scale(var(--block-scale))}
 .block-reveal--side:nth-child(even){transform:translate3d(calc(var(--block-travel)*1.15),0,0) scale(var(--block-scale))}
@@ -312,6 +344,10 @@ a:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-
 
 .js-on:not(.load-failsafe) [data-assemble] .is-settled,
 .block-reveal.is-settled,.block-reveal--up.is-settled,.block-reveal--side.is-settled,.block-reveal--side:nth-child(even).is-settled,.block-reveal--scale.is-settled,.block-reveal--seq.is-settled{opacity:1;transform:none}
+/* Chapter settle timing. Declared on the settled state so the transition runs on the
+   way IN, from the instantly-applied hidden state above. Kept separate from the
+   hero's --load-* clock so the two choreographies stay independently tunable. */
+.block-reveal.is-settled{transition:opacity calc(var(--block-duration)*.7) var(--ease-fade) var(--block-delay,0ms),transform var(--block-duration) var(--ease-settle) var(--block-delay,0ms)}
 
 @media print{
     .js-on .nav-trigger{animation:none}
