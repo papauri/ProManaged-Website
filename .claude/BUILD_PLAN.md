@@ -3,11 +3,141 @@
 ## Mission
 Finish the website as a **mobile-first, modern premium editorial technology studio** with a distinctive bento language, sophisticated loading/transition choreography, strong visual evidence, excellent responsive behaviour, and zero regression of working forms, navigation, PHP, or email logic.
 
-This is the handoff plan for Claude. Treat it as an implementation contract, not inspiration.
+This is the shared implementation contract for **ChatGPT, Claude, and Perplexity**. All three agents are expected to think about the whole product and challenge weak work. No agent has an isolated responsibility.
 
 Target feeling: **calm confidence + intelligent motion + crafted detail**. On a phone, the site must already feel complete and premium; desktop expands the composition rather than simply scaling the mobile layout upward.
 
-## 0. NON-NEGOTIABLE BASELINE
+## 0. SHARED MULTI-AGENT OPERATING MODEL
+
+This project is being developed collaboratively by:
+- ChatGPT
+- Claude
+- Perplexity
+
+### Shared responsibility
+ALL THREE AGENTS HAVE THE SAME RESPONSIBILITY FOR PRODUCT QUALITY.
+
+Every agent is expected to think about and challenge:
+- UI design;
+- UX;
+- responsive behaviour;
+- mobile-first composition;
+- desktop composition;
+- bento layout;
+- typography;
+- motion;
+- page-load choreography;
+- navigation;
+- forms;
+- email UX;
+- accessibility;
+- performance;
+- visual hierarchy;
+- content clarity;
+- business positioning;
+- trust;
+- technical integrity;
+- security;
+- regressions;
+- maintainability.
+
+Never defer an obvious issue by saying it belongs to another agent.
+
+### Shared source of truth
+`.claude/BUILD_PLAN.md` is the shared product contract.
+
+All agents must:
+1. Read the entire file before recommending or changing anything.
+2. Use the current repository as the source of truth.
+3. Treat explicit requirements as requirements, not suggestions.
+4. Preserve approved systems unless there is a concrete reason to improve them.
+5. Challenge weak work rather than accepting it because it technically functions.
+
+### Shared quality bar
+The target is not merely technically complete. The target is a:
+- modern;
+- premium;
+- mobile-first;
+- editorial;
+- distinctive;
+- trustworthy;
+- responsive;
+- motion-rich;
+- carefully composed;
+- production-ready
+ProManaged IT website.
+
+A requirement is NOT complete merely because:
+- a CSS class exists;
+- an animation technically runs;
+- a grid technically spans multiple columns;
+- an image technically loads;
+- a button technically links somewhere.
+
+The rendered experience must visibly satisfy the intended result.
+
+### Shared review questions
+Every agent should actively ask:
+1. What is broken?
+2. What is visually weak?
+3. What is inconsistent?
+4. What is misleading?
+5. What could regress on another device?
+6. What could become inaccessible?
+7. What is technically fragile?
+8. What feels generic?
+9. What does not match the build plan?
+10. What would prevent this from feeling award-level?
+
+### Shared response to defects
+When any agent identifies a defect:
+- verify it;
+- explain the root cause;
+- propose a concrete correction;
+- implement it when repository access allows;
+- verify the result;
+- report what changed.
+
+Do not apply a superficial patch when the underlying architecture is wrong.
+
+### Shared research standard
+External research may be used to improve interaction patterns, layout, motion, typography, responsive composition, navigation, forms and trust signals.
+
+Research must be translated into original ProManaged work. Never copy source code, wording, exact layouts, branding, logos, proprietary assets or project names.
+
+### Shared mobile-first standard
+Every major decision starts at:
+1. 375px
+2. 430px
+3. 768px
+4. 1024px
+5. 1440px
+6. 1600px
+7. 1920px
+8. 2560px equivalent desktop width
+
+Mobile is not a compressed desktop version.
+
+### Shared acceptance standard
+Before anything is considered finished, all agents should be able to agree that:
+- mobile-first composition is strong;
+- hero is balanced;
+- evidence supports the story;
+- bento layouts are varied;
+- motion is visible and premium;
+- load choreography is polished;
+- CTA buttons feel designed;
+- founder section feels personal;
+- navigation feels intentional;
+- forms feel native to the product;
+- footer is complete;
+- there are no obvious overlaps or regressions;
+- implementation matches the build plan;
+- no unverified claims or fake project evidence were introduced.
+
+This is a team, not a chain of command. Think together, challenge together, review together, improve together.
+
+## 1. NON-NEGOTIABLE BASELINE
 
 - **Mobile-first is mandatory.** Design and implement the core layout for 375–430px first, then progressively enhance tablet and desktop.
 - Desktop visual rail: **1880px maximum**.
@@ -24,7 +154,7 @@ Target feeling: **calm confidence + intelligent motion + crafted detail**. On a 
 - Never commit `.yml` / `.yaml` files.
 - Do not modify privacy/legal content unless an objective broken-link/reference bug requires it.
 
-## 1. DESIGN NORTH STAR
+## 2. DESIGN NORTH STAR
 
 ### Visual character
 Combine:
@@ -35,8 +165,8 @@ Combine:
 - unequal bento proportions;
 - visible but subtle interface/project evidence;
 - generous negative space without dead space;
-- **slow, elegant building-block motion**;
-- **a memorable loading sequence that feels like the interface is assembling itself**.
+- slow, elegant building-block motion;
+- a memorable loading sequence that feels like the interface is assembling itself.
 
 Avoid:
 - generic blue SaaS cards;
@@ -55,7 +185,7 @@ Avoid:
 ### Design principle
 **Make the composition interesting through proportion, rhythm, sequencing, evidence and motion—not decoration for decoration's sake.**
 
-## 2. UI/UX WORKSTREAMS
+## 3. UI/UX WORKSTREAMS
 
 ### A. MOBILE-FIRST FOUNDATION — highest priority
 Start every responsive decision at **375px and 430px** before tuning larger layouts.
@@ -73,7 +203,7 @@ Required:
 - forms are comfortable to fill on a phone;
 - motion is perceptible but not heavy or slow enough to frustrate a mobile visitor.
 
-Do not build desktop first and merely add `@media` overrides. Treat mobile as the primary composition and progressively add complexity for tablet/desktop.
+Do not build desktop first and merely add media overrides. Treat mobile as the primary composition and progressively add complexity for tablet/desktop.
 
 ### B. HERO — highest priority
 The hero is the most important visual area.
@@ -111,11 +241,11 @@ Required load sequence:
 Rules:
 - use opacity + transform only;
 - no layout-property animation;
-- no spinner unless genuinely necessary for async data (there is no such requirement here);
+- no spinner unless genuinely necessary for async data;
 - no fake progress percentage;
 - no long blank screen;
 - no blocking preloader that delays usable content unnecessarily;
-- initial assembly should feel **fancy, slow and premium**, not slow for its own sake;
+- initial assembly should feel fancy, slow and premium, not slow for its own sake;
 - target first-visual choreography around **800–1100ms** with controlled 90–130ms stagger;
 - hero blocks should settle at slightly different depths/directions;
 - a subtle final settle is acceptable; avoid repeated bouncing.
@@ -180,12 +310,12 @@ Vary:
 - whitespace;
 - statement vs card sections.
 
-**Mobile-first requirement:**
+Mobile-first requirement:
 - Start with 1-column and occasional 2-column compositions.
 - Vary card height, media ratio, order and grouping so the page does not become a monotone stack.
 - Only introduce more columns as viewport width allows.
 
-Desktop, tablet and mobile must be **art-directed separately**.
+Desktop, tablet and mobile must be art-directed separately.
 Semantic order must remain logical for keyboard and assistive technology users.
 
 ### F. CTA / ANCHOR BUTTON SYSTEM — high priority
@@ -332,7 +462,7 @@ Required:
 
 Never leave placeholder footer markup in a public page.
 
-## 3. RESPONSIVE ART DIRECTION
+## 4. RESPONSIVE ART DIRECTION
 
 Implementation order must be:
 1. 375px
@@ -357,7 +487,7 @@ At every size check:
 
 Large screens should gain richness through composition, spacing and evidence—not by stretching every block to the viewport edge.
 
-## 4. LOADING + MOTION QUALITY BAR
+## 5. LOADING + MOTION QUALITY BAR
 
 The loading experience must read as a **designed transition system**, not a collection of unrelated CSS animations.
 
@@ -381,7 +511,7 @@ On desktop:
 - use larger composition movement and slightly longer settle times;
 - let evidence cards arrive in sequence so the page feels assembled rather than faded in.
 
-## 5. ACCESSIBILITY + QUALITY
+## 6. ACCESSIBILITY + QUALITY
 
 Maintain:
 - semantic headings;
@@ -394,7 +524,7 @@ Maintain:
 - touch-friendly controls;
 - no information hidden behind hover/motion.
 
-## 6. PERFORMANCE
+## 7. PERFORMANCE
 
 Prefer:
 - CSS transforms/opacity for motion;
@@ -407,7 +537,7 @@ Prefer:
 
 The initial viewport must become useful quickly on mobile.
 
-## 7. LOGIC / BACKEND PROTECTION
+## 8. LOGIC / BACKEND PROTECTION
 
 Visual work must not break:
 - `js/main.js` navigation/scroll behaviour;
@@ -422,7 +552,7 @@ Visual work must not break:
 
 Do not rewrite application logic to solve a CSS problem.
 
-## 8. CLEANUP / SECURITY
+## 9. CLEANUP / SECURITY
 
 Audit and remove verified references to:
 - Render.com hosting/deployment;
@@ -435,7 +565,7 @@ Keep ordinary English uses of the word `render`.
 
 Never commit YAML/YML.
 
-## 9. IMPLEMENTATION ORDER
+## 10. IMPLEMENTATION ORDER
 
 ### Phase 1 — Mobile-first structural stability
 Fix first at 375/430:
@@ -474,7 +604,7 @@ Fix only UI/UX and presentation while preserving backend contracts.
 ### Phase 5 — Final polish
 Typography, spacing, micro-interactions, image loading, focus states, CTA consistency, footer details and content rhythm.
 
-## 10. DEFINITION OF DONE
+## 11. DEFINITION OF DONE
 
 All must be true:
 
@@ -489,10 +619,10 @@ All must be true:
 - [ ] Page-load animation feels like a premium block-assembly transition.
 - [ ] Scroll Building Blocks motion is clearly visible but slow and premium.
 - [ ] Motion runs once and respects reduced motion.
+- [ ] JavaScript failure can never leave important content hidden.
 - [ ] Founder portrait is circular, sharp and restrained.
 - [ ] CTA anchors no longer look generic/boring.
 - [ ] `.btn` class family is consistent everywhere.
-- [ ] Navigation is premium and touch-friendly.
 - [ ] Footer is complete and canonical.
 - [ ] Forms remain functional and visually premium.
 - [ ] Internal/customer email templates remain functional and branded.
@@ -503,27 +633,18 @@ All must be true:
 - [ ] No YAML/YML introduced.
 - [ ] No unrelated backend/legal changes.
 
-## 11. CLAUDE EXECUTION RULES
+## 12. GIT / HANDOFF RULES
 
-Read this entire file before touching code.
+- Work directly on `main`.
+- Push directly to `origin/main`.
+- Do not create a branch.
+- Do not create a PR.
+- Never force-push.
+- Never commit YAML/YML.
+- Inspect the full diff before every completion report.
 
-Implement the complete plan in one continuous cycle. Do not stop after tokens, button CSS, a single page, or desktop-only styling.
-
-**Mobile-first is mandatory.** Start at 375px/430px, then enhance upward.
-
-Do not reinterpret the design direction.
-Do not widen the rail.
-Do not replace the bento navigation.
-Do not invent project claims.
-Do not create parallel animation systems.
-Do not create a new button component.
-Do not rewrite PHP/backend logic for visual changes.
-
-Use the existing architecture and improve it surgically.
-
-When finished, inspect the complete diff, remove accidental changes, commit directly to `main`, and push to `origin/main`.
-
-Final response must be exactly:
+### Shared completion language
+Use:
 
 Changed:
 - <concise summary>
@@ -535,3 +656,5 @@ OR
 
 Ready for review:
 - Yes
+
+Do not use “looks good” as a substitute for verification.
