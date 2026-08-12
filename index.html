@@ -24,7 +24,11 @@
     <link rel="stylesheet" href="css/about_section.css">
     <link rel="stylesheet" href="css/mission_vision.css">
     <link rel="stylesheet" href="css/contact_section.css">
-    <script>document.documentElement.classList.add('js-on');</script>
+    <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
+         before first paint. Without JS this class is never added, the hiding rule
+         never matches, and all content renders normally. The timer is a failsafe:
+         if main.js never runs the choreography, the hero resolves anyway. -->
+    <script>document.documentElement.classList.add('js-on');setTimeout(function(){document.documentElement.classList.add('load-failsafe');},3000);</script>
 </head>
 <body id="main-body">
     <div id="header-section">
@@ -65,7 +69,7 @@
                         <span class="hero-figure">Three</span>
                         <span class="hero-figure-label">capabilities under one point of contact — no handoffs, no ticket queue, no account manager in between.</span>
                     </div>
-                    <div class="hero-project-grid" aria-label="Selected interface examples">
+                    <div class="hero-project-grid" role="group" aria-label="Illustrative interface fragments">
                         <article class="hero-project-card">
                             <div class="hero-project-topline"><span>Interface fragment</span><span>Build</span></div>
                             <div class="hero-project-media hero-project-media--hotel" aria-hidden="true"><span class="interface-window interface-window--booking"><span></span><span></span><span></span><b>BOOKING</b><i></i><i></i><i></i></span></div>
@@ -98,7 +102,7 @@
 
     <section id="about" class="section about" data-blocks="settle-up"><div class="rail"><div class="chapter-head"><span class="eyebrow">Founder / Story</span><h2>A technology company should still feel human.</h2></div><div class="about-grid"><div class="about-media about-media--portrait"><img src="images/founder.png" alt="John-Paul Chirwa, founder of ProManaged IT" loading="lazy" width="800" height="800"></div><div class="about-story"><span class="about-kicker">John-Paul Chirwa · Founder</span><h3>Built for people who want the answer, not another layer.</h3><p>ProManaged grew from a practical belief: useful technology should make work simpler, not give people another system to manage.</p><p>That means building what genuinely needs to be built, sourcing what is better bought, and connecting the physical and digital pieces so they behave as one.</p><div class="about-details"><span><i class="fas fa-cubes" aria-hidden="true"></i> Build</span><span><i class="fas fa-truck-ramp-box" aria-hidden="true"></i> Source</span><span><i class="fas fa-tower-broadcast" aria-hidden="true"></i> Connect</span></div></div></div></div></section>
 
-    <section id="mission-vision" class="section section--stone mission-vision" data-blocks="settle-side"><div class="rail"><div class="grid mission-grid"><div class="block block--7 block--bare"><span class="eyebrow">Mission</span><h2>Make dependable technology feel attainable.</h2><p class="lede">Good engineering starts with knowing what matters and refusing to add what does not.</p></div><div class="block block--5 block--bare"><span class="eyebrow">Vision</span><h2>One trusted technology partner, without the overhead.</h2><p class="lede">A smaller, clearer way to get software, equipment and connectivity working together.</p></div></div></div></section>
+    <section id="mission-vision" class="section section--stone mission-vision" data-blocks="settle-side"><div class="rail"><div class="grid mission-grid"><div class="block block--7 block--earth mission-pane mission-pane--lead"><span class="eyebrow">Mission</span><h2>Make dependable technology feel attainable.</h2><p class="lede">Good engineering starts with knowing what matters and refusing to add what does not.</p></div><div class="block block--5 block--bare mission-pane"><span class="eyebrow">Vision</span><h2>One trusted technology partner, without the overhead.</h2><p class="lede">A smaller, clearer way to get software, equipment and connectivity working together.</p></div></div></div></section>
 
     <section id="contact" class="section contact-section section--ivory" data-blocks="scale-in"><div class="rail"><div class="chapter-head"><span class="eyebrow">Start a conversation</span><h2>Bring us the problem.</h2><p class="lede">Tell us what is getting in the way. We will help you work out what should happen next.</p><div class="hero-buttons"><a href="get-started.html" class="btn primary">Start a project</a><a href="mailto:info@promanaged-it.com" class="btn secondary">Email ProManaged</a></div></div></div></section>
 
@@ -130,7 +134,7 @@
                     <a class="btn secondary" href="get-started.html">Talk to ProManaged</a>
                 </div>
             </div>
-            <div class="footer-bottom"><p>&copy; 2026 ProManaged IT. All rights reserved.</p><a href="privacy_policy.html">Privacy Policy</a></div>
+            <div class="footer-bottom"><p>&copy; <span data-current-year>2026</span> ProManaged IT. All rights reserved.</p><a href="privacy_policy.html">Privacy Policy</a></div>
         </div>
     </footer>
 

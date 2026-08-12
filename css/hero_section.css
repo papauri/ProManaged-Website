@@ -1,19 +1,37 @@
-/* hero_section.css — balanced editorial hero with a compact evidence mosaic. */
+/* hero_section.css — the editorial hero and its evidence mosaic.
+
+   MOBILE FIRST. The base rules ARE the 375–430px composition, and it is deliberately
+   art-directed rather than a squashed desktop: a dominant capability block, one tall
+   evidence card, one COMPACT HORIZONTAL evidence card, then the support facts. The
+   two evidence cards are intentionally different shapes so the phone gets rhythm
+   instead of a stack of identical rectangles.
+
+   Composition ladder:
+     base    single column, asymmetric evidence pair
+     560px   evidence pair becomes an equal two-up
+     768px   the visual becomes its own 12-column bento beneath the statement
+     1180px  the balanced 7fr / 5fr desktop split
+     1400px  evidence returns to a two-up inside the 5fr column
+
+   Every visual row sizes intrinsically (`align-content:start` on an auto-row grid),
+   so hero-support can never ride up into the evidence cards. There are no negative
+   margins and no absolute positioning anywhere in the hero composition. */
+
 .hero {
     background: var(--color-graphite);
     color: var(--color-text-on-dark);
-    padding-top: calc(var(--header-h) + var(--section-y));
+    padding-top: calc(var(--header-h) + var(--space-10));
     padding-bottom: var(--section-y);
     position: relative;
+    /* Also the guard rail for the lateral travel in the load choreography. */
     overflow: hidden;
 }
 
 .hero-rail {
     display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: clamp(2.5rem, 4vw, 5rem);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-10);
     align-items: stretch;
-    min-height: clamp(620px, 46vw, 780px);
 }
 
 .hero-statement {
@@ -21,17 +39,16 @@
     flex-direction: column;
     justify-content: center;
     min-width: 0;
-    padding-block: clamp(1rem, 3vw, 4rem);
 }
 
 .hero-eyebrow {
     display: block;
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     font-weight: var(--weight-semibold);
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--color-accent-earth-soft);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-5);
 }
 
 #hero-title {
@@ -41,49 +58,65 @@
     letter-spacing: var(--tracking-display);
     line-height: var(--leading-display);
     color: var(--color-text-on-dark);
-    max-width: 14ch;
-    margin-bottom: var(--space-8);
+    max-width: 15ch;
+    margin-bottom: var(--space-6);
 }
 
 #hero-subtitle {
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     line-height: var(--leading-normal);
     color: var(--color-text-on-dark-muted);
-    max-width: 48ch;
+    max-width: 46ch;
 }
 
+/* Phone: two stacked full-width controls with the label and cue pushed apart, so a
+   stretched button still reads as a designed control. */
 .hero-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-4);
-    margin-top: var(--space-10);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+    margin-top: var(--space-8);
+}
+
+.hero-buttons .btn {
+    justify-content: space-between;
+    text-align: left;
+}
+
+.hero-buttons .btn::after {
+    margin-left: var(--space-4);
 }
 
 .hero-microproof {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3) var(--space-6);
+    flex-direction: column;
+    gap: var(--space-2);
     margin-top: var(--space-8);
-    max-width: 58rem;
 }
 
 .hero-microproof span {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-3);
     font-size: var(--text-xs);
+    line-height: 1.5;
     color: var(--color-text-on-dark-muted);
 }
 
 .hero-microproof i {
+    flex-shrink: 0;
     color: var(--color-accent-earth-soft);
 }
 
+/* ---------- Visual evidence ---------- */
 .hero-visual {
     display: grid;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: minmax(0, 1fr);
+    /* Auto rows + start alignment: rows take their intrinsic height and never
+       stretch into one another, at any viewport width. */
+    grid-auto-rows: auto;
     align-content: start;
-    gap: var(--grid-gap);
+    gap: var(--space-4);
     min-width: 0;
 }
 
@@ -92,15 +125,15 @@
     flex-direction: column;
     justify-content: flex-end;
     min-width: 0;
-    min-height: clamp(270px, 20vw, 360px);
-    padding: clamp(var(--space-8), 3vw, var(--space-12));
+    min-height: 230px;
+    padding: var(--space-6);
     border-radius: var(--radius-lg);
     background: var(--color-accent-earth);
     color: var(--color-text-on-dark);
 }
 
 .hero-feature i {
-    font-size: var(--text-2xl);
+    font-size: var(--text-xl);
     margin-bottom: auto;
     opacity: .9;
 }
@@ -112,7 +145,7 @@
     font-weight: var(--weight-display);
     line-height: .95;
     letter-spacing: var(--tracking-display);
-    margin-top: var(--space-6);
+    margin-top: var(--space-5);
 }
 
 .hero-figure-label {
@@ -125,10 +158,14 @@
     margin-top: var(--space-3);
 }
 
+/* One media height for both evidence cards at every breakpoint. Holding it in a
+   custom property on the grid keeps the pair level: the compact phone card opts out
+   with an aspect-ratio, then opts straight back in. */
 .hero-project-grid {
+    --evidence-media-h: 170px;
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
-    gap: var(--grid-gap);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
     align-items: start;
     min-width: 0;
 }
@@ -138,15 +175,11 @@
     padding: var(--space-5);
     border-radius: var(--radius-lg);
     background: var(--color-graphite-soft);
-    border: 1px solid rgba(247,243,236,.12);
+    border: 1px solid rgba(247, 243, 236, .12);
     color: var(--color-text-on-dark);
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
-}
-
-.hero-project-card--controller {
-    transform: none;
 }
 
 .hero-project-topline {
@@ -161,7 +194,7 @@
 
 .hero-project-media {
     width: 100%;
-    min-height: 150px;
+    min-height: var(--evidence-media-h);
     border-radius: var(--radius);
     overflow: hidden;
     background: #3a3834;
@@ -169,7 +202,6 @@
 }
 
 .hero-project-media--hotel {
-    min-height: 190px;
     background:
         linear-gradient(135deg, rgba(150,80,44,.92), rgba(28,27,25,.4)),
         radial-gradient(circle at 72% 20%, rgba(247,243,236,.42), transparent 28%),
@@ -177,33 +209,33 @@
 }
 
 .hero-project-media--controller {
-    min-height: 190px;
     background:
         radial-gradient(circle at 50% 45%, rgba(37,99,235,.42), transparent 34%),
         linear-gradient(160deg, #202e49 0%, #181a1f 58%, #0e0f11 100%);
 }
 
+.hero-project-copy { display:flex; flex-direction:column; gap:var(--space-2) }
+.hero-project-title { font-size:var(--text-sm); font-weight:var(--weight-semibold); color:var(--color-text-on-dark) }
+.hero-project-desc { font-size:var(--text-xs); line-height:1.45; color:var(--color-text-on-dark-muted) }
+
+/* CSS-drawn interface fragments. No screenshots, no client data — these are
+   illustrative interface motifs, and cost nothing to load. */
 .interface-window {
     position: absolute;
     inset: 14%;
     border: 1px solid rgba(247,243,236,.35);
     border-radius: 12px;
     background: rgba(28,27,25,.28);
-    padding: 14px;
+    padding: 12px;
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     grid-template-rows: auto 1fr 1fr;
-    gap: 8px;
+    gap: 7px;
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
 }
 
-.interface-window span {
-    height: 5px;
-    border-radius: 99px;
-    background: rgba(247,243,236,.65);
-    width: 38%;
-}
-
+.interface-window span { height:5px; border-radius:99px; background:rgba(247,243,236,.65); width:38% }
 .interface-window span:nth-child(2){width:58%}
 .interface-window span:nth-child(3){width:24%}
 .interface-window b{grid-column:1/-1;font-size:9px;letter-spacing:.12em;color:rgba(247,243,236,.8)}
@@ -214,9 +246,9 @@
     inset: 16%;
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    grid-template-rows: 1fr auto auto;
+    grid-template-rows: 1fr auto;
     gap: 8px;
-    padding: 14px;
+    padding: 12px;
     border: 1px solid rgba(247,243,236,.2);
     border-radius: 12px;
     background: rgba(10,12,16,.45);
@@ -225,15 +257,36 @@
 .controller-ui i { border:1px solid rgba(247,243,236,.2); border-radius:7px; background:radial-gradient(circle at 50% 50%,rgba(37,99,235,.38),transparent 55%) }
 .controller-ui b { grid-column:1/2; font-size:9px; color:rgba(247,243,236,.6); letter-spacing:.1em }
 .controller-ui em { grid-column:2/-1; font-size:9px; font-style:normal; color:#8ee0a7; text-align:right; letter-spacing:.08em }
-.hero-project-copy { display:flex; flex-direction:column; gap:var(--space-2) }
-.hero-project-title { font-size:var(--text-sm); font-weight:var(--weight-semibold); color:var(--color-text-on-dark) }
-.hero-project-desc { font-size:var(--text-xs); line-height:1.45; color:var(--color-text-on-dark-muted) }
+
+/* PHONE ART DIRECTION — the second evidence card is a compact horizontal tile, not a
+   copy of the first. Two different shapes give the phone hero its rhythm. */
+.hero-project-card--controller {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    grid-template-areas:
+        "top  top"
+        "media copy";
+    align-items: center;
+    column-gap: var(--space-4);
+    row-gap: var(--space-3);
+}
+
+.hero-project-card--controller .hero-project-topline { grid-area: top }
+.hero-project-card--controller .hero-project-copy { grid-area: copy }
+.hero-project-card--controller .hero-project-media {
+    grid-area: media;
+    min-height: 0;
+    aspect-ratio: var(--ratio-square);
+}
+.hero-project-card--controller .controller-ui { inset:10%; padding:7px; gap:5px; grid-template-rows:1fr }
+.hero-project-card--controller .controller-ui b,
+.hero-project-card--controller .controller-ui em { display:none }
 
 .hero-support {
     display: grid;
-    grid-template-columns: repeat(2,minmax(0,1fr));
-    gap: var(--space-5);
-    padding: clamp(var(--space-6),2.4vw,var(--space-10));
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+    padding: var(--space-6);
     border-radius: var(--radius-lg);
     background: var(--color-graphite-soft);
     border: 1px solid rgba(247,243,236,.14);
@@ -244,32 +297,98 @@
 .hero-support-row i { flex-shrink:0; width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center; color:var(--color-accent-earth-soft); background:rgba(247,243,236,.12); border-radius:var(--radius-sm) }
 .hero-support-text { display:flex; flex-direction:column; min-width:0 }
 .hero-support-title { font-size:var(--text-sm); font-weight:var(--weight-semibold); color:var(--color-text-on-dark) }
-.hero-support-desc { font-size:var(--text-xs); color:var(--color-text-on-dark-muted) }
+.hero-support-desc { font-size:var(--text-xs); line-height:1.45; color:var(--color-text-on-dark-muted) }
 
-@media (min-width:1800px) {
-    .hero-rail { gap:clamp(4rem,5vw,6rem); min-height:clamp(660px,43vw,820px) }
-    .hero-feature { min-height:clamp(300px,20vw,380px) }
-    .hero-project-card { padding:var(--space-6) }
-    .hero-project-media--hotel,.hero-project-media--controller { min-height:210px }
+/* ---------- 560px — the evidence pair becomes an equal two-up ---------- */
+@media (min-width: 560px) {
+    .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-4);
+        margin-top: var(--space-10);
+    }
+
+    .hero-buttons .btn { justify-content:center; text-align:center }
+    .hero-buttons .btn::after { margin-left:-2px }
+
+    .hero-microproof {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--space-3) var(--space-6);
+    }
+
+    .hero-project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+
+    /* Back to a vertical card now that there is width for one. */
+    .hero-project-card--controller {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-4);
+    }
+
+    .hero-project-card--controller .hero-project-media {
+        aspect-ratio: auto;
+        min-height: var(--evidence-media-h);
+    }
+
+    .hero-project-card--controller .controller-ui { inset:16%; padding:12px; gap:8px; grid-template-rows:1fr auto }
+    .hero-project-card--controller .controller-ui b,
+    .hero-project-card--controller .controller-ui em { display:block }
+
+    .hero-support { grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--space-5) }
 }
 
-@media (max-width:1100px) {
-    .hero-rail { grid-template-columns:1fr 1fr; gap:var(--space-10) }
-    .hero-project-grid { grid-template-columns:1fr }
+/* ---------- 768px — the visual becomes its own bento beneath the statement ---------- */
+@media (min-width: 768px) {
+    .hero { padding-top: calc(var(--header-h) + var(--section-y)) }
+    .hero-rail { gap: var(--space-12) }
+
+    #hero-title { max-width: 14ch; margin-bottom: var(--space-8) }
+    #hero-subtitle { font-size: var(--text-xl); max-width: 52ch }
+
+    .hero-visual {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+    }
+
+    /* Dominant block + satellite: the capability statement leads, the support facts
+       sit beside it, and the evidence pair spans the full width below. */
+    .hero-feature { grid-column: span 7; min-height: 280px; padding: var(--space-8) }
+    .hero-support { grid-column: span 5; align-content: center }
+    .hero-project-grid { grid-column: 1 / -1; gap: var(--grid-gap); --evidence-media-h: 180px }
 }
 
-@media (max-width:900px) {
-    .hero-rail { grid-template-columns:1fr; min-height:0; gap:var(--space-10) }
-    .hero-statement { padding-block:0 }
-    .hero-visual { gap:var(--space-6) }
-    .hero-feature { min-height:320px }
+/* ---------- 1180px — the balanced 7fr / 5fr desktop hero ---------- */
+@media (min-width: 1180px) {
+    .hero-rail {
+        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+        gap: clamp(2.5rem, 4vw, 5rem);
+        min-height: clamp(620px, 46vw, 780px);
+    }
+
+    .hero-statement { padding-block: clamp(1rem, 3vw, 4rem) }
+
+    /* Back to a single stacked column inside the narrower 5fr rail. Centred, so the
+       shorter service-page heroes sit level with their statement instead of
+       stranding a block of empty graphite underneath. Rows are still auto-sized, so
+       centring cannot pull one row into another. */
+    .hero-visual { grid-template-columns: minmax(0, 1fr); align-content: center }
+    .hero-feature { grid-column: auto; min-height: clamp(260px, 19vw, 340px) }
+    .hero-support { grid-column: auto; align-content: start }
+    .hero-project-grid { grid-column: auto; grid-template-columns: minmax(0, 1fr); --evidence-media-h: 190px }
 }
 
-@media (max-width:680px) {
-    #hero-subtitle { font-size:var(--text-lg) }
-    .hero-buttons .btn { flex:1 1 100% }
-    .hero-feature,.hero-support,.hero-project-card { padding:var(--space-6) }
-    .hero-project-grid,.hero-support { grid-template-columns:1fr }
-    .hero-feature { min-height:290px }
-    .hero-project-media--hotel,.hero-project-media--controller { min-height:170px }
+/* ---------- 1400px — evidence returns to a two-up inside the 5fr column ---------- */
+@media (min-width: 1400px) {
+    .hero-project-grid { grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr); --evidence-media-h: 180px }
+}
+
+/* ---------- 1800px — more composition, same 1880px rail ---------- */
+@media (min-width: 1800px) {
+    .hero-rail { gap: clamp(4rem, 5vw, 6rem); min-height: clamp(660px, 43vw, 820px) }
+    .hero-feature { min-height: clamp(300px, 20vw, 380px); padding: clamp(var(--space-8), 3vw, var(--space-12)) }
+    .hero-project-card { padding: var(--space-6) }
+    .hero-project-grid { --evidence-media-h: 205px }
+    .hero-support { padding: clamp(var(--space-6), 2.4vw, var(--space-10)) }
 }

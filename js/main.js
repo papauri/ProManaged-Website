@@ -34,6 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const canAnimate = !prefersReducedMotion && 'IntersectionObserver' in window;
+    // Phones get fewer stagger steps and a tighter clock: the same design language,
+    // but the first screen has to resolve quickly on a small viewport.
+    const isCompact = () => window.matchMedia('(max-width: 767px)').matches;
     const UNIT_SELECTOR = [
         '.chapter-head',
         '.grid > .block',
@@ -43,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
         '.booking-grid > *',
         '.faq-container'
     ].join(', ');
-    const MAX_STAGGER_STEPS = 6;
     const cssMs = (name, fallback) => {
         const raw = parseInt(getComputedStyle(document.documentElement).getPropertyValue(name), 10);
         return Number.isFinite(raw) ? raw : fallback;
@@ -51,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const motion = () => ({
         stagger: cssMs('--block-stagger', 90),
         duration: cssMs('--block-duration', 620),
+        maxSteps: isCompact() ? 4 : 6,
     });
     const VARIANTS = {
         'settle-up': { cls: 'block-reveal--up', mult: 1 },
@@ -59,12 +62,11 @@ document.addEventListener("DOMContentLoaded", function () {
         'sequence-in': { cls: 'block-reveal--seq', mult: 1.25 },
     };
     const variantOf = (name) => VARIANTS[name] || VARIANTS['settle-up'];
-    const staggerMs = (index, step) => Math.min(index, MAX_STAGGER_STEPS) * step;
+    const staggerMs = (index, step, maxSteps) => Math.min(index, maxSteps) * step;
 
     const clearMotion = (el) => {
         el.classList.remove('block-reveal', 'is-settled', 'block-reveal--up', 'block-reveal--side', 'block-reveal--scale', 'block-reveal--seq');
         el.style.removeProperty('--block-delay');
-        el.style.removeProperty('--block-index');
     };
 
     const settleGroup = (units, onDone, variantName) => {
@@ -72,29 +74,89 @@ document.addEventListener("DOMContentLoaded", function () {
             if (onDone) onDone();
             return;
         }
-        const { stagger, duration } = motion();
+        const { stagger, duration, maxSteps } = motion();
         const step = Math.round(stagger * variantOf(variantName).mult);
         units.forEach((el, i) => {
-            el.style.setProperty('--block-delay', staggerMs(i, step) + 'ms');
-            el.style.setProperty('--block-index', i);
+            el.style.setProperty('--block-delay', staggerMs(i, step, maxSteps) + 'ms');
             el.classList.add('is-settled');
         });
-        const total = staggerMs(units.length - 1, step) + duration + 180;
+        const total = staggerMs(units.length - 1, step, maxSteps) + duration + 180;
         window.setTimeout(() => {
             units.forEach(clearMotion);
             if (onDone) onDone();
         }, total);
     };
 
+    /* ---------- First-paint block assembly ----------
+       The hero does not fade in as one plane. It assembles in named phases so the
+       interface reads as resolving into place:
+
+         the navigation control  (pure CSS, in global_styles.css — it must never
+                                  depend on this script)
+         the statement           settles first
+         the capability block    lands behind it
+         the evidence cards      arrive in a stagger
+         the support facts       close the visual column
+         the CTAs                resolve last, into their final state
+
+       `gap` is a multiple of --load-stagger measured from the previous phase's
+       start. Phones collapse the gaps and drop the per-card stagger entirely, so the
+       phone hero finishes noticeably sooner without losing the sequence. */
+    const LOAD_PHASES = [
+        { sel: '.hero-statement',    gap: 0,   stagger: false },
+        { sel: '.hero-feature',      gap: 1.7, stagger: false },
+        { sel: '.hero-project-card', gap: 1.0, stagger: true },
+        { sel: '.hero-support',      gap: 1.0, stagger: false },
+        { sel: '.hero-buttons',      gap: 1.3, stagger: false },
+        { sel: '.hero-microproof',   gap: 0.6, stagger: false },
+    ];
+
     const assembleRoot = document.querySelector('[data-assemble]');
     if (assembleRoot) {
-        const heroUnits = [...assembleRoot.querySelectorAll('.hero-statement, .hero-feature, .hero-support')];
-        const release = () => assembleRoot.removeAttribute('data-assemble');
+        const staged = [];
+        // Dropping [data-assemble] retires the whole pre-load stylesheet in one go,
+        // so nothing is left carrying will-change or a stale delay.
+        const release = () => {
+            assembleRoot.removeAttribute('data-assemble');
+            staged.forEach((el) => {
+                el.classList.remove('is-settled');
+                el.style.removeProperty('--block-delay');
+            });
+        };
+
         if (!canAnimate) {
             release();
         } else {
-            requestAnimationFrame(() => requestAnimationFrame(() => settleGroup(heroUnits, release, 'sequence-in')));
-            window.setTimeout(release, 2800);
+            const step = cssMs('--load-stagger', 90);
+            const duration = cssMs('--load-duration', 860);
+            const compact = isCompact();
+            let cursor = 0;
+            let lastDelay = 0;
+
+            LOAD_PHASES.forEach((phase) => {
+                const found = [...assembleRoot.querySelectorAll(phase.sel)];
+                if (!found.length) return;
+                cursor += Math.round(step * phase.gap * (compact ? 0.7 : 1));
+                const perCard = phase.stagger && !compact ? step : 0;
+                found.forEach((el, i) => {
+                    const delay = cursor + i * perCard;
+                    el.style.setProperty('--block-delay', delay + 'ms');
+                    staged.push(el);
+                    if (delay > lastDelay) lastDelay = delay;
+                });
+                cursor += (found.length - 1) * perCard;
+            });
+
+            if (!staged.length) {
+                release();
+            } else {
+                // Two frames: the first paints the pre-load state, the second flips
+                // it. Without this the browser coalesces both and skips the motion.
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    staged.forEach((el) => el.classList.add('is-settled'));
+                }));
+                window.setTimeout(release, lastDelay + duration + 240);
+            }
         }
     }
 
@@ -143,6 +205,12 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll('.block-reveal').forEach(clearMotion);
         }, 7000);
     }
+
+    // The footer year is written into the markup so it is correct without JS, and
+    // refreshed here so it stays correct after the calendar rolls over.
+    document.querySelectorAll('[data-current-year]').forEach((el) => {
+        el.textContent = String(new Date().getFullYear());
+    });
 
     const scrollTopButton = document.createElement('button');
     scrollTopButton.type = 'button';

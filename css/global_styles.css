@@ -24,26 +24,73 @@ p{max-width:var(--measure)}
 .section--graphite p{color:var(--color-text-on-dark-muted)}
 .section--tight{padding-block:calc(var(--section-y)*.62)}
 .section--ruled{border-top:1px solid var(--color-border)}
-.chapter-head{margin-bottom:var(--space-16)}
+.chapter-head{margin-bottom:var(--space-10)}
 .chapter-head--center{text-align:center;margin-inline:auto}
 .chapter-head--center p{margin-inline:auto}
-.eyebrow{display:block;font-family:var(--font-sans);font-size:var(--text-sm);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--color-accent-earth);margin-bottom:var(--space-5)}
+.eyebrow{display:block;font-family:var(--font-sans);font-size:var(--text-xs);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--color-accent-earth);margin-bottom:var(--space-4)}
 .section--graphite .eyebrow,.block--graphite .eyebrow,.block--earth .eyebrow{color:var(--color-accent-earth-soft)}
-.lede{font-size:var(--text-xl);line-height:var(--leading-normal);color:var(--color-text-muted);margin-top:var(--space-6);max-width:var(--measure)}
+.lede{font-size:var(--text-lg);line-height:var(--leading-normal);color:var(--color-text-muted);margin-top:var(--space-5);max-width:var(--measure)}
 .section--graphite .lede{color:var(--color-text-on-dark-muted)}
+
+/* ---------- Block grid ----------
+   MOBILE FIRST: a block owns the full row by default. Column spans are a capability
+   introduced at ≥900px, not a desktop default that phones have to undo. Sections
+   art-direct their own 560–899px composition on top of this base so tablets are a
+   deliberate recomposition rather than either extreme. */
 .grid{display:grid;grid-template-columns:repeat(var(--grid-cols),minmax(0,1fr));gap:var(--grid-gap);align-items:stretch}
-.block{grid-column:span 4;display:flex;flex-direction:column;min-width:0;padding:var(--space-8);border-radius:var(--radius-lg);background:var(--color-paper);border:1px solid var(--color-border);color:var(--color-text);transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition)}
-.block--3{grid-column:span 3}.block--5{grid-column:span 5}.block--6{grid-column:span 6}.block--7{grid-column:span 7}.block--8{grid-column:span 8}.block--9{grid-column:span 9}.block--12{grid-column:span 12}
+.block{grid-column:1/-1;display:flex;flex-direction:column;min-width:0;padding:var(--space-6);border-radius:var(--radius-lg);background:var(--color-paper);border:1px solid var(--color-border);color:var(--color-text);transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition)}
 .block--tint{background:var(--color-accent-earth-soft);border-color:transparent}.block--stone{background:var(--color-stone);border-color:transparent}.block--earth{background:var(--color-accent-earth);border-color:transparent;color:var(--color-text-on-dark)}.block--graphite{background:var(--color-graphite);border-color:transparent;color:var(--color-text-on-dark)}.block--bare{background:transparent;border-color:transparent;padding-inline:0}.block p{color:var(--color-text-muted)}.block h3+p,.block h4+p,.block h2+p{margin-top:var(--space-4)}
-.block--row{flex-direction:row;align-items:flex-start;gap:var(--space-8);padding:var(--space-10)}.block--row>.block__aside{flex-shrink:0}.block__body{min-width:0;display:flex;flex-direction:column;flex:1}.block--interactive{cursor:pointer}.block--interactive:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--color-border-strong)}.block--interactive:focus-visible{outline:2px solid var(--color-accent);outline-offset:3px}
-.mark{flex-shrink:0;width:52px;height:52px;display:inline-flex;align-items:center;justify-content:center;font-size:var(--text-xl);color:var(--color-accent-earth);background:var(--color-accent-earth-soft);border-radius:var(--radius);margin-bottom:var(--space-6)}
-.block--tint>.mark,.block--tint .mark{background:var(--color-paper)}.block--earth .mark,.block--graphite .mark{color:var(--color-text-on-dark);background:rgba(247,243,236,.15)}.block--row>.mark,.block--row .block__aside .mark{width:68px;height:68px;font-size:var(--text-3xl);margin-bottom:0}
-.step-num{display:block;font-family:var(--font-display);font-size:var(--display-3);font-weight:var(--weight-display);letter-spacing:var(--tracking-display);line-height:1;color:var(--color-accent-earth);margin-bottom:var(--space-5)}.section--graphite .step-num,.block--earth .step-num,.block--graphite .step-num{color:var(--color-accent-earth-soft)}
-.process-steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--grid-gap);padding:0;margin:0;counter-reset:step}.process-step{padding-top:var(--space-8);border-top:1px solid var(--color-border);min-width:0}.section--graphite .process-step{border-top-color:rgba(247,243,236,.22)}.process-step h3{font-size:var(--text-xl);margin-bottom:var(--space-4)}.process-step p{color:var(--color-text-muted);max-width:34ch}.section--graphite .process-step p{color:var(--color-text-on-dark-muted)}
+.block--row{gap:var(--space-5)}.block--row>.block__aside{flex-shrink:0}.block__body{min-width:0;display:flex;flex-direction:column;flex:1}.block--interactive{cursor:pointer}.block--interactive:focus-visible{outline:2px solid var(--color-accent);outline-offset:3px}
+@media (hover:hover){.block--interactive:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--color-border-strong)}}
+@media (min-width:768px){
+    .chapter-head{margin-bottom:var(--space-12)}
+    .eyebrow{font-size:var(--text-sm);margin-bottom:var(--space-5)}
+    .lede{font-size:var(--text-xl);margin-top:var(--space-6)}
+    .block{padding:var(--space-8)}
+}
+/* TABLET STAGE — a genuine recomposition, not a waypoint between phone and desktop.
+   Narrow blocks pair up; blocks that are the wide half of an editorial split stay
+   full width. A card left alone at the end of an odd set takes the whole row rather
+   than sitting in a half-empty one. Sections that art-direct their own tablet
+   composition (why_band, service_cards) override these at higher specificity. */
+@media (min-width:600px) and (max-width:899px){
+    .grid>.block--3,.grid>.block--4,.grid>.block--6{grid-column:span 6}
+    .grid>.block--5,.grid>.block--7,.grid>.block--8,.grid>.block--9,.grid>.block--12{grid-column:1/-1}
+    .grid>.block--3:nth-child(odd):last-child,
+    .grid>.block--4:nth-child(odd):last-child,
+    .grid>.block--6:nth-child(odd):last-child{grid-column:1/-1}
+}
+@media (min-width:900px){
+    .block{grid-column:span 4}
+    .block--3{grid-column:span 3}.block--5{grid-column:span 5}.block--6{grid-column:span 6}.block--7{grid-column:span 7}.block--8{grid-column:span 8}.block--9{grid-column:span 9}.block--12{grid-column:span 12}
+    .block--row{flex-direction:row;align-items:flex-start;gap:var(--space-8);padding:var(--space-10)}
+}
+@media (min-width:1024px){.chapter-head{margin-bottom:var(--space-16)}}
+/* Restated AFTER the responsive padding steps above. `padding` is a shorthand, so
+   the ≥768px step would otherwise reinstate the inline padding a bare block must not
+   have, and every bare block would fall out of alignment with the rail. */
+.block--bare{padding-inline:0}
+.mark{flex-shrink:0;width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;font-size:var(--text-lg);color:var(--color-accent-earth);background:var(--color-accent-earth-soft);border-radius:var(--radius);margin-bottom:var(--space-5)}
+@media (min-width:768px){.mark{width:52px;height:52px;font-size:var(--text-xl);margin-bottom:var(--space-6)}}
+.block--tint>.mark,.block--tint .mark{background:var(--color-paper)}.block--earth .mark,.block--graphite .mark{color:var(--color-text-on-dark);background:rgba(247,243,236,.15)}
+@media (min-width:900px){.block--row>.mark,.block--row .block__aside .mark{width:68px;height:68px;font-size:var(--text-3xl);margin-bottom:0}}
+.step-num{display:block;font-family:var(--font-display);font-size:var(--display-3);font-weight:var(--weight-display);letter-spacing:var(--tracking-display);line-height:1;color:var(--color-accent-earth);margin-bottom:var(--space-4)}.section--graphite .step-num,.block--earth .step-num,.block--graphite .step-num{color:var(--color-accent-earth-soft)}
+/* Process: mobile is a numbered ladder, tablet a 2×2, desktop a single row. */
+.process-steps{list-style:none;display:grid;grid-template-columns:1fr;gap:var(--space-8);padding:0;margin:0}.process-step{padding-top:var(--space-6);border-top:1px solid var(--color-border);min-width:0}.section--graphite .process-step{border-top-color:rgba(247,243,236,.22)}.process-step h3{font-size:var(--text-xl);margin-bottom:var(--space-3)}.process-step p{color:var(--color-text-muted);max-width:38ch}.section--graphite .process-step p{color:var(--color-text-on-dark-muted)}
+@media (min-width:560px){.process-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1024px){.process-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--grid-gap)}.process-step{padding-top:var(--space-8)}.process-step p{max-width:34ch}}
 .list{list-style:none;padding:0;margin-top:var(--space-6)}.list li{position:relative;padding:var(--space-2) 0 var(--space-2) var(--space-6);color:var(--color-text-muted);line-height:var(--leading-normal);max-width:var(--measure)}.list li::before{content:"";position:absolute;left:0;top:1.05em;width:12px;height:1px;background:var(--color-accent-earth)}.block--earth .list li::before,.block--graphite .list li::before{background:var(--color-accent-earth-soft)}
 .block--graphite p,.block--graphite li,.block--graphite .list li,.section--graphite .block--bare p,.section--graphite .block--bare li{color:var(--color-text-on-dark-muted)}.block--earth p,.block--earth li,.block--earth .list li,.block--earth h2,.block--earth h3,.block--earth h4,.block--graphite h2,.block--graphite h3,.block--graphite h4{color:var(--color-text-on-dark)}
 
-/* ---------- Canonical CTA / anchor controls ---------- */
+/* ---------- Canonical CTA / anchor controls ----------
+   ONE control family for hero, cards, service pages, forms and footer. The class
+   names (.btn / .primary / .secondary) are canonical and referenced across every
+   page — only the visual language below changes.
+
+   Deliberately not a pill: a softened rectangle plus real depth reads as an
+   engineered control rather than a generic blue capsule. The directional cue is a
+   CSS-drawn chevron in currentColor, so it re-tints itself correctly on every
+   surface without a second set of rules. */
 .btn{
     position:relative;
     isolation:isolate;
@@ -51,93 +98,212 @@ p{max-width:var(--measure)}
     align-items:center;
     justify-content:center;
     gap:var(--space-3);
-    min-height:52px;
-    padding:13px 18px 13px 20px;
+    min-height:54px;
+    padding:15px 22px;
     font-family:var(--font-sans);
-    font-size:var(--text-sm);
+    font-size:.9375rem;
     font-weight:var(--weight-semibold);
-    letter-spacing:-.01em;
-    line-height:1.2;
+    letter-spacing:-.012em;
+    line-height:1.25;
     text-align:center;
     text-decoration:none;
     border:1px solid transparent;
-    border-radius:var(--radius-full);
+    border-radius:var(--radius-control);
     cursor:pointer;
-    overflow:hidden;
+    -webkit-tap-highlight-color:transparent;
     transition:background var(--transition),color var(--transition),border-color var(--transition),transform var(--transition),box-shadow var(--transition);
 }
 
+/* Chevron, not a glyph: font-independent, crisp at every size, and it inherits the
+   button's own colour so dark-surface variants need no extra rule. */
 .btn::after{
-    content:"→";
-    display:inline-grid;
-    place-items:center;
-    width:26px;
-    height:26px;
-    border-radius:50%;
-    font-size:.95rem;
-    line-height:1;
-    transition:transform var(--transition),background var(--transition),color var(--transition);
+    content:"";
+    flex:0 0 auto;
+    width:8px;
+    height:8px;
+    margin-left:-2px;
+    border-top:2px solid currentColor;
+    border-right:2px solid currentColor;
+    border-radius:1px;
+    transform:translateX(0) rotate(45deg);
+    opacity:.8;
+    transition:transform var(--transition),opacity var(--transition);
 }
 
+/* Hover effects are gated on a real pointer: on a touch screen a :hover style
+   sticks to the last-tapped control and reads as a stuck button. Touch devices get
+   the :active press state instead, which is defined outside this gate. */
+@media (hover:hover){
+.btn:hover::after{transform:translateX(4px) rotate(45deg);opacity:1}
+}
+
+/* Primary — brand blue with a lit top edge and a grounded shadow, so it has
+   physical depth instead of a flat wash of colour. */
 .btn.primary{
-    background:var(--color-accent);
+    background:linear-gradient(180deg,#3273f5 0%,var(--color-accent) 52%,#2059d8 100%);
     color:var(--color-accent-contrast);
-    box-shadow:0 8px 24px rgba(37,99,235,.22);
+    border-color:#1f52c9;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 1px 2px rgba(28,27,25,.16),0 12px 24px -14px rgba(30,64,175,.85);
+}
+@media (hover:hover){
+.btn.primary:hover{
+    background:linear-gradient(180deg,#2b68ec 0%,var(--color-accent-hover) 52%,#1b4fca 100%);
+    transform:translateY(-2px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.32),0 2px 4px rgba(28,27,25,.14),0 18px 32px -16px rgba(30,64,175,.9);
+}
+}
+.btn.primary:active{
+    transform:translateY(0);
+    background:var(--color-accent-active);
+    border-color:var(--color-accent-active);
+    box-shadow:inset 0 2px 5px rgba(12,28,72,.5);
 }
 
-.btn.primary::after{background:rgba(255,255,255,.16);color:#fff}
-.btn.primary:hover{background:var(--color-accent-hover);transform:translateY(-2px);box-shadow:0 14px 34px rgba(37,99,235,.28)}
-.btn.primary:hover::after{transform:translateX(3px);background:rgba(255,255,255,.24)}
-.btn.primary:active{background:var(--color-accent-active);transform:translateY(0);box-shadow:none}
-
+/* Secondary — an outlined control on paper. Graphite ink, not a second blue, so the
+   pair reads as a hierarchy rather than two competing buttons. */
 .btn.secondary{
-    background:rgba(255,255,255,.02);
-    color:var(--color-accent-link);
+    background:var(--color-paper);
+    color:var(--color-text);
     border-color:var(--color-border-strong);
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);
+    box-shadow:0 1px 2px rgba(28,27,25,.05);
+}
+@media (hover:hover){
+.btn.secondary:hover{
+    color:var(--color-accent-link);
+    background:var(--color-paper);
+    border-color:var(--color-accent);
+    transform:translateY(-2px);
+    box-shadow:0 12px 26px -14px rgba(28,27,25,.5);
+}
+}
+.btn.secondary:active{
+    transform:translateY(0);
+    background:var(--color-ivory);
+    box-shadow:inset 0 2px 4px rgba(28,27,25,.1);
 }
 
-.btn.secondary::after{background:var(--color-accent-soft);color:var(--color-accent-link)}
-.btn.secondary:hover{background:var(--color-accent-soft);border-color:var(--color-accent);transform:translateY(-2px);box-shadow:0 10px 26px rgba(28,27,25,.08)}
-.btn.secondary:hover::after{transform:translateX(3px);background:var(--color-accent);color:#fff}
-
+/* Dark-surface variant — hero, graphite chapters, earth blocks and the footer. */
 .section--graphite .btn.secondary,
 .block--graphite .btn.secondary,
 .block--earth .btn.secondary,
 .hero .btn.secondary,
 .footer .btn.secondary{
     color:var(--color-text-on-dark);
-    border-color:rgba(247,243,236,.34);
-    background:rgba(247,243,236,.04);
-    box-shadow:inset 0 0 0 1px rgba(247,243,236,.06);
+    border-color:rgba(247,243,236,.3);
+    background:rgba(247,243,236,.06);
+    box-shadow:inset 0 1px 0 rgba(247,243,236,.12);
 }
-.section--graphite .btn.secondary::after,
-.block--graphite .btn.secondary::after,
-.block--earth .btn.secondary::after,
-.hero .btn.secondary::after,
-.footer .btn.secondary::after{background:rgba(247,243,236,.12);color:var(--color-text-on-dark)}
+@media (hover:hover){
 .section--graphite .btn.secondary:hover,
 .block--graphite .btn.secondary:hover,
 .block--earth .btn.secondary:hover,
 .hero .btn.secondary:hover,
-.footer .btn.secondary:hover{border-color:var(--color-text-on-dark);background:rgba(247,243,236,.1);box-shadow:0 10px 26px rgba(0,0,0,.16)}
-.section--graphite .btn.secondary:hover::after,
-.block--graphite .btn.secondary:hover::after,
-.block--earth .btn.secondary:hover::after,
-.hero .btn.secondary:hover::after,
-.footer .btn.secondary:hover::after{background:var(--color-text-on-dark);color:var(--color-graphite)}
+.footer .btn.secondary:hover{
+    color:var(--color-text-on-dark);
+    border-color:rgba(247,243,236,.72);
+    background:rgba(247,243,236,.13);
+    box-shadow:inset 0 1px 0 rgba(247,243,236,.18),0 14px 28px -16px rgba(0,0,0,.9);
+}
+}
+.section--graphite .btn.secondary:active,
+.block--graphite .btn.secondary:active,
+.block--earth .btn.secondary:active,
+.hero .btn.secondary:active,
+.footer .btn.secondary:active{
+    background:rgba(247,243,236,.08);
+    box-shadow:inset 0 2px 5px rgba(0,0,0,.5);
+}
 
-.btn:focus-visible{outline:2px solid var(--color-accent);outline-offset:4px}
+.btn:focus-visible{outline:2px solid var(--color-accent);outline-offset:3px}
 .section--graphite .btn:focus-visible,.hero .btn:focus-visible,.footer .btn:focus-visible{outline-color:var(--color-text-on-dark)}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.55;pointer-events:none}
 
 .btn-row{display:flex;flex-wrap:wrap;gap:var(--space-4);margin-top:var(--space-10)}
 .btn-row--center{justify-content:center}
 .block .btn-row{margin-top:auto;padding-top:var(--space-8)}
 
+/* Phone: a stretched control gets its label and cue pushed apart rather than
+   floating as a small centred cluster in a very wide box. */
+@media (max-width:559px){
+    .btn-row{gap:var(--space-3)}
+    .btn-row .btn{flex:1 1 100%;justify-content:space-between;text-align:left}
+    .btn-row .btn::after{margin-left:var(--space-4)}
+}
+
 a{color:var(--color-accent-link)}
 a:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-radius:var(--radius-sm)}
 .hp-field{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 
-.js-on [data-assemble] .hero-statement,.js-on [data-assemble] .hero-feature,.js-on [data-assemble] .hero-support,.block-reveal{opacity:0;transform:translate3d(0,var(--block-travel),0) scale(var(--block-scale));transition:opacity calc(var(--block-duration)*.7) var(--ease-fade) var(--block-delay,0ms),transform var(--block-duration) var(--ease-settle) var(--block-delay,0ms);will-change:opacity,transform}.block-reveal--up{transform:translate3d(0,var(--block-travel),0) scale(var(--block-scale))}.block-reveal--side{transform:translate3d(calc(var(--block-travel)*-1.15),0,0) scale(var(--block-scale))}.block-reveal--side:nth-child(even){transform:translate3d(calc(var(--block-travel)*1.15),0,0) scale(var(--block-scale))}.block-reveal--scale{transform:scale(var(--block-scale-in))}.block-reveal--seq{transform:translate3d(0,calc(var(--block-travel)*.8),0)}.js-on [data-assemble] .is-settled,.block-reveal.is-settled,.block-reveal--up.is-settled,.block-reveal--side.is-settled,.block-reveal--side:nth-child(even).is-settled,.block-reveal--scale.is-settled,.block-reveal--seq.is-settled{opacity:1;transform:none}
-@media print{.js-on [data-assemble] .hero-statement,.js-on [data-assemble] .hero-feature,.js-on [data-assemble] .hero-support,.block-reveal{opacity:1!important;transform:none!important}}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js-on [data-assemble] .hero-statement,.js-on [data-assemble] .hero-feature,.js-on [data-assemble] .hero-support,.block-reveal{opacity:1!important;transform:none!important;transition:none!important}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
-@media (max-width:900px){.process-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-8)}}@media (max-width:560px){.process-steps{grid-template-columns:1fr}.process-step p{max-width:none}}
+/* ================= BUILDING BLOCKS MOTION =================
+   Two clocks, one easing family, transform + opacity only.
+
+     Phase 1 — first-paint assembly.  The hero units below start hidden and are
+       released in a choreographed order by js/main.js: navigation control, then the
+       statement, then the evidence blocks in a stagger, then the CTAs last.
+     Phase 2 — scroll chapters.  js/main.js adds .block-reveal + a variant class to a
+       group's units as it enters the viewport, once only.
+
+   Both are gated on .js-on, which an inline <head> script adds. A visitor with no
+   JavaScript never sees a hidden composition. A second inline timer adds
+   .load-failsafe, which force-resolves the hero if main.js never got that far. */
+
+/* The navigation control resolves first, and does it in pure CSS so the only
+   navigation affordance on the page can never depend on a script. `backwards` holds
+   the hidden state through the delay; no forwards fill, so :hover still owns
+   transform once the animation has finished. */
+.js-on .nav-trigger{animation:pm-control-in 620ms var(--ease-settle) 120ms backwards}
+@keyframes pm-control-in{from{opacity:0;transform:translate3d(0,-14px,0)}to{opacity:1;transform:none}}
+
+.js-on [data-assemble] .hero-statement,
+.js-on [data-assemble] .hero-feature,
+.js-on [data-assemble] .hero-project-card,
+.js-on [data-assemble] .hero-support,
+.js-on [data-assemble] .hero-buttons,
+.js-on [data-assemble] .hero-microproof{
+    opacity:0;
+    transition:opacity calc(var(--load-duration)*.66) var(--ease-fade) var(--block-delay,0ms),
+               transform var(--load-duration) var(--ease-settle) var(--block-delay,0ms);
+    will-change:opacity,transform;
+}
+
+/* Different depths and directions, so the hero assembles rather than fading in as
+   one plane. The hero clips its own overflow, so the lateral travel cannot widen
+   the page. */
+.js-on [data-assemble] .hero-statement{transform:translate3d(0,calc(var(--load-travel)*.75),0) scale(var(--block-scale))}
+.js-on [data-assemble] .hero-feature{transform:translate3d(calc(var(--load-travel)*.4),calc(var(--load-travel)*1.1),0) scale(var(--block-scale))}
+.js-on [data-assemble] .hero-project-card{transform:translate3d(0,calc(var(--load-travel)*1.3),0) scale(var(--block-scale-in))}
+.js-on [data-assemble] .hero-project-card--controller{transform:translate3d(calc(var(--load-travel)*.45),calc(var(--load-travel)*1.3),0) scale(var(--block-scale-in))}
+.js-on [data-assemble] .hero-support{transform:translate3d(calc(var(--load-travel)*-.45),calc(var(--load-travel)*1.05),0) scale(var(--block-scale))}
+/* The controls travel least — they resolve into place rather than fly in. */
+.js-on [data-assemble] .hero-buttons{transform:translate3d(0,calc(var(--load-travel)*.5),0)}
+.js-on [data-assemble] .hero-microproof{transform:translate3d(0,calc(var(--load-travel)*.4),0)}
+
+.block-reveal{opacity:0;transform:translate3d(0,var(--block-travel),0) scale(var(--block-scale));transition:opacity calc(var(--block-duration)*.7) var(--ease-fade) var(--block-delay,0ms),transform var(--block-duration) var(--ease-settle) var(--block-delay,0ms);will-change:opacity,transform}
+.block-reveal--up{transform:translate3d(0,var(--block-travel),0) scale(var(--block-scale))}
+.block-reveal--side{transform:translate3d(calc(var(--block-travel)*-1.15),0,0) scale(var(--block-scale))}
+.block-reveal--side:nth-child(even){transform:translate3d(calc(var(--block-travel)*1.15),0,0) scale(var(--block-scale))}
+.block-reveal--scale{transform:scale(var(--block-scale-in))}
+.block-reveal--seq{transform:translate3d(0,calc(var(--block-travel)*.85),0)}
+
+.js-on [data-assemble] .is-settled,
+.block-reveal.is-settled,.block-reveal--up.is-settled,.block-reveal--side.is-settled,.block-reveal--side:nth-child(even).is-settled,.block-reveal--scale.is-settled,.block-reveal--seq.is-settled{opacity:1;transform:none}
+
+/* Failsafe — scoped to the hero only, because .block-reveal is added by the same
+   script that removes it, so a dead script simply never hides a chapter. */
+.load-failsafe [data-assemble] .hero-statement,
+.load-failsafe [data-assemble] .hero-feature,
+.load-failsafe [data-assemble] .hero-project-card,
+.load-failsafe [data-assemble] .hero-support,
+.load-failsafe [data-assemble] .hero-buttons,
+.load-failsafe [data-assemble] .hero-microproof{opacity:1;transform:none;transition:none}
+
+@media print{
+    .js-on .nav-trigger{animation:none}
+    .js-on [data-assemble] .hero-statement,.js-on [data-assemble] .hero-feature,.js-on [data-assemble] .hero-project-card,.js-on [data-assemble] .hero-support,.js-on [data-assemble] .hero-buttons,.js-on [data-assemble] .hero-microproof,.block-reveal{opacity:1!important;transform:none!important}
+}
+@media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .js-on .nav-trigger{animation:none}
+    .js-on [data-assemble] .hero-statement,.js-on [data-assemble] .hero-feature,.js-on [data-assemble] .hero-project-card,.js-on [data-assemble] .hero-support,.js-on [data-assemble] .hero-buttons,.js-on [data-assemble] .hero-microproof,.block-reveal{opacity:1!important;transform:none!important;transition:none!important}
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}

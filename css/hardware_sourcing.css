@@ -15,9 +15,12 @@
     margin-top: var(--space-5);
 }
 
-/* This chapter has three steps rather than four. */
-.process-steps--three {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+/* This chapter has three steps rather than four, so it needs its own top of the
+   ladder. The 1-column and 2-column stages come from the shared .process-steps. */
+@media (min-width: 1024px) {
+    .process-steps--three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 }
 
 #track-record h2 {
@@ -44,14 +47,3 @@
     max-width: 60ch;
 }
 
-@media (max-width: 900px) {
-    .process-steps--three {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (max-width: 560px) {
-    .process-steps--three {
-        grid-template-columns: 1fr;
-    }
-}

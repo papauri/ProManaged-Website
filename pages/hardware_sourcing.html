@@ -23,8 +23,9 @@
     <link rel="stylesheet" href="../css/hardware_sourcing.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
          before first paint. Without JS this class is never added, the hiding rule
-         never matches, and all content renders normally. -->
-    <script>document.documentElement.classList.add('js-on');</script>
+         never matches, and all content renders normally. The timer is a failsafe:
+         if main.js never runs the choreography, the hero resolves anyway. -->
+    <script>document.documentElement.classList.add('js-on');setTimeout(function(){document.documentElement.classList.add('load-failsafe');},3000);</script>
 </head>
 
 <body>
@@ -385,18 +386,14 @@
                 </div>
 
                 <div class="footer-newsletter">
-                    <h4>Newsletter</h4>
-                    <p>Occasional notes on what we are building and sourcing. No noise.</p>
-                    <form>
-                        <label for="footer-email" class="visually-hidden">Email address</label>
-                        <input type="email" id="footer-email" placeholder="Enter your email address" aria-label="Email address" required>
-                        <button type="submit">Subscribe</button>
-                    </form>
+                    <h4>Keep in touch</h4>
+                    <p>For new work, sourcing questions or a problem you are not sure how to frame, start with a conversation.</p>
+                    <a class="btn secondary" href="../get-started.html">Talk to ProManaged</a>
                 </div>
             </div>
 
             <div class="footer-bottom rail">
-                <p>&copy; 2026 ProManaged IT. All rights reserved.</p>
+                <p>&copy; <span data-current-year>2026</span> ProManaged IT. All rights reserved.</p>
                 <p>
                     Company Registration Number 749512 &middot;
                     <a href="https://core.cro.ie/e-commerce/company/5379600" target="_blank" rel="noopener">Verify registration</a>

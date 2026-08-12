@@ -1,130 +1,125 @@
 /* why_band.css — homepage chapter 2, "What ProManaged is".
-   The opening spread uses the full visual rail, then moves into a varied proof mosaic
-   so large screens get more evidence rather than more empty background. */
+
+   MOBILE FIRST. The three proof blocks are art-directed on the phone rather than
+   stacked as identical cards: block one is a wide tinted block with its mark beside
+   the copy, block two is a taller plain block, block three is a graphite block with
+   its mark centred against the copy. Different surface, different direction,
+   different height — that is what stops a phone page reading as a list.
+
+   Wider screens turn the same three blocks into a stepped mosaic: unequal spans with
+   rising top offsets, so the row is a composition rather than three boxes in a line. */
 
 .why-grid {
     align-items: start;
-    margin-bottom: var(--section-y);
-}
-
-.why-lead h2 {
-    max-width: 17ch;
-}
-
-.why-lead .eyebrow {
-    margin-bottom: var(--space-6);
-}
-
-.why-note {
-    padding-top: var(--space-3);
+    margin-bottom: var(--space-12);
 }
 
 .why-note p {
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     color: var(--color-text-muted);
     line-height: var(--leading-normal);
 }
 
 .why-note p + p {
-    margin-top: var(--space-5);
+    margin-top: var(--space-4);
 }
 
 .why-facts {
     align-items: start;
 }
 
-.why-fact .mark {
-    background: var(--color-paper);
+/* ---------- Phone art direction ---------- */
+.why-fact {
+    gap: var(--space-5);
 }
 
-.why-evidence-grid {
-    display: grid;
-    grid-template-columns: 1.35fr 0.65fr 0.65fr 1fr;
-    gap: var(--grid-gap);
-    align-items: stretch;
-    margin-top: clamp(2rem, 4vw, 5rem);
-}
-
-.evidence-note {
-    min-width: 0;
-    min-height: 220px;
-    padding: clamp(var(--space-6), 2.2vw, var(--space-10));
-    border-radius: var(--radius-lg);
-    background: var(--color-paper);
-    border: 1px solid var(--color-border);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.evidence-note--statement {
-    min-height: 320px;
+.why-facts .why-fact:nth-child(1) {
+    flex-direction: row;
+    align-items: flex-start;
     background: var(--color-accent-earth-soft);
     border-color: transparent;
 }
 
-.evidence-note--dark {
+.why-facts .why-fact:nth-child(1) .mark {
+    margin-bottom: 0;
+    background: var(--color-paper);
+}
+
+.why-facts .why-fact:nth-child(2) {
+    flex-direction: column;
+    background: var(--color-paper);
+    border-color: var(--color-border);
+    padding-block: var(--space-8);
+}
+
+.why-facts .why-fact:nth-child(3) {
+    flex-direction: row;
+    align-items: center;
     background: var(--color-graphite);
     border-color: transparent;
+}
+
+.why-facts .why-fact:nth-child(3) .mark {
+    margin-bottom: 0;
     color: var(--color-text-on-dark);
+    background: rgba(247, 243, 236, 0.15);
 }
 
-.evidence-note--quote {
-    background: transparent;
-    border-color: var(--color-border-strong);
+.why-facts .why-fact:nth-child(3) h3 { color: var(--color-text-on-dark) }
+.why-facts .why-fact:nth-child(3) p { color: var(--color-text-on-dark-muted) }
+
+/* ---------- Tablet: the tinted block leads, the supporting pair shares a row ----------
+   Written at .grid.why-facts specificity so it beats the generic tablet stage in
+   global_styles.css, which would otherwise give the last of these three blocks the
+   whole row. */
+@media (min-width: 600px) and (max-width: 899px) {
+    .grid.why-facts .why-fact:nth-child(1) {
+        grid-column: 1 / -1;
+    }
+
+    .grid.why-facts .why-fact:nth-child(2),
+    .grid.why-facts .why-fact:nth-child(3) {
+        grid-column: span 6;
+    }
 }
 
-.evidence-kicker {
-    margin-bottom: auto;
-    font-size: var(--text-xs);
-    font-weight: var(--weight-semibold);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--color-accent-earth);
+@media (min-width: 600px) {
+    .why-facts .why-fact:nth-child(3) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .why-facts .why-fact:nth-child(3) .mark {
+        margin-bottom: var(--space-5);
+    }
 }
 
-.evidence-note--dark .evidence-kicker,
-.evidence-note--dark .evidence-label {
-    color: var(--color-accent-earth-soft);
+@media (min-width: 768px) {
+    .why-note p { font-size: var(--text-lg) }
+    .why-note p + p { margin-top: var(--space-5) }
 }
 
-.evidence-note h3 {
-    max-width: 15ch;
-    margin-top: var(--space-8);
-    font-family: var(--font-display);
-    font-size: var(--display-3);
-    font-weight: var(--weight-display);
-    letter-spacing: var(--tracking-display);
-    line-height: var(--leading-tight);
-}
+/* ---------- Desktop: the stepped mosaic ---------- */
+@media (min-width: 900px) {
+    .why-grid { margin-bottom: var(--section-y) }
+    .why-lead h2 { max-width: 17ch }
+    .why-note { padding-top: var(--space-3) }
 
-.evidence-note p {
-    margin-top: var(--space-4);
-    color: var(--color-text-muted);
-}
-
-.evidence-note--dark p {
-    color: var(--color-text-on-dark-muted);
-}
-
-.evidence-value {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 6vw, 7rem);
-    font-weight: var(--weight-display);
-    letter-spacing: var(--tracking-display);
-    line-height: 0.85;
-    margin-bottom: var(--space-5);
-}
-
-.evidence-label {
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    color: var(--color-accent-earth);
-}
-
-@media (min-width: 901px) {
     .why-facts .why-fact:nth-child(1) {
         grid-column: span 5;
+        flex-direction: column;
+        padding: var(--space-10);
+    }
+
+    .why-facts .why-fact:nth-child(1) .mark {
+        margin-bottom: var(--space-6);
+    }
+
+    .why-facts .why-fact:nth-child(1) h3 {
+        font-size: var(--display-3);
+        font-weight: var(--weight-display);
+        letter-spacing: var(--tracking-display);
+        line-height: var(--leading-tight);
     }
 
     .why-facts .why-fact:nth-child(2) {
@@ -135,37 +130,6 @@
     .why-facts .why-fact:nth-child(3) {
         grid-column: span 3;
         margin-top: var(--space-20);
-    }
-
-    .why-facts .why-fact:nth-child(1) {
-        background: var(--color-accent-earth-soft);
-        border-color: transparent;
-        padding: var(--space-10);
-    }
-
-    .why-facts .why-fact:nth-child(1) h3 {
-        font-size: var(--display-3);
-        font-weight: var(--weight-display);
-        letter-spacing: var(--tracking-display);
-        line-height: var(--leading-tight);
-    }
-
-    .why-facts .why-fact:nth-child(3) {
-        background: var(--color-graphite);
-        border-color: transparent;
-    }
-
-    .why-facts .why-fact:nth-child(3) h3 {
-        color: var(--color-text-on-dark);
-    }
-
-    .why-facts .why-fact:nth-child(3) p {
-        color: var(--color-text-on-dark-muted);
-    }
-
-    .why-facts .why-fact:nth-child(3) .mark {
-        color: var(--color-text-on-dark);
-        background: rgba(247, 243, 236, 0.15);
     }
 }
 
@@ -192,110 +156,15 @@
         column-gap: clamp(1.5rem, 2.2vw, 3rem);
     }
 
-    .why-facts .why-fact:nth-child(1) {
-        grid-column: span 5;
-        min-height: 330px;
-    }
+    .why-facts .why-fact:nth-child(1) { min-height: 330px }
 
     .why-facts .why-fact:nth-child(2) {
-        grid-column: span 4;
         min-height: 290px;
         margin-top: clamp(var(--space-8), 4vw, var(--space-12));
     }
 
     .why-facts .why-fact:nth-child(3) {
-        grid-column: span 3;
         min-height: 250px;
         margin-top: clamp(var(--space-16), 7vw, var(--space-24));
-    }
-
-    .why-evidence-grid {
-        grid-template-columns: 1.55fr 0.65fr 0.65fr 1.15fr;
-        min-height: 340px;
-    }
-
-    .evidence-note--statement {
-        min-height: 360px;
-    }
-}
-
-@media (max-width: 900px) {
-    .why-grid {
-        margin-bottom: var(--space-16);
-    }
-
-    .why-lead h2 {
-        max-width: none;
-    }
-
-    .why-note {
-        padding-top: 0;
-    }
-
-    .why-facts .why-fact:nth-child(1) {
-        grid-column: span 12;
-        background: var(--color-accent-earth-soft);
-        border-color: transparent;
-        flex-direction: row;
-        align-items: flex-start;
-        gap: var(--space-6);
-    }
-
-    .why-facts .why-fact:nth-child(1) .mark {
-        margin-bottom: 0;
-        background: var(--color-paper);
-    }
-
-    .why-facts .why-fact:nth-child(2),
-    .why-facts .why-fact:nth-child(3) {
-        grid-column: span 6;
-    }
-
-    .why-evidence-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (max-width: 680px) {
-    .why-facts .why-fact:nth-child(1) {
-        flex-direction: row;
-        padding: var(--space-6);
-    }
-
-    .why-facts .why-fact:nth-child(2) {
-        flex-direction: column;
-        padding-block: var(--space-8);
-    }
-
-    .why-facts .why-fact:nth-child(3) {
-        background: var(--color-graphite);
-        border-color: transparent;
-        flex-direction: row;
-        align-items: center;
-        gap: var(--space-5);
-        padding: var(--space-6);
-    }
-
-    .why-facts .why-fact:nth-child(3) .mark {
-        margin-bottom: 0;
-        color: var(--color-text-on-dark);
-        background: rgba(247, 243, 236, 0.15);
-    }
-
-    .why-facts .why-fact:nth-child(3) h3 {
-        color: var(--color-text-on-dark);
-    }
-
-    .why-facts .why-fact:nth-child(3) p {
-        color: var(--color-text-on-dark-muted);
-    }
-
-    .why-evidence-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .evidence-note,
-    .evidence-note--statement {
-        min-height: 240px;
     }
 }

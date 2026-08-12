@@ -31,29 +31,60 @@
 
 .capability-lede {
     margin-top: var(--space-4);
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     line-height: var(--leading-normal);
 }
 
 /* Build is the lead capability: a full-width graphite banner with a larger headline
-   and a wider text measure than the two supporting capabilities. */
+   and a wider text measure than the two supporting capabilities. Source then takes
+   the tinted surface and Connect stays on paper, so the row is three distinct blocks
+   rather than one dark card and two clones. */
 .capability--lead h3 {
     font-size: var(--display-2);
 }
 
 .capability--lead .capability-lede {
-    font-size: var(--text-xl);
     max-width: 58ch;
 }
 
 .capability--lead .list {
-    columns: 2;
-    column-gap: var(--space-10);
+    columns: 1;
     max-width: 72ch;
 }
 
 .capability--lead .list li {
     break-inside: avoid;
+}
+
+.services-grid .capability:nth-child(2) {
+    background: var(--color-accent-earth-soft);
+    border-color: transparent;
+}
+
+.services-grid .capability:nth-child(2) .mark {
+    background: var(--color-paper);
+}
+
+@media (min-width: 768px) {
+    .capability-lede { font-size: var(--text-lg) }
+    .capability--lead .capability-lede { font-size: var(--text-xl) }
+}
+
+/* Tablet: the two supporting capabilities share a row beneath the lead block.
+   Written at .grid.services-grid specificity so it beats the generic tablet stage in
+   global_styles.css, which would otherwise give Connect — the last block of an odd
+   set — the whole row and break the pair. */
+@media (min-width: 600px) and (max-width: 899px) {
+    .grid.services-grid .capability:not(.capability--lead) {
+        grid-column: span 6;
+    }
+}
+
+@media (min-width: 900px) {
+    .capability--lead .list {
+        columns: 2;
+        column-gap: var(--space-10);
+    }
 }
 
 /* Affordance cue — the whole block is a link (role="link"), so this is a visual
@@ -63,10 +94,14 @@
     align-items: center;
     gap: var(--space-2);
     margin-top: auto;
-    padding-top: var(--space-8);
+    padding-top: var(--space-6);
     font-size: var(--text-sm);
     font-weight: var(--weight-semibold);
     color: var(--color-accent-link);
+}
+
+@media (min-width: 768px) {
+    .capability-cue { padding-top: var(--space-8) }
 }
 
 .block--graphite .capability-cue {
@@ -118,11 +153,5 @@
         max-width: none;
         margin-top: 0;
         align-self: center;
-    }
-}
-
-@media (max-width: 900px) {
-    .capability--lead .list {
-        columns: 1;
     }
 }

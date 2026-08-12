@@ -1,49 +1,135 @@
-/* footer_promanaged.css — canonical footer system. */
+/* footer_promanaged.css — the canonical footer system. Root class is `.footer`.
+
+   MOBILE FIRST: one column, in reading order — who we are, where to go, and one
+   final CTA in a panel of its own so the last thing on the page is an action rather
+   than a list ending in whitespace. Columns are added at 560px and 900px.
+
+   The obsolete `.footer-promanaged` placeholder component is gone: every page now
+   uses the canonical tree, and the compatibility shim it needed was dead code. */
 .footer {
     background: var(--color-graphite);
     color: var(--color-text-on-dark-muted);
-    padding-block: var(--section-y) var(--space-10);
+    padding-block: var(--section-y) var(--space-8);
     position: relative;
 }
-.footer-content { display:grid; grid-template-columns:1.5fr 1fr 1.2fr; gap:clamp(2rem,4vw,5rem); align-items:start; }
-.footer-content h3,.footer-content h4 { font-family:var(--font-sans); font-size:var(--text-sm); font-weight:var(--weight-semibold); letter-spacing:var(--tracking-eyebrow); text-transform:uppercase; color:var(--color-accent-earth-soft); margin-bottom:var(--space-6); }
-.footer-brand p { font-family:var(--font-display); font-size:var(--display-3); font-weight:var(--weight-display); letter-spacing:var(--tracking-display); line-height:var(--leading-tight); color:var(--color-text-on-dark); max-width:22ch; margin-bottom:var(--space-8); }
-.footer-label { display:block; font-size:var(--text-xs); font-weight:var(--weight-semibold); letter-spacing:var(--tracking-eyebrow); text-transform:uppercase; color:var(--color-text-on-dark-muted); margin-bottom:var(--space-3); }
-.footer-contact,.footer-links ul { list-style:none; padding:0; margin:0; }
-.footer-contact a { display:inline-block; padding-block:var(--space-2); color:var(--color-text-on-dark); text-decoration:none; font-size:var(--text-sm); transition:color var(--transition); }
-.footer-contact a:hover,.footer-contact a:focus { color:var(--color-accent-earth-soft); text-decoration:underline; }
-.footer-links a { display:inline-block; padding-block:var(--space-2); color:var(--color-text-on-dark-muted); text-decoration:none; font-size:var(--text-sm); transition:color var(--transition); }
-.footer-links a:hover,.footer-links a:focus { color:var(--color-text-on-dark); }
-.footer-newsletter p { font-size:var(--text-sm); color:var(--color-text-on-dark-muted); line-height:var(--leading-normal); max-width:34ch; margin-bottom:var(--space-5); }
-.footer-newsletter form { display:flex; flex-wrap:wrap; gap:var(--space-3); }
-.footer-newsletter input { flex:1 1 12rem; min-width:0; padding:var(--space-3) var(--space-4); border-radius:var(--radius); border:1px solid rgba(247,243,236,.24); background:var(--color-graphite-soft); color:var(--color-text-on-dark); font-family:var(--font-sans); font-size:var(--text-sm); }
-.footer-newsletter button { padding:var(--space-3) var(--space-6); border:none; border-radius:var(--radius); background:var(--color-accent-earth-soft); color:var(--color-graphite); font-family:var(--font-sans); font-size:var(--text-sm); font-weight:var(--weight-semibold); cursor:pointer; }
-.footer-bottom { display:flex; flex-wrap:wrap; justify-content:space-between; gap:var(--space-3); margin-top:var(--section-y); padding-top:var(--space-6); border-top:1px solid rgba(247,243,236,.16); font-size:var(--text-sm); color:var(--color-text-on-dark-muted); }
-.footer-bottom p { max-width:none; margin:0; }
-.footer-bottom a { color:var(--color-text-on-dark-muted); text-decoration:none; }
-.footer-bottom a:hover,.footer-bottom a:focus { color:var(--color-text-on-dark); }
-.footer-links a:focus-visible,.footer-contact a:focus-visible,.footer-bottom a:focus-visible,.footer-newsletter button:focus-visible { outline:2px solid var(--color-text-on-dark); outline-offset:2px; border-radius:var(--radius-sm); }
 
-/* Temporary compatibility for the homepage placeholder markup. It prevents the footer
-   from disappearing while the page markup is migrated to the canonical .footer tree. */
-.footer-promanaged {
-    display:block;
-    background:var(--color-graphite);
-    color:var(--color-text-on-dark-muted);
-    padding-block:var(--space-12) var(--space-8);
-    border-top:1px solid rgba(247,243,236,.08);
+.footer-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-10);
+    align-items: start;
 }
-.footer-promanaged .rail { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:var(--space-4); }
-.footer-promanaged span { color:var(--color-text-on-dark); font-size:var(--text-sm); font-weight:var(--weight-semibold); }
-.footer-promanaged span + span { color:var(--color-text-on-dark-muted); font-weight:var(--weight-medium); }
 
-@media (max-width:900px) {
-    .footer-content { grid-template-columns:1fr 1fr; gap:var(--space-10); }
-    .footer-brand { grid-column:span 2; }
+.footer-content h3,
+.footer-content h4 {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth-soft);
+    margin-bottom: var(--space-5);
 }
-@media (max-width:680px) {
-    .footer-content { grid-template-columns:1fr; gap:var(--space-10); }
-    .footer-brand { grid-column:span 1; }
-    .footer-bottom { flex-direction:column; }
-    .footer-promanaged .rail { align-items:flex-start; flex-direction:column; }
+
+.footer-brand p {
+    font-family: var(--font-display);
+    font-size: var(--display-3);
+    font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-tight);
+    color: var(--color-text-on-dark);
+    max-width: 22ch;
+    margin-bottom: var(--space-6);
+}
+
+.footer-label {
+    display: block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-text-on-dark-muted);
+    margin-bottom: var(--space-2);
+}
+
+.footer-contact,
+.footer-links ul { list-style: none; padding: 0; margin: 0 }
+
+/* Generous vertical padding: these are the footer's touch targets on a phone. */
+.footer-contact a,
+.footer-links a {
+    display: inline-block;
+    padding-block: var(--space-2);
+    min-height: 40px;
+    text-decoration: none;
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    transition: color var(--transition);
+}
+
+.footer-contact a { color: var(--color-text-on-dark) }
+.footer-contact a:hover, .footer-contact a:focus { color: var(--color-accent-earth-soft); text-decoration: underline }
+.footer-links a { color: var(--color-text-on-dark-muted) }
+.footer-links a:hover, .footer-links a:focus { color: var(--color-text-on-dark) }
+
+/* The final CTA is a panel, not a loose paragraph — it has to close the page. */
+.footer-newsletter {
+    padding: var(--space-6);
+    border: 1px solid rgba(247, 243, 236, .16);
+    border-radius: var(--radius-lg);
+    background: var(--color-graphite-soft);
+}
+
+.footer-newsletter p {
+    font-size: var(--text-sm);
+    color: var(--color-text-on-dark-muted);
+    line-height: var(--leading-normal);
+    max-width: 34ch;
+    margin-bottom: var(--space-5);
+}
+
+.footer-newsletter .btn { width: 100% }
+
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: var(--space-12);
+    padding-top: var(--space-6);
+    border-top: 1px solid rgba(247, 243, 236, .16);
+    font-size: var(--text-sm);
+    color: var(--color-text-on-dark-muted);
+}
+
+.footer-bottom p { max-width: none; margin: 0 }
+.footer-bottom a { color: var(--color-text-on-dark-muted); text-decoration: none }
+.footer-bottom a:hover, .footer-bottom a:focus { color: var(--color-text-on-dark); text-decoration: underline }
+
+.footer-links a:focus-visible,
+.footer-contact a:focus-visible,
+.footer-bottom a:focus-visible {
+    outline: 2px solid var(--color-text-on-dark);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+@media (min-width: 560px) {
+    .footer-content { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-10) }
+    .footer-brand { grid-column: 1 / -1 }
+    .footer-newsletter .btn { width: auto }
+    .footer-bottom {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: var(--space-3) var(--space-6);
+    }
+}
+
+@media (min-width: 900px) {
+    .footer-content { grid-template-columns: 1.5fr 1fr 1.2fr; gap: clamp(2rem, 4vw, 5rem) }
+    .footer-brand { grid-column: auto }
+    .footer-content h3, .footer-content h4 { font-size: var(--text-sm); margin-bottom: var(--space-6) }
+    .footer-newsletter { padding: var(--space-8) }
+    .footer-bottom { margin-top: var(--section-y) }
 }

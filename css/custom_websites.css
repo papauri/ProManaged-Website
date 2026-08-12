@@ -58,15 +58,13 @@
    height is handled here so the script stays a class toggle only. */
 #faq .rail {
     display: grid;
-    grid-template-columns: 4fr 7fr;
-    gap: clamp(2.5rem, 5vw, 6rem);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-10);
     align-items: start;
 }
 
 #faq .chapter-head {
     margin-bottom: 0;
-    position: sticky;
-    top: calc(var(--header-h) + var(--space-8));
 }
 
 .faq-container {
@@ -127,13 +125,17 @@
     padding-bottom: var(--space-6);
 }
 
-@media (max-width: 900px) {
+/* Two columns once there is room: the chapter head holds the left rail while the
+   questions occupy the right, so the accordion fills the wide rail instead of
+   leaving half the page empty. */
+@media (min-width: 901px) {
     #faq .rail {
-        grid-template-columns: 1fr;
-        gap: var(--space-10);
+        grid-template-columns: 4fr 7fr;
+        gap: clamp(2.5rem, 5vw, 6rem);
     }
 
     #faq .chapter-head {
-        position: static;
+        position: sticky;
+        top: calc(var(--header-h) + var(--space-8));
     }
 }

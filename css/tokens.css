@@ -1,5 +1,14 @@
-/* tokens.css — ProManaged IT "Signal & Systems" design system. */
+/* tokens.css — ProManaged IT "Signal & Systems" design system.
+
+   MOBILE FIRST. The :root block below IS the 375–430px composition: its spacing,
+   motion travel and durations are the phone values, not desktop values waiting to be
+   overridden. Every media query in this file is min-width and only ADDS capacity as
+   the viewport earns it. Nothing here is a max-width climb-down.
+
+   The one deliberate exception is --rail-visual, which is a hard ceiling rather than
+   a mobile value: the content rail must never exceed 1880px at any width. */
 :root {
+  /* ---------- Surface + ink ---------- */
   --color-paper: #fffdfa;
   --color-ivory: #f7f3ec;
   --color-stone: #ece5da;
@@ -17,58 +26,135 @@
   --color-text-inverse: #f7f3ec;
   --color-text-on-dark: #f7f3ec;
   --color-text-on-dark-muted: rgba(247,243,236,.74);
+
+  /* Earth is the decorative accent. Blue is reserved for interaction + identity. */
   --color-accent-earth: #96502c;
   --color-accent-earth-hover: #7c4223;
   --color-accent-earth-soft: #f0e4d9;
   --color-accent: #2563eb;
   --color-accent-hover: #1d4ed8;
-  --color-accent-active: #1e40af;
+  --color-accent-active: #1b3fa8;
   --color-accent-link: #1d4ed8;
   --color-accent-soft: #eaf1fe;
   --color-accent-contrast: #fff;
   --color-success: #15803d;
   --color-danger: #b91c1c;
+
+  /* ---------- Type ---------- */
   --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-display: var(--font-primary);
   --font-sans: var(--font-primary);
   --text-xs: .75rem; --text-sm: .875rem; --text-base: 1rem; --text-lg: 1.125rem; --text-xl: 1.25rem; --text-2xl: 1.5rem; --text-3xl: 1.875rem; --text-4xl: 2.25rem; --text-5xl: 3rem;
-  --display-1: clamp(2.75rem,1.35rem + 5.6vw,6rem);
-  --display-2: clamp(2rem,1.3rem + 2.8vw,3.75rem);
-  --display-3: clamp(1.5rem,1.18rem + 1.3vw,2.25rem);
-  --display-figure: clamp(3rem,1.8rem + 4.8vw,5.5rem);
+  --display-1: clamp(2.6rem,1.35rem + 5.6vw,6rem);
+  --display-2: clamp(1.9rem,1.3rem + 2.8vw,3.75rem);
+  --display-3: clamp(1.4rem,1.18rem + 1.3vw,2.25rem);
+  --display-figure: clamp(2.75rem,1.8rem + 4.8vw,5.5rem);
   --tracking-display: -.035em; --tracking-tight: -.015em; --tracking-eyebrow: .1em;
-  --leading-display: 1.04; --leading-tight: 1.16; --leading-normal: 1.62;
+  --leading-display: 1.06; --leading-tight: 1.16; --leading-normal: 1.62;
   --weight-normal: 400; --weight-medium: 500; --weight-semibold: 600; --weight-bold: 700; --weight-display: 800;
   --measure: 62ch; --measure-tight: 46ch; --measure-display: 26ch;
+
+  /* ---------- Space + shape ---------- */
   --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
-  --section-y: clamp(4rem,7vw,8rem);
+  --section-y: clamp(3.5rem,7vw,8rem);
   --radius-sm: 6px; --radius: 10px; --radius-lg: 18px; --radius-full: 9999px;
+  /* Controls are deliberately NOT pills. A softened rectangle reads as an engineered
+     control; a full-radius pill reads as a generic SaaS button. */
+  --radius-control: 13px;
   --shadow-sm: 0 1px 2px rgba(28,27,25,.06),0 2px 6px rgba(28,27,25,.05);
   --shadow-lg: 0 18px 40px rgba(28,27,25,.13),0 4px 12px rgba(28,27,25,.06);
 
-  /* Balanced editorial composition. This is intentionally NOT a full-canvas rail. */
+  /* ---------- Composition (phone base) ----------
+     --rail-visual is a ceiling, not a phone value. Large screens gain composition,
+     never edge-to-edge stretch. */
   --rail-visual: 1880px;
-  --rail-max: var(--rail-visual);
-  --rail-pad: clamp(1.25rem,2.8vw,4.5rem);
-  --grid-gap: clamp(1rem,1.8vw,2.75rem);
+  --rail-pad: 1.125rem;
+  --grid-gap: 1rem;
   --grid-cols: 12;
-  --header-h: 92px;
+  --header-h: 76px;
 
+  /* ---------- Motion (phone base) ----------
+     Two clocks in one easing family:
+       --load-*  drives the first-paint block assembly (hero).
+       --block-* drives the scroll chapter reveals.
+     Phone travel is short and the stagger is tight so the page feels resolved fast;
+     wider viewports lengthen both because there is more composition to assemble. */
   --transition: 160ms cubic-bezier(.4,0,.2,1);
-  --block-duration: 820ms;
-  --block-stagger: 108ms;
-  --block-travel: 34px;
-  --block-scale: .965;
-  --block-scale-in: .92;
-  --block-sequence-mult: 1.25;
-  --block-tilt: .65deg;
-  --ease-settle: cubic-bezier(.16,.86,.24,1.18);
+  --load-duration: 700ms;
+  --load-stagger: 64ms;
+  --load-travel: 18px;
+  --block-duration: 600ms;
+  --block-stagger: 60ms;
+  --block-travel: 16px;
+  --block-scale: .985;
+  --block-scale-in: .962;
+  --ease-settle: cubic-bezier(.16,.86,.24,1.08);
   --ease-fade: cubic-bezier(.16,.72,.24,1);
-  --portrait-size: 260px;
-  --ratio-portrait: 3 / 4; --ratio-square: 1 / 1; --ratio-landscape: 16 / 10; --ratio-panorama: 21 / 9;
+
+  --portrait-size: 172px;
+  --ratio-square: 1 / 1;
 }
-@media (max-width:1440px){:root{--rail-pad:clamp(1.25rem,4vw,3.5rem)}}
-@media (min-width:1800px){:root{--block-duration:900ms;--block-stagger:116ms;--block-travel:38px;--block-scale:.955;--block-scale-in:.90;--grid-gap:clamp(1.5rem,2vw,3rem)}}
-@media (max-width:1024px){:root{--block-travel:24px;--block-stagger:88ms;--block-duration:720ms;--block-scale-in:.94;--portrait-size:210px;--rail-pad:clamp(1.25rem,5vw,3rem)}}
-@media (max-width:768px){:root{--header-h:80px;--block-travel:20px;--block-stagger:72ms;--block-duration:640ms;--block-scale:.975;--block-scale-in:.95}}
-@media (max-width:680px){:root{--block-travel:14px;--block-stagger:56ms;--block-duration:560ms;--block-scale:.985;--block-scale-in:.965;--portrait-size:148px;--rail-pad:1rem;--grid-gap:1rem}}
+
+/* ---------- Large phone ---------- */
+@media (min-width:420px) {
+  :root { --rail-pad:1.25rem; --portrait-size:194px; --load-travel:20px }
+}
+
+/* ---------- Phablet / small tablet ---------- */
+@media (min-width:560px) {
+  :root {
+    --grid-gap:1.25rem;
+    --block-travel:20px; --block-stagger:70ms; --block-duration:650ms;
+    --load-travel:24px; --load-stagger:72ms; --load-duration:750ms;
+    --portrait-size:210px;
+  }
+}
+
+/* ---------- Tablet ---------- */
+@media (min-width:768px) {
+  :root {
+    --header-h:84px;
+    --rail-pad:clamp(1.5rem,4vw,3rem);
+    --grid-gap:clamp(1.25rem,2.2vw,2rem);
+    --block-travel:24px; --block-stagger:84ms; --block-duration:710ms;
+    --block-scale:.976; --block-scale-in:.944;
+    --load-travel:28px; --load-stagger:82ms; --load-duration:810ms;
+    --portrait-size:224px;
+  }
+}
+
+/* ---------- Laptop ---------- */
+@media (min-width:1024px) {
+  :root {
+    --header-h:88px;
+    --block-travel:28px; --block-stagger:96ms; --block-duration:770ms;
+    --block-scale:.97; --block-scale-in:.932;
+    --load-travel:34px; --load-stagger:92ms; --load-duration:860ms;
+    --portrait-size:248px;
+  }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width:1440px) {
+  :root {
+    --header-h:92px;
+    --rail-pad:clamp(2rem,2.8vw,4.5rem);
+    --grid-gap:clamp(1.25rem,1.8vw,2.75rem);
+    --block-travel:34px; --block-stagger:108ms; --block-duration:820ms;
+    --block-scale:.965; --block-scale-in:.92;
+    --load-travel:40px; --load-stagger:104ms; --load-duration:920ms;
+    --ease-settle:cubic-bezier(.16,.86,.24,1.16);
+    --portrait-size:284px;
+  }
+}
+
+/* ---------- Wide desktop ----------
+   More composition and a slower settle. The rail itself does not grow past 1880px. */
+@media (min-width:1800px) {
+  :root {
+    --grid-gap:clamp(1.5rem,2vw,3rem);
+    --block-travel:38px; --block-stagger:116ms; --block-duration:880ms;
+    --load-travel:44px; --load-stagger:112ms; --load-duration:980ms;
+    --portrait-size:320px;
+  }
+}

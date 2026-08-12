@@ -1,43 +1,43 @@
 /* mission_vision.css — homepage chapter 6.
-   A deliberately unequal pair: Mission is the dominant earthy block, Vision flows
-   plainly on the chapter surface rather than becoming a matching second card. */
 
-.pane {
+   A deliberately unequal pair rather than a matched set: Mission is the dominant
+   earth block, Vision flows plainly on the chapter surface beside it. That contrast
+   is the point — two identical bare columns would repeat the editorial split already
+   used by "What ProManaged is" two chapters earlier.
+
+   MOBILE FIRST: the earth block leads the stack and carries its own padding; the
+   bare pane sits directly on the stone chapter surface with none. */
+
+.mission-pane {
     justify-content: center;
-    padding-block: var(--space-12);
 }
 
-.pane.block--earth {
-    padding: var(--space-12) var(--space-10);
+.mission-pane h2 {
+    max-width: 20ch;
 }
 
-.pane-label {
-    display: block;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--color-accent-earth);
-    margin-bottom: var(--space-6);
+.mission-pane .lede {
+    max-width: 44ch;
 }
 
-.block--earth .pane-label {
-    color: var(--color-accent-earth-soft);
+.mission-pane--lead {
+    padding: var(--space-8) var(--space-6);
 }
 
-.pane .pane-text {
-    font-family: var(--font-display);
-    font-size: var(--display-3);
-    font-weight: var(--weight-display);
-    letter-spacing: var(--tracking-display);
-    line-height: var(--leading-tight);
-    color: var(--color-text);
-    max-width: 26ch;
+/* The bare pane keeps a little top breathing room once it is stacked below the
+   earth block, and loses it again when the two sit side by side. */
+.mission-pane.block--bare {
+    padding-block: var(--space-2) 0;
 }
 
-.pane.block--earth .pane-text {
-    color: var(--color-text-on-dark);
+@media (min-width: 900px) {
+    .mission-pane--lead {
+        padding: var(--space-12) var(--space-10);
+    }
+
+    .mission-pane.block--bare {
+        padding-block: var(--space-6);
+    }
 }
 
 /* ---------- Wide desktop ----------
@@ -45,26 +45,11 @@
    editorial pane rather than a large fill with a small statement parked in a corner.
    The statement's own measure is unchanged — this is padding, not line length. */
 @media (min-width: 1600px) {
-    .pane.block--earth {
+    .mission-pane--lead {
         padding: var(--space-16) var(--space-12);
     }
 
-    .pane.block--bare {
+    .mission-pane.block--bare {
         padding-block: var(--space-16);
-    }
-}
-
-@media (max-width: 900px) {
-    .pane,
-    .pane.block--earth {
-        padding: var(--space-8);
-    }
-
-    .pane.block--bare {
-        padding-inline: 0;
-    }
-
-    .pane .pane-text {
-        max-width: none;
     }
 }

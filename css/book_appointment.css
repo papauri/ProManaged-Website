@@ -7,23 +7,24 @@
 
    Form action, field `name` attributes, IDs, labels and the honeypot are untouched. */
 
+/* MOBILE FIRST: the invitation, then the perks, then the board. */
 .booking-grid {
     display: grid;
-    grid-template-columns: 5fr 6fr;
-    gap: clamp(2.5rem, 5vw, 6rem);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-10);
     align-items: start;
 }
 
 .booking-intro h2 {
-    max-width: 16ch;
+    max-width: none;
 }
 
 .booking-intro > p {
     font-size: var(--text-lg);
     color: var(--color-text-on-dark-muted);
     line-height: var(--leading-normal);
-    margin: var(--space-6) 0 var(--space-10);
-    max-width: 44ch;
+    margin: var(--space-5) 0 var(--space-8);
+    max-width: none;
 }
 
 /* ---------- Perks rail ---------- */
@@ -77,20 +78,10 @@
     color: var(--color-text-on-dark-muted);
 }
 
-/* ---------- Tablet / mobile ---------- */
-@media (max-width: 1024px) {
-    .booking-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-10);
-    }
-
-    .booking-intro h2,
-    .booking-intro > p {
-        max-width: none;
-    }
-
-    /* Perks become a two-up row rather than a tall stack, so the form is reachable
-       without a long scroll past three full-width strips. */
+/* ---------- Tablet ----------
+   Perks become a wrapping row rather than a tall stack, so the form is reachable
+   without a long scroll past three full-width strips. */
+@media (min-width: 681px) {
     .booking-perks {
         flex-direction: row;
         flex-wrap: wrap;
@@ -101,7 +92,16 @@
     }
 }
 
-@media (max-width: 680px) {
+/* ---------- Desktop: the intro rail beside the board ---------- */
+@media (min-width: 1025px) {
+    .booking-grid {
+        grid-template-columns: 5fr 6fr;
+        gap: clamp(2.5rem, 5vw, 6rem);
+    }
+
+    .booking-intro h2 { max-width: 16ch }
+    .booking-intro > p { max-width: 44ch; margin: var(--space-6) 0 var(--space-10) }
+
     .booking-perks {
         flex-direction: column;
     }
