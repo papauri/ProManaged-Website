@@ -70,6 +70,7 @@
 }
 
 .block--graphite .proof-tag,
+.block--graphite-soft .proof-tag,
 .block--earth .proof-tag {
     background: rgba(247, 243, 236, 0.16);
     color: var(--color-text-on-dark);
@@ -109,10 +110,19 @@
 .proof-copy h3 { margin: 0 }
 .proof-copy p { margin: 0; font-size: var(--text-sm); line-height: 1.55; color: var(--color-text-muted) }
 .block--graphite .proof-copy p,
+.block--graphite-soft .proof-copy p,
 .block--earth .proof-copy p { color: var(--color-text-on-dark-muted) }
 
 @media (min-width: 900px) {
     .proof-copy p { font-size: var(--text-base) }
+}
+
+/* Links inside a graphite chapter's caption rail: the stock brand blue is too
+   dark against graphite, so the rail uses the chapter's own quiet ink instead. */
+.section--graphite .evidence-rail a {
+    color: var(--color-text-on-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 /* Row banners: the evidence shot rides in the aside beside the copy. The shot
