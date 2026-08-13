@@ -121,7 +121,7 @@ function pm_shell($preheader, $chip, $headline, $bodyHtml) {
     . '</tr></table>'
     . '<p style="margin:4px 0 0 0;font:400 11px/1.4 Arial,Helvetica,sans-serif;'
     . 'letter-spacing:.08em;text-transform:uppercase;color:rgba(247,243,236,.6);">'
-    . 'Build &middot; Source &middot; Connect</p>'
+    . 'Build &middot; Source &middot; Support</p>'
     . '</td></tr>'
 
     // --- Headline + body ---
@@ -136,7 +136,7 @@ function pm_shell($preheader, $chip, $headline, $bodyHtml) {
     . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">'
     . '<tr><td style="border-top:1px solid ' . PM_LINE . ';padding-top:16px;'
     . 'font:400 12px/1.6 Arial,Helvetica,sans-serif;color:' . PM_MUTED . ';">'
-    . 'ProManaged IT &middot; Build, Source, Connect<br>'
+    . 'ProManaged IT &middot; Build, Source, Support<br>'
     . '<a href="mailto:info@promanaged-it.com" style="color:' . PM_BLUE . ';'
     . 'text-decoration:none;">info@promanaged-it.com</a><br>'
     . 'Company Registration Number 749512'
@@ -259,7 +259,7 @@ function pm_customer_email($chip, $headline, $openingLine, array $summary, $expe
         . $closingLine . "\n"
         . "info@promanaged-it.com\n\n"
         . str_repeat('-', 46) . "\n"
-        . "ProManaged IT · Build, Source, Connect\n"
+        . "ProManaged IT · Build, Source, Support\n"
         . "Company Registration Number 749512\n";
 
     return ['html' => $html, 'text' => $text];

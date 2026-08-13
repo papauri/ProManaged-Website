@@ -163,6 +163,14 @@
     color: var(--color-accent-earth-soft);
 }
 
+/* The first-screen fold contract (BUILD_PLAN §2B) has to hold at 375x667, and the
+   microproof is the one hero element that can be shortened without losing a journey
+   answer — so the phone carries two reassurances instead of three. Reappears at
+   560px, where the row goes horizontal and the third costs no vertical space. */
+@media (max-width: 559px) {
+    .hero-microproof span:nth-child(n+3) { display: none }
+}
+
 /* ---------- Visual evidence ---------- */
 .hero-visual {
     display: grid;

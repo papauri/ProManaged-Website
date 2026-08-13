@@ -8,7 +8,17 @@ ProManaged IT is a small, human-led technology studio offering three connected c
 
 - **Build** — custom web apps, SaaS platforms and business websites.
 - **Source** — hardware sourcing, supplier coordination, purchasing, shipping and delivery.
-- **Connect** — network infrastructure, connectivity, WiFi, cabling, security and monitoring.
+- **Support** — everyday IT support: device setup, accounts, email, files, backups and the ordinary faults that stop a working day.
+
+**Build / Source / Support is the canonical public trio.** "Connect" and "Network
+Infrastructure" are retired names and must not appear in public copy, page titles,
+labels, alt text or email templates.
+
+Canonical one-line definitions — the copy seed for every mention of a pillar:
+
+- Build — "We build the software your business runs on — booking systems, internal tools, customer-facing apps."
+- Source — "We find, buy and deliver the computers and equipment you need."
+- Support — "We keep it working — fixes, setups and a person on the phone when it breaks."
 
 The audience is global. Do not frame the company as belonging to one city or country.
 

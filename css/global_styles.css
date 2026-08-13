@@ -384,6 +384,15 @@ a:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-
 .block-reveal--scale{transform:scale(var(--block-scale-in))}
 .block-reveal--seq{transform:translate3d(0,calc(var(--block-travel)*.85),0)}
 
+/* ---------- The calm pace ----------
+   BUILD_PLAN §2B's motion intensity map names three near-absent chapters: the
+   real-proof chapter, contact and the footer. js/main.js drops the per-card stagger
+   to zero for [data-blocks-pace="calm"]; these two tokens are the other half of it —
+   shorter travel and a quicker settle, so the group arrives as one weight and stops.
+   Overriding the tokens rather than the transition keeps every calm chapter on the
+   same easing family and the same release path as the rest of the site. */
+[data-blocks-pace="calm"]{--block-travel:12px;--block-scale:.992;--block-scale-in:.986;--block-duration:520ms}
+
 .js-on:not(.load-failsafe) [data-assemble] .is-settled,
 .block-reveal.is-settled,.block-reveal--up.is-settled,.block-reveal--side.is-settled,.block-reveal--scale.is-settled,.block-reveal--seq.is-settled{opacity:1;transform:none}
 /* Chapter settle timing. Declared on the settled state so the transition runs on the

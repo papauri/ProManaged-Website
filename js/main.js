@@ -101,13 +101,26 @@ document.addEventListener("DOMContentLoaded", function () {
         el.style.setProperty('--dir', fromLeft ? '-1' : '1');
     };
 
-    const settleGroup = (units, onDone, variantName) => {
+    /* ---------- Motion intensity ----------
+       BUILD_PLAN §2B maps how loud each chapter is allowed to be. Most groups are
+       "subtle" and settle card by card. A group marked [data-blocks-pace="calm"] is
+       one of the near-absent chapters — the real-proof chapter, contact, the footer —
+       where the plan asks for ONE quick group settle and no per-card sparkle. The
+       stagger collapses to zero so the whole group arrives as a single weight; the
+       shorter travel and duration are set in CSS on the same attribute.
+
+       This is a pacing dial, not a second motion system: the variant, the easing and
+       the release path are all unchanged, so a calm chapter still clears its classes
+       through exactly the same code as every other one. */
+    const paceOf = (group) => (group && group.dataset.blocksPace) || 'normal';
+
+    const settleGroup = (units, onDone, variantName, pace) => {
         if (!units.length) {
             if (onDone) onDone();
             return;
         }
         const { stagger, duration, maxSteps } = motion();
-        const step = Math.round(stagger * variantOf(variantName).mult);
+        const step = pace === 'calm' ? 0 : Math.round(stagger * variantOf(variantName).mult);
         units.forEach((el, i) => {
             el.style.setProperty('--block-delay', staggerMs(i, step, maxSteps) + 'ms');
             el.classList.add('is-settled');
@@ -255,7 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         if (variant === 'settle-side') applyHinge(el);
                         el.classList.add('block-reveal', variantOf(variant).cls);
                     });
-                    requestAnimationFrame(() => settleGroup(units, null, variant));
+                    requestAnimationFrame(() => settleGroup(units, null, variant, paceOf(group)));
                 }
             });
         };
@@ -272,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (variant === 'settle-side') applyHinge(el);
                     el.classList.add('block-reveal', variantOf(variant).cls);
                 });
-                requestAnimationFrame(() => settleGroup(units, null, variant));
+                requestAnimationFrame(() => settleGroup(units, null, variant, paceOf(entry.target)));
             });
         }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
 

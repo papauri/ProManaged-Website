@@ -14,6 +14,11 @@
     margin-bottom: var(--space-12);
 }
 
+/* The statement chapter no longer carries the fact cards — they answer "why trust
+   them" and now sit beside the founder — so when the grid is the chapter's only
+   content the trailing margin is dead space rather than separation. */
+.why-grid:last-child { margin-bottom: 0 }
+
 .why-note p {
     font-size: var(--text-base);
     color: var(--color-text-muted);
@@ -257,6 +262,7 @@
 /* ---------- Desktop: the stepped mosaic ---------- */
 @media (min-width: 900px) {
     .why-grid { margin-bottom: var(--section-y) }
+    .why-grid:last-child { margin-bottom: 0 }
     .why-lead h2 { max-width: 17ch }
     .why-note { padding-top: var(--space-3) }
 

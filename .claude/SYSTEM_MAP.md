@@ -4,13 +4,20 @@
 
 ## Pages
 
-1. `index.html` — Hero → What ProManaged Is → Build / Source / Connect → How We Work → Founder / Story → Mission / Vision → Contact → Footer.
+1. `index.html` — Hero → What ProManaged Is → Build / Source / Support → Real work → How We Work → Founder / Story → Why us → What you end up with → Contact → Footer.
 2. `get-started.html` — guided intake and booking.
 3. `learn_more.html` — process / expectations.
 4. `privacy_policy.html` — legal page; legal copy is not a design playground.
 5. `pages/custom_websites.html` — Build.
 6. `pages/hardware_sourcing.html` — Source.
-7. `pages/network_infrastructure.html` — Connect.
+7. `pages/it_support.html` — Support.
+
+The canonical public trio is **Build / Source / Support**. `pages/network_infrastructure.html`
+and the "Connect" capability name no longer exist; do not reintroduce either.
+
+The homepage section order follows the journey in `.claude/BUILD_PLAN.md` §2B —
+INTRIGUE → UNDERSTANDING → RELEVANCE → PROOF → TRUST → DESIRE → ACTION — and its
+surfaces alternate so that no two graphite chapters ever sit next to each other.
 
 ## Shared CSS
 
@@ -57,7 +64,17 @@ Anything that offsets content for the fixed rail must add `--nav-float` to `--he
 The pointer layer: the instrument cursor and the card field (pointer-tracked light, lean and traced edge on every surfaced block). Entirely gated behind `.pm-pointer`, which `js/interface_motion.js` adds only for a fine hovering pointer at ≥1024px with no reduced-motion preference. Pure enhancement — nothing here is required for the site to work.
 
 ### `css/footer_promanaged.css`
-Canonical footer component. Root class is `.footer`.
+Canonical footer component. Root class is `.footer`. Every public page carries the
+same tree; only destination-relative hrefs differ.
+
+### Chapter stylesheets
+- `css/why_band.css` — the "What ProManaged IT is" statement and the three trust claims (`.why-facts`, now in `#why-us` beside the founder).
+- `css/service_cards.css` — the Build / Source / Support capability bento.
+- `css/project_proof.css` — real delivered-work evidence: shot wells, the "Delivered work" tag, the compact proof strip.
+- `css/evidence.css` — illustrative, CSS-drawn interface fragments and the evidence rail.
+- `css/pinned_chapter.css` — the sticky "How we work" stepper (index only).
+- `css/mission_vision.css` — the closing outcome statement and its mission/vision beats.
+- `css/contact_section.css`, `css/book_appointment.css`, `css/get-started.css`, `css/learn-more.css`, `css/custom_websites.css`, `css/hardware_sourcing.css`, `css/it_support.css`, `css/privacy_policy.css`, `css/scroll_top.css`, `css/logo.css` — page and component scoped.
 
 ## JavaScript
 
@@ -74,7 +91,18 @@ Motion variants are fixed:
 - `scale-in`;
 - `sequence-in`.
 
+**Pacing.** `data-blocks-pace="calm"` on a `[data-blocks]` group collapses the
+per-card stagger to zero so the chapter settles once, as one weight. It is the motion
+intensity map in `.claude/BUILD_PLAN.md` §2B expressed in markup, and it belongs on
+the near-absent chapters: the real-proof chapter, contact/booking and the footer. The
+matching travel/duration tokens live on the same attribute in `css/global_styles.css`.
+
 Use IntersectionObserver where supported and expose final states for reduced motion/failure cases.
+
+### `js/boot.js`
+The load overture. Loaded synchronously in `<head>` on every page. Not a splash
+screen and has no minimum duration — only a bounded maximum — and its removal is
+armed before the overlay is inserted, so the curtain always lifts.
 
 ### `js/interface_motion.js`
 Three independent, additive modules:

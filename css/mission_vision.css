@@ -20,6 +20,25 @@
     max-width: 44ch;
 }
 
+/* ---------- Supporting beats ----------
+   Mission and vision are no longer the chapter's statement — the outcome line beside
+   them is. They read as two quiet notes: same body size as the rest of the site, the
+   label carried by the bold lead-in rather than by a heading, so the chapter has one
+   headline and not three. */
+.mission-beat {
+    max-width: 46ch;
+    color: var(--color-text-muted);
+    line-height: var(--leading-normal);
+}
+
+.mission-beat + .mission-beat { margin-top: var(--space-4) }
+.mission-beat b { font-weight: var(--weight-semibold); color: var(--color-text) }
+
+@media (min-width: 768px) {
+    .mission-beat { font-size: var(--text-lg) }
+    .mission-beat + .mission-beat { margin-top: var(--space-5) }
+}
+
 .mission-pane--lead {
     padding: var(--space-8) var(--space-6);
 }

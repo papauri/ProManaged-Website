@@ -1,4 +1,4 @@
-/* service_cards.css — homepage chapter 3, "Build / Source / Connect".
+/* service_cards.css — homepage chapter 3, "Build / Source / Support".
    The blocks are the shared component; this file adds the capability numbering, the
    dominant treatment for Build, and the affordance cue. Cards keep the .service-card
    class because js/main.js binds its data-target navigation to it. */
@@ -38,13 +38,13 @@
 /* ---------- The bento ----------
    Was a full-width banner with two equal halves stacked beneath it — three rows of
    one shape, which is a stack with a wide lid rather than a bento. Build is now a
-   TALL block: it takes seven columns and both rows, and Source and Connect stack in
+   TALL block: it takes seven columns and both rows, and Source and Support stack in
    the five columns beside it. Two axes of inequality (width and height) in one figure
    is what makes a composition read as deliberate; one axis reads as a grid that ran
    out of items.
 
    Build also keeps the dominant surface and the largest headline, Source takes the
-   tinted surface and Connect stays on paper — so no two blocks in the chapter share a
+   tinted surface and Support stays on paper — so no two blocks in the chapter share a
    size AND a surface. */
 .capability--lead h3 {
     font-size: var(--display-2);
@@ -80,7 +80,7 @@
 
 /* Tablet: the two supporting capabilities share a row beneath the lead block.
    Written at .grid.services-grid specificity so it beats the generic tablet stage in
-   global_styles.css, which would otherwise give Connect — the last block of an odd
+   global_styles.css, which would otherwise give Support — the last block of an odd
    set — the whole row and break the pair. */
 @media (min-width: 600px) and (max-width: 899px) {
     .grid.services-grid .capability:not(.capability--lead) {
@@ -89,7 +89,7 @@
 }
 
 /* ---------- Desktop: the tall lead ----------
-   Seven columns wide and two rows tall, with Source and Connect stacked in the
+   Seven columns wide and two rows tall, with Source and Support stacked in the
    remaining five. `align-items: stretch` on .grid means the two satellites fill their
    own rows, so the right-hand column reads as one continuous stack against the lead
    rather than two cards floating at different heights. */

@@ -494,7 +494,11 @@
    generic full-screen menu. */
 .nav-panel-lead {
     margin: 0;
-    max-width: 24ch;
+    /* The lead now has to state all three capabilities in one plain sentence
+       (BUILD_PLAN §2B), which is longer than the caption it replaced. 32ch keeps it
+       to three lines on a phone instead of five; the panel scrolls, so the index row
+       below it is still reachable either way. */
+    max-width: 32ch;
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
@@ -652,7 +656,7 @@
 
 /* ---------- Capability tiles ----------
    Build leads (it is the lead capability), so it takes the wider block and a hairline
-   accent rule; Source and Connect pair beneath it. */
+   accent rule; Source and Support pair beneath it. */
 .nav-tile--lead {
     grid-column: 1 / -1;
     min-height: 132px;
