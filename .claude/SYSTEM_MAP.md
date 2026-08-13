@@ -4,7 +4,7 @@
 
 ## Pages
 
-1. `index.html` — Hero → What ProManaged Is → Build / Source / Support → Real work → How We Work → Founder / Story → Why us → What you end up with → Contact → Footer.
+1. `index.html` — Hero → What ProManaged Is → Build / Source / Support → Real work → How We Work → Founder / Story → Why us → The working day after → Contact → Footer.
 2. `get-started.html` — guided intake and booking.
 3. `learn_more.html` — process / expectations.
 4. `privacy_policy.html` — legal page; legal copy is not a design playground.

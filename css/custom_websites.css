@@ -66,6 +66,14 @@
     max-width: var(--measure);
 }
 
+/* ---------- The narrative beat: problem, build, result ----------
+   Three labelled paragraphs rather than a heading per beat, so the panel reads as
+   one continuous account instead of three more mini-cards competing with the real
+   proof shots either side of it. */
+.proof-narrative p + p {
+    margin-top: var(--space-4);
+}
+
 /* ---------- FAQ accordion ----------
    Two columns at desktop: the chapter head holds the left rail while the questions
    occupy the right, so the accordion fills the wide rail instead of leaving half the

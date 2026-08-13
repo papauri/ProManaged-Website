@@ -39,6 +39,38 @@
     .mission-beat + .mission-beat { margin-top: var(--space-5) }
 }
 
+/* ---------- The chapter's own CTA ladder ----------
+   The DESIRE beat is the journey's emotional peak (BUILD_PLAN §2B), so it is also
+   where a visitor who is interested but not ready needs the middle-commitment step
+   right beside the high-commitment one — not three scrolls later in the contact
+   chapter. Same accent as the capability cues elsewhere on the page, restated for
+   the earth surface rather than relying on .capability-cue's graphite override. */
+.mission-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+}
+
+.mission-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-earth-soft);
+}
+
+.mission-cta-link i {
+    transition: transform var(--transition);
+}
+
+.mission-cta-link:hover i,
+.mission-cta-link:focus-visible i {
+    transform: translateX(4px);
+}
+
 .mission-pane--lead {
     padding: var(--space-8) var(--space-6);
 }
