@@ -252,7 +252,7 @@ Homepage canonical order:
 - RELEVANCE — capabilities mapped to problems. Bento allowed and encouraged here.
 - PROOF — real delivered systems (Rosalyn's, Liwonde Sun Hotel). Evidence settles calmly; this chapter is gravity, not sparkle.
 - TRUST — process and founder. A breathing, lower-density chapter.
-- DESIRE — one outcome statement ("a system your team actually uses"), in plain words. No metrics.
+- DESIRE — a vivid after-state statement in plain words ("a system your team actually uses"). This chapter is the emotional peak of the journey: picture the working day once the problem is solved — quiet systems, no workarounds, a person who answers. Aspiration through a concrete after-state, never fabricated metrics. It must not read as the weakest chapter.
 - ACTION — contact/booking. The quietest chapter visually.
 
 ### Comprehension contract
@@ -274,6 +274,21 @@ Homepage canonical order:
 - Subtle: capability cards, founder reveal, evidence detail cards.
 - Near-absent: the real-proof chapter (one quick group settle, no per-card sparkle), contact, footer.
 - Absence of motion in calm chapters is deliberate contrast, not incompleteness. `prefers-reduced-motion` still resolves everything instantly.
+
+### Interest generation without cheapening the brand
+
+Luxury here means craft, evidence and calm — not exclusivity or mystery. Clarity is the bridge between premium and broad appeal; the two are never traded against each other. Broad appeal comes from being easy to understand and easy to start, while every surface keeps Signal & Systems restraint. Four mandatory mechanisms:
+
+1. **Aspiration beat (DESIRE)** — the DESIRE chapter is the emotional peak of the homepage journey. It must picture the after-state concretely (the working day once the system works) without inventing metrics. Aspiration comes from a recognisable outcome, not from numbers, awards or hype language.
+2. **Graduated CTA ladder** — commitment levels must be graduated, not binary:
+   - High commitment: "Start a project" (hero, persistent rail, contact).
+   - Middle step: learn-more positioned as a designed conversion on-ramp, not an information dump — it must end in a clear, inviting next action.
+   - Low commitment: the problem-question cues on capability tiles ("Tell us what keeps breaking.").
+   A first-time visitor who is interested but not ready must always have a welcoming next step.
+3. **Depth over breadth in proof** — only two real projects are approved (Rosalyn's, Liwonde Sun Hotel); proof therefore wins by depth, not volume. One rich narrative beat (problem → build → result-in-words) converts better than several shallow cards. Illustrative UI fragments must never sit at the same visual weight as real proof.
+4. **Pain-first RELEVANCE copy** — the RELEVANCE chapter leads with the visitor's pain, not with ProManaged's taxonomy. Copy must make a first-time visitor recognise their own situation ("that's exactly us") before naming the capability. Capability names follow the pain, never precede it.
+
+These mechanisms are copy and sequencing work. None of them may introduce decoration, urgency pressure, countdown/discount language, stock persuasion patterns, or anything that breaks the Signal & Systems restraint.
 
 ### Real project proof ladder
 - Homepage: one asymmetric proof chapter; the first beat is ONE image + one brand line; "Delivered work" tags separate real proof from illustrative UI.
@@ -642,6 +657,10 @@ Never commit YAML/YML.
 - [ ] Every public page passes the Clarity Contract (Section 2B): plain pillar definitions, no jargon in headings/tags/cues, the 375×667 first-screen fold contract.
 - [ ] Homepage journey follows INTRIGUE → UNDERSTANDING → RELEVANCE → PROOF → TRUST → DESIRE → ACTION; no two graphite chapters adjacent.
 - [ ] Motion presence follows the intensity map; calm chapters are calm by design.
+- [ ] DESIRE chapter reads as the emotional peak of the journey: concrete after-state, no fabricated metrics, not the weakest chapter.
+- [ ] Graduated CTA ladder in place: "Start a project" (high commitment), learn-more as a designed on-ramp ending in a clear next action (middle), problem-question cues (low commitment).
+- [ ] Proof uses depth over breadth: at least one rich problem → build → result-in-words narrative for the approved real projects; illustrative UI never weighted equal to real proof.
+- [ ] RELEVANCE copy is pain-first: a first-time visitor recognises their own situation before capability names appear.
 - [ ] Real project proof ladder in place (homepage beat, Build-page deep dive, get-started reminder, optional learn-more note); no sensitive data visible in any capture.
 - [ ] Capability CTAs use problem-oriented language; exactly one primary per CTA row.
 - [ ] Navigation lead states the three capabilities in one plain sentence; the rail's Menu label is visible; capabilities reachable in ≤2 clicks.
@@ -694,6 +713,7 @@ Priorities:
 5. Mobile-first responsive art direction.
 6. Final polish of founder, CTAs, forms and evidence.
 7. Apply the Clarity Contract and pacing map (Section 2B) throughout: plain-language pillar definitions, jargon placement, the first-screen fold contract, the INTRIGUE → UNDERSTANDING → RELEVANCE → PROOF → TRUST → DESIRE → ACTION order, the motion intensity map, problem-oriented CTAs and the real-project proof ladder. Priorities 1–6 must not break this contract.
+8. Apply the interest-generation mechanisms (Section 2B, "Interest generation without cheapening the brand"): the DESIRE aspiration beat, the graduated CTA ladder with learn-more as a designed on-ramp, depth-over-breadth proof narrative, and pain-first RELEVANCE copy. All four are copy/sequencing work and must not introduce urgency pressure, discount language or stock persuasion patterns.
 
 Use contemporary product-site inspiration at the pattern level where useful, including the visual rhythm and transition approach seen on Markopolo.ai: strong statement, visual proof, alternating detail/evidence blocks, layered interface fragments, and dynamic section pacing. Do NOT copy Markopolo's branding, wording, assets, colours or exact layout.
 
@@ -715,6 +735,7 @@ Before committing:
 - confirm the 375×667 first-screen fold contract (eyebrow + headline + one plain sentence + primary CTA);
 - confirm no two graphite chapters sit adjacent;
 - confirm capability CTAs use the problem-oriented language from Section 2B;
+- confirm the four interest-generation mechanisms are applied (DESIRE aspiration beat, graduated CTA ladder, depth-over-breadth proof, pain-first RELEVANCE copy) and none introduce urgency/discount/stock persuasion patterns;
 - confirm the real project proof ladder is in place and no capture shows personal or operational data;
 - confirm the canonical Build / Source / Support trio is used everywhere (no "Connect" as a public name);
 - confirm mobile-first layouts;
