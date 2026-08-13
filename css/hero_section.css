@@ -51,61 +51,6 @@
     margin-bottom: var(--space-5);
 }
 
-/* ---------- Trust badge ----------
-   A pill above the headline, in the position a "backed by" or "new release" badge
-   normally occupies on a product site. Ours carries the one credential we can
-   actually prove: the company registration, linking to the public register entry
-   already cited in the footer. No award, no metric, no logo wall — if it cannot be
-   verified by clicking it, it does not belong here. */
-.hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-3);
-    align-self: flex-start;
-    max-width: 100%;
-    margin-bottom: var(--space-5);
-    padding: var(--space-2) var(--space-4);
-    border: 1px solid rgba(247, 243, 236, .22);
-    border-radius: var(--radius-full);
-    background: rgba(247, 243, 236, .07);
-    font-size: var(--text-xs);
-    font-weight: var(--weight-medium);
-    line-height: 1.4;
-    color: var(--color-text-on-dark-muted);
-    text-decoration: none;
-    transition: background var(--transition), border-color var(--transition), color var(--transition);
-}
-
-/* A live status dot, not an icon font — it reads as "currently true". */
-.hero-badge::before {
-    content: "";
-    flex-shrink: 0;
-    width: 7px;
-    height: 7px;
-    border-radius: var(--radius-full);
-    background: #8ee0a7;
-    box-shadow: 0 0 0 3px rgba(142, 224, 167, .18);
-}
-
-.hero-badge b { font-weight: var(--weight-semibold); color: var(--color-text-on-dark) }
-
-.hero-badge .hero-badge-cue {
-    flex-shrink: 0;
-    padding-left: var(--space-3);
-    border-left: 1px solid rgba(247, 243, 236, .2);
-    color: var(--color-accent-earth-soft);
-}
-
-@media (hover: hover) {
-    .hero-badge:hover {
-        background: rgba(247, 243, 236, .12);
-        border-color: rgba(247, 243, 236, .42);
-        color: var(--color-text-on-dark);
-    }
-}
-
-.hero-badge:focus-visible { outline: 2px solid var(--color-text-on-dark); outline-offset: 3px }
-
 #hero-title {
     font-family: var(--font-display);
     font-size: var(--display-1);
