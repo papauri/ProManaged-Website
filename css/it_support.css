@@ -1,0 +1,62 @@
+/* it_support.css — page-specific layer only.
+   Chapters, blocks, lists and buttons come from global_styles.css.
+
+   Was networking.css. Two things went with the rename: the price plate
+   (.price-group / .price-info / .service-fee) and the hover class that
+   js/networking.js used to toggle. Both are gone rather than orphaned — the page no
+   longer publishes figures, and the shared pointer layer in css/interaction.css
+   already gives every card its hover treatment, so a page-specific one would have
+   been a second system fighting the first over `transform`. */
+
+.support-note {
+    padding-top: var(--space-3);
+}
+
+.support-note p {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+}
+
+.support-note p + p {
+    margin-top: var(--space-5);
+}
+
+/* The two banner cards carry display-face headings, which is what separates the lead
+   services from the smaller ones in the same grid. */
+.support-grid .block--row h3 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-display);
+    font-size: var(--display-3);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-tight);
+}
+
+.support-grid .block--row > .block__body > p {
+    font-size: var(--text-lg);
+    max-width: 52ch;
+}
+
+/* The compact cards have no lede — they are a heading and a list — so the list needs
+   to start tighter or the card opens with a hole where a paragraph would have been. */
+.support-grid .block:not(.block--row) .service-list {
+    margin-top: var(--space-5);
+}
+
+/* ---------- Tablet ----------
+   The desktop bento runs 7/5, 3/5/4, 5/7 — spans the shared tablet stage in
+   global_styles.css would send to full width one after another, leaving seven stacked
+   bands. Between 600 and 899px the chapter becomes a lead banner, then pairs. */
+@media (min-width: 600px) and (max-width: 899px) {
+    #support-services .grid > .block:first-child {
+        grid-column: 1 / -1;
+    }
+
+    #support-services .grid > .block:not(:first-child) {
+        grid-column: span 6;
+    }
+
+    /* Seven cards means the last one would sit alone in a half-empty row. */
+    #support-services .grid > .block:last-child {
+        grid-column: 1 / -1;
+    }
+}

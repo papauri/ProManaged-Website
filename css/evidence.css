@@ -157,57 +157,80 @@
 .fragment--table i u:last-child { background: rgba(37,99,235,.85) }
 .fragment--table i:nth-child(3) u:last-child { background: rgba(150,80,44,.9) }
 
-/* ---------- Topology: the network, drawn ----------
-   A spine with branch nodes hanging off it. The one fragment that is a diagram
-   rather than a screen, because that is genuinely how connectivity work gets
-   explained on a call. */
-.fragment--topology { grid-template-rows: auto 1fr; padding: 12px }
-.fragment--topology b { display: flex; justify-content: space-between; align-items: center }
-.fragment--topology .topo {
-    position: relative;
+/* ---------- Queue: open support requests ----------
+   Three rows, each a request with a state chip. Two in hand, one closed — the
+   proportion matters: a queue drawn as mostly-done reads as a boast, and a queue
+   drawn as mostly-open reads as a backlog. This is a working afternoon. */
+.fragment--queue { grid-template-rows: auto 1fr; gap: 8px }
+.fragment--queue b { display: flex; justify-content: space-between; align-items: center }
+.fragment--queue .rows { display: grid; grid-auto-rows: 1fr; gap: 6px; align-content: center }
+.fragment--queue .rows s {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-content: center;
-    justify-items: center;
-    gap: 6px;
-}
-/* The spine the branches hang from. */
-.fragment--topology .topo::before {
-    content: "";
-    position: absolute;
-    left: 12%;
-    right: 12%;
-    top: 50%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(247,243,236,.5) 12%, rgba(247,243,236,.5) 88%, transparent);
-}
-.fragment--topology .topo s {
-    position: relative;
-    width: 15px;
-    height: 15px;
-    border-radius: 5px;
-    border: 1px solid rgba(247,243,236,.55);
-    background: rgba(16,16,15,.85);
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(247,243,236,.14);
+    background: rgba(247,243,236,.07);
     text-decoration: none;
 }
-/* The uplink node — the one the others depend on. */
-.fragment--topology .topo s:first-child {
-    border-color: rgba(37,99,235,.95);
-    background: rgba(37,99,235,.42);
-    box-shadow: 0 0 0 3px rgba(37,99,235,.16);
+/* The subject line, standing in for text we are deliberately not inventing. */
+.fragment--queue .rows s u { width: 62% }
+.fragment--queue .rows s:nth-child(2) u { width: 78%; opacity: .72 }
+.fragment--queue .rows s:nth-child(3) u { width: 45%; opacity: .45 }
+/* The state chip. Open work takes the accent; closed work goes quiet rather than
+   green, so the eye lands on what is still live. */
+.fragment--queue .rows s em {
+    padding: 2px 6px;
+    border-radius: 99px;
+    font-size: 6.5px;
+    letter-spacing: .1em;
+    color: rgba(247,243,236,.9);
+    background: rgba(150,80,44,.75);
 }
-.fragment--topology .topo s:nth-child(3) { border-color: rgba(150,80,44,.9); background: rgba(150,80,44,.4) }
-/* Drop lines: each branch node drawn as hanging below the spine. */
-.fragment--topology .topo s::after {
-    content: "";
+.fragment--queue .rows s:nth-child(3) em {
+    background: rgba(247,243,236,.13);
+    color: rgba(247,243,236,.5);
+}
+/* The one being worked on right now. */
+.fragment--queue .rows s:first-child {
+    border-color: rgba(37,99,235,.55);
+    background: rgba(37,99,235,.15);
+}
+
+/* ---------- Session: a remote screen share ----------
+   A window inside a window, with a second cursor in it. That second cursor is the
+   whole point of the fragment: it is what a support session looks like from the
+   visitor's side, and it is why the copy beside it can say nothing happens
+   off-screen. */
+.fragment--session { grid-template-rows: auto 1fr auto; gap: 7px }
+.fragment--session b { display: flex; justify-content: space-between; align-items: center }
+.fragment--session .screen {
+    position: relative;
+    display: grid;
+    grid-template-rows: 7px 1fr 1fr;
+    gap: 5px;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(247,243,236,.2);
+    background: rgba(10,10,9,.6);
+}
+.fragment--session .screen i:first-child { background: rgba(247,243,236,.22); border-color: transparent }
+.fragment--session .screen i:nth-child(2) { background: rgba(247,243,236,.1) }
+.fragment--session .screen i:nth-child(3) { background: rgba(247,243,236,.06) }
+/* The visiting cursor, drawn as a small accent arrow head. */
+.fragment--session .screen s {
     position: absolute;
-    left: 50%;
-    top: 100%;
-    width: 1px;
-    height: 10px;
-    background: rgba(247,243,236,.28);
+    right: 26%;
+    bottom: 24%;
+    width: 0;
+    height: 0;
+    border-left: 6px solid rgba(37,99,235,.95);
+    border-bottom: 9px solid transparent;
+    text-decoration: none;
+    filter: drop-shadow(0 0 3px rgba(37,99,235,.55));
 }
-.fragment--topology .topo s:first-child::after { height: 14px; background: rgba(37,99,235,.55) }
 
 /* ---------- Signal: a link-status readout ---------- */
 .fragment--signal { grid-template-rows: auto 1fr auto; gap: 8px }
@@ -335,9 +358,10 @@
     .evidence-card p { font-size: var(--text-base) }
 
     .fragment--board i { grid-auto-rows: 12px; gap: 6px; padding: 6px }
-    .fragment--topology .topo s { width: 22px; height: 22px; border-radius: 7px }
-    .fragment--topology .topo s::after { height: 16px }
-    .fragment--topology .topo s:first-child::after { height: 22px }
+    .fragment--queue .rows s { padding: 0 10px }
+    .fragment--queue .rows s em { font-size: 7.5px; padding: 3px 7px }
+    .fragment--session .screen { padding: 8px; gap: 6px }
+    .fragment--session .screen s { border-left-width: 8px; border-bottom-width: 12px }
     .fragment--chassis .ports i { width: 30px; height: 14px }
     .fragment--chassis .ports i:last-child { width: 14px }
     .fragment--scope .lines { gap: 11px }
@@ -355,9 +379,8 @@
     .fragment u { height: 6px }
 
     .fragment--board i { grid-auto-rows: 14px; gap: 7px }
-    .fragment--topology .topo s { width: 28px; height: 28px; border-radius: 8px }
-    .fragment--topology .topo s::after { height: 20px }
-    .fragment--topology .topo s:first-child::after { height: 28px }
+    .fragment--queue .rows s em { font-size: 8.5px }
+    .fragment--session .screen s { border-left-width: 9px; border-bottom-width: 14px }
     .fragment--chassis .ports i { width: 36px; height: 16px }
     .fragment--chassis .ports i:last-child { width: 16px }
 }

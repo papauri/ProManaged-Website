@@ -2,3 +2,11 @@
     Order allow,deny
     Deny from all
 </Files>
+
+# Connect / Network Infrastructure became Support / IT Support. The old URL has been
+# live and may be linked or indexed, so it is redirected permanently rather than left
+# to 404. Safe to remove once the old path stops appearing in the access log.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^pages/network_infrastructure\.html$ /pages/it_support.html [R=301,L]
+</IfModule>

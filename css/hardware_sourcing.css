@@ -2,6 +2,51 @@
    Chapters, blocks, process steps, buttons and the enquiry form all come from the
    shared stylesheets. This file only adds the weight the dominant blocks carry. */
 
+/* ---------- Hero close-up ----------
+   The macro keyboard plate. Sized by ASPECT RATIO rather than height so it keeps its
+   proportion as the hero column widens, exactly like .evidence-media does — the two
+   are the same idea at different scales and should not drift apart.
+
+   The SVG uses preserveAspectRatio="slice", so it fills and crops rather than
+   letterboxing: a close-up that letterboxes stops being a close-up. */
+.sourcing-closeup {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: #0a0a09;
+    border: 1px solid rgba(247, 243, 236, .14);
+}
+
+.sourcing-closeup svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* The tag names what the visual is, so the picture is not asked to caption itself. */
+.sourcing-closeup-tag {
+    position: absolute;
+    left: var(--space-4);
+    bottom: var(--space-4);
+    padding: 6px 11px;
+    border-radius: var(--radius-control);
+    background: rgba(10, 10, 9, .66);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(247, 243, 236, .2);
+    font-size: .6875rem;
+    font-weight: var(--weight-semibold);
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--color-text-on-dark);
+}
+
+@media (min-width: 1024px) {
+    .sourcing-closeup { aspect-ratio: 16 / 9 }
+}
+
 .sourcing-note {
     padding-top: var(--space-3);
 }
