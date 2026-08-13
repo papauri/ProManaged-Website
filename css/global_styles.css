@@ -46,8 +46,29 @@ p{max-width:var(--measure)}
 .grid{display:grid;grid-template-columns:repeat(var(--grid-cols),minmax(0,1fr));gap:var(--grid-gap);align-items:stretch}
 .block{grid-column:1/-1;display:flex;flex-direction:column;min-width:0;padding:var(--space-6);border-radius:var(--radius-lg);background:var(--color-paper);border:1px solid var(--color-border);color:var(--color-text);transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition)}
 .block--tint{background:var(--color-accent-earth-soft);border-color:transparent}.block--stone{background:var(--color-stone);border-color:transparent}.block--earth{background:var(--color-accent-earth);border-color:transparent;color:var(--color-text-on-dark)}.block--graphite{background:var(--color-graphite);border-color:transparent;color:var(--color-text-on-dark)}.block--bare{background:transparent;border-color:transparent;padding-inline:0}.block p{color:var(--color-text-muted)}.block h3+p,.block h4+p,.block h2+p{margin-top:var(--space-4)}
-.block--row{gap:var(--space-5)}.block--row>.block__aside{flex-shrink:0}.block__body{min-width:0;display:flex;flex-direction:column;flex:1}.block--interactive{cursor:pointer}.block--interactive:focus-visible{outline:2px solid var(--color-accent);outline-offset:3px}
+.block--row{gap:var(--space-5)}.block--row>.block__aside{flex-shrink:0}.block__body{min-width:0;display:flex;flex-direction:column;flex:1}.block--interactive{cursor:pointer;-webkit-tap-highlight-color:transparent}.block--interactive:focus-visible{outline:2px solid var(--color-accent);outline-offset:3px}
 @media (hover:hover){.block--interactive:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--color-border-strong)}}
+/* Hover never fires on touch, so a whole-card link otherwise gives no feedback at
+   all until the browser navigates away — and no permanent signal that it differs
+   from a static card beside it. The site's own convention for this (see .btn's
+   :active rules) is a press state outside the hover gate; the same idea here, plus
+   a permanent light lift wherever hover can never happen, standing in for what the
+   pointer-tracked card field in interaction.css already gives a mouse. */
+.block--interactive:active{transform:scale(.985)}
+@media not all and (hover:hover){
+    .block--interactive{box-shadow:var(--shadow-sm);border-color:var(--color-border-strong)}
+}
+
+/* ---------- Card cue ----------
+   The always-visible "this card goes somewhere" chip for a whole-card link — the
+   same chip-with-arrow language the navigation panel uses for its own destination
+   cue (.nav-tile-cue), so the two read as one system. Deliberately not a
+   hover-reveal: a mouse gets the pointer-tracked card field in interaction.css as a
+   second signal, but a touch visitor only ever sees what is on the card already. */
+.card-cue{display:inline-flex;align-items:center;gap:var(--space-2);align-self:flex-start;margin-top:auto;padding:var(--space-2) var(--space-4);border-radius:var(--radius-control);background:var(--color-accent-earth-soft);color:var(--color-accent-earth-hover);font-size:var(--text-sm);font-weight:var(--weight-semibold)}
+.block--graphite .card-cue,.block--earth .card-cue{background:rgba(247,243,236,.14);color:var(--color-text-on-dark)}
+.card-cue i{transition:transform var(--transition)}
+@media (hover:hover){.block--interactive:hover .card-cue i,.block--interactive:focus-visible .card-cue i{transform:translateX(4px)}}
 @media (min-width:768px){
     .chapter-head{margin-bottom:var(--space-12)}
     .eyebrow{font-size:var(--text-sm);margin-bottom:var(--space-5)}

@@ -122,9 +122,8 @@
 
     /* And the cue travels with the copy rather than being pushed to the floor by the
        shared `margin-top: auto`, which is what opened the gap in the first place. */
-    .services-grid .capability--lead .capability-cue {
+    .services-grid .capability--lead .card-cue {
         margin-top: var(--space-8);
-        padding-top: 0;
     }
 }
 
@@ -138,35 +137,10 @@
     }
 }
 
-/* Affordance cue — the whole block is a link (role="link"), so this is a visual
-   indicator rather than a nested anchor. */
-.capability-cue {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    margin-top: auto;
-    padding-top: var(--space-6);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    color: var(--color-accent-link);
-}
-
-@media (min-width: 768px) {
-    .capability-cue { padding-top: var(--space-8) }
-}
-
-.block--graphite .capability-cue {
-    color: var(--color-accent-earth-soft);
-}
-
-.capability-cue i {
-    transition: transform var(--transition);
-}
-
-.capability:hover .capability-cue i,
-.capability:focus-visible .capability-cue i {
-    transform: translateX(4px);
-}
+/* The affordance chip itself is the shared .card-cue component in
+   global_styles.css (also used by get-started's start-grid cards), so every
+   whole-card link on the site reads as one system. Nothing capability-specific
+   remains here beyond the lead-card spacing override above. */
 
 /* ---------- Wide desktop ----------
    The lead is no longer a full-width banner, so it no longer needs its body split
