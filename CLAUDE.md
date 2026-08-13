@@ -1,6 +1,6 @@
 # ProManaged IT — Agent Build System
 
-This repo uses an autonomous, token-efficient implementation/review workflow for the Signal & Systems redesign.
+This repo uses an autonomous, token-efficient implementation workflow for the Signal & Systems redesign. Execution runs in self-contained cycles that always complete (implement → self-check → commit → push → report); review is view-only and happens only after delivery, never as an approval gate.
 
 ## Read first
 - `.claude/PROJECT_CONTEXT.md` — current product, audience, design intent and non-goals.

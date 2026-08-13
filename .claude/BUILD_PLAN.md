@@ -142,6 +142,14 @@ The user is the primary visual acceptance gate. They will say what they dislike 
 
 ChatGPT formal review is **optional**, performed only when the user explicitly requests `REVIEW` or asks for a technical/design audit.
 
+### Execution completion contract — no approval gates
+
+- Execution NEVER requires review to proceed. Review is **view-only**: it looks at already-delivered work after delivery. It can never gate, block, delay or interrupt execution.
+- Every execution cycle MUST complete: the full active scope is implemented, self-checked, committed, pushed and reported within the same cycle. No partial delivery parked mid-cycle awaiting approval; no continuation deferred to a review cycle.
+- Self-check replaces external approval. The implementing agent verifies its own work against the Build Plan and the Definition of Done before committing; the full diff inspection is the quality gate.
+- If something genuinely cannot be completed (missing asset, conflicting requirement, external dependency), it is listed under `Blockers` in the final report. `Blockers` is never used as a reason to defer active work that can be done.
+- When the user explicitly requests `REVIEW`, that is an after-the-fact audit of delivered work, not a permission step for upcoming work.
+
 ### Shared acceptance standard
 Before anything is considered finished, the implementing agent must confirm that:
 - mobile-first composition is strong;
@@ -686,6 +694,8 @@ When the user says to implement the build plan, Claude must:
 
 The user will provide subjective feedback after seeing the result. Do not stop implementation waiting for ChatGPT review unless the user explicitly requests a review.
 
+Completion is mandatory: every cycle ends with the full active scope delivered and pushed — never parked mid-cycle for approval. Review is view-only; it happens after delivery and never gates execution (see the Execution completion contract in Section 0).
+
 ## 13. REQUIRED CLAUDE EXECUTION PROMPT
 
 Use a fresh Claude session (`/clear`) and paste:
@@ -702,6 +712,8 @@ Refresh from the LIVE repository first:
 The Build Plan is the implementation instruction.
 
 Implement the entire active build plan in one continuous cycle. Do not wait for a ChatGPT review between steps. Do not stop after token changes, one page, one section, or one animation hook.
+
+Complete the full scope before reporting. Review is view-only and happens after delivery, so never pause mid-cycle to ask for approval. If something genuinely cannot be completed, list it under Blockers; never use review as a reason to defer active work.
 
 The user will judge the rendered result and request further changes after seeing it.
 
