@@ -159,22 +159,30 @@
     line-height: var(--leading-tight);
 }
 
-/* Once the lead card sits BESIDE a supporting one, `.grid`'s stretch alignment gives
-   both the same height — and the lead carries one line of copy where its neighbour
-   carries a paragraph. A fixed aspect ratio would leave that difference as dead space
-   under the image, so here the well absorbs it instead: the shot takes the slack and
-   the card closes on its brand line. The image already fills the well
-   (height:100% + object-fit:cover), so nothing is distorted by the extra height.
+/* Once these cards sit SIDE BY SIDE, `.grid`'s stretch alignment gives them a shared
+   height that neither one's content asked for. Left on a fixed aspect ratio the wells
+   go wrong in both directions: the lead (one brand line) strands dead space under its
+   image, and the supporting card's paragraph pushes past the shared height and
+   SHRINKS its well instead — measured at 900px, the supporting shot collapsed to
+   120px against the lead's 380px, which crops a 1425x800 hero to a letterbox strip.
 
-   Only from 900px. Below that the cards are stacked and full width, the row is not
-   stretching anything, and the native ratio is the right shape. */
+   So the wells absorb the difference rather than the copy fighting them: each grows
+   into whatever slack its card has (`flex-grow: 1`) and none may be compressed below
+   its floor (`flex-shrink: 0`). The image already fills the well via height:100% +
+   object-fit:cover, so the extra height crops rather than distorts.
+
+   Only from 900px. Below that the cards are stacked and full width, nothing is being
+   stretched, and the native ratio is the right shape. */
 @media (min-width: 900px) {
-    .proof-card--lead .proof-shot--hero {
-        flex: 1 1 auto;
+    #proof .proof-card .proof-shot--hero {
+        flex: 1 0 auto;
         aspect-ratio: auto;
-        min-height: 380px;
+        min-height: 260px;
         max-height: none;
     }
+
+    /* The lead beat carries the larger image; it is the chapter's first statement. */
+    #proof .proof-card--lead .proof-shot--hero { min-height: 380px }
 }
 
 /* ---------- Tablet art direction for the homepage chapter ----------
