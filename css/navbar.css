@@ -184,9 +184,10 @@
    to its left, and two identical logos in one rail reads as a bug. */
 .nav-wordmark {
     justify-self: center;
+    font-family: var(--font-mono);
     font-size: var(--text-sm);
-    font-weight: var(--weight-display);
-    letter-spacing: .16em;
+    font-weight: var(--weight-semibold);
+    letter-spacing: .04em;
     text-transform: uppercase;
     text-decoration: none;
     white-space: nowrap;
@@ -306,7 +307,7 @@
 /* The wordmark reappears here (see the max-width step above), so its display size
    belongs here too rather than at 600px where it is no longer rendered. */
 @media (min-width: 768px) {
-    .nav-wordmark { font-size: var(--text-base); letter-spacing: .18em }
+    .nav-wordmark { font-size: var(--text-base); letter-spacing: .05em }
 }
 
 /* ---------- Blended over the hero ----------
@@ -429,9 +430,10 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-3);
+    font-family: var(--font-mono);
     font-size: var(--text-xs);
     font-weight: var(--weight-semibold);
-    letter-spacing: var(--tracking-eyebrow);
+    letter-spacing: .04em;
     text-transform: uppercase;
     color: var(--color-accent-earth-soft);
 }
@@ -443,7 +445,7 @@
    it — a plate reads as a white sticker on the graphite and is the one thing in the
    panel that would not belong to it. */
 .nav-panel-brand img {
-    height: 28px;
+    height: 36px;
     width: auto;
     background: none;
     filter: brightness(0) invert(1);
@@ -739,7 +741,7 @@
     .nav-panel-rail { padding-block: var(--space-6) var(--space-12); gap: var(--space-6) }
     .nav-bento { gap: var(--grid-gap) }
     .nav-panel-brand { font-size: var(--text-sm) }
-    .nav-panel-brand img { height: 32px }
+    .nav-panel-brand img { height: 44px }
     .nav-panel-lead { max-width: 40ch }
 
     .nav-tile { min-height: 124px; padding: var(--space-6) }

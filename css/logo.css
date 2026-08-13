@@ -2,7 +2,7 @@
    The logo lives in the navigation trigger tile (see navbar.css) and in the open
    panel's brand row. One size ramp, every page, every breakpoint. */
 .logo {
-    height: 40px;
+    height: 52px;
     width: auto;
     object-fit: contain;
     display: block;
@@ -10,12 +10,12 @@
 
 @media (max-width: 900px) {
     .logo {
-        height: 36px;
+        height: 44px;
     }
 }
 
 @media (max-width: 600px) {
     .logo {
-        height: 32px;
+        height: 40px;
     }
 }

@@ -44,6 +44,9 @@
   --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-display: var(--font-primary);
   --font-sans: var(--font-primary);
+  /* Reserved for the brand mark only — the wordmark beside the logo. Not a second
+     body typeface: headings, copy, buttons and forms stay on --font-primary. */
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   --text-xs: .75rem; --text-sm: .875rem; --text-base: 1rem; --text-lg: 1.125rem; --text-xl: 1.25rem; --text-2xl: 1.5rem; --text-3xl: 1.875rem; --text-4xl: 2.25rem; --text-5xl: 3rem;
   --display-1: clamp(2.6rem,1.35rem + 5.6vw,6rem);
   --display-2: clamp(1.9rem,1.3rem + 2.8vw,3.75rem);
