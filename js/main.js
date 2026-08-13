@@ -138,8 +138,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
          the navigation control  (pure CSS, in global_styles.css — it must never
                                   depend on this script)
-         the statement           settles first
-         the capability block    lands behind it
+         the eyebrow             leads, lightest and quickest
+         the headline            settles with the most weight of any beat in the
+                                  hero — the moment that should read as deliberate
+         the subheadline         catches up a step behind it
+         the capability block    lands behind the statement
          the evidence cards      arrive in a stagger
          the support facts       close the visual column
          the CTAs                resolve last, into their final state
@@ -148,12 +151,14 @@ document.addEventListener("DOMContentLoaded", function () {
        start. Phones collapse the gaps and drop the per-card stagger entirely, so the
        phone hero finishes noticeably sooner without losing the sequence. */
     const LOAD_PHASES = [
-        { sel: '.hero-statement',    gap: 0,   stagger: false },
-        { sel: '.hero-feature',      gap: 1.7, stagger: false },
-        { sel: '.hero-project-card', gap: 1.0, stagger: true },
-        { sel: '.hero-support',      gap: 1.0, stagger: false },
-        { sel: '.hero-buttons',      gap: 1.3, stagger: false },
-        { sel: '.hero-microproof',   gap: 0.6, stagger: false },
+        { sel: '.hero-eyebrow',      gap: 0,   stagger: false },
+        { sel: '#hero-title',        gap: 0.5, stagger: false },
+        { sel: '#hero-subtitle',     gap: 0.5, stagger: false },
+        { sel: '.hero-feature',      gap: 1.0, stagger: false },
+        { sel: '.hero-project-card', gap: 0.9, stagger: true },
+        { sel: '.hero-support',      gap: 0.9, stagger: false },
+        { sel: '.hero-buttons',      gap: 1.0, stagger: false },
+        { sel: '.hero-microproof',   gap: 0.5, stagger: false },
     ];
 
     const assembleRoot = document.querySelector('[data-assemble]');
