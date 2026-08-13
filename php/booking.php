@@ -24,7 +24,7 @@ if ($name === '' || $email === '' || $service === '' || $date === '' || $time ==
 
 // The service field is a controlled select. Reject anything outside the values
 // the public form actually offers instead of silently rewriting attacker input.
-$allowedServices = ['Software & Web Apps', 'Network Infrastructure', 'Hardware Sourcing'];
+$allowedServices = ['Software & Web Apps', 'IT Support', 'Hardware Sourcing'];
 if (!in_array($service, $allowedServices, true)) {
     pm_respond(400, false, 'Please choose a valid service.');
 }

@@ -27,7 +27,7 @@ if ($name === '' || $email === '' || $phone === '' || $message === '') {
 $allowedTypes = [
     'Hardware sourcing'    => 'Hardware request',
     'Software & web apps'  => 'Software enquiry',
-    'Network infrastructure' => 'Network enquiry',
+    'IT support'           => 'Support request',
 ];
 $submittedType = pm_clean_line($_POST['enquiry_type'] ?? '', 60);
 $enquiryType = $allowedTypes[$submittedType] ?? 'Website enquiry';
