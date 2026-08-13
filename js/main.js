@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         '.about-grid > *',
         '.contact-grid > *',
         '.booking-grid > *',
+        '.proof-strip > *',
         '.faq-container',
         '.privacy-section',
         '.evidence-rail > div',
