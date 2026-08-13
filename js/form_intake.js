@@ -49,10 +49,28 @@
         if (msg) msg.textContent = messageFor(input);
     }
 
+    /* Read the endpoint's reply. The PHP endpoints answer with
+       {ok, message}; the plain-text fallback keeps an older cached endpoint (or
+       a server error page) from being shown to the visitor as raw JSON. */
+    async function readMessage(response) {
+        const raw = await response.text();
+        try {
+            const data = JSON.parse(raw);
+            if (data && typeof data.message === 'string') return data.message;
+        } catch (err) {
+            /* Not JSON — fall through to the raw body. */
+        }
+        // Never surface a server error page; those carry markup, not a sentence.
+        return /<[a-z!/]/i.test(raw) ? '' : raw.trim();
+    }
+
     function init(form) {
         if (!form) return;
 
-        const feedback = document.querySelector('#form-feedback');
+        // Scoped to the form's own section first so a page with more than one
+        // intake board cannot write every result into the same live region.
+        const feedback = (form.closest('section, [id$="-section"]') || document)
+            .querySelector('#form-feedback') || document.querySelector('#form-feedback');
         // The honeypot must never be validated or focused — it is meant to stay empty.
         const inputs = [...form.elements].filter(
             (el) => el.name && el.name !== 'website' && typeof el.checkValidity === 'function'
@@ -60,6 +78,14 @@
 
         // Take over validation now that we can render it inline.
         form.noValidate = true;
+
+        // Stop a date in the past being picked at all. The server rejects one
+        // regardless; this keeps the picker from offering it in the first place.
+        form.querySelectorAll('input[type="date"]:not([min])').forEach((input) => {
+            const now = new Date();
+            const pad = (n) => String(n).padStart(2, '0');
+            input.min = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+        });
 
         inputs.forEach((input) => {
             // Validate on blur, but only re-validate live once a field has already
@@ -113,16 +139,20 @@
                     body: new FormData(form),
                 });
 
+                const message = await readMessage(response);
+
                 if (response.ok) {
                     form.classList.add('is-sent');
                     setFeedback(form.dataset.successMessage
+                        || message
                         || 'Thank you — your message is with us and we will come back to you.', 'is-success');
                     form.reset();
-                    if (feedback) feedback.setAttribute('tabindex', '-1');
-                    if (feedback) feedback.focus();
+                    if (feedback) {
+                        feedback.setAttribute('tabindex', '-1');
+                        feedback.focus();
+                    }
                 } else {
-                    const text = await response.text();
-                    setFeedback(text || 'Something went wrong. Please try again.', 'is-error');
+                    setFeedback(message || 'Something went wrong. Please try again.', 'is-error');
                 }
             } catch (err) {
                 setFeedback('We could not reach the server. Please try again, or email us directly.', 'is-error');

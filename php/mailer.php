@@ -267,33 +267,164 @@ function pm_customer_email($chip, $headline, $openingLine, array $summary, $expe
 
 /* ---------------------------------------------------------------------------
  * Transport.
- * $body may be a plain string (legacy plain-text call) or an
- * ['html' => ..., 'text' => ...] pair from the template helpers above.
  * ------------------------------------------------------------------------ */
-function sendSiteMail($toEmail, $subject, $body, $replyToEmail, $replyToName) {
+
+/**
+ * Resolve and validate SMTP settings from the environment.
+ * Returns null (and logs which keys are missing) rather than half-configuring a
+ * connection that would fail later with an opaque socket error.
+ *
+ * Nothing here is ever echoed; SMTP_PASS is not logged, not returned in any
+ * error path, and not written to the response.
+ */
+function pm_smtp_config() {
     loadEnv(__DIR__ . '/../.env');
 
+    $config = [
+        'host' => pm_env('SMTP_HOST'),
+        'user' => pm_env('SMTP_USER'),
+        'pass' => pm_env('SMTP_PASS'),
+        'port' => pm_env('SMTP_PORT'),
+        'secure' => pm_env('SMTP_SECURE'),
+    ];
+
+    $missing = [];
+    foreach (['host', 'user', 'pass'] as $required) {
+        if ($config[$required] === null || $config[$required] === '') {
+            $missing[] = 'SMTP_' . strtoupper($required);
+        }
+    }
+    if ($missing) {
+        // Names only — never the values.
+        error_log('ProManaged mail: missing SMTP configuration (' . implode(', ', $missing) . ').');
+        return null;
+    }
+
+    $config['port'] = (int) $config['port'];
+    if ($config['port'] <= 0 || $config['port'] > 65535) {
+        $config['port'] = 465;
+    }
+
+    // Normalise the encryption mode. A stray "SSL", "SMTPS" or trailing space in
+    // .env would otherwise leave SMTPSecure set to a value PHPMailer does not
+    // recognise, which silently drops the connection to plaintext.
+    $secure = strtolower(trim((string) $config['secure']));
+    if ($secure === 'smtps' || $secure === 'implicit') {
+        $secure = PHPMailer::ENCRYPTION_SMTPS;
+    } elseif ($secure === 'starttls') {
+        $secure = PHPMailer::ENCRYPTION_STARTTLS;
+    }
+    if ($secure !== PHPMailer::ENCRYPTION_SMTPS && $secure !== PHPMailer::ENCRYPTION_STARTTLS) {
+        // Fall back on the port convention: 465 is implicit TLS, 587 is STARTTLS.
+        $secure = $config['port'] === 587
+            ? PHPMailer::ENCRYPTION_STARTTLS
+            : PHPMailer::ENCRYPTION_SMTPS;
+    }
+    // Port 465 is implicit TLS. STARTTLS on 465 is a protocol error, so the port
+    // wins over a mismatched SMTP_SECURE rather than producing a hung handshake.
+    if ($config['port'] === 465) {
+        $secure = PHPMailer::ENCRYPTION_SMTPS;
+    }
+    $config['secure'] = $secure;
+
+    return $config;
+}
+
+/**
+ * The shared, already-connected PHPMailer instance.
+ *
+ * Every submission sends two messages (internal notification + customer
+ * confirmation). Building a new PHPMailer per message meant two full TLS
+ * handshakes and two AUTH round trips while the visitor waited on the spinner.
+ * SMTPKeepAlive reuses one connection for both.
+ *
+ * Returns null if the transport cannot be configured.
+ */
+function pm_mailer() {
+    static $mail = null;
+    static $failed = false;
+
+    if ($failed) {
+        return null;
+    }
+    if ($mail instanceof PHPMailer) {
+        return $mail;
+    }
+
+    $config = pm_smtp_config();
+    if ($config === null) {
+        $failed = true;
+        return null;
+    }
+
     $mail = new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->Host       = $config['host'];
+    $mail->Port       = $config['port'];
+    $mail->SMTPSecure = $config['secure'];
+    $mail->SMTPAuth   = true;
+    $mail->Username   = $config['user'];
+    $mail->Password   = $config['pass'];
+    $mail->CharSet    = 'UTF-8';
+    $mail->Encoding   = 'base64';
+
+    // Without this the default is 300s: one unreachable mail server would hold
+    // the PHP worker — and the visitor's request — open for five minutes.
+    $mail->Timeout      = 15;
+    $mail->SMTPKeepAlive = true;
+    // Irrelevant under implicit TLS, but explicit so a future move to 587 does
+    // not depend on an opportunistic upgrade succeeding.
+    $mail->SMTPAutoTLS  = true;
+    // Debug output would otherwise be echoed straight into the HTTP response.
+    $mail->SMTPDebug    = 0;
+    $mail->Debugoutput  = function ($str, $level) { /* discarded */ };
+
+    // Close the connection cleanly at the end of the request instead of leaving
+    // the server to time it out.
+    register_shutdown_function(function () use ($mail) {
+        try {
+            $mail->smtpClose();
+        } catch (Throwable $e) {
+            // Nothing useful to do while shutting down.
+        }
+    });
+
+    return $mail;
+}
+
+/**
+ * Send one message.
+ *
+ * $body may be a plain string (legacy plain-text call) or an
+ * ['html' => ..., 'text' => ...] pair from the template helpers above.
+ *
+ * Returns true on accepted delivery, false otherwise. Failure detail is written
+ * to the server log only — the caller has no way to leak it to the browser.
+ */
+function sendSiteMail($toEmail, $subject, $body, $replyToEmail, $replyToName) {
+    $mail = pm_mailer();
+    if ($mail === null) {
+        return false;
+    }
+
     try {
-        $mail->isSMTP();
-        $mail->Host = getenv('SMTP_HOST');
-        $mail->SMTPAuth = true;
-        $mail->Username = getenv('SMTP_USER');
-        $mail->Password = getenv('SMTP_PASS');
-        $mail->SMTPSecure = getenv('SMTP_SECURE') ?: PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port = getenv('SMTP_PORT') ?: 465;
-        $mail->CharSet = 'UTF-8';
+        // The instance is shared, so recipients from the previous message must go.
+        $mail->clearAllRecipients();
+        $mail->clearReplyTos();
+        $mail->clearAttachments();
 
         // From stays the authenticated SMTP account so SPF/DKIM continue to pass;
         // the visitor's address goes on Reply-To only. Sending as the visitor would
         // break deliverability and is deliberately avoided.
-        $mail->setFrom(getenv('SMTP_USER'), 'ProManaged IT Website');
+        $mail->setFrom($mail->Username, 'ProManaged IT Website');
         $mail->addAddress($toEmail);
-        if ($replyToEmail) {
+        if ($replyToEmail && filter_var($replyToEmail, FILTER_VALIDATE_EMAIL)) {
             $mail->addReplyTo($replyToEmail, $replyToName ?: $replyToEmail);
         }
 
-        $mail->Subject = $subject;
+        // PHPMailer strips CR/LF from the Subject itself; stripping here too keeps
+        // the value clean everywhere else it is used.
+        $mail->Subject = trim(str_replace(["\r", "\n"], ' ', (string) $subject));
 
         if (is_array($body)) {
             $mail->isHTML(true);
@@ -303,13 +434,19 @@ function sendSiteMail($toEmail, $subject, $body, $replyToEmail, $replyToName) {
         } else {
             $mail->isHTML(false);
             $mail->Body = $body;
+            $mail->AltBody = '';
         }
 
-        $mail->send();
-        return true;
+        return $mail->send();
     } catch (PHPMailerException $e) {
         // Logged server-side only — the browser response never carries mail internals.
-        error_log('sendSiteMail failed: ' . $mail->ErrorInfo);
+        error_log('ProManaged mail: send failed — ' . $mail->ErrorInfo);
+        return false;
+    } catch (Throwable $e) {
+        // A non-PHPMailer failure (bad recipient type, stream error) must not
+        // become an uncaught fatal: with display_errors on at the host that
+        // would print a stack trace containing server paths into the response.
+        error_log('ProManaged mail: unexpected transport error — ' . $e->getMessage());
         return false;
     }
 }

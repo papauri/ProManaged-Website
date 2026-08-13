@@ -394,6 +394,12 @@
                         <div id="form-feedback" class="form-feedback" role="status" aria-live="polite"></div>
 
                         <form class="intake" id="contact-form" action="../php/contact.php" method="POST">
+                            <!-- Tells the shared enquiry endpoint which page this
+                                 came from, so the internal notification can be
+                                 triaged from its subject line. Server-side the
+                                 value is checked against an allow-list. -->
+                            <input type="hidden" name="enquiry_type" value="Hardware sourcing">
+
                             <div class="intake-grid">
                                 <fieldset class="intake-group intake-group--lead">
                                     <legend class="intake-legend">
