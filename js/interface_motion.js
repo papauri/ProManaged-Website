@@ -16,8 +16,8 @@
         visual consequence.
 
      3. THE INSTRUMENT CURSOR (fine pointer only)
-        A dot that tracks exactly, a ring that lags on a spring, and a ring that snaps
-        to the geometry of whatever it is over.
+        A dot that tracks exactly, a reticle that lags on a spring, and corner brackets
+        that snap to the geometry of whatever they are over.
 
    ONE rAF LOOP serves modules 2 and 3, and it only runs while there is something left
    to move — it parks itself when the cursor has caught up and nothing is animating,
@@ -104,9 +104,9 @@
 
            So under the preference the pointer layer still runs, and the parts that are
            genuinely motion are the parts that are dropped:
-             - the ring's spring lag becomes 1:1 tracking (EASE below is 1);
-             - cards no longer tilt in 3D or rotate their marks (css/interaction.css);
-             - the reticle snaps between shapes instead of easing (same file).
+             - the reticle's spring lag becomes 1:1 tracking;
+             - cards no longer tilt in 3D or rotate their marks;
+             - the reticle snaps between shapes instead of easing.
            What remains is state: the light, the traced edge, the geometry it snaps to.
 
            The scroll choreography is untouched by this and stays fully suppressed —
@@ -143,13 +143,13 @@
         cursor.className = 'pm-cursor';
         cursor.setAttribute('aria-hidden', 'true');
 
-        var ring = document.createElement('span');
-        ring.className = 'pm-cursor-frame';
+        var frame = document.createElement('span');
+        frame.className = 'pm-cursor-frame';
         var corners = [];
         ['tl', 'tr', 'br', 'bl'].forEach(function (name) {
             var c = document.createElement('i');
             c.className = 'pm-corner pm-corner--' + name;
-            ring.appendChild(c);
+            frame.appendChild(c);
             corners.push(c);
         });
 
@@ -157,7 +157,8 @@
         dot.className = 'pm-cursor-dot';
         var label = document.createElement('span');
         label.className = 'pm-cursor-label';
-        cursor.appendChild(ring);
+
+        cursor.appendChild(frame);
         cursor.appendChild(dot);
         cursor.appendChild(label);
         document.body.appendChild(cursor);
@@ -174,16 +175,17 @@
 
         var pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
         var ringPos = { x: pointer.x, y: pointer.y, w: RING, h: RING, r: RING / 2 };
-        var target = { x: pointer.x, y: pointer.y, w: RING, h: RING, r: RING / 2 };
+        var target = { x: pointer.x, y: pointer.y, w: RING, h: RING / 2, r: RING / 2 };
         var pressed = false;
         var live = false;
         var running = false;
         var mode = 'default';
 
-        // The element the ring is currently framed to, plus the card currently taking
+        // The element the reticle is currently framed to, plus the card currently taking
         // the light. Kept as one reference each so leaving is always exact.
         var framed = null;
         var lit = null;
+        var surface = 'light';
 
         var setMode = function (next) {
             if (next === mode) return;
@@ -200,11 +202,23 @@
             }
         };
 
-        /* ---------- Per-frame ----------
-           Position is written straight to style.transform rather than through a CSS
-           custom property + transition: the ring already has its own spring here, and
-           a second easing in the stylesheet would compound into lag. */
-        var frame = function () {
+        var setSurface = function (el) {
+            var next = 'light';
+            if (el) {
+                // Dark surfaces: graphite/earth chapters, dark bento blocks, nav panel.
+                if (
+                    el.closest('.block--graphite, .block--earth, .section--graphite, .nav-panel, .nav-rail-inner')
+                ) {
+                    next = 'dark';
+                }
+            }
+            if (next === surface) return;
+            surface = next;
+            cursor.setAttribute('data-surface', next);
+        };
+
+        /* ---------- Per-frame ---------- */
+        var frameTick = function () {
             var dx = target.x - ringPos.x;
             var dy = target.y - ringPos.y;
             var dw = target.w - ringPos.w;
@@ -217,19 +231,19 @@
 
             var scale = pressed ? 0.84 : 1;
 
-            ring.style.width = ringPos.w + 'px';
-            ring.style.height = ringPos.h + 'px';
-            ring.style.transform =
+            frame.style.width = ringPos.w + 'px';
+            frame.style.height = ringPos.h + 'px';
+            frame.style.transform =
                 'translate3d(' + ringPos.x + 'px,' + ringPos.y + 'px,0) translate(-50%,-50%) scale(' + scale + ')';
-            // The corner brackets inherit the frame's radius so they curve with the
-            // card they have latched onto rather than staying square on a rounded one.
-            ring.style.setProperty('--corner-r', target.r + 'px');
+            // Corners inherit the frame's radius so they curve with the card they have
+            // latched onto rather than staying square on a rounded one.
+            frame.style.setProperty('--corner-r', target.r + 'px');
 
             dot.style.transform =
                 'translate3d(' + pointer.x + 'px,' + pointer.y + 'px,0) translate(-50%,-50%)';
 
-            // The label hangs off the pointer, not off the ring, so it stays readable
-            // when the ring has become a card-sized rectangle.
+            // The label hangs off the pointer, not off the frame, so it stays readable
+            // when the frame has become a card-sized rectangle.
             label.style.transform =
                 'translate3d(' + pointer.x + 'px,' + (pointer.y + 22) + 'px,0) translate(-50%,0)';
 
@@ -242,19 +256,16 @@
                 running = false;
                 return;
             }
-            requestAnimationFrame(frame);
+            requestAnimationFrame(frameTick);
         };
 
         var run = function () {
             if (running) return;
             running = true;
-            requestAnimationFrame(frame);
+            requestAnimationFrame(frameTick);
         };
 
-        /* ---------- What is under the pointer ----------
-           Resolved on every move. `closest` walks at most a handful of ancestors and
-           the result is compared against the last one, so the DOM writes below happen
-           on ENTER and LEAVE only, never per frame. */
+        /* ---------- What is under the pointer ---------- */
         var CONTROL = 'a[href], button, [role="link"], input[type="submit"], .block--interactive';
         var TEXTUAL = 'p, li, h1, h2, h3, h4, blockquote, .lede';
         var TYPING = 'input, textarea, select';
@@ -265,8 +276,11 @@
                 setLabel('');
                 framed = null;
                 target.w = RING; target.h = RING; target.r = RING / 2;
+                setSurface(null);
                 return;
             }
+
+            setSurface(el);
 
             // Never cover a text field: the native caret is information.
             if (el.closest(TYPING)) {
@@ -299,8 +313,6 @@
             if (el.closest(TEXTUAL)) {
                 setMode('text');
                 setLabel('');
-                // The frame collapses onto the pointer; the caret itself is the dot,
-                // restyled into a bar by css/interaction.css.
                 target.w = 2; target.h = 24; target.r = 1;
                 return;
             }
@@ -310,10 +322,7 @@
             target.w = RING; target.h = RING; target.r = RING / 2;
         };
 
-        /* ---------- The card field ----------
-           --mx/--my place the light in the card's own coordinate space; --fx/--fy are
-           the lean, capped by --field-tilt so a wide block never looks like it is
-           falling over. Written on the hovered card only, and cleared on leave. */
+        /* ---------- The card field ---------- */
         var tiltCap = parseFloat(
             getComputedStyle(root).getPropertyValue('--field-tilt')
         ) || 3.4;
@@ -343,18 +352,12 @@
             card.style.setProperty('--trace-origin', px < 0.5 ? 'left' : 'right');
 
             if (framed === card) {
-                // Frame mode: the ring becomes the card's outline, pulled a few pixels
-                // toward the pointer so it still answers to the hand.
                 var radius = parseFloat(getComputedStyle(card).borderTopLeftRadius) || 12;
                 target.x = box.left + box.width / 2 + (px - 0.5) * 2 * MAGNET;
                 target.y = box.top + box.height / 2 + (py - 0.5) * 2 * MAGNET;
                 target.w = box.width + 12;
                 target.h = box.height + 12;
-                // The card's own radius, NOT radius + the 6px the frame stands off by.
-                // Matching the offset exactly would make the bracket a concentric arc
-                // of the card's corner, and at a bento card's 18px radius a 34px
-                // bracket is then almost entirely curve. Holding the tighter radius
-                // leaves a straight run at each end, so it reads as a bracket.
+                // Brackets must curve like the card itself, not like the offset.
                 target.r = radius;
             }
         };

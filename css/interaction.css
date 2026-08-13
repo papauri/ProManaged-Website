@@ -6,18 +6,12 @@
    phone, a keyboard user, a screen reader and a visitor with motion sensitivity all
    get the site exactly as it was before this file existed.
 
-     1. THE INSTRUMENT CURSOR — a precise dot that tracks 1:1, a ring that lags behind
-        it on a spring, and — the part that makes it more than a blob — a ring that
-        SNAPS to the geometry of whatever it is over. Hovering a bento card does not
-        inflate a circle; it draws the card's own outline, at the card's own radius,
-        pulled a few pixels toward the pointer. The cursor stops being a decoration
-        and starts reporting what the interface is: a target, a link, a line of text.
+     1. THE INSTRUMENT CURSOR — a precise dot that tracks 1:1, a set of corner brackets
+        that latch to geometry in front of it, and a label naming destinations.
 
      2. THE CARD FIELD — every surfaced block on the site becomes pointer-aware. A
         soft light follows the pointer across the card, the card tilts a few degrees
-        toward it, and a hairline traces its top edge. js/interface_motion.js writes
-        --mx/--my (light position) and --fx/--fy (tilt) on the hovered card only; one
-        rAF loop serves the whole page.
+        toward it, and a hairline traces its top edge.
 
    NOTHING HERE IS LOAD CHOREOGRAPHY. The Building Blocks reveal in global_styles.css
    still owns entrances, and every hover transform below is explicitly held off while
@@ -31,17 +25,18 @@
 .pm-pointer.pm-cursor-live * { cursor: none }
 
 /* Text entry keeps its native caret. An I-beam is information — where the insertion
-   point will land — and no decorative ring replaces it. The script mirrors this by
-   hiding the ring over the same controls. */
+   point will land — and no decorative reticle replaces it. The script mirrors this by
+   suppressing the instrument over the same controls. */
 .pm-pointer.pm-cursor-live input,
 .pm-pointer.pm-cursor-live textarea,
 .pm-pointer.pm-cursor-live select { cursor: auto }
 
 /* `display: contents` is load-bearing, not tidiness. mix-blend-mode blends an element
    with the backdrop of its PARENT stacking context, so a positioned, z-indexed wrapper
-   would isolate the ring and the dot inside their own group — they would blend against
-   an empty box and the whole effect would silently do nothing. With no box of its own,
-   the wrapper creates no stacking context and its children blend against the page. */
+   would isolate the reticle and the dot inside their own group — they would blend
+   against an empty box and the whole effect would silently do nothing. With no box of
+   its own, the wrapper creates no stacking context and its children blend against the
+   page. */
 .pm-cursor { display: contents }
 
 .pm-cursor-frame,
@@ -64,7 +59,7 @@
 .pm-cursor[data-mode="off"] .pm-cursor-frame,
 .pm-cursor[data-mode="off"] .pm-cursor-dot { opacity: 0 }
 
-/* ---------- The reticle ----------
+/* ---------- The reticle frame ----------
    The frame is an invisible box; the four corner brackets inside it are the cursor.
    Its size and position are written per frame by the script, so this rule owns only
    what it looks like, never where it is. Width and height are deliberately NOT
@@ -75,10 +70,11 @@
     height: var(--cursor-ring);
 }
 
-/* Each bracket is one element carrying two borders — a corner, drawn. `difference`
-   blending is what makes one reticle work on warm paper, on stone, on the graphite
-   chapters and on the dark navigation panel; see --cursor-ink in tokens.css for why
-   the ink is near-ivory rather than white. */
+/* Each bracket is one element carrying two borders — a corner, drawn. The ink colour
+   itself adapts to the surface under the reticle: on warm paper, ivory and stone, the
+   brackets take a graphite ink; on graphite and other dark chapters they take
+   near-ivory. mix-blend-mode:difference then resolves the right contrast without a
+   per-section override. */
 .pm-corner {
     position: absolute;
     width: var(--corner-len, 9px);
@@ -89,6 +85,18 @@
         width 200ms var(--ease-out),
         height 200ms var(--ease-out),
         border-radius 200ms var(--ease-out);
+}
+
+/* Surface-aware ink. The script tags the current surface with data-cursor-surface and
+   these rules flip the ink token accordingly. */
+.pm-cursor[data-surface="dark"] .pm-corner,
+.pm-cursor[data-surface="dark"] .pm-cursor-dot {
+    --cursor-ink: var(--cursor-ink-dark);
+}
+
+.pm-cursor[data-surface="light"] .pm-corner,
+.pm-cursor[data-surface="light"] .pm-cursor-dot {
+    --cursor-ink: var(--cursor-ink-light);
 }
 
 /* Each corner takes only the two borders that meet there, and the matching quarter of
@@ -155,7 +163,7 @@
     border-radius: 1px;
 }
 
-/* The label rides under the ring in frame mode and names the destination. Deliberately
+/* The label rides under the frame in frame mode and names the destination. Deliberately
    NOT blended: a legible chip is worth more than a clever one, and this is the only
    part of the cursor that carries words. */
 .pm-cursor-label {
@@ -173,8 +181,6 @@
     text-transform: uppercase;
     white-space: nowrap;
     box-shadow: var(--shadow-lg);
-    /* No transform transition: the script writes transform every frame, and easing it
-       twice turns a label that follows the pointer into one that trails it. */
     transition: opacity 200ms var(--ease-out);
 }
 
@@ -256,7 +262,7 @@
 
     /* The tilt. Held off while the card is mid-reveal: .block-reveal owns transform
        during an entrance, and two systems writing the same property is how cards end
-       up snapping. Specificity here (0,3,0) deliberately beats the generic
+       up snapping. Specificity here deliberately beats the generic
        .block--interactive:hover lift in global_styles.css so the two compose into one
        transform instead of overriding each other unpredictably. */
     .pm-pointer [data-field]:not(.block-reveal):hover {
@@ -299,40 +305,14 @@
 }
 
 /* ---------- Reduced motion ----------
-   Graded, not a kill switch — see the long note in js/interface_motion.js for why a
-   reticle that tracks the visitor's own pointer is not what this preference is
-   protecting against. The reticle stays; everything that MOVES ON ITS OWN goes.
-
-   Written against .pm-calm (set by the script) rather than only the media query, so
-   the two can never disagree about which mode the page is in.
-
-   The card light and the traced edge survive, because they are state rather than
-   motion — but they arrive instantly instead of easing in. The 3D tilt and the mark's
-   rotation are removed outright: those are real movement of real page content, which
-   is precisely the thing being asked for less of. */
-.pm-calm .pm-cursor-frame,
-.pm-calm .pm-cursor-dot,
-.pm-calm .pm-corner,
-.pm-calm .pm-cursor-label { transition: none }
-
-.pm-calm [data-field]::before,
-.pm-calm [data-field]::after,
-.pm-calm [data-field] .mark { transition: none }
-
-@media (hover: hover) and (pointer: fine) {
-    .pm-calm [data-field]:hover,
-    .pm-calm [data-field]:not(.block-reveal):hover { transform: none }
-    .pm-calm [data-field]:hover .mark { transform: none }
-}
-
-/* Belt and braces. If the script somehow tagged the page without setting .pm-calm,
-   the stylesheet still refuses to move page content under the preference. The reticle
-   is deliberately NOT hidden here — it is the pointer, and taking it away would leave
-   `cursor: none` with nothing drawn in its place. */
+   Belt and braces: the script never adds .pm-pointer in these conditions, and the
+   stylesheet independently refuses to move anything even if it somehow did. */
 @media (prefers-reduced-motion: reduce) {
+    .pm-cursor { display: none }
+    .pm-pointer.pm-cursor-live,
+    .pm-pointer.pm-cursor-live * { cursor: auto }
     [data-field]::before,
     [data-field]::after,
-    [data-field] .mark { transition: none }
-    .pm-pointer [data-field]:not(.block-reveal):hover,
-    .pm-pointer [data-field]:hover .mark { transform: none }
+    [data-field] .mark,
+    .pm-pointer [data-field]:hover { transition: none; transform: none }
 }
