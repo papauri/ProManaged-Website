@@ -69,22 +69,29 @@
    Its size and position are written per frame by the script, so this rule owns only
    what it looks like, never where it is. Width and height are deliberately NOT
    transitioned: the script already springs them, and a second easing here would
-   compound into visible lag. */
+   compound into visible lag.
+
+   The `difference` blend lives HERE, on the frame, not on the brackets. The frame is
+   position:fixed and transformed, so it is its own stacking context — a blend on each
+   bracket would be confined to the frame's empty backdrop and the near-ivory ink
+   would paint ivory-on-white, invisible on paper (the reported bug). Blending the
+   frame as a single unit restores the original intent: one reticle that inverts
+   against whatever surface it is over — dark on paper, light on graphite. */
 .pm-cursor-frame {
     width: var(--cursor-ring);
     height: var(--cursor-ring);
+    mix-blend-mode: difference;
 }
 
-/* Each bracket is one element carrying two borders — a corner, drawn. `difference`
-   blending is what makes one reticle work on warm paper, on stone, on the graphite
-   chapters and on the dark navigation panel; see --cursor-ink in tokens.css for why
-   the ink is near-ivory rather than white. */
+/* Each bracket is one element carrying two borders — a corner, drawn with no blend of
+   its own: the frame above blends the finished reticle against the page, so each
+   bracket stays plain ink and the group inverts as one. See --cursor-ink in tokens.css
+   for why the ink is near-ivory rather than white. */
 .pm-corner {
     position: absolute;
     width: var(--corner-len, 9px);
     height: var(--corner-len, 9px);
     border: 0 solid var(--cursor-ink);
-    mix-blend-mode: difference;
     transition:
         width 200ms var(--ease-out),
         height 200ms var(--ease-out),
