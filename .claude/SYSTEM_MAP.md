@@ -11,6 +11,7 @@
 5. `pages/custom_websites.html` — Build.
 6. `pages/hardware_sourcing.html` — Source.
 7. `pages/it_support.html` — Support.
+8. `pages/hospitality_builder.html` — the Hospitality System Builder. A guided product configurator, reached from the Build page's `#hospitality` CTA. Deliberately **not** a navigation category: the bento panel is composed for exactly seven tiles.
 
 The canonical public trio is **Build / Source / Support**. `pages/network_infrastructure.html`
 and the "Connect" capability name no longer exist; do not reintroduce either.
@@ -74,6 +75,7 @@ same tree; only destination-relative hrefs differ.
 - `css/evidence.css` — illustrative, CSS-drawn interface fragments and the evidence rail.
 - `css/pinned_chapter.css` — the sticky "How we work" stepper (index only).
 - `css/mission_vision.css` — the closing outcome statement and its mission/vision beats.
+- `css/hospitality_builder.css` — the Hospitality System Builder's own components: choice chips, the room stepper, the module card and its detail panel, the system map and the story ladder. Adds nothing to the design system; every value comes from `tokens.css` and the shared families.
 - `css/contact_section.css`, `css/book_appointment.css`, `css/get-started.css`, `css/learn-more.css`, `css/custom_websites.css`, `css/hardware_sourcing.css`, `css/it_support.css`, `css/privacy_policy.css`, `css/scroll_top.css`, `css/logo.css` — page and component scoped.
 
 ## JavaScript
@@ -120,10 +122,29 @@ Owns mobile/bento navigation interaction, focus management, Escape handling, scr
 ### `js/form_intake.js`
 Shared form validation/submission UX. Do not change PHP contracts when adjusting the visual design.
 
+Initialises `#contact-form`, `#booking-form` and `#hospitality-form`; each call is a no-op on a page without that form.
+
+### `js/hospitality_builder.js`
+The Hospitality System Builder engine, and the only place its product copy lives.
+`CORE` and `OPTIONAL` are the catalogue: one record per capability carrying its id,
+category, delivery status, customer-facing copy, `dependsOn`, `worksWith` and its
+workflow steps. Rendering derives everything from those records, so the catalogue
+can later feed a real product without rewriting the UI.
+
+**Delivery status is an honesty contract.** `built` may only be claimed for work
+ProManaged has actually delivered (bookings, rooms, guests, booking engine);
+everything else is `proposed` or `custom`, and the UI prints the word on the card.
+
+**Load order matters.** It must be included BEFORE `js/main.js`. Both are deferred,
+so document order decides: `main.js` collects its motion units at `DOMContentLoaded`
+and skips a `[data-blocks]` group with none, so the cards must exist by then. The
+script therefore renders at execution time, not on `DOMContentLoaded`.
+
 ## Forms / PHP
 
 - `php/contact.php` — contact submission.
 - `php/booking.php` — appointment submission.
+- `php/hospitality.php` — Hospitality System Builder enquiry. Its own endpoint because the payload is a structured configuration rather than a message. Reuses `http.php` and the `mailer.php` templates unchanged. The browser submits catalogue IDs only; every label a human reads is resolved server-side from an allow-list, and the fixed foundation is never read from the submission.
 - `php/mailer.php` — shared internal/customer HTML + plain-text mail templates.
 - `php/env.php` — environment configuration.
 - `php/vendor/PHPMailer/` — mail dependency.

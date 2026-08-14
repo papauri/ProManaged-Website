@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="hospitality_head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design your hospitality system | ProManaged IT</title>
+    <meta name="description" content="Tell us how your lodge, guesthouse or hotel actually works, add only the capabilities you need, and see the system it could become. Built on real hotel-management work delivered in Malawi.">
+    <link rel="icon" href="../images/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/global_styles.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/interaction.css">
+    <link rel="stylesheet" href="../css/logo.css">
+    <link rel="stylesheet" href="../css/hero_section.css">
+    <link rel="stylesheet" href="../css/footer_promanaged.css">
+    <link rel="stylesheet" href="../css/scroll_top.css">
+    <link rel="stylesheet" href="../css/project_proof.css">
+    <link rel="stylesheet" href="../css/contact_section.css">
+    <link rel="stylesheet" href="../css/hospitality_builder.css">
+    <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
+         before first paint. Without JS this class is never added, the hiding rule
+         never matches, and all content renders normally. See global_styles.css. -->
+    <script>(function(d,w){var r=d.documentElement;r.classList.add('js-on');w.pmHeroFailsafe=w.setTimeout(function(){r.classList.add('load-failsafe');},1200);})(document,window);</script>
+    <script src="../js/boot.js"></script>
+</head>
+
+<body>
+    <div id="header-section">
+        <div class="nav-rail">
+            <div class="nav-rail-inner">
+                <button type="button" class="nav-trigger" id="nav-trigger"
+                        aria-expanded="false" aria-controls="nav-panel"
+                        aria-label="Open navigation menu">
+                    <img src="../images/icon.png" alt="ProManaged IT" class="logo">
+                    <span class="nav-trigger-label">
+                        <span class="nav-trigger-word">Menu</span>
+                        <span class="nav-trigger-bars" aria-hidden="true">
+                            <span></span><span></span><span></span>
+                        </span>
+                    </span>
+                </button>
+                <a class="nav-wordmark" href="../index.html">ProManaged IT</a>
+                <div class="nav-rail-actions">
+                    <a class="btn primary nav-cta" href="../get-started.html">Start a project</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-panel" id="nav-panel" hidden>
+            <div class="nav-panel-rail">
+                <div class="nav-panel-top">
+                    <span class="nav-panel-brand">
+                        <img src="../images/icon.png" alt="" aria-hidden="true">
+                        ProManaged IT
+                    </span>
+                    <button type="button" class="nav-close" id="nav-close"
+                            aria-label="Close navigation menu">
+                        <span></span><span></span>
+                    </button>
+                </div>
+
+                <p class="nav-panel-lead">
+                    <span class="nav-panel-lead-eyebrow">Build &middot; Source &middot; Support</span>
+                    <span class="nav-panel-lead-text">We build your software, source your equipment and keep both working.</span>
+                </p>
+
+                <nav class="nav-bento" aria-label="Primary">
+                    <a class="nav-tile nav-tile--primary" href="../get-started.html">
+                        <span class="nav-tile-index">Start here</span>
+                        <span class="nav-tile-label">Start a project</span>
+                        <span class="nav-tile-desc">Bring us the problem. Book a call and get a scope, a timeline and an honest answer.</span>
+                        <span class="nav-tile-cue" aria-hidden="true">Book a call</span>
+                    </a>
+                    <a class="nav-tile nav-tile--lead" href="custom_websites.html">
+                        <span class="nav-tile-index">01 &middot; Build</span>
+                        <span class="nav-tile-label">Software &amp; Web Apps</span>
+                        <span class="nav-tile-desc">We build the software your business runs on &mdash; booking systems, internal tools, customer-facing apps.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--service" href="hardware_sourcing.html">
+                        <span class="nav-tile-index">02 &middot; Source</span>
+                        <span class="nav-tile-label">Hardware Sourcing</span>
+                        <span class="nav-tile-desc">We find, buy and deliver the computers and equipment you need.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--service" href="it_support.html">
+                        <span class="nav-tile-index">03 &middot; Support</span>
+                        <span class="nav-tile-label">IT Support</span>
+                        <span class="nav-tile-desc">We keep it working &mdash; fixes, setups and a person on the phone when it breaks.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="../index.html">
+                        <span class="nav-tile-index">Overview</span>
+                        <span class="nav-tile-label">Home</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="../learn_more.html">
+                        <span class="nav-tile-index">Process</span>
+                        <span class="nav-tile-label">How We Work</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="../index.html#contact">
+                        <span class="nav-tile-index">Direct</span>
+                        <span class="nav-tile-label">Contact</span>
+                    </a>
+                </nav>
+
+                <div class="nav-panel-foot">
+                    <span class="nav-panel-foot-label">On the homepage</span>
+                    <a class="nav-link" href="../index.html#about">About</a>
+                    <a class="nav-link" href="../index.html#services">Services</a>
+                    <a class="nav-link" href="../index.html#mission-vision">Mission &amp; Vision</a>
+                    <a class="nav-link" href="../privacy_policy.html">Privacy Policy</a>
+                    <a class="nav-panel-foot-mail" href="mailto:info@promanaged-it.com">info@promanaged-it.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= ORIENT ================= -->
+    <div id="hero-section">
+        <section id="home" class="hero">
+            <div class="hero-rail rail" data-assemble>
+                <div class="hero-statement">
+                    <span class="hero-eyebrow">Hospitality</span>
+                    <h1 id="hero-title">Design the system your property actually needs.</h1>
+                    <p id="hero-subtitle">Tell us how your lodge, guesthouse or hotel works today. Add only what your operation needs. We will show you the system it could become.</p>
+                    <div class="hero-buttons">
+                        <a href="#property" class="btn primary" id="hero-get-started">Start with your property</a>
+                        <a href="#foundation" class="btn secondary" id="hero-learn-more">See the foundation</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-feature">
+                        <i class="fas fa-hotel" aria-hidden="true"></i>
+                        <span class="hero-figure">Two</span>
+                        <span class="hero-figure-label">hotel-management systems already delivered for businesses in Malawi &mdash; this builder is shaped by that work, not by a feature list.</span>
+                    </div>
+                    <div class="hero-support">
+                        <div class="hero-support-row">
+                            <i class="fas fa-layer-group" aria-hidden="true"></i>
+                            <div class="hero-support-text">
+                                <span class="hero-support-title">A foundation, then choices</span>
+                                <span class="hero-support-desc">Nothing bolted on that you did not ask for</span>
+                            </div>
+                        </div>
+                        <div class="hero-support-row">
+                            <i class="fas fa-comments" aria-hidden="true"></i>
+                            <div class="hero-support-text">
+                                <span class="hero-support-title">A starting point, not a quote</span>
+                                <span class="hero-support-desc">We review how your property runs before we recommend</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- The whole configurator lives inside [data-hb]; js/hospitality_builder.js
+         binds one delegated listener to it and renders every module card from the
+         catalogue in that file. Without JS the chapter headings, explanations and
+         the direct route to the booking form below all still read. -->
+    <div data-hb>
+
+    <!-- ================= UNDERSTAND — the premise ================= -->
+    <section id="premise" class="section section--ivory" data-blocks="settle-side">
+        <div class="rail">
+            <div class="grid">
+                <div class="block block--7 block--bare">
+                    <span class="eyebrow">Why this exists</span>
+                    <h2>Every property runs differently. Most software pretends otherwise.</h2>
+                </div>
+                <div class="block block--5 block--bare">
+                    <p>A twelve-room lodge taking bookings on WhatsApp does not have the same problem as a hotel with a reception desk and a housekeeping rota — but they are usually sold the same thing.</p>
+                    <p>So start from your property instead. Describe how it works, add what your operation actually needs, and see what the system would look like before anyone quotes you for it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CHAPTER 01 — YOUR PROPERTY ================= -->
+    <section id="property" class="section" data-blocks="settle-up">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">01 &middot; Your property</span>
+                <h2>Start with how your property works.</h2>
+                <p class="lede">Four quick answers. Nothing here asks for your contact details — that comes at the end, once you can see what you have designed.</p>
+            </div>
+
+            <div class="grid hb-property">
+                <div class="block block--7 hb-panel">
+                    <h3 id="hb-type-label">What kind of property is it?</h3>
+                    <p class="hb-panel-hint">Pick whichever is closest. It changes what we suggest, not what you are allowed to choose.</p>
+                    <div class="hb-choices" role="group" aria-labelledby="hb-type-label" data-hb-types></div>
+                </div>
+
+                <div class="block block--5 block--tint hb-panel">
+                    <h3 id="hb-rooms-label">Roughly how many rooms?</h3>
+                    <p class="hb-panel-hint">An approximate number is fine.</p>
+                    <div class="hb-stepper">
+                        <button type="button" class="hb-stepper-btn" data-hb-rooms-step="-1" aria-label="Fewer rooms">
+                            <span aria-hidden="true">&minus;</span>
+                        </button>
+                        <div class="hb-stepper-value">
+                            <label class="visually-hidden" for="hb-rooms">Approximate number of rooms</label>
+                            <input type="number" id="hb-rooms" class="hb-stepper-input" inputmode="numeric"
+                                   min="1" max="400" step="1" value="12" data-hb-rooms-input>
+                        </div>
+                        <button type="button" class="hb-stepper-btn" data-hb-rooms-step="1" aria-label="More rooms">
+                            <span aria-hidden="true">+</span>
+                        </button>
+                    </div>
+                    <p class="hb-stepper-readout">
+                        <span data-hb-rooms-value>12</span> rooms
+                    </p>
+                </div>
+
+                <div class="block block--5 hb-panel">
+                    <h3 id="hb-channels-label">How do bookings reach you today?</h3>
+                    <p class="hb-panel-hint">Choose as many as apply.</p>
+                    <div class="hb-choices" role="group" aria-labelledby="hb-channels-label" data-hb-channels></div>
+                </div>
+
+                <div class="block block--7 hb-panel">
+                    <h3>Is there one thing that keeps going wrong?</h3>
+                    <p class="hb-panel-hint">Optional, and the most useful box on this page. Plain language is perfect.</p>
+                    <div class="field field--grow hb-field">
+                        <textarea id="hb-pain" rows="4" placeholder=" " maxlength="1200" data-hb-pain></textarea>
+                        <label for="hb-pain">What keeps going wrong</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CHAPTER 02 — THE FOUNDATION ================= -->
+    <section id="foundation" class="section section--graphite" data-blocks="sequence-in">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">02 &middot; The foundation</span>
+                <h2>Every property starts with the same three things.</h2>
+                <p class="lede">Bookings, rooms and guests are what every hotel system we have delivered actually runs on. They are not options — they are the floor everything else stands on.</p>
+            </div>
+            <div class="grid hb-core" data-hb-core></div>
+        </div>
+    </section>
+
+    <!-- ================= CREDIBILITY — real delivered work ================= -->
+    <section id="evidence" class="section section--stone" data-blocks="settle-up" data-blocks-pace="calm">
+        <div class="rail">
+            <span class="eyebrow">Built from real hospitality work</span>
+            <div class="proof-strip">
+                <div class="proof-strip-copy">
+                    <h3>We have delivered hotel-management systems in Malawi.</h3>
+                    <p>Rosalyn's and Liwonde Sun Hotel both run software we built — guests booking against live availability, and the room and reservation tools the teams work in. This builder is shaped by that work.</p>
+                </div>
+                <div class="proof-shot proof-shot--feature">
+                    <img src="../images/projects/rosalyns-booking.jpg"
+                         alt="A hotel booking interface delivered by ProManaged IT — check-in, guests and room type"
+                         loading="lazy" decoding="async" width="1241" height="467">
+                </div>
+                <div class="proof-strip-action">
+                    <a href="custom_websites.html#projects" class="btn secondary">See the work</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CHAPTER 03 — ADDITIONS ================= -->
+    <section id="additions" class="section" data-blocks="settle-side">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">03 &middot; Your additions</span>
+                <h2>Now add only what your operation needs.</h2>
+                <p class="lede">Select one and it will explain what it does for you, how it runs, and what it connects to. Select nothing and the foundation is still a complete, working system.</p>
+            </div>
+
+            <p class="hb-honesty">
+                <span class="hb-honesty-tag">Worth knowing</span>
+                Each card says whether we have built it before, whether it is a module we have designed
+                but not yet shipped as standard, or whether it is genuinely custom work. Nothing here is
+                a promise of a finished product you can buy today.
+            </p>
+
+            <div class="grid hb-modules" data-hb-optional></div>
+        </div>
+    </section>
+
+    <!-- ================= VISUALISE — the system map ================= -->
+    <section id="system" class="section section--graphite" data-blocks="scale-in">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">04 &middot; Your system</span>
+                <h2>What you have assembled so far.</h2>
+                <p class="lede" data-hb-mapcount>Three foundation capabilities, nothing added yet.</p>
+            </div>
+            <div class="hb-map" data-hb-map aria-live="polite"></div>
+        </div>
+    </section>
+
+    <!-- ================= CONNECT — the workflow story ================= -->
+    <section id="how-it-runs" class="section section--ivory" data-blocks="settle-up">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">05 &middot; How it runs</span>
+                <h2>One guest, from first enquiry to a room ready again.</h2>
+                <p class="lede">This story changes as you change your system. It only ever describes what you have actually selected.</p>
+            </div>
+            <ol class="hb-story" data-hb-story></ol>
+        </div>
+    </section>
+
+    <!-- ================= SUMMARISE ================= -->
+    <section id="summary" class="section" data-blocks="settle-up" data-hb-summary>
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">06 &middot; Your outline</span>
+                <h2>Here's what you've designed.</h2>
+            </div>
+
+            <div class="grid hb-summary">
+                <div class="block block--4 block--tint hb-summary-block">
+                    <h3>Your property</h3>
+                    <div data-hb-summary-property></div>
+                </div>
+
+                <div class="block block--8 hb-summary-block">
+                    <h3>How it works together</h3>
+                    <p class="hb-summary-prose" data-hb-summary-prose></p>
+                    <p class="hb-summary-caveat">
+                        This is a starting point, not a quote or a fixed scope. We will look at how your
+                        property actually operates and recommend the right implementation — including
+                        telling you if part of this is not worth building.
+                    </p>
+                </div>
+
+                <div class="block block--5 hb-summary-block">
+                    <h3>Your foundation</h3>
+                    <ul class="hb-summary-list" data-hb-summary-core></ul>
+                </div>
+
+                <div class="block block--7 block--stone hb-summary-block">
+                    <h3>Your additions</h3>
+                    <ul class="hb-summary-list" data-hb-summary-optional></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= START — the conversion step =================
+         Same intake language, same .field / .field-msg / honeypot contract and the
+         same shared behaviour in js/form_intake.js as the site's other two forms.
+         The configuration travels as hidden IDs; php/hospitality.php owns the
+         labels and rejects anything outside its own catalogue. -->
+    <section id="talk" class="section section--graphite hb-conversion" data-blocks="settle-up" data-blocks-pace="calm">
+        <div class="rail hb-conversion-grid">
+            <div class="hb-conversion-intro">
+                <span class="eyebrow">07 &middot; Next step</span>
+                <h2>Let's talk about your setup.</h2>
+                <p>You've designed the starting point. Tell us where to send your tailored plan and we will come back with what we would actually build, in what order, and what it would take.</p>
+                <ul class="hb-conversion-perks">
+                    <li><i class="fas fa-clipboard-list" aria-hidden="true"></i> Your whole configuration comes with the message — no repeating yourself</li>
+                    <li><i class="fas fa-comments" aria-hidden="true"></i> A real conversation about your property, not a sales sequence</li>
+                    <li><i class="fas fa-scale-balanced" aria-hidden="true"></i> An honest answer, including when something is not worth building</li>
+                </ul>
+            </div>
+
+            <div id="form-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+
+            <form class="intake hb-form" id="hospitality-form"
+                  data-success-message="Thanks — your hospitality system outline is with us. We will review how your property runs and come back with what we would build."
+                  action="../php/hospitality.php" method="POST">
+                <div class="intake-grid">
+                    <fieldset class="intake-group intake-group--lead">
+                        <legend class="intake-legend">
+                            <span class="intake-step">01</span>
+                            <span class="intake-title">You</span>
+                        </legend>
+                        <p class="intake-hint">Where we send your plan.</p>
+                        <div class="field">
+                            <input type="text" id="hb-name" name="name" placeholder=" " required autocomplete="name" aria-describedby="hb-name-msg">
+                            <label for="hb-name">Your name</label>
+                            <span class="field-msg" id="hb-name-msg" data-for="hb-name"></span>
+                        </div>
+                        <div class="field">
+                            <input type="email" id="hb-email" name="email" placeholder=" " required autocomplete="email" aria-describedby="hb-email-msg">
+                            <label for="hb-email">Email</label>
+                            <span class="field-msg" id="hb-email-msg" data-for="hb-email"></span>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="intake-group">
+                        <legend class="intake-legend">
+                            <span class="intake-step">02</span>
+                            <span class="intake-title">Your property</span>
+                        </legend>
+                        <p class="intake-hint">So we know who we are talking about.</p>
+                        <div class="field">
+                            <input type="text" id="hb-business" name="business" placeholder=" " required autocomplete="organization" aria-describedby="hb-business-msg">
+                            <label for="hb-business">Property or business name</label>
+                            <span class="field-msg" id="hb-business-msg" data-for="hb-business"></span>
+                        </div>
+                        <div class="field">
+                            <input type="tel" id="hb-phone" name="phone" placeholder=" " autocomplete="tel" aria-describedby="hb-phone-msg">
+                            <label for="hb-phone">Phone or WhatsApp (optional)</label>
+                            <span class="field-msg" id="hb-phone-msg" data-for="hb-phone"></span>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="intake-group">
+                        <legend class="intake-legend">
+                            <span class="intake-step">03</span>
+                            <span class="intake-title">Anything else</span>
+                        </legend>
+                        <p class="intake-hint">Optional. Your configuration is already attached.</p>
+                        <div class="field field--grow">
+                            <textarea id="hb-notes" name="notes" rows="4" placeholder=" " maxlength="3000" aria-describedby="hb-notes-msg"></textarea>
+                            <label for="hb-notes">Notes</label>
+                            <span class="field-msg" id="hb-notes-msg" data-for="hb-notes"></span>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- The configuration. Written by js/hospitality_builder.js on every
+                     change, as IDs only — php/hospitality.php maps them to labels and
+                     discards anything outside its own catalogue. -->
+                <input type="hidden" name="property_type" value="">
+                <input type="hidden" name="rooms" value="12">
+                <input type="hidden" name="channels" value="">
+                <input type="hidden" name="core_features" value="bookings,rooms,guests">
+                <input type="hidden" name="optional_features" value="">
+                <input type="hidden" name="connections" value="">
+                <input type="hidden" name="current_problem" value="">
+
+                <div class="form-row hp-field" aria-hidden="true">
+                    <label for="hb-website">Website</label>
+                    <input type="text" id="hb-website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+
+                <div class="intake-action">
+                    <button type="submit" class="btn primary intake-submit">
+                        <span class="intake-submit-label">Send my outline</span>
+                        <span class="intake-spinner" aria-hidden="true"></span>
+                    </button>
+                    <p class="intake-assurance">A conversation, not a commitment. Nothing is priced or scheduled until we have spoken.</p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    </div><!-- /[data-hb] -->
+
+    <!-- ================= FOOTER ================= -->
+    <div id="footer-section">
+        <footer class="footer" data-blocks="settle-up" data-blocks-pace="calm">
+            <div class="footer-signature rail" aria-hidden="true">ProManaged IT</div>
+
+            <div class="footer-content rail">
+                <div class="footer-brand">
+                    <h3>ProManaged IT</h3>
+                    <p>Build, Source, Support.</p>
+                    <span class="footer-label">Contact</span>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a></li>
+                        <li><a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a></li>
+                        <li><a href="mailto:johnpaulchirwa@promanaged-it.com">johnpaulchirwa@promanaged-it.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="../index.html#home">Home</a></li>
+                        <li><a href="../index.html#services">Services</a></li>
+                        <li><a href="../index.html#about">About</a></li>
+                        <li><a href="custom_websites.html">Build</a></li>
+                        <li><a href="hardware_sourcing.html">Source</a></li>
+                        <li><a href="it_support.html">Support</a></li>
+                        <li><a href="../learn_more.html">How we work</a></li>
+                        <li><a href="../get-started.html">Get started</a></li>
+                        <li><a href="../privacy_policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4>Keep in touch</h4>
+                    <p>For new work, sourcing questions or a problem you are not sure how to frame, start with a conversation.</p>
+                    <a class="btn secondary" href="../get-started.html">Talk to ProManaged IT</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom rail">
+                <p>&copy; <span data-current-year>2026</span> ProManaged IT. All rights reserved.</p>
+                <p>
+                    Company Registration Number 749512 &middot;
+                    <a href="https://core.cro.ie/e-commerce/company/5379600" target="_blank" rel="noopener">Verify registration</a>
+                    &middot; <a href="../privacy_policy.html">Privacy Policy</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- hospitality_builder.js MUST come before main.js. Both are deferred, so
+         document order decides execution order: main.js collects its motion units
+         at DOMContentLoaded and skips a [data-blocks] group that has none, so the
+         module cards have to exist by then. -->
+    <script src="../js/hospitality_builder.js" defer></script>
+    <script src="../js/main.js" defer></script>
+    <script src="../js/interface_motion.js" defer></script>
+    <script src="../js/mobile_phone_navbar.js" defer></script>
+    <script src="../js/form_intake.js" defer></script>
+</body>
+
+</html>

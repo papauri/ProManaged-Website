@@ -10,6 +10,28 @@ The product idea is simple:
 
 This is not a conventional contact form, pricing calculator, or generic SaaS feature checklist. It is a guided **product configurator + discovery journey + qualified enquiry**.
 
+---
+
+## CURRENT STATUS
+
+- **Completed:** First full implementation cycle — the builder exists end to end: property intake → foundation → optional modules with dependency explanation → live system map → generated workflow story → configuration summary → structured enquiry with its own endpoint and branded emails.
+- **In progress:** None.
+- **Next:** Visual/responsive verification pass at the seven required widths, then §19 source-system research (see Blocked).
+- **Blocked:**
+  - **§19 source-system research.** The Rosalyn's and Liwonde Sun *live admin systems* were not inspected. Browser verification is waived for the current run (`CLAUDE.md` → Verification), and logging into a live client production system is an action outside what this cycle was authorised to take. The feature catalogue was therefore built only from evidence already verified in this repository — the delivered public booking surfaces and the room/reservation tooling described in `pages/custom_websites.html` and `.claude/PROJECT_CREDIBILITY.md`. Everything beyond that is labelled **Proposed module** or **Custom development** in the UI rather than claimed as delivered. The catalogue must be revisited once the systems are actually inspected.
+  - **Responsive verification** at 375 / 430 / 768 / 1024 / 1440 / 1600 / 1920px. Composed mobile-first with explicit tablet, laptop and desktop stages, but not visually confirmed — no browser check was performed and none is claimed.
+- **Last implementation commit:** see `git log` for `Build the Hospitality System Builder end to end`.
+
+### Decisions taken during implementation
+
+Recorded here because they resolve ambiguities in the plan and will shape future cycles.
+
+1. **Core is fixed, not selectable.** §6 calls Core "the stable foundation, not arbitrary checkboxes", so bookings/rooms/guests are explained and always present rather than pre-ticked. The endpoint ignores the submitted `core_features` value entirely — the foundation is what it is regardless of what a POST claims.
+2. **No navigation tile was added.** §3 permits one "if the existing bento navigation can accommodate it without becoming crowded". It cannot: `css/navbar.css` composes the panel for exactly seven tiles (per-tile stagger delays 1–7, minor tiles at `span 4`), and an eighth would break the row and arrive with no stagger. The entry point is the Build-page CTA instead.
+3. **A dedicated endpoint, `php/hospitality.php`.** §16 allows one where justified. The payload is a structured configuration rather than a message, and `contact.php` has no shape for it. Everything underneath is unchanged — the same `http.php` sanitisers, the same `pm_internal_email` / `pm_customer_email` templates, the same PHPMailer transport.
+4. **The browser submits catalogue IDs, never labels.** Every label a human reads is resolved server-side from an allow-list, so a forged POST cannot invent a capability and have it arrive in an inbox looking like something ProManaged offers.
+5. **Analytics are local only.** §21 forbids adding a platform and none exists in the repository, so events dispatch a DOM `CustomEvent` and push to `window.dataLayer` only if something else already created it. Nothing is sent anywhere and no event carries a name, address or free text. `core_feature_selected` is not emitted — core is not selectable (see 1).
+
 The customer should feel:
 
 > "I'm designing my own hospitality system with ProManaged."
@@ -820,50 +842,50 @@ Reuse existing tokens and component patterns.
 The Hospitality System Builder is complete only when:
 
 ### Product experience
-- [ ] A visitor can identify their property type and approximate room count.
-- [ ] A visitor can identify current booking channels.
-- [ ] Core features are clearly explained.
-- [ ] Optional features are clearly explained.
-- [ ] Selecting a feature shows why it matters.
-- [ ] Dependencies are explained rather than silently applied.
-- [ ] Connected features tell a useful workflow story.
-- [ ] The system visual evolves as the customer selects capabilities.
-- [ ] A final configuration summary is generated.
-- [ ] The visitor can submit the configuration to ProManaged.
+- [x] A visitor can identify their property type and approximate room count. — seven property types plus a `+`/`−` number control with a typed value; a slider was rejected as the hardest way to say "eighteen" on a phone.
+- [x] A visitor can identify current booking channels. — multi-select, six channels.
+- [x] Core features are clearly explained. — each foundation card carries title, plain description and why-it-matters.
+- [x] Optional features are clearly explained. — nine modules, each with a customer-facing title and short description on the card face.
+- [x] Selecting a feature shows why it matters. — the detail panel opens on selection with `why`, the workflow steps and the relationships.
+- [x] Dependencies are explained rather than silently applied. — a dependency already met by the foundation is *explained* ("Builds on Rooms — already part of your foundation"); a genuine improvement that is not yet selected becomes a real "Add …" action, so no relationship dead-ends.
+- [x] Connected features tell a useful workflow story. — the "How it runs" chapter is generated from the actual selection and never describes a capability that was not chosen.
+- [x] The system visual evolves as the customer selects capabilities. — the map rebuilds on every change; only genuinely new tiles play the settle, so the composition does not flicker.
+- [x] A final configuration summary is generated. — property, foundation, additions and a generated plain-language paragraph.
+- [x] The visitor can submit the configuration to ProManaged.
 
 ### Sales
-- [ ] ProManaged receives the complete structured configuration.
-- [ ] Internal email is readable and branded.
-- [ ] Customer confirmation is clear and reassuring.
-- [ ] The final step feels like starting a conversation, not submitting a generic form.
+- [x] ProManaged receives the complete structured configuration. — property type, rooms, channels, foundation, added modules with their delivery status, assembled connections, the visitor's stated problem and their notes. *Live email delivery was not exercised: sending would dispatch real mail from the production mailbox. The endpoint's parsing and allow-listing are unit-tested (17 cases, all passing) and `php -l` is clean.*
+- [x] Internal email is readable and branded. — reuses `pm_internal_email` unchanged, with the configuration as the priority triage block.
+- [x] Customer confirmation is clear and reassuring. — reuses `pm_customer_email`; wording states plainly that some selections are built, some proposed and some bespoke.
+- [x] The final step feels like starting a conversation, not submitting a generic form. — asks only for name, property, email and an optional phone/notes, after the visitor can already see what they designed.
 
 ### Design
-- [ ] It looks native to the existing ProManaged luxury/editorial design.
-- [ ] It does not introduce a generic SaaS aesthetic.
-- [ ] Bento composition is asymmetric and deliberate.
-- [ ] Mobile feels designed, not compressed.
-- [ ] Motion uses the existing Building Blocks language.
-- [ ] Motion is premium and restrained.
-- [ ] The experience remains clear with reduced motion.
+- [x] It looks native to the existing ProManaged luxury/editorial design. — no new tokens, typefaces, colours or components; `css/hospitality_builder.css` composes only from `tokens.css` and the shared block/btn/field/intake families.
+- [x] It does not introduce a generic SaaS aesthetic. — softened rectangles rather than pills, warm neutral surfaces, graphite chapters, no gradients or glassmorphism.
+- [x] Bento composition is asymmetric and deliberate. — 5/4/3 for the foundation and 7/5, 5/7, 4/4/4, 5/7 for the module set, with its own tablet stage rather than a compressed desktop grid.
+- [ ] Mobile feels designed, not compressed. — **PARTIAL.** Composed mobile-first with explicit 430/560/768/900/1024/1440 stages, 48px+ touch targets throughout and a tablet composition written specifically for this page. Not visually confirmed; see Blocked.
+- [x] Motion uses the existing Building Blocks language. — the chapters use `settle-up` / `settle-side` / `scale-in` / `sequence-in` through the existing shared observer; no framework was added.
+- [x] Motion is premium and restrained. — transform/opacity only, one entrance per meaningful group, no looping, parallax or bounce.
+- [x] The experience remains clear with reduced motion. — the `prefers-reduced-motion` block forces every builder animation to its final state, and no information or control depends on an animation having run.
 
 ### Credibility
-- [ ] Rosalyn's can be used as real project evidence where appropriate.
-- [ ] Liwonde Sun Hotel can be used as real project evidence where appropriate.
-- [ ] Both are correctly described as Malawian-client work.
-- [ ] No fabricated claims exist.
-- [ ] Bank Nkhonde is absent from public content.
-- [ ] No private admin information is exposed.
+- [x] Rosalyn's can be used as real project evidence where appropriate. — one proof strip, using an existing repository capture.
+- [x] Liwonde Sun Hotel can be used as real project evidence where appropriate. — named in the same strip.
+- [x] Both are correctly described as Malawian-client work.
+- [x] No fabricated claims exist. — no metrics, outcomes, testimonials or dates. Every module states whether it is Built before / Proposed module / Custom development, and only bookings, rooms, guests and the booking engine may claim "built" (asserted by an automated catalogue check).
+- [x] Bank Nkhonde is absent from public content. — verified by repository grep; the name appears only in the `.claude/*.md` files that state the restriction.
+- [x] No private admin information is exposed. — no admin URLs, logins, credentials or customer data; the only imagery is an existing public-site capture.
 
 ### Technical
-- [ ] Existing navigation is intact.
-- [ ] Existing footer is intact.
-- [ ] Existing forms remain functional.
-- [ ] Existing PHP/PHPMailer contracts are preserved.
-- [ ] No `.env` or credentials are committed.
-- [ ] No YAML/YML files are added.
-- [ ] No unnecessary external dependencies are introduced.
-- [ ] No horizontal overflow at 375px, 430px, 768px, 1024px, 1440px, 1600px or 1920px.
-- [ ] Full diff has been inspected.
+- [x] Existing navigation is intact. — the rail and bento panel are copied verbatim; no tile added (see Decisions).
+- [x] Existing footer is intact.
+- [x] Existing forms remain functional. — the only change to shared JS is one additional `init()` call in `js/form_intake.js`, which is a no-op on pages without the form. `contact.php` and `booking.php` are untouched.
+- [x] Existing PHP/PHPMailer contracts are preserved. — new endpoint only; no shared PHP was modified.
+- [x] No `.env` or credentials are committed. — verified against `git status`.
+- [x] No YAML/YML files are added. — verified against `git status`.
+- [x] No unnecessary external dependencies are introduced. — vanilla JS, no libraries, no third-party services.
+- [ ] No horizontal overflow at 375px, 430px, 768px, 1024px, 1440px, 1600px or 1920px. — **BLOCKED** on browser verification, which is waived for this run. Guarded in code (`minmax(0, 1fr)` tracks, `min-width: 0` on flex/grid children, `overflow-wrap` on the values that carry submitted or long text) but not measured.
+- [x] Full diff has been inspected.
 
 ---
 

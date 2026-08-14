@@ -165,5 +165,10 @@
     document.addEventListener('DOMContentLoaded', () => {
         init(document.querySelector('#contact-form'));
         init(document.querySelector('#booking-form'));
+        // The Hospitality System Builder's closing form. Same board, same field
+        // markup, same honeypot — the only difference is the hidden configuration
+        // fields js/hospitality_builder.js keeps in sync, which FormData picks up
+        // with everything else. init() is a no-op on a page without the form.
+        init(document.querySelector('#hospitality-form'));
     });
 })();

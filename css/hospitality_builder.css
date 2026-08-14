@@ -1,0 +1,931 @@
+/* hospitality_builder.css — the Hospitality System Builder.
+
+   MOBILE FIRST, like every other stylesheet here: the base block IS the 375–430px
+   composition, and every media query is min-width and only ADDS capacity.
+
+   This file adds NOTHING to the design system. Every colour, radius, easing and
+   space value comes from css/tokens.css; the block grid, .btn family, .field
+   controls, intake board and Building Blocks motion all come from the shared
+   sheets. What is here is only the configurator's own components — the choice
+   chips, the module card, the system map and the story ladder — built out of
+   those same primitives so the page reads as another ProManaged chapter rather
+   than a microsite.
+
+   Motion rule: transform and opacity only, one entrance per meaningful group,
+   and prefers-reduced-motion resolves every one of them to the final state. */
+
+/* ---------- Chapter 01: the property panels ---------- */
+.hb-panel h3 {
+    font-size: var(--text-xl);
+    letter-spacing: var(--tracking-tight);
+}
+
+.hb-panel-hint {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+    max-width: 46ch;
+}
+
+/* ---------- Choice chips ----------
+   Deliberately not pills: the same softened rectangle as .btn, so a selectable
+   option reads as an engineered control and stays in the site's own language.
+   Selection is never colour-only — the chip gains a filled tick AND an ink/weight
+   change AND aria-pressed. */
+.hb-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+}
+
+.hb-choice {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    /* 48px is the touch floor; the padding keeps it there at every text size. */
+    min-height: 48px;
+    padding: var(--space-3) var(--space-5);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    line-height: 1.3;
+    text-align: left;
+    color: var(--color-text);
+    background: var(--color-paper);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-control);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background var(--transition), border-color var(--transition),
+        color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.block--tint .hb-choice { background: var(--color-paper) }
+
+.hb-choice-mark {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    position: relative;
+    transition: background var(--transition), border-color var(--transition);
+}
+
+/* The tick itself — a CSS-drawn check in the chip's own ink, so it re-tints on
+   every surface without a second rule. Hidden until selected. */
+.hb-choice-mark::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border-right: 2px solid var(--color-accent-contrast);
+    border-bottom: 2px solid var(--color-accent-contrast);
+    transform: rotate(45deg) scale(.4);
+    opacity: 0;
+    transition: opacity var(--transition), transform var(--transition);
+}
+
+@media (hover: hover) {
+    .hb-choice:hover {
+        border-color: var(--color-accent);
+        color: var(--color-accent-link);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 26px -16px rgba(28,27,25,.5);
+    }
+}
+
+.hb-choice:active { transform: translateY(0) scale(.985) }
+.hb-choice:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px }
+
+.hb-choice[aria-pressed="true"] {
+    background: var(--color-graphite);
+    border-color: var(--color-graphite);
+    color: var(--color-text-on-dark);
+    font-weight: var(--weight-semibold);
+}
+
+.hb-choice[aria-pressed="true"] .hb-choice-mark {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.hb-choice[aria-pressed="true"] .hb-choice-mark::after {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+}
+
+/* ---------- Room stepper ----------
+   A number field with real controls. A slider is the hardest possible way to say
+   "eighteen" on a phone, so this is a target either side of a typed value. */
+.hb-stepper {
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+}
+
+.hb-stepper-btn {
+    flex: 0 0 auto;
+    width: 56px;
+    min-height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-semibold);
+    line-height: 1;
+    color: var(--color-text);
+    background: var(--color-paper);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-control);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background var(--transition), border-color var(--transition),
+        color var(--transition), transform var(--transition);
+}
+
+@media (hover: hover) {
+    .hb-stepper-btn:hover { border-color: var(--color-accent); color: var(--color-accent-link) }
+}
+.hb-stepper-btn:active { transform: scale(.94) }
+.hb-stepper-btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px }
+
+.hb-stepper-value { flex: 1 1 auto; min-width: 0; display: flex }
+
+.hb-stepper-input {
+    width: 100%;
+    min-height: 56px;
+    padding: var(--space-3) var(--space-4);
+    font-family: var(--font-sans);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    text-align: center;
+    color: var(--color-text);
+    background: var(--color-paper);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-control);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.hb-stepper-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+
+/* The native spinners duplicate the two controls either side and are far too
+   small to hit; the buttons are the affordance. */
+.hb-stepper-input::-webkit-outer-spin-button,
+.hb-stepper-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0 }
+.hb-stepper-input { -moz-appearance: textfield; appearance: textfield }
+
+.hb-stepper-readout {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+}
+
+/* The textarea sits on the shared .field control from contact_section.css; only
+   its minimum height is builder-specific. */
+.hb-field textarea { min-height: 118px }
+
+/* ---------- The honesty note above the module set ---------- */
+.hb-honesty {
+    max-width: 76ch;
+    margin: 0 0 var(--space-8) 0;
+    padding: var(--space-5) var(--space-6);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    background: var(--color-ivory);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.hb-honesty-tag {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth);
+}
+
+/* ---------- Module cards ----------
+   Deliberately UNEQUAL. A bento needs blocks that differ in both axes, so the
+   spans below break the module set out of a uniform grid: the two capabilities
+   most properties actually start with lead at a larger size, and the custom-work
+   pair closes the composition. */
+.hb-card { gap: var(--space-4) }
+
+.hb-card-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.hb-card-name {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth);
+}
+
+.section--graphite .hb-card-name { color: var(--color-accent-earth) }
+
+.hb-card-title {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    color: var(--color-text);
+}
+
+.hb-card-short {
+    display: block;
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+    max-width: 44ch;
+}
+
+.hb-card-why {
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+    max-width: 52ch;
+}
+
+/* ---------- Status chip ----------
+   The honesty contract, on the card itself. Three states, each carrying its own
+   word — the colour is a reinforcement, never the signal. */
+.hb-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px var(--space-3);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: .04em;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.hb-status--built { background: var(--color-accent-earth-soft); color: var(--color-accent-earth-hover) }
+.hb-status--proposed { background: var(--color-stone); color: var(--color-text-muted) }
+.hb-status--custom { background: var(--color-accent-soft); color: var(--color-accent-active) }
+
+/* ---------- Core cards (graphite chapter) ---------- */
+.hb-card--core {
+    background: var(--color-graphite-soft);
+    border-color: rgba(247,243,236,.14);
+}
+
+.hb-card--core .hb-card-name { color: var(--color-accent-earth-soft) }
+.hb-card--core .hb-card-title { color: var(--color-text-on-dark) }
+.hb-card--core .hb-card-short,
+.hb-card--core .hb-card-why { color: var(--color-text-on-dark-muted) }
+.hb-card--core .hb-status--built {
+    background: rgba(247,243,236,.14);
+    color: var(--color-text-on-dark);
+}
+
+.hb-card-foundation {
+    margin-top: auto;
+    padding-top: var(--space-5);
+    border-top: 1px solid rgba(247,243,236,.18);
+    font-size: var(--text-sm);
+    color: var(--color-text-on-dark-muted);
+    max-width: none;
+}
+
+.hb-card-foundation-mark { color: var(--color-accent-earth-soft) }
+
+/* ---------- Optional cards: the selectable ones ----------
+   No padding and no gap: the toggle and the detail panel own their own insets, so
+   the control can extend to the card's full edge and still look inset. */
+.hb-card--optional { padding: 0; gap: 0; overflow: hidden }
+
+/* The heading exists for heading navigation only; the button inside it carries
+   every visual decision, so this is reset to nothing. */
+.hb-card-heading {
+    margin: 0;
+    font: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+}
+
+/* The whole head of the card is the control, so the target is the card rather
+   than a small chip inside it — the thumb-friendly requirement at 375px. */
+.hb-card-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    width: 100%;
+    padding: var(--space-6);
+    text-align: left;
+    font-family: var(--font-sans);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background var(--transition);
+}
+
+.hb-card-toggle:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -3px }
+
+@media (hover: hover) {
+    .hb-card--optional:not(.is-selected):hover { border-color: var(--color-border-strong) }
+    .hb-card-toggle:hover { background: var(--color-ivory) }
+}
+
+/* Touch has no hover at all, so the press state is the only feedback there is. */
+.hb-card-toggle:active { transform: scale(.99) }
+
+.hb-card-action {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    align-self: flex-start;
+    margin-top: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-control);
+    background: var(--color-accent-earth-soft);
+    color: var(--color-accent-earth-hover);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+}
+
+.hb-card-action-mark {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
+}
+
+/* A plus that becomes a tick on selection — the state change is a shape change,
+   not only a colour change. */
+.hb-card-action-mark::before,
+.hb-card-action-mark::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    border-radius: 1px;
+    transition: transform var(--transition), opacity var(--transition);
+}
+.hb-card-action-mark::before { left: 0; top: 6px; width: 14px; height: 2px }
+.hb-card-action-mark::after { left: 6px; top: 0; width: 2px; height: 14px }
+
+.hb-card--optional.is-selected {
+    border-color: var(--color-graphite);
+    box-shadow: var(--shadow-lg);
+}
+
+.hb-card--optional.is-selected .hb-card-action {
+    background: var(--color-graphite);
+    color: var(--color-text-on-dark);
+}
+
+/* Rotating the vertical stroke out and leaving the horizontal one gives a minus:
+   "remove", which is exactly what the control now does. */
+.hb-card--optional.is-selected .hb-card-action-mark::after {
+    transform: scaleY(0);
+    opacity: 0;
+}
+
+/* ---------- The detail: why it matters, how it runs, what it connects to ---------- */
+.hb-card-detail {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-6);
+    border-top: 1px solid var(--color-border);
+}
+
+/* MUST come after the rule above. [hidden] is styled by the UA sheet at element
+   specificity, so the class selector's display:flex beats it and the panel would
+   be permanently open — including for the eight modules nobody has selected. */
+.hb-card-detail[hidden] { display: none }
+
+.hb-flow-head {
+    margin: 0;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth);
+}
+
+/* The workflow, as a ladder rather than a diagram. A lodge owner should be able
+   to read it; a technical architecture drawing is explicitly not the goal. */
+.hb-flow {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: 0;
+    margin: 0;
+}
+
+.hb-flow-step {
+    position: relative;
+    padding-left: var(--space-6);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-text-muted);
+}
+
+/* The connector: a short rule with a dot, drawn in CSS so it inherits the
+   surface's own accent and needs no per-chapter override. */
+.hb-flow-step::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .55em;
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent-earth);
+}
+
+/* The rule joining one step to the next. It runs from just under this step's dot
+   to the top of the following one, so the ladder reads as a sequence rather than
+   a bullet list. Not drawn after the last step, which has nothing to reach. */
+.hb-flow-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: calc(.55em + 12px);
+    height: calc(100% - .55em - 6px);
+    width: 2px;
+    background: var(--color-border);
+}
+
+/* ---------- Relationships ---------- */
+.hb-relation {
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    max-width: none;
+}
+
+.hb-relations { display: flex; flex-direction: column; gap: var(--space-3) }
+
+.hb-relation--met { background: var(--color-ivory); border: 1px solid var(--color-border) }
+
+.hb-relation--prompt {
+    background: var(--color-accent-earth-soft);
+    border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: flex-start;
+}
+
+.hb-relation-tag {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth);
+}
+
+.hb-relation-text { margin: 0; color: var(--color-text); max-width: 52ch }
+
+/* The prompt's action is a real .btn from the shared control family, so a
+   relationship never dead-ends in a sentence the visitor cannot act on. */
+.hb-relation-add { min-height: 48px }
+
+.hb-card-statusnote {
+    margin: 0;
+    font-size: var(--text-xs);
+    line-height: 1.6;
+    color: var(--color-text-subtle);
+    max-width: none;
+}
+
+/* ---------- The system map ----------
+   An evolving composition, not an architecture diagram: tiles that a lodge owner
+   can read, sized so the property leads and the foundation sits beneath it. */
+.hb-map {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+}
+
+.hb-node {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(247,243,236,.16);
+    background: var(--color-graphite-soft);
+}
+
+.hb-node-kind {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth-soft);
+}
+
+.hb-node-name {
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text-on-dark);
+    /* Long module names must wrap rather than widen the tile past the rail. */
+    overflow-wrap: break-word;
+}
+
+.hb-node-meta {
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--color-text-on-dark-muted);
+}
+
+/* The property is the anchor of the map and reads as the largest weight. */
+.hb-node--property {
+    background: var(--color-accent-earth);
+    border-color: transparent;
+}
+.hb-node--property .hb-node-kind { color: rgba(247,243,236,.8) }
+.hb-node--property .hb-node-name { font-size: var(--text-2xl) }
+
+.hb-node--added { border-color: rgba(247,243,236,.34) }
+
+/* Only the tile that has just appeared settles in, with the same weighted motion
+   the rest of the site uses. The map is rebuilt on every change, so animating
+   every added tile each time would make the whole composition flicker whenever
+   one capability was toggled. Transform and opacity only. */
+.hb-node--enter {
+    animation: hb-node-in var(--block-duration) var(--ease-settle) backwards;
+}
+
+@keyframes hb-node-in {
+    from { opacity: 0; transform: translate3d(0, var(--block-travel), 0) scale(var(--block-scale)) }
+    to { opacity: 1; transform: none }
+}
+
+/* ---------- The workflow story ---------- */
+.hb-story {
+    list-style: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+    padding: 0;
+    margin: 0;
+    counter-reset: hbstep;
+}
+
+.hb-story-step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    min-width: 0;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+}
+
+.hb-story-index {
+    flex: 0 0 auto;
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.4;
+    color: var(--color-accent-earth);
+}
+
+.hb-story-text {
+    margin: 0;
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+    max-width: 56ch;
+}
+
+/* ---------- The summary ---------- */
+.hb-summary-block h3 { font-size: var(--text-xl) }
+
+.hb-summary-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border);
+    max-width: none;
+}
+.hb-summary-line:last-child { border-bottom: 0 }
+
+.hb-summary-key {
+    flex: 0 0 auto;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+}
+
+.hb-summary-value {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    overflow-wrap: break-word;
+    min-width: 0;
+}
+
+.hb-summary-prose {
+    font-size: var(--text-lg);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+    max-width: var(--measure);
+    margin-top: var(--space-4);
+}
+
+.hb-summary-caveat {
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-subtle);
+    max-width: 64ch;
+}
+
+.hb-summary-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: 0;
+    margin-top: var(--space-5);
+}
+
+.hb-summary-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-left: var(--space-5);
+    position: relative;
+    min-width: 0;
+}
+
+.hb-summary-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .62em;
+    width: 12px;
+    height: 1px;
+    background: var(--color-accent-earth);
+}
+
+.hb-summary-item-name {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+}
+
+.hb-summary-item-note {
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-text-muted);
+}
+
+.hb-summary-item-status {
+    align-self: flex-start;
+    margin-top: var(--space-1);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: .04em;
+    color: var(--color-text-subtle);
+}
+
+.hb-summary-item--empty .hb-summary-item-name { color: var(--color-text-muted) }
+
+/* ---------- Conversion ---------- */
+.hb-conversion-grid { display: grid; gap: var(--grid-gap) }
+
+.hb-conversion-intro p { color: var(--color-text-on-dark-muted) }
+
+.hb-conversion-perks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: 0;
+    margin-top: var(--space-8);
+}
+
+.hb-conversion-perks li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-text-on-dark-muted);
+}
+
+.hb-conversion-perks i {
+    flex: 0 0 auto;
+    margin-top: .2em;
+    color: var(--color-accent-earth-soft);
+}
+
+/* The live region for the shared form behaviour in js/form_intake.js. Matches the
+   booking page's treatment so a result reads the same way on every form. */
+.hb-conversion .form-feedback:empty { display: none }
+
+.hb-conversion .form-feedback {
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius);
+    font-size: var(--text-sm);
+    background: rgba(247,243,236,.08);
+    color: var(--color-text-on-dark);
+    border: 1px solid rgba(247,243,236,.2);
+}
+
+.hb-conversion .form-feedback.is-success {
+    background: var(--color-accent-earth-soft);
+    color: var(--color-graphite);
+    border-color: transparent;
+}
+
+.hb-conversion .form-feedback.is-error {
+    background: rgba(185,28,28,.16);
+    border-color: rgba(247,243,236,.34);
+    color: var(--color-text-on-dark);
+}
+
+/* ================= BREAKPOINTS =================
+   Each of these is an addition, not a climb-down. The phone composition above is
+   already complete. */
+
+/* ---------- Large phone ---------- */
+@media (min-width: 430px) {
+    .hb-choice { font-size: var(--text-base) }
+}
+
+/* ---------- Phablet ---------- */
+@media (min-width: 560px) {
+    .hb-map { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+    /* The property anchors the map, so it keeps the full row at every width. */
+    .hb-node--property { grid-column: 1 / -1 }
+    .hb-story { gap: var(--space-6) }
+}
+
+/* ---------- Tablet ---------- */
+@media (min-width: 768px) {
+    .hb-card-toggle { padding: var(--space-8) }
+    .hb-card-detail { padding: var(--space-6) var(--space-8) var(--space-8) }
+    .hb-card-title { font-size: var(--text-2xl) }
+    .hb-node { padding: var(--space-6) }
+    .hb-story-step { gap: var(--space-6); padding-top: var(--space-6) }
+    .hb-story-index { font-size: var(--text-2xl) }
+    .hb-honesty { padding: var(--space-6) var(--space-8) }
+    /* The prompt and its action sit on one line once there is room for both. */
+    .hb-relation--prompt { flex-direction: row; align-items: center; justify-content: space-between }
+    .hb-relation--prompt .hb-relation-tag { margin-bottom: var(--space-1) }
+    .hb-relation-add { flex: 0 0 auto }
+}
+
+/* ---------- Tablet map: three across, property still leading ---------- */
+@media (min-width: 768px) {
+    .hb-map { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+}
+
+/* ---------- The tablet stage ----------
+   The shared grid sends every unclassed .block to a full row until 900px, which
+   would leave this page as one long column of cards on a tablet. These are a
+   deliberate tablet composition rather than a waypoint: modules pair up, the
+   summary's narrow blocks take the row they need, and nothing sits in a
+   half-empty row. */
+@media (min-width: 600px) and (max-width: 899px) {
+    .hb-modules > .hb-card--optional { grid-column: span 6 }
+    /* The lead module keeps the full row — it is the one that changes a working
+       week the most, and pairing it off would flatten the set into a plain grid. */
+    .hb-modules > .hb-card--optional:nth-child(1) { grid-column: 1 / -1 }
+    /* An odd card left at the end takes the row rather than half of one. */
+    .hb-modules > .hb-card--optional:nth-child(even):last-child { grid-column: 1 / -1 }
+
+    .hb-core > .hb-card--core { grid-column: span 6 }
+    .hb-core > .hb-card--core:nth-child(1) { grid-column: 1 / -1 }
+
+    .hb-summary > .block--4 { grid-column: 1 / -1 }
+}
+
+/* ---------- The asymmetric module composition ----------
+   Introduced at the same width the shared block grid starts honouring spans, so
+   the two systems agree. This is where the module set stops being a uniform grid:
+   the capabilities most properties start with lead at a larger size, the middle
+   run pairs up, and the custom-work pair closes the composition. */
+@media (min-width: 900px) {
+    .hb-property > .hb-panel { min-height: 0 }
+
+    .hb-core > .hb-card--core:nth-child(1) { grid-column: span 5 }
+    .hb-core > .hb-card--core:nth-child(2) { grid-column: span 4 }
+    .hb-core > .hb-card--core:nth-child(3) { grid-column: span 3 }
+
+    .hb-modules > .hb-card--optional { grid-column: span 4 }
+    /* Website + booking engine, and housekeeping — the two that change a working
+       week the most, so they carry the most weight in the composition. */
+    .hb-modules > .hb-card--optional:nth-child(1) { grid-column: span 7 }
+    .hb-modules > .hb-card--optional:nth-child(2) { grid-column: span 5 }
+    .hb-modules > .hb-card--optional:nth-child(3) { grid-column: span 5 }
+    .hb-modules > .hb-card--optional:nth-child(4) { grid-column: span 7 }
+    /* Restaurant/POS and custom integrations — the bespoke pair, closing the set. */
+    .hb-modules > .hb-card--optional:nth-child(8) { grid-column: span 5 }
+    .hb-modules > .hb-card--optional:nth-child(9) { grid-column: span 7 }
+
+    .hb-map { grid-template-columns: repeat(4, minmax(0, 1fr)) }
+    .hb-node--property { grid-column: span 2 }
+
+    /* The story becomes two columns of ladder rather than one very long run. */
+    .hb-story { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--grid-gap) }
+}
+
+/* ---------- Laptop ---------- */
+@media (min-width: 1024px) {
+    .hb-conversion-grid {
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        align-items: start;
+        column-gap: clamp(var(--space-8), 4vw, var(--space-20));
+    }
+    .hb-conversion-intro { position: sticky; top: calc(var(--header-h) + var(--nav-float) + var(--space-6)) }
+    /* The feedback region belongs above the board it reports on, in both columns. */
+    .hb-conversion .form-feedback { grid-column: 2 }
+    .hb-conversion .hb-form { grid-column: 2 }
+    .hb-summary-prose { font-size: var(--text-xl) }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1440px) {
+    .hb-map { gap: var(--space-5) }
+    .hb-story { column-gap: var(--space-16) }
+}
+
+/* ================= MOTION =================
+   The detail panel's entrance: the statement resolves, then the story steps
+   assemble one after another. display:none suppresses animation, so these only
+   ever run at the moment the panel stops being [hidden] — which is exactly the
+   selection beat the plan asks for. */
+.hb-assemble > * {
+    animation: hb-settle 460ms var(--ease-settle) backwards;
+}
+.hb-assemble > *:nth-child(1) { animation-delay: 0ms }
+.hb-assemble > *:nth-child(2) { animation-delay: 60ms }
+.hb-assemble > *:nth-child(3) { animation-delay: 120ms }
+.hb-assemble > *:nth-child(4) { animation-delay: 180ms }
+.hb-assemble > *:nth-child(5) { animation-delay: 240ms }
+
+.hb-assemble .hb-flow-step {
+    animation: hb-settle 420ms var(--ease-settle) backwards;
+}
+.hb-assemble .hb-flow-step:nth-child(1) { animation-delay: 140ms }
+.hb-assemble .hb-flow-step:nth-child(2) { animation-delay: 190ms }
+.hb-assemble .hb-flow-step:nth-child(3) { animation-delay: 240ms }
+.hb-assemble .hb-flow-step:nth-child(4) { animation-delay: 290ms }
+.hb-assemble .hb-flow-step:nth-child(5) { animation-delay: 340ms }
+
+@keyframes hb-settle {
+    from { opacity: 0; transform: translate3d(0, 10px, 0) }
+    to { opacity: 1; transform: none }
+}
+
+/* Reduced motion resolves everything here to its final state immediately. No
+   information and no control depends on an animation having run. */
+@media (prefers-reduced-motion: reduce) {
+    .hb-assemble > *,
+    .hb-assemble .hb-flow-step,
+    .hb-node--enter {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+@media print {
+    .hb-assemble > *,
+    .hb-assemble .hb-flow-step,
+    .hb-node--enter { animation: none !important; opacity: 1 !important; transform: none !important }
+}
