@@ -7,21 +7,24 @@ This repo uses an autonomous, token-efficient implementation workflow. Every Cla
 Read:
 
 1. `.claude/AGENT_OPERATING_INSTRUCTIONS.md`
-2. `.claude/PROJECT_CONTEXT.md`
-3. `.claude/BUILD_PLAN.md`
-4. `.claude/PROJECT_CREDIBILITY.md`
-5. `.claude/SYSTEM_MAP.md` when relevant
-6. `.claude/HOSPITALITY_SYSTEM_BUILDER.md` whenever hospitality-builder work is active
+2. `.claude/BUILD_PLAN_EXECUTION_SCOPE.md`
+3. `.claude/PROJECT_CONTEXT.md`
+4. `.claude/BUILD_PLAN.md`
+5. `.claude/PROJECT_CREDIBILITY.md`
+6. `.claude/SYSTEM_MAP.md` when relevant
+7. `.claude/HOSPITALITY_SYSTEM_BUILDER.md` only when hospitality work is explicitly active or required by the active website task
 
-Then inspect the current implementation on `main`.
+## Default `continue` behaviour
+
+If the user says only `continue`, `keep going`, `next`, `implement`, or `CODE NOW`, the default target is **the ProManaged public website Build Plan in `.claude/BUILD_PLAN.md`**.
+
+Do not switch to a secondary product plan merely because it exists in the repository. Hospitality Builder work is opt-in unless the active website plan explicitly calls for it.
+
+Read the current Build Plan, find the highest-priority unchecked website task, implement it, self-check it, update the plan state, commit and push. Do not ask the user to repeat requirements already documented in the repository.
 
 ## Simple-session rule
 
-If the user says only `continue`, `keep going`, `next`, `implement`, or `CODE NOW`, do not ask them to repeat requirements already documented in the repository.
-
-Read the current plans, identify the highest-priority unfinished implementation work, and execute it.
-
-Do not merely describe what should be done when an implementation objective is active.
+A fresh Claude session must be able to resume from the repository alone. The checked/unchecked state in the relevant Build Plan is the persistent task register.
 
 ## Current design contract
 
@@ -61,6 +64,6 @@ The user is the final visual acceptance gate. Do not create an unnecessary revie
 
 The implementation agent should:
 
-**READ → THINK → IMPLEMENT → SELF-CHECK → COMMIT → PUSH → REPORT**
+**READ → THINK → IMPLEMENT → SELF-CHECK → UPDATE PLAN → COMMIT → PUSH → REPORT**
 
 If implementation reveals that a plan is incomplete or technically inaccurate, update the relevant plan so the repository remains the shared source of truth. Do not silently drift away from the documented product intent.
