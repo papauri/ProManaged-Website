@@ -53,17 +53,64 @@ behalf is exactly what that setting rules out.
 | 01 Your property | A property type **and** at least one booking channel are chosen. Room count has a usable default and the problem note is optional, so neither can signal completion. | 02 The foundation |
 | 03 Your additions | At least one module is selected, then a 2.6s pause. Longer than step 01's because a selection opens a detail panel worth reading — and any scroll while reading cancels it. | 04 Your system |
 
-**The read-only chapters deliberately do not auto-advance.** There is nothing to
-complete in 02, 04, 05 or 06, so the only possible trigger would be a timer on
-how fast someone reads, which would pull the page out from under a slow reader.
-A guided flow that fights the visitor is worse than no guided flow. If a
-continue affordance is wanted for those chapters later, make it an explicit
-control rather than a timer.
+**Every chapter also ends with a continue control** (`.hb-next`), which runs the
+same weighted scroll. This is how the read-only chapters move the visitor on:
+there is nothing to complete in 02, 04, 05 or 06, so the only automatic trigger
+available would be a timer on how fast someone reads, which would pull the page
+out from under a slow reader. An explicit invitation engages without hijacking,
+and it completes the chain end to end:
+
+`01 → 02 → 03 → 04 → 05 → 06 → 07`
+
+Each control is a real `<a href="#…">`, so it still navigates with JavaScript
+off; the script upgrades it to the weighted scroll and marks that step spent, so
+an automatic advance cannot fire a second jump straight after.
+
+**The free-text note is a completion signal too.** It is the last thing in
+chapter 01, so `done()` also requires that it does not currently have focus —
+otherwise "pick a type, pick a channel, start writing" would scroll the page away
+from the box the visitor was about to type in. Blurring it re-tests the step and
+advances. `focusin` is in the abandon list for the same reason: focus moved
+without a pointer or key (assistive technology, or a script) would otherwise
+leave a pending advance armed.
 
 **Implementation note.** Each animation frame scrolls with `behavior: 'instant'`.
 `'auto'` means "use the CSS `scroll-behavior` property", and `css/global_styles.css`
 sets `smooth` on `html` — so with `'auto'` every frame kicked off a fresh smooth
 scroll chasing the last one, and the travel measurably stopped ~600px short.
+
+### Density — how the chapter avoids being a wall
+
+Eleven modules shown flat asked the visitor to weigh eleven things at once, which
+is the "dense checklist" §11 rules out. They are rendered as **three labelled
+groups** — what your guests see (5), how your team runs the day (4), when you
+outgrow one property (2) — so the chapter is three small questions with three
+landmarks rather than one long list. `GROUPS` in `js/hospitality_builder.js` owns
+membership and order; the ≥900px spans are composed per group so layout and
+membership stay together, and both are asserted by the test suite.
+
+The core cards also dropped a per-card footer that repeated the same sentence
+three times directly under a chapter lede already making the point.
+
+### Contrast
+
+Two real defects were found by measuring, not by eye, and both are fixed:
+
+1. **The core card footer rendered in `--color-text-muted`** — a *light-surface*
+   token — giving dark grey on a dark card at about **1.9:1**. `.block p` is
+   (0,1,1) and beat the bare `.hb-card-foundation` at (0,1,0). That line is now
+   gone entirely (see above), and the rule that remains is prefixed with
+   `.hb-card--core` so specificity cannot lose again.
+2. **The foundation cards barely separated from their own chapter.**
+   `--color-graphite-soft` on `--color-graphite` measured **1.19:1** — not a card
+   on a background but one dark mass. Lifted to 16% ivory, now **1.6:1**.
+
+Three further marginal failures were cleared: the system map's property tile
+(4.12 and 3.77 against earth) and the summary keys (4.46).
+
+**When auditing contrast here, measure elements that own a text node directly,
+not just leaf elements.** The first audit missed defect 1 entirely because that
+paragraph also contains a `<span>`, so a leaf-only walk skipped it.
 
 ### Cursor in the builder
 

@@ -38,6 +38,7 @@ function literal(name) {
 const ctx = vm.createContext({});
 const CORE = vm.runInContext('(' + literal('CORE') + ')', ctx);
 const OPTIONAL = vm.runInContext('(' + literal('OPTIONAL') + ')', ctx);
+const GROUPS = vm.runInContext('(' + literal('GROUPS') + ')', ctx);
 const ALL = CORE.concat(OPTIONAL);
 const ids = new Set(ALL.map((m) => m.id));
 const coreIds = new Set(CORE.map((m) => m.id));
@@ -55,12 +56,38 @@ const REQUIRED = ['id', 'category', 'status', 'name', 'title', 'shortDescription
 check('no duplicate ids', ids.size === ALL.length);
 
 /* The ≥900px spans in css/hospitality_builder.css are hand-composed against these
-   counts (7+5 / 5+7 / 4+4+4 / 4+4+4 / 12, and 5+4+3 for the foundation). Adding or
+   counts (5+4+3 for the foundation, and per-group patterns below). Adding or
    removing a capability without revisiting them leaves a half-empty row. */
 check('3 foundation capabilities — the CSS composition assumes this',
     CORE.length === 3, 'got ' + CORE.length);
 check('11 optional modules — the CSS composition assumes this',
     OPTIONAL.length === 11, 'got ' + OPTIONAL.length);
+
+/* ---------- Grouping ----------
+   Eleven modules are shown as three labelled sets so the chapter is not a wall of
+   choices. A module missing from every group would simply never render, and one
+   in two groups would render twice — neither is visible from the catalogue alone. */
+const grouped = [];
+GROUPS.forEach((g) => {
+    check('group "' + g.id + '" has a title and a note', !!g.title && !!g.note);
+    g.modules.forEach((id) => grouped.push(id));
+});
+
+OPTIONAL.forEach((m) => {
+    const times = grouped.filter((id) => id === m.id).length;
+    check('"' + m.id + '" appears in exactly one group', times === 1, 'appears ' + times + ' times');
+});
+grouped.forEach((id) => {
+    check('grouped id "' + id + '" is a real optional module',
+        OPTIONAL.some((m) => m.id === id));
+});
+
+/* Each group's span pattern is written for its exact size. */
+const EXPECTED_SIZES = { 'guest-facing': 5, operations: 4, later: 2 };
+GROUPS.forEach((g) => {
+    check('group "' + g.id + '" still has ' + EXPECTED_SIZES[g.id] + ' modules — its CSS spans assume this',
+        g.modules.length === EXPECTED_SIZES[g.id], 'got ' + g.modules.length);
+});
 ALL.forEach((m) => {
     const missing = REQUIRED.filter((k) => !Object.prototype.hasOwnProperty.call(m, k));
     check('"' + m.id + '" has every required field', missing.length === 0, 'missing: ' + missing.join(', '));

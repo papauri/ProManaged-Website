@@ -218,6 +218,163 @@
     color: var(--color-accent-earth);
 }
 
+/* ---------- Module groups ----------
+   The set of eleven is broken into three, each headed by who the group is for.
+   Eleven cards presented flat is a wall — the visitor has to weigh eleven things
+   at once. Three labelled sets is three small questions, and the rule above each
+   one gives the chapter an internal rhythm, so scrolling it feels like passing
+   three landmarks rather than reading one long list. */
+.hb-group + .hb-group {
+    margin-top: var(--space-16);
+    padding-top: var(--space-10);
+    border-top: 1px solid var(--color-border);
+}
+
+.hb-group-head { margin-bottom: var(--space-8) }
+
+.hb-group-title {
+    font-family: var(--font-sans);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text);
+}
+
+.hb-group-note {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    max-width: 56ch;
+}
+
+@media (min-width: 768px) {
+    .hb-group-title { font-size: var(--text-2xl) }
+    .hb-group-note { font-size: var(--text-base) }
+}
+
+/* ---------- The continue control ----------
+   Every chapter ends with one. The read-only chapters have no completion to
+   detect, so rather than guess at reading speed with a timer they offer an
+   obvious way on and let the visitor pick the moment.
+
+   Deliberately not a .btn: a full-width editorial band reads as "the next part of
+   the story", where a button in the same position would read as "submit". */
+.hb-next {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "label cue" "title cue";
+    align-items: center;
+    gap: var(--space-1) var(--space-5);
+    width: 100%;
+    margin-top: var(--space-12);
+    padding: var(--space-6);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    background: var(--color-paper);
+    color: var(--color-text);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background var(--transition), border-color var(--transition),
+        transform var(--transition), box-shadow var(--transition);
+}
+
+.hb-next-label {
+    grid-area: label;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth);
+}
+
+.hb-next-title {
+    grid-area: title;
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    color: inherit;
+    min-width: 0;
+}
+
+/* A downward chevron: this control always moves the visitor down the page, so the
+   cue points the way the scroll will actually go. */
+.hb-next-cue {
+    grid-area: cue;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    border-radius: var(--radius-full);
+    background: var(--color-accent-earth-soft);
+}
+
+.hb-next-cue::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    margin: -7px 0 0 -5px;
+    border-right: 2px solid var(--color-accent-earth-hover);
+    border-bottom: 2px solid var(--color-accent-earth-hover);
+    transform: rotate(45deg);
+    transition: transform var(--transition);
+}
+
+@media (hover: hover) {
+    .hb-next:hover {
+        border-color: var(--color-accent);
+        transform: translateY(-2px);
+        box-shadow: 0 14px 30px -18px rgba(28,27,25,.6);
+    }
+    .hb-next:hover .hb-next-cue::after { transform: rotate(45deg) translate(2px, 2px) }
+}
+
+.hb-next:active { transform: translateY(0) scale(.995) }
+.hb-next:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px }
+/* The scroll target takes focus so keyboard users land in the chapter; it is not
+   an interactive element, so it must not also draw a focus ring. */
+[data-hb] section:focus { outline: none }
+
+/* Graphite chapters. */
+.hb-next--dark {
+    background: rgba(247,243,236,.08);
+    border-color: rgba(247,243,236,.28);
+    color: var(--color-text-on-dark);
+}
+.hb-next--dark .hb-next-label { color: var(--color-accent-earth-soft) }
+.hb-next--dark .hb-next-cue { background: rgba(247,243,236,.16) }
+.hb-next--dark .hb-next-cue::after {
+    border-right-color: var(--color-text-on-dark);
+    border-bottom-color: var(--color-text-on-dark);
+}
+@media (hover: hover) {
+    .hb-next--dark:hover { background: rgba(247,243,236,.14); border-color: rgba(247,243,236,.6) }
+}
+
+/* The one leading into the form carries more weight — it is the end of the
+   journey rather than another step along it. */
+.hb-next--final {
+    background: var(--color-graphite);
+    border-color: transparent;
+    color: var(--color-text-on-dark);
+}
+.hb-next--final .hb-next-label { color: var(--color-accent-earth-soft) }
+.hb-next--final .hb-next-cue { background: rgba(247,243,236,.16) }
+.hb-next--final .hb-next-cue::after {
+    border-right-color: var(--color-text-on-dark);
+    border-bottom-color: var(--color-text-on-dark);
+}
+
+@media (min-width: 768px) {
+    .hb-next { padding: var(--space-8) }
+    .hb-next-title { font-size: var(--text-2xl) }
+    .hb-next-cue { width: 52px; height: 52px }
+}
+
 /* ---------- Module cards ----------
    Deliberately UNEQUAL. A bento needs blocks that differ in both axes, so the
    spans below break the module set out of a uniform grid: the two capabilities
@@ -293,10 +450,15 @@
 .hb-status--proposed { background: var(--color-stone); color: var(--color-text-muted) }
 .hb-status--custom { background: var(--color-accent-soft); color: var(--color-accent-active) }
 
-/* ---------- Core cards (graphite chapter) ---------- */
+/* ---------- Core cards (graphite chapter) ----------
+   The card has to separate from the ground it sits on. --color-graphite-soft on a
+   --color-graphite section measured 1.19:1, which is not a card on a background,
+   it is one dark mass — the three foundation cards read as a single block of
+   murk. Lifting the surface to 16% ivory takes that to ~1.6:1, which is the point
+   at which an edge becomes legible without the card turning grey. */
 .hb-card--core {
-    background: var(--color-graphite-soft);
-    border-color: rgba(247,243,236,.14);
+    background: rgba(247,243,236,.16);
+    border-color: rgba(247,243,236,.24);
 }
 
 .hb-card--core .hb-card-name { color: var(--color-accent-earth-soft) }
@@ -304,20 +466,13 @@
 .hb-card--core .hb-card-short,
 .hb-card--core .hb-card-why { color: var(--color-text-on-dark-muted) }
 .hb-card--core .hb-status--built {
-    background: rgba(247,243,236,.14);
+    background: rgba(247,243,236,.2);
     color: var(--color-text-on-dark);
 }
 
-.hb-card-foundation {
-    margin-top: auto;
-    padding-top: var(--space-5);
-    border-top: 1px solid rgba(247,243,236,.18);
-    font-size: var(--text-sm);
-    color: var(--color-text-on-dark-muted);
-    max-width: none;
-}
-
-.hb-card-foundation-mark { color: var(--color-accent-earth-soft) }
+/* The last paragraph carries the card's bottom spacing now that the repeated
+   footer line is gone. */
+.hb-card--core .hb-card-why { margin-bottom: auto }
 
 /* ---------- Optional cards: the selectable ones ----------
    No padding and no gap: the toggle and the detail panel own their own insets, so
@@ -575,7 +730,11 @@
     background: var(--color-accent-earth);
     border-color: transparent;
 }
-.hb-node--property .hb-node-kind { color: rgba(247,243,236,.8) }
+/* Earth is a mid-tone, so the muted ivories that work on graphite fall under AA
+   here — measured 4.12:1 for the label and 3.77:1 for the meta line. Both are
+   raised until they clear 4.5:1 against this surface specifically. */
+.hb-node--property .hb-node-kind { color: var(--color-text-on-dark) }
+.hb-node--property .hb-node-meta { color: rgba(247,243,236,.9) }
 .hb-node--property .hb-node-name { font-size: var(--text-2xl) }
 
 .hb-node--added { border-color: rgba(247,243,236,.34) }
@@ -650,7 +809,8 @@
     font-weight: var(--weight-semibold);
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
-    color: var(--color-text-subtle);
+    /* --color-text-subtle measured 4.46:1 here — just under AA at this size. */
+    color: var(--color-text-muted);
 }
 
 .hb-summary-value {
@@ -829,11 +989,15 @@
    half-empty row. */
 @media (min-width: 600px) and (max-width: 899px) {
     .hb-modules > .hb-card--optional { grid-column: span 6 }
-    /* The lead module keeps the full row — it is the one that changes a working
-       week the most, and pairing it off would flatten the set into a plain grid. */
+    /* Each group's lead module keeps the full row — it is the one that changes a
+       working week the most, and pairing it off would flatten the set. */
     .hb-modules > .hb-card--optional:nth-child(1) { grid-column: 1 / -1 }
     /* An odd card left at the end takes the row rather than half of one. */
     .hb-modules > .hb-card--optional:nth-child(even):last-child { grid-column: 1 / -1 }
+    /* The last group has only two cards, so a full-width lead would give it two
+       stacked bands. They pair instead. */
+    [data-group="later"] .hb-modules > .hb-card--optional:nth-child(1),
+    [data-group="later"] .hb-modules > .hb-card--optional:nth-child(2) { grid-column: span 6 }
 
     .hb-core > .hb-card--core { grid-column: span 6 }
     .hb-core > .hb-card--core:nth-child(1) { grid-column: 1 / -1 }
@@ -853,20 +1017,24 @@
     .hb-core > .hb-card--core:nth-child(2) { grid-column: span 4 }
     .hb-core > .hb-card--core:nth-child(3) { grid-column: span 3 }
 
-    /* ELEVEN optional modules, laid out 7+5 / 5+7 / 4+4+4 / 4+4+4 / 12 so every
-       row fills exactly and the set opens asymmetric rather than as a plain grid.
-       The count is asserted by tests/hospitality_builder.test.js — adding or
-       removing a module means revisiting these spans. */
+    /* Composed PER GROUP, so a group's membership and its layout live together and
+       every row fills exactly. Group sizes are asserted by
+       tests/hospitality_builder.test.js — changing one means revisiting its spans.
+         guest-facing (5)  7+5, 4+4+4
+         operations   (4)  7+5, 5+7
+         later        (2)  5+7 */
     .hb-modules > .hb-card--optional { grid-column: span 4 }
-    /* Website + booking engine, and housekeeping — the two that change a working
-       week the most, so they carry the most weight in the composition. */
-    .hb-modules > .hb-card--optional:nth-child(1) { grid-column: span 7 }
-    .hb-modules > .hb-card--optional:nth-child(2) { grid-column: span 5 }
-    .hb-modules > .hb-card--optional:nth-child(3) { grid-column: span 5 }
-    .hb-modules > .hb-card--optional:nth-child(4) { grid-column: span 7 }
-    /* Custom integrations closes the set on its own full-width row: it is the one
-       entry that is genuinely open-ended rather than a defined module. */
-    .hb-modules > .hb-card--optional:nth-child(11) { grid-column: 1 / -1 }
+
+    [data-group="guest-facing"] .hb-modules > .hb-card--optional:nth-child(1) { grid-column: span 7 }
+    [data-group="guest-facing"] .hb-modules > .hb-card--optional:nth-child(2) { grid-column: span 5 }
+
+    [data-group="operations"] .hb-modules > .hb-card--optional:nth-child(1) { grid-column: span 7 }
+    [data-group="operations"] .hb-modules > .hb-card--optional:nth-child(2) { grid-column: span 5 }
+    [data-group="operations"] .hb-modules > .hb-card--optional:nth-child(3) { grid-column: span 5 }
+    [data-group="operations"] .hb-modules > .hb-card--optional:nth-child(4) { grid-column: span 7 }
+
+    [data-group="later"] .hb-modules > .hb-card--optional:nth-child(1) { grid-column: span 5 }
+    [data-group="later"] .hb-modules > .hb-card--optional:nth-child(2) { grid-column: span 7 }
 
     .hb-map { grid-template-columns: repeat(4, minmax(0, 1fr)) }
     .hb-node--property { grid-column: span 2 }

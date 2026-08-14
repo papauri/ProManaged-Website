@@ -278,6 +278,33 @@
         },
     ];
 
+    /* Eleven modules presented as one flat set is a wall: the visitor has to weigh
+       eleven things at once, which is exactly the "dense checklist" the plan rules
+       out. Grouped, it becomes three small questions — what guests see, what the
+       team runs, and what comes later — and each group is a set you can hold in
+       your head. Order here is the render order; the spans in the stylesheet are
+       composed per group, so a group's membership and its layout stay together. */
+    const GROUPS = [
+        {
+            id: 'guest-facing',
+            title: 'What your guests see',
+            note: 'The public side of your property — how people find you, book, and know what is on.',
+            modules: ['website', 'restaurant', 'conference', 'events', 'guest-comms'],
+        },
+        {
+            id: 'operations',
+            title: 'How your team runs the day',
+            note: 'The private side. This is where the work actually happens.',
+            modules: ['housekeeping', 'staff', 'payments', 'reporting'],
+        },
+        {
+            id: 'later',
+            title: 'When you outgrow one property',
+            note: 'Only relevant to some properties. Skip this unless it describes you.',
+            modules: ['multi-property', 'integrations'],
+        },
+    ];
+
     const ALL = CORE.concat(OPTIONAL);
     const BY_ID = ALL.reduce(function (map, mod) { map[mod.id] = mod; return map; }, {});
     const CORE_IDS = CORE.map(function (m) { return m.id; });
@@ -530,10 +557,12 @@
             card.appendChild(el('p', 'hb-card-short', mod.shortDescription));
             card.appendChild(el('p', 'hb-card-why', mod.why));
 
-            const foot = el('p', 'hb-card-foundation');
-            foot.appendChild(el('span', 'hb-card-foundation-mark', '—'));
-            foot.appendChild(document.createTextNode(' Part of every system we build. Not something to switch on.'));
-            card.appendChild(foot);
+            /* No per-card "part of every system we build" footer. It said the same
+               sentence three times, immediately under a chapter lede that already
+               makes the point ("They are not options — they are the floor everything
+               else stands on"). Three repetitions of a line the visitor has just
+               read is the kind of density that makes a chapter feel heavier than it
+               is. */
 
             coreHost.appendChild(card);
         });
@@ -542,7 +571,27 @@
     function renderOptional() {
         if (!optionalHost) return;
         clear(optionalHost);
-        OPTIONAL.forEach(function (mod) {
+        GROUPS.forEach(function (group) {
+            const section = el('div', 'hb-group');
+            section.dataset.group = group.id;
+
+            const head = el('div', 'hb-group-head');
+            head.appendChild(el('h3', 'hb-group-title', group.title));
+            head.appendChild(el('p', 'hb-group-note', group.note));
+            section.appendChild(head);
+
+            const grid = el('div', 'grid hb-modules');
+            group.modules.forEach(function (id) {
+                const mod = BY_ID[id];
+                if (mod) grid.appendChild(optionalCard(mod));
+            });
+            section.appendChild(grid);
+            optionalHost.appendChild(section);
+        });
+    }
+
+    function optionalCard(mod) {
+        {
             const card = el('article', 'block hb-card hb-card--optional');
             card.dataset.module = mod.id;
 
@@ -572,12 +621,12 @@
             toggle.appendChild(action);
 
             /* The heading wraps the control rather than sitting beside it — the
-               documented disclosure pattern. A <button> may not contain an <h3>
-               (phrasing content only), and without a heading the whole module set
-               would be invisible to heading navigation, so the nesting goes this
-               way round. It changes nothing visually: .hb-card-heading is reset to
-               inherit. */
-            const heading = el('h3', 'hb-card-heading');
+               documented disclosure pattern. A <button> may not contain a heading
+               (phrasing content only), and without one the whole module set would be
+               invisible to heading navigation, so the nesting goes this way round.
+               It changes nothing visually: .hb-card-heading is reset to inherit.
+               h4, because the group title above it is the h3. */
+            const heading = el('h4', 'hb-card-heading');
             heading.appendChild(toggle);
             card.appendChild(heading);
 
@@ -598,8 +647,8 @@
             detail.appendChild(el('p', 'hb-card-statusnote', STATUS_NOTE[mod.status]));
 
             card.appendChild(detail);
-            optionalHost.appendChild(card);
-        });
+            return card;
+        }
     }
 
     /* The relationship explanation. Two different jobs in one place:
@@ -987,11 +1036,21 @@
         {
             id: 'property',
             target: '#foundation',
-            /* Room count has a usable default and the problem note is optional, so
-               those two cannot signal completion. Type plus at least one channel is
-               the point at which the visitor has actually told us how they work. */
-            done: function () { return state.propertyType !== '' && state.channels.length > 0; },
-            settle: 1100,
+            /* Type plus at least one channel is the point at which the visitor has
+               actually told us how they work — room count has a usable default, so
+               it cannot signal anything on its own.
+
+               The free-text note is the reason for the activeElement check. It sits
+               last in the chapter, so without it the sequence "pick a type, pick a
+               channel, start writing" would scroll the page away from the box the
+               visitor was about to type in. While that field has focus the step is
+               not finished; blurring it re-tests this and advances. */
+            done: function () {
+                return state.propertyType !== ''
+                    && state.channels.length > 0
+                    && document.activeElement !== painInput;
+            },
+            settle: 1800,
         },
         {
             id: 'additions',
@@ -1069,7 +1128,13 @@
            is deliberately NOT in this list: the animation below scrolls the page
            itself and would instantly cancel itself. */
         const abandon = function () { cancelAdvance(); };
-        const EVENTS = ['wheel', 'touchstart', 'pointerdown', 'keydown'];
+        /* `focusin` matters on its own: focus moved without a pointer or a key —
+           assistive technology, or a script calling .focus() — would otherwise leave
+           a pending advance armed and scroll the page away from the field the
+           visitor had just been placed in. It cannot cancel the advance that is
+           being scheduled right now, because the click that completed the step has
+           already focused its own control before these listeners are attached. */
+        const EVENTS = ['wheel', 'touchstart', 'pointerdown', 'keydown', 'focusin'];
         EVENTS.forEach(function (name) {
             window.addEventListener(name, abandon, { passive: true });
         });
@@ -1178,6 +1243,33 @@
         const step = event.target.closest('[data-hb-rooms-step]');
         if (step && root.contains(step)) {
             setRooms(state.rooms + parseInt(step.dataset.hbRoomsStep, 10), true);
+            return;
+        }
+
+        /* The continue control. Authored as a real anchor so it still navigates
+           with JavaScript off; here it is upgraded to the same weighted scroll the
+           automatic advances use, so moving on by hand and being carried on feel
+           like one behaviour rather than two. */
+        const next = event.target.closest('.hb-next');
+        if (next && root.contains(next)) {
+            const targetSel = next.getAttribute('href');
+            const target = targetSel && document.querySelector(targetSel);
+            if (!target) return;
+            event.preventDefault();
+            cancelAdvance();
+            // Mark the step spent: the visitor has moved on deliberately, so being
+            // scrolled again a moment later would be a second, unasked-for jump.
+            const from = next.closest('section');
+            if (from && from.id && advanced.indexOf(from.id) === -1) advanced.push(from.id);
+            track('step_advanced', { from: from ? from.id : '', to: targetSel.replace('#', ''), via: 'control' });
+            if (prefersReducedMotion()) {
+                target.scrollIntoView();
+            } else {
+                slowScrollTo(target);
+            }
+            // Keyboard users must land in the chapter, not back at the top.
+            target.setAttribute('tabindex', '-1');
+            target.focus({ preventScroll: true });
         }
     });
 
@@ -1193,6 +1285,14 @@
     }
     if (painInput) {
         painInput.addEventListener('input', syncHidden);
+        /* Finishing with the note is itself a completion signal — it is the last
+           thing in the chapter. `change` fires on blur once the value has actually
+           been edited, which is "I have said my piece", not "I paused typing".
+           update() re-tests the step, which now passes because focus has left. */
+        painInput.addEventListener('change', function () { syncHidden(); maybeAdvance(); });
+        // Leaving the field without typing anything should still let the step
+        // resolve, since the note is optional.
+        painInput.addEventListener('blur', function () { maybeAdvance(); });
     }
 
     /* Story panels are a disclosure, so Escape should close the one in focus. */

@@ -232,6 +232,17 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Every chapter carries one of these. The read-only chapters have no
+                 completion to detect, so rather than guess at reading speed with a
+                 timer they invite the visitor onward and let them choose the moment.
+                 A real anchor, so it still works with JavaScript off; the script
+                 upgrades it to the same weighted scroll the automatic advances use. -->
+            <a class="hb-next" href="#foundation">
+                <span class="hb-next-label">Next</span>
+                <span class="hb-next-title">The foundation</span>
+                <span class="hb-next-cue" aria-hidden="true"></span>
+            </a>
         </div>
     </section>
 
@@ -244,6 +255,12 @@
                 <p class="lede">Bookings, rooms and guests are what every hotel system we have delivered actually runs on. They are not options — they are the floor everything else stands on.</p>
             </div>
             <div class="grid hb-core" data-hb-core></div>
+
+            <a class="hb-next hb-next--dark" href="#additions">
+                <span class="hb-next-label">Next</span>
+                <span class="hb-next-title">Add what your operation needs</span>
+                <span class="hb-next-cue" aria-hidden="true"></span>
+            </a>
         </div>
     </section>
 
@@ -284,7 +301,15 @@
                 a promise of a finished product you can buy today.
             </p>
 
-            <div class="grid hb-modules" data-hb-optional></div>
+            <!-- Rendered as three labelled groups by js/hospitality_builder.js, so
+                 eleven modules read as three small sets rather than one wall. -->
+            <div data-hb-optional></div>
+
+            <a class="hb-next" href="#system">
+                <span class="hb-next-label">Then see</span>
+                <span class="hb-next-title">What you have assembled</span>
+                <span class="hb-next-cue" aria-hidden="true"></span>
+            </a>
         </div>
     </section>
 
@@ -297,6 +322,12 @@
                 <p class="lede" data-hb-mapcount>Three foundation capabilities, nothing added yet.</p>
             </div>
             <div class="hb-map" data-hb-map aria-live="polite"></div>
+
+            <a class="hb-next hb-next--dark" href="#how-it-runs">
+                <span class="hb-next-label">Next</span>
+                <span class="hb-next-title">See how it runs</span>
+                <span class="hb-next-cue" aria-hidden="true"></span>
+            </a>
         </div>
     </section>
 
@@ -309,6 +340,12 @@
                 <p class="lede">This story changes as you change your system. It only ever describes what you have actually selected.</p>
             </div>
             <ol class="hb-story" data-hb-story></ol>
+
+            <a class="hb-next" href="#summary">
+                <span class="hb-next-label">Next</span>
+                <span class="hb-next-title">Your outline</span>
+                <span class="hb-next-cue" aria-hidden="true"></span>
+            </a>
         </div>
     </section>
 
@@ -346,6 +383,12 @@
                     <ul class="hb-summary-list" data-hb-summary-optional></ul>
                 </div>
             </div>
+
+            <a class="hb-next hb-next--final" href="#talk">
+                <span class="hb-next-label">Last step</span>
+                <span class="hb-next-title">Send this to ProManaged</span>
+                <span class="hb-next-cue" aria-hidden="true"></span>
+            </a>
         </div>
     </section>
 
