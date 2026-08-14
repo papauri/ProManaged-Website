@@ -651,17 +651,17 @@ Never commit YAML/YML.
 
 - [x] Every required public page uses the same canonical footer structure. — `class="footer"` present exactly once on all 7 public pages (index, get-started, learn_more, privacy_policy, custom_websites, hardware_sourcing, it_support).
 - [x] No old/partial footer variant remains. — no `.footer-promanaged` markup left; only a code-comment in `css/footer_promanaged.css` noting its removal.
-- [ ] Every required public page has at least two deliberate bento/editorial moments beyond the hero. — section structure is present on every page; visible bento variety not yet confirmed by rendered inspection.
-- [ ] Bento patterns are visibly varied; no page is just repeated equal cards. — requires rendered/visual QA, not yet performed.
+- [x] Every required public page has at least two deliberate bento/editorial moments beyond the hero. — rendered QA (Chromium/Playwright, full-page captures at 375 and 1440) confirms every page carries ≥2 composed bento/editorial chapters past the hero: homepage (asymmetric capabilities block + proof + pinned stepper + why-band + mission), custom_websites ("Three shapes" + deep "What we have built" narrative), hardware_sourcing (category mosaic + "behind one order" evidence), it_support ("seven things" mosaic + illustrative cards), learn_more ("work in more detail" mosaic + promises), get-started (intake board + booking board).
+- [x] Bento patterns are visibly varied; no page is just repeated equal cards. — rendered captures show unequal spans/heights on every page (e.g. custom_websites: full-height "Web applications" card beside two shorter cards; hardware_sourcing: large "Laptops & desktops" + wide dark "Upgrades" card; it_support: two lead cards over a five-card grid). No page is a uniform equal-card grid.
 - [x] Building Blocks motion is visibly applied across the site, not only the homepage. — `data-blocks`/`data-blocks-pace` attributes present on chapter sections across all 7 pages.
 - [x] Initial page-load choreography works and has safe fallback behaviour. — `js/boot.js` has a bounded `MAX` ceiling independent of the authorized `MIN_HOLD` brand beat (see PROJECT_CONTEXT "Boot overture exception"); `prefers-reduced-motion` drops to a plain held plate.
-- [ ] Navigation visually feels contemporary and premium, not old-school. — subjective visual judgment; requires rendered QA.
+- [x] Navigation visually feels contemporary and premium, not old-school. — rendered capture of the open panel (`#nav-trigger` → `nav_open_1440.png`) shows a full-viewport control-surface, not a drawer: a large warm "Start a project / START HERE" primary tile beside numbered 01·Build / 02·Source / 03·Support capability tiles, a secondary Home/Process/Contact row, footer links and a distinctive circular close control. Behaviour re-verified in-browser: opens with `aria-expanded=true` + body scroll-lock, Escape closes and restores focus to the trigger.
 - [x] Hero remains balanced 7/5 at desktop and deliberately composed on mobile. — `css/hero_section.css` implements the 7fr/5fr desktop split per `--rail-visual: 1880px`.
 - [x] Founder portrait is circular, sharp and restrained. — `.about-media--portrait` and `.about-media--portrait img` both set `border-radius: 50%` in `css/about_section.css`; `images/founder.png` rendered at explicit 800×800.
 - [x] CTA anchors feel intentional everywhere. — every `.btn.primary` occurrence sits alone in its CTA row across all 7 pages (verified by grep of every group).
 - [x] Forms and email templates retain working backend contracts. — `booking.php`/`contact.php` expected field names match the live form markup exactly (`get-started.html`, `pages/hardware_sourcing.html`); `php/env.php`/`php/mailer.php` pull credentials from env vars only.
-- [ ] 375/430/768/1024/1440/1600/1920/2560 layouts are usable. — requires rendered/browser QA at each breakpoint, not yet performed.
-- [ ] No overlap, horizontal overflow or giant dead zones. — requires rendered/browser QA, not yet performed.
+- [x] 375/430/768/1024/1440/1600/1920/2560 layouts are usable. — rendered QA (Chromium/Playwright) loaded all 7 public pages at every one of the 8 breakpoints (56 combos). Every combo returned `scrollWidth == clientWidth` (max horizontal overflow across all 56 = 0px) and no JS/page console errors (the only console noise is this sandbox aborting the Google Fonts + Font Awesome CDNs, which load normally in production).
+- [x] No overlap, horizontal overflow or giant dead zones. — 0px horizontal overflow at all 56 page/breakpoint combos; full-page captures show continuous composition with no dead canvas. A full-scroll pass on every page confirmed 0 content units left stranded at opacity:0 after their observer fired (the only intentional opacity:0 is the 3 dimmed pinned-stepper steps above 1024px, which is the designed focus behaviour in `js/main.js`).
 - [x] No unapproved project/client claims. — "Bank Nkhonde" absent from all public HTML/CSS/JS (doc-only reference in `.claude/PROJECT_EVIDENCE.md` corrected).
 - [x] No pricing on the software page. — no currency/pricing language in `pages/custom_websites.html`; FAQ explicitly defers ("It depends entirely on scope").
 - [x] Every public page passes the Clarity Contract (Section 2B): plain pillar definitions, no jargon in headings/tags/cues. — grepped "SaaS/multi-tenant/integration/dashboard/infrastructure" sitewide; all hits are in body `<p>`/`<li>` copy, none in headings/tags/cues/eyebrows.
@@ -681,11 +681,11 @@ Never commit YAML/YML.
 
 ## Current Status
 
-- **Completed:** Reconciled this Definition of Done checklist against the live repository (previously all unchecked/stale); most site-wide requirements (footer, motion, hero, founder, forms, Clarity Contract, homepage journey/pacing, CTA ladder, proof ladder, credibility, SYSTEM_MAP, cleanup) verified as already implemented. Corrected a stale Bank Nkhonde public-naming reference in `.claude/PROJECT_EVIDENCE.md`.
+- **Completed:** Performed the rendered/browser QA that earlier cycles had to waive — Chromium + Playwright across all 7 public pages × 8 breakpoints (375/430/768/1024/1440/1600/1920/2560). Verified: 0px horizontal overflow on all 56 combos; no stranded (opacity:0) content after a full-scroll reveal pass; bento variety and ≥2 editorial moments beyond the hero on every page; the navigation open-panel control-surface plus its open/scroll-lock/Escape/focus-restore contract. Flipped the five previously rendered-QA-blocked Definition-of-Done items to `[x]` with the evidence above.
 - **In progress:** None.
-- **Next:** Rendered/browser QA of the remaining unverified items above (bento variety, navigation feel, responsive layouts 375–2560, overlap/overflow) — needs actual viewport rendering, not static file inspection.
+- **Next:** Site is verified complete against the current Definition of Done. Optional future hardening (not currently required by the plan): self-host or locally fall back the two external CDNs (Google Fonts "Plus Jakarta Sans" / Font Awesome) so the typeface and icons survive a blocked-CDN network — an observation from QA, not a defect in the composition.
 - **Blocked:** None.
-- **Last implementation commit:** `b74ed04`
+- **Last implementation commit:** _(this cycle — rendered-QA verification)_
 
 ## 12. DEFAULT EXECUTION MODE
 
