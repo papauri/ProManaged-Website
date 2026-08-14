@@ -885,7 +885,12 @@
     font-size: var(--text-xs);
     font-weight: var(--weight-semibold);
     letter-spacing: .04em;
-    color: var(--color-text-subtle);
+    /* This list sits on .block--stone, where --color-text-subtle measures 4.46:1 —
+       just under AA at this size. It only renders once a module has been selected,
+       which is why the first contrast audit of this page reported it clean: the
+       element was never on screen. Audit interactive pages in their SELECTED
+       state, not just as loaded. */
+    color: var(--color-text-muted);
 }
 
 .hb-summary-item--empty .hb-summary-item-name { color: var(--color-text-muted) }

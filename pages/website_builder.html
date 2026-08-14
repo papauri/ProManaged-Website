@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="website_builder_head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design your website | ProManaged IT</title>
+    <meta name="description" content="Tell us what your website needs to do, add only what it needs, and see what it would take to build. Based on real sites we have delivered.">
+    <link rel="icon" href="../images/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/global_styles.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/interaction.css">
+    <link rel="stylesheet" href="../css/logo.css">
+    <link rel="stylesheet" href="../css/hero_section.css">
+    <link rel="stylesheet" href="../css/footer_promanaged.css">
+    <link rel="stylesheet" href="../css/scroll_top.css">
+    <link rel="stylesheet" href="../css/project_proof.css">
+    <link rel="stylesheet" href="../css/contact_section.css">
+    <link rel="stylesheet" href="../css/website_builder.css">
+    <!-- Set synchronously so the hero's building-block assembly can be hidden by
+         CSS before first paint. Without JS this class is never added, the hiding
+         rule never matches, and all content renders normally. -->
+    <script>(function(d,w){var r=d.documentElement;r.classList.add('js-on');w.pmHeroFailsafe=w.setTimeout(function(){r.classList.add('load-failsafe');},1200);})(document,window);</script>
+    <script src="../js/boot.js"></script>
+</head>
+
+<body>
+    <div id="header-section">
+        <div class="nav-rail">
+            <div class="nav-rail-inner">
+                <button type="button" class="nav-trigger" id="nav-trigger"
+                        aria-expanded="false" aria-controls="nav-panel"
+                        aria-label="Open navigation menu">
+                    <img src="../images/icon.png" alt="ProManaged IT" class="logo">
+                    <span class="nav-trigger-label">
+                        <span class="nav-trigger-word">Menu</span>
+                        <span class="nav-trigger-bars" aria-hidden="true">
+                            <span></span><span></span><span></span>
+                        </span>
+                    </span>
+                </button>
+                <a class="nav-wordmark" href="../index.html">ProManaged IT</a>
+                <div class="nav-rail-actions">
+                    <a class="btn primary nav-cta" href="../get-started.html">Start a project</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-panel" id="nav-panel" hidden>
+            <div class="nav-panel-rail">
+                <div class="nav-panel-top">
+                    <span class="nav-panel-brand">
+                        <img src="../images/icon.png" alt="" aria-hidden="true">
+                        ProManaged IT
+                    </span>
+                    <button type="button" class="nav-close" id="nav-close"
+                            aria-label="Close navigation menu">
+                        <span></span><span></span>
+                    </button>
+                </div>
+
+                <p class="nav-panel-lead">
+                    <span class="nav-panel-lead-eyebrow">Build &middot; Source &middot; Support</span>
+                    <span class="nav-panel-lead-text">We build your software, source your equipment and keep both working.</span>
+                </p>
+
+                <nav class="nav-bento" aria-label="Primary">
+                    <a class="nav-tile nav-tile--primary" href="../get-started.html">
+                        <span class="nav-tile-index">Start here</span>
+                        <span class="nav-tile-label">Start a project</span>
+                        <span class="nav-tile-desc">Bring us the problem. Book a call and get a scope, a timeline and an honest answer.</span>
+                        <span class="nav-tile-cue" aria-hidden="true">Book a call</span>
+                    </a>
+                    <a class="nav-tile nav-tile--lead" href="custom_websites.html">
+                        <span class="nav-tile-index">01 &middot; Build</span>
+                        <span class="nav-tile-label">Software &amp; Web Apps</span>
+                        <span class="nav-tile-desc">We build the software your business runs on &mdash; booking systems, internal tools, customer-facing apps.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--service" href="hardware_sourcing.html">
+                        <span class="nav-tile-index">02 &middot; Source</span>
+                        <span class="nav-tile-label">Hardware Sourcing</span>
+                        <span class="nav-tile-desc">We find, buy and deliver the computers and equipment you need.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--service" href="it_support.html">
+                        <span class="nav-tile-index">03 &middot; Support</span>
+                        <span class="nav-tile-label">IT Support</span>
+                        <span class="nav-tile-desc">We keep it working &mdash; fixes, setups and a person on the phone when it breaks.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="../index.html">
+                        <span class="nav-tile-index">Overview</span>
+                        <span class="nav-tile-label">Home</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="../learn_more.html">
+                        <span class="nav-tile-index">Process</span>
+                        <span class="nav-tile-label">How We Work</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="../index.html#contact">
+                        <span class="nav-tile-index">Direct</span>
+                        <span class="nav-tile-label">Contact</span>
+                    </a>
+                </nav>
+
+                <div class="nav-panel-foot">
+                    <span class="nav-panel-foot-label">On the homepage</span>
+                    <a class="nav-link" href="../index.html#about">About</a>
+                    <a class="nav-link" href="../index.html#services">Services</a>
+                    <a class="nav-link" href="../index.html#mission-vision">Mission &amp; Vision</a>
+                    <a class="nav-link" href="../privacy_policy.html">Privacy Policy</a>
+                    <a class="nav-panel-foot-mail" href="mailto:info@promanaged-it.com">info@promanaged-it.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= ORIENT ================= -->
+    <div id="hero-section">
+        <section id="home" class="hero">
+            <div class="hero-rail rail" data-assemble>
+                <div class="hero-statement">
+                    <span class="hero-eyebrow">Websites</span>
+                    <h1 id="hero-title">Work out what your website actually needs.</h1>
+                    <p id="hero-subtitle">Most people are sold either too little or far too much. Tell us what yours has to do, add only that, and see what it would take to build.</p>
+                    <div class="hero-buttons">
+                        <a href="#project" class="btn primary" id="hero-get-started">Start with your site</a>
+                        <a href="#foundation" class="btn secondary" id="hero-learn-more">What every site includes</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-feature">
+                        <i class="fas fa-window-maximize" aria-hidden="true"></i>
+                        <span class="hero-figure">Ten</span>
+                        <span class="hero-figure-label">of the eleven things you can put on this page are work we have already delivered and can show you running.</span>
+                    </div>
+                    <div class="hero-support">
+                        <div class="hero-support-row">
+                            <i class="fas fa-layer-group" aria-hidden="true"></i>
+                            <div class="hero-support-text">
+                                <span class="hero-support-title">Nothing bolted on</span>
+                                <span class="hero-support-desc">Add only what your site actually needs</span>
+                            </div>
+                        </div>
+                        <div class="hero-support-row">
+                            <i class="fas fa-comments" aria-hidden="true"></i>
+                            <div class="hero-support-text">
+                                <span class="hero-support-title">A starting point, not a quote</span>
+                                <span class="hero-support-desc">We tell you if something is not worth building</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- The configurator lives inside [data-wb]; js/website_builder.js binds one
+         delegated listener to it and renders every card from the catalogue in that
+         file. data-cursor-calm drops the instrument cursor to two states across
+         this dense interactive region — see js/interface_motion.js. Without JS the
+         chapter headings, explanations and the route to the booking form all still
+         read. -->
+    <div data-wb data-cursor-calm>
+
+    <!-- ================= UNDERSTAND ================= -->
+    <section id="premise" class="section section--ivory" data-blocks="settle-side">
+        <div class="rail">
+            <div class="grid">
+                <div class="block block--7 block--bare">
+                    <span class="eyebrow">Why this exists</span>
+                    <h2>Most website quotes are answering a question nobody asked.</h2>
+                </div>
+                <div class="block block--5 block--bare">
+                    <p>You ask for a website and get back a price, without ever being asked what it has to do. So you either pay for a shop you will never open, or you get five pages that cannot take a booking.</p>
+                    <p>Start from the job instead. Say what it needs to do, add only that, and see the shape of it before anyone quotes you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CHAPTER 01 — YOUR SITE ================= -->
+    <section id="project" class="section" data-blocks="settle-up">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">01 &middot; Your site</span>
+                <h2>Start with what it has to do.</h2>
+                <p class="lede">Four quick answers. Nothing here asks for your contact details &mdash; that comes at the end, once you can see what you have designed.</p>
+            </div>
+
+            <div class="grid wb-project">
+                <div class="block block--7 wb-panel">
+                    <h3 id="wb-purpose-label">What is the site mainly for?</h3>
+                    <p class="wb-panel-hint">Pick whichever is closest. It changes what we suggest, not what you are allowed to choose.</p>
+                    <div class="wb-choices" role="group" aria-labelledby="wb-purpose-label" data-wb-purpose></div>
+                </div>
+
+                <div class="block block--5 block--tint wb-panel">
+                    <h3 id="wb-pages-label">Roughly how many pages?</h3>
+                    <p class="wb-panel-hint">A guess is fine. Most small business sites land between five and ten.</p>
+                    <div class="wb-stepper">
+                        <button type="button" class="wb-stepper-btn" data-wb-pages-step="-1" aria-label="Fewer pages">
+                            <span aria-hidden="true">&minus;</span>
+                        </button>
+                        <div class="wb-stepper-value">
+                            <label class="visually-hidden" for="wb-pages">Approximate number of pages</label>
+                            <input type="number" id="wb-pages" class="wb-stepper-input" inputmode="numeric"
+                                   min="1" max="200" step="1" value="6" data-wb-pages-input>
+                        </div>
+                        <button type="button" class="wb-stepper-btn" data-wb-pages-step="1" aria-label="More pages">
+                            <span aria-hidden="true">+</span>
+                        </button>
+                    </div>
+                    <p class="wb-stepper-readout"><span data-wb-pages-value>6</span> pages</p>
+                </div>
+
+                <div class="block block--5 wb-panel">
+                    <h3 id="wb-current-label">What do you have today?</h3>
+                    <p class="wb-panel-hint">Choose as many as apply.</p>
+                    <div class="wb-choices" role="group" aria-labelledby="wb-current-label" data-wb-current></div>
+                </div>
+
+                <div class="block block--7 wb-panel">
+                    <h3>Is there one thing it absolutely must do?</h3>
+                    <p class="wb-panel-hint">Optional, and the most useful box on this page. Plain language is perfect.</p>
+                    <div class="field field--grow wb-field">
+                        <textarea id="wb-must" rows="4" placeholder=" " maxlength="1200" data-wb-must></textarea>
+                        <label for="wb-must">What it must do</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Every chapter carries one of these. The read-only chapters have no
+                 completion to detect, so rather than guess at reading speed with a
+                 timer they invite the visitor onward and let them choose the
+                 moment. A real anchor, so it works with JavaScript off. -->
+            <a class="wb-next" href="#foundation">
+                <span class="wb-next-label">Next</span>
+                <span class="wb-next-title">What every site includes</span>
+                <span class="wb-next-cue" aria-hidden="true"></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= CHAPTER 02 — THE BASICS ================= -->
+    <section id="foundation" class="section section--graphite" data-blocks="sequence-in">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">02 &middot; Always included</span>
+                <h2>Four things, in every site we build.</h2>
+                <p class="lede">These are not options and they are not extras on a quote. A site without any one of them is not finished.</p>
+            </div>
+            <div class="grid wb-core" data-wb-core></div>
+
+            <a class="wb-next wb-next--dark" href="#additions">
+                <span class="wb-next-label">Next</span>
+                <span class="wb-next-title">Add what your site needs</span>
+                <span class="wb-next-cue" aria-hidden="true"></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= CREDIBILITY ================= -->
+    <section id="evidence" class="section section--stone" data-blocks="settle-up" data-blocks-pace="calm">
+        <div class="rail">
+            <span class="eyebrow">Built from real work</span>
+            <div class="proof-strip">
+                <div class="proof-strip-copy">
+                    <h3>These are not features from a brochure.</h3>
+                    <p>Rosalyn's and Liwonde Sun Hotel both run sites we built &mdash; live availability, real bookings, and an admin area their teams edit themselves. Almost everything on this page is drawn from work like that.</p>
+                </div>
+                <div class="proof-shot proof-shot--feature">
+                    <img src="../images/projects/rosalyns-booking.jpg"
+                         alt="A booking interface delivered by ProManaged IT — check-in, guests and room type"
+                         loading="lazy" decoding="async" width="1241" height="467">
+                </div>
+                <div class="proof-strip-action">
+                    <a href="custom_websites.html#projects" class="btn secondary">See the work</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CHAPTER 03 — ADDITIONS ================= -->
+    <section id="additions" class="section" data-blocks="settle-side">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">03 &middot; Your additions</span>
+                <h2>Now add only what it needs.</h2>
+                <p class="lede">Select one and it will explain what it does for you, how it works, and what it connects to. Select nothing and you still have a complete, working website.</p>
+            </div>
+
+            <p class="wb-honesty">
+                <span class="wb-honesty-tag">Worth knowing</span>
+                This is a deliberately short list. Almost everything on it is something we have
+                built before and can show you running &mdash; that is the point. If what you need
+                is not here, the last card is where it goes, and we will scope it honestly rather
+                than pretend it is a box to tick.
+            </p>
+
+            <!-- Rendered as three labelled groups by js/website_builder.js. -->
+            <div data-wb-optional></div>
+
+            <a class="wb-next" href="#site">
+                <span class="wb-next-label">Then see</span>
+                <span class="wb-next-title">What you have put together</span>
+                <span class="wb-next-cue" aria-hidden="true"></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= VISUALISE ================= -->
+    <section id="site" class="section section--graphite" data-blocks="scale-in">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">04 &middot; Your site</span>
+                <h2>What you have put together.</h2>
+                <p class="lede" data-wb-mapcount>Four things every site we build includes, nothing added yet.</p>
+            </div>
+            <div class="wb-map" data-wb-map aria-live="polite"></div>
+
+            <a class="wb-next wb-next--dark" href="#how-it-works">
+                <span class="wb-next-label">Next</span>
+                <span class="wb-next-title">See how it works</span>
+                <span class="wb-next-cue" aria-hidden="true"></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= CONNECT ================= -->
+    <section id="how-it-works" class="section section--ivory" data-blocks="settle-up">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">05 &middot; How it works</span>
+                <h2>One visitor, from finding you to getting in touch.</h2>
+                <p class="lede">This changes as you change your site. It only ever describes what you have actually selected.</p>
+            </div>
+            <ol class="wb-story" data-wb-story></ol>
+
+            <a class="wb-next" href="#summary">
+                <span class="wb-next-label">Next</span>
+                <span class="wb-next-title">Your outline</span>
+                <span class="wb-next-cue" aria-hidden="true"></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= SUMMARISE ================= -->
+    <section id="summary" class="section" data-blocks="settle-up" data-wb-summary>
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">06 &middot; Your outline</span>
+                <h2>Here's what you've designed.</h2>
+            </div>
+
+            <div class="grid wb-summary">
+                <div class="block block--4 block--tint wb-summary-block">
+                    <h3>Your site</h3>
+                    <div data-wb-summary-project></div>
+                </div>
+
+                <div class="block block--8 wb-summary-block">
+                    <h3>How it works together</h3>
+                    <p class="wb-summary-prose" data-wb-summary-prose></p>
+                    <p class="wb-summary-caveat">
+                        This is a starting point, not a quote or a fixed scope. We will look at what
+                        you actually need and come back with what we would build &mdash; including
+                        telling you if part of this is not worth paying for.
+                    </p>
+                </div>
+
+                <div class="block block--5 wb-summary-block">
+                    <h3>Always included</h3>
+                    <ul class="wb-summary-list" data-wb-summary-core></ul>
+                </div>
+
+                <div class="block block--7 block--stone wb-summary-block">
+                    <h3>You added</h3>
+                    <ul class="wb-summary-list" data-wb-summary-optional></ul>
+                </div>
+            </div>
+
+            <a class="wb-next wb-next--final" href="#talk">
+                <span class="wb-next-label">Last step</span>
+                <span class="wb-next-title">Send this to ProManaged</span>
+                <span class="wb-next-cue" aria-hidden="true"></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= START =================
+         Same intake language, same .field / .field-msg / honeypot contract and the
+         same shared behaviour in js/form_intake.js as the site's other forms. The
+         configuration travels as hidden IDs; php/website.php owns the labels and
+         rejects anything outside its own catalogue. -->
+    <section id="talk" class="section section--graphite wb-conversion" data-blocks="settle-up" data-blocks-pace="calm">
+        <div class="rail wb-conversion-grid">
+            <div class="wb-conversion-intro">
+                <span class="eyebrow">07 &middot; Next step</span>
+                <h2>Let's talk about your site.</h2>
+                <p>You've designed the starting point. Tell us where to send it and we will come back with what we would actually build, in what order, and what it would take.</p>
+                <ul class="wb-conversion-perks">
+                    <li><i class="fas fa-clipboard-list" aria-hidden="true"></i> Your whole outline comes with the message &mdash; no repeating yourself</li>
+                    <li><i class="fas fa-comments" aria-hidden="true"></i> A real conversation about your business, not a sales sequence</li>
+                    <li><i class="fas fa-scale-balanced" aria-hidden="true"></i> An honest answer, including when something is not worth building</li>
+                </ul>
+            </div>
+
+            <div id="form-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+
+            <form class="intake wb-form" id="website-form"
+                  data-success-message="Thanks — your website outline is with us. We will read it properly and come back with what we would build."
+                  action="../php/website.php" method="POST">
+                <div class="intake-grid">
+                    <fieldset class="intake-group intake-group--lead">
+                        <legend class="intake-legend">
+                            <span class="intake-step">01</span>
+                            <span class="intake-title">You</span>
+                        </legend>
+                        <p class="intake-hint">Where we send your outline.</p>
+                        <div class="field">
+                            <input type="text" id="wb-name" name="name" placeholder=" " required autocomplete="name" aria-describedby="wb-name-msg">
+                            <label for="wb-name">Your name</label>
+                            <span class="field-msg" id="wb-name-msg" data-for="wb-name"></span>
+                        </div>
+                        <div class="field">
+                            <input type="email" id="wb-email" name="email" placeholder=" " required autocomplete="email" aria-describedby="wb-email-msg">
+                            <label for="wb-email">Email</label>
+                            <span class="field-msg" id="wb-email-msg" data-for="wb-email"></span>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="intake-group">
+                        <legend class="intake-legend">
+                            <span class="intake-step">02</span>
+                            <span class="intake-title">Your business</span>
+                        </legend>
+                        <p class="intake-hint">So we know who we are talking about.</p>
+                        <div class="field">
+                            <input type="text" id="wb-business" name="business" placeholder=" " required autocomplete="organization" aria-describedby="wb-business-msg">
+                            <label for="wb-business">Business name</label>
+                            <span class="field-msg" id="wb-business-msg" data-for="wb-business"></span>
+                        </div>
+                        <div class="field">
+                            <input type="tel" id="wb-phone" name="phone" placeholder=" " autocomplete="tel" aria-describedby="wb-phone-msg">
+                            <label for="wb-phone">Phone or WhatsApp (optional)</label>
+                            <span class="field-msg" id="wb-phone-msg" data-for="wb-phone"></span>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="intake-group">
+                        <legend class="intake-legend">
+                            <span class="intake-step">03</span>
+                            <span class="intake-title">Anything else</span>
+                        </legend>
+                        <p class="intake-hint">Optional. Your outline is already attached.</p>
+                        <div class="field field--grow">
+                            <textarea id="wb-notes" name="notes" rows="4" placeholder=" " maxlength="3000" aria-describedby="wb-notes-msg"></textarea>
+                            <label for="wb-notes">Notes</label>
+                            <span class="field-msg" id="wb-notes-msg" data-for="wb-notes"></span>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- The configuration. Written by js/website_builder.js on every
+                     change, as IDs only — php/website.php maps them to labels and
+                     discards anything outside its own catalogue. -->
+                <input type="hidden" name="purpose" value="">
+                <input type="hidden" name="pages" value="6">
+                <input type="hidden" name="current_situation" value="">
+                <input type="hidden" name="core_features" value="pages,mobile,enquiry,hosting">
+                <input type="hidden" name="optional_features" value="">
+                <input type="hidden" name="connections" value="">
+                <input type="hidden" name="must_do" value="">
+
+                <!-- Named "website" like every other form here: js/form_intake.js
+                     excludes that exact name from validation. -->
+                <div class="form-row hp-field" aria-hidden="true">
+                    <label for="wb-website">Website</label>
+                    <input type="text" id="wb-website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+
+                <div class="intake-action">
+                    <button type="submit" class="btn primary intake-submit">
+                        <span class="intake-submit-label">Send my outline</span>
+                        <span class="intake-spinner" aria-hidden="true"></span>
+                    </button>
+                    <p class="intake-assurance">A conversation, not a commitment. Nothing is priced or scheduled until we have spoken.</p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    </div><!-- /[data-wb] -->
+
+    <!-- ================= FOOTER ================= -->
+    <div id="footer-section">
+        <footer class="footer" data-blocks="settle-up" data-blocks-pace="calm">
+            <div class="footer-signature rail" aria-hidden="true">ProManaged IT</div>
+
+            <div class="footer-content rail">
+                <div class="footer-brand">
+                    <h3>ProManaged IT</h3>
+                    <p>Build, Source, Support.</p>
+                    <span class="footer-label">Contact</span>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a></li>
+                        <li><a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a></li>
+                        <li><a href="mailto:johnpaulchirwa@promanaged-it.com">johnpaulchirwa@promanaged-it.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="../index.html#home">Home</a></li>
+                        <li><a href="../index.html#services">Services</a></li>
+                        <li><a href="../index.html#about">About</a></li>
+                        <li><a href="custom_websites.html">Build</a></li>
+                        <li><a href="hardware_sourcing.html">Source</a></li>
+                        <li><a href="it_support.html">Support</a></li>
+                        <li><a href="../learn_more.html">How we work</a></li>
+                        <li><a href="../get-started.html">Get started</a></li>
+                        <li><a href="../privacy_policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4>Keep in touch</h4>
+                    <p>For new work, sourcing questions or a problem you are not sure how to frame, start with a conversation.</p>
+                    <a class="btn secondary" href="../get-started.html">Talk to ProManaged IT</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom rail">
+                <p>&copy; <span data-current-year>2026</span> ProManaged IT. All rights reserved.</p>
+                <p>
+                    Company Registration Number 749512 &middot;
+                    <a href="https://core.cro.ie/e-commerce/company/5379600" target="_blank" rel="noopener">Verify registration</a>
+                    &middot; <a href="../privacy_policy.html">Privacy Policy</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- website_builder.js MUST come before main.js. Both are deferred, so
+         document order decides execution order: main.js collects its motion units
+         at DOMContentLoaded and skips a [data-blocks] group that has none, so the
+         cards have to exist by then. -->
+    <script src="../js/website_builder.js" defer></script>
+    <script src="../js/main.js" defer></script>
+    <script src="../js/interface_motion.js" defer></script>
+    <script src="../js/mobile_phone_navbar.js" defer></script>
+    <script src="../js/form_intake.js" defer></script>
+</body>
+
+</html>

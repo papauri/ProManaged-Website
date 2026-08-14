@@ -1,0 +1,923 @@
+/* website_builder.css — the Website Builder.
+
+   MOBILE FIRST, like every other stylesheet here: the base block IS the 375–430px
+   composition, and every media query is min-width and only ADDS capacity.
+
+   Adds NOTHING to the design system. Every colour, radius, easing and space value
+   comes from css/tokens.css; the block grid, .btn family, .field controls, intake
+   board and Building Blocks motion come from the shared sheets. What is here is
+   only the configurator's own components.
+
+   A deliberate separate copy of css/hospitality_builder.css under a `wb-` prefix
+   (see .claude/WEBSITE_BUILDER.md §3), carrying forward the fixes that build
+   already paid for — they are marked below so they are not undone here. */
+
+/* ---------- Chapter 01 panels ---------- */
+.wb-panel h3 {
+    font-size: var(--text-xl);
+    letter-spacing: var(--tracking-tight);
+}
+
+.wb-panel-hint {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+    max-width: 46ch;
+}
+
+/* ---------- Choice chips ----------
+   Not pills: the same softened rectangle as .btn, so a selectable option reads as
+   an engineered control. Selection is never colour-only — the chip gains a filled
+   tick AND an ink/weight change AND aria-pressed. */
+.wb-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+}
+
+.wb-choice {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 48px;              /* the touch floor */
+    padding: var(--space-3) var(--space-5);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    line-height: 1.3;
+    text-align: left;
+    color: var(--color-text);
+    background: var(--color-paper);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-control);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background var(--transition), border-color var(--transition),
+        color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.block--tint .wb-choice { background: var(--color-paper) }
+
+.wb-choice-mark {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    position: relative;
+    transition: background var(--transition), border-color var(--transition);
+}
+
+.wb-choice-mark::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border-right: 2px solid var(--color-accent-contrast);
+    border-bottom: 2px solid var(--color-accent-contrast);
+    transform: rotate(45deg) scale(.4);
+    opacity: 0;
+    transition: opacity var(--transition), transform var(--transition);
+}
+
+@media (hover: hover) {
+    .wb-choice:hover {
+        border-color: var(--color-accent);
+        color: var(--color-accent-link);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 26px -16px rgba(28,27,25,.5);
+    }
+}
+
+.wb-choice:active { transform: translateY(0) scale(.985) }
+.wb-choice:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px }
+
+.wb-choice[aria-pressed="true"] {
+    background: var(--color-graphite);
+    border-color: var(--color-graphite);
+    color: var(--color-text-on-dark);
+    font-weight: var(--weight-semibold);
+}
+.wb-choice[aria-pressed="true"] .wb-choice-mark {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+.wb-choice[aria-pressed="true"] .wb-choice-mark::after { opacity: 1; transform: rotate(45deg) scale(1) }
+
+/* ---------- Page-count stepper ----------
+   A number field with real controls either side of a typed value. A slider is the
+   hardest possible way to say "about eight" on a phone. */
+.wb-stepper {
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+}
+
+.wb-stepper-btn {
+    flex: 0 0 auto;
+    width: 56px;
+    min-height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-semibold);
+    line-height: 1;
+    color: var(--color-text);
+    background: var(--color-paper);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-control);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color var(--transition), color var(--transition), transform var(--transition);
+}
+@media (hover: hover) {
+    .wb-stepper-btn:hover { border-color: var(--color-accent); color: var(--color-accent-link) }
+}
+.wb-stepper-btn:active { transform: scale(.94) }
+.wb-stepper-btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px }
+
+.wb-stepper-value { flex: 1 1 auto; min-width: 0; display: flex }
+
+.wb-stepper-input {
+    width: 100%;
+    min-height: 56px;
+    padding: var(--space-3) var(--space-4);
+    font-family: var(--font-sans);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    text-align: center;
+    color: var(--color-text);
+    background: var(--color-paper);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-control);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+.wb-stepper-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+/* The native spinners duplicate the two controls either side and are far too
+   small to hit; the buttons are the affordance. */
+.wb-stepper-input::-webkit-outer-spin-button,
+.wb-stepper-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0 }
+.wb-stepper-input { -moz-appearance: textfield; appearance: textfield }
+
+.wb-stepper-readout {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+}
+
+.wb-field textarea { min-height: 118px }
+
+/* ---------- The honesty note ---------- */
+.wb-honesty {
+    max-width: 76ch;
+    margin: 0 0 var(--space-8) 0;
+    padding: var(--space-5) var(--space-6);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    background: var(--color-ivory);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+.wb-honesty-tag {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth);
+}
+
+/* ---------- Module groups ----------
+   Seven modules is small enough to read, but grouping still gives the chapter
+   landmarks rather than one run of cards. */
+.wb-group + .wb-group {
+    margin-top: var(--space-16);
+    padding-top: var(--space-10);
+    border-top: 1px solid var(--color-border);
+}
+.wb-group-head { margin-bottom: var(--space-8) }
+.wb-group-title {
+    font-family: var(--font-sans);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text);
+}
+.wb-group-note {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    max-width: 56ch;
+}
+@media (min-width: 768px) {
+    .wb-group-title { font-size: var(--text-2xl) }
+    .wb-group-note { font-size: var(--text-base) }
+}
+
+/* ---------- The continue control ----------
+   Every chapter ends with one. The read-only chapters have no completion to
+   detect, so rather than guess at reading speed with a timer they offer an
+   obvious way on and let the visitor pick the moment.
+
+   Deliberately not a .btn: a full-width editorial band reads as "the next part of
+   the story", where a button in the same position would read as "submit". */
+.wb-next {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "label cue" "title cue";
+    align-items: center;
+    gap: var(--space-1) var(--space-5);
+    width: 100%;
+    margin-top: var(--space-12);
+    padding: var(--space-6);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    background: var(--color-paper);
+    color: var(--color-text);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background var(--transition), border-color var(--transition),
+        transform var(--transition), box-shadow var(--transition);
+}
+.wb-next-label {
+    grid-area: label;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth);
+}
+.wb-next-title {
+    grid-area: title;
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    color: inherit;
+    min-width: 0;
+}
+/* A downward chevron: this control always moves the visitor down the page. */
+.wb-next-cue {
+    grid-area: cue;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    border-radius: var(--radius-full);
+    background: var(--color-accent-earth-soft);
+}
+.wb-next-cue::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    margin: -7px 0 0 -5px;
+    border-right: 2px solid var(--color-accent-earth-hover);
+    border-bottom: 2px solid var(--color-accent-earth-hover);
+    transform: rotate(45deg);
+    transition: transform var(--transition);
+}
+@media (hover: hover) {
+    .wb-next:hover {
+        border-color: var(--color-accent);
+        transform: translateY(-2px);
+        box-shadow: 0 14px 30px -18px rgba(28,27,25,.6);
+    }
+    .wb-next:hover .wb-next-cue::after { transform: rotate(45deg) translate(2px, 2px) }
+}
+.wb-next:active { transform: translateY(0) scale(.995) }
+.wb-next:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px }
+/* The scroll target takes focus so keyboard users land in the chapter; it is not
+   interactive, so it must not also draw a focus ring. */
+[data-wb] section:focus { outline: none }
+
+.wb-next--dark {
+    background: rgba(247,243,236,.08);
+    border-color: rgba(247,243,236,.28);
+    color: var(--color-text-on-dark);
+}
+.wb-next--dark .wb-next-label { color: var(--color-accent-earth-soft) }
+.wb-next--dark .wb-next-cue { background: rgba(247,243,236,.16) }
+.wb-next--dark .wb-next-cue::after {
+    border-right-color: var(--color-text-on-dark);
+    border-bottom-color: var(--color-text-on-dark);
+}
+@media (hover: hover) {
+    .wb-next--dark:hover { background: rgba(247,243,236,.14); border-color: rgba(247,243,236,.6) }
+}
+
+.wb-next--final {
+    background: var(--color-graphite);
+    border-color: transparent;
+    color: var(--color-text-on-dark);
+}
+.wb-next--final .wb-next-label { color: var(--color-accent-earth-soft) }
+.wb-next--final .wb-next-cue { background: rgba(247,243,236,.16) }
+.wb-next--final .wb-next-cue::after {
+    border-right-color: var(--color-text-on-dark);
+    border-bottom-color: var(--color-text-on-dark);
+}
+
+@media (min-width: 768px) {
+    .wb-next { padding: var(--space-8) }
+    .wb-next-title { font-size: var(--text-2xl) }
+    .wb-next-cue { width: 52px; height: 52px }
+}
+
+/* ---------- Cards ---------- */
+.wb-card { gap: var(--space-4) }
+
+/* Each module card takes its own natural height instead of the row's. The shared
+   .grid stretches its children, which is right for the core row (equal cards) but
+   wrong here: the moment one card is expanded its neighbour would stretch to
+   match and become a tall, mostly empty box. */
+.wb-modules { align-items: start }
+
+.wb-card-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+}
+.wb-card-name {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth);
+}
+.wb-card-title {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    color: var(--color-text);
+}
+.wb-card-short {
+    display: block;
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+    max-width: 44ch;
+}
+.wb-card-why {
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+    max-width: 52ch;
+}
+
+/* ---------- Status chip ----------
+   The honesty contract, on the card itself. The colour is a reinforcement; the
+   word is the signal. */
+.wb-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px var(--space-3);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: .04em;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+.wb-status--built { background: var(--color-accent-earth-soft); color: var(--color-accent-earth-hover) }
+.wb-status--custom { background: var(--color-accent-soft); color: var(--color-accent-active) }
+
+/* ---------- Core cards (graphite chapter) ----------
+   The card must separate from the ground it sits on. --color-graphite-soft on a
+   --color-graphite section measures 1.19:1, which is not a card on a background,
+   it is one dark mass — measured on the hospitality build. 16% ivory takes it to
+   ~1.6:1, where the edge becomes legible without the card turning grey. */
+.wb-card--core {
+    background: rgba(247,243,236,.16);
+    border-color: rgba(247,243,236,.24);
+}
+.wb-card--core .wb-card-name { color: var(--color-accent-earth-soft) }
+.wb-card--core .wb-card-title { color: var(--color-text-on-dark) }
+/* The `.wb-card--core` prefix is load-bearing: `.block p` is (0,1,1) and beats a
+   bare class at (0,1,0), which would paint these in --color-text-muted — a
+   LIGHT-surface token — giving dark grey on a dark card. */
+.wb-card--core .wb-card-short,
+.wb-card--core .wb-card-why { color: var(--color-text-on-dark-muted) }
+.wb-card--core .wb-status--built {
+    background: rgba(247,243,236,.2);
+    color: var(--color-text-on-dark);
+}
+
+/* ---------- Optional cards ----------
+   No padding and no gap: the toggle and the detail panel own their own insets. */
+.wb-card--optional { padding: 0; gap: 0; overflow: hidden }
+
+/* The heading exists for heading navigation only; the button inside carries every
+   visual decision. */
+.wb-card-heading { margin: 0; font: inherit; letter-spacing: inherit; color: inherit }
+
+/* The whole head of the card is the control, so the target is the card rather
+   than a small chip inside it — the thumb-friendly requirement at 375px. */
+.wb-card-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    width: 100%;
+    padding: var(--space-6);
+    text-align: left;
+    font-family: var(--font-sans);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background var(--transition);
+}
+.wb-card-toggle:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -3px }
+@media (hover: hover) {
+    .wb-card--optional:not(.is-selected):hover { border-color: var(--color-border-strong) }
+    .wb-card-toggle:hover { background: var(--color-ivory) }
+}
+/* Touch has no hover, so the press state is the only feedback there is. */
+.wb-card-toggle:active { transform: scale(.99) }
+
+.wb-card-action {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    align-self: flex-start;
+    margin-top: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-control);
+    background: var(--color-accent-earth-soft);
+    color: var(--color-accent-earth-hover);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+}
+.wb-card-action-mark { position: relative; width: 14px; height: 14px; flex: 0 0 auto }
+/* A plus that becomes a minus on selection — the state change is a shape change,
+   not only a colour change. */
+.wb-card-action-mark::before,
+.wb-card-action-mark::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    border-radius: 1px;
+    transition: transform var(--transition), opacity var(--transition);
+}
+.wb-card-action-mark::before { left: 0; top: 6px; width: 14px; height: 2px }
+.wb-card-action-mark::after { left: 6px; top: 0; width: 2px; height: 14px }
+
+.wb-card--optional.is-selected {
+    border-color: var(--color-graphite);
+    box-shadow: var(--shadow-lg);
+}
+.wb-card--optional.is-selected .wb-card-action {
+    background: var(--color-graphite);
+    color: var(--color-text-on-dark);
+}
+.wb-card--optional.is-selected .wb-card-action-mark::after { transform: scaleY(0); opacity: 0 }
+
+/* ---------- The detail ---------- */
+.wb-card-detail {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-6);
+    border-top: 1px solid var(--color-border);
+}
+/* MUST come after the rule above. [hidden] is styled by the UA sheet at element
+   specificity, so the class selector's display:flex would beat it and every panel
+   would be permanently open. */
+.wb-card-detail[hidden] { display: none }
+
+.wb-flow-head {
+    margin: 0;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth);
+}
+
+/* The workflow as a ladder rather than a diagram — readable by someone who does
+   not build websites. */
+.wb-flow { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); padding: 0; margin: 0 }
+.wb-flow-step {
+    position: relative;
+    padding-left: var(--space-6);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-text-muted);
+}
+.wb-flow-step::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .55em;
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent-earth);
+}
+/* The rule joining one step to the next; not drawn after the last, which has
+   nothing to reach. */
+.wb-flow-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: calc(.55em + 12px);
+    height: calc(100% - .55em - 6px);
+    width: 2px;
+    background: var(--color-border);
+}
+
+/* ---------- Relationships ---------- */
+.wb-relations { display: flex; flex-direction: column; gap: var(--space-3) }
+.wb-relation {
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    max-width: none;
+}
+.wb-relation--met { background: var(--color-ivory); border: 1px solid var(--color-border) }
+.wb-relation--prompt {
+    background: var(--color-accent-earth-soft);
+    border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: flex-start;
+}
+.wb-relation-tag {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth);
+}
+.wb-relation-text { margin: 0; color: var(--color-text); max-width: 52ch }
+.wb-relation-add { min-height: 48px }
+
+.wb-card-statusnote {
+    margin: 0;
+    font-size: var(--text-xs);
+    line-height: 1.6;
+    color: var(--color-text-subtle);
+    max-width: none;
+}
+
+/* ---------- The site map ---------- */
+.wb-map { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4) }
+
+.wb-node {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(247,243,236,.16);
+    background: var(--color-graphite-soft);
+}
+.wb-node-kind {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth-soft);
+}
+.wb-node-name {
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text-on-dark);
+    overflow-wrap: break-word;
+}
+.wb-node-meta { font-size: var(--text-sm); line-height: 1.5; color: var(--color-text-on-dark-muted) }
+
+.wb-node--site { background: var(--color-accent-earth); border-color: transparent }
+/* Earth is a mid-tone, so the muted ivories that work on graphite fall under AA
+   here — measured on the hospitality build. Raised until they clear 4.5:1. */
+.wb-node--site .wb-node-kind { color: var(--color-text-on-dark) }
+.wb-node--site .wb-node-meta { color: rgba(247,243,236,.9) }
+.wb-node--site .wb-node-name { font-size: var(--text-2xl) }
+
+.wb-node--added { border-color: rgba(247,243,236,.34) }
+
+/* Only the tile that has just appeared settles in. The map is rebuilt on every
+   change, so animating every added tile each time would make the whole
+   composition flicker whenever one capability was toggled. */
+.wb-node--enter { animation: wb-node-in var(--block-duration) var(--ease-settle) backwards }
+@keyframes wb-node-in {
+    from { opacity: 0; transform: translate3d(0, var(--block-travel), 0) scale(var(--block-scale)) }
+    to { opacity: 1; transform: none }
+}
+
+/* ---------- The story ---------- */
+.wb-story {
+    list-style: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+    padding: 0;
+    margin: 0;
+}
+.wb-story-step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    min-width: 0;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+}
+.wb-story-index {
+    flex: 0 0 auto;
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.4;
+    color: var(--color-accent-earth);
+}
+.wb-story-text {
+    margin: 0;
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+    max-width: 56ch;
+}
+
+/* ---------- The summary ---------- */
+.wb-summary-block h3 { font-size: var(--text-xl) }
+
+.wb-summary-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border);
+    max-width: none;
+}
+.wb-summary-line:last-child { border-bottom: 0 }
+.wb-summary-key {
+    flex: 0 0 auto;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    /* --color-text-subtle measures 4.46:1 here — just under AA at this size. */
+    color: var(--color-text-muted);
+}
+.wb-summary-value {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    overflow-wrap: break-word;
+    min-width: 0;
+}
+.wb-summary-prose {
+    font-size: var(--text-lg);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+    max-width: var(--measure);
+    margin-top: var(--space-4);
+}
+.wb-summary-caveat {
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-subtle);
+    max-width: 64ch;
+}
+.wb-summary-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: 0;
+    margin-top: var(--space-5);
+}
+.wb-summary-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-left: var(--space-5);
+    position: relative;
+    min-width: 0;
+}
+.wb-summary-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .62em;
+    width: 12px;
+    height: 1px;
+    background: var(--color-accent-earth);
+}
+.wb-summary-item-name { font-size: var(--text-base); font-weight: var(--weight-semibold); color: var(--color-text) }
+.wb-summary-item-note { font-size: var(--text-sm); line-height: 1.55; color: var(--color-text-muted) }
+.wb-summary-item-status {
+    align-self: flex-start;
+    margin-top: var(--space-1);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: .04em;
+    /* This list sits on .block--stone, where --color-text-subtle measures 4.46:1 —
+       just under AA at this size. Measured, not assumed. */
+    color: var(--color-text-muted);
+}
+.wb-summary-item--empty .wb-summary-item-name { color: var(--color-text-muted) }
+
+/* ---------- Conversion ---------- */
+.wb-conversion-grid { display: grid; gap: var(--grid-gap) }
+.wb-conversion-intro p { color: var(--color-text-on-dark-muted) }
+.wb-conversion-perks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: 0;
+    margin-top: var(--space-8);
+}
+.wb-conversion-perks li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-text-on-dark-muted);
+}
+.wb-conversion-perks i { flex: 0 0 auto; margin-top: .2em; color: var(--color-accent-earth-soft) }
+
+.wb-conversion .form-feedback:empty { display: none }
+.wb-conversion .form-feedback {
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius);
+    font-size: var(--text-sm);
+    background: rgba(247,243,236,.08);
+    color: var(--color-text-on-dark);
+    border: 1px solid rgba(247,243,236,.2);
+}
+.wb-conversion .form-feedback.is-success {
+    background: var(--color-accent-earth-soft);
+    color: var(--color-graphite);
+    border-color: transparent;
+}
+.wb-conversion .form-feedback.is-error {
+    background: rgba(185,28,28,.16);
+    border-color: rgba(247,243,236,.34);
+    color: var(--color-text-on-dark);
+}
+
+/* ================= BREAKPOINTS =================
+   Each is an addition, not a climb-down. The phone composition above is complete. */
+
+@media (min-width: 560px) {
+    .wb-map { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+    .wb-node--site { grid-column: 1 / -1 }
+    .wb-story { gap: var(--space-6) }
+}
+
+@media (min-width: 768px) {
+    .wb-card-toggle { padding: var(--space-8) }
+    .wb-card-detail { padding: var(--space-6) var(--space-8) var(--space-8) }
+    .wb-card-title { font-size: var(--text-2xl) }
+    .wb-node { padding: var(--space-6) }
+    .wb-story-step { gap: var(--space-6); padding-top: var(--space-6) }
+    .wb-story-index { font-size: var(--text-2xl) }
+    .wb-honesty { padding: var(--space-6) var(--space-8) }
+    .wb-map { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+    /* The prompt and its action sit on one line once there is room for both. */
+    .wb-relation--prompt { flex-direction: row; align-items: center; justify-content: space-between }
+    .wb-relation--prompt .wb-relation-tag { margin-bottom: var(--space-1) }
+    .wb-relation-add { flex: 0 0 auto }
+}
+
+/* ---------- The tablet stage ----------
+   The shared grid sends every unclassed .block to a full row until 900px, which
+   would leave this page as one long column. A deliberate tablet composition
+   instead: modules pair up and nothing sits in a half-empty row. */
+@media (min-width: 600px) and (max-width: 899px) {
+    .wb-modules > .wb-card--optional { grid-column: span 6 }
+    /* Each group's lead keeps the full row; pairing it off would flatten the set. */
+    .wb-modules > .wb-card--optional:nth-child(1) { grid-column: 1 / -1 }
+    .wb-modules > .wb-card--optional:nth-child(even):last-child { grid-column: 1 / -1 }
+    /* The two-card groups pair instead of stacking as two full-width bands. */
+    [data-group="doing"] .wb-modules > .wb-card--optional:nth-child(1),
+    [data-group="doing"] .wb-modules > .wb-card--optional:nth-child(2),
+    [data-group="beyond"] .wb-modules > .wb-card--optional:nth-child(1),
+    [data-group="beyond"] .wb-modules > .wb-card--optional:nth-child(2) { grid-column: span 6 }
+
+    .wb-core > .wb-card--core { grid-column: span 6 }
+}
+
+@media (min-width: 900px) {
+    /* Composed PER GROUP so a group's membership and its layout live together and
+       every row fills exactly. Group sizes are asserted by
+       tests/website_builder.test.js — changing one means revisiting its spans.
+         found  (3)  5+4+3
+         doing  (2)  7+5
+         beyond (2)  5+7
+       Core is four across: 3+3+3+3 would be a plain row, so 4+3+3+2 keeps the
+       asymmetry the design language asks for. */
+    .wb-modules > .wb-card--optional { grid-column: span 4 }
+
+    [data-group="found"] .wb-modules > .wb-card--optional:nth-child(1) { grid-column: span 5 }
+    [data-group="found"] .wb-modules > .wb-card--optional:nth-child(2) { grid-column: span 4 }
+    [data-group="found"] .wb-modules > .wb-card--optional:nth-child(3) { grid-column: span 3 }
+
+    [data-group="doing"] .wb-modules > .wb-card--optional:nth-child(1) { grid-column: span 7 }
+    [data-group="doing"] .wb-modules > .wb-card--optional:nth-child(2) { grid-column: span 5 }
+
+    [data-group="beyond"] .wb-modules > .wb-card--optional:nth-child(1) { grid-column: span 5 }
+    [data-group="beyond"] .wb-modules > .wb-card--optional:nth-child(2) { grid-column: span 7 }
+
+    .wb-core > .wb-card--core:nth-child(1) { grid-column: span 4 }
+    .wb-core > .wb-card--core:nth-child(2) { grid-column: span 3 }
+    .wb-core > .wb-card--core:nth-child(3) { grid-column: span 3 }
+    .wb-core > .wb-card--core:nth-child(4) { grid-column: span 2 }
+
+    .wb-map { grid-template-columns: repeat(4, minmax(0, 1fr)) }
+    .wb-node--site { grid-column: span 2 }
+
+    .wb-story { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--grid-gap) }
+}
+
+@media (min-width: 1024px) {
+    .wb-conversion-grid {
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        align-items: start;
+        column-gap: clamp(var(--space-8), 4vw, var(--space-20));
+    }
+    .wb-conversion-intro { position: sticky; top: calc(var(--header-h) + var(--nav-float) + var(--space-6)) }
+    .wb-conversion .form-feedback { grid-column: 2 }
+    .wb-conversion .wb-form { grid-column: 2 }
+    .wb-summary-prose { font-size: var(--text-xl) }
+}
+
+@media (min-width: 1440px) {
+    .wb-map { gap: var(--space-5) }
+    .wb-story { column-gap: var(--space-16) }
+}
+
+/* ================= MOTION =================
+   The detail panel's entrance: the statement resolves, then the steps assemble.
+   display:none suppresses animation, so these only run when the panel stops being
+   [hidden] — exactly the selection beat. */
+.wb-assemble > * { animation: wb-settle 460ms var(--ease-settle) backwards }
+.wb-assemble > *:nth-child(1) { animation-delay: 0ms }
+.wb-assemble > *:nth-child(2) { animation-delay: 60ms }
+.wb-assemble > *:nth-child(3) { animation-delay: 120ms }
+.wb-assemble > *:nth-child(4) { animation-delay: 180ms }
+.wb-assemble > *:nth-child(5) { animation-delay: 240ms }
+
+.wb-assemble .wb-flow-step { animation: wb-settle 420ms var(--ease-settle) backwards }
+.wb-assemble .wb-flow-step:nth-child(1) { animation-delay: 140ms }
+.wb-assemble .wb-flow-step:nth-child(2) { animation-delay: 190ms }
+.wb-assemble .wb-flow-step:nth-child(3) { animation-delay: 240ms }
+.wb-assemble .wb-flow-step:nth-child(4) { animation-delay: 290ms }
+.wb-assemble .wb-flow-step:nth-child(5) { animation-delay: 340ms }
+
+@keyframes wb-settle {
+    from { opacity: 0; transform: translate3d(0, 10px, 0) }
+    to { opacity: 1; transform: none }
+}
+
+/* Reduced motion resolves everything to its final state immediately. No
+   information and no control depends on an animation having run. */
+@media (prefers-reduced-motion: reduce) {
+    .wb-assemble > *,
+    .wb-assemble .wb-flow-step,
+    .wb-node--enter {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+@media print {
+    .wb-assemble > *,
+    .wb-assemble .wb-flow-step,
+    .wb-node--enter { animation: none !important; opacity: 1 !important; transform: none !important }
+}
