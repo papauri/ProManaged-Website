@@ -145,6 +145,16 @@ script therefore renders at execution time, not on `DOMContentLoaded`.
 - `php/contact.php` — contact submission.
 - `php/booking.php` — appointment submission.
 - `php/hospitality.php` — Hospitality System Builder enquiry. Its own endpoint because the payload is a structured configuration rather than a message. Reuses `http.php` and the `mailer.php` templates unchanged. The browser submits catalogue IDs only; every label a human reads is resolved server-side from an allow-list, and the fixed foundation is never read from the submission.
+- `php/hospitality_catalogue.php` — the server's catalogue and the pure functions that resolve a submission against it. Separate from the endpoint because the endpoint runs on include (it calls `pm_respond()`, which exits), so nothing in it could be tested without also sending mail.
+
+## Tests
+
+Plain scripts, no framework and no dependencies. Run them before any change to the areas they cover.
+
+- `node tests/hospitality_builder.test.js` — catalogue integrity, the delivery-status honesty contract, and browser/endpoint catalogue sync. The catalogue is duplicated between `js/hospitality_builder.js` and `php/hospitality_catalogue.php` on purpose (the server must never take a label from the client); this is what stops the two drifting.
+- `php tests/hospitality_endpoint.test.php` — the endpoint's trust boundary, exercised against hostile input: invented capabilities, markup payloads, duplicate and repetition floods, malformed relationship pairs and out-of-range room counts.
+
+**The honesty contract is enforced here, not by review.** A capability may claim "Built before" only if it is in the permitted set both tests assert. Promoting one without widening that set fails the suite — see `.claude/HOSPITALITY_SYSTEM_BUILDER.md` §19.
 - `php/mailer.php` — shared internal/customer HTML + plain-text mail templates.
 - `php/env.php` — environment configuration.
 - `php/vendor/PHPMailer/` — mail dependency.

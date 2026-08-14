@@ -16,6 +16,9 @@
 
 require_once __DIR__ . '/http.php';
 require_once __DIR__ . '/mailer.php';
+// The catalogue and the pure resolution helpers. Separate so they can be tested
+// without this file running — see tests/hospitality_endpoint.test.php.
+require_once __DIR__ . '/hospitality_catalogue.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     pm_respond(405, false, 'This endpoint only accepts form submissions.');
@@ -27,71 +30,10 @@ if (!empty($_POST['website'])) {
     pm_respond(200, true, 'Thank you — we have your hospitality system outline.');
 }
 
-/* ---------------------------------------------------------------------------
- * The catalogue. Mirrors js/hospitality_builder.js. Kept as a literal table here
- * on purpose: the server must never take a label from the client, and the two
- * lists are short enough that duplication is cheaper than a shared format the
- * browser would have to fetch.
- * ------------------------------------------------------------------------ */
-
-$propertyTypeCatalogue = [
-    'lodge'          => 'Lodge',
-    'guesthouse'     => 'Guesthouse',
-    'boutique-hotel' => 'Boutique hotel',
-    'hotel'          => 'Hotel',
-    'resort'         => 'Resort',
-    'multiple'       => 'Multiple properties',
-    'other'          => 'Something else',
-];
-
-$channelCatalogue = [
-    'website'   => 'Own website',
-    'whatsapp'  => 'WhatsApp',
-    'phone'     => 'Phone',
-    'platforms' => 'Booking platforms',
-    'walk-ins'  => 'Walk-ins',
-    'other'     => 'Something else',
-];
-
-$coreCatalogue = [
-    'bookings' => 'Bookings',
-    'rooms'    => 'Rooms',
-    'guests'   => 'Guests',
-];
-
-/* label => delivery status, so the brief says plainly which of these we have
-   actually built before and which are still proposed or bespoke. */
-$optionalCatalogue = [
-    'website'        => ['Website + booking engine', 'Built before'],
-    'housekeeping'   => ['Housekeeping', 'Proposed module'],
-    'payments'       => ['Payments', 'Proposed module'],
-    'guest-comms'    => ['Guest messages', 'Proposed module'],
-    'reporting'      => ['Reporting', 'Proposed module'],
-    'staff'          => ['Staff accounts', 'Proposed module'],
-    'multi-property' => ['Multiple properties', 'Proposed module'],
-    'restaurant'     => ['Restaurant / POS', 'Custom development'],
-    'integrations'   => ['Custom integrations', 'Custom development'],
-];
-
-/**
- * Resolve a comma-separated list of submitted IDs against an allow-list.
- * Unknown IDs are dropped, order is preserved and duplicates are collapsed.
- * The cap exists so a forged POST cannot make the endpoint build an enormous
- * string out of thousands of repeated valid IDs.
- */
-function pm_hb_resolve($raw, array $allowed, $limit = 24) {
-    $ids = array_filter(array_map('trim', explode(',', pm_clean_line($raw, 600))));
-    $out = [];
-    foreach ($ids as $id) {
-        if (count($out) >= $limit) {
-            break;
-        }
-        if (isset($allowed[$id]) && !isset($out[$id])) {
-            $out[$id] = $allowed[$id];
-        }
-    }
-    return $out;
-}
+$propertyTypeCatalogue = pm_hb_property_types();
+$channelCatalogue      = pm_hb_channels();
+$coreCatalogue         = pm_hb_core();
+$optionalCatalogue     = pm_hb_optional();
 
 /* ---------------------------------------------------------------------------
  * Contact details.
@@ -114,10 +56,9 @@ if ($name === '' || $email === '' || $business === '') {
 $propertyTypeId = pm_clean_line($_POST['property_type'] ?? '', 40);
 $propertyType   = isset($propertyTypeCatalogue[$propertyTypeId]) ? $propertyTypeCatalogue[$propertyTypeId] : '';
 
-// The builder starts at 12 and clamps client-side; the server clamps again
-// rather than trusting it, and treats an unusable value as "not stated".
-$rooms = (int) pm_clean_line($_POST['rooms'] ?? '', 6);
-$roomsText = ($rooms >= 1 && $rooms <= 400) ? (string) $rooms : 'Not stated';
+// The builder clamps client-side; the server clamps again rather than trusting
+// it, and treats an unusable value as "not stated".
+$roomsText = pm_hb_rooms($_POST['rooms'] ?? '');
 
 $channels = pm_hb_resolve($_POST['channels'] ?? '', $channelCatalogue, 8);
 
@@ -136,33 +77,14 @@ foreach ($optionalRaw as $id => $entry) {
     $optionalLines[] = $entry[0] . ' (' . $entry[1] . ')';
 }
 
-/* The relationships the visitor assembled, submitted as "module>dep+dep;...".
-   Rendered only from IDs both sides of which are in the catalogue, so the brief
-   cannot be made to describe a connection between things that do not exist. */
-$connectionLines = [];
-$connectionsRaw = pm_clean_line($_POST['connections'] ?? '', 800);
-foreach (array_slice(array_filter(explode(';', $connectionsRaw)), 0, 24) as $pair) {
-    $parts = explode('>', $pair, 2);
-    if (count($parts) !== 2) {
-        continue;
-    }
-    $fromId = trim($parts[0]);
-    if (!isset($optionalCatalogue[$fromId])) {
-        continue;
-    }
-    $targets = [];
-    foreach (array_slice(array_filter(explode('+', $parts[1])), 0, 8) as $toId) {
-        $toId = trim($toId);
-        if (isset($coreCatalogue[$toId])) {
-            $targets[] = $coreCatalogue[$toId];
-        } elseif (isset($optionalCatalogue[$toId])) {
-            $targets[] = $optionalCatalogue[$toId][0];
-        }
-    }
-    if ($targets) {
-        $connectionLines[] = $optionalCatalogue[$fromId][0] . ' → ' . implode(', ', $targets);
-    }
-}
+/* The relationships the visitor assembled. Rendered only from IDs both sides of
+   which are in the catalogue, so the brief cannot be made to describe a
+   connection between things that do not exist. */
+$connectionLines = pm_hb_connections(
+    $_POST['connections'] ?? '',
+    $optionalCatalogue,
+    $coreCatalogue
+);
 
 $problem = pm_clean_text($_POST['current_problem'] ?? '', 1200);
 

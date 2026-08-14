@@ -267,6 +267,20 @@
     const ROOMS_MAX = 400;
 
     const isSelected = function (id) { return state.selected.indexOf(id) !== -1; };
+    const isCoreId = function (id) { return CORE_IDS.indexOf(id) !== -1; };
+
+    /* Every relationship of a module that is actually live in this system: its
+       hard dependencies, plus the improvements whose other half is present. A core
+       capability always counts as present — it is the foundation. Shared by the
+       relation panel, the system map and the submitted payload so all three
+       describe the same system; when this lived in three places they disagreed,
+       and the map and the discovery brief silently dropped links to the
+       foundation. */
+    const activeLinks = function (mod) {
+        return mod.dependsOn.concat(mod.worksWith.filter(function (id) {
+            return isCoreId(id) || isSelected(id);
+        }));
+    };
 
     /* Selection order is the order the visitor built the system in, and the system
        map reads better when it reflects that. Sorting by catalogue order instead
@@ -562,19 +576,26 @@
         if (!host) return;
         clear(host);
 
-        const coreDeps = mod.dependsOn.filter(function (id) { return CORE_IDS.indexOf(id) !== -1; });
-        const optionalDeps = mod.dependsOn.filter(function (id) { return CORE_IDS.indexOf(id) === -1; });
+        /* Split on WHERE a relationship points, not on which list it came from.
+           A `worksWith` entry aimed at a core capability is still part of the
+           foundation and can never be "added" — offering it as an action would be
+           a button that does nothing, which is exactly the dead-end selection the
+           plan rules out. So core targets are always explained, and only optional
+           ones can become a prompt. */
+        const related = mod.dependsOn.concat(mod.worksWith);
+        const coreRelated = related.filter(isCoreId);
+        const optionalRelated = related.filter(function (id) { return !isCoreId(id); });
 
-        if (coreDeps.length) {
+        if (coreRelated.length) {
             const note = el('p', 'hb-relation hb-relation--met');
             note.appendChild(el('span', 'hb-relation-tag', 'Builds on'));
             note.appendChild(document.createTextNode(
-                sentenceJoin(listNames(coreDeps)) + ' — already part of your foundation, so nothing to add.'
+                sentenceJoin(listNames(coreRelated)) + ' — already part of your foundation, so nothing to add.'
             ));
             host.appendChild(note);
         }
 
-        optionalDeps.concat(mod.worksWith).forEach(function (id) {
+        optionalRelated.forEach(function (id) {
             const other = BY_ID[id];
             if (!other) return;
             if (isSelected(id)) {
@@ -676,9 +697,7 @@
             node.appendChild(el('span', 'hb-node-name', mod.name));
 
             /* What this block is wired to, in the visitor's words. */
-            const links = mod.dependsOn.concat(mod.worksWith.filter(function (other) {
-                return isSelected(other);
-            }));
+            const links = activeLinks(mod);
             if (links.length) {
                 node.appendChild(el('span', 'hb-node-meta',
                     'Connects to ' + sentenceJoin(listNames(links))));
@@ -881,7 +900,7 @@
         state.selected.forEach(function (id) {
             const mod = BY_ID[id];
             if (!mod) return;
-            const links = mod.dependsOn.concat(mod.worksWith.filter(isSelected));
+            const links = activeLinks(mod);
             if (links.length) connections.push(mod.id + '>' + links.join('+'));
         });
         if (hidden.connections) hidden.connections.value = connections.join(';');

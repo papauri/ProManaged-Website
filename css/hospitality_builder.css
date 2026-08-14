@@ -225,6 +225,13 @@
    pair closes the composition. */
 .hb-card { gap: var(--space-4) }
 
+/* Each module card takes its own natural height instead of the row's. The shared
+   .grid stretches its children, which is right for the foundation (equal cards,
+   footers aligned) but wrong here: the moment one card is expanded its neighbour
+   was stretched to match and became a tall, mostly empty box. Measured at 1440px
+   with Housekeeping open. Only the expanded card should grow. */
+.hb-modules { align-items: start }
+
 .hb-card-head {
     display: flex;
     flex-wrap: wrap;
