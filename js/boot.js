@@ -2,10 +2,11 @@
 
    THIS IS A DELIBERATE BRAND BEAT, WITH A GUARANTEED MINIMUM HOLD — a deviation
    from this file's original zero-latency rule, made explicitly at the site owner's
-   request (2026-08-13) so the mark and the business name are reliably seen, not
-   just flashed past on a warm-cache reload. MIN_HOLD below is that floor: the
-   overlay never lifts before it, however fast the page is ready. MAX is unchanged
-   from before — the hard ceiling for a hung load, independent of MIN_HOLD.
+   request (2026-08-14) so the mark, the letter-by-letter name and the progress
+   readout are fully watchable, not just glimpsed, on every load — not only a
+   warm-cache reload. MIN_HOLD below is that floor: the overlay never lifts before
+   it, however fast the page is ready. MAX is a hard ceiling independent of
+   MIN_HOLD, kept comfortably above it for a hung load.
 
    It is loaded SYNCHRONOUSLY in <head>, before the stylesheets have painted anything,
    which is the only place it can be: an overlay that appears after first paint is a
@@ -32,16 +33,19 @@
     'use strict';
 
     // The guaranteed floor: the curtain never lifts before this many ms have
-    // passed, however fast the document is ready. This is what makes the mark and
-    // the business name reliably visible instead of a flicker on a fast reload.
-    var MIN_HOLD = 850;
+    // passed, however fast the document is ready. Set to a few full seconds, on
+    // request, so the mark settling, the name cascading in and the readout
+    // climbing to 100% are all fully seen rather than rushed past.
+    var MIN_HOLD = 3000;
 
     // The hard ceiling, independent of MIN_HOLD. Nothing waits for this on a
     // healthy load — DOMContentLoaded plus MIN_HOLD gets there long first. It
     // exists for the pathological case: a stylesheet that never resolves, a font
     // request hanging on a dead CDN, a parse error in a script above this one. The
-    // visitor gets the page regardless.
-    var MAX = 2200;
+    // visitor gets the page regardless. Kept with the same ~1.4s margin above
+    // MIN_HOLD it had before, so a genuinely hung load still recovers quickly
+    // rather than sitting at the new, longer floor.
+    var MAX = 4400;
 
     // Matches the fade below. Kept as one value so the class removal and the DOM
     // removal cannot drift apart.
@@ -104,10 +108,14 @@
         root.classList.add('pm-booting');
         if (calm) root.classList.add('pm-boot-calm');
 
+        // Spread across roughly the first two-thirds of MIN_HOLD rather than
+        // packed into the opening moment, so the name reads as assembling
+        // deliberately, letter by letter, instead of a quick blur early on
+        // followed by dead air while the readout finishes alone.
         var nameHtml = '';
         for (var i = 0; i < NAME.length; i++) {
             var ch = NAME.charAt(i);
-            nameHtml += '<span class="pm-boot-ch" style="animation-delay:' + (220 + i * 20) + 'ms">'
+            nameHtml += '<span class="pm-boot-ch" style="animation-delay:' + (400 + i * 90) + 'ms">'
                 + (ch === ' ' ? '&nbsp;' : ch) + '</span>';
         }
 
@@ -135,7 +143,7 @@
 
             '.pm-boot-mark{width:60px;height:60px;display:block;',
             'filter:brightness(0) invert(1);opacity:.96;}',
-            '.pm-booting:not(.pm-boot-calm) .pm-boot-mark{animation:pm-boot-mark 520ms cubic-bezier(.16,.86,.24,1.08) both}',
+            '.pm-booting:not(.pm-boot-calm) .pm-boot-mark{animation:pm-boot-mark 680ms cubic-bezier(.16,.86,.24,1.08) both}',
             '@keyframes pm-boot-mark{from{opacity:0;transform:translate3d(0,12px,0) scale(.86)}',
             'to{opacity:.96;transform:none}}',
 
@@ -156,7 +164,7 @@
             '.pm-boot-tagline{font-family:\'Plus Jakarta Sans\',system-ui,-apple-system,\'Segoe UI\',sans-serif;',
             'font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;',
             'color:rgba(247,243,236,.5);opacity:1;}',
-            '.pm-booting:not(.pm-boot-calm) .pm-boot-tagline{animation:pm-boot-tagline-in 300ms cubic-bezier(.16,.72,.24,1) 560ms both}',
+            '.pm-booting:not(.pm-boot-calm) .pm-boot-tagline{animation:pm-boot-tagline-in 400ms cubic-bezier(.16,.72,.24,1) 1900ms both}',
             '@keyframes pm-boot-tagline-in{from{opacity:0;transform:translate3d(0,6px,0)}to{opacity:1;transform:none}}',
 
             '.pm-boot-progress{display:flex;align-items:center;gap:10px;margin-top:6px}',

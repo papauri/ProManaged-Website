@@ -85,13 +85,14 @@ Motion is a signature part of the experience.
 ### Boot overture exception
 
 `js/boot.js` — the full-viewport mark/name/progress overlay shown while the page
-loads — carries a **guaranteed minimum hold** (`MIN_HOLD`, currently 850ms) before
-it can lift, even on an instant load. This is a deliberate, bounded exception to
-the "never add a splash delay" rule above, authorized directly by the site owner
-so the mark and business name are reliably seen rather than flickering past on a
-warm-cache reload. It does not license splash delays anywhere else: the hero and
-every scroll chapter remain delay-free, and the overture's own hard ceiling
-(`MAX`) is unchanged and independent of `MIN_HOLD`. `prefers-reduced-motion`
+loads — carries a **guaranteed minimum hold** (`MIN_HOLD`, currently 3000ms)
+before it can lift, even on an instant load, so the letter-by-letter name and the
+progress readout are fully watchable rather than glimpsed. This is a deliberate,
+bounded exception to the "never add a splash delay" rule above, authorized
+directly by the site owner. It does not license splash delays anywhere else: the
+hero and every scroll chapter remain delay-free, and the overture's own hard
+ceiling (`MAX`) is independent of `MIN_HOLD`, kept a fixed margin above it so a
+genuinely hung load still recovers. `prefers-reduced-motion`
 still applies within the overture — the bounce, the letter cascade and the
 ticking readout are dropped in favour of a plain, briefly-held plate — but the
 minimum hold itself is not skipped, since it is a brand beat rather than motion.
