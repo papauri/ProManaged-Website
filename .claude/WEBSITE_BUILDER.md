@@ -9,106 +9,120 @@ labels are to be reviewed first.
 
 ## 1. PURPOSE
 
-The same guided experience as the Hospitality System Builder, but for anyone who
-wants a website — and deliberately spanning the whole range, from a five-page
-brochure site to a product with paying users.
+The same guided experience as the Hospitality System Builder, for someone who
+wants a **straightforward business website**.
 
-> **Tell us what it needs to do. We'll show you what it would take to build.**
+> **Tell us what your site needs to do. We'll show you what it would take.**
 
-The commercial job is identical: help someone understand what they actually need,
-let them select only that, explain how the pieces connect, and produce a
-structured discovery brief instead of "please contact me".
+The commercial job is identical: help someone understand what they need, let them
+select only that, explain how the pieces connect, and produce a structured
+discovery brief rather than "please contact me".
 
-## 2. RELATIONSHIP TO THE HOSPITALITY BUILDER
+## 2. SCOPE — DELIBERATELY SMALL
+
+**Decision taken: keep this to simpler websites.**
+
+An earlier draft of this catalogue spanned brochure sites through to multi-tenant
+SaaS with subscription billing. That is cut. The reasoning is credibility, and it
+is worth writing down because it will be tempting to widen this later:
+
+A configurator that offers a customer a *product with paying users* as a
+checkbox, when we cannot point at one we have delivered, does not read as
+ambitious. It reads as a business promising anything you click. The builder's
+whole persuasive force comes from most of its capabilities being things we have
+genuinely built — and one unverifiable claim sitting among them damages the ones
+that are true.
+
+So the rule for this builder: **almost everything in the catalogue should be
+something we have actually delivered.** Anything bigger is not listed as a
+module — it is named honestly in one place as a conversation (see `custom`).
+
+### Explicitly out of scope
+
+`saas` (multi-tenant products), `billing` (subscriptions), `shop` (e-commerce),
+`accounts` (customer logins), `reports`, `languages`. None were verified as
+delivered. Removed rather than labelled Proposed — a long list of "Proposed
+module" chips is itself the problem this decision is solving.
+
+## 3. RELATIONSHIP TO THE HOSPITALITY BUILDER
 
 **Decision taken: separate copy, no refactor.** `js/hospitality_builder.js`,
 `css/hospitality_builder.css`, `php/hospitality.php`, `php/hospitality_catalogue.php`
 and `pages/hospitality_builder.html` are **not to be touched**. The website builder
 gets its own near-duplicate set.
 
-The cost of that decision, recorded so it is not a surprise later: the mechanism
-is duplicated, so every future fix to the card, the map, the progression or the
-submission path has to be made twice, and there will be two test suites covering
-the same logic. That is accepted in exchange for zero risk to a page that is
-already shipped and verified.
+The cost, recorded so it is not a surprise later: the mechanism is duplicated, so
+every future fix to the card, the map, the progression or the submission path has
+to be made twice, and there will be two test suites covering the same logic.
+Accepted in exchange for zero risk to a page already shipped and verified.
 
-`js/interface_motion.js` already supports `data-cursor-calm` and needs no change —
-the new page simply uses the attribute.
+`js/interface_motion.js` already supports `data-cursor-calm` and needs no change.
 
-## 3. THE FORK THAT MAKES ONE PAGE SERVE BOTH ENDS
+## 4. CHAPTER 01 — QUESTIONS
 
-`pages/custom_websites.html` already draws the right line:
+The earlier "does anyone log in?" fork is dropped along with the SaaS end of the
+range; there is no longer a brochure-versus-product split to detect.
 
-> A website mainly presents information. A web app lets people log in and do
-> things — book appointments, manage data, track orders.
-
-So chapter 01 asks **"does anyone log in?"** — and that single answer is what
-separates a brochure site from a product. It should visibly change what the rest
-of the page emphasises rather than just being stored.
-
-### Chapter 01 — questions
-
-| Question | Control | Notes |
+| Question | Control | Options |
 | --- | --- | --- |
-| What is this site for? | Choice chips | Show what we do · Take bookings or orders · A tool our team uses · A product with paying users · Not sure yet |
-| Does anyone log in? | Choice chips | Nobody · Our team · Our customers · Both |
-| Roughly how many pages? | Stepper | Same accessible +/- control as the room count. "Not sure" must be reachable. |
+| What is the site for? | Choice chips | Show what we do · Take bookings or enquiries · Share updates and photos · Not sure yet |
+| Roughly how many pages? | Stepper | Same accessible +/- control as the room count; "not sure" must be reachable |
 | What do you have today? | Choice chips (multi) | Nothing yet · A site we have outgrown · A site that needs rebuilding · Social pages only |
-| Anything it absolutely must do? | Optional free text | The most useful box on the page, as with the hospitality note. |
+| Anything it must do? | Optional free text | The most useful box on the page, as with the hospitality note |
 
-## 4. CORE — every build includes these
+## 5. CORE — every build includes these
 
 Not selectable. Presented as the floor, exactly as the hospitality foundation is.
 
-| id | Name | Title direction | Status |
-| --- | --- | --- | --- |
-| `pages` | Pages & content | The pages themselves, written to be read. | Built before |
-| `mobile` | Built for phones | Designed for a phone first, not squeezed onto one. | Built before |
-| `enquiry` | A way to reach you | A form that reaches a real inbox, not a black hole. | Built before |
-| `hosting` | Hosting, domain & SSL | Set up and handed over working. | Built before |
+| id | Name | Title direction |
+| --- | --- | --- |
+| `pages` | Pages & content | The pages themselves, written to be read. |
+| `mobile` | Built for phones | Designed for a phone first, not squeezed onto one. |
+| `enquiry` | A way to reach you | A form that reaches a real inbox, not a black hole. |
+| `hosting` | Hosting, domain & SSL | Set up, secured and handed over working. |
 
-## 5. OPTIONAL MODULES — 13, in four groups
+All four are **Built before**.
 
-Grouped from the start; eleven flat was already proven to be a wall.
+## 6. OPTIONAL MODULES — 6, in two groups
 
-### Group 1 — Being found (4)
+### Group 1 — Being found (3)
 | id | Name | Status |
 | --- | --- | --- |
 | `seo` | Search-friendly setup | Built before |
-| `blog` | Blog or news | Proposed module |
 | `gallery` | Photo gallery | Built before |
-| `languages` | More than one language | Proposed module |
+| `updates` | Updates & news | Built before |
 
-### Group 2 — Letting people do something (4)
-| id | Name | Status | Depends on |
+### Group 2 — Doing more than showing (3)
+| id | Name | Status | Relationships |
 | --- | --- | --- | --- |
-| `bookings` | Bookings & appointments | Built before | `enquiry` |
-| `payments` | Online payments | Proposed module | works with `bookings`, `shop` |
-| `shop` | Shop / e-commerce | Proposed module | works with `payments` |
-| `accounts` | Customer accounts | Proposed module | works with `bookings` |
+| `bookings` | Bookings & enquiries | Built before | builds on `enquiry` |
+| `selfedit` | Edit it yourself | Built before | builds on `pages` |
+| `custom` | Something else | Custom development | — |
 
-### Group 3 — Running it yourself (3)
-| id | Name | Status | Depends on |
-| --- | --- | --- | --- |
-| `cms` | Edit content yourself | Built before | `pages` |
-| `admin` | Team logins & admin area | Built before | works with `cms` |
-| `reports` | Reports & numbers | Proposed module | works with `bookings` |
+Six modules of which five are delivered work. That ratio *is* the credibility
+argument, and it is the thing to protect if this catalogue is ever revisited.
 
-### Group 4 — When it becomes a product (2)
-| id | Name | Status |
-| --- | --- | --- |
-| `saas` | Multi-tenant product | Proposed module |
-| `integrations` | Custom integrations | Custom development |
+### `custom` — the honest catch-all
 
-## 6. THE DELIVERY-STATUS CONTRACT — EVIDENCE FOR EVERY "BUILT BEFORE"
+One module, deliberately not a checkbox for a specific feature. It is where
+anything bigger goes, named plainly rather than hidden:
 
-Same rule as `.claude/HOSPITALITY_SYSTEM_BUILDER.md` §19, and the same
-enforcement: the permitted set is asserted in the test suites, so promoting a
-capability without widening the allow-list fails the build.
+> **Something else.** A shop, customer logins, a product people subscribe to,
+> connecting to software you already use — these are real things, and they are
+> real projects. We scope them in a conversation rather than offering them as a
+> box to tick, because what they take depends entirely on what you need.
 
-Every claim below rests on the read-only inspection of the two delivered hotel
-systems (14 Aug 2026) or on this repository itself. **Nothing rests on marketing
-copy.**
+This is what stops the small catalogue reading as *"that's all they can do"*
+while still promising nothing specific.
+
+## 7. THE DELIVERY-STATUS CONTRACT — EVIDENCE FOR EVERY CLAIM
+
+Same rule as `.claude/HOSPITALITY_SYSTEM_BUILDER.md` §19, same enforcement: the
+permitted set is asserted in the test suites, so promoting a capability without
+widening the allow-list fails the build.
+
+Every claim rests on the read-only inspection of the two delivered hotel systems
+(14 Aug 2026) or on this repository. **Nothing rests on marketing copy.**
 
 | id | Evidence |
 | --- | --- |
@@ -116,58 +130,64 @@ copy.**
 | `mobile` | This repository is mobile-first throughout (`css/tokens.css` is the phone composition). |
 | `enquiry` | `php/contact.php`, `php/booking.php`, PHPMailer over SMTP, in production. |
 | `hosting` | Both client systems are hosted and served under TLS on `promanaged-it.com`. |
-| `seo` | Delivered sites carry deliberate SEO titles and meta descriptions. **Scope the claim narrowly to page structure, titles and descriptions — not rankings, and never a traffic promise.** |
+| `seo` | Delivered sites carry deliberate SEO titles and meta descriptions. **Scope narrowly to page structure, titles and descriptions — never rankings, never a traffic promise.** |
 | `gallery` | An "Explore Our Hotel" gallery section on both delivered sites. |
-| `bookings` | A full multi-step booking engine with live availability on both. |
-| `cms` | The digital menu and the events module are both owner-editable content, per tenant. |
-| `admin` | An authenticated Admin Portal with CSRF protection and password reset on both. |
+| `updates` | The events module on both sites: owner-published, dated items that appear on the public site, with a real empty state. Describe it as a simple updates/news section — **not** a full blogging platform with categories and comments. |
+| `bookings` | A full multi-step booking engine with live availability, guest details and confirmation on both sites. |
+| `selfedit` | The digital menu and the events module are both owner-editable per tenant, behind an authenticated admin portal with CSRF and password reset. |
 
-### Deliberately NOT "Built before" — and why
+## 8. A SEPARATE ISSUE THIS RAISES — NOT ACTED ON
 
-- **`payments`** — the hotel booking pages mention card and bank transfer as
-  *policy text*. That is not an integrated payment module. Do not promote without
-  real evidence.
-- **`saas`** — the hotel booking form carries a `client_uuid`, which is genuine
-  evidence of tenant-scoped architecture. It is **not** evidence of a
-  multi-tenant product offered to customers, which is a different thing. Proposed.
-- **`blog`, `languages`, `shop`, `accounts`, `reports`** — no evidence found.
+Cutting the SaaS end out of the *builder* does not remove it from the site.
+`pages/custom_websites.html` currently states publicly that ProManaged builds:
 
-> **Known tension, flagged for your decision.** `pages/custom_websites.html`
-> publicly states that ProManaged builds "Multi-tenant SaaS products, from first
-> version to scale" and "Subscription billing and user accounts". Those are
-> capability claims about what you *can* build. This catalogue treats them as
-> Proposed because I could not verify them as *delivered*. If they have in fact
-> been delivered somewhere I have not seen, tell me and I will promote them and
-> widen the allow-list. I have not changed the existing page's copy either way.
+- "Multi-tenant SaaS products, from first version to scale"
+- "Subscription billing and user accounts"
+- "Architecture that grows with your user base"
 
-## 7. WHAT CARRIES OVER UNCHANGED
+If the concern is not appearing to over-promise, that live page is a larger
+exposure than a builder that does not exist yet — it makes the same claims, to
+more visitors, today.
 
-Confirmed working and verified on the hospitality page; reuse the same patterns:
+**This has deliberately NOT been changed.** It is approved public copy and a
+commercial decision about what the business offers, which is not mine to make.
+Three options if you want it addressed, in a separate cycle:
+
+1. Leave it — the claims are about capability, not delivered work, and that is a
+   normal thing for a software firm to say.
+2. Soften the wording to what is demonstrable, keeping the ambition without the
+   specific unbacked claims.
+3. Remove the SaaS block entirely and let Build stand on the delivered work.
+
+My recommendation is **2**, and I would not touch it without your say-so.
+
+## 9. WHAT CARRIES OVER UNCHANGED
+
+Verified working on the hospitality page; reuse the same patterns:
 
 - module card with status chip, why, workflow steps, relationships;
 - dependency explanation — core targets explained, optional targets actionable,
   never a dead-end "Add" button;
 - the evolving system map, with only new tiles animating;
-- three-group chunking with per-group spans;
+- group chunking with per-group spans;
 - guided progression: completion-driven advances plus a continue control on every
-  chapter, `focusin` in the abandon list, free-text field blur as a trigger;
+  chapter, `focusin` in the abandon list, free-text blur as a trigger;
 - `data-cursor-calm` on the builder wrapper;
 - `behavior: 'instant'` per scroll frame — `'auto'` defers to the stylesheet's
   `scroll-behavior: smooth` and the travel stops short;
-- `.hb-card-detail[hidden]` equivalent — a class `display` rule beats `[hidden]`
-  and leaves every panel open;
+- a `[hidden]` display rule at higher specificity than the class that shows it;
 - submission as IDs only, labels resolved server-side from an allow-list, fixed
   core never read from the request.
 
-## 8. WHAT MUST BE WRITTEN FRESH
+## 10. WHAT MUST BE WRITTEN FRESH
 
 - the catalogue above, with `why` and `story` prose per module;
 - chapter 01's questions and their state;
-- the workflow-story generator and the summary-paragraph generator — these are
-  hand-written prose in the hospitality file and do not transfer;
+- the workflow-story and summary-paragraph generators — hand-written prose in the
+  hospitality file, which does not transfer;
 - all chapter copy.
 
-## 9. PROPOSED FILES
+## 11. PROPOSED FILES
 
 - `pages/website_builder.html`
 - `css/website_builder.css`
@@ -180,25 +200,21 @@ Confirmed working and verified on the hospitality page; reuse the same patterns:
 
 **No navigation tile.** `css/navbar.css` composes the bento panel for exactly
 seven tiles, with per-tile stagger delays 1–7 and minor tiles at `span 4`. An
-eighth broke the row last time and this would be a ninth. Both builders stay
+eighth broke the row last time; this would be a ninth. Both builders stay
 reachable from the Build page.
 
-## 10. OPEN QUESTIONS FOR REVIEW
+## 12. OPEN QUESTIONS FOR REVIEW
 
-1. **The catalogue itself** — is anything missing that people actually ask you
-   for, and is anything here something you would rather not offer?
-2. **The `saas` / `payments` tension in §6** — delivered anywhere I have not seen?
-3. **Should the log-in answer change the page?** My recommendation: yes — when
-   nobody logs in, groups 3 and 4 are visibly de-emphasised as "probably not you"
-   rather than hidden, so a brochure-site visitor is not weighing thirteen
-   choices. This is the strongest anti-overwhelm mechanic available and I would
-   build it unless you say otherwise.
-4. **Does this replace the hospitality builder as the general route**, or sit
-   beside it? Assumption: beside it, with hospitality kept as the specialist page.
+1. **Is six the right catalogue?** Anything you are regularly asked for that is
+   missing, or anything here you would rather not offer?
+2. **Is `updates` fairly labelled?** It rests on the events module, which is a
+   dated-items publisher rather than a blog. I have worded the claim narrowly,
+   but you know what was actually built.
+3. **The `custom_websites.html` copy in §8** — leave, soften, or remove?
+4. **Does this sit beside the hospitality builder** rather than replacing it?
+   Assumption: beside it, hospitality kept as the specialist page.
 
-## 11. DEFINITION OF DONE — for the build cycle, once approved
-
-Same bar as the hospitality builder, which means all of:
+## 13. DEFINITION OF DONE — for the build cycle, once approved
 
 - [ ] Catalogue and labels approved.
 - [ ] Every capability explains why it matters and how it runs.
