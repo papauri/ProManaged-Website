@@ -13,12 +13,14 @@ ProManaged IT may publicly identify the following as completed project deliverab
 - Do not publish raw/private URLs as the portfolio treatment. The site should show screenshots or carefully cropped interface snippets inside the ProManaged bento system.
 - Describe the work accurately without inventing metrics, awards, usage numbers, or outcomes that are not verified.
 
-### Bank Nkhonde — Hotel Management System
+### Liwonde Sun Hotel — Hotel Management System
 - Client context: Malawian client.
 - Deliverable: hotel management system and associated website/interface work.
 - Presentation: show selected HD interface/website snippets as visual evidence.
 - Do not publish raw/private URLs as the portfolio treatment. The site should show screenshots or carefully cropped interface snippets inside the ProManaged bento system.
 - Describe the work accurately without inventing metrics, awards, usage numbers, or outcomes that are not verified.
+
+**Bank Nkhonde must NOT be mentioned anywhere publicly** — see `.claude/PROJECT_CREDIBILITY.md`. It is superseded here as an approved public project name.
 
 ## Portfolio presentation rules
 
