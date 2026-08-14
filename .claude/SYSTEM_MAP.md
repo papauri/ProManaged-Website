@@ -116,6 +116,8 @@ The last two share one rAF loop that parks itself when nothing is moving. No ele
 
 Cards opt in automatically: the script tags `.grid > .block:not(.block--bare)` and `.nav-tile` with `data-field`. A card can name itself to the cursor with `data-cursor-label`.
 
+**`data-cursor-calm`** on any container drops the cursor to two states inside it — control, or not — instead of four. It exists for dense interactive regions where constant frame/caret/link switching competes with the task; the hospitality builder's steps use it. Everywhere without the attribute is unchanged.
+
 ### `js/mobile_phone_navbar.js`
 Owns mobile/bento navigation interaction, focus management, Escape handling, scroll lock and restoration.
 

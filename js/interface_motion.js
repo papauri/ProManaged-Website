@@ -258,6 +258,15 @@
         var CONTROL = 'a[href], button, [role="link"], input[type="submit"], .block--interactive';
         var TEXTUAL = 'p, li, h1, h2, h3, h4, blockquote, .lede';
         var TYPING = 'input, textarea, select';
+        /* Opt-out for dense interactive regions. The four-mode cursor is right for
+           editorial chapters, where each change of mode is an occasional event. In a
+           section that is wall-to-wall cards, controls and copy — the hospitality
+           builder's steps — the same behaviour fires constantly: the frame snaps
+           around a whole card, collapses to a caret over its paragraph, expands to a
+           link ring over its button, and back, on every few pixels of travel. Inside
+           a marked region the cursor keeps just two states, so it stops competing
+           with the thing the visitor is actually doing. */
+        var CALM = '[data-cursor-calm]';
 
         var resolve = function (el) {
             if (!el || el.nodeType !== 1) {
@@ -273,6 +282,21 @@
                 setMode('off');
                 setLabel('');
                 framed = null;
+                return;
+            }
+
+            if (el.closest(CALM)) {
+                // Two states only: a control, or everything else. No card framing and
+                // no caret, which are the two that make this section feel busy.
+                framed = null;
+                setLabel('');
+                if (el.closest(CONTROL)) {
+                    setMode('link');
+                    target.w = 44; target.h = 44; target.r = 22;
+                } else {
+                    setMode('default');
+                    target.w = RING; target.h = RING; target.r = RING / 2;
+                }
                 return;
             }
 

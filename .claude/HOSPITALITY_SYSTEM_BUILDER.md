@@ -35,6 +35,48 @@ Recorded so a later session does not repeat it or wrongly assume it never happen
 2. **The same flaw in two more places.** The system map and the submitted payload both computed links as `dependsOn + worksWith.filter(isSelected)`, which silently dropped every link to the foundation — the discovery brief was under-reporting the system. All three now share one `activeLinks()` helper, so the panel, the map and the brief describe the same system.
 3. **An expanded card stretching its neighbour.** The shared `.grid` stretches its children, so opening one module's detail dragged the card beside it to the same height and left a tall empty box. `.hb-modules` now aligns to `start`, so only the expanded card grows.
 
+### Guided progression
+
+Completing a step carries the visitor to the next one in a slow, weighted scroll
+(~1.2–2.4s, eased, landing the chapter just under the fixed rail).
+
+It may only ever act when the visitor has stopped acting for themselves. Every
+advance is driven by a real completion condition, fires at most once, only moves
+forward, and is abandoned the instant the visitor scrolls, taps, or presses a
+key. Abandoning is not permanent — the next completed action reschedules it — so
+it can never strand someone who scrolled at the wrong moment. It is disabled
+entirely under `prefers-reduced-motion`, since moving the page on someone's
+behalf is exactly what that setting rules out.
+
+| From | Advances when | To |
+| --- | --- | --- |
+| 01 Your property | A property type **and** at least one booking channel are chosen. Room count has a usable default and the problem note is optional, so neither can signal completion. | 02 The foundation |
+| 03 Your additions | At least one module is selected, then a 2.6s pause. Longer than step 01's because a selection opens a detail panel worth reading — and any scroll while reading cancels it. | 04 Your system |
+
+**The read-only chapters deliberately do not auto-advance.** There is nothing to
+complete in 02, 04, 05 or 06, so the only possible trigger would be a timer on
+how fast someone reads, which would pull the page out from under a slow reader.
+A guided flow that fights the visitor is worse than no guided flow. If a
+continue affordance is wanted for those chapters later, make it an explicit
+control rather than a timer.
+
+**Implementation note.** Each animation frame scrolls with `behavior: 'instant'`.
+`'auto'` means "use the CSS `scroll-behavior` property", and `css/global_styles.css`
+sets `smooth` on `html` — so with `'auto'` every frame kicked off a fresh smooth
+scroll chasing the last one, and the travel measurably stopped ~600px short.
+
+### Cursor in the builder
+
+`[data-hb]` carries `data-cursor-calm`, honoured by `js/interface_motion.js`.
+
+The site's four-mode instrument cursor is right for editorial chapters, where a
+change of mode is an occasional event. Across the builder's steps — wall-to-wall
+cards, controls and copy — the same behaviour fires constantly: the frame snaps
+around a whole card, collapses to a caret over its paragraph, expands to a link
+ring over its button, and back, every few pixels of travel. Inside a marked
+region the cursor keeps two states only (control, or not), so it stops competing
+with the task. Everywhere else on the site is untouched.
+
 ### Standing rules
 
 These replace the one-off gates this plan originally carried, and are enforced automatically rather than by remembering.

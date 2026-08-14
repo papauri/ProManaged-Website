@@ -966,6 +966,160 @@
     }
 
     /* ---------------------------------------------------------------------
+       GUIDED PROGRESSION
+       Finishing a step carries the visitor to the next one, slowly.
+
+       The rule this follows: it may only ever act on the visitor's behalf when
+       they have stopped acting for themselves. Every step below is driven by a
+       real completion condition rather than a timer on reading speed, fires at
+       most once, only ever moves forward, and is abandoned the moment the
+       visitor touches the page. If it is cancelled it is not cancelled for good
+       — the next completed action schedules it again — so it can never strand
+       someone who simply scrolled at the wrong moment.
+
+       The read-only chapters between these two deliberately do NOT auto-advance.
+       There is nothing to complete in them, so the only possible trigger would be
+       a timer on how fast someone reads, which would scroll the page out from
+       under a slow reader. See §"Guided progression" in the plan.
+       ------------------------------------------------------------------ */
+
+    const FLOW = [
+        {
+            id: 'property',
+            target: '#foundation',
+            /* Room count has a usable default and the problem note is optional, so
+               those two cannot signal completion. Type plus at least one channel is
+               the point at which the visitor has actually told us how they work. */
+            done: function () { return state.propertyType !== '' && state.channels.length > 0; },
+            settle: 1100,
+        },
+        {
+            id: 'additions',
+            target: '#system',
+            done: function () { return state.selected.length > 0; },
+            /* Longer, because a selection opens a detail panel worth reading. Any
+               scroll while reading cancels this anyway; the pause is for the visitor
+               who reads a short panel without needing to scroll at all. */
+            settle: 2600,
+        },
+    ];
+
+    const advanced = [];
+    let pendingAdvance = null;
+    let flowArmed = false;
+
+    function cancelAdvance() {
+        if (!pendingAdvance) return;
+        window.clearTimeout(pendingAdvance.timer);
+        // stop() drops the listeners and flags any running scroll to halt on its
+        // next frame, which is what actually ends the animation.
+        pendingAdvance.stop();
+        pendingAdvance = null;
+    }
+
+    /* A deliberately slow scroll. The browser's own smooth behaviour is tuned for
+       "get me there", which is the wrong register for a guided step — this is
+       closer to the weighted pacing the rest of the site's motion uses.
+
+       Each frame must be an INSTANT jump to the next eased position. css/global_styles.css
+       sets scroll-behavior:smooth on html, and `behavior:'auto'` means "use the CSS
+       property" rather than "jump" — so with 'auto' every frame started a fresh
+       smooth scroll of its own, each one chasing the last. Measured: the travel
+       lagged and stopped ~600px short of the target. 'instant' is the value that
+       actually overrides the stylesheet. */
+    function slowScrollTo(el) {
+        const cs = getComputedStyle(document.documentElement);
+        const headerH = parseFloat(cs.getPropertyValue('--header-h')) || 76;
+        const navFloat = parseFloat(cs.getPropertyValue('--nav-float')) || 0;
+        const offset = headerH + navFloat + 16;
+
+        const from = window.scrollY;
+        const to = Math.max(0, from + el.getBoundingClientRect().top - offset);
+        const distance = to - from;
+
+        // Never drag anyone backwards, and never animate a move nobody would see.
+        if (distance < 24) return null;
+
+        // Long enough to read as deliberate, capped so a big jump is not a journey.
+        const duration = Math.min(2400, Math.max(1200, Math.abs(distance) * 0.9));
+        const started = performance.now();
+        // easeInOutCubic: leaves and arrives slowly, travels in the middle.
+        const ease = function (t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        };
+
+        const state_ = { raf: 0, cancelled: false };
+        const step = function (now) {
+            if (state_.cancelled) return;
+            const t = Math.min(1, (now - started) / duration);
+            window.scrollTo({ top: from + distance * ease(t), behavior: 'instant' });
+            if (t < 1) state_.raf = window.requestAnimationFrame(step);
+        };
+        state_.raf = window.requestAnimationFrame(step);
+        return state_;
+    }
+
+    function scheduleAdvance(entry) {
+        cancelAdvance();
+
+        const target = root.querySelector(entry.target) || document.querySelector(entry.target);
+        if (!target) return;
+
+        /* Anything that shows the visitor is driving abandons the attempt. `scroll`
+           is deliberately NOT in this list: the animation below scrolls the page
+           itself and would instantly cancel itself. */
+        const abandon = function () { cancelAdvance(); };
+        const EVENTS = ['wheel', 'touchstart', 'pointerdown', 'keydown'];
+        EVENTS.forEach(function (name) {
+            window.addEventListener(name, abandon, { passive: true });
+        });
+
+        const stop = function () {
+            EVENTS.forEach(function (name) { window.removeEventListener(name, abandon); });
+            if (pendingAdvance && pendingAdvance.motion) pendingAdvance.motion.cancelled = true;
+        };
+
+        const timer = window.setTimeout(function () {
+            // Already where we were going: nothing to do, but the step is spent.
+            const box = target.getBoundingClientRect();
+            const alreadyThere = box.top >= 0 && box.top < window.innerHeight * 0.4;
+
+            advanced.push(entry.id);
+            track('step_advanced', { from: entry.id, to: entry.target.replace('#', '') });
+
+            const motion = alreadyThere ? null : slowScrollTo(target);
+            if (pendingAdvance) pendingAdvance.motion = motion;
+
+            if (!motion) {
+                stop();
+                pendingAdvance = null;
+            } else {
+                // Release the listeners once the travel is over.
+                window.setTimeout(function () {
+                    stop();
+                    pendingAdvance = null;
+                }, 2500);
+            }
+        }, entry.settle);
+
+        pendingAdvance = { timer: timer, stop: stop, motion: null };
+    }
+
+    function maybeAdvance() {
+        // Not during boot, and never when the visitor has asked for less motion:
+        // moving the page for someone is precisely what that setting rules out.
+        if (!flowArmed || prefersReducedMotion()) return;
+        for (let i = 0; i < FLOW.length; i++) {
+            const entry = FLOW[i];
+            if (advanced.indexOf(entry.id) !== -1) continue;
+            if (entry.done()) {
+                scheduleAdvance(entry);
+                return;
+            }
+        }
+    }
+
+    /* ---------------------------------------------------------------------
        THE ONE UPDATE PATH
        ------------------------------------------------------------------ */
     function update() {
@@ -974,6 +1128,7 @@
         renderStory();
         renderSummary();
         syncHidden();
+        maybeAdvance();
     }
 
     /* ---------------------------------------------------------------------
@@ -1078,6 +1233,10 @@
     update();
     root.classList.add('hb-ready');
     track('builder_started', {});
+
+    /* Armed only after the first render, so the boot pass can never schedule an
+       advance before the visitor has done anything. */
+    flowArmed = true;
 
     /* "Completed" means the visitor actually reached the proposed system with a
        property described — not that they submitted. It is the product-learning
