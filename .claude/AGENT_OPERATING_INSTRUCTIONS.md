@@ -6,17 +6,27 @@ This file is persistent operating context for Claude and any other coding agent 
 
 The goal is to prevent repeated prompts across separate Claude sessions. The repository plans are the shared memory. A short instruction such as `continue` should be enough to resume implementation.
 
+## Default execution scope
+
+Read `.claude/BUILD_PLAN_EXECUTION_SCOPE.md` at session startup.
+
+Unless the user explicitly names another product or plan, `continue` means **continue the ProManaged public website implementation in `.claude/BUILD_PLAN.md`**.
+
+The Hospitality System Builder is a secondary plan. Do not switch to it simply because it exists. Work on it only when the user explicitly asks for hospitality work or the active website Build Plan explicitly requires it.
+
 ## Session startup
 
 At the beginning of every session:
 
 1. Read `CLAUDE.md`.
-2. Read `.claude/PROJECT_CONTEXT.md`.
-3. Read `.claude/BUILD_PLAN.md`.
-4. Read `.claude/PROJECT_CREDIBILITY.md`.
-5. Read `.claude/SYSTEM_MAP.md` when the task touches architecture or shared components.
-6. Read `.claude/HOSPITALITY_SYSTEM_BUILDER.md` whenever hospitality-builder work is active.
-7. Inspect the current repository state on `main` before making assumptions.
+2. Read `.claude/AGENT_OPERATING_INSTRUCTIONS.md`.
+3. Read `.claude/BUILD_PLAN_EXECUTION_SCOPE.md`.
+4. Read `.claude/PROJECT_CONTEXT.md`.
+5. Read `.claude/BUILD_PLAN.md`.
+6. Read `.claude/PROJECT_CREDIBILITY.md`.
+7. Read `.claude/SYSTEM_MAP.md` when the task touches architecture or shared components.
+8. Read `.claude/HOSPITALITY_SYSTEM_BUILDER.md` only when hospitality-builder work is active or explicitly requested.
+9. Inspect the current repository state on `main` before making assumptions.
 
 The repository is authoritative. Do not depend on previous conversation history for requirements that are already documented here.
 
@@ -24,8 +34,9 @@ The repository is authoritative. Do not depend on previous conversation history 
 
 When the user says `continue`, `keep going`, `next`, `implement`, or `CODE NOW`:
 
+- default to `.claude/BUILD_PLAN.md` and the ProManaged public website;
 - do not ask the user to repeat documented requirements;
-- identify the highest-priority unfinished work from the active plans;
+- identify the highest-priority unfinished website work;
 - inspect the existing implementation and dependencies;
 - implement the work;
 - self-check the result;
@@ -186,13 +197,13 @@ Never expose secrets or credentials in source, commits, public UI, logs or email
 
 ## Hospitality System Builder
 
-`.claude/HOSPITALITY_SYSTEM_BUILDER.md` is an active implementation plan, not optional documentation.
+`.claude/HOSPITALITY_SYSTEM_BUILDER.md` is an active implementation plan, but it is not the default `continue` target.
 
-When it is the current scope:
+When it is explicitly active:
 
 - inspect the actual Rosalyn's and Liwonde Sun systems/code/assets where available before finalising feature assumptions;
 - distinguish genuine reusable hospitality functionality from client-specific functionality;
-- do not invent project capabilities, outcomes or metrics;
+- do not invent capabilities, outcomes or metrics;
 - treat the builder as a guided product configurator + discovery journey + qualified enquiry;
 - preserve the existing ProManaged visual language;
 - make Core, Optional, Dependencies, Workflow Stories and Proposed System understandable to non-technical hospitality owners;
@@ -209,7 +220,7 @@ Approved named project proof:
 - Rosalyn's — Hotel Management System
 - Liwonde Sun Hotel — Hotel Management System
 
-Bank Nkhonde must never be mentioned publicly.
+Do not mention Bank Nkhonde publicly.
 
 Do not invent:
 
