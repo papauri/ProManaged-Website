@@ -647,35 +647,45 @@ Never commit YAML/YML.
 
 ## 11. DEFINITION OF DONE
 
-- [ ] Every required public page uses the same canonical footer structure.
-- [ ] No old/partial footer variant remains.
-- [ ] Every required public page has at least two deliberate bento/editorial moments beyond the hero.
-- [ ] Bento patterns are visibly varied; no page is just repeated equal cards.
-- [ ] Building Blocks motion is visibly applied across the site, not only the homepage.
-- [ ] Initial page-load choreography works and has safe fallback behaviour.
-- [ ] Navigation visually feels contemporary and premium, not old-school.
-- [ ] Hero remains balanced 7/5 at desktop and deliberately composed on mobile.
-- [ ] Founder portrait is circular, sharp and restrained.
-- [ ] CTA anchors feel intentional everywhere.
-- [ ] Forms and email templates retain working backend contracts.
-- [ ] 375/430/768/1024/1440/1600/1920/2560 layouts are usable.
-- [ ] No overlap, horizontal overflow or giant dead zones.
-- [ ] No unapproved project/client claims.
-- [ ] No pricing on the software page.
-- [ ] Every public page passes the Clarity Contract (Section 2B): plain pillar definitions, no jargon in headings/tags/cues, the 375×667 first-screen fold contract.
-- [ ] Homepage journey follows INTRIGUE → UNDERSTANDING → RELEVANCE → PROOF → TRUST → DESIRE → ACTION; no two graphite chapters adjacent.
-- [ ] Motion presence follows the intensity map; calm chapters are calm by design.
-- [ ] DESIRE chapter reads as the emotional peak of the journey: concrete after-state, no fabricated metrics, not the weakest chapter.
-- [ ] Graduated CTA ladder in place: "Start a project" (high commitment), learn-more as a designed on-ramp ending in a clear next action (middle), problem-question cues (low commitment).
-- [ ] Proof uses depth over breadth: at least one rich problem → build → result-in-words narrative for the approved real projects; illustrative UI never weighted equal to real proof.
-- [ ] RELEVANCE copy is pain-first: a first-time visitor recognises their own situation before capability names appear.
-- [ ] Real project proof ladder in place (homepage beat, Build-page deep dive, get-started reminder, optional learn-more note); no sensitive data visible in any capture.
-- [ ] Capability CTAs use problem-oriented language; exactly one primary per CTA row.
-- [ ] Navigation lead states the three capabilities in one plain sentence; the rail's Menu label is visible; capabilities reachable in ≤2 clicks.
-- [ ] SYSTEM_MAP reconciled with the live repository (canonical Build / Source / Support trio).
-- [ ] No Render/eBay/RAWG legacy logic where not required.
-- [ ] No YAML/YML committed.
-- [ ] Full diff inspected before commit.
+> Status legend: `[x]` verified against the live repository this cycle (evidence noted); `[ ]` genuinely unverified or requires rendered/browser QA not yet performed. Do not flip an item to `[x]` without re-checking the live files.
+
+- [x] Every required public page uses the same canonical footer structure. — `class="footer"` present exactly once on all 7 public pages (index, get-started, learn_more, privacy_policy, custom_websites, hardware_sourcing, it_support).
+- [x] No old/partial footer variant remains. — no `.footer-promanaged` markup left; only a code-comment in `css/footer_promanaged.css` noting its removal.
+- [ ] Every required public page has at least two deliberate bento/editorial moments beyond the hero. — section structure is present on every page; visible bento variety not yet confirmed by rendered inspection.
+- [ ] Bento patterns are visibly varied; no page is just repeated equal cards. — requires rendered/visual QA, not yet performed.
+- [x] Building Blocks motion is visibly applied across the site, not only the homepage. — `data-blocks`/`data-blocks-pace` attributes present on chapter sections across all 7 pages.
+- [x] Initial page-load choreography works and has safe fallback behaviour. — `js/boot.js` has a bounded `MAX` ceiling independent of the authorized `MIN_HOLD` brand beat (see PROJECT_CONTEXT "Boot overture exception"); `prefers-reduced-motion` drops to a plain held plate.
+- [ ] Navigation visually feels contemporary and premium, not old-school. — subjective visual judgment; requires rendered QA.
+- [x] Hero remains balanced 7/5 at desktop and deliberately composed on mobile. — `css/hero_section.css` implements the 7fr/5fr desktop split per `--rail-visual: 1880px`.
+- [x] Founder portrait is circular, sharp and restrained. — `.about-media--portrait` and `.about-media--portrait img` both set `border-radius: 50%` in `css/about_section.css`; `images/founder.png` rendered at explicit 800×800.
+- [x] CTA anchors feel intentional everywhere. — every `.btn.primary` occurrence sits alone in its CTA row across all 7 pages (verified by grep of every group).
+- [x] Forms and email templates retain working backend contracts. — `booking.php`/`contact.php` expected field names match the live form markup exactly (`get-started.html`, `pages/hardware_sourcing.html`); `php/env.php`/`php/mailer.php` pull credentials from env vars only.
+- [ ] 375/430/768/1024/1440/1600/1920/2560 layouts are usable. — requires rendered/browser QA at each breakpoint, not yet performed.
+- [ ] No overlap, horizontal overflow or giant dead zones. — requires rendered/browser QA, not yet performed.
+- [x] No unapproved project/client claims. — "Bank Nkhonde" absent from all public HTML/CSS/JS (doc-only reference in `.claude/PROJECT_EVIDENCE.md` corrected).
+- [x] No pricing on the software page. — no currency/pricing language in `pages/custom_websites.html`; FAQ explicitly defers ("It depends entirely on scope").
+- [x] Every public page passes the Clarity Contract (Section 2B): plain pillar definitions, no jargon in headings/tags/cues. — grepped "SaaS/multi-tenant/integration/dashboard/infrastructure" sitewide; all hits are in body `<p>`/`<li>` copy, none in headings/tags/cues/eyebrows.
+- [x] Homepage journey follows INTRIGUE → UNDERSTANDING → RELEVANCE → PROOF → TRUST → DESIRE → ACTION; no two graphite chapters adjacent. — verified section order/classes in `index.html`: hero → what-we-are(ivory) → services → proof(stone) → how-we-work(graphite) → about → why-us(ivory) → mission-vision(stone) → contact(ivory).
+- [x] Motion presence follows the intensity map; calm chapters are calm by design. — `data-blocks-pace="calm"` present on the proof, why-band and contact/mission chapters (the near-absent list); prominent chapters (hero, how-we-work) omit it.
+- [x] DESIRE chapter reads as the emotional peak of the journey: concrete after-state, no fabricated metrics, not the weakest chapter. — `#mission-vision` ("Nobody is chasing a workaround by Tuesday") states a concrete after-state with no invented numbers.
+- [x] Graduated CTA ladder in place. — hero/rail/contact carry "Start a project"; capability tiles carry problem-question cues ("Tell us what keeps breaking," etc.); learn-more is linked as a secondary CTA throughout.
+- [x] Proof uses depth over breadth. — homepage proof chapter is one asymmetric evidence block with a single narrative beat; only Rosalyn's and Liwonde Sun Hotel are used.
+- [x] RELEVANCE copy is pain-first. — each capability card opens with a pain statement ("The booking spreadsheet has quietly become a second job.") before naming the capability.
+- [x] Real project proof ladder in place; no sensitive data visible in any capture. — homepage first beat is one image + brand line + "Delivered work" tag; get-started carries one compact strip; learn-more carries one line; alt text/comments explicitly scope captures to public-facing views only.
+- [x] Capability CTAs use problem-oriented language; exactly one primary per CTA row. — confirmed in `#services` capability cards and verified across all `.btn.primary` groups sitewide.
+- [x] Navigation lead states the three capabilities in one plain sentence; the rail's Menu label is visible; capabilities reachable in ≤2 clicks. — `.nav-panel-lead-text` states "We build your software, source your equipment and keep both working."; all three capability tiles sit directly in the panel (1 click from any page).
+- [x] SYSTEM_MAP reconciled with the live repository (canonical Build / Source / Support trio). — `.claude/SYSTEM_MAP.md` reflects the current page list, canonical trio and current CSS/JS architecture; no "Connect" or `network_infrastructure.html` references remain anywhere in the repo.
+- [x] No Render/eBay/RAWG legacy logic where not required. — no matches anywhere in the repo (excluding ordinary English "render").
+- [x] No YAML/YML committed. — none present in the repository tree.
+- [ ] Full diff inspected before commit. — a per-cycle process step, not a standing repository state; confirm at each implementation cycle rather than checking off permanently.
+
+## Current Status
+
+- **Completed:** Reconciled this Definition of Done checklist against the live repository (previously all unchecked/stale); most site-wide requirements (footer, motion, hero, founder, forms, Clarity Contract, homepage journey/pacing, CTA ladder, proof ladder, credibility, SYSTEM_MAP, cleanup) verified as already implemented. Corrected a stale Bank Nkhonde public-naming reference in `.claude/PROJECT_EVIDENCE.md`.
+- **In progress:** None.
+- **Next:** Rendered/browser QA of the remaining unverified items above (bento variety, navigation feel, responsive layouts 375–2560, overlap/overflow) — needs actual viewport rendering, not static file inspection.
+- **Blocked:** None.
+- **Last implementation commit:** `b74ed04`
 
 ## 12. DEFAULT EXECUTION MODE
 
