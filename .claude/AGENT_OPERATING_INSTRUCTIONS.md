@@ -29,13 +29,85 @@ When the user says `continue`, `keep going`, `next`, `implement`, or `CODE NOW`:
 - inspect the existing implementation and dependencies;
 - implement the work;
 - self-check the result;
-- commit the coherent completed scope;
+- update the relevant Build Plan progress state as defined below;
+- commit the implementation and plan-state update as one coherent scope;
 - push directly to `main`;
-- report briefly what changed, what was checked, and the commit SHA.
+- report briefly what changed, what was checked, the plan status, and the commit SHA.
 
 Do not merely produce another plan when an implementation objective is already active.
 
 Do not create an approval loop between every small implementation step. The user is the final visual acceptance gate and will say when something needs changing.
+
+## Mandatory Build Plan progress tracking
+
+The Build Plans are not passive documentation. They are the persistent task register for the project.
+
+**Every completed implementation task MUST be registered in the relevant Build Plan before the implementation commit is created.**
+
+For every active task:
+
+1. Find the exact checklist item, acceptance criterion, or task entry in the relevant `.md` plan.
+2. Implement the task completely enough to satisfy its documented acceptance criteria.
+3. Run the available self-checks/validation.
+4. Only then change its checkbox from `[ ]` to `[x]`.
+5. Add a short completion note when useful, including the implementation area and commit SHA if the plan's progress format supports it.
+6. If the task is only partly implemented, **do not** mark it `[x]`; leave it `[ ]` and add a `PARTIAL` note describing what remains.
+7. If the task cannot be completed because of a genuine blocker, leave it `[ ]` and add a `BLOCKED` note explaining the exact blocker and what is needed.
+8. Never mark a task complete merely because files were edited, a class was added, or an initial attempt was made.
+9. If the task's original wording is ambiguous, update the plan with a precise acceptance criterion before marking it complete.
+10. Commit the code changes and the corresponding Build Plan progress update together whenever practical, so Git history shows both what changed and what was completed.
+
+### Progress-state rules
+
+Use these states consistently:
+
+- `[ ]` — not completed;
+- `[x]` — implemented and self-checked against acceptance criteria;
+- `PARTIAL` — started but not complete; keep the checkbox unchecked;
+- `BLOCKED` — cannot currently be completed because of a genuine external/technical dependency; keep the checkbox unchecked.
+
+Do not invent completion percentages. Do not mark broad parent objectives complete while required child tasks remain unfinished.
+
+### Required progress record
+
+For active execution plans, maintain a concise status section where the plan structure allows it:
+
+```md
+## Current Status
+
+- **Completed:** [brief list of recently completed tasks]
+- **In progress:** [current task]
+- **Next:** [next highest-priority unchecked task]
+- **Blocked:** None
+- **Last implementation commit:** `COMMIT_SHA`
+```
+
+If the plan already has an equivalent progress/status section, update that section instead of creating a duplicate.
+
+### Session-resume rule
+
+At the beginning of a new session, Claude MUST use the checked/unchecked task state to resume from the highest-priority unfinished work.
+
+Do not redo `[x]` tasks unless:
+
+- a later change broke them;
+- the user explicitly asks for a regression fix;
+- the plan's acceptance criteria changed;
+- verification proves the earlier completion was incorrect.
+
+When a later change invalidates a previously completed task, revert it to `[ ]` and record why before fixing it.
+
+### Plan integrity
+
+The plan must describe the repository's actual state, not an aspirational state.
+
+If implementation reveals that a planned task is no longer required, technically incorrect, duplicated, or superseded:
+
+- update the plan explicitly;
+- explain the replacement or reason briefly;
+- do not silently delete the task's history.
+
+The Build Plan and code should move forward together.
 
 ## Team model
 
@@ -61,8 +133,9 @@ After a coherent implementation scope:
 3. verify internal links and asset paths;
 4. run available code/repository validation;
 5. verify that existing backend contracts remain intact;
-6. commit with a meaningful message;
-7. push to `main`.
+6. update the relevant Build Plan completion state;
+7. commit the implementation + plan-state update;
+8. push to `main`.
 
 Never claim a test, browser check or deployment verification that was not actually performed.
 
@@ -200,18 +273,21 @@ It is complete when:
 
 - the documented objective is implemented;
 - existing contracts are preserved;
+- the relevant Build Plan task is marked `[x]` only after self-check;
 - the implementation is responsive;
 - accessibility is considered;
 - motion has an appropriate reduced-motion path;
 - no obvious dead links/assets/selectors were introduced;
 - available validation has been run;
-- the coherent scope is committed and pushed to `main`.
+- the coherent scope and plan-state update are committed;
+- the commit is pushed to `main`.
 
 ## Final report format
 
 After an implementation cycle, report only what is useful:
 
 - **Implemented:** concise summary
+- **Plan updated:** exact task(s) marked complete / partial / blocked
 - **Checked:** concise validation summary
 - **Commit:** SHA
 - **Pushed:** yes/no
