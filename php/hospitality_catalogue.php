@@ -71,9 +71,11 @@ function pm_hb_optional() {
         'payments'       => ['Payments', 'Proposed module'],
         'guest-comms'    => ['Guest messages', 'Proposed module'],
         'reporting'      => ['Reporting', 'Proposed module'],
-        'staff'          => ['Staff accounts', 'Proposed module'],
+        'staff'          => ['Staff accounts', 'Built before'],
         'multi-property' => ['Multiple properties', 'Proposed module'],
-        'restaurant'     => ['Restaurant / POS', 'Custom development'],
+        'restaurant'     => ['Restaurant menu', 'Built before'],
+        'conference'     => ['Conference & meetings', 'Built before'],
+        'events'         => ['Events', 'Built before'],
         'integrations'   => ['Custom integrations', 'Custom development'],
     ];
 }

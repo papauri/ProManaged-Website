@@ -18,6 +18,7 @@ This is not a conventional contact form, pricing calculator, or generic SaaS fea
 - **In progress:** None.
 - **Next:** Nothing outstanding on this plan. See "Standing rules" below for what governs future changes.
 - **Blocked:** None.
+- **Source-system research (§19): done.** Both delivered systems were inspected read-only on 14 Aug 2026. The catalogue was corrected as a result — `restaurant` and `staff` reclassified, `conference` and `events` added — so eight of fourteen capabilities now rest on verified delivered work rather than four. Full findings in §19.
 
 ### Verification performed
 
@@ -705,9 +706,62 @@ The builder must never imply that the exact configurable product already exists 
 
 ---
 
-## 19. THE DELIVERY-STATUS CONTRACT
+## 19. SOURCE-SYSTEM RESEARCH — DONE — AND THE DELIVERY-STATUS CONTRACT
 
-> **Superseded.** This section previously required inspecting the live Rosalyn's and Liwonde Sun admin systems before finalising the catalogue. That gate was never satisfiable from the coding environment — the repository contains no URL for either system, and the credentials file is not readable by the agent — so it would have stayed permanently open while doing nothing to protect the thing it was written to protect. It is replaced by the rule below, which targets the same risk (claiming capabilities we have not built) and is enforced by tests rather than by a step someone has to remember.
+### The inspection (14 Aug 2026)
+
+Both delivered systems were inspected read-only at the URLs the owner supplied:
+`promanaged-it.com/rosalyns-hotel` and `promanaged-it.com/liwondesunhotel`.
+Nothing was created, edited or deleted, no booking was submitted, and the admin
+portal was observed at its login screen only — no authentication was attempted.
+Findings were taken from page structure (navigation, form fields, module
+sections) rather than screenshots, so no guest data or private content was
+captured at any point.
+
+**They are one product with two tenants, not two builds.** Identical navigation
+(Home, Rooms, Restaurant, Gym, Conference, Events, Book Now), an identical
+booking-search contract (`check_in`, `check_out`, `guests`, `children`,
+`room_type`), and identical section structure. The differences are tenant data —
+room names, rates, facilities — not features. The booking form carries a
+`client_uuid`, so the system is already built along tenant lines. That is a real
+input to §20: the multi-tenant model is not hypothetical.
+
+**Verified present in both systems:**
+
+| Capability | Evidence |
+| --- | --- |
+| Bookings | Multi-step engine: dates → room → guest information → guest details → booking type → add-ons. CSRF-protected. |
+| Rooms | Room types with per-night rates and live availability counts; unavailable and over-capacity states are handled. |
+| Guests | Full record: name, email, phone, country, address, number of guests, children, special requests. |
+| Website + booking engine | The public site and the engine above. |
+| Staff accounts | An authenticated Admin Portal with CSRF and password reset. |
+| Restaurant menu | A categorised digital menu — Local Corner, Mains, Pasta, Quick & Easy, **Room Service** — with per-item pricing. |
+| Conference & meetings | A meeting-space enquiry module: company, contact, date, start/end time, attendees, event type, AV equipment, catering, requirements. |
+| Events | A published upcoming-events module. |
+
+**Also seen, folded into Bookings rather than made separate modules:** standard
+versus tentative booking types, add-on packages, and group-too-large-for-one-room
+handling.
+
+**Deliberately NOT promoted.** Payments (the booking page mentions card and bank
+transfer as *policy* text, which is not an integrated module), housekeeping,
+reporting and guest messages were not evidenced. Multi-property was not promoted
+either: multi-*tenant* hosting is a different feature from one operator running
+several properties from one system, and conflating the two would be exactly the
+kind of over-claim this section exists to prevent.
+
+**Catalogue changes made as a result:** `restaurant` reclassified from Custom
+development to Built before and rescoped to the digital menu (charging to a room
+was not evidenced); `staff` promoted to Built before and rewritten to claim the
+admin portal rather than per-role permissions, which were not verified;
+`conference` and `events` added as new Built-before modules. Eight of fourteen
+capabilities now rest on delivered work rather than four.
+
+### The contract
+
+The gate this section used to impose — inspect before finalising — has done its
+job and is replaced by a standing rule, so the guarantee survives future edits
+instead of depending on someone repeating the inspection.
 
 The catalogue classifies every capability three ways, and the classification is printed on the card the visitor reads:
 
@@ -721,16 +775,15 @@ The catalogue classifies every capability three ways, and the classification is 
 
 A capability may be promoted to **Built before** only when its presence in delivered work has actually been verified. Until then it is Proposed or Custom. This is not a judgement call at review time: the permitted set is asserted in `tests/hospitality_builder.test.js` and `tests/hospitality_endpoint.test.php`, so promoting a capability without also widening that allow-list fails the suite.
 
-Currently permitted: `bookings`, `rooms`, `guests`, `website` — the reservation, room-state, guest-record and public booking-engine surfaces evidenced in `pages/custom_websites.html` and approved in `.claude/PROJECT_CREDIBILITY.md`.
+Currently permitted: `bookings`, `rooms`, `guests`, `website`, `staff`, `restaurant`, `conference`, `events` — each verified against both delivered systems in the inspection above.
 
-### If the live systems are inspected later
+### Adding to that list later
 
-Still worth doing, as product research rather than as a gate. It needs two things this environment did not have: **the URL of each system**, and confirmation that read-only inspection is intended. Then:
+Anything else requires the same standard: evidence from the real systems, not a plausible assumption. When something is confirmed, widen the allow-list in **both** test files and update the catalogue `status` in **both** `js/hospitality_builder.js` and `php/hospitality_catalogue.php`. The suites fail if any of those four fall out of step.
 
-- inspect only enough to establish common workflows, common entities, reusable versus client-specific features, and what should remain custom;
-- never expose credentials; never modify admin data; never create, delete or edit bookings, users or settings;
-- do not force client-specific functionality into the generic product model;
-- widen the `Built before` allow-list in **both** test files for anything the inspection actually confirms, and update the catalogue's `status` to match.
+The obvious next candidates, none of which are currently evidenced, are payments, housekeeping, reporting and guest messages. If the admin portal is inspected under authentication later, that is where they would be confirmed or ruled out.
+
+Rules for any further inspection: never expose credentials; never modify admin data; never create, delete or edit bookings, users or settings; capture structure rather than screenshots so no guest data is collected; and do not force client-specific functionality into the generic product model.
 
 ---
 

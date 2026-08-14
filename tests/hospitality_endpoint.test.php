@@ -108,7 +108,10 @@ foreach ([
    Only capabilities ProManaged has genuinely delivered may be described to a
    reader as built. See .claude/PROJECT_CREDIBILITY.md. */
 
-$mayClaimBuilt = ['website'];
+// Confirmed present in BOTH delivered systems during the §19 inspection on
+// 14 Aug 2026. Mirrors MAY_CLAIM_BUILT in tests/hospitality_builder.test.js —
+// see there for what each entry was verified against.
+$mayClaimBuilt = ['website', 'staff', 'restaurant', 'conference', 'events'];
 foreach ($optional as $id => $entry) {
     check('"' . $id . '" carries a permitted delivery status',
         in_array($entry[1], ['Built before', 'Proposed module', 'Custom development'], true), true);

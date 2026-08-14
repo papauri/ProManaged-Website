@@ -53,6 +53,14 @@ const REQUIRED = ['id', 'category', 'status', 'name', 'title', 'shortDescription
     'why', 'dependsOn', 'worksWith', 'story'];
 
 check('no duplicate ids', ids.size === ALL.length);
+
+/* The ≥900px spans in css/hospitality_builder.css are hand-composed against these
+   counts (7+5 / 5+7 / 4+4+4 / 4+4+4 / 12, and 5+4+3 for the foundation). Adding or
+   removing a capability without revisiting them leaves a half-empty row. */
+check('3 foundation capabilities — the CSS composition assumes this',
+    CORE.length === 3, 'got ' + CORE.length);
+check('11 optional modules — the CSS composition assumes this',
+    OPTIONAL.length === 11, 'got ' + OPTIONAL.length);
 ALL.forEach((m) => {
     const missing = REQUIRED.filter((k) => !Object.prototype.hasOwnProperty.call(m, k));
     check('"' + m.id + '" has every required field', missing.length === 0, 'missing: ' + missing.join(', '));
@@ -96,7 +104,23 @@ check('the core-target relationship case is still exercised by the catalogue',
    .claude/PROJECT_CREDIBILITY.md approves only the delivered hotel work. A
    capability may claim "Built before" only if ProManaged has genuinely shipped it.
    Anything else must read Proposed module or Custom development. */
-const MAY_CLAIM_BUILT = new Set(['bookings', 'rooms', 'guests', 'website']);
+/* Each entry was confirmed present in BOTH delivered systems during the §19
+   inspection on 14 Aug 2026. Adding to this set requires the same standard —
+   evidence from the real systems, not a plausible assumption.
+     bookings/rooms/guests  multi-step booking engine, room types with live
+                            availability and rates, full guest record
+     website                the public site and its booking engine
+     staff                  an authenticated admin portal (CSRF + password reset)
+     restaurant             a categorised digital menu, room service included
+     conference             a meeting-space enquiry module
+     events                 a published upcoming-events module
+   Deliberately NOT included: payments, housekeeping, reporting, guest-comms and
+   multi-property — none were evidenced, and multi-TENANT hosting is not the same
+   feature as one operator running several properties from one system. */
+const MAY_CLAIM_BUILT = new Set([
+    'bookings', 'rooms', 'guests', 'website',
+    'staff', 'restaurant', 'conference', 'events',
+]);
 ALL.filter((m) => m.status === 'built').forEach((m) => {
     check('"' + m.id + '" is permitted to claim "Built before"', MAY_CLAIM_BUILT.has(m.id),
         'unverified capability claiming delivered work — see PROJECT_CREDIBILITY.md');

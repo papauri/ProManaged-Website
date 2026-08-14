@@ -172,17 +172,20 @@
         {
             id: 'staff',
             category: 'optional',
-            status: 'proposed',
+            /* Verified: both delivered systems sit behind an authenticated admin
+               portal with CSRF protection and password reset. Per-role scoping was
+               NOT verified, so the copy below deliberately does not claim it. */
+            status: 'built',
             name: 'Staff accounts',
-            title: 'Everyone gets their own way in.',
-            shortDescription: 'Individual logins, with each role seeing what it needs.',
-            why: 'A single shared login means nobody knows who changed what, and reception can see everything an owner can. Separate accounts fix both at once.',
+            title: 'A private side your team signs into.',
+            shortDescription: 'The management area behind your public site, protected by a real login.',
+            why: 'Everything your team changes — rooms, rates, availability — happens somewhere the public cannot reach. That side of the system is where the actual work gets done.',
             dependsOn: [],
             worksWith: ['housekeeping'],
             story: [
-                'Each person signs in as themselves',
-                'They see what their role needs',
-                'Changes are attributable',
+                'Your team signs in',
+                'They manage rooms, rates and reservations',
+                'Guests only ever see the public site',
             ],
         },
         {
@@ -204,17 +207,57 @@
         {
             id: 'restaurant',
             category: 'optional',
-            status: 'custom',
-            name: 'Restaurant / POS',
-            title: 'Charges that find the right room.',
-            shortDescription: 'Restaurant and bar charges posted to a guest\'s stay.',
-            why: 'This one is genuinely property-specific — menus, tills and the way charges reach a room differ everywhere. It is built to how your property already works rather than assumed.',
-            dependsOn: ['guests'],
-            worksWith: ['payments'],
+            /* Verified: both delivered systems carry a categorised digital menu
+               (Local Corner, Mains, Pasta, Quick & Easy, Room Service) with per-item
+               pricing. Charging to a room was NOT evidenced and is a separate
+               module below, so this claims the menu and nothing more. */
+            status: 'built',
+            name: 'Restaurant menu',
+            title: 'Your menu, without reprinting it.',
+            shortDescription: 'A categorised digital menu on your site — including room service.',
+            why: 'A menu in a PDF is out of date the day a price changes. Kept in the system, it is edited once and correct everywhere a guest looks.',
+            dependsOn: [],
+            worksWith: ['website'],
             story: [
-                'A guest orders during their stay',
-                'The charge is posted to their room',
-                'It appears on the final bill',
+                'Dishes are grouped into your own categories',
+                'Prices are edited in one place',
+                'Guests see the current menu before they arrive',
+            ],
+        },
+        {
+            id: 'conference',
+            category: 'optional',
+            /* Verified: a conference-room enquiry module on both systems, capturing
+               company, contact, date, times, attendees, event type, AV and catering. */
+            status: 'built',
+            name: 'Conference & meetings',
+            title: 'The other thing your rooms get booked for.',
+            shortDescription: 'Meeting-space enquiries with dates, attendees, AV and catering.',
+            why: 'Conference business arrives with completely different questions to a room booking — how many people, what times, what equipment. Asking them properly up front turns a vague enquiry into something you can actually quote.',
+            dependsOn: [],
+            worksWith: ['website'],
+            story: [
+                'A company asks about your meeting space',
+                'They give dates, times and numbers',
+                'AV and catering needs come with the enquiry',
+                'You reply with a real quote',
+            ],
+        },
+        {
+            id: 'events',
+            category: 'optional',
+            /* Verified: an events module publishing upcoming events on both systems. */
+            status: 'built',
+            name: 'Events',
+            title: 'What is on, kept current.',
+            shortDescription: 'Publish upcoming events to your site without touching the code.',
+            why: 'Events are the reason a lot of people look at your site at all. Being able to put one up yourself is the difference between the page being current and being a year out of date.',
+            dependsOn: [],
+            worksWith: ['website'],
+            story: [
+                'You add an upcoming event',
+                'It appears on your site',
+                'It comes down on its own once it has passed',
             ],
         },
         {
@@ -744,7 +787,7 @@
         steps.push('The guest\'s details stay attached to the stay, ready for their arrival.');
 
         if (on('restaurant')) {
-            steps.push('Anything they spend during the stay is posted to their room.');
+            steps.push('During the stay they order from a menu that is always the current one, room service included.');
         }
 
         if (on('housekeeping')) {
@@ -762,6 +805,16 @@
 
         if (on('reporting')) {
             steps.push('Every completed stay adds to what you can see across the month.');
+        }
+
+        /* Conference and events are not part of one guest's stay, so they close the
+           story as the other things the same system carries rather than being
+           forced into the middle of it. */
+        if (on('conference')) {
+            steps.push('Separately, meeting-space enquiries arrive with the dates, numbers and equipment already asked for.');
+        }
+        if (on('events')) {
+            steps.push('And what is on at the property stays current without anyone touching the code.');
         }
 
         return steps;
@@ -861,10 +914,16 @@
                 + 'and the room returns to availability once it is ready.';
         }
         if (on('restaurant')) {
-            text += ' What a guest spends during the stay is posted to their room.';
+            text += ' Your restaurant menu, room service included, stays current on the same site.';
+        }
+        if (on('conference')) {
+            text += ' Meeting-space enquiries come in with the dates, numbers and equipment already asked for.';
+        }
+        if (on('events')) {
+            text += ' You can put an event up yourself and take it down when it has passed.';
         }
         if (on('staff')) {
-            text += ' Each person signs in as themselves and sees what their role needs.';
+            text += ' Your team works in a private management area behind a real login.';
         }
         if (on('multi-property')) {
             text += ' Every property you run works this way without being mixed together.';

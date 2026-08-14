@@ -853,6 +853,10 @@
     .hb-core > .hb-card--core:nth-child(2) { grid-column: span 4 }
     .hb-core > .hb-card--core:nth-child(3) { grid-column: span 3 }
 
+    /* ELEVEN optional modules, laid out 7+5 / 5+7 / 4+4+4 / 4+4+4 / 12 so every
+       row fills exactly and the set opens asymmetric rather than as a plain grid.
+       The count is asserted by tests/hospitality_builder.test.js — adding or
+       removing a module means revisiting these spans. */
     .hb-modules > .hb-card--optional { grid-column: span 4 }
     /* Website + booking engine, and housekeeping — the two that change a working
        week the most, so they carry the most weight in the composition. */
@@ -860,9 +864,9 @@
     .hb-modules > .hb-card--optional:nth-child(2) { grid-column: span 5 }
     .hb-modules > .hb-card--optional:nth-child(3) { grid-column: span 5 }
     .hb-modules > .hb-card--optional:nth-child(4) { grid-column: span 7 }
-    /* Restaurant/POS and custom integrations — the bespoke pair, closing the set. */
-    .hb-modules > .hb-card--optional:nth-child(8) { grid-column: span 5 }
-    .hb-modules > .hb-card--optional:nth-child(9) { grid-column: span 7 }
+    /* Custom integrations closes the set on its own full-width row: it is the one
+       entry that is genuinely open-ended rather than a defined module. */
+    .hb-modules > .hb-card--optional:nth-child(11) { grid-column: 1 / -1 }
 
     .hb-map { grid-template-columns: repeat(4, minmax(0, 1fr)) }
     .hb-node--property { grid-column: span 2 }
