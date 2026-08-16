@@ -163,3 +163,151 @@
         padding: var(--space-10);
     }
 }
+
+/* ================= ROUTES — the direct "what do you need?" band =================
+   Homepage chapter 2, sitting between the hero and the understanding statement.
+
+   Why it exists: measured on a 375x667 phone, the first clickable DESTINATION on
+   this page was four screens down. This is the bypass for someone who already
+   knows what they came for; the capabilities chapter below still carries the
+   narrative for someone who does not.
+
+   Deliberately lighter than .capability: a route is a signpost, not a pitch. It
+   borrows the same tokens and the same block radius so the two read as one system,
+   but stays a compact row so it costs the page as little height as possible. */
+
+/* Tighter than a full .chapter-head: this band introduces a list of links, not
+   the page's next big statement, so it should not claim a chapter's air. */
+.routes-head {
+    margin-bottom: var(--space-8);
+}
+
+.routes-head h2 {
+    font-size: var(--display-3);
+}
+
+@media (min-width: 768px) {
+    .routes-head { margin-bottom: var(--space-8) }
+}
+@media (min-width: 1024px) {
+    .routes-head { margin-bottom: var(--space-10) }
+}
+
+.routes-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    gap: var(--space-3);
+}
+
+.route {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-4);
+    /* 64px minimum: a comfortable thumb target, and tall enough that five of these
+       still read as a list rather than a wall. */
+    min-height: 64px;
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-paper);
+    text-decoration: none;
+    color: var(--color-text);
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color var(--transition), background var(--transition),
+        transform var(--transition), box-shadow var(--transition);
+}
+
+.route-mark {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    background: var(--color-accent-earth-soft);
+    color: var(--color-accent-earth);
+    font-size: var(--text-base);
+}
+
+.route-body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.route-label {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.3;
+    color: var(--color-text);
+}
+
+.route-desc {
+    font-size: var(--text-sm);
+    line-height: 1.45;
+    color: var(--color-text-muted);
+}
+
+/* A chevron in currentColor, so it re-tints on every surface without a second
+   rule — the same device .btn uses. */
+.route-cue {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid var(--color-accent-earth);
+    border-right: 2px solid var(--color-accent-earth);
+    border-radius: 1px;
+    transform: rotate(45deg);
+    opacity: .85;
+    transition: transform var(--transition), opacity var(--transition);
+}
+
+@media (hover: hover) {
+    .route:hover {
+        border-color: var(--color-accent);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 26px -16px rgba(28,27,25,.5);
+    }
+    .route:hover .route-cue { transform: rotate(45deg) translate(2px, -2px); opacity: 1 }
+}
+
+/* Hover never fires on touch, so the press state is the only feedback there is. */
+.route:active { transform: translateY(0) scale(.99); background: var(--color-ivory) }
+.route:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px }
+
+/* The two most-asked-for routes carry a little more weight, so the list has a
+   hierarchy rather than five identical bars. */
+.route--lead {
+    background: var(--color-ivory);
+    border-color: var(--color-border-strong);
+}
+
+@media (min-width: 560px) {
+    .routes-grid { gap: var(--grid-gap) }
+    .route { padding: var(--space-5) var(--space-6); min-height: 76px }
+    .route-mark { width: 48px; height: 48px; font-size: var(--text-lg) }
+    .route-label { font-size: var(--text-lg) }
+}
+
+/* Two across once there is room for the description to still read on one or two
+   lines. */
+@media (min-width: 700px) {
+    .route { grid-column: span 6 }
+    /* An odd card left at the end takes the row rather than half of one. */
+    .route:last-child:nth-child(odd) { grid-column: 1 / -1 }
+}
+
+/* The deliberate composition: the two leads share the first row, the three
+   specifics share the second. Every row fills exactly, and the band stays
+   asymmetric like the rest of the page rather than becoming a plain grid. */
+@media (min-width: 1024px) {
+    .route { grid-column: span 4 }
+    .route--lead { grid-column: span 6 }
+    .route:last-child:nth-child(odd) { grid-column: span 4 }
+}

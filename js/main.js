@@ -61,6 +61,11 @@ document.addEventListener("DOMContentLoaded", function () {
         '.contact-grid > *',
         '.booking-grid > *',
         '.proof-strip > *',
+        // The homepage's "what do you need?" route band. A chapter whose content
+        // matches nothing in this list gets no motion at all and sits static while
+        // every chapter around it settles, so a new chapter type has to be
+        // registered here.
+        '.routes-grid > .route',
         '.faq-container',
         '.privacy-section',
         '.evidence-rail > div',
