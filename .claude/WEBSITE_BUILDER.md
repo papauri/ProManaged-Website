@@ -178,21 +178,38 @@ selected, and the audit ran on the page as loaded. Fixed in both files.
 > **Audit interactive pages in their selected state, not just as loaded.** An
 > element that only exists after an interaction is invisible to a page-load audit.
 
-## 9. THE `custom_websites.html` COPY — STILL NOT ACTED ON
+## 9. SUBSCRIPTION BILLING — REMOVED FROM PUBLIC COPY
 
-That page publicly claims ProManaged builds:
+**Done, on instruction.** Subscription billing was never verified as delivered
+work, so every public claim of it is gone. There were **four** places, not the one
+originally flagged:
 
-- "Multi-tenant SaaS products, from first version to scale"
-- "Subscription billing and user accounts"
-- "Architecture that grows with your user base"
+| File | Was | Now |
+| --- | --- | --- |
+| `index.html` | "Products with logins and subscriptions, from first version to scale" | "Multi-tenant products with user accounts and secure logins" |
+| `pages/custom_websites.html` | Heading "Products with paying users"; bullet "Subscription billing and user accounts" | Heading "Products with many customers"; bullets "Multi-tenant products — one system serving several businesses" and "User accounts and secure logins" |
+| `learn_more.html` (capabilities) | "Products with paying users" / "…through accounts, subscriptions and scale" | "Products with many customers" / "…through user accounts, secure logins and scale" |
+| `learn_more.html` (audiences) | "…can carry paying users…" | "…can carry real customers…" |
 
-The multi-tenant half of that is now **verified** (see §2), so it is no longer the
-exposure it looked like. **Subscription billing remains unverified.**
+The headings changed as well as the bullets on purpose. "Products with paying
+users" implies we handle the payment side; removing the billing bullet while
+keeping that heading would have left the promise standing with nothing under it.
 
-This copy has deliberately NOT been changed. It is approved public copy and a
-commercial decision. If you want it addressed: the minimal honest edit is to
-replace "Subscription billing and user accounts" with a claim backed by delivered
-work, such as user accounts and secure logins, leaving the rest intact.
+**What was kept, because it is verified:** multi-tenant products, user accounts
+and secure logins, architecture that grows. See §7 for the evidence.
+
+**Deliberately NOT changed**, since none of these are billing claims:
+
+- the word "SaaS" where it describes a *category of work* (`custom_websites.html`
+  meta description and FAQ, `index.html` keywords) — multi-tenant platform work is
+  verified, so the category is accurate;
+- "generic SaaS card/pill/dashboard" in the design docs and stylesheets — that is
+  an aesthetic being avoided, not a claim;
+- `FREE_LIFETIME_SAAS` in `tests/hospitality_endpoint.test.php` — a deliberately
+  invented capability used as hostile input to prove the allow-list drops it;
+- the hospitality builder's `payments` module, which is about recording deposits
+  and balances against a reservation and is honestly labelled "Proposed module" —
+  a different thing from subscription billing.
 
 ## 10. FILES
 
@@ -216,4 +233,4 @@ builders are reached from the Build page.
 2. **Is `updates` fairly labelled?** It rests on the events module — a dated-items
    publisher rather than a blog. The claim is worded narrowly, but you know what
    was actually built.
-3. **The `custom_websites.html` copy in §9** — leave, or make the minimal edit?
+3. ~~The `custom_websites.html` copy~~ — done, see §9.
