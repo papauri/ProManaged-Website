@@ -64,7 +64,10 @@
     background: rgba(255, 253, 250, .88);
     -webkit-backdrop-filter: blur(14px) saturate(1.35);
     backdrop-filter: blur(14px) saturate(1.35);
-    border-bottom: 1px solid var(--color-border);
+    /* Graphite ink at low alpha, not the cream --color-border token. A solid warm
+       hairline reads as a white stroke on the hero; a translucent graphite edge
+       appears on paper and disappears into dark surfaces. */
+    border-bottom: 1px solid color-mix(in srgb, var(--color-graphite) 12%, transparent);
     transition:
         background var(--transition),
         border-color var(--transition),
@@ -116,7 +119,7 @@
     .nav-rail-inner {
         max-width: calc(var(--rail-visual) - var(--rail-pad) * 2);
         padding-inline: var(--space-6);
-        border: 1px solid var(--color-border);
+        border: 1px solid color-mix(in srgb, var(--color-graphite) 12%, transparent);
         border-radius: var(--radius-lg);
         box-shadow: 0 1px 2px rgba(28, 27, 25, .04);
     }
@@ -145,11 +148,11 @@
        chip this design removed. */
     .nav-condensed:not(.nav-over-hero) .nav-rail-inner {
         background: rgba(255, 253, 250, .94);
-        border-color: var(--color-border-strong);
+        border-color: color-mix(in srgb, var(--color-graphite) 16%, transparent);
     }
 
     .nav-condensed.nav-over-hero .nav-rail-inner {
-        background: rgba(28, 27, 25, .82);
+        background: rgba(28, 27, 25, .62);
     }
 }
 
@@ -330,11 +333,10 @@
    subtitle scrolled straight through the centred wordmark and the two sets of type
    overlapped. That was legible enough with only a small control in the corner, but
    the rail now has content across its full width, so it needs something behind it.
-   Hairline stays off — the bar should still read as part of the hero, not as chrome
-   sitting on top of it. */
+   No cream hairline — the inherited graphite mix sits on paper and vanishes into
+   the hero, so the capsule edge tracks the surface instead of boxing it in. */
 .nav-over-hero .nav-rail-inner {
-    background: rgba(28, 27, 25, .72);
-    border-bottom-color: transparent;
+    background: rgba(28, 27, 25, .52);
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
 }
