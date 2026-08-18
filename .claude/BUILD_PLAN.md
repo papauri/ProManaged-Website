@@ -272,6 +272,10 @@ Homepage canonical order:
 - First-screen fold contract at 375×667: eyebrow + headline + one plain sentence + primary CTA all visible without scrolling.
 - The so-what rule: every section answers one journey question (what we do / what problem it solves / why trust / what next). No decorative-only sections. Philosophy content condenses into supporting beats and never replaces explanation. A section that answers a question an earlier section has already answered is a duplicate, not a reinforcement, and must be merged into the beat that answers it best.
 - Route-band contract: the homepage's second chapter (`#what-we-do`) must carry, in this order, the plain-language statement of the whole company, a direct link for every thing a visitor can buy, named in the visitor's words rather than in the pillar taxonomy, and one line for the visitor who cannot place themselves in the list. It is the page's "how do I get to the thing I came for", and it may not be pushed below any other chapter.
+- **Landing contract — a link arrives where its own words promised.** No card, route, capability tile or CTA may drop the visitor at the top of a page and leave them to find the part it named. Two kinds, and the difference is what stops the route band and the capabilities chapter becoming the same band:
+  - a **route** names a thing the visitor came for, so it lands on the section that IS that thing (`#what-we-build`, `#categories`, `#support-services`, a builder's `#begin`);
+  - a **capability card** carries a "Tell us…" cue, so it lands on the section where they can do exactly that (`#tell-us`, `#contact`).
+  And a link whose text invites the visitor to WRITE something — "describe the problem", "send a message", "ask a question" — must land on a section containing a free-text box. Enforced by `node tests/links.test.js`, which also fails any `#fragment` that resolves to nothing.
 
 ### Guided configurators: the step gate
 
@@ -720,7 +724,15 @@ Never commit YAML/YML.
 
 ## Current Status
 
-- **Completed (this cycle):** Two pieces of work, both driven by the homepage and the builders being unclear about what is on offer.
+- **Completed (latest cycle):** The landing contract — every card, route and CTA now arrives where its own words promised, and the form the copy has been promising for months now exists.
+
+  **The missing form.** `get-started.html` carried only the BOOKING form (name, email, service, date, time). Every "describe the problem in plain words" / "send a message" / "ask a question" link on the site pointed either there or at `index.html#contact`, which has no form on it at all — so the site invited you to describe the problem and handed you a date picker. The only free-text enquiry form on the whole site was on the hardware sourcing page. `get-started.html#describe` is the fix: same `.intake` language, same `php/contact.php` endpoint, same honeypot, field ids prefixed `gs-` because the booking form on the same page already owns `#name`/`#email`/`#website`. One additive change to the endpoint — `'Get started' => 'New project enquiry'` in the allow-list, so this mail is not mislabelled as a website enquiry — and one backwards-compatible change to `js/form_intake.js` (`data-feedback`, so a page with two boards can give each its own live region). Six invitation links across four pages now reach it.
+
+  **Deep links everywhere.** All 19 outbound destinations on the homepage now carry a fragment, split by intent: routes land on the substance (`#what-we-build`, `#categories`, `#support-services`, `#begin`), capability cards land on the invitation their "Tell us…" cue promises (`#tell-us`, `#contact`). The two closing CTA bands on the Build and Support pages gained `#tell-us` ids to land on. `node tests/links.test.js` is new and enforces all of it, plus unique ids, real files and live fragments across all nine pages.
+
+  **Verified in Chromium against a local PHP server.** All 10 deep-link destinations land on the named section clear of the fixed rail, with the expected heading; a real capability-card click navigates and lands correctly. The new form: empty submit → zero POSTs, four inline field errors, message in its **own** live region with the booking form's untouched; valid submit → one POST to `php/contact.php` carrying `enquiry_type=Get started`; the booking form still resolves to its own region. Endpoint exercised only on paths that send no mail — honeypot → 200 without sending, missing message → 400, GET → 405 — so no real email was sent. 0px overflow and zero stranded content on `get-started.html` at 375/768/1440, surface rhythm intact with the new chapter. No console errors.
+
+- **Completed (previous cycle):** Two pieces of work, both driven by the homepage and the builders being unclear about what is on offer.
 
   **Homepage clarity and flow.** The hero headline now names the work ("We build it, source it, and keep it working.") instead of setting a mood, the subtitle states all three capabilities in ten words, the microproof strip states what is sold rather than making three soft trust claims, and the second hero action goes to the route band instead of to a second document. The route band `#what-we-do` absorbed the standalone `#what-we-are` statement and is now the UNDERSTANDING beat as well as the signpost list; the studio positioning and the registration/where-we-work note moved into the founder chapter, which is where a visitor asks them. The homepage is **9 chapters, down from 10**, and the top of the page answers "what do you do" once rather than three times. The retired `.why-grid` / `.why-lead` / `.why-note` rules were removed from `css/why_band.css`; `#why-us` and its fact cards are untouched.
 
@@ -734,7 +746,7 @@ Never commit YAML/YML.
 - **In progress:** None.
 - **Next:** Site is verified complete against the current Definition of Done, including the two contracts added this cycle (the route-band contract in §2B and the guided-configurator step gate). Optional future hardening (not currently required by the plan): self-host or locally fall back the two external CDNs (Google Fonts "Plus Jakarta Sans" / Font Awesome) so the typeface and icons survive a blocked-CDN network — an observation from QA, not a defect in the composition.
 - **Blocked:** None.
-- **Last implementation commit:** _(this cycle — homepage clarity/flow and the builder step gate)_
+- **Last implementation commit:** _(latest — the landing contract and the missing describe-the-problem form)_
 
 ### Standing note: this plan's page count is load-bearing
 

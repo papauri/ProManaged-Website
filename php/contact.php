@@ -28,6 +28,10 @@ $allowedTypes = [
     'Hardware sourcing'    => 'Hardware request',
     'Software & web apps'  => 'Software enquiry',
     'IT support'           => 'Support request',
+    // get-started.html#describe — the general "here is what is going wrong" form.
+    // It is not tied to one pillar, so it must not fall through to the default,
+    // which would title a broken-laptop enquiry as a website one.
+    'Get started'          => 'New project enquiry',
 ];
 $submittedType = pm_clean_line($_POST['enquiry_type'] ?? '', 60);
 $enquiryType = $allowedTypes[$submittedType] ?? 'Website enquiry';

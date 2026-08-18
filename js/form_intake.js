@@ -69,8 +69,15 @@
 
         // Scoped to the form's own section first so a page with more than one
         // intake board cannot write every result into the same live region.
-        const feedback = (form.closest('section, [id$="-section"]') || document)
-            .querySelector('#form-feedback') || document.querySelector('#form-feedback');
+        //
+        // data-feedback takes precedence, and exists because get-started.html
+        // carries TWO forms: only one element on a page may be #form-feedback, so
+        // the second form names its own. Every other form on the site omits the
+        // attribute and resolves exactly as it did before.
+        const named = form.dataset.feedback ? document.querySelector(form.dataset.feedback) : null;
+        const feedback = named
+            || (form.closest('section, [id$="-section"]') || document).querySelector('#form-feedback')
+            || document.querySelector('#form-feedback');
         // The honeypot must never be validated or focused — it is meant to stay empty.
         const inputs = [...form.elements].filter(
             (el) => el.name && el.name !== 'website' && typeof el.checkValidity === 'function'

@@ -142,8 +142,8 @@
                          has to hold with the primary CTA still on screen. -->
                     <p id="hero-subtitle">Describe what is going wrong in plain words, and we will come back with a scope, a timeline and an honest answer.</p>
                     <div class="hero-buttons">
-                        <a href="#booking" class="btn primary" id="hero-get-started">Book a call</a>
-                        <a href="#intake" class="btn secondary" id="hero-learn-more">What to bring</a>
+                        <a href="#describe" class="btn primary" id="hero-get-started">Describe the problem</a>
+                        <a href="#booking" class="btn secondary" id="hero-learn-more">Book a call instead</a>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -219,6 +219,124 @@
                         <h3>Where things need to land</h3>
                         <p>For sourcing work especially — the delivery destination shapes cost, timing and what is realistic to order at all.</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= DESCRIBE THE PROBLEM =================
+         The form this page has been promising since its own headline ("Bring us
+         the problem. Describe what is going wrong in plain words") and had never
+         actually carried. Until now the only thing on get-started.html was the
+         BOOKING form — name, email, service, date, time — with nowhere to write
+         the problem down, so every "describe the problem in plain words" link on
+         the site landed on a date picker. The site's only free-text enquiry form
+         lived on the hardware sourcing page, which is the wrong home for
+         "something is broken and I do not know what".
+
+         Same endpoint and same contract as that form: php/contact.php, the same
+         name / email / phone / message fields, the same honeypot, the same
+         allow-listed enquiry_type. Nothing about the endpoint's trust boundary
+         changed except one new entry in its allow-list, so this page's mail is
+         triaged as a project enquiry rather than mislabelled as a website one.
+
+         IDs are prefixed gs- because the booking form further down this page
+         already owns #name, #email and #website. Only the ids differ; the `name`
+         attributes the server reads are identical. -->
+    <section id="describe" class="section section--stone contact" data-blocks="settle-up" data-blocks-pace="calm">
+        <div class="rail">
+            <div class="contact-grid">
+                <div class="contact-invite">
+                    <span class="eyebrow">Describe the problem</span>
+                    <h2>Write it in whatever words you have.</h2>
+                    <p class="lede">You do not need to know what the answer is, or what to call it. Describe what goes wrong and how often, and we will come back with what we think it actually needs &mdash; including if that is nothing.</p>
+                    <ul class="contact-direct">
+                        <li>
+                            <a href="#intake">
+                                <i class="fas fa-circle-question" aria-hidden="true"></i>What is worth including
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#booking">
+                                <i class="fas fa-calendar-check" aria-hidden="true"></i>Rather book a call?
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:info@promanaged-it.com">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>info@promanaged-it.com
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="contact-form-wrap">
+                    <!-- Its own live region, named by the form. This page has two
+                         intake boards and only one may be given the id
+                         #form-feedback, so js/form_intake.js resolves
+                         data-feedback first and falls back to its original
+                         section-scoped #form-feedback lookup for every other
+                         form on the site. -->
+                    <div id="gs-form-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+
+                    <form class="intake" id="contact-form" action="php/contact.php" method="POST"
+                          data-feedback="#gs-form-feedback">
+                        <!-- Checked against an allow-list server-side; it only
+                             decides how the internal notification is titled. -->
+                        <input type="hidden" name="enquiry_type" value="Get started">
+
+                        <div class="intake-grid">
+                            <fieldset class="intake-group intake-group--lead">
+                                <legend class="intake-legend">
+                                    <span class="intake-step">01</span>
+                                    <span class="intake-title">You</span>
+                                </legend>
+                                <p class="intake-hint">So we know who we are replying to.</p>
+                                <div class="field">
+                                    <input type="text" id="gs-name" name="name" placeholder=" " required autocomplete="name" aria-describedby="gs-name-msg">
+                                    <label for="gs-name">Full name</label>
+                                    <span class="field-msg" id="gs-name-msg" data-for="gs-name"></span>
+                                </div>
+                                <div class="field-row">
+                                    <div class="field">
+                                        <input type="email" id="gs-email" name="email" placeholder=" " required autocomplete="email" aria-describedby="gs-email-msg">
+                                        <label for="gs-email">Email address</label>
+                                        <span class="field-msg" id="gs-email-msg" data-for="gs-email"></span>
+                                    </div>
+                                    <div class="field">
+                                        <input type="tel" id="gs-phone" name="phone" placeholder=" " required autocomplete="tel" aria-describedby="gs-phone-msg">
+                                        <label for="gs-phone">Phone number</label>
+                                        <span class="field-msg" id="gs-phone-msg" data-for="gs-phone"></span>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="intake-group intake-group--message">
+                                <legend class="intake-legend">
+                                    <span class="intake-step">02</span>
+                                    <span class="intake-title">The problem</span>
+                                </legend>
+                                <p class="intake-hint">What goes wrong, how often, and anything from the five things above that you already know.</p>
+                                <div class="field field--grow">
+                                    <textarea id="gs-message" name="message" rows="6" placeholder=" " required aria-describedby="gs-message-msg"></textarea>
+                                    <label for="gs-message">What is going wrong</label>
+                                    <span class="field-msg" id="gs-message-msg" data-for="gs-message"></span>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="form-group hp-field" aria-hidden="true">
+                            <label for="gs-website">Website</label>
+                            <input type="text" id="gs-website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <div class="intake-action">
+                            <button type="submit" class="btn primary intake-submit">
+                                <span class="intake-submit-label">Send this to ProManaged</span>
+                                <span class="intake-spinner" aria-hidden="true"></span>
+                            </button>
+                            <p class="intake-assurance">A person reads it, not a filter. No follow-up sales sequence.</p>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

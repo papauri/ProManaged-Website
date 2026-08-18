@@ -497,7 +497,11 @@
     </section>
 
     <!-- ================= CLOSING CTA (the real booking form lives on get-started.html) ================= -->
-    <section class="section section--graphite cta-band" data-blocks="settle-up">
+    <!-- #tell-us: the landing point for the homepage Build card, whose cue
+         reads "Tell us what you're trying to automate". The card promises an
+         invitation, so it has to arrive at one — not at the top of a page the
+         visitor then has to scroll to the bottom of. -->
+    <section id="tell-us" class="section section--graphite cta-band" data-blocks="settle-up">
         <div class="rail">
             <div class="chapter-head chapter-head--center">
                 <span class="eyebrow">Next step</span>
@@ -505,7 +509,7 @@
                 <p class="lede">Book a call and describe the problem. You will get a scope and an honest answer about whether it is worth building.</p>
                 <div class="btn-row btn-row--center">
                     <a href="../get-started.html#booking" class="btn primary">Book a call</a>
-                    <a href="../index.html#contact" class="btn secondary">Send a message</a>
+                    <a href="../get-started.html#describe" class="btn secondary">Send a message</a>
                 </div>
             </div>
         </div>

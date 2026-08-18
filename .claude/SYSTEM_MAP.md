@@ -187,6 +187,32 @@ considered for the other**; that is the accepted cost of the decision recorded i
 
 ## Forms / PHP
 
+**Where the enquiry forms actually are.** This was wrong for a long time and the
+copy did not match it:
+
+- `get-started.html#describe` — the general "here is what is going wrong" form.
+  Free text, posts to `php/contact.php` with `enquiry_type=Get started`. **This is
+  the destination for every "describe the problem" / "send a message" / "ask a
+  question" link on the site.** Before it existed, those links pointed either at
+  `get-started.html` — which carried only the BOOKING form (name, email, service,
+  date, time), so the page invited you to describe the problem and gave you a date
+  picker — or at `index.html#contact`, which is a CTA block with no form on it at
+  all. The site's only free-text form was on the hardware sourcing page.
+- `get-started.html#booking` — the appointment form (`php/booking.php`).
+- `pages/hardware_sourcing.html#contact` — the equipment request
+  (`php/contact.php`, `enquiry_type=Hardware sourcing`).
+- `pages/website_builder.html#talk` and `pages/hospitality_builder.html#talk` —
+  the configurator briefs, each with its own endpoint.
+
+`get-started.html` therefore carries TWO intake boards. Two consequences worth
+knowing before editing it: its describe-form field ids are prefixed `gs-` because
+the booking form already owns `#name`, `#email` and `#website` (the `name`
+attributes the server reads are identical), and it declares
+`data-feedback="#gs-form-feedback"` because only one element on a page may be
+`#form-feedback`. `js/form_intake.js` resolves `data-feedback` first and falls
+back to its original section-scoped lookup, so no other form on the site changed.
+
+
 - `php/contact.php` — contact submission.
 - `php/booking.php` — appointment submission.
 - `php/hospitality.php` — Hospitality System Builder enquiry. Its own endpoint because the payload is a structured configuration rather than a message. Reuses `http.php` and the `mailer.php` templates unchanged. The browser submits catalogue IDs only; every label a human reads is resolved server-side from an allow-list, and the fixed foundation is never read from the submission.
@@ -202,6 +228,10 @@ Plain scripts, no framework and no dependencies. Run them before any change to t
 - `php tests/hospitality_endpoint.test.php` — the endpoint's trust boundary, exercised against hostile input: invented capabilities, markup payloads, duplicate and repetition floods, malformed relationship pairs and out-of-range room counts.
 - `node tests/website_builder.test.js` — the same for the Website Builder, plus an assertion that at least 10 of its 11 capabilities are delivered work, and that no ranking or traffic promise appears in the copy.
 - `php tests/website_endpoint.test.php` — the same trust-boundary coverage for `php/website.php`.
+- `node tests/links.test.js` — link integrity across every public page: unique ids, every local
+  href/src/data-target resolving to a real file, every `#fragment` resolving to a real id, and the
+  landing contract (a "describe the problem" / "send a message" link must reach a section that
+  actually has a free-text box; homepage routes and capability cards must carry a fragment).
 - `node tests/builder_flow.test.js` — the step-gate attribute contract on both builder
   pages (contiguous step numbers, every continue control advancing by exactly one, step 1
   declaring a requirement whose selectors exist, the outline mirroring the steps, nothing
