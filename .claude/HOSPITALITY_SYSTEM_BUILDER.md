@@ -15,6 +15,24 @@ This is not a conventional contact form, pricing calculator, or generic SaaS fea
 ## CURRENT STATUS
 
 - **Completed:** The builder is finished and verified end to end — property intake → foundation → optional modules with dependency explanation → live system map → generated workflow story → configuration summary → structured enquiry with its own endpoint and branded emails. Verified in a real browser at all seven required widths, and by two live submissions that delivered real mail through the production SMTP transport.
+- **Amended:** The builder is now behind a step gate. It opens on a plain `#begin`
+  panel that states what the form is, that it is not a quote and how long it takes,
+  with a static seven-step outline beside it; nothing interactive is rendered until
+  the visitor presses the one control there. After that, one chapter is open at a
+  time, revealed by the previous chapter's continue control, and that control
+  refuses to advance until the chapter is complete. Chapter 01 requires **both** the
+  property type and how bookings arrive today — the room count has a default and the
+  free-text box is optional, so neither gates — and the closing form refuses to
+  submit an incomplete configuration (`php/hospitality.php` still validates
+  independently and remains the real gate). Mechanics are shared with the Website
+  Builder in `js/builder_flow.js` / `css/builder_flow.css`; the contract is asserted
+  by `node tests/builder_flow.test.js` and documented in `.claude/SYSTEM_MAP.md`.
+  Nothing in the catalogue, the dependency model, the workflow stories, the summary
+  or the endpoint changed.
+
+  **The §22/§12 verification below predates the gate.** It remains accurate for the
+  chapters themselves, but any future sweep must press the start control and walk
+  the chapters open first — loading the page now renders the gate and nothing else.
 - **In progress:** None.
 - **Next:** Nothing outstanding on this plan. See "Standing rules" below for what governs future changes.
 - **Blocked:** None.

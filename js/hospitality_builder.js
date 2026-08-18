@@ -1145,6 +1145,11 @@
         };
 
         const timer = window.setTimeout(function () {
+            /* A chapter still closed by the step gate is display:none and has no
+               position, so it must be opened before anything measures it. This is
+               the automatic counterpart of what the gate does on a click of the
+               continue control. */
+            if (window.pmBuilderFlow) window.pmBuilderFlow.revealTarget(entry.target);
             // Already where we were going: nothing to do, but the step is spent.
             const box = target.getBoundingClientRect();
             const alreadyThere = box.top >= 0 && box.top < window.innerHeight * 0.4;
@@ -1174,6 +1179,8 @@
         // Not during boot, and never when the visitor has asked for less motion:
         // moving the page for someone is precisely what that setting rules out.
         if (!flowArmed || prefersReducedMotion()) return;
+        // Nothing may scroll the page while the builder is still behind its gate.
+        if (window.pmBuilderFlow && !window.pmBuilderFlow.isStarted()) return;
         for (let i = 0; i < FLOW.length; i++) {
             const entry = FLOW[i];
             if (advanced.indexOf(entry.id) !== -1) continue;
@@ -1193,6 +1200,12 @@
         renderStory();
         renderSummary();
         syncHidden();
+        /* js/builder_flow.js owns which chapter is open and whether the chapter
+           you are in will let you leave. It reads completion from the DOM, so it
+           has to be repainted whenever the DOM it reads has changed. Absent (an
+           older cached copy of the page, or the file failing to load) everything
+           below simply behaves as it did before the gate existed. */
+        if (window.pmBuilderFlow) window.pmBuilderFlow.refresh();
         maybeAdvance();
     }
 
@@ -1310,10 +1323,35 @@
 
     const form = document.querySelector('#hospitality-form');
     if (form) {
-        /* form_intake.js owns validation and transport. This only guarantees the
-           payload is current at the moment of submit — a visitor who types a note
-           and hits Enter must not send the previous value. */
-        form.addEventListener('submit', function () {
+        /* form_intake.js owns validation and transport. This guarantees the payload
+           is current at the moment of submit — a visitor who types a note and hits
+           Enter must not send the previous value — and refuses a submission whose
+           configuration is incomplete.
+
+           This handler is registered before form_intake.js binds its own (that one
+           runs at DOMContentLoaded, and this file is deferred, so it is already
+           bound by then), which is what lets stopImmediatePropagation() stop the
+           POST before the shared handler makes it.
+
+           The step gate makes reaching this form with an unanswered chapter 01 very
+           difficult, but "difficult" is not "impossible" — a stale page, a direct
+           #talk link or a script error upstream would all get past it. The server
+           validates independently in php/hospitality.php either way; this is the
+           message that tells the visitor what to fix. */
+        form.addEventListener('submit', function (event) {
+            const gap = window.pmBuilderFlow && window.pmBuilderFlow.firstIncomplete();
+            if (gap) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                const feedback = document.querySelector('#form-feedback');
+                if (feedback) {
+                    feedback.textContent = gap.reason;
+                    feedback.classList.remove('is-success');
+                    feedback.classList.add('is-error');
+                }
+                window.pmBuilderFlow.returnTo(gap.step);
+                return;
+            }
             syncHidden();
             track('hospitality_enquiry_submitted', {
                 property_type: state.propertyType,

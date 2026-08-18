@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../css/project_proof.css">
     <link rel="stylesheet" href="../css/contact_section.css">
     <link rel="stylesheet" href="../css/website_builder.css">
+    <link rel="stylesheet" href="../css/builder_flow.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by
          CSS before first paint. Without JS this class is never added, the hiding
          rule never matches, and all content renders normally. -->
@@ -127,8 +128,8 @@
                     <h1 id="hero-title">Work out what your website actually needs.</h1>
                     <p id="hero-subtitle">Most people are sold either too little or far too much. Tell us what yours has to do, add only that, and see what it would take to build.</p>
                     <div class="hero-buttons">
-                        <a href="#project" class="btn primary" id="hero-get-started">Start with your site</a>
-                        <a href="#foundation" class="btn secondary" id="hero-learn-more">What every site includes</a>
+                        <a href="#begin" class="btn primary" id="hero-get-started">Design my website</a>
+                        <a href="custom_websites.html#projects" class="btn secondary" id="hero-learn-more">See work we have delivered</a>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -163,8 +164,13 @@
          file. data-cursor-calm drops the instrument cursor to two states across
          this dense interactive region — see js/interface_motion.js. Without JS the
          chapter headings, explanations and the route to the booking form all still
-         read. -->
-    <div data-wb data-cursor-calm>
+         read.
+
+         data-builder-flow hands the same element to js/builder_flow.js, which owns
+         the step gate: which chapter is open, and whether the chapter you are in
+         will let you leave yet. That file is loaded FIRST for a reason — see the
+         load-order note at the top of it. -->
+    <div data-wb data-builder-flow data-cursor-calm>
 
     <!-- ================= UNDERSTAND ================= -->
     <section id="premise" class="section section--ivory" data-blocks="settle-side">
@@ -182,8 +188,87 @@
         </div>
     </section>
 
+    <!-- ================= THE GATE =================
+         Nothing interactive exists on this page until this button is pressed.
+
+         Before it did: every chapter of the configurator was on screen for anyone
+         who scrolled, including people who had not yet decided they wanted a
+         website at all — so the page's first impression was a long instrument
+         with no stated purpose, and its closing form could be reached with the
+         first chapter never answered.
+
+         This panel is the whole fix. It says what the thing is, what it is not,
+         and roughly what it costs in time, and it carries the one control that
+         opens the instrument. The outline beside it stays readable throughout, so
+         "what am I filling in" is answerable at every point.
+
+         Everything here is plain markup. Without JavaScript the button does
+         nothing, no chapter is ever hidden, and the page reads exactly as it did
+         before the gate existed. -->
+    <section id="begin" class="section section--stone builder-gate" data-blocks="settle-up" data-blocks-pace="calm">
+        <div class="rail">
+            <div class="grid">
+                <div class="block block--7 block--graphite builder-gate-lead">
+                    <span class="eyebrow">Before you start</span>
+                    <h2>Design your website, one step at a time.</h2>
+                    <p class="lede">This is a website outline &mdash; not a quote, and not a contact form. You say what the site has to do, add only what it needs, and see the shape of it before deciding whether to send it to us.</p>
+                    <p class="builder-gate-note">About three minutes. Each step opens once the one before it is answered, so you always know what you are being asked for. Nothing asks for your contact details until the last step.</p>
+                    <button type="button" class="btn primary builder-start" data-builder-start>Design my website</button>
+                    <p class="builder-gate-note">Not ready for that? <a href="custom_websites.html">See what we build</a>, or <a href="../get-started.html#booking">book a call</a> and describe it in your own words instead.</p>
+                    <p class="builder-gate-started">You are working through the outline beside this panel. Each step opens as you finish the one before it &mdash; and you can come back up here at any point to see where you are.</p>
+                </div>
+                <div class="block block--5 block--bare">
+                    <!-- Static markup on purpose: this is the answer to "what is this
+                         form going to ask me", and it has to be readable before the
+                         script has done anything, and with the script absent. -->
+                    <ol class="builder-outline" data-builder-outline>
+                        <li class="builder-outline-item" data-outline-for="1">
+                            <span class="builder-outline-num">1</span>
+                            <span class="builder-outline-text">What your site is mainly for</span>
+                            <span class="builder-outline-state" data-outline-state>Locked</span>
+                        </li>
+                        <li class="builder-outline-item" data-outline-for="2">
+                            <span class="builder-outline-num">2</span>
+                            <span class="builder-outline-text">What every site already includes</span>
+                            <span class="builder-outline-state" data-outline-state>Locked</span>
+                        </li>
+                        <li class="builder-outline-item" data-outline-for="3">
+                            <span class="builder-outline-num">3</span>
+                            <span class="builder-outline-text">What to add to it</span>
+                            <span class="builder-outline-state" data-outline-state>Locked</span>
+                        </li>
+                        <li class="builder-outline-item" data-outline-for="4">
+                            <span class="builder-outline-num">4</span>
+                            <span class="builder-outline-text">What you have put together</span>
+                            <span class="builder-outline-state" data-outline-state>Locked</span>
+                        </li>
+                        <li class="builder-outline-item" data-outline-for="5">
+                            <span class="builder-outline-num">5</span>
+                            <span class="builder-outline-text">How a visitor moves through it</span>
+                            <span class="builder-outline-state" data-outline-state>Locked</span>
+                        </li>
+                        <li class="builder-outline-item" data-outline-for="6">
+                            <span class="builder-outline-num">6</span>
+                            <span class="builder-outline-text">Your outline, in full</span>
+                            <span class="builder-outline-state" data-outline-state>Locked</span>
+                        </li>
+                        <li class="builder-outline-item" data-outline-for="7">
+                            <span class="builder-outline-num">7</span>
+                            <span class="builder-outline-text">Send it to ProManaged</span>
+                            <span class="builder-outline-state" data-outline-state>Locked</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ================= CHAPTER 01 — YOUR SITE ================= -->
-    <section id="project" class="section" data-blocks="settle-up">
+    <section id="project" class="section" data-blocks="settle-up"
+             data-builder-step="1"
+             data-step-require='[data-wb-purpose] [aria-pressed="true"]|[data-wb-current] [aria-pressed="true"]'
+             data-step-missing="Two answers are still missing: what the site is mainly for, and what you have today. Everything this page suggests after this point is shaped by those two, so the step will not let you past without them."
+             data-step-focus="[data-wb-purpose] [data-choice]">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">01 &middot; Your site</span>
@@ -246,7 +331,7 @@
     </section>
 
     <!-- ================= CHAPTER 02 — THE BASICS ================= -->
-    <section id="foundation" class="section section--graphite" data-blocks="sequence-in">
+    <section id="foundation" class="section section--graphite" data-blocks="sequence-in" data-builder-step="2">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">02 &middot; Always included</span>
@@ -264,7 +349,11 @@
     </section>
 
     <!-- ================= CREDIBILITY ================= -->
-    <section id="evidence" class="section section--stone" data-blocks="settle-up" data-blocks-pace="calm">
+    <!-- Same step number as #foundation: this is a read-only companion to that
+         chapter, so it opens and closes with it rather than being a step of
+         its own. Only one section in a step group may carry a continue
+         control. -->
+    <section id="evidence" class="section section--stone" data-blocks="settle-up" data-blocks-pace="calm" data-builder-step="2">
         <div class="rail">
             <span class="eyebrow">Built from real work</span>
             <div class="proof-strip">
@@ -285,7 +374,7 @@
     </section>
 
     <!-- ================= CHAPTER 03 — ADDITIONS ================= -->
-    <section id="additions" class="section" data-blocks="settle-side">
+    <section id="additions" class="section" data-blocks="settle-side" data-builder-step="3">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">03 &middot; Your additions</span>
@@ -313,7 +402,7 @@
     </section>
 
     <!-- ================= VISUALISE ================= -->
-    <section id="site" class="section section--graphite" data-blocks="scale-in">
+    <section id="site" class="section section--graphite" data-blocks="scale-in" data-builder-step="4">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">04 &middot; Your site</span>
@@ -331,7 +420,7 @@
     </section>
 
     <!-- ================= CONNECT ================= -->
-    <section id="how-it-works" class="section section--ivory" data-blocks="settle-up">
+    <section id="how-it-works" class="section section--ivory" data-blocks="settle-up" data-builder-step="5">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">05 &middot; How it works</span>
@@ -349,7 +438,7 @@
     </section>
 
     <!-- ================= SUMMARISE ================= -->
-    <section id="summary" class="section" data-blocks="settle-up" data-wb-summary>
+    <section id="summary" class="section" data-blocks="settle-up" data-wb-summary data-builder-step="6">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">06 &middot; Your outline</span>
@@ -396,7 +485,7 @@
          same shared behaviour in js/form_intake.js as the site's other forms. The
          configuration travels as hidden IDs; php/website.php owns the labels and
          rejects anything outside its own catalogue. -->
-    <section id="talk" class="section section--graphite wb-conversion" data-blocks="settle-up" data-blocks-pace="calm">
+    <section id="talk" class="section section--graphite wb-conversion" data-blocks="settle-up" data-blocks-pace="calm" data-builder-step="7">
         <div class="rail wb-conversion-grid">
             <div class="wb-conversion-intro">
                 <span class="eyebrow">07 &middot; Next step</span>
@@ -546,10 +635,17 @@
         </footer>
     </div>
 
-    <!-- website_builder.js MUST come before main.js. Both are deferred, so
-         document order decides execution order: main.js collects its motion units
-         at DOMContentLoaded and skips a [data-blocks] group that has none, so the
+    <!-- Order here is load-bearing twice over.
+
+         builder_flow.js before website_builder.js: both delegate clicks to the same
+         [data-wb] root, and listeners on one element run in registration order, so
+         the gate has to bind first to be able to stop a blocked continue control
+         from reaching the builder's own handler.
+
+         website_builder.js before main.js: main.js collects its motion units at
+         DOMContentLoaded and skips a [data-blocks] group that has none, so the
          cards have to exist by then. -->
+    <script src="../js/builder_flow.js" defer></script>
     <script src="../js/website_builder.js" defer></script>
     <script src="../js/main.js" defer></script>
     <script src="../js/interface_motion.js" defer></script>

@@ -255,8 +255,8 @@ Homepage canonical order:
 
 **INTRIGUE → UNDERSTANDING → RELEVANCE → PROOF → TRUST → DESIRE → ACTION**
 
-- INTRIGUE — the hero. First charge of premium motion and composition. States the three capabilities in ≤12 words.
-- UNDERSTANDING — one calm editorial statement of what ProManaged does, in plain language. Low density, no grid.
+- INTRIGUE — the hero. First charge of premium motion and composition. States the three capabilities in ≤12 words, in plain nouns. The headline names the work; a headline that only sets a mood ("Technology that behaves itself.") does not satisfy this beat, because a first-time visitor still cannot say what is for sale.
+- UNDERSTANDING — one calm editorial statement of what ProManaged does, in plain language. **This beat is delivered by the head of the `#what-we-do` route band, not by a section of its own.** It used to be a standalone chapter sitting between the route band and the capabilities bento, which made the top of the homepage answer "what do you do" three times running — hero, routes, statement — before anything new was said. The statement now leads the route band and the routes follow it immediately, so understanding and the way to act on it are the same beat. Its density budget still applies to the head itself: an eyebrow, one heading, one paragraph, no cards. The studio-positioning copy it also carried ("a small studio for people who were quoted enterprise prices…", the registration and where-we-work note) moved into TRUST, beside the founder, which is where a visitor actually asks it.
 - RELEVANCE — capabilities mapped to problems. Bento allowed and encouraged here.
 - PROOF — real delivered systems (Rosalyn's, Liwonde Sun Hotel). Evidence settles calmly; this chapter is gravity, not sparkle.
 - TRUST — process and founder. A breathing, lower-density chapter.
@@ -270,7 +270,46 @@ Homepage canonical order:
   - Support — "We keep it working — fixes, setups and a person on the phone when it breaks."
 - Jargon placement rule: "SaaS", "multi-tenant", "integration", "dashboard", "infrastructure" may appear ONLY in supporting body copy — never in headings, tags, card titles, cues, eyebrows or first-screen copy.
 - First-screen fold contract at 375×667: eyebrow + headline + one plain sentence + primary CTA all visible without scrolling.
-- The so-what rule: every section answers one journey question (what we do / what problem it solves / why trust / what next). No decorative-only sections. Philosophy content condenses into supporting beats and never replaces explanation.
+- The so-what rule: every section answers one journey question (what we do / what problem it solves / why trust / what next). No decorative-only sections. Philosophy content condenses into supporting beats and never replaces explanation. A section that answers a question an earlier section has already answered is a duplicate, not a reinforcement, and must be merged into the beat that answers it best.
+- Route-band contract: the homepage's second chapter (`#what-we-do`) must carry, in this order, the plain-language statement of the whole company, a direct link for every thing a visitor can buy, named in the visitor's words rather than in the pillar taxonomy, and one line for the visitor who cannot place themselves in the list. It is the page's "how do I get to the thing I came for", and it may not be pushed below any other chapter.
+
+### Guided configurators: the step gate
+
+Both `pages/website_builder.html` and `pages/hospitality_builder.html` are long
+interactive instruments. Two rules govern how they are shown, and they apply to any
+future configurator as well.
+
+1. **Opt-in before instrument.** No interactive chapter may be on screen for a
+   visitor who has not said they want the thing being configured. Each builder
+   opens on a plain gate (`#begin`) that states what the form is, what it is *not*
+   (never a quote), roughly how long it takes, and that no contact details are
+   asked for until the end. One control opens the instrument.
+2. **One chapter at a time, with real validation.** A chapter is revealed by the
+   previous chapter's continue control, and that control refuses to advance while
+   the current chapter's requirements are unmet — with a sentence naming what is
+   missing and the focus moved to the first gap. The closing form additionally
+   refuses to submit an incomplete configuration. Server-side validation in the
+   PHP endpoint is unchanged and remains the real gate; the client message exists
+   so the visitor knows what to fix.
+
+The gate also has to answer "what am I filling in" at every point, which is what
+the numbered outline on the gate panel is for — it is static markup, so it reads
+before the script runs and with the script absent.
+
+Implementation notes that are contractual:
+
+- `js/builder_flow.js` is shared by both builders and knows nothing about either
+  one's internal state: a chapter declares completeness in its own markup
+  (`data-builder-step`, `data-step-require`, `data-step-missing`,
+  `data-step-focus`). Adding a chapter means adding those attributes and an
+  outline entry, not editing the shared file.
+- Its click listener runs in the **capture phase**. `js/main.js` binds its
+  smooth-scroll handler directly to every `a[href]`, so a bubble listener is too
+  late to stop a blocked control from pushing the destination into the URL.
+- Nothing is hidden without JavaScript. The whole page still reads top to bottom
+  with the script absent, and the continue controls stay ordinary anchors.
+- `node tests/builder_flow.test.js` asserts the whole attribute contract, plus the
+  homepage surface rhythm below.
 
 ### Pacing: alternate wow and breathe
 - Density map — bento/narrative density at: hero visual, capabilities, proof. Calm editorial statement sections at: understanding, founder/trust, contact.
@@ -681,13 +720,21 @@ Never commit YAML/YML.
 
 ## Current Status
 
-- **Completed:** Performed the rendered/browser QA that earlier cycles had to waive — Chromium + Playwright across the public pages × 8 breakpoints (375/430/768/1024/1440/1600/1920/2560). Verified: 0px horizontal overflow; no stranded (opacity:0) content after a full-scroll reveal pass; bento variety and ≥2 editorial moments beyond the hero on every page; the navigation open-panel control-surface plus its open/scroll-lock/Escape/focus-restore contract.
+- **Completed (this cycle):** Two pieces of work, both driven by the homepage and the builders being unclear about what is on offer.
+
+  **Homepage clarity and flow.** The hero headline now names the work ("We build it, source it, and keep it working.") instead of setting a mood, the subtitle states all three capabilities in ten words, the microproof strip states what is sold rather than making three soft trust claims, and the second hero action goes to the route band instead of to a second document. The route band `#what-we-do` absorbed the standalone `#what-we-are` statement and is now the UNDERSTANDING beat as well as the signpost list; the studio positioning and the registration/where-we-work note moved into the founder chapter, which is where a visitor asks them. The homepage is **9 chapters, down from 10**, and the top of the page answers "what do you do" once rather than three times. The retired `.why-grid` / `.why-lead` / `.why-note` rules were removed from `css/why_band.css`; `#why-us` and its fact cards are untouched.
+
+  **The builder step gate.** Both configurators now open on a plain gate and reveal one chapter at a time — see the Guided configurators section above for the full contract. New: `js/builder_flow.js`, `css/builder_flow.css`, `tests/builder_flow.test.js`. A real bug was found and fixed during browser verification: the gate's click listener had to move to the capture phase, because `js/main.js` binds its smooth-scroll-and-push-the-hash handler directly to every anchor and was pushing `#foundation` into the URL on a *blocked* control.
+
+  **Verified in Chromium against a local server, not waived.** Both builders: gated on load (every chapter carries `hidden`, page height 3291px instead of the full instrument); start opens step 1 only and scrolls to it; a blocked continue control leaves the URL alone, leaves the next chapter closed, shows its hint and moves focus to the first gap; a half-answered chapter stays blocked; completing it unblocks; the full seven-step walk opens each chapter in turn with the outline tracking Done / You are here / Locked. Submitting with chapter 01 broken makes **zero** network requests and shows the reason; fixing it submits and the payload carries the configuration. Zero stranded (`opacity:0`) content and 0px horizontal overflow on the homepage and both builders at 375/768/1440, and on `custom_websites.html` at 375. The 375×667 first-screen fold contract still holds with the new headline (eyebrow 116–135, headline 155–291, sentence 315–373, primary CTA 405–459 of 666) and the microproof still caps at two items on a phone. No console errors.
+
+- **Previously completed:** Performed the rendered/browser QA that earlier cycles had to waive — Chromium + Playwright across the public pages × 8 breakpoints (375/430/768/1024/1440/1600/1920/2560). Verified: 0px horizontal overflow; no stranded (opacity:0) content after a full-scroll reveal pass; bento variety and ≥2 editorial moments beyond the hero on every page; the navigation open-panel control-surface plus its open/scroll-lock/Escape/focus-restore contract.
 
   **The site is now 9 public pages, not 7.** Two guided configurators were added (`pages/hospitality_builder.html`, `pages/website_builder.html` — see their own plans), and the homepage gained a "What do you need?" route band directly under the hero. The three pages new or changed since the original sweep have been re-verified to the same standard, including 2560px and a full-scroll reveal pass, with the builders driven into their **fully-expanded state** first: 0px overflow, zero stranded content, the 1880px rail ceiling holding exactly, and the complete navigation contract (aria-expanded, scroll lock, focus into panel, Escape, focus restored to the trigger) passing on a builder page.
 - **In progress:** None.
-- **Next:** Site is verified complete against the current Definition of Done. Optional future hardening (not currently required by the plan): self-host or locally fall back the two external CDNs (Google Fonts "Plus Jakarta Sans" / Font Awesome) so the typeface and icons survive a blocked-CDN network — an observation from QA, not a defect in the composition.
+- **Next:** Site is verified complete against the current Definition of Done, including the two contracts added this cycle (the route-band contract in §2B and the guided-configurator step gate). Optional future hardening (not currently required by the plan): self-host or locally fall back the two external CDNs (Google Fonts "Plus Jakarta Sans" / Font Awesome) so the typeface and icons survive a blocked-CDN network — an observation from QA, not a defect in the composition.
 - **Blocked:** None.
-- **Last implementation commit:** _(this cycle — reconciling the Definition of Done with the 9-page site)_
+- **Last implementation commit:** _(this cycle — homepage clarity/flow and the builder step gate)_
 
 ### Standing note: this plan's page count is load-bearing
 
@@ -695,6 +742,12 @@ Several Definition-of-Done items assert a property "across all N pages". Adding 
 public page silently invalidates every one of them. **A new page is not finished
 until those items are re-verified and the count here is updated** — otherwise the
 plan certifies a site that no longer exists, which is worse than an unchecked box.
+
+The page count is still **9**. What changed this cycle is inside three of them:
+the homepage lost a chapter (10 → 9) and both builders are now gated, so their
+"fully-expanded state" QA has to drive the gate open first — a sweep that only
+loads a builder page now measures the gate, not the instrument, and will report a
+clean bill of health for content it never rendered.
 
 ## 12. DEFAULT EXECUTION MODE
 

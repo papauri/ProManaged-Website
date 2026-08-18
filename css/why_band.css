@@ -1,4 +1,4 @@
-/* why_band.css — homepage chapter 2, "What ProManaged is".
+/* why_band.css — the homepage's "why trust them" chapter (#why-us).
 
    MOBILE FIRST. The three proof blocks are art-directed on the phone rather than
    stacked as identical cards: block one is a wide tinted block with its mark beside
@@ -7,27 +7,12 @@
    different height — that is what stops a phone page reading as a list.
 
    Wider screens turn the same three blocks into a stepped mosaic: unequal spans with
-   rising top offsets, so the row is a composition rather than three boxes in a line. */
+   rising top offsets, so the row is a composition rather than three boxes in a line.
 
-.why-grid {
-    align-items: start;
-    margin-bottom: var(--space-12);
-}
-
-/* The statement chapter no longer carries the fact cards — they answer "why trust
-   them" and now sit beside the founder — so when the grid is the chapter's only
-   content the trailing margin is dead space rather than separation. */
-.why-grid:last-child { margin-bottom: 0 }
-
-.why-note p {
-    font-size: var(--text-base);
-    color: var(--color-text-muted);
-    line-height: var(--leading-normal);
-}
-
-.why-note p + p {
-    margin-top: var(--space-4);
-}
+   The statement half of this file (.why-grid / .why-lead / .why-note) is gone: the
+   standalone "What ProManaged IT is" section it dressed was the homepage's third
+   consecutive answer to "what do you do", and its copy now lives in the route band
+   head and the founder chapter. Only the fact cards are still rendered. */
 
 .why-facts {
     align-items: start;
@@ -254,18 +239,8 @@
     }
 }
 
-@media (min-width: 768px) {
-    .why-note p { font-size: var(--text-lg) }
-    .why-note p + p { margin-top: var(--space-5) }
-}
-
 /* ---------- Desktop: the stepped mosaic ---------- */
 @media (min-width: 900px) {
-    .why-grid { margin-bottom: var(--section-y) }
-    .why-grid:last-child { margin-bottom: 0 }
-    .why-lead h2 { max-width: 17ch }
-    .why-note { padding-top: var(--space-3) }
-
     .why-facts .why-fact:nth-child(1) {
         grid-column: span 5;
         flex-direction: column;
@@ -295,24 +270,6 @@
 }
 
 @media (min-width: 1600px) {
-    .why-grid {
-        grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
-        column-gap: clamp(5rem, 8vw, 11rem);
-    }
-
-    .why-grid .why-lead,
-    .why-grid .why-note {
-        grid-column: auto;
-    }
-
-    .why-note {
-        padding-top: clamp(var(--space-4), 3vw, var(--space-10));
-    }
-
-    .why-note p {
-        max-width: 52ch;
-    }
-
     .why-facts {
         column-gap: clamp(1.5rem, 2.2vw, 3rem);
     }

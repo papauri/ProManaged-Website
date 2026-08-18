@@ -140,14 +140,26 @@
             <div class="hero-rail rail" data-assemble>
                 <div class="hero-statement">
                     <span class="hero-eyebrow">Build · Source · Support</span>
-                    <h1 id="hero-title">Technology that behaves itself.</h1>
-                    <!-- One plain sentence, all three capabilities, twelve words. The
+                    <!-- The headline names the WORK, not a mood. The line it replaces
+                         ("Technology that behaves itself.") was the page's first
+                         sentence and told a first-time visitor nothing about what can
+                         actually be bought here. -->
+                    <h1 id="hero-title">We build it, source it, and keep it working.</h1>
+                    <!-- One plain sentence, all three capabilities, ten words. The
                          375x667 fold contract in BUILD_PLAN §2B has to hold here:
                          eyebrow, headline, this line and the primary CTA all sit above
                          the fold on the smallest phone. -->
-                    <p id="hero-subtitle">We build your software, source your equipment and keep both working.</p>
-                    <div class="hero-buttons"><a href="get-started.html" class="btn primary" id="hero-get-started">Start a project</a><a href="learn_more.html" class="btn secondary" id="hero-learn-more">How we work</a></div>
-                    <div class="hero-microproof"><span><i class="fas fa-circle-check" aria-hidden="true"></i> Direct access to the team</span><span><i class="fas fa-circle-check" aria-hidden="true"></i> Software, hardware &amp; support</span><span><i class="fas fa-circle-check" aria-hidden="true"></i> Built for real-world budgets</span></div>
+                    <p id="hero-subtitle">Software, equipment and everyday IT support — from one small team.</p>
+                    <!-- The secondary action is a DESTINATION on this page, not a
+                         second document: it drops the visitor into the route band,
+                         which is where "what can I get from you" is answered with
+                         links. learn_more.html is still reachable from the navigation,
+                         the footer, the mission band and the contact routes. -->
+                    <div class="hero-buttons"><a href="get-started.html" class="btn primary" id="hero-get-started">Start a project</a><a href="#what-we-do" class="btn secondary" id="hero-learn-more">See what we do</a></div>
+                    <!-- Was three soft trust claims. Trust is answered properly further
+                         down (#why-us); the first screen has one job, which is saying
+                         what we sell. Each line is one capability in plain nouns. -->
+                    <div class="hero-microproof"><span><i class="fas fa-circle-check" aria-hidden="true"></i> Software &amp; websites, built for you</span><span><i class="fas fa-circle-check" aria-hidden="true"></i> Computers &amp; equipment, delivered</span><span><i class="fas fa-circle-check" aria-hidden="true"></i> IT support when it breaks</span></div>
                 </div>
                 <div class="hero-visual">
                     <div class="hero-feature">
@@ -190,15 +202,16 @@
          Plain nouns on purpose: a visitor thinking "I want a website" should not
          have to decode "Build". The pillar names still lead the capabilities
          chapter; this one names the job instead. -->
-    <section id="what-we-do" class="section section--tight routes" aria-labelledby="routes-title" data-blocks="settle-up" data-blocks-pace="calm">
+    <section id="what-we-do" class="section section--ivory routes" aria-labelledby="routes-title" data-blocks="settle-up" data-blocks-pace="calm">
         <div class="rail">
             <!-- .chapter-head as well as .routes-head: the shared class is what
                  js/main.js animates and what carries the site's heading rhythm;
                  .routes-head only trims the size, because this band introduces a
                  list of links rather than the page's next big statement. -->
             <div class="chapter-head routes-head">
-                <span class="eyebrow">What we do</span>
-                <h2 id="routes-title">What do you need?</h2>
+                <span class="eyebrow">What ProManaged IT does</span>
+                <h2 id="routes-title">Software, equipment, and someone to call.</h2>
+                <p class="lede">We build the software your business runs on, we find and deliver the computers and equipment you need, and we keep both working when something breaks. That is the whole company &mdash; pick whichever sounds like you.</p>
             </div>
             <nav class="routes-grid" aria-labelledby="routes-title">
                 <a class="route route--lead" href="pages/website_builder.html">
@@ -242,22 +255,15 @@
                     <span class="route-cue" aria-hidden="true"></span>
                 </a>
             </nav>
+            <!-- The list is only useful to someone who can place themselves in it.
+                 This is the exit for everyone else, and it asks for a description
+                 rather than a category. -->
+            <p class="routes-note">None of these quite it? <a href="get-started.html">Describe the problem in plain words</a> and we will tell you what it actually needs.</p>
         </div>
     </section>
 
-    <!-- ================= UNDERSTANDING =================
-         The journey's second beat (BUILD_PLAN §2B): one calm editorial statement of
-         what ProManaged does, in plain language, sitting between the graphite hero and
-         the capabilities bento so the page breathes before its first dense chapter.
-         Low density by design — a statement and a note, no cards. The three trust
-         claims that used to close this chapter now live in #why-us, beside the
-         founder, which is where the journey answers "why trust them". -->
-    <section id="what-we-are" class="section section--ivory why-band" data-blocks="settle-side" data-blocks-pace="calm">
-        <div class="rail"><div class="grid why-grid"><div class="block block--7 block--bare why-lead"><span class="eyebrow">What ProManaged IT is</span><h2>A small studio for people who were quoted enterprise prices for an ordinary problem.</h2></div><div class="block block--5 block--bare why-note"><p>We do three things: we build the software your business runs on, we find and deliver the computers and equipment you need, and we keep both working when something breaks.</p><p>That is the whole company — software, equipment and support for individuals, founders, families and small teams, from people who stay reachable long after the invoice is settled. We are registered in Ireland and work remotely across borders — our delivered systems, so far, are for hotels in Malawi.</p></div></div></div>
-    </section>
-
     <section id="services" class="section services" aria-labelledby="services-title" data-blocks="settle-side">
-        <div class="rail"><div class="chapter-head"><span class="eyebrow">Capabilities</span><h2 id="services-title">Build, Source, Support.</h2><p class="lede">Three ways we help, in the order most clients need them. Take one or take all three — it is the same team either way.</p></div><div class="grid services-grid"><div class="block block--7 block--graphite block--interactive service-card capability capability--lead" data-target="pages/custom_websites.html" data-cursor-label="Tell us what you're trying to automate" role="link" tabindex="0" aria-label="Build — we build the software your business runs on. Tell us what you are trying to automate"><span class="mark" aria-hidden="true"><i class="fas fa-laptop-code"></i></span><div class="block__body"><span class="capability-index">01</span><h3>The booking spreadsheet has quietly become a second job.</h3><p class="capability-lede"><b>Build.</b> We build the software your business runs on — booking systems, internal tools, customer-facing apps — so the job that eats a day a week becomes something the software does instead.</p><ul class="list"><li>Custom web apps, internal tools and dashboards</li><li>Multi-tenant products with user accounts and secure logins</li><li>Business websites when that is genuinely the right answer</li></ul><span class="card-cue">Tell us what you&rsquo;re trying to automate <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div><div class="block block--5 block--interactive service-card capability" data-target="pages/hardware_sourcing.html" data-cursor-label="Tell us what you need to source" role="link" tabindex="0" aria-label="Source — we find, buy and deliver the computers and equipment you need. Tell us what you need to source"><span class="mark" aria-hidden="true"><i class="fas fa-boxes-stacked"></i></span><div class="block__body"><span class="capability-index">02</span><h3>The gear you need is out of stock, or it will not ship to you.</h3><p class="capability-lede"><b>Source.</b> We find, buy and deliver the computers and equipment you need, wherever you are — including the things that are out of stock locally or will not ship to you directly.</p><ul class="list"><li>Laptops, desktops and gaming PCs</li><li>Monitors, mice, keyboards and controllers</li><li>Local-friendly payment on international orders</li></ul><span class="card-cue">Tell us what you need to source <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div><div class="block block--5 block--interactive service-card capability" data-target="pages/it_support.html" data-cursor-label="Tell us what keeps breaking" role="link" tabindex="0" aria-label="Support — we keep it working, with fixes, setups and a person on the phone. Tell us what keeps breaking"><span class="mark" aria-hidden="true"><i class="fas fa-life-ring"></i></span><div class="block__body"><span class="capability-index">03</span><h3>Something breaks, and there is nobody to call who actually knows your setup.</h3><p class="capability-lede"><b>Support.</b> We keep it working — fixes, setups and a person on the phone when it breaks. The everyday faults that stop a working day, sorted, mostly over a call.</p><ul class="list"><li>Device setup, migration and troubleshooting</li><li>Passwords, email, files and software</li><li>Backups, lost files and everyday security</li></ul><span class="card-cue">Tell us what keeps breaking <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div></div></div>
+        <div class="rail"><div class="chapter-head"><span class="eyebrow">Capabilities</span><h2 id="services-title">Build, Source, Support.</h2><p class="lede">The same three things in detail — what each one covers, and the problem it is usually bought to solve. Take one or take all three; it is the same team either way.</p></div><div class="grid services-grid"><div class="block block--7 block--graphite block--interactive service-card capability capability--lead" data-target="pages/custom_websites.html" data-cursor-label="Tell us what you're trying to automate" role="link" tabindex="0" aria-label="Build — we build the software your business runs on. Tell us what you are trying to automate"><span class="mark" aria-hidden="true"><i class="fas fa-laptop-code"></i></span><div class="block__body"><span class="capability-index">01</span><h3>The booking spreadsheet has quietly become a second job.</h3><p class="capability-lede"><b>Build.</b> We build the software your business runs on — booking systems, internal tools, customer-facing apps — so the job that eats a day a week becomes something the software does instead.</p><ul class="list"><li>Custom web apps, internal tools and dashboards</li><li>Multi-tenant products with user accounts and secure logins</li><li>Business websites when that is genuinely the right answer</li></ul><span class="card-cue">Tell us what you&rsquo;re trying to automate <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div><div class="block block--5 block--interactive service-card capability" data-target="pages/hardware_sourcing.html" data-cursor-label="Tell us what you need to source" role="link" tabindex="0" aria-label="Source — we find, buy and deliver the computers and equipment you need. Tell us what you need to source"><span class="mark" aria-hidden="true"><i class="fas fa-boxes-stacked"></i></span><div class="block__body"><span class="capability-index">02</span><h3>The gear you need is out of stock, or it will not ship to you.</h3><p class="capability-lede"><b>Source.</b> We find, buy and deliver the computers and equipment you need, wherever you are — including the things that are out of stock locally or will not ship to you directly.</p><ul class="list"><li>Laptops, desktops and gaming PCs</li><li>Monitors, mice, keyboards and controllers</li><li>Local-friendly payment on international orders</li></ul><span class="card-cue">Tell us what you need to source <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div><div class="block block--5 block--interactive service-card capability" data-target="pages/it_support.html" data-cursor-label="Tell us what keeps breaking" role="link" tabindex="0" aria-label="Support — we keep it working, with fixes, setups and a person on the phone. Tell us what keeps breaking"><span class="mark" aria-hidden="true"><i class="fas fa-life-ring"></i></span><div class="block__body"><span class="capability-index">03</span><h3>Something breaks, and there is nobody to call who actually knows your setup.</h3><p class="capability-lede"><b>Support.</b> We keep it working — fixes, setups and a person on the phone when it breaks. The everyday faults that stop a working day, sorted, mostly over a call.</p><ul class="list"><li>Device setup, migration and troubleshooting</li><li>Passwords, email, files and software</li><li>Backups, lost files and everyday security</li></ul><span class="card-cue">Tell us what keeps breaking <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div></div></div>
     </section>
 
     <!-- ================= REAL WORK — delivered project proof =================
@@ -420,7 +426,14 @@
         </div>
     </section>
 
-    <section id="about" class="section about" data-blocks="settle-up"><div class="rail"><div class="chapter-head"><span class="eyebrow">Founder / Story</span><h2>A technology company should still feel human.</h2></div><div class="about-grid"><div class="about-media about-media--portrait"><img src="images/founder.png" alt="John-Paul Chirwa, founder of ProManaged IT" loading="lazy" decoding="async" width="800" height="800"></div><div class="about-story"><span class="about-kicker">John-Paul Chirwa · Founder</span><h3>Built for people who want the answer, not another layer.</h3><p>ProManaged IT grew from a practical belief: useful technology should make work simpler, not give people another system to manage.</p><p>That means building what genuinely needs to be built, sourcing what is better bought, and staying on hand when the everyday things stop working.</p><div class="about-details"><span><i class="fas fa-cubes" aria-hidden="true"></i> Build</span><span><i class="fas fa-truck-ramp-box" aria-hidden="true"></i> Source</span><span><i class="fas fa-life-ring" aria-hidden="true"></i> Support</span></div></div></div></div></section>
+    <!-- ================= TRUST, first beat — who we are =================
+         This chapter absorbed the old standalone #what-we-are section. That section
+         was the page's THIRD consecutive answer to "what do you do" (after the hero
+         and the route band) and it delayed the capabilities chapter without adding a
+         new fact. Its copy is not lost: the positioning statement is this chapter's
+         head, and the registration/where-we-work note closes the founder story —
+         which is where a visitor is actually asking "who am I dealing with". -->
+    <section id="about" class="section about" data-blocks="settle-up"><div class="rail"><div class="chapter-head"><span class="eyebrow">Who we are</span><h2>A small studio for people who were quoted enterprise prices for an ordinary problem.</h2><p class="lede">Software, equipment and support for individuals, founders, families and small teams — from people who stay reachable long after the invoice is settled.</p></div><div class="about-grid"><div class="about-media about-media--portrait"><img src="images/founder.png" alt="John-Paul Chirwa, founder of ProManaged IT" loading="lazy" decoding="async" width="800" height="800"></div><div class="about-story"><span class="about-kicker">John-Paul Chirwa · Founder</span><h3>Built for people who want the answer, not another layer.</h3><p>ProManaged IT grew from a practical belief: useful technology should make work simpler, not give people another system to manage.</p><p>That means building what genuinely needs to be built, sourcing what is better bought, and staying on hand when the everyday things stop working.</p><p>We are registered in Ireland and work remotely across borders — our delivered systems, so far, are for hotels in Malawi.</p><div class="about-details"><span><i class="fas fa-cubes" aria-hidden="true"></i> Build</span><span><i class="fas fa-truck-ramp-box" aria-hidden="true"></i> Source</span><span><i class="fas fa-life-ring" aria-hidden="true"></i> Support</span></div></div></div></div></section>
 
     <!-- ================= TRUST, second beat =================
          The three claims that answer "why trust them". They used to close the

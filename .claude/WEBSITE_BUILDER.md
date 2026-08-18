@@ -76,6 +76,34 @@ not a refactor.
 `js/interface_motion.js` already supported `data-cursor-calm`; the new page uses
 the attribute and the shared file was not changed.
 
+## 3B. THE STEP GATE — HOW THE BUILDER IS SHOWN
+
+Added after the builder shipped, because the page was presenting the whole
+instrument to everyone: a visitor who had not decided they wanted a website
+scrolled into six interactive chapters with no stated purpose, and the closing form
+could be reached with chapter 01 never answered.
+
+The rules now, shared with the hospitality builder and enforced by
+`node tests/builder_flow.test.js`:
+
+1. The page opens on `#begin` — a plain gate that says what the form is, that it is
+   not a quote, roughly how long it takes, and that no contact details are asked for
+   until the last step. One control opens the instrument.
+2. Beside it, a static numbered outline of all seven steps. It answers "what am I
+   filling in" before anything is asked, reads with JavaScript off, and tracks
+   Done / You are here / Locked once the builder is open.
+3. One chapter at a time. The continue control reveals the next chapter and refuses
+   to advance while the current one is incomplete.
+4. Chapter 01's requirement is **both** the purpose and the current situation —
+   every suggestion the rest of the page makes is shaped by those two answers. The
+   page count has a default and the free-text box is optional, so neither gates.
+5. The closing form refuses to submit an incomplete configuration. `php/website.php`
+   validates independently and remains the real gate.
+
+Mechanics live in `js/builder_flow.js` / `css/builder_flow.css`; see
+`.claude/SYSTEM_MAP.md` for the capture-phase and load-order contracts. This file's
+catalogue, chapter content and endpoint behaviour are unchanged by it.
+
 ## 4. CHAPTER 01 — QUESTIONS
 
 | Question | Control | Options |

@@ -177,13 +177,21 @@
    but stays a compact row so it costs the page as little height as possible. */
 
 /* Tighter than a full .chapter-head: this band introduces a list of links, not
-   the page's next big statement, so it should not claim a chapter's air. */
+   the page's next big statement, so it should not claim a chapter's air. It DOES
+   now carry the page's plain-language explanation of the company — the statement
+   that used to be its own section directly below — so the lede is allowed a
+   slightly wider measure than the site default: it is a paragraph of explanation,
+   not a chapter's opening flourish. */
 .routes-head {
     margin-bottom: var(--space-8);
 }
 
 .routes-head h2 {
     font-size: var(--display-3);
+}
+
+.routes-head .lede {
+    max-width: 62ch;
 }
 
 @media (min-width: 768px) {
@@ -310,4 +318,33 @@
     .route { grid-column: span 4 }
     .route--lead { grid-column: span 6 }
     .route:last-child:nth-child(odd) { grid-column: span 4 }
+}
+
+/* The list only helps someone who can place themselves in it. This is the line for
+   everyone else, and it deliberately asks for a description rather than a category.
+   Sits below the grid, quieter than a route, but still a real link. */
+.routes-note {
+    margin-top: var(--space-6);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    max-width: 62ch;
+}
+
+.routes-note a {
+    color: var(--color-accent-link);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+}
+
+@media (hover: hover) {
+    .routes-note a:hover { color: var(--color-accent-hover) }
+}
+
+@media (min-width: 768px) {
+    .routes-note {
+        margin-top: var(--space-8);
+        font-size: var(--text-base);
+    }
 }

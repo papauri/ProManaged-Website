@@ -78,6 +78,10 @@ same tree; only destination-relative hrefs differ.
 - `css/mission_vision.css` — the closing outcome statement and its mission/vision beats.
 - `css/hospitality_builder.css` — the Hospitality System Builder's own components: choice chips, the room stepper, the module card and its detail panel, the system map and the story ladder. Adds nothing to the design system; every value comes from `tokens.css` and the shared families.
 - `css/website_builder.css` — the Website Builder's equivalent, under a `wb-` prefix. A deliberate separate copy rather than a shared sheet (see `.claude/WEBSITE_BUILDER.md` §3), so a fix to one must be considered for the other.
+- `css/builder_flow.css` — the gate, the step outline and the locked/blocked states
+  shared by BOTH builders. Everything in it is either a new class or scoped behind
+  `.builder-flow-on`, which only `js/builder_flow.js` adds, so with JavaScript off it
+  changes nothing.
 - `css/contact_section.css`, `css/book_appointment.css`, `css/get-started.css`, `css/learn-more.css`, `css/custom_websites.css`, `css/hardware_sourcing.css`, `css/it_support.css`, `css/privacy_policy.css`, `css/scroll_top.css`, `css/logo.css` — page and component scoped.
 
 ## JavaScript
@@ -128,6 +132,36 @@ Shared form validation/submission UX. Do not change PHP contracts when adjusting
 
 Initialises `#contact-form`, `#booking-form`, `#hospitality-form` and `#website-form`; each call is a no-op on a page without that form.
 
+### `js/builder_flow.js`
+
+The step gate shared by both builders, and the only file either page loads before
+its own builder script. It owns two things:
+
+- **the gate** — no interactive chapter is shown until the visitor presses the one
+  control on `#begin`;
+- **the step lock** — one chapter open at a time; the next is revealed by the
+  current chapter's continue control, which refuses to advance while that chapter's
+  requirements are unmet.
+
+It knows nothing about either builder's internal state. A chapter declares itself
+in markup: `data-builder-step="N"` (sections sharing N open together),
+`data-step-require` (selectors, `|`-separated, that must each match),
+`data-step-missing` (the sentence shown when they do not) and `data-step-focus`
+(where to send the focus). That is what lets one file drive two instruments.
+
+Two things about it are contractual and easy to break:
+
+- **its click listener runs in the capture phase.** `js/main.js` binds its
+  smooth-scroll handler directly to every `a[href]`, so a bubble listener on the
+  builder root is too late — it fires after main.js has already pushed the
+  destination hash and started scrolling toward a chapter that is still closed.
+- **it must load before the builder script**, so `window.pmBuilderFlow` exists by
+  the time the builder's first render calls `refresh()`.
+
+The builders call into it at three points: `refresh()` from their own `update()`,
+`revealTarget()` before an automatic advance measures its target, and
+`firstIncomplete()` on submit, to refuse an incomplete configuration.
+
 ### `js/hospitality_builder.js`
 The Hospitality System Builder engine, and the only place its product copy lives.
 `CORE` and `OPTIONAL` are the catalogue: one record per capability carrying its id,
@@ -168,10 +202,21 @@ Plain scripts, no framework and no dependencies. Run them before any change to t
 - `php tests/hospitality_endpoint.test.php` — the endpoint's trust boundary, exercised against hostile input: invented capabilities, markup payloads, duplicate and repetition floods, malformed relationship pairs and out-of-range room counts.
 - `node tests/website_builder.test.js` — the same for the Website Builder, plus an assertion that at least 10 of its 11 capabilities are delivered work, and that no ranking or traffic promise appears in the copy.
 - `php tests/website_endpoint.test.php` — the same trust-boundary coverage for `php/website.php`.
+- `node tests/builder_flow.test.js` — the step-gate attribute contract on both builder
+  pages (contiguous step numbers, every continue control advancing by exactly one, step 1
+  declaring a requirement whose selectors exist, the outline mirroring the steps, nothing
+  shipping pre-hidden, load order), plus the homepage section rhythm: no two adjacent
+  chapters on the same surface and no two adjacent graphite ones.
 
 **The honesty contract is enforced here, not by review.** A capability may claim "Built before" only if it is in the permitted set the tests assert. Promoting one without widening that set fails the suite — see `.claude/HOSPITALITY_SYSTEM_BUILDER.md` §19 and `.claude/WEBSITE_BUILDER.md` §7.
 
 **Audit contrast in the SELECTED state.** Both builders have elements that only render once a module is chosen; a page-load audit misses them entirely, which is how one sub-AA value shipped.
+
+**Audit the builders in the OPENED state.** Since the step gate, simply loading a
+builder page renders the gate and nothing else. Any sweep — overflow, stranded
+content, contrast, touch targets — must press the start control and walk the
+chapters open first, or it will report a clean bill of health for content it never
+rendered.
 - `php/mailer.php` — shared internal/customer HTML + plain-text mail templates.
 - `php/env.php` — environment configuration.
 - `php/vendor/PHPMailer/` — mail dependency.
