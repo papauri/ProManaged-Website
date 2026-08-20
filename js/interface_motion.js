@@ -132,26 +132,21 @@
            Built in script, never in the markup: it is decoration with no accessible
            meaning, and a page served without JS should not carry an empty div for it.
 
-           The reticle is FOUR CORNER BRACKETS rather than a circle. A ring that grows
-           and shrinks is the house style of every cursor library on the internet;
-           brackets that latch onto the corners of a thing read as an instrument
-           acquiring a target, which is the language this site is already speaking —
-           the fragments, the readouts, the status chips. Each corner is one element
-           with two borders, positioned by the frame it sits in, so snapping to a card
-           costs four transforms and no reflow. */
+           The reticle is a single hairline outline, not a set of corner brackets. A
+           bracket that latches onto a thing reads as an instrument acquiring a
+           target — a busier, more "gamified" mark than the rest of the site's calm
+           editorial instrumentation. One continuous line is the quieter idiom: it
+           traces the exact shape of whatever it is over — a small circle at rest, the
+           precise outline of a card once it lands on one — the way a selection or a
+           link preview is marked in the calmer end of contemporary software, not the
+           way a viewfinder marks a subject. It costs the same: one element, one width/
+           height/radius written per frame, no reflow. */
         var cursor = document.createElement('div');
         cursor.className = 'pm-cursor';
         cursor.setAttribute('aria-hidden', 'true');
 
         var ring = document.createElement('span');
         ring.className = 'pm-cursor-frame';
-        var corners = [];
-        ['tl', 'tr', 'br', 'bl'].forEach(function (name) {
-            var c = document.createElement('i');
-            c.className = 'pm-corner pm-corner--' + name;
-            ring.appendChild(c);
-            corners.push(c);
-        });
 
         var dot = document.createElement('span');
         dot.className = 'pm-cursor-dot';
@@ -221,9 +216,9 @@
             ring.style.height = ringPos.h + 'px';
             ring.style.transform =
                 'translate3d(' + ringPos.x + 'px,' + ringPos.y + 'px,0) translate(-50%,-50%) scale(' + scale + ')';
-            // The corner brackets inherit the frame's radius so they curve with the
-            // card they have latched onto rather than staying square on a rounded one.
-            ring.style.setProperty('--corner-r', target.r + 'px');
+            // The outline inherits the frame's radius so it curves with the card it
+            // has landed on rather than staying circular over a square corner.
+            ring.style.setProperty('--ring-radius', target.r + 'px');
 
             dot.style.transform =
                 'translate3d(' + pointer.x + 'px,' + pointer.y + 'px,0) translate(-50%,-50%)';
@@ -374,12 +369,10 @@
                 target.y = box.top + box.height / 2 + (py - 0.5) * 2 * MAGNET;
                 target.w = box.width + 12;
                 target.h = box.height + 12;
-                // The card's own radius, NOT radius + the 6px the frame stands off by.
-                // Matching the offset exactly would make the bracket a concentric arc
-                // of the card's corner, and at a bento card's 18px radius a 34px
-                // bracket is then almost entirely curve. Holding the tighter radius
-                // leaves a straight run at each end, so it reads as a bracket.
-                target.r = radius;
+                // Radius + the 6px the outline stands off by, so the traced line is
+                // concentric with the card's own corner rather than a tighter arc
+                // pulled in from a wider curve.
+                target.r = radius + 6;
             }
         };
 
