@@ -58,7 +58,14 @@
 
     /* The navigation rail is fixed, so a raw scrollIntoView() puts the chapter
        heading underneath it. Same offset arithmetic the builders' own weighted
-       scroll uses. */
+       scroll uses.
+
+       The travel itself is delegated to js/main.js's window.pmScrollTo when it is
+       there, so moving between builder chapters carries the same weight as every other
+       jump on the site rather than keeping a second curve of its own. The fallback is
+       the previous behaviour verbatim, because this file must not depend on main.js
+       having run — it only ever runs on a click, but a builder page served with main.js
+       blocked still has to advance. */
     function scrollToSection(section) {
         const cs = getComputedStyle(document.documentElement);
         const headerH = parseFloat(cs.getPropertyValue('--header-h')) || 76;
@@ -67,6 +74,10 @@
             0,
             window.scrollY + section.getBoundingClientRect().top - (headerH + navFloat + 16)
         );
+        if (typeof window.pmScrollTo === 'function') {
+            window.pmScrollTo(top);
+            return;
+        }
         window.scrollTo({ top: top, behavior: reducedMotion() ? 'auto' : 'smooth' });
     }
 

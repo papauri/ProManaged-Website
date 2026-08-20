@@ -159,13 +159,26 @@
         root.classList.add('pm-cursor-live');
 
         var RING = 26;
-        // How hard the reticle chases the pointer. Low enough to read as weight, high
-        // enough that it never feels detached from the hand. Reduced motion takes 1,
+        // The resting ring over a plain inline link — a control, but not a shape worth
+        // tracing. Smaller than the old 56px circle, which read as a blob next to the
+        // fine outline everything else now uses.
+        var LINK_RING = 34;
+        // How hard the reticle chases the pointer, expressed as the fraction of the
+        // remaining distance covered in ONE 60Hz frame. The per-frame factor is
+        // re-derived from real elapsed time below, so the weight feels identical on a
+        // 60Hz and a 120Hz display — applying this raw per frame made the cursor
+        // converge twice as fast on a high-refresh monitor. Reduced motion takes 1,
         // which is exact tracking with no lag at all.
         var EASE = reduced ? 1 : 0.19;
-        // How far a framed card pulls its outline toward the pointer. Small on
+        // How far a traced element pulls its outline toward the pointer. Small on
         // purpose — it should read as the card acknowledging you, not as a wobble.
         var MAGNET = 7;
+        // Peak elongation along the direction of travel, as a fraction. The stretch is
+        // driven by how far the ring is currently lagging the pointer, so it grows on a
+        // fast flick and resolves itself as the ring catches up — no separate velocity
+        // decay to tune, and it can never stick. Motion only, so reduced motion is 0.
+        var STRETCH = reduced ? 0 : 0.17;
+        var STRETCH_FULL = 210;
 
         var pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
         var ringPos = { x: pointer.x, y: pointer.y, w: RING, h: RING, r: RING / 2 };
@@ -174,10 +187,13 @@
         var live = false;
         var running = false;
         var mode = 'default';
+        var lastFrame = 0;
 
-        // The element the ring is currently framed to, plus the card currently taking
-        // the light. Kept as one reference each so leaving is always exact.
-        var framed = null;
+        // The element the outline is currently traced to — a destination card OR a
+        // solid control — plus how much room to leave around it, and the card currently
+        // taking the light. One reference each, so leaving is always exact.
+        var traced = null;
+        var tracedPad = 12;
         var lit = null;
 
         var setMode = function (next) {
@@ -198,27 +214,63 @@
         /* ---------- Per-frame ----------
            Position is written straight to style.transform rather than through a CSS
            custom property + transition: the ring already has its own spring here, and
-           a second easing in the stylesheet would compound into lag. */
-        var frame = function () {
+           a second easing in the stylesheet would compound into lag.
+
+           Everything the ring owns — position, size AND corner radius — is eased by the
+           same factor, so a circle becoming a card outline is one continuous morph
+           rather than a springing box with a radius that jumps on the first frame. */
+        var frame = function (now) {
+            // Frame-rate independence. EASE is expressed per 60Hz frame; converting it
+            // through the real elapsed time keeps the weight identical at any refresh
+            // rate. dt is clamped because a backgrounded tab resumes with a huge gap,
+            // and an unclamped factor there would teleport the ring.
+            var dt = lastFrame ? Math.min(now - lastFrame, 64) : 16.667;
+            lastFrame = now;
+            var k = EASE >= 1 ? 1 : 1 - Math.pow(1 - EASE, dt / 16.667);
+
             var dx = target.x - ringPos.x;
             var dy = target.y - ringPos.y;
             var dw = target.w - ringPos.w;
             var dh = target.h - ringPos.h;
+            var dr = target.r - ringPos.r;
 
-            ringPos.x += dx * EASE;
-            ringPos.y += dy * EASE;
-            ringPos.w += dw * EASE;
-            ringPos.h += dh * EASE;
+            ringPos.x += dx * k;
+            ringPos.y += dy * k;
+            ringPos.w += dw * k;
+            ringPos.h += dh * k;
+            ringPos.r += dr * k;
 
-            var scale = pressed ? 0.84 : 1;
+            // A press tightens the mark. A traced outline barely moves — shrinking a
+            // whole card's outline by a sixth reads as the card recoiling, not as a
+            // click — while the free ring takes the full squeeze.
+            var press = pressed ? (traced ? 0.985 : 0.86) : 1;
+
+            /* The lag stretch. The ring is always a little behind the pointer; that gap
+               IS the speed, so elongating along it turns the lag into intent rather
+               than sloppiness. Suppressed whenever the outline is traced to something:
+               a card's outline is reporting real geometry, and geometry that stretches
+               is just wrong. */
+            var stretch = '';
+            if (STRETCH && !traced) {
+                var lag = Math.sqrt(dx * dx + dy * dy);
+                var s = Math.min(lag / STRETCH_FULL, 1) * STRETCH;
+                if (s > 0.004) {
+                    var a = Math.atan2(dy, dx) * 180 / Math.PI;
+                    stretch = ' rotate(' + a.toFixed(2) + 'deg) scale(' +
+                        (1 + s).toFixed(4) + ',' + (1 - s * 0.55).toFixed(4) +
+                        ') rotate(' + (-a).toFixed(2) + 'deg)';
+                }
+            }
 
             ring.style.width = ringPos.w + 'px';
             ring.style.height = ringPos.h + 'px';
             ring.style.transform =
-                'translate3d(' + ringPos.x + 'px,' + ringPos.y + 'px,0) translate(-50%,-50%) scale(' + scale + ')';
-            // The outline inherits the frame's radius so it curves with the card it
-            // has landed on rather than staying circular over a square corner.
-            ring.style.setProperty('--ring-radius', target.r + 'px');
+                'translate3d(' + ringPos.x.toFixed(2) + 'px,' + ringPos.y.toFixed(2) + 'px,0)' +
+                ' translate(-50%,-50%) scale(' + press + ')' + stretch;
+            // The outline carries the radius it is currently easing through, so it
+            // curves with the card it has landed on rather than staying circular over a
+            // square corner — and gets there gradually.
+            ring.style.setProperty('--ring-radius', ringPos.r.toFixed(2) + 'px');
 
             dot.style.transform =
                 'translate3d(' + pointer.x + 'px,' + pointer.y + 'px,0) translate(-50%,-50%)';
@@ -231,10 +283,12 @@
             // Park the loop once everything has arrived. Idle hovering costs nothing.
             var settled =
                 Math.abs(dx) < 0.35 && Math.abs(dy) < 0.35 &&
-                Math.abs(dw) < 0.35 && Math.abs(dh) < 0.35;
+                Math.abs(dw) < 0.35 && Math.abs(dh) < 0.35 &&
+                Math.abs(dr) < 0.35;
 
             if (settled) {
                 running = false;
+                lastFrame = 0;
                 return;
             }
             requestAnimationFrame(frame);
@@ -262,13 +316,35 @@
            a marked region the cursor keeps just two states, so it stops competing
            with the thing the visitor is actually doing. */
         var CALM = '[data-cursor-calm]';
+        /* Controls that are a SHAPE rather than a span of words. A button, a pill, a
+           route row is a discrete object with its own edge, so the outline acquires it
+           the way it acquires a card — the control is what the cursor is reporting, and
+           reporting it as a floating circle throws that geometry away. An inline link
+           inside a paragraph is deliberately NOT here: tracing a few words mid-sentence
+           reads as a highlight, and there is already a caret mode for running copy. */
+        var SOLID = '.btn, button, [role="button"], input[type="submit"], input[type="button"], .route';
+        // Past this an "acquired" control is really a region, and tracing it stops
+        // reading as a cursor at all. Falls back to the free ring.
+        var SOLID_MAX_W = 560;
+        var SOLID_MAX_H = 220;
+
+        var traceable = function (el) {
+            if (!el || !el.matches(SOLID)) return false;
+            var box = el.getBoundingClientRect();
+            return !!box.width && !!box.height
+                && box.width <= SOLID_MAX_W && box.height <= SOLID_MAX_H;
+        };
+
+        var freeRing = function (size) {
+            traced = null;
+            target.w = size; target.h = size; target.r = size / 2;
+        };
 
         var resolve = function (el) {
             if (!el || el.nodeType !== 1) {
                 setMode('default');
                 setLabel('');
-                framed = null;
-                target.w = RING; target.h = RING; target.r = RING / 2;
+                freeRing(RING);
                 return;
             }
 
@@ -276,21 +352,28 @@
             if (el.closest(TYPING)) {
                 setMode('off');
                 setLabel('');
-                framed = null;
+                traced = null;
                 return;
             }
 
             if (el.closest(CALM)) {
                 // Two states only: a control, or everything else. No card framing and
-                // no caret, which are the two that make this section feel busy.
-                framed = null;
+                // no caret, which are the two that make this section feel busy. The
+                // control still acquires its own shape — that is the state the visitor
+                // is acting on, and it is one state, not a fifth one.
                 setLabel('');
-                if (el.closest(CONTROL)) {
+                var calmControl = el.closest(CONTROL);
+                if (calmControl) {
                     setMode('link');
-                    target.w = 44; target.h = 44; target.r = 22;
+                    if (traceable(calmControl)) {
+                        traced = calmControl;
+                        tracedPad = 8;
+                    } else {
+                        freeRing(LINK_RING);
+                    }
                 } else {
                     setMode('default');
-                    target.w = RING; target.h = RING; target.r = RING / 2;
+                    freeRing(RING);
                 }
                 return;
             }
@@ -299,26 +382,34 @@
             var control = el.closest(CONTROL);
 
             if (card && (control || card.hasAttribute('data-target') || card.matches('a, [role="link"]'))) {
-                // A card that is itself a destination: frame it.
-                framed = card;
+                // A card that is itself a destination: trace it.
+                traced = card;
+                tracedPad = 12;
                 setMode('frame');
                 setLabel(card.getAttribute('data-cursor-label') || '');
                 return;
             }
 
-            framed = null;
-
             if (control) {
                 setMode('link');
                 setLabel('');
-                target.w = 56; target.h = 56; target.r = 28;
+                // A solid control is acquired at its own edge; anything else — an
+                // inline link, a bare interactive block — keeps the free ring.
+                if (traceable(control)) {
+                    traced = control;
+                    tracedPad = 8;
+                } else {
+                    freeRing(LINK_RING);
+                }
                 return;
             }
+
+            traced = null;
 
             if (el.closest(TEXTUAL)) {
                 setMode('text');
                 setLabel('');
-                // The frame collapses onto the pointer; the caret itself is the dot,
+                // The outline collapses onto the pointer; the caret itself is the dot,
                 // restyled into a bar by css/interaction.css.
                 target.w = 2; target.h = 24; target.r = 1;
                 return;
@@ -326,7 +417,7 @@
 
             setMode('default');
             setLabel('');
-            target.w = RING; target.h = RING; target.r = RING / 2;
+            freeRing(RING);
         };
 
         /* ---------- The card field ----------
@@ -360,20 +451,34 @@
             card.style.setProperty('--fx', ((0.5 - py) * 2 * tiltCap).toFixed(2) + 'deg');
             // The traced edge grows from the side the pointer is nearest.
             card.style.setProperty('--trace-origin', px < 0.5 ? 'left' : 'right');
+        };
 
-            if (framed === card) {
-                // Frame mode: the ring becomes the card's outline, pulled a few pixels
-                // toward the pointer so it still answers to the hand.
-                var radius = parseFloat(getComputedStyle(card).borderTopLeftRadius) || 12;
-                target.x = box.left + box.width / 2 + (px - 0.5) * 2 * MAGNET;
-                target.y = box.top + box.height / 2 + (py - 0.5) * 2 * MAGNET;
-                target.w = box.width + 12;
-                target.h = box.height + 12;
-                // Radius + the 6px the outline stands off by, so the traced line is
-                // concentric with the card's own corner rather than a tighter arc
-                // pulled in from a wider curve.
-                target.r = radius + 6;
-            }
+        /* ---------- Acquiring a shape ----------
+           The outline becomes the element's own edge, pulled a few pixels toward the
+           pointer so it still answers to the hand. Used for both things the cursor can
+           acquire — a destination card and a solid control — because from the ring's
+           point of view they are the same operation on a different box.
+
+           Reads one rect. Called from pointermove and from scroll (a card that scrolls
+           under a still pointer has to keep its outline), never per animation frame. */
+        var traceGeom = function (el, x, y, pad) {
+            var box = el.getBoundingClientRect();
+            if (!box.width || !box.height) return;
+
+            var px = (x - box.left) / box.width;
+            var py = (y - box.top) / box.height;
+            var radius = parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0;
+            var half = pad / 2;
+
+            target.x = box.left + box.width / 2 + (px - 0.5) * 2 * MAGNET;
+            target.y = box.top + box.height / 2 + (py - 0.5) * 2 * MAGNET;
+            target.w = box.width + pad;
+            target.h = box.height + pad;
+            // The element's own radius plus the standoff, so the line is concentric
+            // with the corner it is tracing rather than a tighter arc inside it. A
+            // pill (a huge radius on a short box) stays a pill because the radius is
+            // capped to half the traced height.
+            target.r = Math.min(radius + half, target.h / 2);
         };
 
         /* ---------- Events ---------- */
@@ -400,7 +505,9 @@
             }
             if (card) applyField(card, e.clientX, e.clientY);
 
-            if (!framed) {
+            if (traced) {
+                traceGeom(traced, e.clientX, e.clientY, tracedPad);
+            } else {
                 target.x = pointer.x;
                 target.y = pointer.y;
             }
@@ -435,11 +542,14 @@
             clearLit();
         });
 
-        // A framed card that scrolls under the pointer must keep its outline. Cheap:
-        // one rect read, only while something is actually framed.
+        // An acquired card or control that scrolls under the pointer must keep its
+        // outline. Cheap: one rect read, only while something is actually traced. The
+        // card light is re-placed too, so a card scrolling under a still pointer does
+        // not keep its highlight parked where the pointer used to be over it.
         window.addEventListener('scroll', function () {
-            if (framed) applyField(framed, pointer.x, pointer.y);
-            run();
+            if (traced) traceGeom(traced, pointer.x, pointer.y, tracedPad);
+            if (lit) applyField(lit, pointer.x, pointer.y);
+            if (traced || lit) run();
         }, { passive: true });
 
         // A touch on a hybrid device means the visitor has put the mouse down.

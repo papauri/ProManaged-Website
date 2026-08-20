@@ -16,15 +16,40 @@
     cursor: pointer;
     box-shadow: var(--shadow-lg);
     z-index: 900;
-    transition: background var(--transition), transform var(--transition);
+
+    /* Away state. `visibility` rather than `display` so the control can be animated at
+       all — display:none cannot transition, which is why this used to appear and vanish
+       on a single scroll pixel — and rather than opacity alone so it stays out of the
+       tab order and takes no clicks while it is gone.
+
+       The visibility delay is the trick that makes it work in both directions: hiding,
+       it waits for the fade to finish before becoming unfocusable; showing, the
+       .is-visible rule zeroes every delay so it appears at once. */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px) scale(.92);
+    transition:
+        opacity var(--transition),
+        transform var(--transition-slow),
+        background var(--transition),
+        visibility 0s linear 200ms;
 }
 
-/* `display: flex` above would otherwise beat the UA [hidden] rule, so restate it. */
+.scroll-top-btn.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s, 0s, 0s, 0s;
+}
+
+/* `display: flex` above would otherwise beat the UA [hidden] rule, so restate it.
+   Kept as a safety net: nothing sets [hidden] any more, but anything that did would
+   otherwise leave a laid-out button behind. */
 .scroll-top-btn[hidden] {
     display: none;
 }
 
-.scroll-top-btn:hover {
+.scroll-top-btn.is-visible:hover {
     background: var(--color-accent-earth);
     transform: translateY(-2px);
 }

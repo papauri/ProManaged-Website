@@ -13,17 +13,123 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // The fixed rail is the capsule's own height PLUS the gap it floats above the
     // viewport edge, so both tokens have to be read here — otherwise an anchor lands
     // --nav-float too high and the target's first line sits under the bar.
-    const headerOffset = (() => {
+    //
+    // Read PER JUMP rather than cached once at load: --nav-float is breakpoint
+    // dependent, so a value measured at 1440px is the wrong offset for the same
+    // session after the window is dragged narrow.
+    const headerOffset = () => {
         const styles = getComputedStyle(document.documentElement);
         const read = (name, fallback) => {
             const raw = parseInt(styles.getPropertyValue(name), 10);
             return Number.isFinite(raw) ? raw : fallback;
         };
         return read('--header-h', 92) + read('--nav-float', 0);
+    };
+
+    /* ---------- Weighted page travel ----------
+       Native `behavior: smooth` moves at a near-constant rate and stops dead, which is
+       the one piece of motion on the site that was not speaking the house language.
+       This is the same weighted in-out the Building Blocks reveal uses: it leans in,
+       travels, and spends its last third settling.
+
+       Three things here are load-bearing rather than decoration:
+
+         - css/global_styles.css sets `scroll-behavior: smooth` on <html>. Left on, the
+           browser would run its OWN animation toward every intermediate position this
+           loop writes and the two would fight to a standstill. The inline `auto`
+           suppresses it for the duration and is removed again afterwards.
+         - ANY input from the visitor cancels immediately. A hand-rolled scroll that
+           ignores the wheel for a second is worse than no animation at all, and that
+           single omission is what makes most custom smooth-scrolling feel broken.
+         - `prefers-reduced-motion` arrives instantly, and still has to force `auto`,
+           because a bare scrollTo would otherwise inherit the CSS smooth scroll.
+
+       Exposed as window.pmScrollTo so js/builder_flow.js moves between builder
+       chapters with exactly the same weight instead of keeping a second curve. */
+    const pmScrollTo = (() => {
+        const docEl = document.documentElement;
+        let frame = 0;
+        let release = null;
+
+        const stop = () => {
+            if (frame) { cancelAnimationFrame(frame); frame = 0; }
+            if (release) { release(); release = null; }
+        };
+
+        const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+        return (destination) => {
+            stop();
+            const limit = Math.max(0, docEl.scrollHeight - window.innerHeight);
+            const end = Math.max(0, Math.min(destination, limit));
+            const start = window.scrollY;
+            const distance = end - start;
+
+            // Nothing to travel, nobody asking for travel, or nobody watching: arrive.
+            // The hidden check matters because requestAnimationFrame is suspended in a
+            // background tab, so an animated jump started there would never run a
+            // single frame and would strand the override below.
+            if (prefersReducedMotion
+                || document.visibilityState === 'hidden'
+                || Math.abs(distance) < 2) {
+                docEl.style.scrollBehavior = 'auto';
+                window.scrollTo(0, end);
+                docEl.style.removeProperty('scroll-behavior');
+                return;
+            }
+
+            // Longer jumps take longer, but not proportionally — a full-page jump would
+            // otherwise crawl. Bounded so a short hop still reads as a move and the
+            // longest trip on the site stays near a second.
+            const duration = Math.min(1100, Math.max(520, 320 + Math.abs(distance) * 0.4));
+
+            docEl.style.scrollBehavior = 'auto';
+
+            const abort = () => stop();
+            /* Backgrounding the tab suspends requestAnimationFrame outright, so a jump
+               left in flight would otherwise sit frozen — holding the inline
+               scroll-behavior override open — and then snap the remaining distance in
+               one frame whenever the visitor came back. Landing it immediately means
+               they return to the place they asked for, with nothing left overridden. */
+            const finishIfHidden = () => {
+                if (document.visibilityState !== 'hidden') return;
+                window.scrollTo(0, end);
+                stop();
+            };
+            window.addEventListener('wheel', abort, { passive: true });
+            window.addEventListener('touchstart', abort, { passive: true });
+            window.addEventListener('pointerdown', abort, { passive: true });
+            window.addEventListener('keydown', abort);
+            document.addEventListener('visibilitychange', finishIfHidden);
+            release = () => {
+                window.removeEventListener('wheel', abort);
+                window.removeEventListener('touchstart', abort);
+                window.removeEventListener('pointerdown', abort);
+                window.removeEventListener('keydown', abort);
+                document.removeEventListener('visibilitychange', finishIfHidden);
+                docEl.style.removeProperty('scroll-behavior');
+            };
+
+            const begun = performance.now();
+            const step = (now) => {
+                const p = Math.min(1, (now - begun) / duration);
+                window.scrollTo(0, start + distance * ease(p));
+                if (p < 1) {
+                    frame = requestAnimationFrame(step);
+                    return;
+                }
+                frame = 0;
+                stop();
+            };
+            frame = requestAnimationFrame(step);
+        };
     })();
+    window.pmScrollTo = pmScrollTo;
 
     document.querySelectorAll('a[href]').forEach(link => {
         link.addEventListener('click', function (e) {
@@ -33,13 +139,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const targetElement = document.getElementById(decodeURIComponent(url.hash.slice(1)));
             if (!targetElement) return;
             e.preventDefault();
-            const top = targetElement.getBoundingClientRect().top + window.scrollY - headerOffset;
-            window.scrollTo({ top, behavior: 'smooth' });
+            const top = targetElement.getBoundingClientRect().top + window.scrollY - headerOffset();
+            pmScrollTo(top);
             history.pushState(null, '', url.hash);
         });
     });
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const canAnimate = !prefersReducedMotion && 'IntersectionObserver' in window;
     // Phones get fewer stagger steps and a tighter clock: the same design language,
     // but the first screen has to resolve quickly on a small viewport.
@@ -441,8 +545,21 @@ document.addEventListener("DOMContentLoaded", function () {
     scrollTopButton.innerHTML = '&uarr;';
     scrollTopButton.setAttribute('aria-label', 'Scroll back to top');
     scrollTopButton.classList.add('scroll-top-btn');
-    scrollTopButton.hidden = true;
     document.body.appendChild(scrollTopButton);
-    window.addEventListener('scroll', () => { scrollTopButton.hidden = window.scrollY <= 400; }, { passive: true });
-    scrollTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    /* A class rather than [hidden]: display:none cannot transition, so the control used
+       to appear and vanish on a single scroll pixel. css/scroll_top.css now lifts and
+       fades it, and keeps it out of the tab order with visibility:hidden while it is
+       away. The state is only written when it actually changes, so the listener costs
+       one comparison per scroll event rather than a class write. */
+    let topShown = false;
+    const syncScrollTop = () => {
+        const shouldShow = window.scrollY > 400;
+        if (shouldShow === topShown) return;
+        topShown = shouldShow;
+        scrollTopButton.classList.toggle('is-visible', shouldShow);
+    };
+    syncScrollTop();
+    window.addEventListener('scroll', syncScrollTop, { passive: true });
+    scrollTopButton.addEventListener('click', () => pmScrollTo(0));
 });
