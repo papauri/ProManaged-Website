@@ -16,8 +16,10 @@
         visual consequence.
 
      3. THE INSTRUMENT CURSOR (fine pointer only)
-        A dot that tracks exactly, a ring that lags on a spring, and a ring that snaps
-        to the geometry of whatever it is over.
+        A dot that tracks exactly, and a soft glow that lags on a spring and blooms
+        warmer over anything interactive — the same bloom the boot overture's dot
+        field uses (js/boot.js), carried through the rest of the site instead of
+        left behind on the first screen.
 
    ONE rAF LOOP serves modules 2 and 3, and it only runs while there is something left
    to move — it parks itself when the cursor has caught up and nothing is animating,
@@ -104,10 +106,10 @@
 
            So under the preference the pointer layer still runs, and the parts that are
            genuinely motion are the parts that are dropped:
-             - the ring's spring lag becomes 1:1 tracking (EASE below is 1);
+             - the glow's spring lag becomes 1:1 tracking (EASE below is 1);
              - cards no longer tilt in 3D or rotate their marks (css/interaction.css);
-             - the reticle snaps between shapes instead of easing (same file).
-           What remains is state: the light, the traced edge, the geometry it snaps to.
+             - the glow's bloom is an instant size change instead of a stretch-and-ease.
+           What remains is state: the light, the traced edge, and the glow itself.
 
            The scroll choreography is untouched by this and stays fully suppressed —
            content that moves on its own is exactly what the preference is asking us
@@ -132,68 +134,67 @@
            Built in script, never in the markup: it is decoration with no accessible
            meaning, and a page served without JS should not carry an empty div for it.
 
-           The reticle is a single hairline outline, not a set of corner brackets. A
-           bracket that latches onto a thing reads as an instrument acquiring a
-           target — a busier, more "gamified" mark than the rest of the site's calm
-           editorial instrumentation. One continuous line is the quieter idiom: it
-           traces the exact shape of whatever it is over — a small circle at rest, the
-           precise outline of a card once it lands on one — the way a selection or a
-           link preview is marked in the calmer end of contemporary software, not the
-           way a viewfinder marks a subject. It costs the same: one element, one width/
-           height/radius written per frame, no reflow. */
+           REVISED 2026-08-25, at the site owner's request: the previous reticle traced
+           the exact rectangle of whatever it hovered — a card, a button — latching its
+           outline onto that element's own edge and corner radius. In practice that read
+           as a viewfinder acquiring a target, not as an instrument, which is the
+           opposite of what it was going for. It is gone.
+
+           In its place: a dot that still tracks the pointer exactly, and a soft warm
+           glow around it that blooms bigger and brighter over anything interactive —
+           the same visual idea as the bloom in the boot overture's cursor-reactive dot
+           field, so the site's very first interaction (playing with the dots while it
+           loads) and its everyday cursor read as one instrument, not two unrelated
+           decorations. The glow never becomes anyone else's shape; only its size and
+           warmth change. */
         var cursor = document.createElement('div');
         cursor.className = 'pm-cursor';
         cursor.setAttribute('aria-hidden', 'true');
 
-        var ring = document.createElement('span');
-        ring.className = 'pm-cursor-frame';
+        var glow = document.createElement('span');
+        glow.className = 'pm-cursor-glow';
 
         var dot = document.createElement('span');
         dot.className = 'pm-cursor-dot';
         var label = document.createElement('span');
         label.className = 'pm-cursor-label';
-        cursor.appendChild(ring);
+        cursor.appendChild(glow);
         cursor.appendChild(dot);
         cursor.appendChild(label);
         document.body.appendChild(cursor);
         root.classList.add('pm-cursor-live');
 
-        var RING = 26;
-        // The resting ring over a plain inline link — a control, but not a shape worth
-        // tracing. Smaller than the old 56px circle, which read as a blob next to the
-        // fine outline everything else now uses.
-        var LINK_RING = 34;
-        // How hard the reticle chases the pointer, expressed as the fraction of the
+        // Resting diameter, and the diameter the glow blooms to over anything
+        // interactive — a control, a destination card, a route row. One size for all
+        // of them: the glow is reporting "you can act here," not the shape of the
+        // thing itself.
+        var REST = 26;
+        var ACTIVE = 68;
+        // How hard the glow chases the pointer, expressed as the fraction of the
         // remaining distance covered in ONE 60Hz frame. The per-frame factor is
         // re-derived from real elapsed time below, so the weight feels identical on a
         // 60Hz and a 120Hz display — applying this raw per frame made the cursor
         // converge twice as fast on a high-refresh monitor. Reduced motion takes 1,
         // which is exact tracking with no lag at all.
         var EASE = reduced ? 1 : 0.19;
-        // How far a traced element pulls its outline toward the pointer. Small on
-        // purpose — it should read as the card acknowledging you, not as a wobble.
-        var MAGNET = 7;
         // Peak elongation along the direction of travel, as a fraction. The stretch is
-        // driven by how far the ring is currently lagging the pointer, so it grows on a
-        // fast flick and resolves itself as the ring catches up — no separate velocity
+        // driven by how far the glow is currently lagging the pointer, so it grows on a
+        // fast flick and resolves itself as the glow catches up — no separate velocity
         // decay to tune, and it can never stick. Motion only, so reduced motion is 0.
         var STRETCH = reduced ? 0 : 0.17;
         var STRETCH_FULL = 210;
 
         var pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-        var ringPos = { x: pointer.x, y: pointer.y, w: RING, h: RING, r: RING / 2 };
-        var target = { x: pointer.x, y: pointer.y, w: RING, h: RING, r: RING / 2 };
+        var glowPos = { x: pointer.x, y: pointer.y, size: REST };
+        var target = { x: pointer.x, y: pointer.y, size: REST };
         var pressed = false;
         var live = false;
         var running = false;
         var mode = 'default';
         var lastFrame = 0;
 
-        // The element the outline is currently traced to — a destination card OR a
-        // solid control — plus how much room to leave around it, and the card currently
-        // taking the light. One reference each, so leaving is always exact.
-        var traced = null;
-        var tracedPad = 12;
+        // The card currently taking the light (module 2's own tracking — unrelated to
+        // the glow's size or position).
         var lit = null;
 
         var setMode = function (next) {
@@ -213,45 +214,38 @@
 
         /* ---------- Per-frame ----------
            Position is written straight to style.transform rather than through a CSS
-           custom property + transition: the ring already has its own spring here, and
+           custom property + transition: the glow already has its own spring here, and
            a second easing in the stylesheet would compound into lag.
 
-           Everything the ring owns — position, size AND corner radius — is eased by the
-           same factor, so a circle becoming a card outline is one continuous morph
-           rather than a springing box with a radius that jumps on the first frame. */
+           Position and size are eased by the same factor, so a bloom over a newly-
+           hovered control is one continuous grow rather than a springing dot with a
+           size that jumps on the first frame. */
         var frame = function (now) {
             // Frame-rate independence. EASE is expressed per 60Hz frame; converting it
             // through the real elapsed time keeps the weight identical at any refresh
             // rate. dt is clamped because a backgrounded tab resumes with a huge gap,
-            // and an unclamped factor there would teleport the ring.
+            // and an unclamped factor there would teleport the glow.
             var dt = lastFrame ? Math.min(now - lastFrame, 64) : 16.667;
             lastFrame = now;
             var k = EASE >= 1 ? 1 : 1 - Math.pow(1 - EASE, dt / 16.667);
 
-            var dx = target.x - ringPos.x;
-            var dy = target.y - ringPos.y;
-            var dw = target.w - ringPos.w;
-            var dh = target.h - ringPos.h;
-            var dr = target.r - ringPos.r;
+            var dx = target.x - glowPos.x;
+            var dy = target.y - glowPos.y;
+            var ds = target.size - glowPos.size;
 
-            ringPos.x += dx * k;
-            ringPos.y += dy * k;
-            ringPos.w += dw * k;
-            ringPos.h += dh * k;
-            ringPos.r += dr * k;
+            glowPos.x += dx * k;
+            glowPos.y += dy * k;
+            glowPos.size += ds * k;
 
-            // A press tightens the mark. A traced outline barely moves — shrinking a
-            // whole card's outline by a sixth reads as the card recoiling, not as a
-            // click — while the free ring takes the full squeeze.
-            var press = pressed ? (traced ? 0.985 : 0.86) : 1;
+            // A press tightens the glow — the same tactile squeeze a physical control
+            // gives back.
+            var press = pressed ? 0.86 : 1;
 
-            /* The lag stretch. The ring is always a little behind the pointer; that gap
+            /* The lag stretch. The glow is always a little behind the pointer; that gap
                IS the speed, so elongating along it turns the lag into intent rather
-               than sloppiness. Suppressed whenever the outline is traced to something:
-               a card's outline is reporting real geometry, and geometry that stretches
-               is just wrong. */
+               than sloppiness. */
             var stretch = '';
-            if (STRETCH && !traced) {
+            if (STRETCH) {
                 var lag = Math.sqrt(dx * dx + dy * dy);
                 var s = Math.min(lag / STRETCH_FULL, 1) * STRETCH;
                 if (s > 0.004) {
@@ -262,29 +256,23 @@
                 }
             }
 
-            ring.style.width = ringPos.w + 'px';
-            ring.style.height = ringPos.h + 'px';
-            ring.style.transform =
-                'translate3d(' + ringPos.x.toFixed(2) + 'px,' + ringPos.y.toFixed(2) + 'px,0)' +
+            glow.style.width = glowPos.size.toFixed(2) + 'px';
+            glow.style.height = glowPos.size.toFixed(2) + 'px';
+            glow.style.transform =
+                'translate3d(' + glowPos.x.toFixed(2) + 'px,' + glowPos.y.toFixed(2) + 'px,0)' +
                 ' translate(-50%,-50%) scale(' + press + ')' + stretch;
-            // The outline carries the radius it is currently easing through, so it
-            // curves with the card it has landed on rather than staying circular over a
-            // square corner — and gets there gradually.
-            ring.style.setProperty('--ring-radius', ringPos.r.toFixed(2) + 'px');
 
             dot.style.transform =
                 'translate3d(' + pointer.x + 'px,' + pointer.y + 'px,0) translate(-50%,-50%)';
 
-            // The label hangs off the pointer, not off the ring, so it stays readable
-            // when the ring has become a card-sized rectangle.
+            // The label hangs off the pointer, not off the glow, so it stays readable
+            // however big the bloom currently is.
             label.style.transform =
                 'translate3d(' + pointer.x + 'px,' + (pointer.y + 22) + 'px,0) translate(-50%,0)';
 
             // Park the loop once everything has arrived. Idle hovering costs nothing.
             var settled =
-                Math.abs(dx) < 0.35 && Math.abs(dy) < 0.35 &&
-                Math.abs(dw) < 0.35 && Math.abs(dh) < 0.35 &&
-                Math.abs(dr) < 0.35;
+                Math.abs(dx) < 0.35 && Math.abs(dy) < 0.35 && Math.abs(ds) < 0.35;
 
             if (settled) {
                 running = false;
@@ -307,44 +295,19 @@
         var CONTROL = 'a[href], button, [role="link"], input[type="submit"], .block--interactive';
         var TEXTUAL = 'p, li, h1, h2, h3, h4, blockquote, .lede';
         var TYPING = 'input, textarea, select';
-        /* Opt-out for dense interactive regions. The four-mode cursor is right for
-           editorial chapters, where each change of mode is an occasional event. In a
-           section that is wall-to-wall cards, controls and copy — the hospitality
-           builder's steps — the same behaviour fires constantly: the frame snaps
-           around a whole card, collapses to a caret over its paragraph, expands to a
-           link ring over its button, and back, on every few pixels of travel. Inside
-           a marked region the cursor keeps just two states, so it stops competing
-           with the thing the visitor is actually doing. */
+        /* Opt-out for dense interactive regions. Even the simplified glow changes size
+           on every control, card and paragraph boundary; in a section that is
+           wall-to-wall cards, controls and copy — the hospitality builder's steps —
+           that still fires constantly. Inside a marked region the cursor keeps just
+           two states (a control, or everything else), so it stops competing with the
+           thing the visitor is actually doing. */
         var CALM = '[data-cursor-calm]';
-        /* Controls that are a SHAPE rather than a span of words. A button, a pill, a
-           route row is a discrete object with its own edge, so the outline acquires it
-           the way it acquires a card — the control is what the cursor is reporting, and
-           reporting it as a floating circle throws that geometry away. An inline link
-           inside a paragraph is deliberately NOT here: tracing a few words mid-sentence
-           reads as a highlight, and there is already a caret mode for running copy. */
-        var SOLID = '.btn, button, [role="button"], input[type="submit"], input[type="button"], .route';
-        // Past this an "acquired" control is really a region, and tracing it stops
-        // reading as a cursor at all. Falls back to the free ring.
-        var SOLID_MAX_W = 560;
-        var SOLID_MAX_H = 220;
-
-        var traceable = function (el) {
-            if (!el || !el.matches(SOLID)) return false;
-            var box = el.getBoundingClientRect();
-            return !!box.width && !!box.height
-                && box.width <= SOLID_MAX_W && box.height <= SOLID_MAX_H;
-        };
-
-        var freeRing = function (size) {
-            traced = null;
-            target.w = size; target.h = size; target.r = size / 2;
-        };
 
         var resolve = function (el) {
             if (!el || el.nodeType !== 1) {
                 setMode('default');
                 setLabel('');
-                freeRing(RING);
+                target.size = REST;
                 return;
             }
 
@@ -352,28 +315,19 @@
             if (el.closest(TYPING)) {
                 setMode('off');
                 setLabel('');
-                traced = null;
                 return;
             }
 
             if (el.closest(CALM)) {
-                // Two states only: a control, or everything else. No card framing and
-                // no caret, which are the two that make this section feel busy. The
-                // control still acquires its own shape — that is the state the visitor
-                // is acting on, and it is one state, not a fifth one.
+                // Two states only: a control, or everything else. No caret, which is
+                // the other thing that makes this section feel busy.
                 setLabel('');
-                var calmControl = el.closest(CONTROL);
-                if (calmControl) {
-                    setMode('link');
-                    if (traceable(calmControl)) {
-                        traced = calmControl;
-                        tracedPad = 8;
-                    } else {
-                        freeRing(LINK_RING);
-                    }
+                if (el.closest(CONTROL)) {
+                    setMode('active');
+                    target.size = ACTIVE;
                 } else {
                     setMode('default');
-                    freeRing(RING);
+                    target.size = REST;
                 }
                 return;
             }
@@ -382,42 +336,29 @@
             var control = el.closest(CONTROL);
 
             if (card && (control || card.hasAttribute('data-target') || card.matches('a, [role="link"]'))) {
-                // A card that is itself a destination: trace it.
-                traced = card;
-                tracedPad = 12;
-                setMode('frame');
+                // A card that is itself a destination: bloom, and name it.
+                setMode('active');
+                target.size = ACTIVE;
                 setLabel(card.getAttribute('data-cursor-label') || '');
                 return;
             }
 
             if (control) {
-                setMode('link');
+                setMode('active');
                 setLabel('');
-                // A solid control is acquired at its own edge; anything else — an
-                // inline link, a bare interactive block — keeps the free ring.
-                if (traceable(control)) {
-                    traced = control;
-                    tracedPad = 8;
-                } else {
-                    freeRing(LINK_RING);
-                }
+                target.size = ACTIVE;
                 return;
             }
-
-            traced = null;
 
             if (el.closest(TEXTUAL)) {
                 setMode('text');
                 setLabel('');
-                // The outline collapses onto the pointer; the caret itself is the dot,
-                // restyled into a bar by css/interaction.css.
-                target.w = 2; target.h = 24; target.r = 1;
                 return;
             }
 
             setMode('default');
             setLabel('');
-            freeRing(RING);
+            target.size = REST;
         };
 
         /* ---------- The card field ----------
@@ -453,34 +394,6 @@
             card.style.setProperty('--trace-origin', px < 0.5 ? 'left' : 'right');
         };
 
-        /* ---------- Acquiring a shape ----------
-           The outline becomes the element's own edge, pulled a few pixels toward the
-           pointer so it still answers to the hand. Used for both things the cursor can
-           acquire — a destination card and a solid control — because from the ring's
-           point of view they are the same operation on a different box.
-
-           Reads one rect. Called from pointermove and from scroll (a card that scrolls
-           under a still pointer has to keep its outline), never per animation frame. */
-        var traceGeom = function (el, x, y, pad) {
-            var box = el.getBoundingClientRect();
-            if (!box.width || !box.height) return;
-
-            var px = (x - box.left) / box.width;
-            var py = (y - box.top) / box.height;
-            var radius = parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0;
-            var half = pad / 2;
-
-            target.x = box.left + box.width / 2 + (px - 0.5) * 2 * MAGNET;
-            target.y = box.top + box.height / 2 + (py - 0.5) * 2 * MAGNET;
-            target.w = box.width + pad;
-            target.h = box.height + pad;
-            // The element's own radius plus the standoff, so the line is concentric
-            // with the corner it is tracing rather than a tighter arc inside it. A
-            // pill (a huge radius on a short box) stays a pill because the radius is
-            // capped to half the traced height.
-            target.r = Math.min(radius + half, target.h / 2);
-        };
-
         /* ---------- Events ---------- */
         document.addEventListener('pointermove', function (e) {
             if (e.pointerType !== 'mouse') return;
@@ -492,8 +405,8 @@
                 live = true;
                 cursor.classList.add('is-live');
                 // Do not spring in from the centre of the screen on the first move.
-                ringPos.x = pointer.x;
-                ringPos.y = pointer.y;
+                glowPos.x = pointer.x;
+                glowPos.y = pointer.y;
             }
 
             resolve(e.target);
@@ -505,12 +418,8 @@
             }
             if (card) applyField(card, e.clientX, e.clientY);
 
-            if (traced) {
-                traceGeom(traced, e.clientX, e.clientY, tracedPad);
-            } else {
-                target.x = pointer.x;
-                target.y = pointer.y;
-            }
+            target.x = pointer.x;
+            target.y = pointer.y;
 
             run();
         }, { passive: true });
@@ -542,14 +451,14 @@
             clearLit();
         });
 
-        // An acquired card or control that scrolls under the pointer must keep its
-        // outline. Cheap: one rect read, only while something is actually traced. The
-        // card light is re-placed too, so a card scrolling under a still pointer does
-        // not keep its highlight parked where the pointer used to be over it.
+        // The card light is re-placed on scroll, so a card scrolling under a still
+        // pointer does not keep its highlight parked where the pointer used to be
+        // over it. Cheap: one rect read, only while a card is actually lit.
         window.addEventListener('scroll', function () {
-            if (traced) traceGeom(traced, pointer.x, pointer.y, tracedPad);
-            if (lit) applyField(lit, pointer.x, pointer.y);
-            if (traced || lit) run();
+            if (lit) {
+                applyField(lit, pointer.x, pointer.y);
+                run();
+            }
         }, { passive: true });
 
         // A touch on a hybrid device means the visitor has put the mouse down.
