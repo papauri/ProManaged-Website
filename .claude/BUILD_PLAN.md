@@ -520,6 +520,16 @@ Mobile must have:
 Do not build desktop first and collapse it.
 
 ### G. FOUNDER / STORY — HIGH PRIORITY
+
+**CURRENT STATE (2026-08-29): the founder identity is OFF the public site, by user instruction.**
+- No founder name, no founder portrait, no personal email anywhere in the public pages.
+- The homepage About chapter runs story-only: `.about-grid--story`, kicker "Independent · Ireland-registered", studio-voice copy.
+- The portrait markup is **on standby**, not deleted: it is commented out in `index.html` inside `.about-grid`, the asset stays at `images/founder.png`, and every `.about-media--portrait` rule stays in `css/about_section.css`.
+- To restore: un-comment that block, drop the `--story` modifier from the grid class, and put a founder kicker back in `.about-kicker`.
+- Personal email `johnpaulchirwa@promanaged-it.com` removed from all nine public footers; canonical public contacts are `info@` and `support@` only. Do not reintroduce it.
+
+The original spec below is retained for the day the portrait comes back:
+
 Use the existing 800×800 founder asset:
 - circular crop;
 - sharp at rendered size;

@@ -1,4 +1,9 @@
-/* about_section.css — homepage chapter 5, founder / story.
+/* about_section.css — homepage chapter 5, studio story.
+
+   PORTRAIT ON STANDBY: the founder portrait is currently commented out in
+   index.html and the section runs story-only via .about-grid--story. Every
+   .about-media--portrait rule below is deliberately kept so the portrait can be
+   restored by un-commenting the markup and dropping the --story modifier.
 
    MOBILE FIRST. The phone composition is the base: a restrained circular portrait
    with its ring, the founder line, one thesis statement, then Build / Source /
@@ -68,6 +73,12 @@
 .about-story {
     min-width: 0;
     position: relative;
+}
+
+/* Story-only variant: no portrait column, so the copy owns the full rail and the
+   measure — not a stretched half-layout with an empty gutter beside it. */
+.about-grid--story {
+    grid-template-columns: minmax(0, 1fr);
 }
 
 .about-kicker {
@@ -165,9 +176,15 @@
         column-gap: clamp(3rem, 7vw, 9rem);
     }
 
+    .about-grid--story {
+        grid-template-columns: minmax(0, 1fr);
+        column-gap: 0;
+    }
+
     .about-media--portrait::after { display: block }
     .about-media--portrait::before { inset: -14px }
     .about-story { padding-top: clamp(0rem, 2vw, 2rem) }
+    .about-grid--story .about-story { padding-top: 0 }
 }
 
 @media (min-width: 1600px) {
@@ -177,6 +194,14 @@
 
     .about-story {
         padding-top: clamp(1rem, 3vw, 4rem);
+    }
+
+    .about-grid--story .about-story {
+        padding-top: 0;
+    }
+
+    .about-grid--story .about-story h3 {
+        max-width: 20ch;
     }
 
     .about-story h3 {
