@@ -17,10 +17,17 @@ Options -MultiViews
 #
 # Links in the markup are root-absolute (/gaming#request). Assets stay relative:
 # a page served at /gaming still resolves ../css/ and css/ to /css/.
+#
+# HOSTING LAYOUT. On the server this repo lives in a sub-folder
+# (public_html/promanaged-it.com/), and the account's top-level .htaccess maps the
+# domain into it with "RewriteRule ^(.+)$ /promanaged-it.com/$1". That rule must
+# use [L], not [END]: [END] stops every later rewrite pass, so none of the rules in
+# this file ever run and every clean URL is a 404. For the same reason there is no
+# "RewriteBase /" here: relative targets must resolve inside the sub-folder.
+# Redirect targets (/gaming) are public URLs and need no folder prefix.
 # ---------------------------------------------------------------------------
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /
 
     # --- Old addresses: 301 to the clean one, query string kept. -------------
     # THE_REQUEST is what the browser asked for, not the internal rewrite, so the
