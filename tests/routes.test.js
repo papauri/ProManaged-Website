@@ -61,12 +61,12 @@ const listed = (php.match(/function pm_page_label[\s\S]*?\$routes = \[([\s\S]*?)
 check(JSON.stringify(listed) === JSON.stringify(Object.keys(ROUTES).sort()),
     'pm_page_label() allow-list matches the route table');
 
-// The gaming and hardware pages point at the Facebook page where sale products go up.
+// The gaming and hardware pages point at the Facebook page where the products we have are posted and updated regularly.
 ['pages/gaming.html', 'pages/hardware_sourcing.html'].forEach((page) => {
     const src = read(page);
     check(/class="fb-btn" href="https:\/\/www\.facebook\.com\/promanageditservices" target="_blank" rel="noopener noreferrer"/.test(src),
         `${page}: links to the Facebook page in a new tab`);
-    check(/sale products/i.test(src), `${page}: says sale products are posted there`);
+    check(/updated? regularly/i.test(src) && !/sale/i.test(src.replace(/wholesale|resale/gi, '')), `${page}: says our products are posted and updated there, not "sale"`);
 });
 
 console.log('');
