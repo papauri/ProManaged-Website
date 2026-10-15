@@ -41,7 +41,9 @@
 
 .evidence-topline b { font-weight: var(--weight-semibold); color: var(--color-accent-earth) }
 .block--graphite .evidence-topline b,
-.block--earth .evidence-topline b { color: var(--color-accent-earth-soft) }
+.block--earth .evidence-topline b,
+/* A bare card on a graphite chapter is on graphite too: earth there measured 2.85:1. */
+.section--graphite .block--bare .evidence-topline b { color: var(--color-accent-earth-soft) }
 
 /* The media well. A fixed aspect ratio rather than a fixed height, so a card that
    spans five columns and one that spans seven both keep a deliberate proportion

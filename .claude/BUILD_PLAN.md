@@ -819,7 +819,15 @@ Never commit YAML/YML.
 
 ## Current Status
 
-- **Completed (latest cycle):** Persona pages and request forms (§2C, "Persona pages and request forms").
+- **Completed (latest cycle):** Quality pass over all 11 pages, and a real send from every form on the site.
+
+  **Accessibility audit (axe-core 4.10, WCAG 2.1 A/AA)** on all 11 pages, as "everything" and as each page's own persona, at 1440 and 375, plus the states a page-load audit never reaches: both forms' error state with chips checked, the open navigation panel, the reopened chooser, the get-started pointer and the corner switch. It found four contrast failures — all in chapters that predate the persona work — and all four are fixed: the pinned stepper's receded steps (2.66:1 → ~4.9:1, opacity .42 → .68), the builders' "Locked" outline state (2.45:1; now receded through surface and ink instead of opacity), the intake assurance line on stone (4.45:1 → text-muted), and the evidence-card label on the Source page's graphite chapter (2.85:1 → earth-soft). Re-run: **0 violations**. No page has a missing h1, description, broken image or unlabelled field, and every hero CTA is above the 375×667 fold. The persona forms' email and phone fields now stack, so "Phone or WhatsApp (optional)" no longer truncates.
+
+  **Sweep at the remaining breakpoints:** 430/1024/1920 × 8 views × 11 pages — 264 combinations, 0 defects (on top of the 375/768/1440 sweep in the previous cycle).
+
+  **Real sends, at the owner's request,** through the live pages in Chromium against the production SMTP configuration in `.env`, with johnpaulchirwa@gmail.com as the visitor: the gaming, property, software, equipment and support forms (`php/enquiry.php`), the get-started describe form (`php/contact.php`) and booking form (`php/booking.php`), and the two builder briefs (`php/hospitality.php`, `php/website.php`, posted with valid catalogue ids). All nine returned 200 — which these endpoints only do once the internal notification has been accepted by SMTP — each page showed its success message, and no customer-confirmation failure was logged. The local throttle record was cleared between batches because nine sends from one address exceed the 5-per-10-minutes limit.
+
+- **Completed (previous cycle):** Persona pages and request forms (§2C, "Persona pages and request forms").
 
   Every persona now has its own page and a request form that asks the right questions: two new pages (`pages/gaming.html`, `pages/property.html`) and new forms on the Build (`#brief`), Source (`#contact`, replacing the generic message board) and Support (`#get-help`) pages; hotels and websites keep their builders' briefs. All five post to the new `php/enquiry.php`, whose schema in `php/enquiry_catalogue.php` resolves every label server-side. The persona's rail button, navigation tile, homepage card and routes, off-topic notice and a new get-started pointer all lead to that page and form. The site is now **11 public pages**.
 
@@ -867,7 +875,7 @@ Never commit YAML/YML.
 - **In progress:** None.
 - **Next:** Owner visual review of the tailored views (§2C). Site is otherwise verified complete against the current Definition of Done, including the contracts added in earlier cycles (the route-band contract in §2B and the guided-configurator step gate). Optional future hardening (not currently required by the plan): self-host or locally fall back the two external CDNs (Google Fonts "Plus Jakarta Sans" / Font Awesome) so the typeface and icons survive a blocked-CDN network — an observation from QA, not a defect in the composition.
 - **Blocked:** None.
-- **Last implementation commit:** `3a6b60e` — persona pages and request forms
+- **Last implementation commit:** _(latest — quality pass and real form sends)_
 
 ### Standing note: this plan's page count is load-bearing
 

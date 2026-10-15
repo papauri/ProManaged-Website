@@ -75,6 +75,10 @@
     .enquiry-form .intake-group--message .field--grow { height: auto }
 }
 
+/* Email and phone stack rather than share a row: side by side in a half-width
+   group, "Phone or WhatsApp (optional)" truncated to "Phone or WhatsA…". */
+.enquiry-form .intake-group--lead .field-row { grid-template-columns: minmax(0, 1fr) }
+
 /* ---------- "Pick any" chips ----------
    Real checkboxes, visually a row of chips. The input stays in the accessibility
    tree and takes keyboard focus; the chip shows its state. */

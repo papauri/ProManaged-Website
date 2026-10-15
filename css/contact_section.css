@@ -424,7 +424,8 @@
 
 .intake-assurance {
     font-size: var(--text-sm);
-    color: var(--color-text-subtle);
+    /* --color-text-muted, not -subtle: on the stone board -subtle measured 4.45:1. */
+    color: var(--color-text-muted);
     margin: 0;
     max-width: 34ch;
 }

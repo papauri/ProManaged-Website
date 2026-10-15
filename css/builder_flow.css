@@ -139,8 +139,18 @@
     white-space: nowrap;
 }
 
+/* Locked steps recede through surface and ink rather than opacity: at opacity .62
+   the "Locked" word measured 2.45:1, below AA. These colours keep every word at
+   4.5:1 or better while the step still reads as not-yet-available. */
 .builder-outline-item.is-locked {
-    opacity: .62;
+    background: var(--color-ivory);
+    border-style: dashed;
+}
+
+.builder-outline-item.is-locked .builder-outline-text { color: var(--color-text-muted) }
+.builder-outline-item.is-locked .builder-outline-num {
+    background: var(--color-stone);
+    color: var(--color-text-muted);
 }
 
 .builder-outline-item.is-current {

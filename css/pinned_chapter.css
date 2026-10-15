@@ -84,8 +84,10 @@
        assembly in global_styles.css. */
     .pinned[data-pinned-ready] .pinned-step {
         /* Inactive steps recede rather than disappear: they stay readable, which
-           matters because this is real content, not a carousel. */
-        opacity: .42;
+           matters because this is real content, not a carousel. Measured with axe:
+           at .42 the receded body copy fell to 2.66:1 on graphite; .68 keeps it at
+           ~4.9:1 (WCAG AA) while still reading clearly as "not this step". */
+        opacity: .68;
         transition: opacity var(--transition-slow);
     }
 
