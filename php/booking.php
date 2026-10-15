@@ -17,6 +17,8 @@ $email   = pm_valid_email($_POST['email'] ?? '');
 $service = pm_clean_line($_POST['service'] ?? '', 80);
 $date    = pm_clean_line($_POST['date'] ?? '', 10);
 $time    = pm_clean_line($_POST['time'] ?? '', 5);
+// Optional, allow-listed; '' when absent or unknown, and an empty row is omitted.
+$audience = pm_audience_label($_POST['audience'] ?? '');
 
 if ($name === '' || $email === '' || $service === '' || $date === '' || $time === '') {
     pm_respond(400, false, 'Please complete the form with valid information.');
@@ -85,6 +87,7 @@ $internal = pm_internal_email(
     [
         'Service'        => $service,
         'Requested slot' => $slot,
+        'Visitor said'   => $audience,
         'Submitted'      => $received,
     ],
     'Notes',

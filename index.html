@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="css/about_section.css">
     <link rel="stylesheet" href="css/mission_vision.css">
     <link rel="stylesheet" href="css/contact_section.css">
+    <link rel="stylesheet" href="css/audience.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
          before first paint. Without JS this class is never added, the hiding rule
          never matches, and all content renders normally.
@@ -39,6 +40,7 @@
          clears the class again and the choreography still runs. -->
     <script>(function(d,w){var r=d.documentElement;r.classList.add('js-on');w.pmHeroFailsafe=w.setTimeout(function(){r.classList.add('load-failsafe');},1200);})(document,window);</script>
     <script src="js/boot.js"></script>
+    <script src="js/audience.js"></script>
 </head>
 <body id="main-body">
     <div id="header-section">
@@ -94,17 +96,17 @@
                         <span class="nav-tile-desc">Bring us the problem. Book a call and get a scope, a timeline and an honest answer.</span>
                         <span class="nav-tile-cue" aria-hidden="true">Book a call</span>
                     </a>
-                    <a class="nav-tile nav-tile--lead" href="pages/custom_websites.html">
+                    <a class="nav-tile nav-tile--lead" href="pages/custom_websites.html" data-aud="software website hospitality">
                         <span class="nav-tile-index">01 &middot; Build</span>
                         <span class="nav-tile-label">Software &amp; Web Apps</span>
                         <span class="nav-tile-desc">We build the software your business runs on &mdash; booking systems, internal tools, customer-facing apps.</span>
                     </a>
-                    <a class="nav-tile nav-tile--service" href="pages/hardware_sourcing.html">
+                    <a class="nav-tile nav-tile--service" href="pages/hardware_sourcing.html" data-aud="hardware gaming">
                         <span class="nav-tile-index">02 &middot; Source</span>
                         <span class="nav-tile-label">Hardware Sourcing</span>
                         <span class="nav-tile-desc">We find, buy and deliver the computers and equipment you need.</span>
                     </a>
-                    <a class="nav-tile nav-tile--service" href="pages/it_support.html">
+                    <a class="nav-tile nav-tile--service" href="pages/it_support.html" data-aud="support">
                         <span class="nav-tile-index">03 &middot; Support</span>
                         <span class="nav-tile-label">IT Support</span>
                         <span class="nav-tile-desc">We keep it working &mdash; fixes, setups and a person on the phone when it breaks.</span>
@@ -139,41 +141,41 @@
         <section id="home" class="hero">
             <div class="hero-rail rail" data-assemble>
                 <div class="hero-statement">
-                    <span class="hero-eyebrow">Build · Source · Support</span>
+                    <span class="hero-eyebrow" data-aud-copy="home-hero-eyebrow">Build · Source · Support</span>
                     <!-- The headline names the WORK, not a mood. The line it replaces
                          ("Technology that behaves itself.") was the page's first
                          sentence and told a first-time visitor nothing about what can
                          actually be bought here. -->
-                    <h1 id="hero-title">We build it, source it, and keep it working.</h1>
+                    <h1 id="hero-title" data-aud-copy="home-hero-title">We build it, source it, and keep it working.</h1>
                     <!-- One plain sentence, all three capabilities, ten words. The
                          375x667 fold contract in BUILD_PLAN §2B has to hold here:
                          eyebrow, headline, this line and the primary CTA all sit above
                          the fold on the smallest phone. -->
-                    <p id="hero-subtitle">Software, equipment and everyday IT support — from one small team.</p>
+                    <p id="hero-subtitle" data-aud-copy="home-hero-sub">Software, equipment and everyday IT support — from one small team.</p>
                     <!-- The secondary action is a DESTINATION on this page, not a
                          second document: it drops the visitor into the route band,
                          which is where "what can I get from you" is answered with
                          links. learn_more.html is still reachable from the navigation,
                          the footer, the mission band and the contact routes. -->
-                    <div class="hero-buttons"><a href="get-started.html#describe" class="btn primary" id="hero-get-started">Start a project</a><a href="#what-we-do" class="btn secondary" id="hero-learn-more">See what we do</a></div>
+                    <div class="hero-buttons"><a href="get-started.html#describe" class="btn primary" id="hero-get-started" data-aud-copy="home-hero-primary">Start a project</a><a href="#what-we-do" class="btn secondary" id="hero-learn-more">See what we do</a></div>
                     <!-- Was three soft trust claims. Trust is answered properly further
                          down (#why-us); the first screen has one job, which is saying
                          what we sell. Each line is one capability in plain nouns. -->
-                    <div class="hero-microproof"><span><i class="fas fa-circle-check" aria-hidden="true"></i> Software &amp; websites, built for you</span><span><i class="fas fa-circle-check" aria-hidden="true"></i> Computers &amp; equipment, delivered</span><span><i class="fas fa-circle-check" aria-hidden="true"></i> IT support when it breaks</span></div>
+                    <div class="hero-microproof" data-aud-copy="home-hero-proof"><span><i class="fas fa-circle-check" aria-hidden="true"></i> Software &amp; websites, built for you</span><span><i class="fas fa-circle-check" aria-hidden="true"></i> Computers &amp; equipment, delivered</span><span><i class="fas fa-circle-check" aria-hidden="true"></i> IT support when it breaks</span></div>
                 </div>
                 <div class="hero-visual">
                     <div class="hero-feature">
                         <i class="fas fa-layer-group" aria-hidden="true"></i>
-                        <span class="hero-figure">Three</span>
-                        <span class="hero-figure-label">capabilities under one point of contact — no handoffs, no ticket queue, no account manager in between.</span>
+                        <span class="hero-figure" data-aud-copy="home-hero-figure">Three</span>
+                        <span class="hero-figure-label" data-aud-copy="home-hero-figure-label">capabilities under one point of contact — no handoffs, no ticket queue, no account manager in between.</span>
                     </div>
                     <div class="hero-project-grid" role="group" aria-label="Illustrative interface fragments">
-                        <article class="hero-project-card">
+                        <article class="hero-project-card" data-aud="software website hospitality">
                             <div class="hero-project-topline"><span>Interface fragment</span><span>Build</span></div>
                             <div class="hero-project-media hero-project-media--hotel" aria-hidden="true"><span class="interface-window interface-window--booking"><span></span><span></span><span></span><b>BOOKING</b><i></i><i></i><i></i></span></div>
                             <div class="hero-project-copy"><span class="hero-project-title">Operations &amp; booking UI</span><span class="hero-project-desc">A visual slice of the kind of booking, availability and workflow interfaces we build.</span></div>
                         </article>
-                        <article class="hero-project-card hero-project-card--controller">
+                        <article class="hero-project-card hero-project-card--controller" data-aud="support">
                             <div class="hero-project-topline"><span>Interface fragment</span><span>Support</span></div>
                             <div class="hero-project-media hero-project-media--controller" aria-hidden="true"><span class="controller-ui"><i></i><i></i><i></i><b>SESSION</b><em>CONNECTED</em></span></div>
                             <div class="hero-project-copy"><span class="hero-project-title">Remote support session</span><span class="hero-project-desc">The screen-share view a support call actually happens in — you watch every step.</span></div>
@@ -209,12 +211,12 @@
                  .routes-head only trims the size, because this band introduces a
                  list of links rather than the page's next big statement. -->
             <div class="chapter-head routes-head">
-                <span class="eyebrow">What ProManaged IT does</span>
-                <h2 id="routes-title">Software, equipment, and someone to call.</h2>
-                <p class="lede">We build the software your business runs on, we find and deliver the computers and equipment you need, and we keep both working when something breaks. That is the whole company &mdash; pick whichever sounds like you.</p>
+                <span class="eyebrow" data-aud-copy="home-routes-eyebrow">What ProManaged IT does</span>
+                <h2 id="routes-title" data-aud-copy="home-routes-title">Software, equipment, and someone to call.</h2>
+                <p class="lede" data-aud-copy="home-routes-lede">We build the software your business runs on, we find and deliver the computers and equipment you need, and we keep both working when something breaks. That is the whole company &mdash; pick whichever sounds like you.</p>
             </div>
             <nav class="routes-grid" aria-labelledby="routes-title">
-                <a class="route route--lead" href="pages/website_builder.html#begin">
+                <a class="route route--lead" href="pages/website_builder.html#begin" data-aud="website">
                     <span class="route-mark" aria-hidden="true"><i class="fas fa-window-maximize"></i></span>
                     <span class="route-body">
                         <span class="route-label">A website</span>
@@ -222,7 +224,7 @@
                     </span>
                     <span class="route-cue" aria-hidden="true"></span>
                 </a>
-                <a class="route route--lead" href="pages/custom_websites.html#what-we-build">
+                <a class="route route--lead" href="pages/custom_websites.html#what-we-build" data-aud="software">
                     <span class="route-mark" aria-hidden="true"><i class="fas fa-laptop-code"></i></span>
                     <span class="route-body">
                         <span class="route-label">Software for my business</span>
@@ -230,7 +232,7 @@
                     </span>
                     <span class="route-cue" aria-hidden="true"></span>
                 </a>
-                <a class="route" href="pages/hospitality_builder.html#begin">
+                <a class="route" href="pages/hospitality_builder.html#begin" data-aud="hospitality">
                     <span class="route-mark" aria-hidden="true"><i class="fas fa-hotel"></i></span>
                     <span class="route-body">
                         <span class="route-label">A hotel or lodge system</span>
@@ -238,19 +240,47 @@
                     </span>
                     <span class="route-cue" aria-hidden="true"></span>
                 </a>
-                <a class="route" href="pages/hardware_sourcing.html#categories">
+                <a class="route" href="pages/hardware_sourcing.html#categories" data-aud="hardware gaming">
                     <span class="route-mark" aria-hidden="true"><i class="fas fa-boxes-stacked"></i></span>
                     <span class="route-body">
-                        <span class="route-label">Computers or equipment</span>
-                        <span class="route-desc">Found, bought and delivered to you.</span>
+                        <span class="route-label" data-aud-copy="route-equipment-label">Computers or equipment</span>
+                        <span class="route-desc" data-aud-copy="route-equipment-desc">Found, bought and delivered to you.</span>
                     </span>
                     <span class="route-cue" aria-hidden="true"></span>
                 </a>
-                <a class="route" href="pages/it_support.html#support-services">
+                <a class="route" href="pages/it_support.html#support-services" data-aud="support">
                     <span class="route-mark" aria-hidden="true"><i class="fas fa-life-ring"></i></span>
                     <span class="route-body">
                         <span class="route-label">Something keeps breaking</span>
                         <span class="route-desc">A person who knows your setup.</span>
+                    </span>
+                    <span class="route-cue" aria-hidden="true"></span>
+                </a>
+                <!-- Persona-only routes (data-aud-only): hidden until a visitor has said
+                     who they are in the "What brings you here?" chooser, so the band
+                     still offers two or three real destinations once it has been
+                     narrowed to one capability. js/audience.js deals the spans. -->
+                <a class="route" href="pages/custom_websites.html#projects" data-aud-only="hospitality software website">
+                    <span class="route-mark" aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                    <span class="route-body">
+                        <span class="route-label">See systems we have delivered</span>
+                        <span class="route-desc">Two hotels in Malawi, running on software we built.</span>
+                    </span>
+                    <span class="route-cue" aria-hidden="true"></span>
+                </a>
+                <a class="route" href="pages/hardware_sourcing.html#contact" data-aud-only="hardware gaming">
+                    <span class="route-mark" aria-hidden="true"><i class="fas fa-pen-to-square"></i></span>
+                    <span class="route-body">
+                        <span class="route-label">Ask for a specific item</span>
+                        <span class="route-desc">Name it and your budget &mdash; we come back with one total.</span>
+                    </span>
+                    <span class="route-cue" aria-hidden="true"></span>
+                </a>
+                <a class="route" href="get-started.html#booking" data-aud-only="support">
+                    <span class="route-mark" aria-hidden="true"><i class="fas fa-calendar-check"></i></span>
+                    <span class="route-body">
+                        <span class="route-label">Book a call</span>
+                        <span class="route-desc">Talk it through with the person who will fix it.</span>
                     </span>
                     <span class="route-cue" aria-hidden="true"></span>
                 </a>
@@ -263,7 +293,7 @@
     </section>
 
     <section id="services" class="section services" aria-labelledby="services-title" data-blocks="settle-side">
-        <div class="rail"><div class="chapter-head"><span class="eyebrow">Capabilities</span><h2 id="services-title">Build, Source, Support.</h2><p class="lede">The same three things in detail — what each one covers, and the problem it is usually bought to solve. Take one or take all three; it is the same team either way.</p></div><div class="grid services-grid"><div class="block block--7 block--graphite block--interactive service-card capability capability--lead" data-target="pages/custom_websites.html#tell-us" data-cursor-label="Tell us what you're trying to automate" role="link" tabindex="0" aria-label="Build — we build the software your business runs on. Tell us what you are trying to automate"><span class="mark" aria-hidden="true"><i class="fas fa-laptop-code"></i></span><div class="block__body"><span class="capability-index">01</span><h3>The booking spreadsheet has quietly become a second job.</h3><p class="capability-lede"><b>Build.</b> We build the software your business runs on — booking systems, internal tools, customer-facing apps — so the job that eats a day a week becomes something the software does instead.</p><ul class="list"><li>Custom web apps, internal tools and dashboards</li><li>Multi-tenant products with user accounts and secure logins</li><li>Business websites when that is genuinely the right answer</li></ul><span class="card-cue">Tell us what you&rsquo;re trying to automate <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div><div class="block block--5 block--interactive service-card capability" data-target="pages/hardware_sourcing.html#contact" data-cursor-label="Tell us what you need to source" role="link" tabindex="0" aria-label="Source — we find, buy and deliver the computers and equipment you need. Tell us what you need to source"><span class="mark" aria-hidden="true"><i class="fas fa-boxes-stacked"></i></span><div class="block__body"><span class="capability-index">02</span><h3>The gear you need is out of stock, or it will not ship to you.</h3><p class="capability-lede"><b>Source.</b> We find, buy and deliver the computers and equipment you need, wherever you are — including the things that are out of stock locally or will not ship to you directly.</p><ul class="list"><li>Laptops, desktops and gaming PCs</li><li>Monitors, mice, keyboards and controllers</li><li>Local-friendly payment on international orders</li></ul><span class="card-cue">Tell us what you need to source <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div><div class="block block--5 block--interactive service-card capability" data-target="pages/it_support.html#tell-us" data-cursor-label="Tell us what keeps breaking" role="link" tabindex="0" aria-label="Support — we keep it working, with fixes, setups and a person on the phone. Tell us what keeps breaking"><span class="mark" aria-hidden="true"><i class="fas fa-life-ring"></i></span><div class="block__body"><span class="capability-index">03</span><h3>Something breaks, and there is nobody to call who actually knows your setup.</h3><p class="capability-lede"><b>Support.</b> We keep it working — fixes, setups and a person on the phone when it breaks. The everyday faults that stop a working day, sorted, mostly over a call.</p><ul class="list"><li>Device setup, migration and troubleshooting</li><li>Passwords, email, files and software</li><li>Backups, lost files and everyday security</li></ul><span class="card-cue">Tell us what keeps breaking <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div></div></div>
+        <div class="rail"><div class="chapter-head"><span class="eyebrow">Capabilities</span><h2 id="services-title" data-aud-copy="home-services-title">Build, Source, Support.</h2><p class="lede" data-aud-copy="home-services-lede">The same three things in detail — what each one covers, and the problem it is usually bought to solve. Take one or take all three; it is the same team either way.</p></div><div class="grid services-grid"><div class="block block--7 block--graphite block--interactive service-card capability capability--lead" data-aud="software website hospitality" data-target="pages/custom_websites.html#tell-us" data-cursor-label="Tell us what you're trying to automate" role="link" tabindex="0" aria-label="Build — we build the software your business runs on. Tell us what you are trying to automate"><span class="mark" aria-hidden="true"><i class="fas fa-laptop-code"></i></span><div class="block__body"><span class="capability-index">01</span><h3>The booking spreadsheet has quietly become a second job.</h3><p class="capability-lede"><b>Build.</b> We build the software your business runs on — booking systems, internal tools, customer-facing apps — so the job that eats a day a week becomes something the software does instead.</p><ul class="list"><li>Custom web apps, internal tools and dashboards</li><li>Multi-tenant products with user accounts and secure logins</li><li>Business websites when that is genuinely the right answer</li></ul><span class="card-cue">Tell us what you&rsquo;re trying to automate <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div><div class="block block--5 block--interactive service-card capability" data-aud="hardware gaming" data-target="pages/hardware_sourcing.html#contact" data-cursor-label="Tell us what you need to source" role="link" tabindex="0" aria-label="Source — we find, buy and deliver the computers and equipment you need. Tell us what you need to source"><span class="mark" aria-hidden="true"><i class="fas fa-boxes-stacked"></i></span><div class="block__body"><span class="capability-index">02</span><h3>The gear you need is out of stock, or it will not ship to you.</h3><p class="capability-lede"><b>Source.</b> We find, buy and deliver the computers and equipment you need, wherever you are — including the things that are out of stock locally or will not ship to you directly.</p><ul class="list"><li>Laptops, desktops and gaming PCs</li><li>Monitors, mice, keyboards and controllers</li><li>Local-friendly payment on international orders</li></ul><span class="card-cue">Tell us what you need to source <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div><div class="block block--5 block--interactive service-card capability" data-aud="support" data-target="pages/it_support.html#tell-us" data-cursor-label="Tell us what keeps breaking" role="link" tabindex="0" aria-label="Support — we keep it working, with fixes, setups and a person on the phone. Tell us what keeps breaking"><span class="mark" aria-hidden="true"><i class="fas fa-life-ring"></i></span><div class="block__body"><span class="capability-index">03</span><h3>Something breaks, and there is nobody to call who actually knows your setup.</h3><p class="capability-lede"><b>Support.</b> We keep it working — fixes, setups and a person on the phone when it breaks. The everyday faults that stop a working day, sorted, mostly over a call.</p><ul class="list"><li>Device setup, migration and troubleshooting</li><li>Passwords, email, files and software</li><li>Backups, lost files and everyday security</li></ul><span class="card-cue">Tell us what keeps breaking <i class="fas fa-arrow-right" aria-hidden="true"></i></span></div></div></div></div>
     </section>
 
     <!-- ================= REAL WORK — delivered project proof =================
@@ -284,7 +314,7 @@
          dark moments without stacking them.
 
          data-blocks-pace="calm": one group settle, no per-card stagger. -->
-    <section id="proof" class="section section--stone" data-blocks="settle-up" data-blocks-pace="calm">
+    <section id="proof" class="section section--stone" data-blocks="settle-up" data-blocks-pace="calm" data-aud="software website hospitality">
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">Real work</span>
@@ -438,7 +468,7 @@
                  back to "about-grid", and (3) restore the founder kicker in .about-kicker.
                  Asset kept at images/founder.png; styles kept in css/about_section.css.
             <div class="about-media about-media--portrait"><img src="images/founder.png" alt="Founder portrait, ProManaged IT" loading="lazy" decoding="async" width="800" height="800"></div>
-            --><div class="about-story"><span class="about-kicker">Independent · Ireland-registered</span><h3>Built for people who want the answer, not another layer.</h3><p>ProManaged IT grew from a practical belief: useful technology should make work simpler, not give people another system to manage. We are a small, independent studio — the person who scopes your work is the person who builds it and the person who answers when you need something.</p><p>That means building what genuinely needs to be built, sourcing what is better bought, and staying on hand when the everyday things stop working.</p><p>We are registered in Ireland and work remotely across borders — our delivered systems, so far, are for hotels in Malawi.</p><div class="about-details"><span><i class="fas fa-cubes" aria-hidden="true"></i> Build</span><span><i class="fas fa-truck-ramp-box" aria-hidden="true"></i> Source</span><span><i class="fas fa-life-ring" aria-hidden="true"></i> Support</span></div></div></div></div></section>
+            --><div class="about-story"><span class="about-kicker">Independent · Ireland-registered</span><h3>Built for people who want the answer, not another layer.</h3><p>ProManaged IT grew from a practical belief: useful technology should make work simpler, not give people another system to manage. We are a small, independent studio — the person who scopes your work is the person who builds it and the person who answers when you need something.</p><p>That means building what genuinely needs to be built, sourcing what is better bought, and staying on hand when the everyday things stop working.</p><p>We are registered in Ireland and work remotely across borders — our delivered systems, so far, are for hotels in Malawi.</p><div class="about-details"><span data-aud="software website hospitality"><i class="fas fa-cubes" aria-hidden="true"></i> Build</span><span data-aud="hardware gaming"><i class="fas fa-truck-ramp-box" aria-hidden="true"></i> Source</span><span data-aud="support"><i class="fas fa-life-ring" aria-hidden="true"></i> Support</span></div></div></div></div></section>
 
     <!-- ================= TRUST, second beat =================
          The three claims that answer "why trust them". They used to close the
@@ -458,11 +488,11 @@
          Mission and vision are kept, but condensed into supporting beats beside it —
          philosophy supports the explanation rather than standing in for it. The id is
          unchanged because the navigation panel and the footer both link to it. -->
-    <section id="mission-vision" class="section section--stone mission-vision" data-blocks="settle-side" data-blocks-pace="calm"><div class="rail"><div class="grid mission-grid"><div class="block block--7 block--earth mission-pane mission-pane--lead"><span class="eyebrow">The working day, after</span><h2>Nobody is chasing a workaround by Tuesday.</h2><p class="lede">The booking goes straight into the system instead of a notebook. The report that used to eat an afternoon runs itself. When something does look wrong, one person already knows about it — and calls you, instead of you opening a ticket and waiting.</p><div class="mission-cta"><a href="get-started.html#describe" class="btn primary">Start a project</a><a href="learn_more.html#method" class="mission-cta-link">Not ready yet? See how we work <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div></div><div class="block block--5 block--bare mission-pane"><span class="eyebrow">Why we work this way</span><p class="mission-beat"><b>Our mission</b> — make dependable technology feel attainable, without the overhead of an agency.</p><p class="mission-beat"><b>Our vision</b> — one trusted technology partner for software, equipment and everyday support.</p></div></div></div></section>
+    <section id="mission-vision" class="section section--stone mission-vision" data-blocks="settle-side" data-blocks-pace="calm"><div class="rail"><div class="grid mission-grid"><div class="block block--7 block--earth mission-pane mission-pane--lead"><span class="eyebrow" data-aud-copy="home-desire-eyebrow">The working day, after</span><h2 data-aud-copy="home-desire-title">Nobody is chasing a workaround by Tuesday.</h2><p class="lede" data-aud-copy="home-desire-lede">The booking goes straight into the system instead of a notebook. The report that used to eat an afternoon runs itself. When something does look wrong, one person already knows about it — and calls you, instead of you opening a ticket and waiting.</p><div class="mission-cta"><a href="get-started.html#describe" class="btn primary" data-aud-copy="home-desire-cta">Start a project</a><a href="learn_more.html#method" class="mission-cta-link">Not ready yet? See how we work <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div></div><div class="block block--5 block--bare mission-pane"><span class="eyebrow">Why we work this way</span><p class="mission-beat"><b>Our mission</b> — make dependable technology feel attainable, without the overhead of an agency.</p><p class="mission-beat"><b>Our vision</b> — one trusted technology partner for software, equipment and everyday support.</p></div></div></div></section>
 
     <!-- ACTION — the quietest chapter on the page. Calm pace per the §2B intensity
          map: the contact block settles once and stops. -->
-    <section id="contact" class="section contact-section section--ivory" data-blocks="scale-in" data-blocks-pace="calm"><div class="rail"><div class="contact-grid contact-grid--closing"><div class="contact-invite"><span class="eyebrow">Start a conversation</span><h2>Bring us the problem.</h2><p class="lede">Tell us what is getting in the way. We will help you work out what should happen next.</p><div class="hero-buttons"><a href="get-started.html#describe" class="btn primary">Start a project</a><a href="mailto:info@promanaged-it.com" class="btn secondary">Email ProManaged IT</a></div></div><div class="contact-routes"><span class="contact-routes-label">Or go straight to</span><ul class="contact-direct"><li><a href="get-started.html#booking"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book a call</a></li><li><a href="pages/custom_websites.html#what-we-build"><i class="fas fa-laptop-code" aria-hidden="true"></i>Software &amp; web apps</a></li><li><a href="pages/hardware_sourcing.html#categories"><i class="fas fa-boxes-stacked" aria-hidden="true"></i>Computer &amp; gaming gear</a></li><li><a href="pages/it_support.html#support-services"><i class="fas fa-life-ring" aria-hidden="true"></i>IT support</a></li><li><a href="learn_more.html#method"><i class="fas fa-compass-drafting" aria-hidden="true"></i>How we work</a></li></ul></div></div></div></section>
+    <section id="contact" class="section contact-section section--ivory" data-blocks="scale-in" data-blocks-pace="calm"><div class="rail"><div class="contact-grid contact-grid--closing"><div class="contact-invite"><span class="eyebrow">Start a conversation</span><h2>Bring us the problem.</h2><p class="lede">Tell us what is getting in the way. We will help you work out what should happen next.</p><div class="hero-buttons"><a href="get-started.html#describe" class="btn primary" data-aud-copy="home-contact-cta">Start a project</a><a href="mailto:info@promanaged-it.com" class="btn secondary">Email ProManaged IT</a></div></div><div class="contact-routes"><span class="contact-routes-label">Or go straight to</span><ul class="contact-direct"><li><a href="get-started.html#booking"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book a call</a></li><li data-aud="software website hospitality"><a href="pages/custom_websites.html#what-we-build"><i class="fas fa-laptop-code" aria-hidden="true"></i>Software &amp; web apps</a></li><li data-aud="hardware gaming"><a href="pages/hardware_sourcing.html#categories"><i class="fas fa-boxes-stacked" aria-hidden="true"></i>Computer &amp; gaming gear</a></li><li data-aud="support"><a href="pages/it_support.html#support-services"><i class="fas fa-life-ring" aria-hidden="true"></i>IT support</a></li><li><a href="learn_more.html#method"><i class="fas fa-compass-drafting" aria-hidden="true"></i>How we work</a></li></ul></div></div></div></section>
 
     <!-- ================= FOOTER ================= -->
     <div id="footer-section">
@@ -488,9 +518,9 @@
                         <li><a href="index.html#home">Home</a></li>
                         <li><a href="index.html#services">Services</a></li>
                         <li><a href="index.html#about">About</a></li>
-                        <li><a href="pages/custom_websites.html">Build</a></li>
-                        <li><a href="pages/hardware_sourcing.html">Source</a></li>
-                        <li><a href="pages/it_support.html">Support</a></li>
+                        <li data-aud="software website hospitality"><a href="pages/custom_websites.html">Build</a></li>
+                        <li data-aud="hardware gaming"><a href="pages/hardware_sourcing.html">Source</a></li>
+                        <li data-aud="support"><a href="pages/it_support.html">Support</a></li>
                         <li><a href="learn_more.html">How we work</a></li>
                         <li><a href="get-started.html">Get started</a></li>
                         <li><a href="privacy_policy.html">Privacy Policy</a></li>

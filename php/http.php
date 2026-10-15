@@ -103,6 +103,27 @@ function pm_valid_email($value) {
     return $value;
 }
 
+/**
+ * The "What brings you here?" choice a visitor made on the site (js/audience.js),
+ * sent as an optional `audience` field with an enquiry so the notification says
+ * who is writing. Allow-listed: the browser sends an id, never a label, and
+ * anything unknown resolves to '' — which the mail templates simply omit.
+ * The ids here must match PERSONAS in js/audience.js (tests/audience.test.js).
+ */
+function pm_audience_label($value) {
+    $labels = [
+        'gamer'    => 'Gamer',
+        'hotel'    => 'Hotel or lodge owner',
+        'property' => 'Property owner',
+        'business' => 'Needs software for their business',
+        'website'  => 'Needs a website',
+        'hardware' => 'Looking for hardware',
+        'support'  => 'Needs IT support',
+    ];
+    $key = pm_clean_line($value, 20);
+    return isset($labels[$key]) ? $labels[$key] : '';
+}
+
 /** Best-effort client identifier for throttling. Never shown to the visitor. */
 function pm_client_key() {
     $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'unknown';

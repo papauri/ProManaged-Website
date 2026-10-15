@@ -16,6 +16,8 @@ $name    = pm_clean_line($_POST['name'] ?? '', 120);
 $email   = pm_valid_email($_POST['email'] ?? '');
 $phone   = pm_clean_line($_POST['phone'] ?? '', 60);
 $message = pm_clean_text($_POST['message'] ?? '', 5000);
+// Optional, allow-listed; '' when absent or unknown, and an empty row is omitted.
+$audience = pm_audience_label($_POST['audience'] ?? '');
 
 if ($name === '' || $email === '' || $phone === '' || $message === '') {
     pm_respond(400, false, 'Please complete the form and provide a valid email address.');
@@ -56,6 +58,7 @@ $internal = pm_internal_email(
     ],
     [
         'Request type' => $enquiryType,
+        'Visitor said' => $audience,
         'Received'     => $received,
     ],
     'Their message',

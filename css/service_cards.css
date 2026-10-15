@@ -307,8 +307,12 @@
    lines. */
 @media (min-width: 700px) {
     .route { grid-column: span 6 }
-    /* An odd card left at the end takes the row rather than half of one. */
-    .route:last-child:nth-child(odd) { grid-column: 1 / -1 }
+    /* An odd card left at the end takes the row rather than half of one. Counted
+       among the routes that are actually showing: the persona-only routes
+       ([data-aud-only], css/audience.css) are hidden with no visitor choice, and a
+       plain :last-child would count them. With a choice made, js/audience.js deals
+       the spans explicitly and these rules are overridden. */
+    .route:nth-last-child(1 of .route:not([data-aud-only])):nth-child(odd of .route:not([data-aud-only])) { grid-column: 1 / -1 }
 }
 
 /* The deliberate composition: the two leads share the first row, the three
@@ -317,7 +321,7 @@
 @media (min-width: 1024px) {
     .route { grid-column: span 4 }
     .route--lead { grid-column: span 6 }
-    .route:last-child:nth-child(odd) { grid-column: span 4 }
+    .route:nth-last-child(1 of .route:not([data-aud-only])):nth-child(odd of .route:not([data-aud-only])) { grid-column: span 4 }
 }
 
 /* The list only helps someone who can place themselves in it. This is the line for

@@ -201,8 +201,8 @@ check(!/why-(grid|lead|note)/.test(home),
 // The route band is now the page's plain-language explanation as well as its
 // signpost list, so it has to carry both a statement and the links.
 const routes = sectionBody(home, 'what-we-do');
-check(/<h2 id="routes-title">/.test(routes), 'homepage: the route band still names itself');
-check(/<p class="lede">/.test(routes), 'homepage: the route band carries the plain-language statement');
+check(/<h2 id="routes-title"[\s>]/.test(routes), 'homepage: the route band still names itself');
+check(/<p class="lede"[\s>]/.test(routes), 'homepage: the route band carries the plain-language statement');
 check((routes.match(/class="route[ "]/g) || []).length >= 5,
     'homepage: the route band still offers every route');
 check(routes.includes('routes-note'), 'homepage: the route band offers a way out for "none of these"');

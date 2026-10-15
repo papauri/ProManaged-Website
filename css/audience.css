@@ -1,0 +1,616 @@
+/* audience.css — "What brings you here?" and the tailored site.
+
+   Pairs with js/audience.js. The per-persona HIDING rules are not in this file: they
+   are generated from the persona list and injected in <head> by the script, so the
+   list lives in exactly one place. What is here:
+
+     - the no-choice default for persona-only extras;
+     - the layout repairs a filtered page needs (bento re-dealing, the route band,
+       the hero fragment pair, the navigation panel, surface rhythm);
+     - the chooser, the always-visible switch and the off-topic page notice.
+
+   Loaded LAST on every page so its repairs win ties with the page stylesheets.
+   Nothing here hides content a visitor without JavaScript would otherwise see. */
+
+/* ---------- Persona-only extras ----------
+   Shown only once a visitor has narrowed the site. With no JavaScript (and in
+   "everything" mode) html carries no data-pm-aud, so they never appear. */
+html:not([data-pm-aud]) [data-aud-only] { display: none !important }
+
+/* ---------- Bento, re-dealt ----------
+   js/audience.js writes data-aud-span on the visible cards of any grid it filtered.
+   The tablet stage simply stacks them; from 900px they take the dealt spans, and a
+   card designed to stand through two rows stops doing so, because the neighbour it
+   was standing beside may be gone. */
+@media (min-width: 600px) and (max-width: 899px) {
+    .grid[data-aud-recomposed] > [data-aud-span] { grid-column: 1 / -1 !important; grid-row: auto !important }
+}
+
+@media (min-width: 900px) {
+    .grid[data-aud-recomposed] > [data-aud-span] { grid-row: auto !important }
+    .grid[data-aud-recomposed] > [data-aud-span="5"] { grid-column: span 5 !important }
+    .grid[data-aud-recomposed] > [data-aud-span="7"] { grid-column: span 7 !important }
+    .grid[data-aud-recomposed] > [data-aud-span="12"] { grid-column: 1 / -1 !important }
+}
+
+/* The route band counts siblings with :nth-child in css/service_cards.css, which
+   counts hidden routes too; the script deals it explicitly instead. */
+@media (min-width: 700px) {
+    html .routes-grid > .route[data-aud-span-md="6"] { grid-column: span 6 }
+    html .routes-grid > .route[data-aud-span-md="12"] { grid-column: 1 / -1 }
+}
+
+@media (min-width: 1024px) {
+    html .routes-grid > .route[data-aud-span="4"] { grid-column: span 4 }
+    html .routes-grid > .route[data-aud-span="6"] { grid-column: span 6 }
+    html .routes-grid > .route[data-aud-span="12"] { grid-column: 1 / -1 }
+}
+
+/* The hero's two illustrative fragments: one left means one column, none left means
+   no empty grid holding a gap open. */
+.hero-project-grid[data-aud-count="1"] { grid-template-columns: minmax(0, 1fr) !important }
+.hero-project-grid[data-aud-count="0"] { display: none }
+
+/* ---------- The navigation panel, tailored ----------
+   With a persona chosen, exactly one capability tile survives (every persona maps to
+   one pillar). It takes the lead tile's role beside the primary action instead of
+   sitting in a half-empty service row. */
+html[data-pm-aud] .nav-bento > .nav-tile[data-aud] { grid-column: 1 / -1; min-height: 132px }
+html[data-pm-aud] .nav-bento > .nav-tile[data-aud] .nav-tile-label { font-size: var(--text-2xl) }
+html[data-pm-aud] .nav-bento > .nav-tile[data-aud] .nav-tile-desc { font-size: var(--text-sm) }
+html[data-pm-aud] .nav-bento > .nav-tile[data-aud]::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--color-accent-earth);
+}
+
+@media (min-width: 600px) {
+    html[data-pm-aud] .nav-bento > .nav-tile[data-aud] { grid-column: span 5; min-height: 200px }
+    html[data-pm-aud] .nav-bento > .nav-tile[data-aud] .nav-tile-label { font-size: var(--display-3) }
+}
+
+@media (min-width: 900px) {
+    html[data-pm-aud] .nav-bento > .nav-tile[data-aud] { grid-column: span 6; grid-row: span 2; min-height: 268px }
+}
+
+@media (min-width: 1600px) {
+    html[data-pm-aud] .nav-bento > .nav-tile[data-aud] { min-height: 320px }
+}
+
+.aud-nav-switch {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+    padding: var(--space-2) var(--space-4);
+    min-height: 40px;
+    border: 1px solid rgba(247, 243, 236, .28);
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--color-text-on-dark);
+    font: inherit;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background var(--transition), border-color var(--transition);
+}
+
+.aud-nav-switch i { color: var(--color-accent-earth-soft) }
+
+@media (hover: hover) {
+    .aud-nav-switch:hover { background: rgba(247, 243, 236, .09); border-color: rgba(247, 243, 236, .5) }
+}
+
+.aud-nav-switch:focus-visible { outline: 2px solid var(--color-text-on-dark); outline-offset: 3px }
+
+/* ---------- Surface rhythm repair ----------
+   Written by the script only when hiding a chapter put two light chapters of the
+   same surface side by side. Light surfaces only; graphite is never touched. */
+.section.aud-surface--paper { background: var(--color-paper) }
+.section.aud-surface--ivory { background: var(--color-ivory) }
+.section.aud-surface--stone { background: var(--color-stone) }
+
+/* ================= THE CHOOSER =================
+   A plain ivory surface, the site's own type and controls, and nothing else on
+   screen. On a first visit it is revealed by the load overture lifting, so it is
+   opaque from the start (.is-first); reopened later it fades in over the page. */
+.pm-aud-lock { overflow: hidden }
+
+.aud {
+    position: fixed;
+    inset: 0;
+    /* Above the navigation panel (2000), below the cursor layer (9000) so the pointer
+       still reads, and below the load overture (9500), which it waits for. */
+    z-index: 8500;
+    display: flex;
+    background: var(--color-ivory);
+    color: var(--color-text);
+    opacity: 0;
+    transition: opacity 260ms var(--ease-out);
+}
+
+.aud[hidden] { display: none }
+.aud.is-first,
+.aud.is-open { opacity: 1 }
+.aud.is-closing { opacity: 0; pointer-events: none; transition-duration: 300ms }
+
+.aud-scroll {
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.aud-rail {
+    width: 100%;
+    max-width: 1320px;
+    min-height: 100%;
+    margin-inline: auto;
+    padding: var(--space-4) var(--rail-pad) var(--space-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.aud-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+}
+
+.aud-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.aud-brand img { width: 28px; height: 28px }
+
+.aud-close {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    background: var(--color-paper);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform var(--transition), border-color var(--transition);
+}
+
+.aud-close span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 2px;
+    border-radius: var(--radius-full);
+    background: var(--color-text);
+}
+
+.aud-close span:first-child { transform: translate(-50%, -50%) rotate(45deg) }
+.aud-close span:last-child { transform: translate(-50%, -50%) rotate(-45deg) }
+
+@media (hover: hover) {
+    .aud-close:hover { transform: rotate(90deg); border-color: var(--color-text) }
+}
+
+.aud-close:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px }
+
+/* The first ask has no "current view" to keep, so the only way out is an answer —
+   and "Show me everything" is one of them. */
+.aud.is-first .aud-close { display: none }
+
+.aud-head { max-width: 46rem }
+
+.aud-eyebrow {
+    display: block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent-earth);
+    margin-bottom: var(--space-4);
+}
+
+.aud-title {
+    font-family: var(--font-display);
+    font-size: var(--display-2);
+    font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-display);
+    color: var(--color-text);
+}
+
+.aud-title:focus { outline: none }
+
+.aud-lede {
+    margin-top: var(--space-4);
+    font-size: var(--text-lg);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+    max-width: 48ch;
+}
+
+.aud-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-3);
+}
+
+.aud-opt-wrap { grid-column: 1 / -1; display: flex }
+
+.aud-opt {
+    position: relative;
+    flex: 1;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-4);
+    min-height: 72px;
+    padding: var(--space-4) var(--space-5);
+    text-align: left;
+    background: var(--color-paper);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-text);
+    font: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color var(--transition), transform var(--transition),
+        box-shadow var(--transition), background var(--transition);
+}
+
+@media (hover: hover) {
+    .aud-opt:hover {
+        border-color: var(--color-accent);
+        transform: translateY(-2px);
+        box-shadow: 0 14px 30px -18px rgba(28, 27, 25, .5);
+    }
+    .aud-opt:hover .aud-opt-cue { transform: rotate(45deg) translate(2px, -2px); opacity: 1 }
+}
+
+.aud-opt:active { transform: translateY(0) scale(.99) }
+.aud-opt:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px }
+
+.aud-opt-mark {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    background: var(--color-accent-earth-soft);
+    color: var(--color-accent-earth);
+    font-size: var(--text-lg);
+}
+
+.aud-opt-body { min-width: 0; display: flex; flex-direction: column; gap: 2px }
+
+.aud-opt-label {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.3;
+}
+
+.aud-opt-desc {
+    font-size: var(--text-sm);
+    line-height: 1.45;
+    color: var(--color-text-muted);
+}
+
+.aud-opt-cue {
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid var(--color-accent-earth);
+    border-right: 2px solid var(--color-accent-earth);
+    border-radius: 1px;
+    transform: rotate(45deg);
+    opacity: .85;
+    transition: transform var(--transition), opacity var(--transition);
+}
+
+/* The view in force, when the chooser is reopened. Earth rule, not a check mark:
+   it is a marker of where you are, not a form field. */
+.aud-opt-current {
+    display: none;
+    grid-column: 2;
+    justify-self: start;
+    padding: 2px var(--space-2);
+    border-radius: var(--radius-sm);
+    background: var(--color-accent-earth);
+    color: var(--color-text-on-dark);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+}
+
+.aud-opt.is-current { border-color: var(--color-accent-earth); box-shadow: inset 0 0 0 1px var(--color-accent-earth) }
+.aud-opt.is-current .aud-opt-current { display: inline-block }
+
+/* "Show me everything" is an answer, not a persona: quieter, dashed, no fill. */
+.aud-opt--all { background: transparent; border-style: dashed; border-color: var(--color-border-strong) }
+.aud-opt--all .aud-opt-mark { background: var(--color-stone); color: var(--color-text) }
+
+.aud-foot {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+    margin-top: auto;
+}
+
+.aud-foot i { color: var(--color-accent-earth) }
+
+@media (min-width: 560px) {
+    .aud-grid { gap: var(--grid-gap) }
+    .aud-opt { min-height: 84px; padding: var(--space-5) var(--space-6) }
+    .aud-opt-mark { width: 48px; height: 48px }
+    .aud-opt-label { font-size: var(--text-lg) }
+}
+
+/* Two columns once a description still reads on one or two lines. */
+@media (min-width: 760px) {
+    .aud-rail { gap: var(--space-10); padding-top: var(--space-6) }
+    .aud-opt-wrap { grid-column: span 6 }
+}
+
+/* Desktop: four cards across, two rows. The cards turn vertical — mark above,
+   words beneath, cue in the corner — so the screen reads as a set of choices rather
+   than a long form. */
+@media (min-width: 1100px) {
+    .aud-rail { justify-content: center; gap: var(--space-12) }
+    .aud-opt-wrap { grid-column: span 3 }
+    .aud-opt {
+        grid-template-columns: minmax(0, 1fr);
+        align-items: start;
+        align-content: start;
+        gap: var(--space-5);
+        min-height: 200px;
+        padding: var(--space-6);
+    }
+    .aud-opt-mark { width: 52px; height: 52px; font-size: var(--text-xl) }
+    .aud-opt-current { grid-column: 1; grid-row: 1; justify-self: end; align-self: start }
+    .aud-opt.is-current .aud-opt-mark { grid-row: 1 }
+    .aud-opt-cue { position: absolute; right: var(--space-6); bottom: var(--space-6) }
+    .aud-opt-body { padding-right: var(--space-6) }
+}
+
+/* ---------- Building Blocks, for the chooser ----------
+   The head lands first, the options settle in a short stagger behind it, the foot
+   last. Same easing family and tokens as the page; shorter than a chapter, because
+   somebody is waiting to answer. */
+.aud-head,
+.aud-opt-wrap,
+.aud-foot {
+    opacity: 0;
+    transform: translate3d(0, var(--block-travel), 0) scale(var(--block-scale));
+    transition:
+        opacity 520ms var(--ease-fade) var(--_d, 0ms),
+        transform 640ms var(--ease-settle) var(--_d, 0ms);
+}
+
+.aud-opt-wrap { --_d: calc(120ms + var(--i, 0) * 55ms) }
+.aud-foot { --_d: 620ms }
+
+.aud.is-open .aud-head,
+.aud.is-open .aud-opt-wrap,
+.aud.is-open .aud-foot {
+    opacity: 1;
+    transform: none;
+}
+
+/* ================= THE SWITCH =================
+   Always on screen, bottom-left — the corner the back-to-top control does not use.
+   A graphite control with the persona's mark on an earth chip: it reads as part of
+   the navigation system, not as a cookie banner. */
+.aud-pill {
+    position: fixed;
+    left: var(--space-4);
+    bottom: var(--space-4);
+    z-index: 950;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 48px;
+    max-width: calc(100vw - 2 * var(--space-4) - 64px);
+    padding: 5px var(--space-3) 5px 5px;
+    border: 1px solid rgba(247, 243, 236, .2);
+    border-radius: var(--radius-control);
+    background: var(--color-graphite);
+    color: var(--color-text-on-dark);
+    box-shadow: var(--shadow-lg);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform var(--transition), background var(--transition), opacity var(--transition), visibility 0s;
+}
+
+@media (hover: hover) {
+    .aud-pill:hover { transform: translateY(-2px); background: var(--color-graphite-soft) }
+    .aud-pill:hover .aud-pill-cue { background: var(--color-accent-earth) }
+}
+
+.aud-pill:active { transform: scale(.98) }
+.aud-pill:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px }
+
+.aud-pill-mark {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: var(--color-accent-earth);
+    color: var(--color-text-on-dark);
+    font-size: var(--text-sm);
+}
+
+.aud-pill-text { min-width: 0; display: flex; flex-direction: column; line-height: 1.2 }
+
+.aud-pill-kicker {
+    font-size: .6875rem;
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-text-on-dark-muted);
+}
+
+.aud-pill-label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.aud-pill-cue {
+    flex-shrink: 0;
+    padding: 3px var(--space-2);
+    border-radius: var(--radius-sm);
+    background: rgba(247, 243, 236, .12);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    transition: background var(--transition);
+}
+
+/* Out of the way while something else owns the screen. */
+.nav-is-open .aud-pill,
+.pm-aud-lock .aud-pill,
+.nav-is-open .aud-notice,
+.pm-aud-lock .aud-notice { opacity: 0; visibility: hidden; transition-delay: 0s, 0s, 0s, 0s }
+
+@media (min-width: 768px) {
+    .aud-pill { left: var(--space-6); bottom: var(--space-6) }
+}
+
+@media print {
+    .aud, .aud-pill, .aud-notice { display: none !important }
+}
+
+/* ---------- Off-topic notice ----------
+   Sits directly above the switch it refers to. Never blocks the page. */
+.aud-notice {
+    position: fixed;
+    left: var(--space-4);
+    bottom: calc(var(--space-4) + 48px + var(--space-3));
+    z-index: 950;
+    width: min(360px, calc(100vw - 2 * var(--space-4)));
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    background: var(--color-paper);
+    box-shadow: var(--shadow-lg);
+    color: var(--color-text);
+}
+
+.aud-notice-text { font-size: var(--text-sm); line-height: 1.5; color: var(--color-text-muted); padding-right: var(--space-6) }
+.aud-notice-text b { color: var(--color-text) }
+
+.aud-notice-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-4);
+    margin-top: var(--space-3);
+}
+
+.aud-notice-link {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-link);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.aud-notice-link:focus-visible,
+.aud-notice-close:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px }
+
+.aud-notice-close {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: var(--radius-full);
+    background: none;
+    color: var(--color-text-muted);
+    font-size: var(--text-xl);
+    line-height: 1;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .aud-notice { left: var(--space-6); bottom: calc(var(--space-6) + 48px + var(--space-3)) }
+}
+
+/* The usual case: inside the dark hero, above the eyebrow, in the page flow. */
+.aud-notice--inline {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    z-index: auto;
+    width: auto;
+    max-width: 38rem;
+    margin-bottom: var(--space-6);
+    padding: var(--space-3) var(--space-10) var(--space-3) var(--space-4);
+    border-color: rgba(247, 243, 236, .22);
+    border-radius: var(--radius-control);
+    background: rgba(247, 243, 236, .06);
+    box-shadow: none;
+    color: var(--color-text-on-dark);
+}
+
+.aud-notice--inline .aud-notice-text { color: var(--color-text-on-dark-muted); padding-right: 0 }
+.aud-notice--inline .aud-notice-text b { color: var(--color-text-on-dark) }
+.aud-notice--inline .aud-notice-actions { margin-top: var(--space-2) }
+.aud-notice--inline .aud-notice-link { color: var(--color-accent-earth-soft) }
+.aud-notice--inline .aud-notice-close { color: var(--color-text-on-dark-muted) }
+.aud-notice--inline .aud-notice-link:focus-visible,
+.aud-notice--inline .aud-notice-close:focus-visible { outline-color: var(--color-text-on-dark) }
+
+@media (min-width: 768px) {
+    .aud-notice--inline { left: auto; bottom: auto }
+}
+
+/* ---------- Reduced motion ----------
+   Final states immediately: no settle, no lift, no fade travel. */
+@media (prefers-reduced-motion: reduce) {
+    .aud,
+    .aud-head,
+    .aud-opt-wrap,
+    .aud-foot,
+    .aud-opt,
+    .aud-pill,
+    .aud-close { transition: none !important }
+    .aud-head,
+    .aud-opt-wrap,
+    .aud-foot { opacity: 1; transform: none }
+}

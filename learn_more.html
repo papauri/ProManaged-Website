@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/scroll_top.css">
     <link rel="stylesheet" href="css/evidence.css">
     <link rel="stylesheet" href="css/learn-more.css">
+    <link rel="stylesheet" href="css/audience.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
          before first paint. Without JS this class is never added, the hiding rule
          never matches, and all content renders normally.
@@ -33,6 +34,7 @@
          clears the class again and the choreography still runs. -->
     <script>(function(d,w){var r=d.documentElement;r.classList.add('js-on');w.pmHeroFailsafe=w.setTimeout(function(){r.classList.add('load-failsafe');},1200);})(document,window);</script>
     <script src="js/boot.js"></script>
+    <script src="js/audience.js"></script>
 </head>
 
 <body>
@@ -89,17 +91,17 @@
                         <span class="nav-tile-desc">Bring us the problem. Book a call and get a scope, a timeline and an honest answer.</span>
                         <span class="nav-tile-cue" aria-hidden="true">Book a call</span>
                     </a>
-                    <a class="nav-tile nav-tile--lead" href="pages/custom_websites.html">
+                    <a class="nav-tile nav-tile--lead" href="pages/custom_websites.html" data-aud="software website hospitality">
                         <span class="nav-tile-index">01 &middot; Build</span>
                         <span class="nav-tile-label">Software &amp; Web Apps</span>
                         <span class="nav-tile-desc">We build the software your business runs on &mdash; booking systems, internal tools, customer-facing apps.</span>
                     </a>
-                    <a class="nav-tile nav-tile--service" href="pages/hardware_sourcing.html">
+                    <a class="nav-tile nav-tile--service" href="pages/hardware_sourcing.html" data-aud="hardware gaming">
                         <span class="nav-tile-index">02 &middot; Source</span>
                         <span class="nav-tile-label">Hardware Sourcing</span>
                         <span class="nav-tile-desc">We find, buy and deliver the computers and equipment you need.</span>
                     </a>
-                    <a class="nav-tile nav-tile--service" href="pages/it_support.html">
+                    <a class="nav-tile nav-tile--service" href="pages/it_support.html" data-aud="support">
                         <span class="nav-tile-index">03 &middot; Support</span>
                         <span class="nav-tile-label">IT Support</span>
                         <span class="nav-tile-desc">We keep it working &mdash; fixes, setups and a person on the phone when it breaks.</span>
@@ -180,21 +182,21 @@
                 <p class="lede">You do not need an IT department, a procurement process or a technical background. Most of our clients have none of the three.</p>
             </div>
             <div class="grid audience-grid">
-                <div class="block block--5 audience-lead">
+                <div class="block block--5 audience-lead" data-aud="hardware gaming support">
                     <span class="mark" aria-hidden="true"><i class="fas fa-user"></i></span>
                     <div class="block__body">
                         <h3>Individuals and families</h3>
                         <p>Buying a first laptop, a work machine or a gaming rig — and wanting somebody honest to check the specification and handle the shipping before any money changes hands.</p>
                     </div>
                 </div>
-                <div class="block block--7 audience-satellite">
+                <div class="block block--7 audience-satellite" data-aud="software website hospitality hardware support">
                     <span class="mark" aria-hidden="true"><i class="fas fa-store"></i></span>
                     <div class="block__body">
                         <h3>Small teams and organisations</h3>
                         <p>Outgrowing spreadsheets and shared inboxes, needing a real system, someone to call when it breaks, or equipment that arrives without a logistics headache.</p>
                     </div>
                 </div>
-                <div class="block block--7 audience-satellite">
+                <div class="block block--7 audience-satellite" data-aud="software website">
                     <span class="mark" aria-hidden="true"><i class="fas fa-lightbulb"></i></span>
                     <div class="block__body">
                         <h3>Founders with an idea</h3>
@@ -295,7 +297,7 @@
                  work stack beside it rather than sitting in a row of identical cards.
                  Beneath, a 5/7 pair and then the graphite closer. -->
             <div class="grid">
-                <div class="block block--8 block--row block--tint block--tall">
+                <div class="block block--8 block--row block--tint block--tall" data-aud="software hospitality">
                     <div class="block__aside">
                         <span class="mark" aria-hidden="true"><i class="fas fa-laptop-code"></i></span>
                     </div>
@@ -304,7 +306,7 @@
                         <p>Booking systems, dashboards, order and inventory trackers, and the integrations that connect them to whatever you already use. Built around your workflow instead of forcing your workflow around a product.</p>
                     </div>
                 </div>
-                <div class="block block--4">
+                <div class="block block--4" data-aud="software">
                     <span class="mark" aria-hidden="true"><i class="fas fa-cloud"></i></span>
                     <div class="block__body">
                         <!-- The heading stays plain; the trade word belongs in the body
@@ -313,21 +315,21 @@
                         <p>Multi-tenant platforms from a first version through user accounts, secure logins and scale.</p>
                     </div>
                 </div>
-                <div class="block block--4">
+                <div class="block block--4" data-aud="website hospitality">
                     <span class="mark" aria-hidden="true"><i class="fas fa-window-maximize"></i></span>
                     <div class="block__body">
                         <h3>Business websites</h3>
                         <p>Fast, responsive sites with enquiry and booking flows, and a content setup you can manage yourself.</p>
                     </div>
                 </div>
-                <div class="block block--5">
+                <div class="block block--5" data-aud="hardware gaming">
                     <span class="mark" aria-hidden="true"><i class="fas fa-boxes-stacked"></i></span>
                     <div class="block__body">
                         <h3>Computer &amp; gaming equipment</h3>
                         <p>Laptops, gaming PCs, monitors, controllers and accessories — specified, bought from trusted suppliers, then shipped to you.</p>
                     </div>
                 </div>
-                <div class="block block--7 block--row">
+                <div class="block block--7 block--row" data-aud="support">
                     <div class="block__aside">
                         <span class="mark" aria-hidden="true"><i class="fas fa-life-ring"></i></span>
                     </div>
@@ -336,7 +338,7 @@
                         <p>New machines set up, passwords and email recovered, software installed, lost files found — the ordinary faults that stop a working day.</p>
                     </div>
                 </div>
-                <div class="block block--12 block--row block--graphite">
+                <div class="block block--12 block--row block--graphite" data-aud="support">
                     <div class="block__aside">
                         <span class="mark" aria-hidden="true"><i class="fas fa-headset"></i></span>
                     </div>
@@ -349,7 +351,7 @@
                      systems have shipped, pointing at the Build page where the
                      evidence lives. Kept deliberately smaller than the homepage and
                      software-page treatments. -->
-                <div class="block block--12 block--bare">
+                <div class="block block--12 block--bare" data-aud="software website hospitality">
                     <p>ProManaged has delivered hotel-management software for two businesses in Malawi, one part of the client work we deliver remotely — booking, availability and the everyday operations a hotel runs on. <a href="pages/custom_websites.html">See the systems on the Build page</a>.</p>
                 </div>
             </div>
@@ -431,9 +433,9 @@
                         <li><a href="index.html#home">Home</a></li>
                         <li><a href="index.html#services">Services</a></li>
                         <li><a href="index.html#about">About</a></li>
-                        <li><a href="pages/custom_websites.html">Build</a></li>
-                        <li><a href="pages/hardware_sourcing.html">Source</a></li>
-                        <li><a href="pages/it_support.html">Support</a></li>
+                        <li data-aud="software website hospitality"><a href="pages/custom_websites.html">Build</a></li>
+                        <li data-aud="hardware gaming"><a href="pages/hardware_sourcing.html">Source</a></li>
+                        <li data-aud="support"><a href="pages/it_support.html">Support</a></li>
                         <li><a href="learn_more.html">How we work</a></li>
                         <li><a href="get-started.html">Get started</a></li>
                         <li><a href="privacy_policy.html">Privacy Policy</a></li>

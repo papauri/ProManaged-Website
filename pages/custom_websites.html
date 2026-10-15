@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../css/evidence.css">
     <link rel="stylesheet" href="../css/project_proof.css">
     <link rel="stylesheet" href="../css/custom_websites.css">
+    <link rel="stylesheet" href="../css/audience.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
          before first paint. Without JS this class is never added, the hiding rule
          never matches, and all content renders normally.
@@ -34,9 +35,10 @@
          clears the class again and the choreography still runs. -->
     <script>(function(d,w){var r=d.documentElement;r.classList.add('js-on');w.pmHeroFailsafe=w.setTimeout(function(){r.classList.add('load-failsafe');},1200);})(document,window);</script>
     <script src="../js/boot.js"></script>
+    <script src="../js/audience.js"></script>
 </head>
 
-<body>
+<body data-aud-page="software website hospitality">
     <div id="header-section">
         <!-- Closed state of the navigation: a fixed rail with the control left, the
              wordmark centred and one persistent action right. Still no link bar —
@@ -90,17 +92,17 @@
                         <span class="nav-tile-desc">Bring us the problem. Book a call and get a scope, a timeline and an honest answer.</span>
                         <span class="nav-tile-cue" aria-hidden="true">Book a call</span>
                     </a>
-                    <a class="nav-tile nav-tile--lead" href="custom_websites.html">
+                    <a class="nav-tile nav-tile--lead" href="custom_websites.html" data-aud="software website hospitality">
                         <span class="nav-tile-index">01 &middot; Build</span>
                         <span class="nav-tile-label">Software &amp; Web Apps</span>
                         <span class="nav-tile-desc">We build the software your business runs on &mdash; booking systems, internal tools, customer-facing apps.</span>
                     </a>
-                    <a class="nav-tile nav-tile--service" href="hardware_sourcing.html">
+                    <a class="nav-tile nav-tile--service" href="hardware_sourcing.html" data-aud="hardware gaming">
                         <span class="nav-tile-index">02 &middot; Source</span>
                         <span class="nav-tile-label">Hardware Sourcing</span>
                         <span class="nav-tile-desc">We find, buy and deliver the computers and equipment you need.</span>
                     </a>
-                    <a class="nav-tile nav-tile--service" href="it_support.html">
+                    <a class="nav-tile nav-tile--service" href="it_support.html" data-aud="support">
                         <span class="nav-tile-index">03 &middot; Support</span>
                         <span class="nav-tile-label">IT Support</span>
                         <span class="nav-tile-desc">We keep it working &mdash; fixes, setups and a person on the phone when it breaks.</span>
@@ -232,7 +234,7 @@
             <!-- A pinwheel, not three rows: a wide banner, a tall block standing
                  beside it through both rows, then a second banner beneath. -->
             <div class="grid">
-                <div class="block block--8 block--row block--tint">
+                <div class="block block--8 block--row block--tint" data-aud="software hospitality">
                     <div class="block__aside">
                         <span class="mark" aria-hidden="true"><i class="fas fa-laptop-code"></i></span>
                     </div>
@@ -246,7 +248,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="block block--4 block--tall">
+                <div class="block block--4 block--tall" data-aud="software">
                     <span class="mark" aria-hidden="true"><i class="fas fa-cloud"></i></span>
                     <div class="block__body">
                         <!-- Plain heading, trade words in the supporting copy — the
@@ -264,7 +266,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="block block--8 block--row">
+                <div class="block block--8 block--row" data-aud="website">
                     <div class="block__aside">
                         <span class="mark" aria-hidden="true"><i class="fas fa-briefcase"></i></span>
                     </div>
@@ -372,7 +374,7 @@
          website rather than a hotel system. The hospitality builder below is the
          specialist follow-on. Neither is a navigation category — the bento panel
          is composed for exactly seven tiles. -->
-    <section id="website-builder" class="section" data-blocks="settle-side">
+    <section id="website-builder" class="section" data-blocks="settle-side" data-aud="website">
         <div class="rail">
             <div class="grid">
                 <div class="block block--7 block--bare">
@@ -402,7 +404,7 @@
          "what would mine look like". Deliberately NOT a new navigation category:
          the bento panel is composed for exactly seven tiles, and an eighth would
          crowd it — see .claude/HOSPITALITY_SYSTEM_BUILDER.md §3. -->
-    <section id="hospitality" class="section section--ivory" data-blocks="settle-side">
+    <section id="hospitality" class="section section--ivory" data-blocks="settle-side" data-aud="hospitality">
         <div class="rail">
             <div class="grid">
                 <div class="block block--7 block--bare">
@@ -539,9 +541,9 @@
                         <li><a href="../index.html#home">Home</a></li>
                         <li><a href="../index.html#services">Services</a></li>
                         <li><a href="../index.html#about">About</a></li>
-                        <li><a href="custom_websites.html">Build</a></li>
-                        <li><a href="hardware_sourcing.html">Source</a></li>
-                        <li><a href="it_support.html">Support</a></li>
+                        <li data-aud="software website hospitality"><a href="custom_websites.html">Build</a></li>
+                        <li data-aud="hardware gaming"><a href="hardware_sourcing.html">Source</a></li>
+                        <li data-aud="support"><a href="it_support.html">Support</a></li>
                         <li><a href="../learn_more.html">How we work</a></li>
                         <li><a href="../get-started.html">Get started</a></li>
                         <li><a href="../privacy_policy.html">Privacy Policy</a></li>

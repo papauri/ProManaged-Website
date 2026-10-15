@@ -124,6 +124,30 @@ Cards opt in automatically: the script tags `.grid > .block:not(.block--bare)` a
 
 **`data-cursor-calm`** on any container drops the cursor to two states inside it — control, or not — instead of four. It exists for dense interactive regions where constant frame/caret/link switching competes with the task; the hospitality builder's steps use it. Everywhere without the attribute is unchanged.
 
+### `js/audience.js`
+The "What brings you here?" layer (BUILD_PLAN §2C). Loaded synchronously in `<head>`
+straight after `js/boot.js` on every page, because it injects the per-persona hiding
+rules before the body is parsed (no flash for a returning visitor) and registers its
+DOMContentLoaded work before `js/main.js` measures motion groups and stages the hero.
+`PERSONAS` is the only place persona copy lives.
+
+Markup contract — the page declares, the script never knows page structure:
+- `data-aud="tokens"` — shown when the visitor's choice includes any token; shown to everyone with no choice or no JS.
+- `data-aud-only="tokens"` — the same, but hidden until a choice is made (persona-only extras).
+- `data-aud-copy="key"` — text/href replaced by the persona's copy for that key, restored on "everything".
+- `<body data-aud-page="tokens">` — the page's scope; off-scope visitors get an in-hero notice, never a blocked page.
+
+It also re-deals filtered `.grid` bento rows (`data-aud-span`), deals the homepage
+route band, filters booking `<option>`s by detaching them (iOS ignores hidden
+options), repairs light surface collisions (`aud-surface--*`), adds the optional
+`audience` field to `#contact-form` / `#booking-form`, and owns the chooser dialog,
+the bottom-left switch and the in-panel switch. Exposes `window.pmAudience`.
+
+### `css/audience.css`
+Loaded LAST on every page. The no-choice default for `data-aud-only`, the layout
+repairs a filtered page needs (re-dealt spans, route band, hero fragment pair,
+tailored navigation panel, surface repair), and the chooser / switch / notice.
+
 ### `js/mobile_phone_navbar.js`
 Owns mobile/bento navigation interaction, focus management, Escape handling, scroll lock and restoration.
 
@@ -213,8 +237,8 @@ attributes the server reads are identical), and it declares
 back to its original section-scoped lookup, so no other form on the site changed.
 
 
-- `php/contact.php` — contact submission.
-- `php/booking.php` — appointment submission.
+- `php/contact.php` — contact submission. Also reads the optional `audience` field (see `pm_audience_label()` in `php/http.php`).
+- `php/booking.php` — appointment submission. Same optional `audience` field.
 - `php/hospitality.php` — Hospitality System Builder enquiry. Its own endpoint because the payload is a structured configuration rather than a message. Reuses `http.php` and the `mailer.php` templates unchanged. The browser submits catalogue IDs only; every label a human reads is resolved server-side from an allow-list, and the fixed foundation is never read from the submission.
 - `php/hospitality_catalogue.php` — the server's catalogue and the pure functions that resolve a submission against it. Separate from the endpoint because the endpoint runs on include (it calls `pm_respond()`, which exits), so nothing in it could be tested without also sending mail.
 - `php/website.php` — Website Builder enquiry. Same shape and same trust model as the hospitality endpoint.
@@ -232,6 +256,12 @@ Plain scripts, no framework and no dependencies. Run them before any change to t
   href/src/data-target resolving to a real file, every `#fragment` resolving to a real id, and the
   landing contract (a "describe the problem" / "send a message" link must reach a section that
   actually has a free-text box; homepage routes and capability cards must carry a fragment).
+- `node tests/audience.test.js` — the tailored-site layer: persona catalogue shape, every persona href
+  resolving (page + fragment) and invitations-to-write landing on a textarea, copy keys used by
+  markup, markup tokens known, every page loading the layer in order, PHP allow-list in sync,
+  copy free of jargon/prices/unapproved names, and for every persona on every page: no stacked
+  graphite chapters, no same-surface neighbours after repair, exactly one navigation capability
+  tile, enough routes/cards/booking options left to act on.
 - `node tests/builder_flow.test.js` — the step-gate attribute contract on both builder
   pages (contiguous step numbers, every continue control advancing by exactly one, step 1
   declaring a requirement whose selectors exist, the outline mirroring the steps, nothing

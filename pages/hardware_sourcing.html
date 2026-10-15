@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../css/contact_section.css">
     <link rel="stylesheet" href="../css/evidence.css">
     <link rel="stylesheet" href="../css/hardware_sourcing.css">
+    <link rel="stylesheet" href="../css/audience.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
          before first paint. Without JS this class is never added, the hiding rule
          never matches, and all content renders normally.
@@ -34,9 +35,10 @@
          clears the class again and the choreography still runs. -->
     <script>(function(d,w){var r=d.documentElement;r.classList.add('js-on');w.pmHeroFailsafe=w.setTimeout(function(){r.classList.add('load-failsafe');},1200);})(document,window);</script>
     <script src="../js/boot.js"></script>
+    <script src="../js/audience.js"></script>
 </head>
 
-<body>
+<body data-aud-page="hardware gaming">
     <div id="header-section">
         <!-- Closed state of the navigation: a fixed rail with the control left, the
              wordmark centred and one persistent action right. Still no link bar —
@@ -90,17 +92,17 @@
                         <span class="nav-tile-desc">Bring us the problem. Book a call and get a scope, a timeline and an honest answer.</span>
                         <span class="nav-tile-cue" aria-hidden="true">Book a call</span>
                     </a>
-                    <a class="nav-tile nav-tile--lead" href="custom_websites.html">
+                    <a class="nav-tile nav-tile--lead" href="custom_websites.html" data-aud="software website hospitality">
                         <span class="nav-tile-index">01 &middot; Build</span>
                         <span class="nav-tile-label">Software &amp; Web Apps</span>
                         <span class="nav-tile-desc">We build the software your business runs on &mdash; booking systems, internal tools, customer-facing apps.</span>
                     </a>
-                    <a class="nav-tile nav-tile--service" href="hardware_sourcing.html">
+                    <a class="nav-tile nav-tile--service" href="hardware_sourcing.html" data-aud="hardware gaming">
                         <span class="nav-tile-index">02 &middot; Source</span>
                         <span class="nav-tile-label">Hardware Sourcing</span>
                         <span class="nav-tile-desc">We find, buy and deliver the computers and equipment you need.</span>
                     </a>
-                    <a class="nav-tile nav-tile--service" href="it_support.html">
+                    <a class="nav-tile nav-tile--service" href="it_support.html" data-aud="support">
                         <span class="nav-tile-index">03 &middot; Support</span>
                         <span class="nav-tile-label">IT Support</span>
                         <span class="nav-tile-desc">We keep it working &mdash; fixes, setups and a person on the phone when it breaks.</span>
@@ -136,13 +138,13 @@
             <div class="hero-rail rail" data-assemble>
                 <div class="hero-statement">
                     <span class="hero-eyebrow">Source</span>
-                    <h1 id="hero-title">You pick the gear. We handle everything after that.</h1>
+                    <h1 id="hero-title" data-aud-copy="source-hero-title">You pick the gear. We handle everything after that.</h1>
                     <!-- The canonical plain-language definition of Source (BUILD_PLAN
                          §2B). One sentence, so the 375x667 fold contract holds with the
                          primary CTA still on screen. -->
-                    <p id="hero-subtitle">We find, buy and deliver the computers and equipment you need — including the things nobody stocks locally.</p>
+                    <p id="hero-subtitle" data-aud-copy="source-hero-sub">We find, buy and deliver the computers and equipment you need — including the things nobody stocks locally.</p>
                     <div class="hero-buttons">
-                        <a href="#contact" class="btn primary" id="hero-get-started">Request equipment</a>
+                        <a href="#contact" class="btn primary" id="hero-get-started" data-aud-copy="source-hero-primary">Request equipment</a>
                         <a href="#categories" class="btn secondary" id="hero-learn-more">What we source</a>
                     </div>
                 </div>
@@ -387,8 +389,8 @@
         <div class="rail">
             <div class="chapter-head">
                 <span class="eyebrow">What we source</span>
-                <h2>If it plugs in, we can probably get it.</h2>
-                <p class="lede">Everyday computers, gaming gear and the accessories around them. This is consumer and enthusiast kit for individuals, families and small teams — not data-centre hardware. If what you want is not listed, ask anyway; the answer is usually yes.</p>
+                <h2 data-aud-copy="source-cat-title">If it plugs in, we can probably get it.</h2>
+                <p class="lede" data-aud-copy="source-cat-lede">Everyday computers, gaming gear and the accessories around them. This is consumer and enthusiast kit for individuals, families and small teams — not data-centre hardware. If what you want is not listed, ask anyway; the answer is usually yes.</p>
             </div>
             <!-- Four different row shapes rather than one repeated: a 7/5 opening with
                  the gaming block standing through both rows, a full banner, a 5/7
@@ -625,9 +627,9 @@
                         <li><a href="../index.html#home">Home</a></li>
                         <li><a href="../index.html#services">Services</a></li>
                         <li><a href="../index.html#about">About</a></li>
-                        <li><a href="custom_websites.html">Build</a></li>
-                        <li><a href="hardware_sourcing.html">Source</a></li>
-                        <li><a href="it_support.html">Support</a></li>
+                        <li data-aud="software website hospitality"><a href="custom_websites.html">Build</a></li>
+                        <li data-aud="hardware gaming"><a href="hardware_sourcing.html">Source</a></li>
+                        <li data-aud="support"><a href="it_support.html">Support</a></li>
                         <li><a href="../learn_more.html">How we work</a></li>
                         <li><a href="../get-started.html">Get started</a></li>
                         <li><a href="../privacy_policy.html">Privacy Policy</a></li>
