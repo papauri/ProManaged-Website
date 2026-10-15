@@ -77,23 +77,23 @@
             tokens: ['gaming'],
             pillar: 'Source',
             home: '/gaming',
-            formNote: 'Gaming gear? The gaming request asks for your platform and where it ships, so we can come back with one total straight away.',
-            lead: 'Gaming gear, found, bought and delivered. Everything else is tucked away.',
+            formNote: 'Gaming gear? The gaming request asks for your platform and where you are, so we can come back with one total straight away.',
+            lead: 'Gaming gear, found and bought for you. Everything else is tucked away.',
             cta: {
                 text: 'Request gaming gear', short: 'Request gear',
                 href: '/gaming#request',
-                desc: 'Name the gear and your budget. We come back with options and one total, delivered.',
+                desc: 'Name the gear and your budget. We come back with options and one total, ready to collect or brought to you.',
                 cue: 'Send a request'
             },
             proof: ['Gaming PCs &amp; consoles', 'Monitors, headsets &amp; controllers', 'One total price, before you pay'],
             copy: {
                 'home-hero-eyebrow': 'Gaming gear',
-                'home-hero-title': 'Gaming gear, found and delivered.',
-                'home-hero-sub': 'Gaming PCs, consoles, monitors and headsets — found, bought and shipped to your door.',
+                'home-hero-title': 'Gaming gear, sourced for you.',
+                'home-hero-sub': 'Gaming PCs, consoles, monitors and headsets — found and bought for you, ready to collect locally or brought to your doorstep.',
                 'home-hero-figure': 'One',
-                'home-hero-figure-label': 'person who finds it, orders it and ships it — and answers when you ask where it is.',
+                'home-hero-figure-label': 'person who finds it, orders it and brings it in — and answers when you ask where it is.',
                 'home-routes-title': 'Straight to the gear.',
-                'home-routes-lede': 'Gaming PCs, consoles and the kit around them, bought from trusted suppliers and delivered — including the things that sell out everywhere first.',
+                'home-routes-lede': 'Gaming PCs, consoles and the kit around them, bought from trusted suppliers and brought in — including the things that sell out everywhere first.',
                 'route-equipment-link': { href: '/gaming#gear' },
                 'route-ask-link': { href: '/gaming#request' },
                 'home-card-source': { target: '/gaming#request' },
@@ -101,7 +101,7 @@
                     href: '/gaming',
                     html: '<span class="nav-tile-index">Your page</span>'
                         + '<span class="nav-tile-label">Gaming gear</span>'
-                        + '<span class="nav-tile-desc">PCs, consoles, monitors and headsets \u2014 one total, delivered.</span>'
+                        + '<span class="nav-tile-desc">PCs, consoles, monitors and headsets \u2014 one total, ready to collect or brought to you.</span>'
                 },
                 'route-equipment-label': 'Gaming gear',
                 'route-equipment-desc': 'PCs, consoles, controllers and headsets.',
@@ -109,7 +109,7 @@
                 'home-desire-title': 'The box arrives, and it is the right one.',
                 'home-desire-lede': 'The spec was checked against what you actually play. The total was agreed before you paid. Nobody had to argue with a courier — and if anything looks wrong, you message the person who placed the order.',
                 'source-hero-title': 'You pick the rig. We handle everything after that.',
-                'source-hero-sub': 'Gaming PCs, consoles, monitors and headsets — found, bought and delivered, including the things nobody stocks locally.',
+                'source-hero-sub': 'Gaming PCs, consoles, monitors and headsets — found and bought for you, including the things nobody stocks locally.',
                 'source-cat-title': 'Everything a setup needs.',
                 'source-cat-lede': 'Rigs, consoles, screens and the gear around them — consumer and enthusiast kit from trusted suppliers. If what you want is not listed, ask anyway; the answer is usually yes.'
             }
@@ -246,13 +246,13 @@
             id: 'hardware',
             label: 'I’m looking for hardware',
             short: 'Hardware',
-            desc: 'Laptops, desktops, monitors and accessories, delivered.',
+            desc: 'Laptops, desktops, monitors and accessories, sourced for you.',
             icon: 'fa-boxes-stacked',
             tokens: ['hardware'],
             pillar: 'Source',
             home: '/hardware',
             formNote: 'Looking for hardware? The equipment request asks for quantity, budget and destination, so we can quote a total straight away.',
-            lead: 'Computers and equipment, found, bought and delivered. Everything else is tucked away.',
+            lead: 'Computers and equipment, found and bought for you. Everything else is tucked away.',
             cta: {
                 text: 'Request equipment', short: 'Request equipment',
                 href: '/hardware#contact',
@@ -262,7 +262,7 @@
             proof: ['Laptops, desktops &amp; monitors', 'One total price, before you pay', 'Pay in the currency you hold'],
             copy: {
                 'home-hero-eyebrow': 'Computers &amp; equipment',
-                'home-hero-title': 'The right equipment, delivered.',
+                'home-hero-title': 'The right equipment, sourced for you.',
                 'home-hero-sub': 'Laptops, desktops, monitors and accessories — including the things nobody stocks locally.',
                 'home-hero-figure': 'One',
                 'home-hero-figure-label': 'total for hardware, freight and handling — agreed before you commit, not discovered afterwards.',

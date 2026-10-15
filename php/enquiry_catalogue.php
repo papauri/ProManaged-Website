@@ -35,8 +35,8 @@ function pm_enquiry_forms() {
             'title'   => 'Gaming gear request',
             'confirm' => 'Your gaming gear request is with us',
             'next'    => 'Come back with options and ONE total — gear, freight and handling — before anything is ordered. Check the spec against what they play.',
-            'expect'  => 'We will come back with options and one total for the gear, delivered, before anything is ordered. Nothing is bought without your go-ahead.',
-            'success' => 'Thanks — your gaming gear request is with us. We will come back with options and one total, delivered.',
+            'expect'  => 'We will come back with options and one total for the gear before anything is ordered — then you collect it locally, or we bring it to your doorstep. Nothing is bought without your go-ahead.',
+            'success' => 'Thanks — your gaming gear request is with us. We will come back with options and one total, ready to collect or brought to you.',
             'fields'  => [
                 'platform'    => ['label' => 'Platform', 'type' => 'choice', 'required' => true, 'options' => [
                     'pc'          => 'Gaming PC',
@@ -56,7 +56,7 @@ function pm_enquiry_forms() {
                     'stream'     => 'Streaming or capture gear',
                 ]],
                 'budget'      => ['label' => 'Rough budget', 'type' => 'line', 'max' => 80],
-                'destination' => ['label' => 'Deliver to', 'type' => 'line', 'max' => 120, 'required' => true],
+                'destination' => ['label' => 'Where they are', 'type' => 'line', 'max' => 120, 'required' => true],
                 'needed_by'   => ['label' => 'Needed by', 'type' => 'choice', 'options' => $when],
                 'setup'       => ['label' => 'Setup help', 'type' => 'choice', 'options' => [
                     'yes' => 'Yes — help me set it up over a call',
@@ -140,7 +140,7 @@ function pm_enquiry_forms() {
             'title'   => 'Hardware request',
             'confirm' => 'Your equipment request is with us',
             'next'    => 'Come back with options and one total — hardware, freight and handling — before anything is ordered, specified against what it is for.',
-            'expect'  => 'We will come back with options and a total price, delivered, before anything is ordered. Nothing is bought without your go-ahead.',
+            'expect'  => 'We will come back with options and a total price before anything is ordered — then you collect it locally, or we bring it to your doorstep. Nothing is bought without your go-ahead.',
             'success' => 'Thanks — your request is with us. We will come back with options and a total price.',
             'fields'  => [
                 'category'    => ['label' => 'Looking for', 'type' => 'multi', 'options' => [
@@ -159,7 +159,7 @@ function pm_enquiry_forms() {
                     'many' => 'More than 20',
                 ]],
                 'budget'      => ['label' => 'Rough budget', 'type' => 'line', 'max' => 80],
-                'destination' => ['label' => 'Deliver to', 'type' => 'line', 'max' => 120, 'required' => true],
+                'destination' => ['label' => 'Where they are', 'type' => 'line', 'max' => 120, 'required' => true],
                 'needed_by'   => ['label' => 'Needed by', 'type' => 'choice', 'options' => $when],
                 'message'     => ['label' => 'What they need', 'type' => 'text', 'max' => 4000, 'required' => true],
             ],
