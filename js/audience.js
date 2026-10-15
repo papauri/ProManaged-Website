@@ -49,7 +49,9 @@
     var root = d.documentElement;
 
     // Resolve the site root from this script's own URL, so the same copy works from
-    // index.html and from pages/*.html. Same technique as js/boot.js.
+    // index.html and from pages/*.html. Same technique as js/boot.js. Only assets
+    // use it: page links are root-absolute clean URLs (/gaming#request), served by
+    // the route table in .htaccess.
     var here = d.currentScript && d.currentScript.src;
     var BASE = here ? here.replace(/js\/audience\.js(?:[?#].*)?$/, '') : '';
 
@@ -74,12 +76,12 @@
             icon: 'fa-gamepad',
             tokens: ['gaming'],
             pillar: 'Source',
-            home: 'pages/gaming.html',
+            home: '/gaming',
             formNote: 'Gaming gear? The gaming request asks for your platform and where it ships, so we can come back with one total straight away.',
             lead: 'Gaming gear, found, bought and delivered. Everything else is tucked away.',
             cta: {
                 text: 'Request gaming gear', short: 'Request gear',
-                href: 'pages/gaming.html#request',
+                href: '/gaming#request',
                 desc: 'Name the gear and your budget. We come back with options and one total, delivered.',
                 cue: 'Send a request'
             },
@@ -92,11 +94,11 @@
                 'home-hero-figure-label': 'person who finds it, orders it and ships it — and answers when you ask where it is.',
                 'home-routes-title': 'Straight to the gear.',
                 'home-routes-lede': 'Gaming PCs, consoles and the kit around them, bought from trusted suppliers and delivered — including the things that sell out everywhere first.',
-                'route-equipment-link': { href: 'pages/gaming.html#gear' },
-                'route-ask-link': { href: 'pages/gaming.html#request' },
-                'home-card-source': { target: 'pages/gaming.html#request' },
+                'route-equipment-link': { href: '/gaming#gear' },
+                'route-ask-link': { href: '/gaming#request' },
+                'home-card-source': { target: '/gaming#request' },
                 'nav-source-tile': {
-                    href: 'pages/gaming.html',
+                    href: '/gaming',
                     html: '<span class="nav-tile-index">Your page</span>'
                         + '<span class="nav-tile-label">Gaming gear</span>'
                         + '<span class="nav-tile-desc">PCs, consoles, monitors and headsets \u2014 one total, delivered.</span>'
@@ -120,12 +122,12 @@
             icon: 'fa-hotel',
             tokens: ['hospitality', 'website'],
             pillar: 'Build',
-            home: 'pages/hospitality_builder.html',
+            home: '/hospitality',
             formNote: 'Running a hotel or lodge? The hotel system builder asks how your property works and sends us your outline \u2014 seven short steps.',
             lead: 'Hotel and lodge systems, and the website guests book from. Everything else is tucked away.',
             cta: {
                 text: 'Design your hotel system', short: 'Design your system',
-                href: 'pages/hospitality_builder.html#begin',
+                href: '/hospitality#begin',
                 desc: 'Seven short steps, about four minutes. What comes back is an outline of your system, not a price.',
                 cue: 'Start the builder'
             },
@@ -151,20 +153,20 @@
             icon: 'fa-building',
             tokens: ['software', 'website', 'hospitality'],
             pillar: 'Build',
-            home: 'pages/property.html',
+            home: '/property',
             formNote: 'A property owner? The property form asks what kind of property it is and what you want it to do, so the first reply is already useful.',
             lead: 'Websites and booking systems for the property you own. Everything else is tucked away.',
             cta: {
                 text: 'Tell us about your property', short: 'Your property',
-                href: 'pages/property.html#request',
+                href: '/property#request',
                 desc: 'Describe the property and what you want it to do. We come back with what it actually needs.',
                 cue: 'Describe it'
             },
             proof: ['A website for your property', 'Bookings and availability online', 'Built from real hotel systems'],
             copy: {
-                'home-card-build': { target: 'pages/property.html#request' },
+                'home-card-build': { target: '/property#request' },
                 'nav-build-tile': {
-                    href: 'pages/property.html',
+                    href: '/property',
                     html: '<span class="nav-tile-index">Your page</span>'
                         + '<span class="nav-tile-label">Your property</span>'
                         + '<span class="nav-tile-desc">A website, online bookings and a system for your records.</span>'
@@ -189,12 +191,12 @@
             icon: 'fa-laptop-code',
             tokens: ['software', 'website'],
             pillar: 'Build',
-            home: 'pages/custom_websites.html',
+            home: '/software',
             formNote: 'Software for your business? The software brief asks what you use today and what keeps going wrong \u2014 the start of a real scope.',
             lead: 'Software and websites for your business. Everything else is tucked away.',
             cta: {
                 text: 'Tell us what to build', short: 'Start a project',
-                href: 'pages/custom_websites.html#brief',
+                href: '/software#brief',
                 desc: 'Bring us the problem. We come back with a scope, a timeline and an honest answer.',
                 cue: 'Describe the problem'
             },
@@ -217,12 +219,12 @@
             icon: 'fa-window-maximize',
             tokens: ['website'],
             pillar: 'Build',
-            home: 'pages/website_builder.html',
+            home: '/websites',
             formNote: 'Need a website? The website builder shows you the shape of it in about three minutes, and sends us your outline at the end.',
             lead: 'Websites, designed with you and built by us. Everything else is tucked away.',
             cta: {
                 text: 'Design your website', short: 'Design your site',
-                href: 'pages/website_builder.html#begin',
+                href: '/websites#begin',
                 desc: 'Seven short steps, about three minutes. Nothing asks for your contact details until the end.',
                 cue: 'Start the builder'
             },
@@ -248,12 +250,12 @@
             icon: 'fa-boxes-stacked',
             tokens: ['hardware'],
             pillar: 'Source',
-            home: 'pages/hardware_sourcing.html',
+            home: '/hardware',
             formNote: 'Looking for hardware? The equipment request asks for quantity, budget and destination, so we can quote a total straight away.',
             lead: 'Computers and equipment, found, bought and delivered. Everything else is tucked away.',
             cta: {
                 text: 'Request equipment', short: 'Request equipment',
-                href: 'pages/hardware_sourcing.html#contact',
+                href: '/hardware#contact',
                 desc: 'Include your budget and where it needs to go. We come back with options and a total price.',
                 cue: 'Send a request'
             },
@@ -279,12 +281,12 @@
             icon: 'fa-life-ring',
             tokens: ['support'],
             pillar: 'Support',
-            home: 'pages/it_support.html',
+            home: '/support',
             formNote: 'Something broken? The support form asks which device and how urgent it is, so we can usually come back with a time for a call.',
             lead: 'Everyday IT support from a person who stays with the problem. Everything else is tucked away.',
             cta: {
                 text: 'Describe the problem', short: 'Get help',
-                href: 'pages/it_support.html#get-help',
+                href: '/support#get-help',
                 desc: 'Say what it is doing in whatever words you have. Working out what is wrong is the job.',
                 cue: 'Describe it'
             },
@@ -334,7 +336,7 @@
         c['home-services-lede'] = 'What it covers, and the problem it is usually bought to solve. Ask about anything else &mdash; it is the same team either way.';
         c['gs-direct'] = '<span class="persona-direct-kicker">Your request form</span>'
             + '<p>' + p.formNote + '</p>'
-            + '<a class="btn secondary" href="' + BASE + p.cta.href + '">' + p.cta.text + '</a>';
+            + '<a class="btn secondary" href="' + p.cta.href + '">' + p.cta.text + '</a>';
         c['nav-lead-eyebrow'] = 'Showing: ' + p.short;
         c['nav-lead-text'] = p.lead;
         c['nav-primary'] = {
@@ -359,8 +361,15 @@
     var fromUrl = null;
     try { fromUrl = new URLSearchParams(w.location.search).get('for'); } catch (e) { fromUrl = null; }
     var stored = readStored();
-    var current = byId[fromUrl] ? fromUrl : (byId[stored] ? stored : null);
+    // The visitor's own page: /gaming IS the gamer's page. Landing on one without
+    // having chosen yet (a shared link, a search result, the Facebook page) counts
+    // as the choice, so the chooser does not ask a question the URL already answered.
+    var herePath = (w.location.pathname || '/').replace(/\/+$/, '') || '/';
+    var fromPath = null;
+    PERSONAS.forEach(function (p) { if (p.home === herePath) fromPath = p.id; });
+    var current = byId[fromUrl] ? fromUrl : (byId[stored] ? stored : (fromPath || null));
     if (byId[fromUrl] && fromUrl !== stored) store(fromUrl);
+    else if (current === fromPath && fromPath && !byId[stored]) store(fromPath);
     var firstVisit = current === null;
 
     var setRoot = function (id) {
@@ -436,8 +445,8 @@
                 html = v;
             } else if (v) {
                 if (typeof v.html === 'string') html = v.html;
-                if (v.href) href = BASE + v.href;
-                if (v.target) target = BASE + v.target;
+                if (v.href) href = v.href;
+                if (v.target) target = v.target;
             }
             // Markup is only ever written when this key owns it: replaced when the
             // persona supplies html, restored once if it was replaced before. A key
@@ -605,6 +614,19 @@
             }
             input.value = p.id;
         });
+        // And which page it was sent from — the clean URL, so the notification
+        // reads "/gaming" and links straight back. Allow-listed server-side too
+        // (pm_page_label() in php/http.php).
+        d.querySelectorAll('form.intake').forEach(function (form) {
+            var page = form.querySelector('input[name="page"]');
+            if (!page) {
+                page = d.createElement('input');
+                page.type = 'hidden';
+                page.name = 'page';
+                form.appendChild(page);
+            }
+            page.value = herePath;
+        });
     };
 
     /* ---------- The always-visible switch ---------- */
@@ -683,7 +705,7 @@
         notice.innerHTML =
             '<p class="aud-notice-text">This page is outside <b>' + esc(p.short) + '</b>, so nothing on it is filtered.</p>' +
             '<div class="aud-notice-actions">' +
-            '<a class="aud-notice-link" href="' + BASE + (p.home || 'index.html') + '">Go to your page</a>' +
+            '<a class="aud-notice-link" href="' + (p.home || '/') + '">Go to your page</a>' +
             '<button type="button" class="aud-notice-link" data-aud-act="all">Show everything</button>' +
             '<button type="button" class="aud-notice-close" data-aud-act="dismiss" aria-label="Dismiss">&times;</button>' +
             '</div>';
@@ -794,7 +816,15 @@
         chooser.addEventListener('click', function (e) {
             var pick = e.target.closest('[data-aud-pick]');
             if (pick) {
-                choose(pick.getAttribute('data-aud-pick'));
+                var id = pick.getAttribute('data-aud-pick');
+                choose(id);
+                // A pick is a destination: "I'm a gamer" goes to /gaming. Picking
+                // "everything", or the page already being theirs, stays put.
+                var home = byId[id] && byId[id].home;
+                if (home && home !== herePath) {
+                    w.location.assign(home);
+                    return;
+                }
                 closeChooser();
                 return;
             }

@@ -27,6 +27,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
+const ROUTE_TABLE = require('./routes');
 const read = (p) => fs.readFileSync(path.join(ROOT, p), 'utf8');
 
 let failures = 0;
@@ -83,8 +84,15 @@ PAGES.forEach((page) => {
             continue;
         }
 
-        const target = path.posix.normalize(path.posix.join(dir.replace(/\\/g, '/'), rawPath));
-        if (!fs.existsSync(path.join(ROOT, target))) {
+        // Page links are clean root-absolute routes (/gaming) served by .htaccess;
+        // assets stay relative files. A relative link straight to a page file would
+        // bypass the clean URL, so for pages only routes count.
+        const route = rawPath.startsWith('/') ? ROUTE_TABLE.resolve(rawPath) : null;
+        const target = route
+            ? route.file
+            : path.posix.normalize(path.posix.join(dir.replace(/\\/g, '/'), rawPath));
+        if ((rawPath.startsWith('/') && !route) || (!route && target.endsWith('.html'))
+            || !fs.existsSync(path.join(ROOT, target))) {
             broken.push(raw);
             continue;
         }
@@ -123,9 +131,10 @@ PAGES.forEach((page) => {
         if (/^(mailto:|tel:)/.test(raw)) continue;
 
         const [rawPath, fragment] = raw.split('#');
+        const route = rawPath.startsWith('/') ? ROUTE_TABLE.resolve(rawPath) : null;
         const target = rawPath === ''
             ? page
-            : path.posix.normalize(path.posix.join(dir, rawPath));
+            : route ? route.file : path.posix.normalize(path.posix.join(dir, rawPath));
         if (!(target in FORM_PAGES)) continue;
 
         // The destination must have a free-text box, and the link must aim at the

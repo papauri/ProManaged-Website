@@ -1,12 +1,81 @@
-<Files .env>
-    Order allow,deny
-    Deny from all
-</Files>
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
 
-# Connect / Network Infrastructure became Support / IT Support. The old URL has been
-# live and may be linked or indexed, so it is redirected permanently rather than left
-# to 404. Safe to remove once the old path stops appearing in the access log.
+DirectoryIndex index.html
+# MultiViews would let /gaming match a gaming.* file on its own and fight the rules below.
+Options -MultiViews
+
+# ---------------------------------------------------------------------------
+# Clean URLs. Every public page has a short address of its own — /gaming,
+# /hardware, /support — and every request form has one too (/gaming/request).
+#
+# This file is the ROUTE TABLE. tests/routes.js reads the "Pages" rules below to
+# check every link on the site resolves, so a new page is not reachable until it
+# has a line here. Keep one rule per line, in the exact shape used.
+#
+# Links in the markup are root-absolute (/gaming#request). Assets stay relative:
+# a page served at /gaming still resolves ../css/ and css/ to /css/.
+# ---------------------------------------------------------------------------
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteRule ^pages/network_infrastructure\.html$ /pages/it_support.html [R=301,L]
+    RewriteBase /
+
+    # --- Old addresses: 301 to the clean one, query string kept. -------------
+    # THE_REQUEST is what the browser asked for, not the internal rewrite, so the
+    # clean URL rewriting back onto the same file can never loop.
+    RewriteCond %{THE_REQUEST} \s/+index\.html[\s?#]
+    RewriteRule ^ / [R=301,L]
+    RewriteCond %{THE_REQUEST} \s/+pages/gaming\.html[\s?#]
+    RewriteRule ^ /gaming [R=301,L]
+    RewriteCond %{THE_REQUEST} \s/+pages/property\.html[\s?#]
+    RewriteRule ^ /property [R=301,L]
+    RewriteCond %{THE_REQUEST} \s/+pages/hospitality_builder\.html[\s?#]
+    RewriteRule ^ /hospitality [R=301,L]
+    RewriteCond %{THE_REQUEST} \s/+pages/website_builder\.html[\s?#]
+    RewriteRule ^ /websites [R=301,L]
+    RewriteCond %{THE_REQUEST} \s/+pages/custom_websites\.html[\s?#]
+    RewriteRule ^ /software [R=301,L]
+    RewriteCond %{THE_REQUEST} \s/+pages/hardware_sourcing\.html[\s?#]
+    RewriteRule ^ /hardware [R=301,L]
+    RewriteCond %{THE_REQUEST} \s/+pages/it_support\.html[\s?#]
+    RewriteRule ^ /support [R=301,L]
+    RewriteCond %{THE_REQUEST} \s/+get-started\.html[\s?#]
+    RewriteRule ^ /get-started [R=301,L]
+    RewriteCond %{THE_REQUEST} \s/+learn_more\.html[\s?#]
+    RewriteRule ^ /learn-more [R=301,L]
+    RewriteCond %{THE_REQUEST} \s/+privacy_policy\.html[\s?#]
+    RewriteRule ^ /privacy [R=301,L]
+    # Connect / Network Infrastructure became Support / IT Support. The old URL has
+    # been live and may be linked or indexed. Safe to remove once it stops
+    # appearing in the access log.
+    RewriteRule ^pages/network_infrastructure\.html$ /support [R=301,L]
+
+    # --- A trailing slash would break the relative asset paths. ---------------
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+    # --- Forms: a shareable address straight to each request form. -----------
+    RewriteRule ^gaming/request$ /gaming#request [R=301,NE,L]
+    RewriteRule ^property/request$ /property#request [R=301,NE,L]
+    RewriteRule ^hospitality/request$ /hospitality#begin [R=301,NE,L]
+    RewriteRule ^websites/request$ /websites#begin [R=301,NE,L]
+    RewriteRule ^software/request$ /software#brief [R=301,NE,L]
+    RewriteRule ^hardware/request$ /hardware#contact [R=301,NE,L]
+    RewriteRule ^support/request$ /support#get-help [R=301,NE,L]
+    RewriteRule ^contact$ /get-started#describe [R=301,NE,L]
+    RewriteRule ^book$ /get-started#booking [R=301,NE,L]
+
+    # --- Pages: the clean address serves the file. ---------------------------
+    RewriteRule ^gaming$ pages/gaming.html [L]
+    RewriteRule ^property$ pages/property.html [L]
+    RewriteRule ^hospitality$ pages/hospitality_builder.html [L]
+    RewriteRule ^websites$ pages/website_builder.html [L]
+    RewriteRule ^software$ pages/custom_websites.html [L]
+    RewriteRule ^hardware$ pages/hardware_sourcing.html [L]
+    RewriteRule ^support$ pages/it_support.html [L]
+    RewriteRule ^get-started$ get-started.html [L]
+    RewriteRule ^learn-more$ learn_more.html [L]
+    RewriteRule ^privacy$ privacy_policy.html [L]
 </IfModule>

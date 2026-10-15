@@ -59,6 +59,7 @@ $internal = pm_internal_email(
     [
         'Request type' => $enquiryType,
         'Visitor said' => $audience,
+        'Sent from'    => pm_page_label($_POST['page'] ?? ''),
         'Received'     => $received,
     ],
     'Their message',

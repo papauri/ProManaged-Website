@@ -36,6 +36,7 @@ $recipient = 'info@promanaged-it.com';
 
 $details = $read['details'];
 $details['Visitor said'] = pm_audience_label($_POST['audience'] ?? '');
+$details['Sent from'] = pm_page_label($_POST['page'] ?? '');
 $details['Received'] = $received;
 
 // --- Internal notification ---------------------------------------------------

@@ -116,6 +116,7 @@ $details = [
     // mail and run the entries together.
     'Added modules'    => $optionalLines ? implode(' · ', $optionalLines) : 'None — foundation only',
     'Connections'      => $connectionLines ? implode(' · ', $connectionLines) : 'None beyond the foundation',
+    'Sent from'        => pm_page_label($_POST['page'] ?? ''),
     'Submitted'        => $received,
 ];
 

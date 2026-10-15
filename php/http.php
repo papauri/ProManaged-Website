@@ -124,6 +124,20 @@ function pm_audience_label($value) {
     return isset($labels[$key]) ? $labels[$key] : '';
 }
 
+/**
+ * The page an enquiry was sent from, as its clean URL (/gaming, /support), sent as
+ * an optional `page` field by js/audience.js. Allow-listed against the routes in
+ * .htaccess: anything else resolves to '' and the mail templates omit the row.
+ */
+function pm_page_label($value) {
+    $routes = [
+        '/', '/gaming', '/property', '/hospitality', '/websites', '/software',
+        '/hardware', '/support', '/get-started', '/learn-more', '/privacy',
+    ];
+    $path = pm_clean_line($value, 40);
+    return in_array($path, $routes, true) ? 'promanaged-it.com' . $path : '';
+}
+
 /** Best-effort client identifier for throttling. Never shown to the visitor. */
 function pm_client_key() {
     $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'unknown';

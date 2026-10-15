@@ -100,8 +100,8 @@ Object.keys(schema).forEach((type) => check(used.has(type), `schema form "${type
 // The two persona pages exist and are reachable from the shared footer everywhere.
 ['pages/gaming.html', 'pages/property.html'].forEach((p) => {
     check(fs.existsSync(path.join(ROOT, p)), `${p} exists`);
-    const file = path.basename(p);
-    const missing = PAGES.filter((page) => !read(page).includes(`${file}">`));
+    const route = require('./routes').ROUTE_OF[p];
+    const missing = PAGES.filter((page) => !read(page).includes(`href="${route}"`));
     check(missing.length === 0, `${p} is linked from every page` + (missing.length ? ' -> missing on ' + missing.join(', ') : ''));
 });
 

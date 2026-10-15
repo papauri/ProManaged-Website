@@ -88,6 +88,7 @@ $internal = pm_internal_email(
         'Service'        => $service,
         'Requested slot' => $slot,
         'Visitor said'   => $audience,
+        'Sent from'      => pm_page_label($_POST['page'] ?? ''),
         'Submitted'      => $received,
     ],
     'Notes',

@@ -113,6 +113,7 @@ $details = [
     // rather than newlines — a "\n" would collapse to a space in the HTML mail.
     'Added'          => $optionalLines ? implode(' · ', $optionalLines) : 'None — the basics only',
     'Connections'    => $connectionLines ? implode(' · ', $connectionLines) : 'None beyond the basics',
+    'Sent from'      => pm_page_label($_POST['page'] ?? ''),
     'Submitted'      => $received,
 ];
 

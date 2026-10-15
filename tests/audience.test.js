@@ -29,6 +29,7 @@ const path = require('path');
 const vm = require('vm');
 
 const ROOT = path.join(__dirname, '..');
+const ROUTE_TABLE = require('./routes');
 const read = (p) => fs.readFileSync(path.join(ROOT, p), 'utf8');
 
 let failures = 0;
@@ -165,13 +166,15 @@ PERSONAS.forEach((p) => {
     });
     links.push(['home page', p.home]);
     links.forEach(([where, href]) => {
-        const [file, frag] = href.split('#');
-        const exists = fs.existsSync(path.join(ROOT, file));
+        const r = ROUTE_TABLE.resolve(href);
+        const [file, frag] = r ? [r.file, r.frag] : [href, ''];
+        const exists = !!r && fs.existsSync(path.join(ROOT, file));
         const fragOk = exists && (!frag || idsOf(file).has(frag));
         check(exists && fragOk, `${p.id}: ${where} -> ${href} resolves`);
     });
     [p.cta.text, p.cta.short].forEach((text) => {
-        const [file, frag] = p.cta.href.split('#');
+        const r = ROUTE_TABLE.resolve(p.cta.href) || { file: '', frag: '' };
+        const [file, frag] = [r.file, r.frag];
         if (WRITE.test(text)) {
             check(!!frag && sectionHasTextarea(file, frag), `${p.id}: "${text}" invites writing and lands on a free-text box (${p.cta.href})`);
         }
