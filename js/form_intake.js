@@ -182,5 +182,9 @@
         // js/website_builder.js keeps in sync, which FormData picks up with
         // everything else.
         init(document.querySelector('#website-form'));
+        // The persona request forms (php/enquiry.php): gaming, property, software,
+        // equipment and support. One per page; the "pick any" checkboxes need no
+        // validation of their own, so the existing per-field handling covers them.
+        init(document.querySelector('#enquiry-form'));
     });
 })();

@@ -416,6 +416,39 @@ interest tokens: `software`, `website`, `hospitality`, `hardware`, `gaming`, `su
 - [x] Optional, allow-listed `audience` field on `php/contact.php` and `php/booking.php`.
 - [x] `tests/audience.test.js` — catalogue, links, landing contract, tokens, copy keys, rhythm per persona per page, PHP sync.
 
+### Persona pages and request forms (owner request, 2026-10-15)
+Every persona has ONE page that is theirs, in the same Signal & Systems language,
+and that page carries a request form asking the questions that matter for that
+kind of request — the switch, the rail button, the navigation panel's capability
+tile, the homepage card and the off-topic notice all send the visitor there.
+
+| Persona | Their page | Their form |
+|---|---|---|
+| Gamer | `pages/gaming.html` (new) | `#request` — platform, gear, destination, budget, setup help |
+| Hotel or lodge | `pages/hospitality_builder.html` | the builder's own brief (`#talk`) |
+| Property owner | `pages/property.html` (new) | `#request` — kind of property, units, current site, needs |
+| Business software | `pages/custom_websites.html` | `#brief` — business, kind of system, team, timeline |
+| Website | `pages/website_builder.html` | the builder's own brief (`#talk`) |
+| Hardware | `pages/hardware_sourcing.html` | `#contact` — quantity, categories, destination, budget |
+| IT support | `pages/it_support.html` | `#get-help` — device, kind of problem, urgency |
+
+Contract:
+- The five request forms post to **`php/enquiry.php`** with a `form_type`;
+  `php/enquiry_catalogue.php` is the schema and the only source of any label the
+  inbox reads (the builders' trust model: option KEYS in, server labels out).
+  Same mailer templates, honeypot and throttle as every other form.
+- **Contract change, made deliberately:** the Source page's request form used to post
+  to `php/contact.php` (`enquiry_type=Hardware sourcing`); it now posts to
+  `php/enquiry.php` (`form_type=equipment`). `php/contact.php` is unchanged and still
+  serves the get-started describe form.
+- get-started shows a persona-only "Your request form" pointer to the persona's own form.
+- Phones: the switch steps aside while a form field has focus.
+
+- [x] `pages/gaming.html` and `pages/property.html`, in the shared shell (nav, footer, motion, audience layer).
+- [x] Request forms on the gaming, property, Build, Source and Support pages; `php/enquiry.php` + `php/enquiry_catalogue.php`.
+- [x] Personas route to their page and form (rail, panel tile, homepage cards/routes, notice, get-started pointer).
+- [x] `tests/enquiry_endpoint.test.php` (hostile input) and `tests/persona_pages.test.js` (HTML forms vs server schema).
+
 ## 3. FULL-SITE UI/UX IMPLEMENTATION PRIORITIES
 
 ### A. SHARED FOOTER — CRITICAL / SITE-WIDE
@@ -786,7 +819,13 @@ Never commit YAML/YML.
 
 ## Current Status
 
-- **Completed (latest cycle):** The tailored site — "What brings you here?" (§2C).
+- **Completed (latest cycle):** Persona pages and request forms (§2C, "Persona pages and request forms").
+
+  Every persona now has its own page and a request form that asks the right questions: two new pages (`pages/gaming.html`, `pages/property.html`) and new forms on the Build (`#brief`), Source (`#contact`, replacing the generic message board) and Support (`#get-help`) pages; hotels and websites keep their builders' briefs. All five post to the new `php/enquiry.php`, whose schema in `php/enquiry_catalogue.php` resolves every label server-side. The persona's rail button, navigation tile, homepage card and routes, off-topic notice and a new get-started pointer all lead to that page and form. The site is now **11 public pages**.
+
+  **Verified in Chromium against a local PHP server.** Each of the five forms at 375 and 1440, as its persona: an empty submit highlights the required fields and makes zero requests; a filled submit makes exactly one POST carrying the schema keys plus the persona, and shows the server's message in the form's own live region. QA caught two real defects before commit: the Build and Support pages did not load `js/form_intake.js` (a submit would have navigated to raw JSON) — fixed, and now asserted by `tests/persona_pages.test.js`; and on phones the corner switch could sit over a form field — it now steps aside while a field has focus. Endpoint: `tests/enquiry_endpoint.test.php` covers unknown form types, invented options, duplicate/flood/nested multi values, header injection, caps and control characters. One real request (property form) went through production SMTP during QA and returned 200. Full persona sweep across all 11 pages: **264 persona × page × width combinations (375/768/1440), 0 defects** — no overflow, no stranded content, no same-surface neighbours, no re-dealt grid holes, exactly one navigation capability tile, no console errors.
+
+- **Completed (previous cycle):** The tailored site — "What brings you here?" (§2C).
 
   A first-time visitor now meets a plain ivory chooser as the load overture lifts: seven personas in their own words plus "Show me everything". The choice re-voices the homepage (hero, routes, capability chapter, DESIRE beat, CTAs), the rail button and the navigation panel, and hides every card, chapter, tile, footer link and booking option that does not apply — on all 9 pages. A switch fixed bottom-left (and one in the navigation panel) changes it at any time without a reload. New: `js/audience.js`, `css/audience.css`, `tests/audience.test.js`; the persona travels with contact/booking enquiries as an optional allow-listed `audience` field. Two existing assertions were loosened only where they pinned exact attribute order (`tests/builder_flow.test.js` route-band checks), and `css/service_cards.css`'s odd-last-route rule now counts only routes that are actually showing.
 
@@ -828,7 +867,7 @@ Never commit YAML/YML.
 - **In progress:** None.
 - **Next:** Owner visual review of the tailored views (§2C). Site is otherwise verified complete against the current Definition of Done, including the contracts added in earlier cycles (the route-band contract in §2B and the guided-configurator step gate). Optional future hardening (not currently required by the plan): self-host or locally fall back the two external CDNs (Google Fonts "Plus Jakarta Sans" / Font Awesome) so the typeface and icons survive a blocked-CDN network — an observation from QA, not a defect in the composition.
 - **Blocked:** None.
-- **Last implementation commit:** `c8d04f4` — the tailored site, "What brings you here?"
+- **Last implementation commit:** _(latest — persona pages and request forms)_
 
 ### Standing note: this plan's page count is load-bearing
 
@@ -837,7 +876,9 @@ public page silently invalidates every one of them. **A new page is not finished
 until those items are re-verified and the count here is updated** — otherwise the
 plan certifies a site that no longer exists, which is worse than an unchecked box.
 
-The page count is still **9**. What changed this cycle is inside three of them:
+The page count is now **11**: `pages/gaming.html` and `pages/property.html` were added
+for the persona pages (§2C) and are covered by every sweep and test that walks the
+`pages/` directory. Earlier note, still true:
 the homepage lost a chapter (10 → 9) and both builders are now gated, so their
 "fully-expanded state" QA has to drive the gate open first — a sweep that only
 loads a builder page now measures the gate, not the instrument, and will report a

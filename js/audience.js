@@ -74,10 +74,12 @@
             icon: 'fa-gamepad',
             tokens: ['gaming'],
             pillar: 'Source',
+            home: 'pages/gaming.html',
+            formNote: 'Gaming gear? The gaming request asks for your platform and where it ships, so we can come back with one total straight away.',
             lead: 'Gaming gear, found, bought and delivered. Everything else is tucked away.',
             cta: {
                 text: 'Request gaming gear', short: 'Request gear',
-                href: 'pages/hardware_sourcing.html#contact',
+                href: 'pages/gaming.html#request',
                 desc: 'Name the gear and your budget. We come back with options and one total, delivered.',
                 cue: 'Send a request'
             },
@@ -90,6 +92,15 @@
                 'home-hero-figure-label': 'person who finds it, orders it and ships it — and answers when you ask where it is.',
                 'home-routes-title': 'Straight to the gear.',
                 'home-routes-lede': 'Gaming PCs, consoles and the kit around them, bought from trusted suppliers and delivered — including the things that sell out everywhere first.',
+                'route-equipment-link': { href: 'pages/gaming.html#gear' },
+                'route-ask-link': { href: 'pages/gaming.html#request' },
+                'home-card-source': { target: 'pages/gaming.html#request' },
+                'nav-source-tile': {
+                    href: 'pages/gaming.html',
+                    html: '<span class="nav-tile-index">Your page</span>'
+                        + '<span class="nav-tile-label">Gaming gear</span>'
+                        + '<span class="nav-tile-desc">PCs, consoles, monitors and headsets \u2014 one total, delivered.</span>'
+                },
                 'route-equipment-label': 'Gaming gear',
                 'route-equipment-desc': 'PCs, consoles, controllers and headsets.',
                 'home-desire-eyebrow': 'The day it arrives',
@@ -109,6 +120,8 @@
             icon: 'fa-hotel',
             tokens: ['hospitality', 'website'],
             pillar: 'Build',
+            home: 'pages/hospitality_builder.html',
+            formNote: 'Running a hotel or lodge? The hotel system builder asks how your property works and sends us your outline \u2014 seven short steps.',
             lead: 'Hotel and lodge systems, and the website guests book from. Everything else is tucked away.',
             cta: {
                 text: 'Design your hotel system', short: 'Design your system',
@@ -138,15 +151,24 @@
             icon: 'fa-building',
             tokens: ['software', 'website', 'hospitality'],
             pillar: 'Build',
+            home: 'pages/property.html',
+            formNote: 'A property owner? The property form asks what kind of property it is and what you want it to do, so the first reply is already useful.',
             lead: 'Websites and booking systems for the property you own. Everything else is tucked away.',
             cta: {
-                text: 'Tell us about your property', short: 'Start a project',
-                href: 'get-started.html#describe',
+                text: 'Tell us about your property', short: 'Your property',
+                href: 'pages/property.html#request',
                 desc: 'Describe the property and what you want it to do. We come back with what it actually needs.',
                 cue: 'Describe it'
             },
             proof: ['A website for your property', 'Bookings and availability online', 'Built from real hotel systems'],
             copy: {
+                'home-card-build': { target: 'pages/property.html#request' },
+                'nav-build-tile': {
+                    href: 'pages/property.html',
+                    html: '<span class="nav-tile-index">Your page</span>'
+                        + '<span class="nav-tile-label">Your property</span>'
+                        + '<span class="nav-tile-desc">A website, online bookings and a system for your records.</span>'
+                },
                 'home-hero-eyebrow': 'Property owners',
                 'home-hero-title': 'Your property, online and organised.',
                 'home-hero-sub': 'A website for your property and a system for bookings and records — built around how you actually run it.',
@@ -167,10 +189,12 @@
             icon: 'fa-laptop-code',
             tokens: ['software', 'website'],
             pillar: 'Build',
+            home: 'pages/custom_websites.html',
+            formNote: 'Software for your business? The software brief asks what you use today and what keeps going wrong \u2014 the start of a real scope.',
             lead: 'Software and websites for your business. Everything else is tucked away.',
             cta: {
-                text: 'Start a project', short: 'Start a project',
-                href: 'get-started.html#describe',
+                text: 'Tell us what to build', short: 'Start a project',
+                href: 'pages/custom_websites.html#brief',
                 desc: 'Bring us the problem. We come back with a scope, a timeline and an honest answer.',
                 cue: 'Describe the problem'
             },
@@ -193,6 +217,8 @@
             icon: 'fa-window-maximize',
             tokens: ['website'],
             pillar: 'Build',
+            home: 'pages/website_builder.html',
+            formNote: 'Need a website? The website builder shows you the shape of it in about three minutes, and sends us your outline at the end.',
             lead: 'Websites, designed with you and built by us. Everything else is tucked away.',
             cta: {
                 text: 'Design your website', short: 'Design your site',
@@ -222,6 +248,8 @@
             icon: 'fa-boxes-stacked',
             tokens: ['hardware'],
             pillar: 'Source',
+            home: 'pages/hardware_sourcing.html',
+            formNote: 'Looking for hardware? The equipment request asks for quantity, budget and destination, so we can quote a total straight away.',
             lead: 'Computers and equipment, found, bought and delivered. Everything else is tucked away.',
             cta: {
                 text: 'Request equipment', short: 'Request equipment',
@@ -251,10 +279,12 @@
             icon: 'fa-life-ring',
             tokens: ['support'],
             pillar: 'Support',
+            home: 'pages/it_support.html',
+            formNote: 'Something broken? The support form asks which device and how urgent it is, so we can usually come back with a time for a call.',
             lead: 'Everyday IT support from a person who stays with the problem. Everything else is tucked away.',
             cta: {
                 text: 'Describe the problem', short: 'Get help',
-                href: 'get-started.html#describe',
+                href: 'pages/it_support.html#get-help',
                 desc: 'Say what it is doing in whatever words you have. Working out what is wrong is the job.',
                 cue: 'Describe it'
             },
@@ -302,6 +332,9 @@
         c['home-hero-proof'] = p.proof.map(function (t) { return '<span>' + CHECK + t + '</span>'; }).join('');
         c['home-services-title'] = p.pillar + ', in detail.';
         c['home-services-lede'] = 'What it covers, and the problem it is usually bought to solve. Ask about anything else &mdash; it is the same team either way.';
+        c['gs-direct'] = '<span class="persona-direct-kicker">Your request form</span>'
+            + '<p>' + p.formNote + '</p>'
+            + '<a class="btn secondary" href="' + BASE + p.cta.href + '">' + p.cta.text + '</a>';
         c['nav-lead-eyebrow'] = 'Showing: ' + p.short;
         c['nav-lead-text'] = p.lead;
         c['nav-primary'] = {
@@ -391,19 +424,34 @@
        page to exactly what shipped. Copy is static strings from this file, never input. */
     var swapCopy = function (p) {
         d.querySelectorAll('[data-aud-copy]').forEach(function (el) {
-            if (!el._pmAud) el._pmAud = { html: el.innerHTML, href: el.getAttribute('href') };
+            if (!el._pmAud) {
+                el._pmAud = { html: el.innerHTML, href: el.getAttribute('href'), target: el.getAttribute('data-target') };
+            }
             var orig = el._pmAud;
             var v = p.copy[el.getAttribute('data-aud-copy')];
-            var html = orig.html;
+            var html = null;
             var href = orig.href;
+            var target = orig.target;
             if (typeof v === 'string') {
                 html = v;
             } else if (v) {
                 if (typeof v.html === 'string') html = v.html;
                 if (v.href) href = BASE + v.href;
+                if (v.target) target = BASE + v.target;
             }
-            if (el.innerHTML !== html) el.innerHTML = html;
+            // Markup is only ever written when this key owns it: replaced when the
+            // persona supplies html, restored once if it was replaced before. A key
+            // that only retargets a link (a route, a card) never touches its inner
+            // markup, because that markup holds other keys' elements.
+            if (html !== null) {
+                if (el.innerHTML !== html) el.innerHTML = html;
+                orig.swapped = true;
+            } else if (orig.swapped) {
+                el.innerHTML = orig.html;
+                orig.swapped = false;
+            }
             if (href !== null && el.getAttribute('href') !== href) el.setAttribute('href', href);
+            if (target !== null && el.getAttribute('data-target') !== target) el.setAttribute('data-target', target);
         });
     };
 
@@ -543,7 +591,7 @@
        writing. Optional and allow-listed server-side (pm_audience_label() in
        php/http.php); "everything" sends nothing. */
     var tagForms = function (p) {
-        d.querySelectorAll('#contact-form, #booking-form').forEach(function (form) {
+        d.querySelectorAll('#contact-form, #booking-form, #enquiry-form').forEach(function (form) {
             var input = form.querySelector('input[name="audience"]');
             if (p.id === 'all') {
                 if (input) input.parentNode.removeChild(input);
@@ -635,7 +683,7 @@
         notice.innerHTML =
             '<p class="aud-notice-text">This page is outside <b>' + esc(p.short) + '</b>, so nothing on it is filtered.</p>' +
             '<div class="aud-notice-actions">' +
-            '<a class="aud-notice-link" href="' + BASE + 'index.html">Back to your view</a>' +
+            '<a class="aud-notice-link" href="' + BASE + (p.home || 'index.html') + '">Go to your page</a>' +
             '<button type="button" class="aud-notice-link" data-aud-act="all">Show everything</button>' +
             '<button type="button" class="aud-notice-close" data-aud-act="dismiss" aria-label="Dismiss">&times;</button>' +
             '</div>';
@@ -875,9 +923,32 @@
             tag('.nav-tile--primary', 'nav-primary');
             tag('.nav-panel-lead-eyebrow', 'nav-lead-eyebrow');
             tag('.nav-panel-lead-text', 'nav-lead-text');
+            tag('.nav-tile--lead', 'nav-build-tile');
+            tag('.nav-tile--service[data-aud~="hardware"]', 'nav-source-tile');
 
             buildPill();
             buildNavSwitch();
+
+            // While a form field has focus the switch steps aside on phones, where it
+            // would otherwise sit over the field being typed into (and over the
+            // on-screen keyboard's neighbour). css/audience.css does the hiding.
+            // Reappearing is deferred: a tap on a form's own submit button moves focus
+            // out of the field first, and the switch must not slide back under that
+            // finger mid-tap.
+            var typingTimer = 0;
+            d.addEventListener('focusin', function (e) {
+                w.clearTimeout(typingTimer);
+                if (e.target.closest && e.target.closest('form')) {
+                    root.classList.add('pm-aud-typing');
+                }
+            });
+            d.addEventListener('focusout', function () {
+                w.clearTimeout(typingTimer);
+                typingTimer = w.setTimeout(function () {
+                    var a = d.activeElement;
+                    if (!(a && a.closest && a.closest('form'))) root.classList.remove('pm-aud-typing');
+                }, 600);
+            });
             apply(current === null ? 'all' : current);
             current = firstVisit ? null : current;
             if (firstVisit) openChooser(null);

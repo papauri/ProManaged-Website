@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="../css/scroll_top.css">
     <link rel="stylesheet" href="../css/evidence.css">
     <link rel="stylesheet" href="../css/it_support.css">
+    <link rel="stylesheet" href="../css/enquiry.css">
     <link rel="stylesheet" href="../css/audience.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
          before first paint. Without JS this class is never added, the hiding rule
@@ -400,6 +401,141 @@
     </section>
 
     <!-- ================= CLOSING CTA ================= -->
+    <!-- ================= GET HELP =================
+         The request form for this kind of visitor: it asks the questions that
+         matter for THIS request instead of one generic message box. -->
+    <section id="get-help" class="section section--ivory enquiry-section" data-blocks="settle-up" data-blocks-pace="calm">
+        <div class="rail enquiry-board">
+            <div class="enquiry-intro">
+                <span class="eyebrow">Get help</span>
+                <h2>Tell us what it is doing.</h2>
+                <p class="lede">Which device, roughly what kind of problem and how urgent it is. You do not need to know what is wrong — working that out is the job.</p>
+                <ul class="enquiry-perks">
+                    <li><i class="fas fa-desktop" aria-hidden="true"></i> Usually a call and a screen share</li>
+                    <li><i class="fas fa-eye" aria-hidden="true"></i> You watch every step — nothing off-screen</li>
+                    <li><i class="fas fa-key" aria-hidden="true"></i> We never ask for your password</li>
+                </ul>
+                <ul class="contact-direct">
+                    <li><a href="mailto:info@promanaged-it.com"><i class="fas fa-envelope" aria-hidden="true"></i>info@promanaged-it.com</a></li>
+                    <li><a href="../get-started.html#booking"><i class="fas fa-calendar-check" aria-hidden="true"></i>Rather book a call?</a></li>
+                </ul>
+            </div>
+            <div class="enquiry-form-wrap">
+                <div id="sp-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+                <!-- Posts to php/enquiry.php. Every option value below is a KEY declared in
+                     php/enquiry_catalogue.php, which resolves the labels the inbox reads;
+                     tests/persona_pages.test.js fails if the two drift. -->
+                <form class="intake enquiry-form" id="enquiry-form" action="../php/enquiry.php" method="POST" data-feedback="#sp-feedback">
+                    <input type="hidden" name="form_type" value="support">
+                    <div class="intake-grid">
+                        <fieldset class="intake-group intake-group--lead">
+                            <legend class="intake-legend">
+                                <span class="intake-step">01</span>
+                                <span class="intake-title">You</span>
+                            </legend>
+                            <p class="intake-hint">So we know who we are replying to.</p>
+                            <div class="field">
+                                <input type="text" id="sp-name" name="name" placeholder=" " required autocomplete="name" maxlength="120" aria-describedby="sp-name-msg">
+                                <label for="sp-name">Full name</label>
+                                <span class="field-msg" id="sp-name-msg" data-for="sp-name"></span>
+                            </div>
+                            <div class="field-row">
+                                <div class="field">
+                                    <input type="email" id="sp-email" name="email" placeholder=" " required autocomplete="email" maxlength="254" aria-describedby="sp-email-msg">
+                                    <label for="sp-email">Email address</label>
+                                    <span class="field-msg" id="sp-email-msg" data-for="sp-email"></span>
+                                </div>
+                                <div class="field">
+                                    <input type="tel" id="sp-phone" name="phone" placeholder=" " autocomplete="tel" maxlength="60" aria-describedby="sp-phone-msg">
+                                    <label for="sp-phone">Phone or WhatsApp (optional)</label>
+                                    <span class="field-msg" id="sp-phone-msg" data-for="sp-phone"></span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="intake-group">
+                            <legend class="intake-legend">
+                                <span class="intake-step">02</span>
+                                <span class="intake-title">The problem</span>
+                            </legend>
+                            <p class="intake-hint">Your best guess is fine.</p>
+                            <div class="field field--select">
+                                <select id="sp-device" name="device" required aria-describedby="sp-device-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="windows">A Windows laptop or desktop</option>
+                                    <option value="mac">A Mac</option>
+                                    <option value="mobile">A phone or tablet</option>
+                                    <option value="printer">A printer or another device</option>
+                                    <option value="account">Email or an online account</option>
+                                    <option value="unsure">Not sure</option>
+                                </select>
+                                <label for="sp-device">Device</label>
+                                <span class="field-msg" id="sp-device-msg" data-for="sp-device"></span>
+                            </div>
+                            <div class="field field--select">
+                                <select id="sp-problem" name="problem" required aria-describedby="sp-problem-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="setup">Setting up a new device</option>
+                                    <option value="broken">It stopped working</option>
+                                    <option value="accounts">Accounts and passwords</option>
+                                    <option value="email">Email and file access</option>
+                                    <option value="software">Software and updates</option>
+                                    <option value="backups">Backups and lost files</option>
+                                    <option value="security">Everyday security</option>
+                                    <option value="other">Something else</option>
+                                </select>
+                                <label for="sp-problem">Closest to</label>
+                                <span class="field-msg" id="sp-problem-msg" data-for="sp-problem"></span>
+                            </div>
+                            <div class="field field--select">
+                                <select id="sp-urgency" name="urgency" aria-describedby="sp-urgency-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="today">It is stopping work today</option>
+                                    <option value="week">This week</option>
+                                    <option value="any">Whenever suits</option>
+                                </select>
+                                <label for="sp-urgency">How urgent (optional)</label>
+                                <span class="field-msg" id="sp-urgency-msg" data-for="sp-urgency"></span>
+                            </div>
+                            <div class="field field--select">
+                                <select id="sp-contact" name="contact" aria-describedby="sp-contact-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="call">A phone call</option>
+                                    <option value="email">Email</option>
+                                    <option value="whatsapp">WhatsApp</option>
+                                </select>
+                                <label for="sp-contact">Best way to reach you (optional)</label>
+                                <span class="field-msg" id="sp-contact-msg" data-for="sp-contact"></span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="intake-group intake-group--message">
+                            <legend class="intake-legend">
+                                <span class="intake-step">03</span>
+                                <span class="intake-title">In your words</span>
+                            </legend>
+                            <p class="intake-hint">What happens, on which device, and when it started.</p>
+                            <div class="field field--grow">
+                                <textarea id="sp-message" name="message" rows="5" placeholder=" " required maxlength="4000" aria-describedby="sp-message-msg"></textarea>
+                                <label for="sp-message">What it is doing, and when it started</label>
+                                <span class="field-msg" id="sp-message-msg" data-for="sp-message"></span>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="form-group hp-field" aria-hidden="true">
+                        <label for="sp-website">Website</label>
+                        <input type="text" id="sp-website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+                    <div class="intake-action">
+                        <button type="submit" class="btn primary intake-submit">
+                            <span class="intake-submit-label">Send for help</span>
+                            <span class="intake-spinner" aria-hidden="true"></span>
+                        </button>
+                        <p class="intake-assurance">A person reads it and comes back to you — no ticket number, no queue.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- #tell-us: the landing point for the homepage Support card, whose cue
          reads "Tell us what keeps breaking". Same reasoning as the Build
          page — the card promises an invitation, so it must arrive at one. -->
@@ -411,7 +547,7 @@
                 <p class="lede">Describe the problem in whatever words you have. You do not need to know what is wrong — working that out is the job.</p>
                 <div class="btn-row btn-row--center">
                     <a href="../get-started.html#booking" class="btn primary">Book a call</a>
-                    <a href="../get-started.html#describe" class="btn secondary">Send a message</a>
+                    <a href="#get-help" class="btn secondary">Send a message</a>
                 </div>
             </div>
         </div>
@@ -444,6 +580,8 @@
                         <li data-aud="software website hospitality"><a href="custom_websites.html">Build</a></li>
                         <li data-aud="hardware gaming"><a href="hardware_sourcing.html">Source</a></li>
                         <li data-aud="support"><a href="it_support.html">Support</a></li>
+                        <li data-aud="gaming hardware"><a href="gaming.html">Gaming gear</a></li>
+                        <li data-aud="property"><a href="property.html">Property</a></li>
                         <li><a href="../learn_more.html">How we work</a></li>
                         <li><a href="../get-started.html">Get started</a></li>
                         <li><a href="../privacy_policy.html">Privacy Policy</a></li>
@@ -471,6 +609,7 @@
     <script src="../js/main.js" defer></script>
     <script src="../js/interface_motion.js" defer></script>
     <script src="../js/mobile_phone_navbar.js" defer></script>
+    <script src="../js/form_intake.js" defer></script>
 </body>
 
 </html>

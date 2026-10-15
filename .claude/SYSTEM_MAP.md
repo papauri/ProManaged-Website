@@ -13,6 +13,8 @@
 7. `pages/it_support.html` — Support.
 8. `pages/hospitality_builder.html` — the Hospitality System Builder. A guided product configurator, reached from the Build page's `#hospitality` CTA. Deliberately **not** a navigation category: the bento panel is composed for exactly seven tiles.
 9. `pages/website_builder.html` — the Website Builder. The same experience for a straightforward business website, reached from the Build page's `#website-builder` CTA. Also not a navigation category, for the same reason.
+10. `pages/gaming.html` — the gamer persona's page (BUILD_PLAN §2C): what we source for gaming, how it works, the track record, and the gaming request form (`#request`).
+11. `pages/property.html` — the property-owner persona's page: websites, bookings and records for property, the delivered hotel proof, and the property form (`#request`).
 
 The canonical public trio is **Build / Source / Support**. `pages/network_infrastructure.html`
 and the "Connect" capability name no longer exist; do not reintroduce either.
@@ -223,8 +225,13 @@ copy did not match it:
   picker — or at `index.html#contact`, which is a CTA block with no form on it at
   all. The site's only free-text form was on the hardware sourcing page.
 - `get-started.html#booking` — the appointment form (`php/booking.php`).
-- `pages/hardware_sourcing.html#contact` — the equipment request
-  (`php/contact.php`, `enquiry_type=Hardware sourcing`).
+- The persona request forms, all `#enquiry-form`, all posting to `php/enquiry.php`
+  with a `form_type`: `pages/gaming.html#request` (gaming),
+  `pages/property.html#request` (property), `pages/custom_websites.html#brief`
+  (software), `pages/hardware_sourcing.html#contact` (equipment — this form used to
+  post to `php/contact.php`) and `pages/it_support.html#get-help` (support). Option
+  values are KEYS from `php/enquiry_catalogue.php`; "pick any" questions are
+  checkbox chips (`css/enquiry.css`) named `field[]`.
 - `pages/website_builder.html#talk` and `pages/hospitality_builder.html#talk` —
   the configurator briefs, each with its own endpoint.
 
@@ -243,6 +250,8 @@ back to its original section-scoped lookup, so no other form on the site changed
 - `php/hospitality_catalogue.php` — the server's catalogue and the pure functions that resolve a submission against it. Separate from the endpoint because the endpoint runs on include (it calls `pm_respond()`, which exits), so nothing in it could be tested without also sending mail.
 - `php/website.php` — Website Builder enquiry. Same shape and same trust model as the hospitality endpoint.
 - `php/website_catalogue.php` — the same separation, for the same reason.
+- `php/enquiry.php` — the persona request forms. Resolves the submission through `pm_enquiry_resolve()`, then sends the internal notification and the customer confirmation with the shared templates.
+- `php/enquiry_catalogue.php` — the schema of those forms (fields, types, required, option keys → labels) and the pure resolver, separate from the endpoint so it can be tested without sending mail.
 
 ## Tests
 
@@ -252,6 +261,8 @@ Plain scripts, no framework and no dependencies. Run them before any change to t
 - `php tests/hospitality_endpoint.test.php` — the endpoint's trust boundary, exercised against hostile input: invented capabilities, markup payloads, duplicate and repetition floods, malformed relationship pairs and out-of-range room counts.
 - `node tests/website_builder.test.js` — the same for the Website Builder, plus an assertion that at least 10 of its 11 capabilities are delivered work, and that no ranking or traffic promise appears in the copy.
 - `php tests/website_endpoint.test.php` — the same trust-boundary coverage for `php/website.php`.
+- `php tests/enquiry_endpoint.test.php` — the persona forms' trust boundary against hostile input.
+- `node tests/persona_pages.test.js` — every persona form's fields, option keys and required flags match `php/enquiry_catalogue.php`; each form posts to the endpoint, carries the honeypot and loads `js/form_intake.js`; the persona pages are linked from every footer.
 - `node tests/links.test.js` — link integrity across every public page: unique ids, every local
   href/src/data-target resolving to a real file, every `#fragment` resolving to a real id, and the
   landing contract (a "describe the problem" / "send a message" link must reach a section that

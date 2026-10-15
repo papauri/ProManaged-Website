@@ -135,7 +135,7 @@ PAGES.forEach((page) => {
 
 /* ----------------------------------------------- copy keys exist in the markup
    Keys tagged by the script itself at start-up (shared chrome) are listed. */
-const SCRIPT_TAGGED = ['rail-cta', 'nav-primary', 'nav-lead-eyebrow', 'nav-lead-text'];
+const SCRIPT_TAGGED = ['rail-cta', 'nav-primary', 'nav-lead-eyebrow', 'nav-lead-text', 'nav-build-tile', 'nav-source-tile'];
 const markupKeys = new Set(PAGES.flatMap((page) =>
     [...read(page).matchAll(/data-aud-copy="([^"]+)"/g)].map((m) => m[1])));
 PERSONAS.forEach((p) => {
@@ -159,7 +159,11 @@ function sectionHasTextarea(rel, id) {
 const WRITE = /\b(describe|tell us|send|request|ask|message)\b/i;
 PERSONAS.forEach((p) => {
     const links = [['cta', p.cta.href]];
-    Object.entries(p.copy).forEach(([k, v]) => { if (v && typeof v === 'object' && v.href) links.push([k, v.href]); });
+    Object.entries(p.copy).forEach(([k, v]) => {
+        if (v && typeof v === 'object' && v.href) links.push([k, v.href]);
+        if (v && typeof v === 'object' && v.target) links.push([k + ' (card)', v.target]);
+    });
+    links.push(['home page', p.home]);
     links.forEach(([where, href]) => {
         const [file, frag] = href.split('#');
         const exists = fs.existsSync(path.join(ROOT, file));

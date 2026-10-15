@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Owners — Websites &amp; Booking Systems | ProManaged IT</title>
+    <meta name="description" content="Websites, online bookings and record-keeping systems for property owners — guest houses, short-lets, rentals and lodges — built in stages around how you actually run the property.">
+    <link rel="icon" href="../images/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/global_styles.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/interaction.css">
+    <link rel="stylesheet" href="../css/logo.css">
+    <link rel="stylesheet" href="../css/hero_section.css">
+    <link rel="stylesheet" href="../css/footer_promanaged.css">
+    <link rel="stylesheet" href="../css/scroll_top.css">
+    <link rel="stylesheet" href="../css/contact_section.css">
+    <link rel="stylesheet" href="../css/project_proof.css">
+    <link rel="stylesheet" href="../css/custom_websites.css">
+    <link rel="stylesheet" href="../css/enquiry.css">
+    <link rel="stylesheet" href="../css/audience.css">
+    <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
+         before first paint. Without JS this class is never added, the hiding rule
+         never matches, and all content renders normally.
+
+         pmHeroFailsafe is the bounded fallback for the case where JS IS enabled but
+         main.js never stages the choreography (404, parse error, throw). main.js
+         clears it only AFTER arming its own release timer, so on every path the hero
+         is exposed by something. If it fires before a slow main.js arrives, main.js
+         clears the class again and the choreography still runs. -->
+    <script>(function(d,w){var r=d.documentElement;r.classList.add('js-on');w.pmHeroFailsafe=w.setTimeout(function(){r.classList.add('load-failsafe');},1200);})(document,window);</script>
+    <script src="../js/boot.js"></script>
+    <script src="../js/audience.js"></script>
+</head>
+
+<body data-aud-page="property hospitality">
+    <div id="header-section">
+        <!-- Closed state of the navigation: a fixed rail with the control left, the
+             wordmark centred and one persistent action right. Still no link bar —
+             every destination lives in the bento panel below. -->
+        <div class="nav-rail">
+            <div class="nav-rail-inner">
+                <button type="button" class="nav-trigger" id="nav-trigger"
+                        aria-expanded="false" aria-controls="nav-panel"
+                        aria-label="Open navigation menu">
+                    <img src="../images/icon.png" alt="ProManaged IT" class="logo">
+                    <span class="nav-trigger-label">
+                        <span class="nav-trigger-word">Menu</span>
+                        <span class="nav-trigger-bars" aria-hidden="true">
+                            <span></span><span></span><span></span>
+                        </span>
+                    </span>
+                </button>
+                <a class="nav-wordmark" href="../index.html">ProManaged IT</a>
+                <div class="nav-rail-actions">
+                    <a class="btn primary nav-cta" href="../get-started.html">Start a project</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full-viewport bento navigation panel. Behaviour (aria-expanded, focus
+             trap, Escape, scroll lock, focus restoration) lives in
+             js/mobile_phone_navbar.js and binds to #nav-trigger / #nav-panel /
+             #nav-close / .is-open — those hooks are contractual. -->
+        <div class="nav-panel" id="nav-panel" hidden>
+            <div class="nav-panel-rail">
+                <div class="nav-panel-top">
+                    <span class="nav-panel-brand">
+                        <img src="../images/icon.png" alt="" aria-hidden="true">
+                        ProManaged IT
+                    </span>
+                    <button type="button" class="nav-close" id="nav-close"
+                            aria-label="Close navigation menu">
+                        <span></span><span></span>
+                    </button>
+                </div>
+
+                <p class="nav-panel-lead">
+                    <span class="nav-panel-lead-eyebrow">Build &middot; Source &middot; Support</span>
+                    <span class="nav-panel-lead-text">We build your software, source your equipment and keep both working.</span>
+                </p>
+
+                <nav class="nav-bento" aria-label="Primary">
+                    <a class="nav-tile nav-tile--primary" href="../get-started.html">
+                        <span class="nav-tile-index">Start here</span>
+                        <span class="nav-tile-label">Start a project</span>
+                        <span class="nav-tile-desc">Bring us the problem. Book a call and get a scope, a timeline and an honest answer.</span>
+                        <span class="nav-tile-cue" aria-hidden="true">Book a call</span>
+                    </a>
+                    <a class="nav-tile nav-tile--lead" href="custom_websites.html" data-aud="software website hospitality">
+                        <span class="nav-tile-index">01 &middot; Build</span>
+                        <span class="nav-tile-label">Software &amp; Web Apps</span>
+                        <span class="nav-tile-desc">We build the software your business runs on &mdash; booking systems, internal tools, customer-facing apps.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--service" href="hardware_sourcing.html" data-aud="hardware gaming">
+                        <span class="nav-tile-index">02 &middot; Source</span>
+                        <span class="nav-tile-label">Hardware Sourcing</span>
+                        <span class="nav-tile-desc">We find, buy and deliver the computers and equipment you need.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--service" href="it_support.html" data-aud="support">
+                        <span class="nav-tile-index">03 &middot; Support</span>
+                        <span class="nav-tile-label">IT Support</span>
+                        <span class="nav-tile-desc">We keep it working &mdash; fixes, setups and a person on the phone when it breaks.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="../index.html">
+                        <span class="nav-tile-index">Overview</span>
+                        <span class="nav-tile-label">Home</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="../learn_more.html">
+                        <span class="nav-tile-index">Process</span>
+                        <span class="nav-tile-label">How We Work</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="../index.html#contact">
+                        <span class="nav-tile-index">Direct</span>
+                        <span class="nav-tile-label">Contact</span>
+                    </a>
+                </nav>
+
+                <div class="nav-panel-foot">
+                    <span class="nav-panel-foot-label">On the homepage</span>
+                    <a class="nav-link" href="../index.html#about">About</a>
+                    <a class="nav-link" href="../index.html#services">Services</a>
+                    <a class="nav-link" href="../index.html#mission-vision">Mission &amp; Vision</a>
+                    <a class="nav-link" href="../privacy_policy.html">Privacy Policy</a>
+                    <a class="nav-panel-foot-mail" href="mailto:info@promanaged-it.com">info@promanaged-it.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="hero-section">
+        <section id="home" class="hero">
+            <div class="hero-rail rail" data-assemble>
+                <div class="hero-statement">
+                    <span class="hero-eyebrow">Property owners</span>
+                    <h1 id="hero-title">Your property, online and organised.</h1>
+                    <p id="hero-subtitle">A website for your property and a system for bookings and records — built around how you actually run it.</p>
+                    <div class="hero-buttons">
+                        <a href="#request" class="btn primary" id="hero-get-started">Tell us about your property</a>
+                        <a href="#offer" class="btn secondary" id="hero-learn-more">What we build</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-feature">
+                        <i class="fas fa-building" aria-hidden="true"></i>
+                        <span class="hero-figure">Two</span>
+                        <span class="hero-figure-label">hotels already take bookings through a system we built — the same build, delivered twice.</span>
+                    </div>
+                    <div class="hero-support">
+                        <div class="hero-support-row">
+                            <i class="fas fa-layer-group" aria-hidden="true"></i>
+                            <div class="hero-support-text">
+                                <span class="hero-support-title">Built in stages</span>
+                                <span class="hero-support-desc">Start with the website, add the rest later</span>
+                            </div>
+                        </div>
+                        <div class="hero-support-row">
+                            <i class="fas fa-pen-to-square" aria-hidden="true"></i>
+                            <div class="hero-support-text">
+                                <span class="hero-support-title">Yours to update</span>
+                                <span class="hero-support-desc">Content you can manage yourself</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= THE PROBLEM ================= -->
+    <section id="premise" class="section section--ivory" data-blocks="settle-side">
+        <div class="rail">
+            <div class="grid">
+                <div class="block block--7 block--bare">
+                    <span class="eyebrow">Sound familiar?</span>
+                    <h2>Enquiries by phone, bookings in a notebook, records in three chats.</h2>
+                </div>
+                <div class="block block--5 block--bare premise-note">
+                    <p>Guests ring to ask what is free. Someone writes it down. A second person promises the same dates over WhatsApp, and nobody can see the month at a glance.</p>
+                    <p>None of it needs a big system. It needs the right first step — usually a website that answers the questions, then bookings and records once they are worth it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= WHAT WE BUILD FOR PROPERTY ================= -->
+    <section id="offer" class="section" data-blocks="settle-side">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">What we build</span>
+                <h2>Three things a property usually needs.</h2>
+                <p class="lede">Take one, or build up to all three over time. It is the same team either way, and nothing is built before it is worth building.</p>
+            </div>
+            <div class="grid">
+                <div class="block block--7 block--tint block--row">
+                    <div class="block__aside">
+                        <span class="mark" aria-hidden="true"><i class="fas fa-window-maximize"></i></span>
+                    </div>
+                    <div class="block__body">
+                        <h3>A website for the property</h3>
+                        <ul class="list"><li>Photos, rooms or units, location and the questions guests always ask</li><li>An enquiry form that lands in your inbox</li><li>Content you can update yourself</li></ul>
+                    </div>
+                </div>
+                <div class="block block--5 block--tall">
+                    <span class="mark" aria-hidden="true"><i class="fas fa-calendar-check"></i></span>
+                    <div class="block__body">
+                        <h3>Bookings and availability</h3>
+                        <p>Guests see what is free and book it themselves, against live availability — the same kind of booking engine we delivered for two Malawian hotels.</p><p>Every booking lands in one place the moment it is made, instead of a diary.</p>
+                    </div>
+                </div>
+                <div class="block block--7 block--row">
+                    <div class="block__aside">
+                        <span class="mark" aria-hidden="true"><i class="fas fa-folder-open"></i></span>
+                    </div>
+                    <div class="block__body">
+                        <h3>A system for your records</h3>
+                        <p>Tenants, rent, maintenance, the paperwork that lives in a notebook and three chats today — software built around how you actually run the property, not a template you have to bend to.</p>
+                    </div>
+                </div>
+                <div class="block block--12 block--graphite block--row">
+                    <div class="block__aside">
+                        <span class="mark" aria-hidden="true"><i class="fas fa-life-ring"></i></span>
+                    </div>
+                    <div class="block__body">
+                        <h3>Someone to call afterwards</h3>
+                        <p>When something looks wrong, one person already knows the setup. Support and changes after launch are part of the work, not a separate contract you discover later.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PROOF =================
+         The closest delivered work to a property booking system: the two hotel
+         systems. Captures are of the PUBLIC sites only. -->
+    <section id="proof" class="section section--stone" data-blocks="settle-up" data-blocks-pace="calm">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">Real work</span>
+                <h2>Bookings we have already built.</h2>
+                <p class="lede">Hotel systems for two businesses in Malawi — guests book directly from the public site, and staff manage rooms, rates and reservations from one screen.</p>
+            </div>
+            <div class="grid">
+                <div class="block block--7 proof-card proof-card--lead">
+                    <div class="proof-shot proof-shot--hero">
+                        <img src="../images/projects/rosalyns-hero.jpg" alt="Rosalyn's Beach Hotel public website" loading="lazy" decoding="async" width="1425" height="900">
+                    </div>
+                    <div class="proof-copy">
+                        <span class="proof-tag">Delivered work</span>
+                        <h3>Rosalyn&rsquo;s</h3>
+                    </div>
+                </div>
+                <div class="block block--5 block--graphite proof-card">
+                    <div class="proof-shot proof-shot--hero">
+                        <img src="../images/projects/liwonde-hero.jpg" alt="Liwonde Sun Hotel public website" loading="lazy" decoding="async" width="1425" height="800">
+                    </div>
+                    <div class="proof-copy">
+                        <span class="proof-tag">Delivered work</span>
+                        <h3>Liwonde Sun Hotel</h3>
+                        <p>The same system, delivered a second time for a second Malawian hotel.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= HOW IT WORKS ================= -->
+    <section id="how" class="section section--graphite" data-blocks="sequence-in">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">How it works</span>
+                <h2>From how you run it to what you need.</h2>
+            </div>
+            <ol class="process-steps">
+                <li class="process-step">
+                    <span class="step-num">01</span>
+                    <h3>Listen</h3>
+                    <p>You tell us how the property runs today — enquiries, bookings, payments, the records you keep and where they live.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">02</span>
+                    <h3>Plan</h3>
+                    <p>A written scope, a realistic timeline and an honest cost — including what to build first and what can wait.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">03</span>
+                    <h3>Build</h3>
+                    <p>The website, bookings or records system, with working previews as we go. Nothing is unveiled at the end for the first time.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">04</span>
+                    <h3>Stay close</h3>
+                    <p>Questions, changes and fixes after launch are part of the relationship, with one person who already knows the setup.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ================= TELL US ABOUT YOUR PROPERTY =================
+         The request form for this kind of visitor: it asks the questions that
+         matter for THIS request instead of one generic message box. -->
+    <section id="request" class="section section--ivory enquiry-section" data-blocks="settle-up" data-blocks-pace="calm">
+        <div class="rail enquiry-board">
+            <div class="enquiry-intro">
+                <span class="eyebrow">Tell us about your property</span>
+                <h2>Start with how you run it today.</h2>
+                <p class="lede">What kind of property it is, roughly how big, and what you want it to do. We come back with what it actually needs first — and what could wait.</p>
+                <ul class="enquiry-perks">
+                    <li><i class="fas fa-layer-group" aria-hidden="true"></i> Built in stages, so you only pay for what you use</li>
+                    <li><i class="fas fa-hotel" aria-hidden="true"></i> Booking work already running at two hotels</li>
+                    <li><i class="fas fa-comments" aria-hidden="true"></i> A conversation, not a sales sequence</li>
+                </ul>
+                <ul class="contact-direct">
+                    <li><a href="mailto:info@promanaged-it.com"><i class="fas fa-envelope" aria-hidden="true"></i>info@promanaged-it.com</a></li>
+                    <li><a href="../get-started.html#booking"><i class="fas fa-calendar-check" aria-hidden="true"></i>Rather book a call?</a></li>
+                </ul>
+            </div>
+            <div class="enquiry-form-wrap">
+                <div id="pr-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+                <!-- Posts to php/enquiry.php. Every option value below is a KEY declared in
+                     php/enquiry_catalogue.php, which resolves the labels the inbox reads;
+                     tests/persona_pages.test.js fails if the two drift. -->
+                <form class="intake enquiry-form" id="enquiry-form" action="../php/enquiry.php" method="POST" data-feedback="#pr-feedback">
+                    <input type="hidden" name="form_type" value="property">
+                    <div class="intake-grid">
+                        <fieldset class="intake-group intake-group--lead">
+                            <legend class="intake-legend">
+                                <span class="intake-step">01</span>
+                                <span class="intake-title">You</span>
+                            </legend>
+                            <p class="intake-hint">So we know who we are replying to.</p>
+                            <div class="field">
+                                <input type="text" id="pr-name" name="name" placeholder=" " required autocomplete="name" maxlength="120" aria-describedby="pr-name-msg">
+                                <label for="pr-name">Full name</label>
+                                <span class="field-msg" id="pr-name-msg" data-for="pr-name"></span>
+                            </div>
+                            <div class="field-row">
+                                <div class="field">
+                                    <input type="email" id="pr-email" name="email" placeholder=" " required autocomplete="email" maxlength="254" aria-describedby="pr-email-msg">
+                                    <label for="pr-email">Email address</label>
+                                    <span class="field-msg" id="pr-email-msg" data-for="pr-email"></span>
+                                </div>
+                                <div class="field">
+                                    <input type="tel" id="pr-phone" name="phone" placeholder=" " autocomplete="tel" maxlength="60" aria-describedby="pr-phone-msg">
+                                    <label for="pr-phone">Phone or WhatsApp (optional)</label>
+                                    <span class="field-msg" id="pr-phone-msg" data-for="pr-phone"></span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="intake-group">
+                            <legend class="intake-legend">
+                                <span class="intake-step">02</span>
+                                <span class="intake-title">The property</span>
+                            </legend>
+                            <p class="intake-hint">So we know what we are talking about.</p>
+                            <div class="field field--select">
+                                <select id="pr-property_type" name="property_type" required aria-describedby="pr-property_type-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="guesthouse">Guest house or B&amp;B</option>
+                                    <option value="shortlet">Short-let or holiday apartments</option>
+                                    <option value="rental">Rental homes or flats</option>
+                                    <option value="lodge">Lodge or holiday property</option>
+                                    <option value="commercial">Commercial property</option>
+                                    <option value="mixed">A mix, or something else</option>
+                                </select>
+                                <label for="pr-property_type">Kind of property</label>
+                                <span class="field-msg" id="pr-property_type-msg" data-for="pr-property_type"></span>
+                            </div>
+                            <div class="field field--select">
+                                <select id="pr-units" name="units" aria-describedby="pr-units-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="one">One</option>
+                                    <option value="few">2 to 5</option>
+                                    <option value="some">6 to 20</option>
+                                    <option value="many">More than 20</option>
+                                </select>
+                                <label for="pr-units">Units or rooms (optional)</label>
+                                <span class="field-msg" id="pr-units-msg" data-for="pr-units"></span>
+                            </div>
+                            <div class="field field--select">
+                                <select id="pr-current_site" name="current_site" aria-describedby="pr-current_site-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="none">No website yet</option>
+                                    <option value="replace">Have one — it needs replacing</option>
+                                    <option value="extend">Have one — it needs bookings added</option>
+                                </select>
+                                <label for="pr-current_site">Website today (optional)</label>
+                                <span class="field-msg" id="pr-current_site-msg" data-for="pr-current_site"></span>
+                            </div>
+                            <div class="field">
+                                <input type="text" id="pr-location" name="location" placeholder=" " maxlength="120" aria-describedby="pr-location-msg">
+                                <label for="pr-location">Where the property is (optional)</label>
+                                <span class="field-msg" id="pr-location-msg" data-for="pr-location"></span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="intake-group intake-group--message">
+                            <legend class="intake-legend">
+                                <span class="intake-step">03</span>
+                                <span class="intake-title">What you want it to do</span>
+                            </legend>
+                            <p class="intake-hint">Pick what applies, then describe how it works today.</p>
+                            <fieldset class="choice-chips">
+                                <legend class="choice-chips-legend">Looking for <span>Pick any</span></legend>
+                                <div class="choice-chips-list">
+                                    <label class="chip"><input type="checkbox" name="needs[]" value="website"><span>A website for the property</span></label>
+                                    <label class="chip"><input type="checkbox" name="needs[]" value="bookings"><span>Online bookings and availability</span></label>
+                                    <label class="chip"><input type="checkbox" name="needs[]" value="records"><span>A system for tenants, rent or records</span></label>
+                                    <label class="chip"><input type="checkbox" name="needs[]" value="unsure"><span>Not sure yet</span></label>
+                                </div>
+                            </fieldset>
+                            <div class="field field--grow">
+                                <textarea id="pr-message" name="message" rows="5" placeholder=" " required maxlength="4000" aria-describedby="pr-message-msg"></textarea>
+                                <label for="pr-message">How bookings, enquiries and records work today</label>
+                                <span class="field-msg" id="pr-message-msg" data-for="pr-message"></span>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="form-group hp-field" aria-hidden="true">
+                        <label for="pr-website">Website</label>
+                        <input type="text" id="pr-website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+                    <div class="intake-action">
+                        <button type="submit" class="btn primary intake-submit">
+                            <span class="intake-submit-label">Send the details</span>
+                            <span class="intake-spinner" aria-hidden="true"></span>
+                        </button>
+                        <p class="intake-assurance">No obligation, and no quote until we have talked it through.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <div id="footer-section">
+        <footer class="footer" data-blocks="settle-up" data-blocks-pace="calm">
+            <!-- Decorative brand signature. aria-hidden: the accessible name is the
+                 .footer-brand heading immediately below it. -->
+            <div class="footer-signature rail" aria-hidden="true">ProManaged IT</div>
+
+            <div class="footer-content rail">
+                <div class="footer-brand">
+                    <h3>ProManaged IT</h3>
+                    <p>Build, Source, Support.</p>
+                    <span class="footer-label">Contact</span>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a></li>
+                        <li><a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="../index.html#home">Home</a></li>
+                        <li><a href="../index.html#services">Services</a></li>
+                        <li><a href="../index.html#about">About</a></li>
+                        <li data-aud="software website hospitality"><a href="custom_websites.html">Build</a></li>
+                        <li data-aud="hardware gaming"><a href="hardware_sourcing.html">Source</a></li>
+                        <li data-aud="support"><a href="it_support.html">Support</a></li>
+                        <li data-aud="gaming hardware"><a href="gaming.html">Gaming gear</a></li>
+                        <li data-aud="property"><a href="property.html">Property</a></li>
+                        <li><a href="../learn_more.html">How we work</a></li>
+                        <li><a href="../get-started.html">Get started</a></li>
+                        <li><a href="../privacy_policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4>Keep in touch</h4>
+                    <p>For new work, sourcing questions or a problem you are not sure how to frame, start with a conversation.</p>
+                    <a class="btn secondary" href="../get-started.html">Talk to ProManaged IT</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom rail">
+                <p>&copy; <span data-current-year>2026</span> ProManaged IT. All rights reserved.</p>
+                <p>
+                    Company Registration Number 749512 &middot;
+                    <a href="https://core.cro.ie/e-commerce/company/5379600" target="_blank" rel="noopener">Verify registration</a>
+                    &middot; <a href="../privacy_policy.html">Privacy Policy</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../js/main.js" defer></script>
+    <script src="../js/interface_motion.js" defer></script>
+    <script src="../js/mobile_phone_navbar.js" defer></script>
+    <script src="../js/form_intake.js" defer></script>
+</body>
+
+</html>

@@ -163,6 +163,8 @@ document.addEventListener("DOMContentLoaded", function () {
         '.pinned-steps > .process-step',
         '.about-grid > *',
         '.contact-grid > *',
+        // The persona request chapters (css/enquiry.css): intro and board.
+        '.enquiry-board > *',
         '.booking-grid > *',
         '.proof-strip > *',
         // The homepage's "what do you need?" route band. A chapter whose content

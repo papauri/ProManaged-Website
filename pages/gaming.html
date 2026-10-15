@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Gear — Sourced &amp; Delivered | ProManaged IT</title>
+    <meta name="description" content="ProManaged IT finds, buys and delivers gaming PCs, consoles, monitors, headsets and upgrade parts — one total price before you pay, delivered to your door.">
+    <link rel="icon" href="../images/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/global_styles.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/interaction.css">
+    <link rel="stylesheet" href="../css/logo.css">
+    <link rel="stylesheet" href="../css/hero_section.css">
+    <link rel="stylesheet" href="../css/footer_promanaged.css">
+    <link rel="stylesheet" href="../css/scroll_top.css">
+    <link rel="stylesheet" href="../css/contact_section.css">
+    <link rel="stylesheet" href="../css/hardware_sourcing.css">
+    <link rel="stylesheet" href="../css/enquiry.css">
+    <link rel="stylesheet" href="../css/audience.css">
+    <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
+         before first paint. Without JS this class is never added, the hiding rule
+         never matches, and all content renders normally.
+
+         pmHeroFailsafe is the bounded fallback for the case where JS IS enabled but
+         main.js never stages the choreography (404, parse error, throw). main.js
+         clears it only AFTER arming its own release timer, so on every path the hero
+         is exposed by something. If it fires before a slow main.js arrives, main.js
+         clears the class again and the choreography still runs. -->
+    <script>(function(d,w){var r=d.documentElement;r.classList.add('js-on');w.pmHeroFailsafe=w.setTimeout(function(){r.classList.add('load-failsafe');},1200);})(document,window);</script>
+    <script src="../js/boot.js"></script>
+    <script src="../js/audience.js"></script>
+</head>
+
+<body data-aud-page="gaming hardware">
+    <div id="header-section">
+        <!-- Closed state of the navigation: a fixed rail with the control left, the
+             wordmark centred and one persistent action right. Still no link bar —
+             every destination lives in the bento panel below. -->
+        <div class="nav-rail">
+            <div class="nav-rail-inner">
+                <button type="button" class="nav-trigger" id="nav-trigger"
+                        aria-expanded="false" aria-controls="nav-panel"
+                        aria-label="Open navigation menu">
+                    <img src="../images/icon.png" alt="ProManaged IT" class="logo">
+                    <span class="nav-trigger-label">
+                        <span class="nav-trigger-word">Menu</span>
+                        <span class="nav-trigger-bars" aria-hidden="true">
+                            <span></span><span></span><span></span>
+                        </span>
+                    </span>
+                </button>
+                <a class="nav-wordmark" href="../index.html">ProManaged IT</a>
+                <div class="nav-rail-actions">
+                    <a class="btn primary nav-cta" href="../get-started.html">Start a project</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full-viewport bento navigation panel. Behaviour (aria-expanded, focus
+             trap, Escape, scroll lock, focus restoration) lives in
+             js/mobile_phone_navbar.js and binds to #nav-trigger / #nav-panel /
+             #nav-close / .is-open — those hooks are contractual. -->
+        <div class="nav-panel" id="nav-panel" hidden>
+            <div class="nav-panel-rail">
+                <div class="nav-panel-top">
+                    <span class="nav-panel-brand">
+                        <img src="../images/icon.png" alt="" aria-hidden="true">
+                        ProManaged IT
+                    </span>
+                    <button type="button" class="nav-close" id="nav-close"
+                            aria-label="Close navigation menu">
+                        <span></span><span></span>
+                    </button>
+                </div>
+
+                <p class="nav-panel-lead">
+                    <span class="nav-panel-lead-eyebrow">Build &middot; Source &middot; Support</span>
+                    <span class="nav-panel-lead-text">We build your software, source your equipment and keep both working.</span>
+                </p>
+
+                <nav class="nav-bento" aria-label="Primary">
+                    <a class="nav-tile nav-tile--primary" href="../get-started.html">
+                        <span class="nav-tile-index">Start here</span>
+                        <span class="nav-tile-label">Start a project</span>
+                        <span class="nav-tile-desc">Bring us the problem. Book a call and get a scope, a timeline and an honest answer.</span>
+                        <span class="nav-tile-cue" aria-hidden="true">Book a call</span>
+                    </a>
+                    <a class="nav-tile nav-tile--lead" href="custom_websites.html" data-aud="software website hospitality">
+                        <span class="nav-tile-index">01 &middot; Build</span>
+                        <span class="nav-tile-label">Software &amp; Web Apps</span>
+                        <span class="nav-tile-desc">We build the software your business runs on &mdash; booking systems, internal tools, customer-facing apps.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--service" href="hardware_sourcing.html" data-aud="hardware gaming">
+                        <span class="nav-tile-index">02 &middot; Source</span>
+                        <span class="nav-tile-label">Hardware Sourcing</span>
+                        <span class="nav-tile-desc">We find, buy and deliver the computers and equipment you need.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--service" href="it_support.html" data-aud="support">
+                        <span class="nav-tile-index">03 &middot; Support</span>
+                        <span class="nav-tile-label">IT Support</span>
+                        <span class="nav-tile-desc">We keep it working &mdash; fixes, setups and a person on the phone when it breaks.</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="../index.html">
+                        <span class="nav-tile-index">Overview</span>
+                        <span class="nav-tile-label">Home</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="../learn_more.html">
+                        <span class="nav-tile-index">Process</span>
+                        <span class="nav-tile-label">How We Work</span>
+                    </a>
+                    <a class="nav-tile nav-tile--minor" href="../index.html#contact">
+                        <span class="nav-tile-index">Direct</span>
+                        <span class="nav-tile-label">Contact</span>
+                    </a>
+                </nav>
+
+                <div class="nav-panel-foot">
+                    <span class="nav-panel-foot-label">On the homepage</span>
+                    <a class="nav-link" href="../index.html#about">About</a>
+                    <a class="nav-link" href="../index.html#services">Services</a>
+                    <a class="nav-link" href="../index.html#mission-vision">Mission &amp; Vision</a>
+                    <a class="nav-link" href="../privacy_policy.html">Privacy Policy</a>
+                    <a class="nav-panel-foot-mail" href="mailto:info@promanaged-it.com">info@promanaged-it.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="hero-section">
+        <section id="home" class="hero">
+            <div class="hero-rail rail" data-assemble>
+                <div class="hero-statement">
+                    <span class="hero-eyebrow">Gaming gear</span>
+                    <h1 id="hero-title">Gaming gear, found and delivered.</h1>
+                    <p id="hero-subtitle">Gaming PCs, consoles, monitors and headsets — found, bought and shipped to your door, including the things nobody stocks locally.</p>
+                    <div class="hero-buttons">
+                        <a href="#request" class="btn primary" id="hero-get-started">Request gaming gear</a>
+                        <a href="#gear" class="btn secondary" id="hero-learn-more">See what we source</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-feature">
+                        <i class="fas fa-gamepad" aria-hidden="true"></i>
+                        <span class="hero-figure">One total</span>
+                        <span class="hero-figure-label">for the gear, freight and handling — agreed before you pay, not discovered when the courier calls.</span>
+                    </div>
+                    <div class="hero-support">
+                        <div class="hero-support-row">
+                            <i class="fas fa-globe" aria-hidden="true"></i>
+                            <div class="hero-support-text">
+                                <span class="hero-support-title">Across borders</span>
+                                <span class="hero-support-desc">Sourced from trusted international suppliers</span>
+                            </div>
+                        </div>
+                        <div class="hero-support-row">
+                            <i class="fas fa-hand-holding-dollar" aria-hidden="true"></i>
+                            <div class="hero-support-text">
+                                <span class="hero-support-title">Local-friendly payment</span>
+                                <span class="hero-support-desc">Pay in the currency you actually hold</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= THE PROBLEM ================= -->
+    <section id="premise" class="section section--ivory" data-blocks="settle-side">
+        <div class="rail">
+            <div class="grid">
+                <div class="block block--7 block--bare">
+                    <span class="eyebrow">Sound familiar?</span>
+                    <h2>Sold out everywhere, or it will not ship to you.</h2>
+                </div>
+                <div class="block block--5 block--bare sourcing-note">
+                    <p>The console is out of stock. The retailer does not deliver to your country. The card gets declined, and the shipping quote turns up after you have already paid.</p>
+                    <p>We take that whole chain off your hands: one person who finds the gear, checks it is right for what you play, quotes one total and gets it to your door.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= WHAT WE SOURCE FOR GAMERS =================
+         Same row shapes as the Source page's category mosaic — a 7/5 opening with
+         the console block standing through two rows, then 5/7 and a graphite
+         closer — so the two pages read as one family. -->
+    <section id="gear" class="section" data-blocks="settle-side">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">What we source</span>
+                <h2>Everything a setup needs.</h2>
+                <p class="lede">Rigs, consoles, screens and the gear around them — consumer and enthusiast kit from trusted suppliers. If what you want is not listed, ask anyway; the answer is usually yes.</p>
+            </div>
+            <div class="grid">
+                <div class="block block--7 block--tint block--row">
+                    <div class="block__aside">
+                        <span class="mark" aria-hidden="true"><i class="fas fa-desktop"></i></span>
+                    </div>
+                    <div class="block__body">
+                        <h3>Gaming PCs</h3>
+                        <p>Prebuilt or custom rigs, specified against the games you actually play and the resolution you play them at — not the most expensive parts list.</p>
+                    </div>
+                </div>
+                <div class="block block--5 block--tall">
+                    <span class="mark" aria-hidden="true"><i class="fas fa-gamepad"></i></span>
+                    <div class="block__body">
+                        <h3>Consoles &amp; controllers</h3>
+                        <p>Current-generation consoles and the controllers, chargers and spare pads that sell out everywhere first.</p>
+                    </div>
+                </div>
+                <div class="block block--7 block--row">
+                    <div class="block__aside">
+                        <span class="mark" aria-hidden="true"><i class="fas fa-tv"></i></span>
+                    </div>
+                    <div class="block__body">
+                        <h3>Monitors &amp; displays</h3>
+                        <p>High-refresh panels for competitive play and big screens for the couch — matched to the machine driving them.</p>
+                    </div>
+                </div>
+                <div class="block block--5">
+                    <span class="mark" aria-hidden="true"><i class="fas fa-headphones"></i></span>
+                    <div class="block__body">
+                        <h3>Headsets, mics &amp; capture</h3>
+                        <p>Headsets, streaming microphones, webcams and capture cards for going live at the weekend.</p>
+                    </div>
+                </div>
+                <div class="block block--7 block--row">
+                    <div class="block__aside">
+                        <span class="mark" aria-hidden="true"><i class="fas fa-keyboard"></i></span>
+                    </div>
+                    <div class="block__body">
+                        <h3>Keyboards, mice &amp; desk gear</h3>
+                        <p>Mechanical keyboards, switches, keycaps, mice, mats and the chair-side bits that finish a setup.</p>
+                    </div>
+                </div>
+                <div class="block block--12 block--graphite block--row">
+                    <div class="block__aside">
+                        <span class="mark" aria-hidden="true"><i class="fas fa-memory"></i></span>
+                    </div>
+                    <div class="block__body">
+                        <h3>Upgrades, storage &amp; parts</h3>
+                        <p>Graphics cards, memory, SSDs and cooling — specified against the machine you already own, because an upgrade is often far cheaper than a new rig.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= HOW IT WORKS ================= -->
+    <section id="how" class="section section--graphite" data-blocks="sequence-in">
+        <div class="rail">
+            <div class="chapter-head">
+                <span class="eyebrow">How it works</span>
+                <h2>Three steps, one person to message.</h2>
+            </div>
+            <ol class="process-steps process-steps--three">
+                <li class="process-step">
+                    <span class="step-num">01</span>
+                    <h3>Tell us the setup</h3>
+                    <p>A model, a link, or just what you play and a budget. We come back with options and an honest recommendation — including when the cheaper one is the better buy.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">02</span>
+                    <h3>One total, then we order</h3>
+                    <p>Gear, freight and handling quoted as one figure before anything is committed, with payment arranged in a way that works where you are.</p>
+                </li>
+                <li class="process-step">
+                    <span class="step-num">03</span>
+                    <h3>Delivered — and set up</h3>
+                    <p>Shipped to your door with updates along the way. Want help getting it running? We can walk you through setup over a call.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ================= TRACK RECORD ================= -->
+    <section id="track-record" class="section section--stone section--tight" data-blocks="settle-side">
+        <div class="rail">
+            <div class="grid record-grid">
+                <div class="block block--7 block--row block--earth record-statement">
+                    <div class="block__aside">
+                        <span class="mark" aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                    </div>
+                    <div class="block__body">
+                        <span class="eyebrow">Already doing this</span>
+                        <h2>Gaming PCs, consoles and equipment already sourced and delivered.</h2>
+                        <p>We have run this end to end for real clients — specifying, ordering, shipping and delivering — so buyers never had to negotiate international suppliers, freight or currency conversion themselves.</p>
+                    </div>
+                </div>
+                <div class="block block--5 record-stages">
+                    <span class="record-stages-label">What that covers</span>
+                    <ol class="record-stage-list">
+                        <li><span class="record-stage-index">01</span><span class="record-stage-name">Specify</span></li>
+                        <li><span class="record-stage-index">02</span><span class="record-stage-name">Order</span></li>
+                        <li><span class="record-stage-index">03</span><span class="record-stage-name">Ship</span></li>
+                        <li><span class="record-stage-index">04</span><span class="record-stage-name">Deliver</span></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= REQUEST GAMING GEAR =================
+         The request form for this kind of visitor: it asks the questions that
+         matter for THIS request instead of one generic message box. -->
+    <section id="request" class="section section--ivory enquiry-section" data-blocks="settle-up" data-blocks-pace="calm">
+        <div class="rail enquiry-board">
+            <div class="enquiry-intro">
+                <span class="eyebrow">Request gaming gear</span>
+                <h2>Tell us the setup you are after.</h2>
+                <p class="lede">Name the gear, the platform and where it needs to go. We come back with options and one total — before anything is bought.</p>
+                <ul class="enquiry-perks">
+                    <li><i class="fas fa-gamepad" aria-hidden="true"></i> Specified against what you actually play</li>
+                    <li><i class="fas fa-receipt" aria-hidden="true"></i> One total: gear, freight and handling</li>
+                    <li><i class="fas fa-hand-holding-dollar" aria-hidden="true"></i> Pay in the currency you hold</li>
+                </ul>
+                <ul class="contact-direct">
+                    <li><a href="mailto:info@promanaged-it.com"><i class="fas fa-envelope" aria-hidden="true"></i>info@promanaged-it.com</a></li>
+                    <li><a href="../get-started.html#booking"><i class="fas fa-calendar-check" aria-hidden="true"></i>Rather book a call?</a></li>
+                </ul>
+            </div>
+            <div class="enquiry-form-wrap">
+                <div id="gm-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+                <!-- Posts to php/enquiry.php. Every option value below is a KEY declared in
+                     php/enquiry_catalogue.php, which resolves the labels the inbox reads;
+                     tests/persona_pages.test.js fails if the two drift. -->
+                <form class="intake enquiry-form" id="enquiry-form" action="../php/enquiry.php" method="POST" data-feedback="#gm-feedback">
+                    <input type="hidden" name="form_type" value="gaming">
+                    <div class="intake-grid">
+                        <fieldset class="intake-group intake-group--lead">
+                            <legend class="intake-legend">
+                                <span class="intake-step">01</span>
+                                <span class="intake-title">You</span>
+                            </legend>
+                            <p class="intake-hint">So we know who we are replying to.</p>
+                            <div class="field">
+                                <input type="text" id="gm-name" name="name" placeholder=" " required autocomplete="name" maxlength="120" aria-describedby="gm-name-msg">
+                                <label for="gm-name">Full name</label>
+                                <span class="field-msg" id="gm-name-msg" data-for="gm-name"></span>
+                            </div>
+                            <div class="field-row">
+                                <div class="field">
+                                    <input type="email" id="gm-email" name="email" placeholder=" " required autocomplete="email" maxlength="254" aria-describedby="gm-email-msg">
+                                    <label for="gm-email">Email address</label>
+                                    <span class="field-msg" id="gm-email-msg" data-for="gm-email"></span>
+                                </div>
+                                <div class="field">
+                                    <input type="tel" id="gm-phone" name="phone" placeholder=" " autocomplete="tel" maxlength="60" aria-describedby="gm-phone-msg">
+                                    <label for="gm-phone">Phone or WhatsApp (optional)</label>
+                                    <span class="field-msg" id="gm-phone-msg" data-for="gm-phone"></span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="intake-group">
+                            <legend class="intake-legend">
+                                <span class="intake-step">02</span>
+                                <span class="intake-title">The setup</span>
+                            </legend>
+                            <p class="intake-hint">Rough is fine. We fill in the rest with you.</p>
+                            <div class="field field--select">
+                                <select id="gm-platform" name="platform" required aria-describedby="gm-platform-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="pc">Gaming PC</option>
+                                    <option value="playstation">PlayStation</option>
+                                    <option value="xbox">Xbox</option>
+                                    <option value="switch">Nintendo Switch</option>
+                                    <option value="mixed">More than one, or not sure yet</option>
+                                </select>
+                                <label for="gm-platform">Platform</label>
+                                <span class="field-msg" id="gm-platform-msg" data-for="gm-platform"></span>
+                            </div>
+                            <div class="field">
+                                <input type="text" id="gm-destination" name="destination" placeholder=" " required autocomplete="address-level2" maxlength="120" aria-describedby="gm-destination-msg">
+                                <label for="gm-destination">Deliver to (country and city)</label>
+                                <span class="field-msg" id="gm-destination-msg" data-for="gm-destination"></span>
+                            </div>
+                            <div class="field">
+                                <input type="text" id="gm-budget" name="budget" placeholder=" " maxlength="80" aria-describedby="gm-budget-msg">
+                                <label for="gm-budget">Rough budget (optional)</label>
+                                <span class="field-msg" id="gm-budget-msg" data-for="gm-budget"></span>
+                            </div>
+                            <div class="field field--select">
+                                <select id="gm-needed_by" name="needed_by" aria-describedby="gm-needed_by-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="asap">As soon as possible</option>
+                                    <option value="month">Within a month</option>
+                                    <option value="later">In the next few months</option>
+                                    <option value="flexible">No fixed date</option>
+                                </select>
+                                <label for="gm-needed_by">Needed by (optional)</label>
+                                <span class="field-msg" id="gm-needed_by-msg" data-for="gm-needed_by"></span>
+                            </div>
+                            <div class="field field--select">
+                                <select id="gm-setup" name="setup" aria-describedby="gm-setup-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="yes">Yes — help me set it up over a call</option>
+                                    <option value="no">No, I will set it up myself</option>
+                                </select>
+                                <label for="gm-setup">Help setting it up? (optional)</label>
+                                <span class="field-msg" id="gm-setup-msg" data-for="gm-setup"></span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="intake-group intake-group--message">
+                            <legend class="intake-legend">
+                                <span class="intake-step">03</span>
+                                <span class="intake-title">The gear</span>
+                            </legend>
+                            <p class="intake-hint">Pick what applies, then tell us more in your own words.</p>
+                            <fieldset class="choice-chips">
+                                <legend class="choice-chips-legend">Looking for <span>Pick any</span></legend>
+                                <div class="choice-chips-list">
+                                    <label class="chip"><input type="checkbox" name="gear[]" value="pc"><span>A gaming PC</span></label>
+                                    <label class="chip"><input type="checkbox" name="gear[]" value="console"><span>A console</span></label>
+                                    <label class="chip"><input type="checkbox" name="gear[]" value="monitor"><span>A monitor</span></label>
+                                    <label class="chip"><input type="checkbox" name="gear[]" value="headset"><span>Headset or mic</span></label>
+                                    <label class="chip"><input type="checkbox" name="gear[]" value="controller"><span>Controllers</span></label>
+                                    <label class="chip"><input type="checkbox" name="gear[]" value="desk"><span>Keyboard, mouse or desk gear</span></label>
+                                    <label class="chip"><input type="checkbox" name="gear[]" value="upgrade"><span>Upgrade parts</span></label>
+                                    <label class="chip"><input type="checkbox" name="gear[]" value="stream"><span>Streaming or capture gear</span></label>
+                                </div>
+                            </fieldset>
+                            <div class="field field--grow">
+                                <textarea id="gm-message" name="message" rows="5" placeholder=" " required maxlength="4000" aria-describedby="gm-message-msg"></textarea>
+                                <label for="gm-message">Models, links, or just what you play</label>
+                                <span class="field-msg" id="gm-message-msg" data-for="gm-message"></span>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="form-group hp-field" aria-hidden="true">
+                        <label for="gm-website">Website</label>
+                        <input type="text" id="gm-website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+                    <div class="intake-action">
+                        <button type="submit" class="btn primary intake-submit">
+                            <span class="intake-submit-label">Send my request</span>
+                            <span class="intake-spinner" aria-hidden="true"></span>
+                        </button>
+                        <p class="intake-assurance">No obligation. Nothing is ordered until you say yes to the total.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <div id="footer-section">
+        <footer class="footer" data-blocks="settle-up" data-blocks-pace="calm">
+            <!-- Decorative brand signature. aria-hidden: the accessible name is the
+                 .footer-brand heading immediately below it. -->
+            <div class="footer-signature rail" aria-hidden="true">ProManaged IT</div>
+
+            <div class="footer-content rail">
+                <div class="footer-brand">
+                    <h3>ProManaged IT</h3>
+                    <p>Build, Source, Support.</p>
+                    <span class="footer-label">Contact</span>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:info@promanaged-it.com">info@promanaged-it.com</a></li>
+                        <li><a href="mailto:support@promanaged-it.com">support@promanaged-it.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="../index.html#home">Home</a></li>
+                        <li><a href="../index.html#services">Services</a></li>
+                        <li><a href="../index.html#about">About</a></li>
+                        <li data-aud="software website hospitality"><a href="custom_websites.html">Build</a></li>
+                        <li data-aud="hardware gaming"><a href="hardware_sourcing.html">Source</a></li>
+                        <li data-aud="support"><a href="it_support.html">Support</a></li>
+                        <li data-aud="gaming hardware"><a href="gaming.html">Gaming gear</a></li>
+                        <li data-aud="property"><a href="property.html">Property</a></li>
+                        <li><a href="../learn_more.html">How we work</a></li>
+                        <li><a href="../get-started.html">Get started</a></li>
+                        <li><a href="../privacy_policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4>Keep in touch</h4>
+                    <p>For new work, sourcing questions or a problem you are not sure how to frame, start with a conversation.</p>
+                    <a class="btn secondary" href="../get-started.html">Talk to ProManaged IT</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom rail">
+                <p>&copy; <span data-current-year>2026</span> ProManaged IT. All rights reserved.</p>
+                <p>
+                    Company Registration Number 749512 &middot;
+                    <a href="https://core.cro.ie/e-commerce/company/5379600" target="_blank" rel="noopener">Verify registration</a>
+                    &middot; <a href="../privacy_policy.html">Privacy Policy</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../js/main.js" defer></script>
+    <script src="../js/interface_motion.js" defer></script>
+    <script src="../js/mobile_phone_navbar.js" defer></script>
+    <script src="../js/form_intake.js" defer></script>
+</body>
+
+</html>

@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../css/contact_section.css">
     <link rel="stylesheet" href="../css/evidence.css">
     <link rel="stylesheet" href="../css/hardware_sourcing.css">
+    <link rel="stylesheet" href="../css/enquiry.css">
     <link rel="stylesheet" href="../css/audience.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
          before first paint. Without JS this class is never added, the hiding rule
@@ -513,94 +514,133 @@
 
     <!-- ================= REQUEST FORM ================= -->
     <div id="contact-section">
-        <section id="contact" class="section section--ivory contact" data-blocks="settle-up" data-blocks-pace="calm">
-            <div class="rail">
-                <div class="contact-grid">
-                    <div class="contact-invite">
-                        <span class="eyebrow">Request equipment</span>
-                        <h2>Tell us what you are looking for.</h2>
-                        <p class="lede">Include your budget and where it needs to be delivered, and we will come back with options and a total price.</p>
-                        <ul class="contact-direct">
-                            <li>
-                                <a href="mailto:info@promanaged-it.com">
-                                    <i class="fas fa-envelope" aria-hidden="true"></i>info@promanaged-it.com
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../get-started.html#booking">
-                                    <i class="fas fa-calendar-check" aria-hidden="true"></i>Book a call instead
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="contact-form-wrap">
-                        <div id="form-feedback" class="form-feedback" role="status" aria-live="polite"></div>
-
-                        <form class="intake" id="contact-form" action="../php/contact.php" method="POST">
-                            <!-- Tells the shared enquiry endpoint which page this
-                                 came from, so the internal notification can be
-                                 triaged from its subject line. Server-side the
-                                 value is checked against an allow-list. -->
-                            <input type="hidden" name="enquiry_type" value="Hardware sourcing">
-
-                            <div class="intake-grid">
-                                <fieldset class="intake-group intake-group--lead">
-                                    <legend class="intake-legend">
-                                        <span class="intake-step">01</span>
-                                        <span class="intake-title">You</span>
-                                    </legend>
-                                    <p class="intake-hint">So we know who we are talking to.</p>
-                                    <div class="field">
-                                        <input type="text" id="name" name="name" placeholder=" " required autocomplete="name" aria-describedby="name-msg">
-                                        <label for="name">Full name</label>
-                                        <span class="field-msg" id="name-msg" data-for="name"></span>
-                                    </div>
-                                    <div class="field-row">
-                                        <div class="field">
-                                            <input type="email" id="email" name="email" placeholder=" " required autocomplete="email" aria-describedby="email-msg">
-                                            <label for="email">Email address</label>
-                                            <span class="field-msg" id="email-msg" data-for="email"></span>
-                                        </div>
-                                        <div class="field">
-                                            <input type="tel" id="phone" name="phone" placeholder=" " required autocomplete="tel" aria-describedby="phone-msg">
-                                            <label for="phone">Phone number</label>
-                                            <span class="field-msg" id="phone-msg" data-for="phone"></span>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset class="intake-group intake-group--message">
-                                    <legend class="intake-legend">
-                                        <span class="intake-step">02</span>
-                                        <span class="intake-title">What you need</span>
-                                    </legend>
-                                    <p class="intake-hint">Include your budget and where it needs to be delivered.</p>
-                                    <div class="field field--grow">
-                                        <textarea id="message" name="message" rows="5" placeholder=" " required aria-describedby="message-msg"></textarea>
-                                        <label for="message">What you need, budget, destination</label>
-                                        <span class="field-msg" id="message-msg" data-for="message"></span>
-                                    </div>
-                                </fieldset>
-                            </div>
-
-                            <div class="form-group hp-field" aria-hidden="true">
-                                <label for="website">Website</label>
-                                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-                            </div>
-
-                            <div class="intake-action">
-                                <button type="submit" class="btn primary intake-submit">
-                                    <span class="intake-submit-label">Send request</span>
-                                    <span class="intake-spinner" aria-hidden="true"></span>
-                                </button>
-                                <p class="intake-assurance">No obligation, and we reply to every message.</p>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        <section id="contact" class="section section--ivory enquiry-section" data-blocks="settle-up" data-blocks-pace="calm">
+        <div class="rail enquiry-board">
+            <div class="enquiry-intro">
+                <span class="eyebrow">Request equipment</span>
+                <h2>Tell us what you are looking for.</h2>
+                <p class="lede">Include your budget and where it needs to be delivered, and we will come back with options and a total price.</p>
+                <ul class="enquiry-perks">
+                    <li><i class="fas fa-clipboard-check" aria-hidden="true"></i> Specified against what it is for</li>
+                    <li><i class="fas fa-receipt" aria-hidden="true"></i> One total: hardware, freight and handling</li>
+                    <li><i class="fas fa-user" aria-hidden="true"></i> One person to chase — us</li>
+                </ul>
+                <ul class="contact-direct">
+                    <li><a href="mailto:info@promanaged-it.com"><i class="fas fa-envelope" aria-hidden="true"></i>info@promanaged-it.com</a></li>
+                    <li><a href="../get-started.html#booking"><i class="fas fa-calendar-check" aria-hidden="true"></i>Rather book a call?</a></li>
+                </ul>
             </div>
-        </section>
+            <div class="enquiry-form-wrap">
+                <div id="form-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+                <!-- Posts to php/enquiry.php. Every option value below is a KEY declared in
+                     php/enquiry_catalogue.php, which resolves the labels the inbox reads;
+                     tests/persona_pages.test.js fails if the two drift. -->
+                <form class="intake enquiry-form" id="enquiry-form" action="../php/enquiry.php" method="POST" data-feedback="#form-feedback">
+                    <input type="hidden" name="form_type" value="equipment">
+                    <div class="intake-grid">
+                        <fieldset class="intake-group intake-group--lead">
+                            <legend class="intake-legend">
+                                <span class="intake-step">01</span>
+                                <span class="intake-title">You</span>
+                            </legend>
+                            <p class="intake-hint">So we know who we are replying to.</p>
+                            <div class="field">
+                                <input type="text" id="eq-name" name="name" placeholder=" " required autocomplete="name" maxlength="120" aria-describedby="eq-name-msg">
+                                <label for="eq-name">Full name</label>
+                                <span class="field-msg" id="eq-name-msg" data-for="eq-name"></span>
+                            </div>
+                            <div class="field-row">
+                                <div class="field">
+                                    <input type="email" id="eq-email" name="email" placeholder=" " required autocomplete="email" maxlength="254" aria-describedby="eq-email-msg">
+                                    <label for="eq-email">Email address</label>
+                                    <span class="field-msg" id="eq-email-msg" data-for="eq-email"></span>
+                                </div>
+                                <div class="field">
+                                    <input type="tel" id="eq-phone" name="phone" placeholder=" " autocomplete="tel" maxlength="60" aria-describedby="eq-phone-msg">
+                                    <label for="eq-phone">Phone or WhatsApp (optional)</label>
+                                    <span class="field-msg" id="eq-phone-msg" data-for="eq-phone"></span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="intake-group">
+                            <legend class="intake-legend">
+                                <span class="intake-step">02</span>
+                                <span class="intake-title">The order</span>
+                            </legend>
+                            <p class="intake-hint">Include your budget and where it needs to go.</p>
+                            <div class="field">
+                                <input type="text" id="eq-destination" name="destination" placeholder=" " required autocomplete="address-level2" maxlength="120" aria-describedby="eq-destination-msg">
+                                <label for="eq-destination">Deliver to (country and city)</label>
+                                <span class="field-msg" id="eq-destination-msg" data-for="eq-destination"></span>
+                            </div>
+                            <div class="field field--select">
+                                <select id="eq-quantity" name="quantity" aria-describedby="eq-quantity-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="one">One</option>
+                                    <option value="few">2 to 5</option>
+                                    <option value="some">6 to 20</option>
+                                    <option value="many">More than 20</option>
+                                </select>
+                                <label for="eq-quantity">How many (optional)</label>
+                                <span class="field-msg" id="eq-quantity-msg" data-for="eq-quantity"></span>
+                            </div>
+                            <div class="field">
+                                <input type="text" id="eq-budget" name="budget" placeholder=" " maxlength="80" aria-describedby="eq-budget-msg">
+                                <label for="eq-budget">Rough budget (optional)</label>
+                                <span class="field-msg" id="eq-budget-msg" data-for="eq-budget"></span>
+                            </div>
+                            <div class="field field--select">
+                                <select id="eq-needed_by" name="needed_by" aria-describedby="eq-needed_by-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="asap">As soon as possible</option>
+                                    <option value="month">Within a month</option>
+                                    <option value="later">In the next few months</option>
+                                    <option value="flexible">No fixed date</option>
+                                </select>
+                                <label for="eq-needed_by">Needed by (optional)</label>
+                                <span class="field-msg" id="eq-needed_by-msg" data-for="eq-needed_by"></span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="intake-group intake-group--message">
+                            <legend class="intake-legend">
+                                <span class="intake-step">03</span>
+                                <span class="intake-title">What you need</span>
+                            </legend>
+                            <p class="intake-hint">Pick what applies, then add models, specs or what it is for.</p>
+                            <fieldset class="choice-chips">
+                                <legend class="choice-chips-legend">Looking for <span>Pick any</span></legend>
+                                <div class="choice-chips-list">
+                                    <label class="chip"><input type="checkbox" name="category[]" value="computer"><span>Laptop or desktop</span></label>
+                                    <label class="chip"><input type="checkbox" name="category[]" value="gaming"><span>Gaming PC or console</span></label>
+                                    <label class="chip"><input type="checkbox" name="category[]" value="monitor"><span>Monitor</span></label>
+                                    <label class="chip"><input type="checkbox" name="category[]" value="desk"><span>Mice, keyboards or desk gear</span></label>
+                                    <label class="chip"><input type="checkbox" name="category[]" value="audio"><span>Headset, mic or webcam</span></label>
+                                    <label class="chip"><input type="checkbox" name="category[]" value="parts"><span>Upgrade parts or accessories</span></label>
+                                    <label class="chip"><input type="checkbox" name="category[]" value="other"><span>Something else</span></label>
+                                </div>
+                            </fieldset>
+                            <div class="field field--grow">
+                                <textarea id="eq-message" name="message" rows="5" placeholder=" " required maxlength="4000" aria-describedby="eq-message-msg"></textarea>
+                                <label for="eq-message">What you need, and what it is for</label>
+                                <span class="field-msg" id="eq-message-msg" data-for="eq-message"></span>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="form-group hp-field" aria-hidden="true">
+                        <label for="eq-website">Website</label>
+                        <input type="text" id="eq-website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+                    <div class="intake-action">
+                        <button type="submit" class="btn primary intake-submit">
+                            <span class="intake-submit-label">Send request</span>
+                            <span class="intake-spinner" aria-hidden="true"></span>
+                        </button>
+                        <p class="intake-assurance">No obligation, and we reply to every message.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
     </div>
 
     <!-- ================= FOOTER ================= -->
@@ -630,6 +670,8 @@
                         <li data-aud="software website hospitality"><a href="custom_websites.html">Build</a></li>
                         <li data-aud="hardware gaming"><a href="hardware_sourcing.html">Source</a></li>
                         <li data-aud="support"><a href="it_support.html">Support</a></li>
+                        <li data-aud="gaming hardware"><a href="gaming.html">Gaming gear</a></li>
+                        <li data-aud="property"><a href="property.html">Property</a></li>
                         <li><a href="../learn_more.html">How we work</a></li>
                         <li><a href="../get-started.html">Get started</a></li>
                         <li><a href="../privacy_policy.html">Privacy Policy</a></li>

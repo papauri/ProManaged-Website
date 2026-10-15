@@ -505,6 +505,11 @@ html[data-pm-aud] .nav-bento > .nav-tile[data-aud]::before {
     .aud-pill { left: var(--space-6); bottom: var(--space-6) }
 }
 
+/* Phones: out of the way while a form field has focus (js/audience.js). */
+@media (max-width: 767px) {
+    .pm-aud-typing .aud-pill { opacity: 0; visibility: hidden; transform: translateY(12px) }
+}
+
 @media print {
     .aud, .aud-pill, .aud-notice { display: none !important }
 }

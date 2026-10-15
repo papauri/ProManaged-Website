@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../css/evidence.css">
     <link rel="stylesheet" href="../css/project_proof.css">
     <link rel="stylesheet" href="../css/custom_websites.css">
+    <link rel="stylesheet" href="../css/enquiry.css">
     <link rel="stylesheet" href="../css/audience.css">
     <!-- Set synchronously so the hero's building-block assembly can be hidden by CSS
          before first paint. Without JS this class is never added, the hiding rule
@@ -498,6 +499,138 @@
         </div>
     </section>
 
+    <!-- ================= THE SOFTWARE BRIEF =================
+         The request form for this kind of visitor: it asks the questions that
+         matter for THIS request instead of one generic message box. -->
+    <section id="brief" class="section section--ivory enquiry-section" data-blocks="settle-up" data-blocks-pace="calm">
+        <div class="rail enquiry-board">
+            <div class="enquiry-intro">
+                <span class="eyebrow">Tell us what to build</span>
+                <h2>Describe the problem, not the software.</h2>
+                <p class="lede">What keeps going wrong, how often, and what you use today. You do not need a specification — turning the problem into one is the first thing we do together.</p>
+                <ul class="enquiry-perks">
+                    <li><i class="fas fa-diagram-project" aria-hidden="true"></i> Working previews at every step</li>
+                    <li><i class="fas fa-file-signature" aria-hidden="true"></i> Scope, timeline and cost in writing first</li>
+                    <li><i class="fas fa-scale-balanced" aria-hidden="true"></i> An honest answer if it is not worth building</li>
+                </ul>
+                <ul class="contact-direct">
+                    <li><a href="mailto:info@promanaged-it.com"><i class="fas fa-envelope" aria-hidden="true"></i>info@promanaged-it.com</a></li>
+                    <li><a href="../get-started.html#booking"><i class="fas fa-calendar-check" aria-hidden="true"></i>Rather book a call?</a></li>
+                </ul>
+            </div>
+            <div class="enquiry-form-wrap">
+                <div id="sw-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+                <!-- Posts to php/enquiry.php. Every option value below is a KEY declared in
+                     php/enquiry_catalogue.php, which resolves the labels the inbox reads;
+                     tests/persona_pages.test.js fails if the two drift. -->
+                <form class="intake enquiry-form" id="enquiry-form" action="../php/enquiry.php" method="POST" data-feedback="#sw-feedback">
+                    <input type="hidden" name="form_type" value="software">
+                    <div class="intake-grid">
+                        <fieldset class="intake-group intake-group--lead">
+                            <legend class="intake-legend">
+                                <span class="intake-step">01</span>
+                                <span class="intake-title">You</span>
+                            </legend>
+                            <p class="intake-hint">So we know who we are replying to.</p>
+                            <div class="field">
+                                <input type="text" id="sw-name" name="name" placeholder=" " required autocomplete="name" maxlength="120" aria-describedby="sw-name-msg">
+                                <label for="sw-name">Full name</label>
+                                <span class="field-msg" id="sw-name-msg" data-for="sw-name"></span>
+                            </div>
+                            <div class="field-row">
+                                <div class="field">
+                                    <input type="email" id="sw-email" name="email" placeholder=" " required autocomplete="email" maxlength="254" aria-describedby="sw-email-msg">
+                                    <label for="sw-email">Email address</label>
+                                    <span class="field-msg" id="sw-email-msg" data-for="sw-email"></span>
+                                </div>
+                                <div class="field">
+                                    <input type="tel" id="sw-phone" name="phone" placeholder=" " autocomplete="tel" maxlength="60" aria-describedby="sw-phone-msg">
+                                    <label for="sw-phone">Phone or WhatsApp (optional)</label>
+                                    <span class="field-msg" id="sw-phone-msg" data-for="sw-phone"></span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="intake-group">
+                            <legend class="intake-legend">
+                                <span class="intake-step">02</span>
+                                <span class="intake-title">Your business</span>
+                            </legend>
+                            <p class="intake-hint">Your best guess is fine for all of these.</p>
+                            <div class="field">
+                                <input type="text" id="sw-business" name="business" placeholder=" " required autocomplete="organization" maxlength="160" aria-describedby="sw-business-msg">
+                                <label for="sw-business">Business or organisation</label>
+                                <span class="field-msg" id="sw-business-msg" data-for="sw-business"></span>
+                            </div>
+                            <div class="field field--select">
+                                <select id="sw-kind" name="kind" required aria-describedby="sw-kind-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="booking">A booking or scheduling system</option>
+                                    <option value="internal">An internal tool (tracking, reports, approvals)</option>
+                                    <option value="customer">Something customers log into</option>
+                                    <option value="product">A product with many customers</option>
+                                    <option value="website">A website</option>
+                                    <option value="unsure">Not sure yet</option>
+                                </select>
+                                <label for="sw-kind">Closest to</label>
+                                <span class="field-msg" id="sw-kind-msg" data-for="sw-kind"></span>
+                            </div>
+                            <div class="field field--select">
+                                <select id="sw-team" name="team" aria-describedby="sw-team-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="solo">Just me</option>
+                                    <option value="small">2 to 10</option>
+                                    <option value="medium">11 to 50</option>
+                                    <option value="large">More than 50</option>
+                                </select>
+                                <label for="sw-team">People who would use it (optional)</label>
+                                <span class="field-msg" id="sw-team-msg" data-for="sw-team"></span>
+                            </div>
+                            <div class="field field--select">
+                                <select id="sw-timeline" name="timeline" aria-describedby="sw-timeline-msg">
+                                    <option value="">Choose one</option>
+                                    <option value="asap">As soon as possible</option>
+                                    <option value="quarter">Within three months</option>
+                                    <option value="later">Later this year</option>
+                                    <option value="exploring">Just exploring</option>
+                                </select>
+                                <label for="sw-timeline">Timeline (optional)</label>
+                                <span class="field-msg" id="sw-timeline-msg" data-for="sw-timeline"></span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="intake-group intake-group--message">
+                            <legend class="intake-legend">
+                                <span class="intake-step">03</span>
+                                <span class="intake-title">The problem</span>
+                            </legend>
+                            <p class="intake-hint">In whatever words you have.</p>
+                            <div class="field">
+                                <input type="text" id="sw-today" name="today" placeholder=" " maxlength="200" aria-describedby="sw-today-msg">
+                                <label for="sw-today">What you use today (spreadsheets, apps, paper…) (optional)</label>
+                                <span class="field-msg" id="sw-today-msg" data-for="sw-today"></span>
+                            </div>
+                            <div class="field field--grow">
+                                <textarea id="sw-message" name="message" rows="5" placeholder=" " required maxlength="5000" aria-describedby="sw-message-msg"></textarea>
+                                <label for="sw-message">What keeps going wrong, and how often</label>
+                                <span class="field-msg" id="sw-message-msg" data-for="sw-message"></span>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="form-group hp-field" aria-hidden="true">
+                        <label for="sw-website">Website</label>
+                        <input type="text" id="sw-website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+                    <div class="intake-action">
+                        <button type="submit" class="btn primary intake-submit">
+                            <span class="intake-submit-label">Send the brief</span>
+                            <span class="intake-spinner" aria-hidden="true"></span>
+                        </button>
+                        <p class="intake-assurance">A person reads it, not a filter. No follow-up sales sequence.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- ================= CLOSING CTA (the real booking form lives on get-started.html) ================= -->
     <!-- #tell-us: the landing point for the homepage Build card, whose cue
          reads "Tell us what you're trying to automate". The card promises an
@@ -511,7 +644,7 @@
                 <p class="lede">Book a call and describe the problem. You will get a scope and an honest answer about whether it is worth building.</p>
                 <div class="btn-row btn-row--center">
                     <a href="../get-started.html#booking" class="btn primary">Book a call</a>
-                    <a href="../get-started.html#describe" class="btn secondary">Send a message</a>
+                    <a href="#brief" class="btn secondary">Send the brief</a>
                 </div>
             </div>
         </div>
@@ -544,6 +677,8 @@
                         <li data-aud="software website hospitality"><a href="custom_websites.html">Build</a></li>
                         <li data-aud="hardware gaming"><a href="hardware_sourcing.html">Source</a></li>
                         <li data-aud="support"><a href="it_support.html">Support</a></li>
+                        <li data-aud="gaming hardware"><a href="gaming.html">Gaming gear</a></li>
+                        <li data-aud="property"><a href="property.html">Property</a></li>
                         <li><a href="../learn_more.html">How we work</a></li>
                         <li><a href="../get-started.html">Get started</a></li>
                         <li><a href="../privacy_policy.html">Privacy Policy</a></li>
@@ -571,6 +706,7 @@
     <script src="../js/main.js" defer></script>
     <script src="../js/interface_motion.js" defer></script>
     <script src="../js/mobile_phone_navbar.js" defer></script>
+    <script src="../js/form_intake.js" defer></script>
     <script src="../js/custom_websites.js" defer></script>
 </body>
 
