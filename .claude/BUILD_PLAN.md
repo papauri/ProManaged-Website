@@ -828,7 +828,7 @@ Never commit YAML/YML.
 - **In progress:** None.
 - **Next:** Owner visual review of the tailored views (§2C). Site is otherwise verified complete against the current Definition of Done, including the contracts added in earlier cycles (the route-band contract in §2B and the guided-configurator step gate). Optional future hardening (not currently required by the plan): self-host or locally fall back the two external CDNs (Google Fonts "Plus Jakarta Sans" / Font Awesome) so the typeface and icons survive a blocked-CDN network — an observation from QA, not a defect in the composition.
 - **Blocked:** None.
-- **Last implementation commit:** _(latest — the tailored site, "What brings you here?")_
+- **Last implementation commit:** `c8d04f4` — the tailored site, "What brings you here?"
 
 ### Standing note: this plan's page count is load-bearing
 
